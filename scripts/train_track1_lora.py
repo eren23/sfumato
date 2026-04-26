@@ -127,13 +127,17 @@ def build_tokenize_fn(tokenizer, max_length: int):
         tokenizer.pad_token_id = pad_id
 
     def _resolve(row):
+        # Sfumato prefix-robust dataset: full_prompt + full_target.
+        if "full_prompt" in row and "full_target" in row:
+            return row["full_prompt"], row["full_target"]
         if "prompt" in row and "response" in row:
             return row["prompt"], row["response"]
         if "question" in row and "answer" in row:
             prefix = row.get("prefix", "") or ""
             return row["question"] + prefix, row["answer"]
         raise KeyError(
-            f"row needs (prompt,response) or (question,answer); keys={list(row.keys())}"
+            f"row needs (full_prompt,full_target) | (prompt,response) | "
+            f"(question,answer); keys={list(row.keys())}"
         )
 
     def tokenize_fn(row):
