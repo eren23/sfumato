@@ -97,6 +97,25 @@ def upload_cell(
     run.summary["accuracy"] = accuracy
     run.summary["total_flops"] = total_flops
     run.summary["mean_flops_per_problem"] = total_flops / max(len(rows), 1)
+
+    # Per-problem text table: idx, gold, pred, correct, full trace.
+    table = wandb.Table(
+        columns=["idx", "id", "gold", "pred", "correct", "flops", "trace"]
+    )
+    for r in rows:
+        trace_str = "\n\n".join(
+            f"### {k}\n{v}" for k, v in r.get("trace", {}).items() if v
+        )
+        table.add_data(
+            r.get("idx"),
+            r.get("id"),
+            r.get("gold"),
+            r.get("pred"),
+            bool(r.get("correct", False)),
+            r.get("flops", 0),
+            trace_str[:6000],
+        )
+    run.log({"problems": table})
     run.finish()
     print(
         f"[backfill] {name}: n={len(rows)} acc={accuracy:.3f} "

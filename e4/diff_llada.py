@@ -169,8 +169,10 @@ class _Real:
         return x[:, prompt_ids.shape[1] :]
 
     def denoise_block(
-        self, prompt: str, k_steps: int, seed: int = 0
+        self, prompt: str, k_steps: int, seed: int = 0, temperature: float = 0.0
     ) -> tuple[str, int]:
+        """Denoise. temperature>0 enables stochastic sampling (needed for
+        self-consistency / branch ensembles to actually diverge)."""
         import torch  # type: ignore
 
         self._ensure_loaded()
@@ -187,7 +189,7 @@ class _Real:
         )["input_ids"].to(self._model.device)  # type: ignore[attr-defined]
 
         gen_ids = self._generate(
-            prompt_ids, steps=max(k_steps, 4), temperature=0.0
+            prompt_ids, steps=max(k_steps, 4), temperature=temperature
         )
         text = self._tokenizer.batch_decode(gen_ids, skip_special_tokens=True)[0]  # type: ignore[attr-defined]
         used = flops_mod.llada_forward_flops(

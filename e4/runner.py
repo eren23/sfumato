@@ -178,16 +178,23 @@ def run_condition(
         return grade.extract_answer(ans), f1 + f2 + f3 + f4 + f5, trace
     if condition == "cmaj":
         # Self-consistency at diffusion level: N parallel LLaDA branches
-        # (different seeds) -> majority vote on the extracted numeric answer.
-        # Captures "germinate in parallel, then converge" without any AR step.
+        # (different seeds, temperature>0) -> majority vote on the extracted
+        # numeric answer. Captures "germinate in parallel, then converge"
+        # without any AR step. Temperature>0 is REQUIRED for branches to
+        # diverge — at temp=0 LLaDA's gumbel sampling is deterministic and
+        # all branches produce identical output (verified by sweep accident).
         from collections import Counter
 
         n_branches = int(os.environ.get("BRANCHES", "5"))
+        temperature = float(os.environ.get("TEMP", "0.7"))
         branches: list[str] = []
         total = 0
         for b in range(n_branches):
             cot, used = diff_model.denoise_block(
-                prompt=q, k_steps=k_steps, seed=seed * 100 + b
+                prompt=q,
+                k_steps=k_steps,
+                seed=seed * 100 + b,
+                temperature=temperature,
             )
             branches.append(cot)
             total += used
@@ -201,13 +208,18 @@ def run_condition(
         return winner, total, trace
     if condition == "cmerge":
         # Parallel diffusion branches -> AR merger. Inverse of C3:
-        # diffusion-germinate-multiple -> AR-converge-into-one.
+        # diffusion-germinate-multiple -> AR-converge-into-one. Same temp>0
+        # requirement as cmaj for branches to actually diverge.
         n_branches = int(os.environ.get("BRANCHES", "3"))
+        temperature = float(os.environ.get("TEMP", "0.7"))
         branches: list[str] = []
         total = 0
         for b in range(n_branches):
             cot, used = diff_model.denoise_block(
-                prompt=q, k_steps=k_steps, seed=seed * 100 + b
+                prompt=q,
+                k_steps=k_steps,
+                seed=seed * 100 + b,
+                temperature=temperature,
             )
             branches.append(cot)
             total += used
@@ -351,10 +363,52 @@ def main() -> int:
     print(f"[E4] rows -> {out_path.relative_to(REPO_ROOT)}", flush=True)
 
     if wandb_run is not None:
+        import wandb  # type: ignore
+
         wandb_run.summary["accuracy"] = accuracy
         wandb_run.summary["total_flops"] = total_flops
         wandb_run.summary["wallclock_s"] = elapsed
         wandb_run.summary["mean_flops_per_problem"] = total_flops / max(n_problems, 1)
+
+        # Log full per-problem table (text outputs included). Trace stages
+        # become a single concatenated string so the schema is uniform across
+        # conditions.
+        table = wandb.Table(
+            columns=[
+                "idx",
+                "id",
+                "gold",
+                "pred",
+                "correct",
+                "flops",
+                "trace",
+            ]
+        )
+        for r in rows:
+            trace_str = "\n\n".join(
+                f"### {k}\n{v}" for k, v in r.get("trace", {}).items() if v
+            )
+            table.add_data(
+                r["idx"],
+                r["id"],
+                r["gold"],
+                r["pred"],
+                bool(r["correct"]),
+                r["flops"],
+                trace_str[:6000],  # cap to avoid bloat
+            )
+        wandb_run.log({"problems": table})
+
+        # Attach the raw jsonl as a versioned artifact (useful for replay).
+        try:
+            artifact = wandb.Artifact(
+                f"{condition}-k{k_steps}-seed{seed}-rows", type="rows"
+            )
+            artifact.add_file(str(out_path))
+            wandb_run.log_artifact(artifact)
+        except Exception as exc:
+            print(f"[E4] artifact upload skipped: {exc}", flush=True)
+
         wandb_run.finish()
     return 0
 
