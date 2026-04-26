@@ -17,9 +17,11 @@ from __future__ import annotations
 _KNOWN_PARAMS: dict[str, int] = {
     "Qwen/Qwen2.5-0.5B-Instruct": 494_000_000,
     "Qwen/Qwen2.5-1.5B-Instruct": 1_540_000_000,
+    "Qwen/Qwen2.5-7B-Instruct": 7_620_000_000,
     "HuggingFaceTB/SmolLM2-1.7B-Instruct": 1_710_000_000,
-    "GSAI-ML/LLaDA-1.5B-Instruct": 1_500_000_000,
-    "diffusionfamily/diffullama": 1_000_000_000,
+    "GSAI-ML/LLaDA-8B-Instruct": 8_020_000_000,
+    "GSAI-ML/LLaDA-1.5": 8_020_000_000,
+    "diffusionfamily/diffullama": 7_000_000_000,
 }
 
 

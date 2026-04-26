@@ -26,7 +26,7 @@ presets:
     K_STEPS: "8"
     N_PROBLEMS: "5"
     AR_MODEL: Qwen/Qwen2.5-0.5B-Instruct
-    DIFF_MODEL: GSAI-ML/LLaDA-1.5B-Instruct
+    DIFF_MODEL: GSAI-ML/LLaDA-8B-Instruct
     SEED: "0"
     MOCK_MODELS: "1"             # runner emits fake outputs without loading real weights
     MAX_WALLCLOCK_SECONDS: "60"
@@ -36,7 +36,7 @@ presets:
     CONDITION: c1
     N_PROBLEMS: "5"
     AR_MODEL: Qwen/Qwen2.5-0.5B-Instruct
-    DIFF_MODEL: GSAI-ML/LLaDA-1.5B-Instruct
+    DIFF_MODEL: GSAI-ML/LLaDA-8B-Instruct
     SEED: "0"
     MOCK_MODELS: "0"
     MAX_WALLCLOCK_SECONDS: "300"
@@ -48,7 +48,7 @@ presets:
     K_STEPS: ${K_STEPS:0}
     N_PROBLEMS: "200"
     AR_MODEL: Qwen/Qwen2.5-0.5B-Instruct
-    DIFF_MODEL: GSAI-ML/LLaDA-1.5B-Instruct
+    DIFF_MODEL: GSAI-ML/LLaDA-8B-Instruct
     SEED: "0"
     MOCK_MODELS: "0"
     MAX_WALLCLOCK_SECONDS: "7200"

@@ -6,8 +6,10 @@ Interleaving autoregressive (AR) generation with diffusion-style iterative refin
 
 ## Models (param-golf picks)
 
-- **AR backbone:** `Qwen/Qwen2.5-0.5B-Instruct`. Fallback: `HuggingFaceTB/SmolLM2-1.7B-Instruct` if Qwen-0.5B's GSM8K is <10 % zero-shot.
-- **Diffusion LM:** `GSAI-ML/LLaDA-1.5B-Instruct`. Fallback: `diffusionfamily/diffullama` (DiffuLLaMA-1B).
+- **AR backbone:** `Qwen/Qwen2.5-0.5B-Instruct` (~0.5 B params, ~1 GB bf16). Fallback: `HuggingFaceTB/SmolLM2-1.7B-Instruct` if Qwen-0.5B's GSM8K is <10 % zero-shot.
+- **Diffusion LM:** `GSAI-ML/LLaDA-8B-Instruct` (~8 B params, ~16 GB bf16). Smallest serious public discrete-diffusion LM; "LLaDA-1.5" is a v1.5 of the same 8 B model, not a smaller variant. Fallback: `diffusionfamily/diffullama` (~7 B, AR→diffusion adapted from LLaMA-2).
+- **Co-residency on 1×4090 (24 GB):** Qwen-0.5B + LLaDA-8B in bf16 ≈ 17 GB weights; KV cache + activations comfortably fit in the remaining 7 GB. The hybrid pipeline is sequential per problem so no concurrent forward passes.
+- **Param-golf framing:** total ~8.5 B is small by today's standards; a positive E4 result here is a much stronger plausibility argument than at frontier scale.
 
 ## Conditions
 
@@ -32,7 +34,7 @@ Total runs: 1 (C1) + 5×3 conditions × 200 problems = 3,001 base runs + 3 seeds
 Per-token forward FLOPs ≈ `2 × N_params + 2 × n_layers × n_ctx × d_model` (Kaplan-style approximation; see `flops.py` for exact formula).
 
 - C1: `flops = output_tokens × forward_flops(qwen_0.5b)`
-- C2: `flops = k × block_len × forward_flops(llada_1.5b)`
+- C2: `flops = k × block_len × forward_flops(llada_8b)`
 - C3: `flops = plan_tokens × forward_flops(qwen) + k × block_len × forward_flops(llada) + answer_tokens × forward_flops(qwen)`
 - C4: `flops = C3 + extension_tokens × forward_flops(qwen) + k × block_len × forward_flops(llada)`
 

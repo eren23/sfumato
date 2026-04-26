@@ -128,7 +128,7 @@ def main() -> int:
     n_problems = env_int("N_PROBLEMS", 5)
     seed = env_int("SEED", 0)
     ar_model_name = env_str("AR_MODEL", "Qwen/Qwen2.5-0.5B-Instruct")
-    diff_model_name = env_str("DIFF_MODEL", "GSAI-ML/LLaDA-1.5B-Instruct")
+    diff_model_name = env_str("DIFF_MODEL", "GSAI-ML/LLaDA-8B-Instruct")
     mock = env_bool("MOCK_MODELS", False)
 
     random.seed(seed)
