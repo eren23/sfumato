@@ -299,7 +299,12 @@ def main() -> int:
     val_ds = None
     try:
         print(f"Loading dataset: {DATASET_REPO}", flush=True)
-        ds = load_dataset(DATASET_REPO)
+        hf_token = (
+            os.environ.get("HF_TOKEN")
+            or os.environ.get("HUGGINGFACE_HUB_TOKEN")
+            or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+        )
+        ds = load_dataset(DATASET_REPO, token=hf_token)
         train_ds = ds["train"]
         val_ds = ds.get("validation") or ds.get("test")
     except Exception as exc:
