@@ -95,12 +95,15 @@ class _Real:
             self.name, trust_remote_code=True
         )
         dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
+        # NOTE: LLaDA's custom modeling code (trust_remote_code) targets
+        # transformers ≤ 4.x. Pin transformers==4.46.3 on the pod.
         model = AutoModel.from_pretrained(
             self.name,
             torch_dtype=dtype,
-            device_map="auto",
             trust_remote_code=True,
         )
+        if torch.cuda.is_available():
+            model = model.to("cuda")
         model.requires_grad_(False)
         self._model = model
 

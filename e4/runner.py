@@ -72,7 +72,7 @@ def load_problems(n: int, dev_indices_path: Path) -> list[dict]:
 
     from datasets import load_dataset  # type: ignore
 
-    ds = load_dataset(spec["dataset"], split=spec["split"])
+    ds = load_dataset(spec["dataset"], spec.get("config", "main"), split=spec["split"])
     return [
         {
             "id": str(i),
