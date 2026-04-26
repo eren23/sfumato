@@ -1,0 +1,22 @@
+{
+  "os": "macOS-26.2-arm64-arm-64bit",
+  "python": "CPython 3.12.12",
+  "startedAt": "2026-04-26T11:05:21.487996Z",
+  "args": [
+    "e4/results/",
+    "--project",
+    "sfumato-e4"
+  ],
+  "program": "/Users/eren/Documents/AI/sfumato/scripts/backfill_wandb.py",
+  "codePath": "scripts/backfill_wandb.py",
+  "codePathLocal": "scripts/backfill_wandb.py",
+  "git": {
+    "remote": "https://github.com/eren23/sfumato.git",
+    "commit": "92e37f62a526980667b8f01bb1608c19a99792dd"
+  },
+  "email": "erenakbulutwork@gmail.com",
+  "root": "/Users/eren/Documents/AI/sfumato",
+  "host": "erens-MacBook-Pro",
+  "executable": "/Users/eren/Documents/AI/parameter-golf_dev/.venv/bin/python",
+  "writerId": "ls9u0zaus3z655njtun4sui5x8a4g7zl"
+}
