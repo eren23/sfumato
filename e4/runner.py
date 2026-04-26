@@ -105,6 +105,16 @@ def run_condition(
         text, used = diff_model.denoise_block(prompt=q, k_steps=k_steps, seed=seed)
         trace["diffusion_cot"] = text
         return grade.extract_answer(text), used, trace
+    if condition == "c2c":
+        # C2 + commit adapter on the final sub-block. Tests "is the commit
+        # adapter alone enough to lift single-shot accuracy?" The diff wrapper
+        # handles enabling/disabling the named PEFT adapter exactly once per
+        # call (not per diffusion step).
+        text, used = diff_model.denoise_block(
+            prompt=q, k_steps=k_steps, seed=seed, apply_commit=True
+        )
+        trace["diffusion_cot"] = text
+        return grade.extract_answer(text), used, trace
     if condition == "c3":
         plan, f1 = ar_model.generate_plan(q, max_tokens=32, seed=seed)
         cot, f2 = diff_model.denoise_block(
@@ -206,6 +216,34 @@ def run_condition(
         trace["votes"] = " | ".join(answers)
         trace["winner"] = winner
         return winner, total, trace
+    if condition == "cmajc":
+        # cmaj + commit adapter on each branch's final sub-block, THEN
+        # majority-vote on the extracted numeric answers. Tests whether
+        # commit + branching double-dips (additive vs subsumed).
+        from collections import Counter
+
+        n_branches = int(os.environ.get("BRANCHES", "5"))
+        temperature = float(os.environ.get("TEMP", "0.7"))
+        branches: list[str] = []
+        total = 0
+        for b in range(n_branches):
+            cot, used = diff_model.denoise_block(
+                prompt=q,
+                k_steps=k_steps,
+                seed=seed * 100 + b,
+                temperature=temperature,
+                apply_commit=True,
+            )
+            branches.append(cot)
+            total += used
+        answers = [grade.extract_answer(b) for b in branches]
+        counts = Counter(a for a in answers if a)
+        winner = counts.most_common(1)[0][0] if counts else (answers[0] or "")
+        for i, b in enumerate(branches):
+            trace[f"branch_{i}"] = b
+        trace["votes"] = " | ".join(answers)
+        trace["winner"] = winner
+        return winner, total, trace
     if condition == "cmerge":
         # Parallel diffusion branches -> AR merger. Inverse of C3:
         # diffusion-germinate-multiple -> AR-converge-into-one. Same temp>0
@@ -272,12 +310,23 @@ def main() -> int:
     mock = env_bool("MOCK_MODELS", False)
     branches = env_int("BRANCHES", 1)
 
+    # Optional LoRA adapters (E2 tracks). Empty string → None.
+    raw_lora = env_str("LORA_PATH", "")
+    raw_commit = env_str("COMMIT_LORA_PATH", "")
+    lora_path = raw_lora if raw_lora else None
+    commit_lora_path = raw_commit if raw_commit else None
+
     random.seed(seed)
     dev_indices = REPO_ROOT / "e4" / "data" / "gsm8k_dev_200.json"
     problems = load_problems(n_problems, dev_indices)
 
     ar_model = ar_qwen.load(ar_model_name, mock=mock)
-    diff_model = diff_llada.load(diff_model_name, mock=mock)
+    diff_model = diff_llada.load(
+        diff_model_name,
+        mock=mock,
+        lora_path=lora_path,
+        commit_lora_path=commit_lora_path,
+    )
 
     wandb_run = _maybe_init_wandb(
         {
@@ -312,6 +361,8 @@ def main() -> int:
                 "seed": seed,
                 "ar_model": ar_model_name,
                 "diff_model": diff_model_name,
+                "lora_path": lora_path or "",
+                "commit_lora_path": commit_lora_path or "",
                 "pred": pred,
                 "gold": prob["answer"],
                 "correct": correct,
