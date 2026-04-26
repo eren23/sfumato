@@ -1,12 +1,12 @@
 # Crucible local config for E4.
 # Local-run usage:
-#   cd /Users/eren/Documents/ai/diff-ar-paper-research
+#   cd /Users/eren/Documents/ai/sfumato
 #   .venv/bin/crucible run experiment --preset smoke
-# Fleet-run usage: see ../parameter-golf_dev/.crucible/projects/diff_ar_e4.yaml
+# Fleet-run usage: see ../parameter-golf_dev/.crucible/projects/sfumato_e4.yaml
 
 project:
-  name: diff-ar-e4
-  description: AR vs diffusion vs hybrid CoT on GSM8K — param-golf E4
+  name: sfumato-e4
+  description: AR vs diffusion vs hybrid CoT on GSM8K — sfumato E4
 
 training:
   - backend: generic
