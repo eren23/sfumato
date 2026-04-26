@@ -242,10 +242,14 @@ def main() -> int:
     dataset = Dataset.from_list(keep_rows)
 
     if args.push:
-        token = os.environ.get("HF_TOKEN")
+        token = (
+            os.environ.get("HF_TOKEN")
+            or os.environ.get("HUGGINGFACE_HUB_TOKEN")
+            or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+        )
         if not token:
             print(
-                "[consensus] HF_TOKEN env var not set; cannot push",
+                "[consensus] no HF token in env (HF_TOKEN / HUGGINGFACE_HUB_TOKEN); cannot push",
                 file=sys.stderr,
             )
             return 1

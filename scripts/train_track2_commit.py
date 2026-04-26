@@ -467,9 +467,13 @@ def main() -> int:
 
     # --------------------------------------------------------------- push
     if PUSH:
-        token = os.environ.get("HF_TOKEN")
+        token = (
+            os.environ.get("HF_TOKEN")
+            or os.environ.get("HUGGINGFACE_HUB_TOKEN")
+            or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+        )
         if token is None:
-            print("PUSH_TO_HUB=true but HF_TOKEN not set; skipping push.", file=sys.stderr)
+            print("PUSH_TO_HUB=true but no HF token in env; skipping push.", file=sys.stderr)
         else:
             try:
                 model.push_to_hub(
