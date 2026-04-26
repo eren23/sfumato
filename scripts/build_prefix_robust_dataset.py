@@ -177,12 +177,60 @@ def main() -> int:
 
     qwen_tier_names = ["weak", "medium", "strong"]
     qwen_plans: dict[str, list[str]] = {}
-    for tier, model_name in zip(qwen_tier_names, qwen_models):
+
+    # Init wandb early so we can log per-Qwen heartbeats during gen.
+    wandb_run = None
+    if os.environ.get("WANDB_API_KEY") and os.environ.get("WANDB_DISABLED") != "1":
+        try:
+            import wandb  # type: ignore
+
+            wandb_run = wandb.init(
+                project=os.environ.get("WANDB_PROJECT", "sfumato-e2"),
+                name=os.environ.get(
+                    "WANDB_RUN_NAME",
+                    f"track1-data-N{args.n_train}-seed{args.seed}",
+                ),
+                tags=["track1", "dataset-build"],
+                reinit=True,
+                config={
+                    "n_train": args.n_train,
+                    "qwen_models": qwen_models,
+                    "seed": args.seed,
+                },
+            )
+        except Exception as exc:
+            print(f"[build] wandb init skipped: {exc}", flush=True)
+
+    import time as _time
+
+    for tier_idx, (tier, model_name) in enumerate(
+        zip(qwen_tier_names, qwen_models)
+    ):
+        t0 = _time.time()
+        if wandb_run is not None:
+            wandb_run.log(
+                {"qwen/tier_idx": tier_idx, "qwen/tier": tier, "qwen/model": model_name}
+            )
         if auto_mock:
             qwen_plans[tier] = _mock_qwen_plans(model_name, questions)
         else:
             qwen_plans[tier] = _generate_qwen_plans(
                 model_name, questions, seed=args.seed
+            )
+        elapsed = _time.time() - t0
+        print(
+            f"[build] qwen tier={tier} model={model_name} done in {elapsed:.1f}s "
+            f"({len(questions)} problems, {len(questions)/elapsed:.2f} it/s)",
+            flush=True,
+        )
+        if wandb_run is not None:
+            wandb_run.log(
+                {
+                    f"qwen/{tier}_seconds": elapsed,
+                    f"qwen/{tier}_it_per_s": len(questions) / max(elapsed, 1e-6),
+                    "progress/qwen_done": tier_idx + 1,
+                    "progress/qwen_total": len(qwen_models),
+                }
             )
 
     rows: list[dict] = []
@@ -211,30 +259,16 @@ def main() -> int:
 
     tier_names = ["none", "minimal", "hint", "xml", "weak", "medium", "strong", "oracle"]
 
-    # Optional: log a wandb run for visibility into dataset gen.
-    if os.environ.get("WANDB_API_KEY") and os.environ.get("WANDB_DISABLED") != "1":
+    # Finalize wandb run (was opened before Qwen loop for heartbeat logging).
+    if wandb_run is not None:
         try:
-            import wandb  # type: ignore
-
-            run = wandb.init(
-                project=os.environ.get("WANDB_PROJECT", "sfumato-e2"),
-                name=f"track1-data-N{args.n_train}-seed{args.seed}",
-                tags=["track1", "dataset-build"],
-                reinit=True,
-                config={
-                    "n_train": args.n_train,
-                    "qwen_models": qwen_models,
-                    "seed": args.seed,
-                    "n_rows": len(rows),
-                    "tiers": tier_names,
-                },
-            )
-            run.summary["n_rows"] = len(rows)
-            run.summary["n_problems"] = len(rows) // 8
-            run.summary["n_tiers"] = 8
-            run.finish()
+            wandb_run.summary["n_rows"] = len(rows)
+            wandb_run.summary["n_problems"] = len(rows) // 8
+            wandb_run.summary["n_tiers"] = 8
+            wandb_run.summary["tiers"] = tier_names
+            wandb_run.finish()
         except Exception as exc:
-            print(f"[build] wandb log skipped: {exc}", flush=True)
+            print(f"[build] wandb finalize skipped: {exc}", flush=True)
 
     dataset = Dataset.from_list(rows)
     # Cast prefix_tier to ClassLabel so stratify_by_column works.
