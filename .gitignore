@@ -20,5 +20,8 @@ e4/results/*.pdf
 .cache/
 hf_cache/
 
+# wandb local cache
+wandb/
+
 # OS junk
 .DS_Store
