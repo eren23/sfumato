@@ -213,9 +213,15 @@ def main() -> int:
     # Cast prefix_tier to ClassLabel so stratify_by_column works.
     tier_names = ["none", "minimal", "hint", "xml", "weak", "medium", "strong", "oracle"]
     dataset = dataset.cast_column("prefix_tier", ClassLabel(names=tier_names))
-    split = dataset.train_test_split(
-        test_size=0.05, seed=args.seed, stratify_by_column="prefix_tier"
-    )
+    # Stratified split needs test_size >= num_classes (8). Fall back to a
+    # plain shuffled split for tiny smoke runs where 5% < 8 rows.
+    test_n = max(int(round(len(dataset) * 0.05)), 1)
+    if test_n >= len(tier_names):
+        split = dataset.train_test_split(
+            test_size=0.05, seed=args.seed, stratify_by_column="prefix_tier"
+        )
+    else:
+        split = dataset.train_test_split(test_size=0.05, seed=args.seed)
     dd = DatasetDict({"train": split["train"], "validation": split["test"]})
 
     if args.push:
