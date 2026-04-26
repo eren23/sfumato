@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+.env.local
+
+# Crucible runtime artefacts
+.crucible/runs/
+.crucible/cache/
+
+# Experiment outputs (raw runs are large; keep them out of git)
+e4/results/raw_*.jsonl
+e4/results/*.parquet
+e4/results/*.pdf
+
+# HF cache
+.cache/
+hf_cache/
+
+# OS junk
+.DS_Store
