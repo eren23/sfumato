@@ -1,1 +1,0 @@
-{"running_loss":0.4,"flops_used":131498240000000,"accuracy":0.6,"_timestamp":1.7772014893693361e+09,"flops_cumulative":6574825760000000,"total_flops":6574825760000000,"_step":49,"step":50,"running_acc":0.6,"_wandb":{"runtime":0},"correct":1,"mean_flops_per_problem":1.314965152e+14,"_runtime":0}
