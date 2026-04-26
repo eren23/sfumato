@@ -113,6 +113,49 @@ def run_condition(
         ans, f3 = ar_model.finalize_answer(question=q, plan=plan, cot=cot, seed=seed)
         trace.update(plan=plan, diffusion_cot=cot, finalize=ans)
         return grade.extract_answer(ans), f1 + f2 + f3, trace
+    if condition == "c3p":
+        # C3 minus the AR finalize step: AR plan -> diffusion CoT -> answer
+        # extracted directly from LLaDA's output. Decomposes C3<C2 into
+        # "does the plan help LLaDA?" vs "does the finalizer hurt?"
+        plan, f1 = ar_model.generate_plan(q, max_tokens=32, seed=seed)
+        cot, f2 = diff_model.denoise_block(
+            prompt=q + "\n\nPlan: " + plan, k_steps=k_steps, seed=seed
+        )
+        trace.update(plan=plan, diffusion_cot=cot)
+        return grade.extract_answer(cot), f1 + f2, trace
+    if condition == "c2hint":
+        # C2 with a generic CoT hint prefix (no model planner). Tests
+        # whether *any* prefix degrades, or specifically *generated* ones.
+        text, used = diff_model.denoise_block(
+            prompt=q + "\n\nLet's think step by step.",
+            k_steps=k_steps,
+            seed=seed,
+        )
+        trace["diffusion_cot"] = text
+        return grade.extract_answer(text), used, trace
+    if condition == "c2empty":
+        # C2 with empty "Plan: " prefix (structure but no content).
+        # Decomposes "is it the plan content or just the structural prefix?"
+        text, used = diff_model.denoise_block(
+            prompt=q + "\n\nPlan: ", k_steps=k_steps, seed=seed
+        )
+        trace["diffusion_cot"] = text
+        return grade.extract_answer(text), used, trace
+    if condition == "crev":
+        # Reverse hybrid: LLaDA generates a short scaffold first (low budget),
+        # then Qwen reads question + LLaDA's scaffold and finalizes.
+        # Tests "diffuse-then-AR" asymmetry vs C3's "AR-then-diffuse-then-AR".
+        scaffold_k = max(k_steps // 2, 4)
+        scaffold, f1 = diff_model.denoise_block(
+            prompt=q + "\n\nSketch the key calculations first.",
+            k_steps=scaffold_k,
+            seed=seed,
+        )
+        ans, f2 = ar_model.finalize_answer(
+            question=q, plan="", cot=scaffold, seed=seed
+        )
+        trace.update(diffusion_scaffold=scaffold, finalize=ans)
+        return grade.extract_answer(ans), f1 + f2, trace
     if condition == "c4":
         plan, f1 = ar_model.generate_plan(q, max_tokens=32, seed=seed)
         cot1, f2 = diff_model.denoise_block(
@@ -133,7 +176,78 @@ def run_condition(
             finalize=ans,
         )
         return grade.extract_answer(ans), f1 + f2 + f3 + f4 + f5, trace
+    if condition == "cmaj":
+        # Self-consistency at diffusion level: N parallel LLaDA branches
+        # (different seeds) -> majority vote on the extracted numeric answer.
+        # Captures "germinate in parallel, then converge" without any AR step.
+        from collections import Counter
+
+        n_branches = int(os.environ.get("BRANCHES", "5"))
+        branches: list[str] = []
+        total = 0
+        for b in range(n_branches):
+            cot, used = diff_model.denoise_block(
+                prompt=q, k_steps=k_steps, seed=seed * 100 + b
+            )
+            branches.append(cot)
+            total += used
+        answers = [grade.extract_answer(b) for b in branches]
+        counts = Counter(a for a in answers if a)
+        winner = counts.most_common(1)[0][0] if counts else (answers[0] or "")
+        for i, b in enumerate(branches):
+            trace[f"branch_{i}"] = b
+        trace["votes"] = " | ".join(answers)
+        trace["winner"] = winner
+        return winner, total, trace
+    if condition == "cmerge":
+        # Parallel diffusion branches -> AR merger. Inverse of C3:
+        # diffusion-germinate-multiple -> AR-converge-into-one.
+        n_branches = int(os.environ.get("BRANCHES", "3"))
+        branches: list[str] = []
+        total = 0
+        for b in range(n_branches):
+            cot, used = diff_model.denoise_block(
+                prompt=q, k_steps=k_steps, seed=seed * 100 + b
+            )
+            branches.append(cot)
+            total += used
+        joined = "\n\n---\n\n".join(
+            f"Candidate {i+1}:\n{b}" for i, b in enumerate(branches)
+        )
+        ans, f_ar = ar_model.finalize_answer(
+            question=q, plan="", cot=joined, seed=seed
+        )
+        for i, b in enumerate(branches):
+            trace[f"branch_{i}"] = b
+        trace["finalize"] = ans
+        return grade.extract_answer(ans), total + f_ar, trace
     raise ValueError(f"Unknown condition: {condition}")
+
+
+def _maybe_init_wandb(cfg: dict) -> object | None:
+    """Init wandb if WANDB_API_KEY is set and WANDB_DISABLED is not '1'."""
+    if os.environ.get("WANDB_DISABLED") == "1":
+        return None
+    if not os.environ.get("WANDB_API_KEY"):
+        return None
+    try:
+        import wandb  # type: ignore
+    except ImportError:
+        print("[E4] wandb not installed; skipping logging.", flush=True)
+        return None
+    project = os.environ.get("WANDB_PROJECT", "sfumato-e4")
+    name = (
+        f"{cfg['condition']}-k{cfg['k_steps']}-seed{cfg['seed']}"
+        f"-{cfg['ar_model'].split('/')[-1]}"
+    )
+    run = wandb.init(
+        project=project,
+        name=name,
+        config=cfg,
+        reinit=True,
+        tags=[cfg["condition"], f"k={cfg['k_steps']}"],
+    )
+    return run
 
 
 def main() -> int:
@@ -144,6 +258,7 @@ def main() -> int:
     ar_model_name = env_str("AR_MODEL", "Qwen/Qwen2.5-0.5B-Instruct")
     diff_model_name = env_str("DIFF_MODEL", "GSAI-ML/LLaDA-8B-Instruct")
     mock = env_bool("MOCK_MODELS", False)
+    branches = env_int("BRANCHES", 1)
 
     random.seed(seed)
     dev_indices = REPO_ROOT / "e4" / "data" / "gsm8k_dev_200.json"
@@ -151,6 +266,19 @@ def main() -> int:
 
     ar_model = ar_qwen.load(ar_model_name, mock=mock)
     diff_model = diff_llada.load(diff_model_name, mock=mock)
+
+    wandb_run = _maybe_init_wandb(
+        {
+            "condition": condition,
+            "k_steps": k_steps,
+            "n_problems": n_problems,
+            "seed": seed,
+            "ar_model": ar_model_name,
+            "diff_model": diff_model_name,
+            "branches": branches,
+            "mock": mock,
+        }
+    )
 
     n_correct = 0
     total_flops = 0
@@ -189,6 +317,17 @@ def main() -> int:
             f"val_bpb:{total_flops:.3e}",
             flush=True,
         )
+        if wandb_run is not None:
+            wandb_run.log(
+                {
+                    "step": i + 1,
+                    "running_acc": running_acc,
+                    "running_loss": running_loss,
+                    "flops_used": used,
+                    "flops_cumulative": total_flops,
+                    "correct": int(correct),
+                }
+            )
 
     elapsed = time.time() - t0
     accuracy = n_correct / max(n_problems, 1)
@@ -210,6 +349,13 @@ def main() -> int:
         for row in rows:
             f.write(json.dumps(row) + "\n")
     print(f"[E4] rows -> {out_path.relative_to(REPO_ROOT)}", flush=True)
+
+    if wandb_run is not None:
+        wandb_run.summary["accuracy"] = accuracy
+        wandb_run.summary["total_flops"] = total_flops
+        wandb_run.summary["wallclock_s"] = elapsed
+        wandb_run.summary["mean_flops_per_problem"] = total_flops / max(n_problems, 1)
+        wandb_run.finish()
     return 0
 
 
