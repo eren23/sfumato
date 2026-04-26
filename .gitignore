@@ -15,6 +15,7 @@ venv/
 e4/results/raw_*.jsonl
 e4/results/*.parquet
 e4/results/*.pdf
+# keep figs/ committed (small PNGs, useful as artefacts)
 
 # HF cache
 .cache/
