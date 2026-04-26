@@ -40,6 +40,7 @@ def cell_key(row: dict[str, Any]) -> tuple:
         row.get("ar_model", "unknown_ar"),
         row.get("diff_model", "unknown_diff"),
         row.get("seed", 0),
+        row.get("branches", 1),
     )
 
 
@@ -52,9 +53,10 @@ def upload_cell(
 ) -> None:
     import wandb  # type: ignore
 
-    cond, k, ar, diff, seed = cell
+    cond, k, ar, diff, seed, branches = cell
+    branches_suffix = f"-b{branches}" if branches > 1 else ""
     name = (
-        f"{cond}-k{k}-seed{seed}"
+        f"{cond}-k{k}-seed{seed}{branches_suffix}"
         f"-{ar.split('/')[-1] if '/' in ar else ar}"
     )
     cfg = {
