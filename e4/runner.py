@@ -90,22 +90,29 @@ def run_condition(
     ar_model,
     diff_model,
     seed: int,
-) -> tuple[str, int]:
-    """Returns (predicted_answer, flops_used)."""
+) -> tuple[str, int, dict]:
+    """Returns (predicted_answer, flops_used, trace_dict).
+
+    trace_dict has the per-stage text outputs for diagnosis.
+    """
     q = problem["question"]
+    trace: dict[str, str] = {}
     if condition == "c1":
         cot, used = ar_model.generate_cot_and_answer(q, seed=seed)
-        return grade.extract_answer(cot), used
+        trace["cot"] = cot
+        return grade.extract_answer(cot), used, trace
     if condition == "c2":
         text, used = diff_model.denoise_block(prompt=q, k_steps=k_steps, seed=seed)
-        return grade.extract_answer(text), used
+        trace["diffusion_cot"] = text
+        return grade.extract_answer(text), used, trace
     if condition == "c3":
         plan, f1 = ar_model.generate_plan(q, max_tokens=32, seed=seed)
         cot, f2 = diff_model.denoise_block(
             prompt=q + "\n\nPlan: " + plan, k_steps=k_steps, seed=seed
         )
         ans, f3 = ar_model.finalize_answer(question=q, plan=plan, cot=cot, seed=seed)
-        return ans, f1 + f2 + f3
+        trace.update(plan=plan, diffusion_cot=cot, finalize=ans)
+        return grade.extract_answer(ans), f1 + f2 + f3, trace
     if condition == "c4":
         plan, f1 = ar_model.generate_plan(q, max_tokens=32, seed=seed)
         cot1, f2 = diff_model.denoise_block(
@@ -118,7 +125,14 @@ def run_condition(
             seed=seed,
         )
         ans, f5 = ar_model.finalize_answer(question=q, plan=plan, cot=cot2, seed=seed)
-        return ans, f1 + f2 + f3 + f4 + f5
+        trace.update(
+            plan=plan,
+            diffusion_cot1=cot1,
+            extension=extension,
+            diffusion_cot2=cot2,
+            finalize=ans,
+        )
+        return grade.extract_answer(ans), f1 + f2 + f3 + f4 + f5, trace
     raise ValueError(f"Unknown condition: {condition}")
 
 
@@ -143,7 +157,7 @@ def main() -> int:
     rows: list[dict] = []
     t0 = time.time()
     for i, prob in enumerate(problems):
-        pred, used = run_condition(
+        pred, used, trace = run_condition(
             prob, condition, k_steps, ar_model, diff_model, seed=seed
         )
         correct = grade.is_correct(pred, prob["answer"])
@@ -156,10 +170,13 @@ def main() -> int:
                 "condition": condition,
                 "k_steps": k_steps,
                 "seed": seed,
+                "ar_model": ar_model_name,
+                "diff_model": diff_model_name,
                 "pred": pred,
                 "gold": prob["answer"],
                 "correct": correct,
                 "flops": used,
+                "trace": trace,
             }
         )
         running_acc = n_correct / (i + 1)

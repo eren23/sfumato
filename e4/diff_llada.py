@@ -79,9 +79,13 @@ class _Real:
     """
 
     name: str
-    block_len: int = 256
-    gen_length: int = 256
+    block_len: int = 128
+    gen_length: int = 128
     sub_block_length: int = 32  # internal block_length within gen_length
+    # NOTE: LLaDA's reference (chat.py / generate.py) uses steps=128 for
+    # gen_length=128 → 32 steps/block. With our gen_length=128, block=32 →
+    # 4 sub-blocks; k=32 gives 8 steps/block (the minimum we observed
+    # produces fluent output); k=64 gives 16/block; k=128 = reference.
     _model: object | None = field(default=None, repr=False)
     _tokenizer: object | None = field(default=None, repr=False)
 
