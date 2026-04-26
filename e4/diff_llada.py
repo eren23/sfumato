@@ -130,6 +130,17 @@ class _Real:
         # Apply LoRA if requested. PEFT adapter switching is slow per-call
         # (it walks every Linear layer), so the runner only switches at most
         # once per denoise_block invocation — never per diffusion step.
+        # PEFT's PeftModel.from_pretrained doesn't auto-discover HF tokens
+        # the way datasets.load_dataset does — pass it explicitly so private
+        # adapter repos load. Read HF_TOKEN, HUGGINGFACE_HUB_TOKEN, or
+        # HUGGING_FACE_HUB_TOKEN.
+        import os as _os
+
+        _hf_token = (
+            _os.environ.get("HF_TOKEN")
+            or _os.environ.get("HUGGINGFACE_HUB_TOKEN")
+            or _os.environ.get("HUGGING_FACE_HUB_TOKEN")
+        )
         if self.lora_path:
             from peft import PeftModel  # type: ignore
 
@@ -138,6 +149,7 @@ class _Real:
                 self.lora_path,
                 is_trainable=False,
                 adapter_name="base_lora",
+                token=_hf_token,
             )
             if self.commit_lora_path:
                 # Load commit as a NAMED adapter, then switch back to base_lora
@@ -146,6 +158,7 @@ class _Real:
                     self.commit_lora_path,
                     adapter_name="commit",
                     is_trainable=False,
+                    token=_hf_token,
                 )
                 model.set_adapter("base_lora")
         elif self.commit_lora_path:
@@ -160,6 +173,7 @@ class _Real:
                 self.commit_lora_path,
                 is_trainable=False,
                 adapter_name="commit",
+                token=_hf_token,
             )
             model.disable_adapter_layers()
 
