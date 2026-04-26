@@ -209,9 +209,35 @@ def main() -> int:
 
     print(f"[build] built {len(rows)} rows ({len(rows) // 8} problems × 8 tiers)")
 
+    tier_names = ["none", "minimal", "hint", "xml", "weak", "medium", "strong", "oracle"]
+
+    # Optional: log a wandb run for visibility into dataset gen.
+    if os.environ.get("WANDB_API_KEY") and os.environ.get("WANDB_DISABLED") != "1":
+        try:
+            import wandb  # type: ignore
+
+            run = wandb.init(
+                project=os.environ.get("WANDB_PROJECT", "sfumato-e2"),
+                name=f"track1-data-N{args.n_train}-seed{args.seed}",
+                tags=["track1", "dataset-build"],
+                reinit=True,
+                config={
+                    "n_train": args.n_train,
+                    "qwen_models": qwen_models,
+                    "seed": args.seed,
+                    "n_rows": len(rows),
+                    "tiers": tier_names,
+                },
+            )
+            run.summary["n_rows"] = len(rows)
+            run.summary["n_problems"] = len(rows) // 8
+            run.summary["n_tiers"] = 8
+            run.finish()
+        except Exception as exc:
+            print(f"[build] wandb log skipped: {exc}", flush=True)
+
     dataset = Dataset.from_list(rows)
     # Cast prefix_tier to ClassLabel so stratify_by_column works.
-    tier_names = ["none", "minimal", "hint", "xml", "weak", "medium", "strong", "oracle"]
     dataset = dataset.cast_column("prefix_tier", ClassLabel(names=tier_names))
     # Stratified split needs test_size >= num_classes (8). Fall back to a
     # plain shuffled split for tiny smoke runs where 5% < 8 rows.
