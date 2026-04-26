@@ -58,31 +58,53 @@ def _generate_qwen_plans(
     model_name: str,
     questions: list[str],
     seed: int,
+    batch_size: int = 16,
 ) -> list[str]:
-    """Load `model_name`, generate one greedy plan per question, unload."""
+    """Load `model_name`, batch-generate greedy plans, unload.
+
+    Batching on a single GPU is ~5-10x faster than one-question-at-a-time
+    `model.generate` calls because each call has fixed kernel-launch overhead.
+    """
     import torch  # type: ignore
     from transformers import AutoModelForCausalLM, AutoTokenizer  # type: ignore
     from tqdm import tqdm  # type: ignore
 
     print(f"[qwen] loading {model_name}", flush=True)
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_name, padding_side="left")
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
     dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
     model = AutoModelForCausalLM.from_pretrained(
         model_name, torch_dtype=dtype, device_map="auto"
     )
     model.requires_grad_(False)
 
-    plans: list[str] = []
-    torch.manual_seed(seed)
-    for q in tqdm(questions, desc=f"plans:{model_name.split('/')[-1]}"):
+    # Precompute all prompt strings once.
+    prompt_texts: list[str] = []
+    for q in questions:
         messages = [
             {"role": "system", "content": PLAN_SYSTEM},
             {"role": "user", "content": q},
         ]
-        prompt_text = tokenizer.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True
+        prompt_texts.append(
+            tokenizer.apply_chat_template(
+                messages, tokenize=False, add_generation_prompt=True
+            )
         )
-        inputs = tokenizer(prompt_text, return_tensors="pt").to(model.device)
+
+    plans: list[str] = []
+    torch.manual_seed(seed)
+    n = len(prompt_texts)
+    short = model_name.split("/")[-1]
+    for start in tqdm(range(0, n, batch_size), desc=f"plans:{short}:bs{batch_size}"):
+        batch_prompts = prompt_texts[start : start + batch_size]
+        inputs = tokenizer(
+            batch_prompts,
+            return_tensors="pt",
+            padding=True,
+            truncation=True,
+            max_length=512,
+        ).to(model.device)
         with torch.no_grad():
             out = model.generate(
                 **inputs,
@@ -90,9 +112,13 @@ def _generate_qwen_plans(
                 do_sample=False,
                 pad_token_id=tokenizer.eos_token_id,
             )
-        new_ids = out[0, inputs["input_ids"].shape[1] :]
-        text = tokenizer.decode(new_ids, skip_special_tokens=True).strip()
-        plans.append(text)
+        # `out` shape: (B, prompt_len + new_tokens). With left-padding, prompt
+        # ends at inputs["input_ids"].shape[1] for every row.
+        prompt_len = inputs["input_ids"].shape[1]
+        new_ids = out[:, prompt_len:]
+        for row in new_ids:
+            text = tokenizer.decode(row, skip_special_tokens=True).strip()
+            plans.append(text)
 
     del model
     del tokenizer
