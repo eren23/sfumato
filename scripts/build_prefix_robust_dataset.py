@@ -251,9 +251,17 @@ def main() -> int:
     dd = DatasetDict({"train": split["train"], "validation": split["test"]})
 
     if args.push:
-        token = os.environ.get("HF_TOKEN")
+        token = (
+            os.environ.get("HF_TOKEN")
+            or os.environ.get("HUGGINGFACE_HUB_TOKEN")
+            or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+        )
         if not token:
-            print("[build] HF_TOKEN env var not set; cannot push", file=sys.stderr)
+            print(
+                "[build] no HF token in env (HF_TOKEN / HUGGINGFACE_HUB_TOKEN); "
+                "cannot push",
+                file=sys.stderr,
+            )
             return 1
         print(f"[build] pushing to hub: {args.repo_id} (private)", flush=True)
         dd.push_to_hub(args.repo_id, private=True, token=token)
