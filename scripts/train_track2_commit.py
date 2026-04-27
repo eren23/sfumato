@@ -53,25 +53,25 @@ from train_track1_lora import (  # type: ignore  # noqa: E402
 # Config
 # ----------------------------------------------------------------------------
 MODEL_NAME = env("MODEL_NAME", "GSAI-ML/LLaDA-8B-Instruct")
-DATASET_REPO = env("HF_DATASET_ID", "eren23/sfumato-consensus-gsm8k")
-LOCAL_PARQUET = env(
-    "LOCAL_PARQUET",
-    str(Path(__file__).resolve().parents[1] / "e2" / "data" / "consensus_dataset.parquet"),
+DATASET_REPO = env("HF_DATASET_ID", "eren23/sfumato-commit-mixture-gsm8k")
+LOCAL_JSONL = env(
+    "LOCAL_JSONL",
+    str(Path(__file__).resolve().parents[1] / "e2" / "data" / "commit_mixture.jsonl"),
 )
 
 LORA_R = env_int("LORA_R", 8)
 LORA_ALPHA = env_int("LORA_ALPHA", 16)
 LORA_DROPOUT = env_float("LORA_DROPOUT", 0.05)
 LR = env_float("LR", 5e-5)
-EPOCHS = env_int("EPOCHS", 2)
-WARMUP_STEPS = env_int("WARMUP_STEPS", 200)
-BATCH_SIZE = env_int("BATCH_SIZE", 2)
-GRAD_ACCUM = env_int("GRAD_ACCUM", 2)
+EPOCHS = env_int("EPOCHS", 4)  # tiny dataset (~104 train rows), more passes
+WARMUP_STEPS = env_int("WARMUP_STEPS", 20)
+BATCH_SIZE = env_int("BATCH_SIZE", 1)
+GRAD_ACCUM = env_int("GRAD_ACCUM", 4)
 SEED = env_int("SEED", 42)
 MAX_LENGTH = env_int("MAX_LENGTH", 512)
-LOG_INTERVAL = env_int("LOG_INTERVAL", 50)
-EVAL_INTERVAL = env_int("EVAL_INTERVAL", 500)
-EVAL_BATCHES = env_int("EVAL_BATCHES", 32)
+LOG_INTERVAL = env_int("LOG_INTERVAL", 5)
+EVAL_INTERVAL = env_int("EVAL_INTERVAL", 25)
+EVAL_BATCHES = env_int("EVAL_BATCHES", 5)
 
 P_MASK_LOW = env_float("P_MASK_LOW", 0.3)
 P_MASK_HIGH = env_float("P_MASK_HIGH", 0.9)
@@ -103,25 +103,28 @@ def _find_answer_start(text: str):
     return best
 
 
-def build_track2_tokenize_fn(tokenizer, max_length: int, rng: random.Random):
-    """Tokenize a consensus row into (input_ids, prompt_len, answer_end).
+_DENOISE_SYS = (
+    "You are a careful math tutor. Think step by step about the problem "
+    "below; show numeric work; end with 'Answer: <number>'."
+)
 
-    Schema (created by another script, eren23/sfumato-consensus-gsm8k):
+
+def build_track2_tokenize_fn(tokenizer, max_length: int, rng: random.Random):
+    """Tokenize a commit-mixture row into (input_ids, prompt_len, answer_start, answer_end).
+
+    Schema (eren23/sfumato-commit-mixture-gsm8k):
       - "question": GSM8K question
-      - "branches": list[str] (b=5) of full branch generations
-      - "majority_answer": str — the consensus answer text (containing one of
-        ANSWER_DELIMS)
+      - "target_cot": full chain-of-thought text whose tail contains "Answer:"
+      - "target_answer": numeric answer (string)
+      - "bucket": one of {rescue, preserve_disagreement, pure_agreement}
 
     We build:
-      prompt    = question + "\n" + (random branch text up to its answer mark)
-      response  = majority_answer (only the answer-delim-onward portion is
-                  marked as the supervised span; tokens before that delim are
-                  considered extra context, not denoised)
+      prompt   = LLaDA chat template wrapping the question (matches inference)
+      response = full target_cot (so the adapter sees natural CoT context)
 
-    Output keys:
-      input_ids   : list[int] padded to max_length
-      prompt_len  : int — start of the answer-only span
-      answer_end  : int — end (exclusive) of the answer-only span
+    The supervised span — what the loss masks — is ONLY [answer_start..response_end),
+    i.e. from "Answer:" to end. Earlier CoT tokens are present in the input
+    but never noised, so the adapter only learns to commit the answer span.
     """
     pad_id = tokenizer.pad_token_id
     if pad_id is None:
@@ -131,38 +134,47 @@ def build_track2_tokenize_fn(tokenizer, max_length: int, rng: random.Random):
 
     def tokenize_fn(row):
         question = row.get("question", "") or ""
-        majority = row.get("majority_answer", "") or ""
-        branches = row.get("branches") or []
-        branch = rng.choice(branches) if branches else ""
+        target_cot = row.get("target_cot", "") or ""
 
-        # Locate answer span inside majority_answer (fall back to whole text)
-        a_off = _find_answer_start(majority)
-        if a_off is None:
-            answer_text = majority
-        else:
-            answer_text = majority[a_off:]
-
-        # Prompt = question + branch context (lets the model condition on the
-        # noisy branch when committing to consensus)
-        prompt_text = question
-        if branch:
-            prompt_text = prompt_text + "\n\nBranch:\n" + branch
-        prompt_text = prompt_text + "\n\nAnswer:\n"
+        messages = [
+            {"role": "system", "content": _DENOISE_SYS},
+            {"role": "user", "content": question},
+        ]
+        prompt_text = tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True
+        )
 
         prompt_ids = tokenizer(prompt_text, add_special_tokens=False)["input_ids"]
-        answer_ids = tokenizer(answer_text, add_special_tokens=False)["input_ids"]
-        if eos is not None and (not answer_ids or answer_ids[-1] != eos):
-            answer_ids = answer_ids + [eos]
+        response_ids = tokenizer(target_cot, add_special_tokens=False)["input_ids"]
+        if eos is not None and (not response_ids or response_ids[-1] != eos):
+            response_ids = response_ids + [eos]
+
+        # Find the LAST occurrence of an answer delim — robust to CoTs that
+        # mention "Answer:" inline before the final declaration.
+        answer_offset = -1
+        for delim in ANSWER_DELIMS:
+            i = target_cot.rfind(delim)
+            if i > answer_offset:
+                answer_offset = i
+        if answer_offset < 0:
+            # Fall back: last quarter of the response.
+            answer_offset_in_tokens = max(0, len(response_ids) - max(8, len(response_ids) // 4))
+        else:
+            prefix_text = target_cot[:answer_offset]
+            answer_offset_in_tokens = len(
+                tokenizer(prefix_text, add_special_tokens=False)["input_ids"]
+            )
 
         if len(prompt_ids) >= max_length - 1:
             prompt_ids = prompt_ids[: max_length - 1]
-            answer_ids = answer_ids[:1]
+            response_ids = response_ids[:1]
         avail = max_length - len(prompt_ids)
-        answer_ids = answer_ids[:avail]
+        response_ids = response_ids[:avail]
 
-        ids = prompt_ids + answer_ids
+        ids = prompt_ids + response_ids
         prompt_len = len(prompt_ids)
-        answer_end = len(ids)
+        answer_start = prompt_len + min(answer_offset_in_tokens, len(response_ids))
+        answer_end = prompt_len + len(response_ids)
         pad_n = max_length - len(ids)
         if pad_n > 0:
             ids = ids + [pad_id] * pad_n
@@ -170,6 +182,7 @@ def build_track2_tokenize_fn(tokenizer, max_length: int, rng: random.Random):
         return {
             "input_ids": ids,
             "prompt_len": prompt_len,
+            "answer_start": answer_start,
             "answer_end": answer_end,
         }
 
@@ -194,6 +207,7 @@ def run_validation_track2(model, loader, max_batches: int) -> float:
                     batch,
                     p_mask_low=P_MASK_LOW,
                     p_mask_high=P_MASK_HIGH,
+                    span_start_key="answer_start",
                     span_end=batch["answer_end"],
                 )
             losses.append(float(loss.detach()))
@@ -289,7 +303,6 @@ def main() -> int:
             bias="none",
             task_type="CAUSAL_LM",
             target_modules=LORA_TARGETS,
-            layers_to_transform=LORA_LAYERS_TO_TRANSFORM,
         )
         model = get_peft_model(model, lora_cfg)
     model.print_trainable_parameters()  # expect ~1-2M params
@@ -305,17 +318,27 @@ def main() -> int:
             or os.environ.get("HUGGING_FACE_HUB_TOKEN")
         )
         ds = load_dataset(DATASET_REPO, token=hf_token)
-        train_ds = ds["train"]
-        val_ds = ds.get("validation") or ds.get("test")
+        full = ds["train"]
+        if "split" in full.column_names:
+            train_ds = full.filter(lambda r: r["split"] == "train")
+            val_ds = full.filter(lambda r: r["split"] == "validation")
+        else:
+            split = full.train_test_split(test_size=0.05, seed=SEED)
+            train_ds = split["train"]
+            val_ds = split["test"]
     except Exception as exc:
-        print(f"HF load failed ({exc}); falling back to {LOCAL_PARQUET}", flush=True)
-        if not Path(LOCAL_PARQUET).exists():
-            print(f"ERROR: local parquet missing: {LOCAL_PARQUET}", file=sys.stderr)
+        print(f"HF load failed ({exc}); falling back to {LOCAL_JSONL}", flush=True)
+        if not Path(LOCAL_JSONL).exists():
+            print(f"ERROR: local jsonl missing: {LOCAL_JSONL}", file=sys.stderr)
             return 2
-        full = Dataset.from_parquet(LOCAL_PARQUET)
-        split = full.train_test_split(test_size=0.05, seed=SEED)
-        train_ds = split["train"]
-        val_ds = split["test"]
+        full = Dataset.from_json(LOCAL_JSONL)
+        if "split" in full.column_names:
+            train_ds = full.filter(lambda r: r["split"] == "train")
+            val_ds = full.filter(lambda r: r["split"] == "validation")
+        else:
+            split = full.train_test_split(test_size=0.05, seed=SEED)
+            train_ds = split["train"]
+            val_ds = split["test"]
 
     tokenize_fn = build_track2_tokenize_fn(tokenizer, MAX_LENGTH, rng)
     print(f"Tokenizing train ({len(train_ds)} rows)...", flush=True)
@@ -324,7 +347,7 @@ def main() -> int:
         print(f"Tokenizing val ({len(val_ds)} rows)...", flush=True)
         val_ds = val_ds.map(tokenize_fn, remove_columns=val_ds.column_names)
 
-    cols = ["input_ids", "prompt_len", "answer_end"]
+    cols = ["input_ids", "prompt_len", "answer_start", "answer_end"]
     train_ds.set_format(type="torch", columns=cols)
     if val_ds is not None:
         val_ds.set_format(type="torch", columns=cols)
@@ -335,6 +358,9 @@ def main() -> int:
             "input_ids": torch.stack([b["input_ids"] for b in batch]).to(device),
             "prompt_len": torch.tensor(
                 [int(b["prompt_len"]) for b in batch], dtype=torch.long, device=device
+            ),
+            "answer_start": torch.tensor(
+                [int(b["answer_start"]) for b in batch], dtype=torch.long, device=device
             ),
             "answer_end": torch.tensor(
                 [int(b["answer_end"]) for b in batch], dtype=torch.long, device=device
@@ -401,6 +427,7 @@ def main() -> int:
                     batch,
                     p_mask_low=P_MASK_LOW,
                     p_mask_high=P_MASK_HIGH,
+                    span_start_key="answer_start",
                     span_end=batch["answer_end"],
                 )
             (loss / GRAD_ACCUM).backward()
