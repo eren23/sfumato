@@ -122,6 +122,32 @@ def main() -> int:
     print(f"[consensus] loading diffusion model: {args.diff_model}", flush=True)
     diff_model = diff_llada.load(args.diff_model, mock=args.mock)
 
+    # Wandb heartbeat for live progress visibility.
+    wandb_run = None
+    if os.environ.get("WANDB_API_KEY") and os.environ.get("WANDB_DISABLED") != "1":
+        try:
+            import wandb  # type: ignore
+
+            wandb_run = wandb.init(
+                project=os.environ.get("WANDB_PROJECT", "sfumato-e2"),
+                name=os.environ.get(
+                    "WANDB_RUN_NAME",
+                    f"track2-data-N{args.n_problems}-b{args.branches}-t{args.temperature}",
+                ),
+                tags=["track2", "consensus-build"],
+                reinit=True,
+                config={
+                    "n_problems": args.n_problems,
+                    "branches": args.branches,
+                    "temperature": args.temperature,
+                    "k_steps": args.k_steps,
+                    "diff_model": args.diff_model,
+                    "seed": args.seed,
+                },
+            )
+        except Exception as exc:
+            print(f"[consensus] wandb init skipped: {exc}", flush=True)
+
     new_count = 0
     try:
         for i in range(n):
@@ -190,11 +216,33 @@ def main() -> int:
                     if r.get("consensus_correct")
                     and r.get("greedy_answer") != r.get("gold_answer")
                 )
+                # Also count partial-credit cases for diagnosis.
+                greedy_correct = sum(
+                    1
+                    for r in existing.values()
+                    if r.get("greedy_answer") == r.get("gold_answer")
+                )
+                consensus_correct = sum(
+                    1
+                    for r in existing.values()
+                    if r.get("consensus_correct")
+                )
                 print(
                     f"[consensus] processed={new_count} "
-                    f"total={len(existing)} kept={kept}",
+                    f"total={len(existing)} kept={kept} "
+                    f"(greedy_correct={greedy_correct}, "
+                    f"consensus_correct={consensus_correct})",
                     flush=True,
                 )
+                if wandb_run is not None:
+                    wandb_run.log({
+                        "processed": new_count,
+                        "total": len(existing),
+                        "kept": kept,
+                        "greedy_correct": greedy_correct,
+                        "consensus_correct": consensus_correct,
+                        "kept_rate": kept / max(len(existing), 1),
+                    })
 
             if (
                 args.max_problems_per_run
