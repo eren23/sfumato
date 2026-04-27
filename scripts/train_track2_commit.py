@@ -82,8 +82,11 @@ RESUME_FROM = env("RESUME_FROM", None)
 PUSH = env_bool("PUSH_TO_HUB", True)
 WANDB_RUN_NAME = env("WANDB_RUN_NAME", "track2-commit")
 
-# FFN-only late-layer adaptation
-LORA_TARGETS = ["gate_proj", "up_proj", "down_proj"]
+# FFN-only adaptation. CRITICAL: LLaDA's LLaDALlamaBlock uses NON-standard
+# module names — ff_proj (gate equivalent), up_proj, ff_out (down equivalent).
+# Earlier ["gate_proj", "up_proj", "down_proj"] only matched up_proj —
+# 1/3 of FFN. Confirmed by inspecting modeling_llada.py + adapter weights.
+LORA_TARGETS = ["ff_proj", "up_proj", "ff_out"]
 LORA_LAYERS_TO_TRANSFORM = list(range(24, 32))
 
 
