@@ -89,6 +89,9 @@ MAX_LENGTH = env_int("MAX_LENGTH", 512)
 LOG_INTERVAL = env_int("LOG_INTERVAL", 50)
 EVAL_INTERVAL = env_int("EVAL_INTERVAL", 500)
 EVAL_BATCHES = env_int("EVAL_BATCHES", 32)
+MASK_LOW = env_float("MASK_LOW", 1e-3)
+MASK_HIGH = env_float("MASK_HIGH", 1.0 - 1e-3)
+MAX_STEPS = env_int("MAX_STEPS", 0)  # 0 = no cap
 
 OUTPUT_REPO = env("HF_OUTPUT_REPO", "eren23/sfumato-llada-prefix-robust")
 SAVE_DIR = Path(env("SAVE_DIR", "/tmp/track1_lora"))
@@ -250,7 +253,9 @@ def run_validation(model, loader, max_batches: int) -> float:
             if i >= max_batches:
                 break
             with torch.cuda.amp.autocast(dtype=torch.bfloat16):
-                loss, _ = compute_llada_loss(model, batch)
+                loss, _ = compute_llada_loss(
+                    model, batch, p_mask_low=MASK_LOW, p_mask_high=MASK_HIGH
+                )
             losses.append(float(loss.detach()))
     if not losses:
         return float("nan")
@@ -444,8 +449,12 @@ def main() -> int:
         optim.zero_grad(set_to_none=True)
 
         for micro_idx, batch in enumerate(train_loader):
+            if MAX_STEPS and global_step >= MAX_STEPS:
+                break
             with torch.cuda.amp.autocast(dtype=torch.bfloat16):
-                loss, p_mask_avg = compute_llada_loss(model, batch)
+                loss, p_mask_avg = compute_llada_loss(
+                    model, batch, p_mask_low=MASK_LOW, p_mask_high=MASK_HIGH
+                )
             (loss / GRAD_ACCUM).backward()
             accum_loss += float(loss.detach()) / GRAD_ACCUM
             accum_p += p_mask_avg / GRAD_ACCUM
