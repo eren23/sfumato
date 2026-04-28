@@ -99,14 +99,19 @@ RESUME_FROM = env("RESUME_FROM", None)
 PUSH = env_bool("PUSH_TO_HUB", True)
 WANDB_RUN_NAME = env("WANDB_RUN_NAME", "track1-prefix-robust")
 
+# LLaDA's LLaDALlamaBlock uses olmo-style names for attn_out / ff_proj / ff_out
+# instead of o_proj / gate_proj / down_proj. Track 1 v2 was published using
+# the standard Llama list above, which only matched 4/7 modules (q,k,v,up_proj).
+# v3 should use the full LLaDA-correct list. See e2/RESULTS_TRACK2.md
+# "Bug discovered" for the eval that surfaced this.
 LORA_TARGETS = [
     "q_proj",
     "k_proj",
     "v_proj",
-    "o_proj",
-    "gate_proj",
+    "attn_out",
+    "ff_proj",
     "up_proj",
-    "down_proj",
+    "ff_out",
 ]
 
 
