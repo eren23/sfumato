@@ -76,6 +76,11 @@ EVAL_BATCHES = env_int("EVAL_BATCHES", 5)
 P_MASK_LOW = env_float("P_MASK_LOW", 0.3)
 P_MASK_HIGH = env_float("P_MASK_HIGH", 0.9)
 
+# v3 design knob: FULL_RESPONSE_LOSS=1 supervises the entire CoT, not just the
+# answer-only span. Lets the commit adapter learn to shape the late-CoT
+# reasoning, not just the literal answer-token tail. Used for the v3 follow-up.
+FULL_RESPONSE_LOSS = env_bool("FULL_RESPONSE_LOSS", False)
+
 OUTPUT_REPO = env("HF_OUTPUT_REPO", "eren23/sfumato-llada-commit")
 SAVE_DIR = Path(env("SAVE_DIR", "/tmp/track2_commit"))
 RESUME_FROM = env("RESUME_FROM", None)
@@ -210,7 +215,7 @@ def run_validation_track2(model, loader, max_batches: int) -> float:
                     batch,
                     p_mask_low=P_MASK_LOW,
                     p_mask_high=P_MASK_HIGH,
-                    span_start_key="answer_start",
+                    span_start_key="prompt_len" if FULL_RESPONSE_LOSS else "answer_start",
                     span_end=batch["answer_end"],
                 )
             losses.append(float(loss.detach()))
@@ -430,7 +435,7 @@ def main() -> int:
                     batch,
                     p_mask_low=P_MASK_LOW,
                     p_mask_high=P_MASK_HIGH,
-                    span_start_key="answer_start",
+                    span_start_key="prompt_len" if FULL_RESPONSE_LOSS else "answer_start",
                     span_end=batch["answer_end"],
                 )
             (loss / GRAD_ACCUM).backward()

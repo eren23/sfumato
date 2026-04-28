@@ -31,6 +31,15 @@ sys.path.insert(0, str(REPO_ROOT))
 from e4 import ar_qwen, diff_llada, flops as flops_mod, grade  # noqa: E402
 
 
+# Module-level state for env-driven commit-block count. Set in main() and
+# read by run_condition() via _get_commit_n_blocks().
+_COMMIT_N_BLOCKS: int = 1
+
+
+def _get_commit_n_blocks() -> int:
+    return _COMMIT_N_BLOCKS
+
+
 def env_str(key: str, default: str) -> str:
     return os.environ.get(key, default)
 
@@ -109,9 +118,14 @@ def run_condition(
         # C2 + commit adapter on the final sub-block. Tests "is the commit
         # adapter alone enough to lift single-shot accuracy?" The diff wrapper
         # handles enabling/disabling the named PEFT adapter exactly once per
-        # call (not per diffusion step).
+        # call (not per diffusion step). COMMIT_N_BLOCKS env var controls how
+        # many trailing sub-blocks fire commit (default 1).
         text, used = diff_model.denoise_block(
-            prompt=q, k_steps=k_steps, seed=seed, apply_commit=True
+            prompt=q,
+            k_steps=k_steps,
+            seed=seed,
+            apply_commit=True,
+            commit_n_blocks=_get_commit_n_blocks(),
         )
         trace["diffusion_cot"] = text
         return grade.extract_answer(text), used, trace
@@ -233,6 +247,7 @@ def run_condition(
                 seed=seed * 100 + b,
                 temperature=temperature,
                 apply_commit=True,
+                commit_n_blocks=_get_commit_n_blocks(),
             )
             branches.append(cot)
             total += used
@@ -315,6 +330,11 @@ def main() -> int:
     raw_commit = env_str("COMMIT_LORA_PATH", "")
     lora_path = raw_lora if raw_lora else None
     commit_lora_path = raw_commit if raw_commit else None
+    # v3 commit-LoRA follow-up knob: how many trailing sub-blocks fire commit.
+    # Default 1 (only the last block, original behavior). v3 follow-up runs
+    # with COMMIT_N_BLOCKS=3 to commit on blocks 2-4 of 4.
+    global _COMMIT_N_BLOCKS
+    _COMMIT_N_BLOCKS = env_int("COMMIT_N_BLOCKS", 1)
 
     random.seed(seed)
     dev_indices = REPO_ROOT / "e4" / "data" / "gsm8k_dev_200.json"

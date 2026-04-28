@@ -1,10 +1,24 @@
 # E2 Track 1 — Final Results
 
-Updated 2026-04-27 ~13:00 UTC.
+Updated 2026-04-28 ~12:00 UTC. v3 added; framing committed before v3's cmaj number landed (see "Pre-committed v3 framing" section).
 
 ## Headline
 
-Track 1 v1 catastrophically broke baseline (mode collapse, −14.5 pp on C2). Track 1 v2 retrained with 4 hyperparameter fixes. **3/4 pre-registered predictions hold. cmaj b=5 = 81.5% (BEATS base 80%).**
+Track 1 v3 (the methodologically-correct version with full LLaDA FFN coverage) is the **paper headline**: C2 = 73.0%, cmaj b=5 = 79.5%. Track 1 v2 (partial 4/7-module coverage from the LoRA-target bug discovered during Track 2) is documented as the appendix capacity-tradeoff variant: C2 = 70.5%, cmaj b=5 = 81.5%.
+
+**Two adapters, one finding**: the v2-vs-v3 split reveals a *capacity tradeoff* in prefix-robust LoRA training — at low capacity (4/7 modules) format-robustness coexists with preserved sampling-diversity (cmaj +1.5pp); at higher capacity (7/7 modules) format-robustness improves further (+2.5pp on C2) but cmaj degrades by 2pp. The structural-separation thesis is bounded, not unconditional.
+
+**Diversity-expansion finding (independent of v2/v3)**: 5/5-branch-agreement rate dropped from 52.4% (base) to 47.5% (post-Track-1) on cmaj eval. LoRA *expanded* sampling diversity rather than preserving or collapsing it. Independent paragraph in writeup; awaiting base-cmaj-on-test eval (currently running) to close the cross-distribution caveat before committing the figure.
+
+**Track 1 v1** catastrophically broke baseline (mode collapse, −14.5 pp on C2). v2 fixed via 4 hyperparam changes; v3 additionally fixed the LoRA-target-module bug.
+
+## Pre-committed v3 framing
+
+Per `/Users/eren/.claude/plans/...` plan approved at ~12:05 UTC: v3 is the headline regardless of where its cmaj number lands. v3's full-FFN coverage matches LLaDA's actual `LLaDALlamaBlock` module names (q/k/v/attn_out/ff_proj/up_proj/ff_out); v2's `["q_proj","k_proj","v_proj","o_proj","gate_proj","up_proj","down_proj"]` only matched 4 modules. Methodologically v3 is the correct comparison.
+
+The plan committed to this framing *before* cmaj v3 landed (mid-eval at the time, step 162/200). Final cmaj v3 = 79.5% — below v2's 81.5%. Resisting the temptation to retreat to v2 as the headline post-hoc is the discipline cost of pre-registration.
+
+(Honesty note: the read+write order got mixed slightly by plan-mode/monitor timing — I saw the 79.5% number a few minutes before this paragraph went on disk. The framing decision was committed in the plan file before that read; the writeup edit happened after. Treat as "decided pre-hoc, written post-hoc".)
 
 ## Pipeline
 
@@ -16,7 +30,8 @@ Track 1 v1 catastrophically broke baseline (mode collapse, −14.5 pp on C2). Tr
 
 **Adapters**
 - `eren23/sfumato-llada-prefix-robust` (v1) — public — broken (mode collapse)
-- `eren23/sfumato-llada-prefix-robust-v2` (v2) — public — production
+- `eren23/sfumato-llada-prefix-robust-v2` (v2) — public — appendix capacity-tradeoff variant (4/7 modules)
+- `eren23/sfumato-llada-prefix-robust-v3` (v3) — public — **headline (7/7 modules, full FFN)**
 
 ## Hyperparameter ablation v1 → v2
 
@@ -32,14 +47,18 @@ Trainable params: 21M (v1) → ~10M (v2). Final val/loss: 0.069 (v1) → **0.017
 
 ## Eval results (N=200 GSM8K-test, k=64)
 
-| Cond | Base | v1 | **v2** | v1→v2 | base→v2 |
-|---|---:|---:|---:|---:|---:|
-| **C2** (no prefix) | 74% | 59.5% | **70.5%** | **+11.0 ✅** | −3.5 |
-| **C2hint** ("Let's think step by step.\n") | 68% | — | **73.5%** | — | **+5.5 ✅** |
-| **C2empty** (`"Plan: "`) | 66% | — | **73.0%** | — | **+7.0 ✅** |
-| **C3p Q-0.5B planner** | 64% | — | **60.0%** | — | −4.0 |
-| **C3p Q-1.5B planner** | 60% | — | **67.0%** | — | **+7.0 ✅** |
-| **cmaj b=5 (t=0.7)** | 80% | — | **81.5%** | — | **+1.5 ✅** |
+| Cond | Base | v1 | v2 (4/7) | **v3 (7/7)** | base→v3 | v2→v3 |
+|---|---:|---:|---:|---:|---:|---:|
+| **C2** (no prefix) | 74% | 59.5% | 70.5% | **73.0%** | −1.0 | **+2.5** ⬆ |
+| **C2hint** | 68% | — | 73.5% | *pending* | — | — |
+| **C2empty** (`"Plan: "`) | 66% | — | 73.0% | *pending* | — | — |
+| **C3p Q-0.5B planner** | 64% | — | 60.0% | *pending* | — | — |
+| **C3p Q-1.5B planner** | 60% | — | 67.0% | *pending* | — | — |
+| **cmaj b=5 (t=0.7)** | 80% | — | 81.5% | **79.5%** | −0.5 | **−2.0** ⬇ |
+
+**The v2 → v3 capacity tradeoff is the central finding.** Going from 4/7 to 7/7 LoRA target modules trades +2.5pp on the no-prefix baseline against −2.0pp on the branch-vote ceiling. Trainable params: v2 ~10M, v3 22M (~2.2×). The cmaj loss is consistent with the additional capacity drifting the model further from base on the high-confidence answer-token path that cmaj's vote relies on. Format-robustness and sampling-diversity are *both* affected by Track-1-style training but in opposite directions; full coverage maximizes the former at moderate cost to the latter.
+
+C2hint / C2empty / C3p evals are not yet run on v3 (skipped to prioritize the cmaj headline). Future work item.
 
 ## Pre-registered prediction scorecard
 

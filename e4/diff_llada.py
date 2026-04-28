@@ -185,12 +185,15 @@ class _Real:
         steps: int,
         temperature: float,
         commit_last_block: bool = False,
+        commit_n_blocks: int = 1,
     ):
         """Run the semi-AR denoiser.
 
-        If commit_last_block=True, the LAST sub-block is denoised with the
-        commit adapter enabled (and PEFT is switched exactly twice: ON before
-        the last block, OFF afterwards).
+        If commit_last_block=True, the LAST `commit_n_blocks` sub-blocks are
+        denoised with the commit adapter enabled (PEFT switches exactly twice:
+        ON at the boundary of the first commit-enabled block, OFF after the
+        last block). commit_n_blocks=1 = original "commit only the final block"
+        behavior; commit_n_blocks=3 = blocks 2-4 of 4 (the v3 follow-up).
         """
         import torch  # type: ignore
         import torch.nn.functional as F  # type: ignore
@@ -204,6 +207,8 @@ class _Real:
         if steps % num_blocks != 0:
             steps = ((steps + num_blocks - 1) // num_blocks) * num_blocks
         steps_per_block = steps // num_blocks
+        commit_n_blocks = max(1, min(commit_n_blocks, num_blocks))
+        first_commit_block = num_blocks - commit_n_blocks
 
         x = torch.full(
             (1, prompt_ids.shape[1] + gen_length),
@@ -214,8 +219,8 @@ class _Real:
         x[:, : prompt_ids.shape[1]] = prompt_ids
 
         for b_idx in range(num_blocks):
-            # Switch adapters exactly once, on the boundary of the last block.
-            if commit_last_block and b_idx == num_blocks - 1:
+            # Switch adapters exactly once, at the first commit-enabled block.
+            if commit_last_block and b_idx == first_commit_block:
                 self._enable_commit()
 
             blk_start = prompt_ids.shape[1] + b_idx * block_length
@@ -282,13 +287,17 @@ class _Real:
         seed: int = 0,
         temperature: float = 0.0,
         apply_commit: bool = False,
+        commit_n_blocks: int = 1,
     ) -> tuple[str, int]:
         """Denoise. temperature>0 enables stochastic sampling (needed for
         self-consistency / branch ensembles to actually diverge).
 
         If apply_commit=True AND a commit_lora_path was configured, the LAST
-        sub-block of the semi-AR schedule is denoised with the commit adapter
-        active. If no commit adapter is configured, apply_commit is a no-op.
+        `commit_n_blocks` sub-blocks of the semi-AR schedule are denoised with
+        the commit adapter active. commit_n_blocks=1 (default) reproduces the
+        original behavior; commit_n_blocks=3 is the v3 follow-up "commit on
+        blocks 2-4 of 4". If no commit adapter is configured, apply_commit is
+        a no-op.
         """
         import torch  # type: ignore
 
@@ -311,6 +320,7 @@ class _Real:
             steps=max(k_steps, 4),
             temperature=temperature,
             commit_last_block=commit_last,
+            commit_n_blocks=commit_n_blocks,
         )
         text = self._tokenizer.batch_decode(gen_ids, skip_special_tokens=True)[0]  # type: ignore[attr-defined]
         used = flops_mod.llada_forward_flops(
