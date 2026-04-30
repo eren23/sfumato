@@ -30,3 +30,7 @@ wandb/
 
 # OS junk
 .DS_Store
+
+# Local AI tooling state (Claude Code, attocode MCP) — not project artifacts
+.claude/
+.attocode/
