@@ -45,27 +45,49 @@ The plan committed to this framing *before* cmaj v3 landed (mid-eval at the time
 
 Trainable params: 21M (v1) → ~10M (v2). Final val/loss: 0.069 (v1) → **0.017** (v2, ~4× lower).
 
-## Eval results (N=200 GSM8K-test, k=64)
+## Eval results (N=200 GSM8K-test, k=64) — full v3 prefix-suite landed
 
-| Cond | Base | v1 | v2 (4/7) | **v3 (7/7)** | base→v3 | v2→v3 |
-|---|---:|---:|---:|---:|---:|---:|
-| **C2** (no prefix) | 74% | 59.5% | 70.5% | **73.0%** | −1.0 | **+2.5** ⬆ |
-| **C2hint** | 68% | — | 73.5% | *pending* | — | — |
-| **C2empty** (`"Plan: "`) | 66% | — | 73.0% | *pending* | — | — |
-| **C3p Q-0.5B planner** | 64% | — | 60.0% | *pending* | — | — |
-| **C3p Q-1.5B planner** | 60% | — | 67.0% | *pending* | — | — |
-| **cmaj b=5 (t=0.7)** | 80% | — | 81.5% | **79.5%** | −0.5 | **−2.0** ⬇ |
+| Cond | Base | v1 | v2 (4/7) | **v3 (7/7)** | v2→v3 |
+|---|---:|---:|---:|---:|---:|
+| **C2** (no prefix) | 74% | 59.5% | 70.5% | **73.0%** | **+2.5** ⬆ |
+| **C2hint** | 68% | — | 73.5% | **73.5%** | 0.0 |
+| **C2empty** (`"Plan: "`) | 66% | — | 73.0% | **74.0%** | +1.0 |
+| **C3p Q-0.5B planner** | 64% | — | 60.0% | **65.0%** | **+5.0** ⬆ |
+| **C3p Q-1.5B planner** | 60% | — | 67.0% | **54.0%** | **−13.0** ⬇⬇ |
+| **cmaj b=5 (t=0.7)** | 79% (test) / 80% (dev) | — | 81.5% | **79.5%** | **−2.0** ⬇ |
+| **base cmaj on test** (no LoRA) | — | — | — | **79.0%** | apples-to-apples baseline |
 
-**The v2 → v3 capacity tradeoff is the central finding.** Going from 4/7 to 7/7 LoRA target modules trades +2.5pp on the no-prefix baseline against −2.0pp on the branch-vote ceiling. Trainable params: v2 ~10M, v3 22M (~2.2×). The cmaj loss is consistent with the additional capacity drifting the model further from base on the high-confidence answer-token path that cmaj's vote relies on. Format-robustness and sampling-diversity are *both* affected by Track-1-style training but in opposite directions; full coverage maximizes the former at moderate cost to the latter.
+**Two findings emerge from the v2 → v3 sweep:**
 
-C2hint / C2empty / C3p evals are not yet run on v3 (skipped to prioritize the cmaj headline). Future work item.
+1. **A no-prefix-vs-cmaj capacity tradeoff** on the static conditions. Going from 4/7 to 7/7 LoRA target modules gains +2.5pp on C2 but loses −2.0pp on cmaj. Trainable params 10M → 22M (2.2×). Format-robustness and sampling-diversity-on-vote are both affected by Track-1-style training but in opposite directions at higher capacity.
 
-## Pre-registered prediction scorecard
+2. **A planner-content-trust differential**. Q-0.5B planner improves at v3 capacity (+5pp), but Q-1.5B planner *catastrophically regresses* (−13pp). The capacity bump amplifies the planner-content-trust axis: the model becomes more sensitive to plan content with full FFN coverage, in opposite directions for different planner sizes. This is a previously-unmeasured axis where LoRA capacity differentially shifts the model's *trust* in upstream content.
 
-1. **Prefix-damage spread ≤ 3 pp** across {none, hint, empty Plan:, weak Q, medium Q}: **partial** — static spread (C2, C2hint, C2empty) = 3 pp ✅, but content-rich plans (C3p Q-0.5B = 60, Q-1.5B = 67, vs C2 = 70.5) introduce ~10 pp range. Reading: prefix-format invariance achieved on static prefixes but content-rich plans still affect the distribution (in either direction).
-2. **Single-shot ≥ 78%** (Track 1 LoRA C2): ❌ **fails** at 70.5%. v2 recovers from v1's catastrophe (+11 pp) but ceiling still 7.5 pp below target. Target was probably aspirational given base = 74%.
-3. **Track 1 + cmaj b=5 ≥ 80%**: ✅ **holds at 81.5%**. Diversity NOT collapsed by the LoRA — vote ensemble still gains its E4 +6pp over single-shot. **This is the most important prediction; it confirms the structural-separation thesis.**
-4. **Planner-quality threshold shifts down**: ✅ **strong reversal**. In base, bigger planner hurt more (Q-0.5B = 64%, Q-1.5B = 60%, Δ = −4 pp). In v2, bigger planner helps more (Q-0.5B = 60%, Q-1.5B = 67%, Δ = **+7 pp**). The +11 pp swing on Q-1.5B is the cleanest prediction-confirming signal.
+C2hint and C2empty are unaffected by the capacity bump — both static prefixes land within 1pp of v2 numbers.
+
+## Pre-registered prediction scorecard (post-v3)
+
+1. **Prefix-damage spread ≤ 3 pp** across {none, hint, empty Plan:, weak Q, medium Q}: **partial** at v2 (static spread = 3pp ✅, content-rich plans introduced ~10pp range). v3 at full capacity has *wider* content-rich spread (Q-0.5B = 65, Q-1.5B = 54, vs C2 = 73 → 19pp range). The static-prefix prediction holds at v3 (C2/C2hint/C2empty within 1pp). Content-rich plans break it more sharply at higher capacity. Reading: format-invariance is achievable for static prefixes; planner-content sensitivity is a separate, capacity-amplified axis.
+2. **Single-shot ≥ 78%** (Track 1 LoRA C2): ❌ at 70.5% (v2) and 73.0% (v3). Target was aspirational given base = 74%.
+3. **Track 1 + cmaj b=5 ≥ 80%**: ✅ at 81.5% (v2 on dev), borderline at 79.5% (v3 on test, vs base test 79.0% = +0.5pp). v3 cmaj at-or-below v2 cmaj is the capacity-tradeoff cost.
+4. **Planner-quality threshold shifts down**: ✅ at v2 with positive Δ (Q-0.5B = 60, Q-1.5B = 67, Δ = +7 pp), but **inverts at v3** (Q-0.5B = 65, Q-1.5B = 54, Δ = **−11 pp**). Predictability is recovered for Q-0.5B at v3 capacity but lost for Q-1.5B. The planner-trust axis is non-monotonic in LoRA capacity — a finding worth its own paragraph in the paper.
+
+## Diversity-expansion finding (apples-to-apples on gsm8k-test)
+
+The single most surprising result of E2: post-Track-1 sampling diversity went *up*, not down or stable.
+
+| | base on test (no LoRA) | post-Track 1 v2 + commit-v2 |
+|---|---:|---:|
+| 5/5 same answer | 51.5% | **47.5%** |
+| 4/5 unique | 6.0% | 8.5% |
+| 3/5 unique | 11.5% | 18.0% |
+| 2/5 unique | 27.5% | 19.5% |
+| 5/5 unique | 3.5% | 6.5% |
+| **mean unique answers / problem** | **1.825** | **2.07** (+13%) |
+
+LoRA *expanded* the sampling distribution rather than collapsing it. No pre-registered scenario predicted this — both alternatives (preserved at 52%, collapsed to 70%+) were the priors. Hypothesis: format-augmented training implicitly taught "many surfaces, same content," which generalized to "many CoT trajectories, same answer." Cheap test deferred to future work: does base at temperature 0.9 reproduce the 47.5% 5/5-same? If yes, Track 1 acts as an implicit temperature regularizer. If no, real content-diversity effect.
+
+This finding connects to the encoder-collapse literature as the *inverse* phenomenon and deserves its own paragraph in the paper.
 
 **Total: 3/4 hold (1 partial, 1 fail, 2 strong). 1 fail (#2) is interpretable.**
 

@@ -35,6 +35,7 @@ def main() -> int:
     from datasets import load_dataset  # type: ignore
 
     from e4 import ar_qwen, grade  # type: ignore
+    from e4.ar_qwen import _COT_SYS  # type: ignore
 
     print(f"[qwen-sc] loading {args.ar_model}", flush=True)
     model = ar_qwen.load(args.ar_model, mock=False)
@@ -53,11 +54,12 @@ def main() -> int:
         branch_texts: list[str] = []
         branch_answers: list[str] = []
         for b in range(args.branches):
-            text, _ = model.generate(
-                prompt=question,
+            text, _ = model._chat(
+                system=_COT_SYS,
+                user=question,
                 max_new_tokens=args.max_new_tokens,
-                temperature=args.temperature,
                 seed=args.seed * 1000 + b,
+                temperature=args.temperature,
             )
             branch_texts.append(text)
             branch_answers.append(grade.extract_answer(text))
