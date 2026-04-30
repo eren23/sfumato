@@ -17,6 +17,10 @@ e4/results/*.parquet
 e4/results/*.pdf
 # keep figs/ committed (small PNGs, useful as artefacts)
 
+# E2 local data cache (source of truth lives on HF Hub:
+# eren23/sfumato-consensus-gsm8k, eren23/sfumato-commit-mixture-gsm8k)
+e2/data/
+
 # HF cache
 .cache/
 hf_cache/
