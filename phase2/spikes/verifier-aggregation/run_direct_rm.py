@@ -33,18 +33,19 @@ OUT_PATH = REPO_ROOT / "phase2/spikes/verifier-aggregation/direct_rm_results.jso
 @torch.no_grad()
 def score_branches(rows, model_id, max_len=2048, batch_size=2, load_in_4bit=True):
     """Score each (problem, branch) with the reward model. Returns scores array."""
-    from transformers import AutoModelForCausalLM, AutoTokenizer
+    from transformers import AutoModel, AutoTokenizer
     print(f"[rm] loading {model_id} (4bit={load_in_4bit})", flush=True)
     tok = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
+    # AutoModel (not AutoModelForCausalLM) — RM models use custom auto_map registrations
     if load_in_4bit:
         from transformers import BitsAndBytesConfig
         bnb = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.float16,
                                   bnb_4bit_quant_type="nf4", bnb_4bit_use_double_quant=True)
-        model = AutoModelForCausalLM.from_pretrained(model_id, quantization_config=bnb,
-                                                      device_map="auto", trust_remote_code=True)
+        model = AutoModel.from_pretrained(model_id, quantization_config=bnb,
+                                           device_map="auto", trust_remote_code=True)
     else:
-        model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.float16,
-                                                      device_map="cuda", trust_remote_code=True)
+        model = AutoModel.from_pretrained(model_id, torch_dtype=torch.float16,
+                                           device_map="cuda", trust_remote_code=True)
     model.train(False)
     print(f"[rm] model loaded; scoring {len(rows)} branches", flush=True)
 
@@ -71,15 +72,21 @@ def score_branches(rows, model_id, max_len=2048, batch_size=2, load_in_4bit=True
             enc = tok(texts, return_tensors="pt", padding=True, truncation=True, max_length=max_len).to("cuda")
             input_ids = enc.input_ids
         out = model(input_ids=input_ids)
-        # Most Qwen RM models use the lm_head's last-token logit as reward
-        # OR have a value head. Try both.
+        # Qwen2.5-Math-RM-72B: output is `out.logits` of shape [B, T, 1] — scalar
+        # reward per token. Take the LAST non-pad position's reward as the
+        # candidate score (matches the model card example).
         if hasattr(out, "logits"):
-            # take last non-pad token's logit (scalar reward = logits[..., -1, 0] for value-head models)
-            # For Math-RM-72B which uses LM-head: take the mean of last-token logits as a proxy
-            last_logits = out.logits[:, -1, :]  # [B, V]
-            batch_scores = last_logits.mean(dim=-1).float().cpu().numpy()
+            # logits could be [B, T, 1] (RM) or [B, T, V] (LM); shape disambiguates
+            if out.logits.shape[-1] == 1:
+                # RM: take last token's reward scalar
+                batch_scores = out.logits[:, -1, 0].float().cpu().numpy()
+            else:
+                # LM fallback: mean of last-token logits
+                batch_scores = out.logits[:, -1, :].mean(dim=-1).float().cpu().numpy()
+        elif hasattr(out, "rewards"):
+            batch_scores = out.rewards.squeeze(-1).float().cpu().numpy()
         else:
-            batch_scores = out.values.squeeze(-1).float().cpu().numpy()
+            batch_scores = out[0].squeeze(-1).float().cpu().numpy()
         for j, _ in enumerate(batch):
             scores[b_idx*batch_size + j] = float(batch_scores[j])
         if b_idx % 20 == 0:
