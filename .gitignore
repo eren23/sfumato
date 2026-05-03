@@ -34,3 +34,4 @@ wandb/
 # Local AI tooling state (Claude Code, attocode MCP) — not project artifacts
 .claude/
 .attocode/
+phase2/spikes/option3-process-reward/rich_substrate*.jsonl
