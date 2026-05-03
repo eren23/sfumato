@@ -18,21 +18,17 @@ LOGDIR=phase2/spikes/verifier-aggregation/_hunt_logs
 mkdir -p "$LOGDIR"
 
 declare -a MODELS=(
-  "Qwen/Qwen3.6-27B"
-  "Qwen/Qwen2.5-72B-Instruct"        # only on A6000+
-  "meta-llama/Llama-3.3-70B-Instruct" # only on A6000+
-  "Qwen/Qwen3-Embedding-8B"
-  "Skywork/Skywork-Reward-Llama-3.1-8B-v0.2"
-  "Alibaba-NLP/gte-Qwen2-7B-instruct"
+  "Qwen/Qwen2.5-72B-Instruct"                # retry — transient HF shard error last time
+  "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B" # 32B reasoning-distilled (ungated, replaces gated Llama-3.3-70B)
+  "Qwen/QwQ-32B"                              # Qwen reasoning model 32B
+  "Qwen/Qwen2.5-Math-72B-Instruct"           # math-tuned 72B (different from Math-RM-72B which was a value-head)
 )
 
 declare -a TAGS=(
-  "qwen36-27b"
   "qwen25-72b-instruct"
-  "llama33-70b-instruct"
-  "qwen3emb8b"
-  "skywork-rm-llama-8b"
-  "gte-qwen2-7b"
+  "deepseek-r1-distill-qwen-32b"
+  "qwq-32b"
+  "qwen25-math-72b-instruct"
 )
 
 for i in "${!MODELS[@]}"; do
