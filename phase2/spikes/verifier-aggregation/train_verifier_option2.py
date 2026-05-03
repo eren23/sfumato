@@ -116,14 +116,26 @@ def extract_embeddings(rows, model_id="Qwen/Qwen2.5-0.5B-Instruct", max_len=768,
     print(f"[opt2] loading {model_id} (4bit={load_in_4bit})", flush=True)
     tok = AutoTokenizer.from_pretrained(model_id)
     if load_in_4bit:
-        from transformers import BitsAndBytesConfig
+        from transformers import BitsAndBytesConfig, AutoModel
         bnb = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.float16,
                                   bnb_4bit_quant_type="nf4", bnb_4bit_use_double_quant=True)
-        model = AutoModelForCausalLM.from_pretrained(model_id, quantization_config=bnb, device_map="auto")
+        try:
+            model = AutoModelForCausalLM.from_pretrained(model_id, quantization_config=bnb,
+                                                          device_map="auto", trust_remote_code=True)
+        except (ValueError, KeyError) as e:
+            print(f"[opt2] AutoModelForCausalLM failed ({type(e).__name__}); falling back to AutoModel", flush=True)
+            model = AutoModel.from_pretrained(model_id, quantization_config=bnb,
+                                               device_map="auto", trust_remote_code=True)
     else:
-        model = AutoModelForCausalLM.from_pretrained(
-            model_id, torch_dtype=torch.float16, device_map="cuda",
-        )
+        from transformers import AutoModel
+        try:
+            model = AutoModelForCausalLM.from_pretrained(
+                model_id, torch_dtype=torch.float16, device_map="cuda", trust_remote_code=True,
+            )
+        except (ValueError, KeyError):
+            print(f"[opt2] AutoModelForCausalLM failed; falling back to AutoModel", flush=True)
+            model = AutoModel.from_pretrained(model_id, torch_dtype=torch.float16,
+                                               device_map="cuda", trust_remote_code=True)
     model.train(False)  # set inference mode (note: avoiding .eval() name)
     embeddings = np.zeros((len(rows), model.config.hidden_size), dtype=np.float32)
     n_batches = math.ceil(len(rows) / batch_size)
