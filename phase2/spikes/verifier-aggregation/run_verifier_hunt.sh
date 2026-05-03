@@ -18,21 +18,21 @@ LOGDIR=phase2/spikes/verifier-aggregation/_hunt_logs
 mkdir -p "$LOGDIR"
 
 declare -a MODELS=(
-  "Qwen/Qwen3-Embedding-8B"
-  "Skywork/Skywork-Reward-Llama-3.1-8B-v0.2"
-  "Alibaba-NLP/gte-Qwen2-7B-instruct"
   "Qwen/Qwen3.6-27B"
   "Qwen/Qwen2.5-72B-Instruct"        # only on A6000+
   "meta-llama/Llama-3.3-70B-Instruct" # only on A6000+
+  "Qwen/Qwen3-Embedding-8B"
+  "Skywork/Skywork-Reward-Llama-3.1-8B-v0.2"
+  "Alibaba-NLP/gte-Qwen2-7B-instruct"
 )
 
 declare -a TAGS=(
-  "qwen3emb8b"
-  "skywork-rm-llama-8b"
-  "gte-qwen2-7b"
   "qwen36-27b"
   "qwen25-72b-instruct"
   "llama33-70b-instruct"
+  "qwen3emb8b"
+  "skywork-rm-llama-8b"
+  "gte-qwen2-7b"
 )
 
 for i in "${!MODELS[@]}"; do
@@ -54,6 +54,14 @@ for i in "${!MODELS[@]}"; do
   else
     echo "[hunt] FAIL $T (rc=$rc); see $LOG"
   fi
+  # free disk: drop this model's HF cache (60GB volume can't hold multiple 70Bs)
+  CACHE_DIR=$(echo "/workspace/sfumato/.hf_cache/models--${M//\//--}")
+  if [[ -d "$CACHE_DIR" ]]; then
+    SIZE=$(du -sh "$CACHE_DIR" 2>/dev/null | cut -f1)
+    echo "[hunt] freeing $SIZE — $CACHE_DIR"
+    rm -rf "$CACHE_DIR"
+  fi
+  df -h /workspace 2>/dev/null | tail -1
 done
 
 echo "============================================================"
