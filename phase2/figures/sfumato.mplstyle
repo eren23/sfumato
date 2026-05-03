@@ -1,0 +1,88 @@
+# Sfumato Phase 2 — unified matplotlib style
+# Used by every static figure under phase2/figures/.
+# Goals: phone-readable at 320px wide, B&W safe, paper-grade typography.
+
+# ---------------------------------------------------------------------------
+# Figure
+# ---------------------------------------------------------------------------
+figure.figsize:      9.0, 5.0
+figure.dpi:          200
+figure.facecolor:    white
+figure.edgecolor:    white
+savefig.dpi:         200
+savefig.facecolor:   white
+savefig.edgecolor:   white
+savefig.bbox:        tight
+savefig.pad_inches:  0.18
+
+# ---------------------------------------------------------------------------
+# Typography (system-safe stack; falls back through Helvetica → DejaVu)
+# ---------------------------------------------------------------------------
+font.family:         sans-serif
+font.sans-serif:     Inter, SF Pro Text, Helvetica Neue, Helvetica, Arial, DejaVu Sans, sans-serif
+font.size:           10.0
+axes.titlesize:      11.5
+axes.titleweight:    semibold
+axes.titlepad:       10.0
+axes.labelsize:      10.0
+axes.labelpad:       6.0
+axes.labelweight:    regular
+xtick.labelsize:     9.0
+ytick.labelsize:     9.0
+legend.fontsize:     9.0
+legend.title_fontsize: 9.5
+
+# ---------------------------------------------------------------------------
+# Axes / spines / grid (Stripe-Press-restrained chrome)
+# ---------------------------------------------------------------------------
+axes.facecolor:      white
+axes.edgecolor:      "#1f2937"
+axes.linewidth:      0.8
+axes.titlelocation:  left
+axes.spines.top:     False
+axes.spines.right:   False
+axes.spines.left:    True
+axes.spines.bottom:  True
+axes.grid:           True
+axes.grid.axis:      y
+axes.axisbelow:      True
+grid.color:          "#e5e7eb"
+grid.linestyle:      "-"
+grid.linewidth:      0.6
+grid.alpha:          0.9
+
+# ---------------------------------------------------------------------------
+# Ticks
+# ---------------------------------------------------------------------------
+xtick.direction:     out
+ytick.direction:     out
+xtick.major.size:    3.5
+ytick.major.size:    3.5
+xtick.major.width:   0.7
+ytick.major.width:   0.7
+xtick.color:         "#374151"
+ytick.color:         "#374151"
+
+# ---------------------------------------------------------------------------
+# Legend
+# ---------------------------------------------------------------------------
+legend.frameon:      False
+legend.borderaxespad: 0.6
+legend.handlelength: 1.4
+legend.handletextpad: 0.6
+legend.columnspacing: 1.2
+
+# ---------------------------------------------------------------------------
+# Lines / patches
+# ---------------------------------------------------------------------------
+lines.linewidth:     1.6
+patch.linewidth:     0.4
+patch.edgecolor:     "#111827"
+errorbar.capsize:    3.5
+
+# ---------------------------------------------------------------------------
+# PDF / fonts in vector
+# ---------------------------------------------------------------------------
+pdf.fonttype:        42
+ps.fonttype:         42
+svg.fonttype:        none

@@ -1,0 +1,26 @@
+{
+  "pod": "parameter-golf__sfumato_e4-01",
+  "phases": [
+    {
+      "name": "B-substrate-N200-tau07",
+      "rid": "sfumato_e4_1777752833996294000_26cedc",
+      "state": "timeout"
+    },
+    {
+      "name": "C-multiseed-cmajc-seed1",
+      "rid": "sfumato_e4_1777755856197360000_8c157c",
+      "state": "failed",
+      "tail": "pandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\n\u001b[1;34mwandb\u001b[0m: \n\u001b[1;34mwandb\u001b[0m: \ud83d\ude80 View run \u001b[33mcmaj-k64-seed0-Qwen2.5-0.5B-Instruct\u001b[0m at: \u001b[34mhttps://wandb.ai/eren23/sfumato-e4/runs/eeu4fzh8\u001b[0m\n\u001b[1;34mwandb\u001b[0m: Find logs at: \u001b[1;35mwandb/run-20260502_210419-eeu4fzh8/logs\u001b[0m\n"
+    },
+    {
+      "name": "D-multiseed-cmajc-seed2",
+      "rid": "sfumato_e4_1777755886338688000_708478",
+      "state": "failed",
+      "tail": "pandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\n\u001b[1;34mwandb\u001b[0m: \n\u001b[1;34mwandb\u001b[0m: \ud83d\ude80 View run \u001b[33mcmaj-k64-seed0-Qwen2.5-0.5B-Instruct\u001b[0m at: \u001b[34mhttps://wandb.ai/eren23/sfumato-e4/runs/k4fex4n1\u001b[0m\n\u001b[1;34mwandb\u001b[0m: Find logs at: \u001b[1;35mwandb/run-20260502_210449-k4fex4n1/logs\u001b[0m\n"
+    }
+  ],
+  "started_at": 1777752713.34052,
+  "scp_rc": 1,
+  "ended_at": 1777755919.1602712,
+  "duration_min": 53.4
+}

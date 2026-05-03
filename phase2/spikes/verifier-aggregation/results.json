@@ -1,0 +1,31 @@
+{
+  "folds": [
+    {
+      "label": "p1-train_p2-eval",
+      "n_problems": 200,
+      "n_train_branches": 750,
+      "n_test_branches": 1000,
+      "cmaj_acc": 0.79,
+      "cmaj_ci": [
+        0.7269312953862013,
+        0.8442602432758717
+      ],
+      "verifier_acc": 0.695,
+      "verifier_ci": [
+        0.6261321954662298,
+        0.7579805629764088
+      ],
+      "oracle_acc": 0.88,
+      "oracle_ci": [
+        0.8267276488358778,
+        0.9215797520036373
+      ],
+      "verifier_recovers_failed_cmaj": 4,
+      "verifier_misses_recoverable": 14,
+      "delta_pp_vs_cmaj": -9.5
+    }
+  ],
+  "pre_reg_decision": "LOSS",
+  "mean_verifier_acc": 0.695,
+  "mean_cmaj_acc": 0.79
+}

@@ -1,0 +1,35 @@
+
+Generating train split:   0%|          | 0/7473 [00:00<?, ? examples/s]
+Generating train split: 100%|██████████| 7473/7473 [00:00<00:00, 343071.42 examples/s]
+
+Generating test split:   0%|          | 0/1319 [00:00<?, ? examples/s]
+Generating test split: 100%|██████████| 1319/1319 [00:00<00:00, 301766.59 examples/s]
+A new version of the following files was downloaded from https://huggingface.co/GSAI-ML/LLaDA-8B-Instruct:
+- configuration_llada.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+A new version of the following files was downloaded from https://huggingface.co/GSAI-ML/LLaDA-8B-Instruct:
+- modeling_llada.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+
+Downloading shards:   0%|          | 0/6 [00:00<?, ?it/s]
+Downloading shards:  17%|█▋        | 1/6 [00:12<01:00, 12.19s/it]
+Downloading shards:  33%|███▎      | 2/6 [00:29<01:00, 15.01s/it]
+Downloading shards:  50%|█████     | 3/6 [00:44<00:45, 15.11s/it]
+Downloading shards:  67%|██████▋   | 4/6 [00:57<00:28, 14.46s/it]
+Downloading shards:  83%|████████▎ | 5/6 [01:13<00:14, 14.80s/it]
+Downloading shards: 100%|██████████| 6/6 [01:24<00:00, 13.45s/it]
+Downloading shards: 100%|██████████| 6/6 [01:24<00:00, 14.02s/it]
+
+Loading checkpoint shards:   0%|          | 0/6 [00:00<?, ?it/s]
+Loading checkpoint shards:  17%|█▋        | 1/6 [00:00<00:01,  4.35it/s]
+Loading checkpoint shards:  50%|█████     | 3/6 [00:00<00:00,  8.00it/s]
+Loading checkpoint shards:  83%|████████▎ | 5/6 [00:00<00:00,  9.75it/s]
+Loading checkpoint shards: 100%|██████████| 6/6 [00:00<00:00,  9.31it/s]
+[1/5] differs=True  no_commit_tail=''resh duck egg, so she makes 9 * $2 = $18 every day.\n\n#### 18''  with_commit_tail=''sh duck egg, so she makes 9 * $2 = $18 every day.\nAnswer: 18''
+[2/5] differs=True  no_commit_tail=''ber to the amount of white fiber:\n\\[ 2 + 1 = 3 \\]\n\nAnswer: 3''  with_commit_tail=''er to the amount of white fiber:\n\n\\[ 2 + 1 = 3 \\]\n\nAnswer: 3''
+[3/5] differs=True  no_commit_tail='',000\nSo his profit was 195,000-130,000 = $65,000\n\n#### 65,00''  with_commit_tail=''0\nSo his profit was 195,000-130,000 = $65,000\nAnswer: 65,000''
+[4/5] differs=True  no_commit_tail='' sprints/week * 60 meters/sprint = 540 meters/week\n\n#### 540''  with_commit_tail=''prints/week * 60 meters/sprint = 540 meters/week\nAnswer: 540''
+[5/5] differs=True  no_commit_tail=''s - 40 cups = 20 cups in the final meal of the day.\n\n#### 20''  with_commit_tail=''s = 20 cups of feed in the final meal of the day.\nAnswer: 20''
+
+ABL_B sanity: 5/5 problems show text difference.
+PASS

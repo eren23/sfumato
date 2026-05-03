@@ -4,14 +4,101 @@ Real path ports the reference sampler from ML-GSAI/LLaDA (Apache-2.0):
   https://github.com/ML-GSAI/LLaDA/blob/main/generate.py
 
 Mock path returns deterministic strings for local CI.
+
+Workstream C (Phase 2) added an optional `step_callback` hook to `_generate`
+that fires once per sub-block boundary so the inference visualizer can
+intercept state, surface it to the UI, and inject mechanism-switch
+directives (continue / AR-extend / cmaj-branch). Default callback is a
+no-op pass-through so all existing runner.py callers stay bit-identical.
 """
 
 from __future__ import annotations
 
 import hashlib
+import time
 from dataclasses import dataclass, field
+from typing import Any, Callable, Optional
 
 from e4 import flops as flops_mod
+
+
+# ── Workstream C callback contract ─────────────────────────────────────────
+# `_generate` fires `step_callback(StepState)` once per sub-block boundary
+# (after all `steps_per_block` diffusion rounds inside that block complete —
+# never mid-block, since rolling back partial commits is too costly). The
+# callback returns a `StepDirective` that tells the sampler what to do for
+# the NEXT sub-block. Default callback returns continue_llada() to preserve
+# existing runner.py semantics bit-for-bit.
+
+@dataclass
+class StepState:
+    """Snapshot handed to the callback at each sub-block boundary."""
+
+    step_idx: int                # monotonically increasing across sub-blocks
+    sub_block: int               # 0..num_blocks-1
+    num_blocks: int
+    mechanism: str               # "llada" | "ar_extend" | "cmaj_branch"
+    tokens_committed: list[int]
+    token_strings: list[str]
+    positions: list[int]         # absolute positions in the full sequence
+    entropy: list[float]         # per-position Shannon entropy (nats)
+    top_k_logits: list[list[tuple[int, float]]]
+    commit_lora_active: bool
+    logit_shift_norm: Optional[float]
+    temperature: float
+    steps_per_block: int
+    wallclock_ms: int
+    # Live tensor handle so the AR-extend / cmaj-branch directives can mutate
+    # the in-flight x BEFORE the next sub-block runs. Caller must NOT detach.
+    x_handle: Any = None
+    prompt_len: int = 0
+    block_start: int = 0
+    block_end: int = 0
+
+
+@dataclass
+class StepDirective:
+    """What the callback wants the sampler to do for the next sub-block.
+
+    Tagged union via `kind`:
+      - "continue_llada" — default; just keep going with normal LLaDA.
+      - "switch_to_ar"   — run AR extend for n_tokens, graft into x, then
+                           hand control back to LLaDA for remaining blocks.
+      - "branch_cmaj"    — fork b parallel LLaDA continuations from the
+                           current x; caller picks winner. Sampler returns
+                           early after appending branch metadata to state.
+      - "stop"           — stop generation here (e.g., user aborted).
+    """
+
+    kind: str = "continue_llada"
+    n_tokens: int = 0                 # for switch_to_ar
+    model_name: str = ""              # for switch_to_ar
+    b: int = 0                        # for branch_cmaj
+    extra: dict | None = None         # arbitrary passthrough (e.g., text injection override)
+
+    @classmethod
+    def continue_llada(cls) -> "StepDirective":
+        return cls(kind="continue_llada")
+
+    @classmethod
+    def switch_to_ar(cls, n_tokens: int, model_name: str = "") -> "StepDirective":
+        return cls(kind="switch_to_ar", n_tokens=n_tokens, model_name=model_name)
+
+    @classmethod
+    def branch_cmaj(cls, b: int) -> "StepDirective":
+        return cls(kind="branch_cmaj", b=b)
+
+    @classmethod
+    def stop(cls) -> "StepDirective":
+        return cls(kind="stop")
+
+
+def _default_step_callback(state: StepState) -> StepDirective:
+    """No-op default — preserves bit-identical behavior for existing callers."""
+    return StepDirective.continue_llada()
+
+
+StepCallback = Callable[[StepState], StepDirective]
 
 _LLADA_MASK_ID = 126336  # LLaDA's [MASK] token id
 _LLADA_EOT_ID = 126081   # LLaDA's <|endoftext|> id (for optional masking, see LLaDA App. B.4)
@@ -26,6 +113,10 @@ _DENOISE_SYS = (
 class _Mock:
     name: str
     block_len: int = 256
+    # Mock semi-AR schedule mirrors the real one so the visualizer renders
+    # a 4×32 grid in MOCK_MODELS=1.
+    gen_length: int = 128
+    sub_block_length: int = 32
 
     def denoise_block(
         self,
@@ -34,12 +125,67 @@ class _Mock:
         seed: int = 0,
         temperature: float = 0.0,
         apply_commit: bool = False,
+        commit_n_blocks: int = 1,
+        step_callback: Optional[StepCallback] = None,
     ) -> tuple[str, int]:
         # apply_commit is a no-op in mock mode (kept so the runner can pass it).
         h = hashlib.sha256(
             f"{prompt}|{k_steps}|{seed}|{temperature}|{int(apply_commit)}".encode()
         ).hexdigest()[:8]
         tag = "+commit" if apply_commit else ""
+
+        # If a step_callback was supplied (visualizer mode), synthesize
+        # 4 deterministic sub-block StepStates so the UI / trace path is
+        # exercised end-to-end without a GPU.
+        if step_callback is not None:
+            num_blocks = self.gen_length // self.sub_block_length
+            commit_n = max(1, min(commit_n_blocks, num_blocks))
+            first_commit = num_blocks - commit_n
+            rng_seed = seed
+            for b_idx in range(num_blocks):
+                rng_seed = (rng_seed * 1103515245 + 12345) & 0xFFFFFFFF
+                positions = list(
+                    range(
+                        len(prompt) + b_idx * self.sub_block_length,
+                        len(prompt) + (b_idx + 1) * self.sub_block_length,
+                    )
+                )
+                tokens = [(rng_seed + p) & 0xFFFF for p in positions]
+                strings = [f"<m{b_idx}_{i}>" for i in range(len(positions))]
+                ent = [
+                    0.05 + 0.6 * ((p * 2654435761) & 0xFF) / 255.0
+                    for p in positions
+                ]
+                topk = [
+                    [(t, 0.6), (t + 1, 0.2), (t + 2, 0.1), (t + 3, 0.06), (t + 4, 0.04)]
+                    for t in tokens
+                ]
+                state = StepState(
+                    step_idx=b_idx,
+                    sub_block=b_idx,
+                    num_blocks=num_blocks,
+                    mechanism="llada",
+                    tokens_committed=tokens,
+                    token_strings=strings,
+                    positions=positions,
+                    entropy=ent,
+                    top_k_logits=topk,
+                    commit_lora_active=bool(apply_commit) and (b_idx >= first_commit),
+                    logit_shift_norm=None,
+                    temperature=float(temperature),
+                    steps_per_block=max(k_steps // num_blocks, 1),
+                    wallclock_ms=10,
+                    x_handle=None,
+                    prompt_len=len(prompt),
+                    block_start=positions[0] if positions else 0,
+                    block_end=(positions[-1] + 1) if positions else 0,
+                )
+                directive = step_callback(state)
+                if directive is None:
+                    directive = StepDirective.continue_llada()
+                if directive.kind in ("stop", "branch_cmaj"):
+                    break
+
         text = f"Mock diffusion CoT (k={k_steps}{tag}) hash={h}"
         used = flops_mod.llada_forward_flops(
             name=self.name, n_tokens=self.block_len, n_steps=k_steps
@@ -186,6 +332,7 @@ class _Real:
         temperature: float,
         commit_last_block: bool = False,
         commit_n_blocks: int = 1,
+        step_callback: Optional[StepCallback] = None,
     ):
         """Run the semi-AR denoiser.
 
@@ -194,9 +341,17 @@ class _Real:
         ON at the boundary of the first commit-enabled block, OFF after the
         last block). commit_n_blocks=1 = original "commit only the final block"
         behavior; commit_n_blocks=3 = blocks 2-4 of 4 (the v3 follow-up).
+
+        ``step_callback`` (Workstream C visualizer hook): if provided, fires
+        once per sub-block boundary AFTER the block's diffusion rounds complete
+        and returns a ``StepDirective`` controlling the next block. Default is
+        ``_default_step_callback`` which always returns continue_llada(), so
+        existing callers stay bit-identical.
         """
         import torch  # type: ignore
         import torch.nn.functional as F  # type: ignore
+
+        cb = step_callback or _default_step_callback
 
         device = self._model.device  # type: ignore[attr-defined]
         gen_length = self.gen_length
@@ -218,15 +373,30 @@ class _Real:
         )
         x[:, : prompt_ids.shape[1]] = prompt_ids
 
-        for b_idx in range(num_blocks):
+        b_idx = 0
+        step_idx = 0
+        while b_idx < num_blocks:
             # Switch adapters exactly once, at the first commit-enabled block.
             if commit_last_block and b_idx == first_commit_block:
                 self._enable_commit()
+
+            commit_active_now = bool(
+                commit_last_block and b_idx >= first_commit_block
+            )
 
             blk_start = prompt_ids.shape[1] + b_idx * block_length
             blk_end = prompt_ids.shape[1] + (b_idx + 1) * block_length
             block_mask = (x[:, blk_start:blk_end] == _LLADA_MASK_ID)
             n_transfer = _num_transfer_tokens(block_mask, steps_per_block)
+
+            # Per-sub-block trace accumulators (only populated when callback
+            # is non-default — but cheap enough to always collect).
+            t0 = time.time()
+            committed_positions: list[int] = []
+            committed_tokens: list[int] = []
+            committed_entropy: list[float] = []
+            committed_topk: list[list[tuple[int, float]]] = []
+            last_logits = None  # for logit_shift_norm if we ever shadow-run base
 
             for s in range(steps_per_block):
                 mask_index = x == _LLADA_MASK_ID
@@ -248,7 +418,87 @@ class _Real:
                 if k > 0:
                     _, sel = torch.topk(conf[0], k=k)
                     transfer[0, sel] = True
+
+                    # Record per-position trace data (only used by callback).
+                    if step_callback is not None:
+                        sel_list = sel.tolist()
+                        for pos in sel_list:
+                            committed_positions.append(int(pos))
+                            committed_tokens.append(int(x0[0, pos].item()))
+                            row = p[0, pos]  # (vocab,)
+                            ent = float(-(row * (row.clamp(min=1e-20)).log()).sum().item())
+                            committed_entropy.append(ent)
+                            top_p, top_i = torch.topk(row, k=5)
+                            committed_topk.append(
+                                [
+                                    (int(top_i[j].item()), float(top_p[j].item()))
+                                    for j in range(5)
+                                ]
+                            )
+
                 x[transfer] = x0[transfer]
+                last_logits = logits
+
+            # ── sub-block boundary: fire callback ──
+            wallclock_ms = int((time.time() - t0) * 1000)
+            token_strings: list[str] = []
+            if step_callback is not None and self._tokenizer is not None:
+                try:
+                    token_strings = [
+                        self._tokenizer.decode([tid], skip_special_tokens=False)  # type: ignore[attr-defined]
+                        for tid in committed_tokens
+                    ]
+                except Exception:
+                    token_strings = ["?"] * len(committed_tokens)
+
+            state = StepState(
+                step_idx=step_idx,
+                sub_block=b_idx,
+                num_blocks=num_blocks,
+                mechanism="llada",
+                tokens_committed=committed_tokens,
+                token_strings=token_strings,
+                positions=committed_positions,
+                entropy=committed_entropy,
+                top_k_logits=committed_topk,
+                commit_lora_active=commit_active_now,
+                logit_shift_norm=None,
+                temperature=float(temperature),
+                steps_per_block=steps_per_block,
+                wallclock_ms=wallclock_ms,
+                x_handle=x,
+                prompt_len=int(prompt_ids.shape[1]),
+                block_start=blk_start,
+                block_end=blk_end,
+            )
+
+            directive = cb(state)
+            if directive is None:
+                directive = StepDirective.continue_llada()
+
+            if directive.kind == "stop":
+                break
+            elif directive.kind == "continue_llada":
+                b_idx += 1
+                step_idx += 1
+                continue
+            elif directive.kind == "switch_to_ar":
+                # AR-extend handoff: caller is responsible for grafting AR
+                # tokens into `x` BEFORE returning the directive (since the
+                # callback holds x_handle). After the graft we just advance
+                # to the next block — the AR tokens occupy the masked slots
+                # they were written into.
+                b_idx += 1
+                step_idx += 1
+                continue
+            elif directive.kind == "branch_cmaj":
+                # Caller takes over branching responsibility (server.py forks
+                # parallel LLaDA continuations from x_handle). We stop here;
+                # the merged result is owned by the caller.
+                break
+            else:
+                # Unknown directive — be conservative and stop.
+                break
 
         # Always reset adapter state at the end so the next call starts clean.
         if commit_last_block:
@@ -288,6 +538,7 @@ class _Real:
         temperature: float = 0.0,
         apply_commit: bool = False,
         commit_n_blocks: int = 1,
+        step_callback: Optional[StepCallback] = None,
     ) -> tuple[str, int]:
         """Denoise. temperature>0 enables stochastic sampling (needed for
         self-consistency / branch ensembles to actually diverge).
@@ -298,6 +549,9 @@ class _Real:
         original behavior; commit_n_blocks=3 is the v3 follow-up "commit on
         blocks 2-4 of 4". If no commit adapter is configured, apply_commit is
         a no-op.
+
+        ``step_callback`` is the Workstream C visualizer hook; default None
+        preserves bit-identical behavior.
         """
         import torch  # type: ignore
 
@@ -321,6 +575,7 @@ class _Real:
             temperature=temperature,
             commit_last_block=commit_last,
             commit_n_blocks=commit_n_blocks,
+            step_callback=step_callback,
         )
         text = self._tokenizer.batch_decode(gen_ids, skip_special_tokens=True)[0]  # type: ignore[attr-defined]
         used = flops_mod.llada_forward_flops(
