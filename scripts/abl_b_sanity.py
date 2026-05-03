@@ -31,7 +31,7 @@ sys.path.insert(0, str(REPO_ROOT))
 from e4 import diff_llada  # noqa: E402
 
 BASE = "GSAI-ML/LLaDA-8B-Instruct"
-TRACK1_V3 = os.environ.get("TRACK1_V3_REPO", "eren23/sfumato-prefix-robust-gsm8k-v3")
+TRACK1_V3 = os.environ.get("TRACK1_V3_REPO", "eren23/sfumato-llada-prefix-robust-v3")
 COMMIT_V3 = os.environ.get("COMMIT_V3_REPO", "eren23/sfumato-llada-commit-v3")
 
 DEV_PATH = REPO_ROOT / "e4" / "data" / "gsm8k_dev_200.json"
@@ -40,8 +40,16 @@ K = int(os.environ.get("K_STEPS", "64"))
 
 
 def main() -> None:
+    # gsm8k_dev_200.json is frozen-indices metadata, not problems. Load via HF.
     with DEV_PATH.open() as f:
-        problems = json.load(f)[:N]
+        spec = json.load(f)
+    from datasets import load_dataset  # type: ignore
+    ds = load_dataset(spec["dataset"], spec.get("config", "main"), split=spec["split"])
+    problems = [
+        {"id": str(i), "question": ds[i]["question"],
+         "answer": ds[i]["answer"].split("####")[-1].strip()}
+        for i in spec["indices"][:N]
+    ]
 
     model = diff_llada.load(
         name=BASE,
