@@ -4,11 +4,16 @@ Returns (problem_id, branch_idx, branch_text, gold_answer, branch_extracted_answ
 """
 from __future__ import annotations
 import json
+import os
 import pathlib
 import re
 from typing import Iterator, NamedTuple
 
-RESULTS_DIR = pathlib.Path("/Users/eren/Documents/AI/sfumato/e4/results")
+# RESULTS_DIR is env-overridable; defaults try local-mac first then pod path.
+_DEFAULT = "/Users/eren/Documents/AI/sfumato/e4/results"
+if not pathlib.Path(_DEFAULT).exists():
+    _DEFAULT = "/workspace/sfumato/e4/results"
+RESULTS_DIR = pathlib.Path(os.environ.get("SFUMATO_RESULTS_DIR", _DEFAULT))
 
 # Phase-1 cmaj jsonls (already on disk)
 PHASE1_JSONLS = {
