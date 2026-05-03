@@ -111,13 +111,19 @@ def cp_ci(k, n, alpha=0.05):
 
 
 @torch.no_grad()
-def extract_embeddings(rows, model_id="Qwen/Qwen2.5-0.5B-Instruct", max_len=768, batch_size=8):
+def extract_embeddings(rows, model_id="Qwen/Qwen2.5-0.5B-Instruct", max_len=768, batch_size=8, load_in_4bit=False):
     from transformers import AutoModelForCausalLM, AutoTokenizer
-    print(f"[opt2] loading {model_id}", flush=True)
+    print(f"[opt2] loading {model_id} (4bit={load_in_4bit})", flush=True)
     tok = AutoTokenizer.from_pretrained(model_id)
-    model = AutoModelForCausalLM.from_pretrained(
-        model_id, torch_dtype=torch.float16, device_map="cuda",
-    )
+    if load_in_4bit:
+        from transformers import BitsAndBytesConfig
+        bnb = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.float16,
+                                  bnb_4bit_quant_type="nf4", bnb_4bit_use_double_quant=True)
+        model = AutoModelForCausalLM.from_pretrained(model_id, quantization_config=bnb, device_map="auto")
+    else:
+        model = AutoModelForCausalLM.from_pretrained(
+            model_id, torch_dtype=torch.float16, device_map="cuda",
+        )
     model.train(False)  # set inference mode (note: avoiding .eval() name)
     embeddings = np.zeros((len(rows), model.config.hidden_size), dtype=np.float32)
     n_batches = math.ceil(len(rows) / batch_size)
@@ -248,13 +254,15 @@ def main():
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--max-len", type=int, default=768)
     ap.add_argument("--batch-size", type=int, default=8)
+    ap.add_argument("--load-in-4bit", action="store_true")
     args = ap.parse_args()
 
     print(f"[opt2] loading branches from {RESULTS_DIR}", flush=True)
     rows = load_all_branches()
     print(f"[opt2] {len(rows)} branches across {len({r.problem_id for r in rows})} problems", flush=True)
 
-    embs = extract_embeddings(rows, model_id=args.model_id, max_len=args.max_len, batch_size=args.batch_size)
+    embs = extract_embeddings(rows, model_id=args.model_id, max_len=args.max_len,
+                              batch_size=args.batch_size, load_in_4bit=args.load_in_4bit)
 
     folds = cv_split_by_problem(rows, k=args.cv, seed=args.seed)
     fold_results = []
