@@ -169,8 +169,13 @@ def _grid_html(steps: list[dict], num_blocks: int = 4, block_len: int = 32) -> s
                 mech_marker = "<sup style='color:#b45309;font-size:8px'>AR</sup>"
             elif cell["mech"] == "cmaj_branch":
                 mech_marker = "<sup style='color:#7c3aed;font-size:8px'>CM</sup>"
-            tok = (cell["tok"] or "").strip().replace("<", "&lt;").replace(">", "&gt;")
-            display = tok[:4] if tok else "·"
+            raw = (cell["tok"] or "").strip()
+            # Strip mock-only `<m{b}_{i}>` wrapper so cells show the index, not "&lt;".
+            if raw.startswith("<") and raw.endswith(">") and len(raw) > 2:
+                raw = raw[1:-1]
+            display_raw = raw[:4] if raw else "·"
+            display = display_raw.replace("<", "&lt;").replace(">", "&gt;")
+            tok = raw.replace("<", "&lt;").replace(">", "&gt;")
             tt_lines = [
                 f"token: {tok!r}",
                 f"entropy: {cell['ent']:.3f} nats",
@@ -217,13 +222,16 @@ def _grid_html(steps: list[dict], num_blocks: int = 4, block_len: int = 32) -> s
 def _state_summary(client: BackendClient) -> str:
     if not client.session_id:
         return "_(no session)_"
+    n_steps = len(client.steps)
+    finished = client.done or n_steps >= 4
     parts = [
         f"**session_id:** `{client.session_id}`",
         f"**problem_idx:** {client.problem.get('idx', '?')}",
         f"**question:** {client.problem.get('question', '')[:200]}",
         f"**gold:** {client.problem.get('answer', '?')}",
-        f"**steps so far:** {len(client.steps)} / 4",
-        f"**done:** {client.done}",
+        f"**steps so far:** {n_steps} / 4",
+        f"**done:** {finished}"
+        + ("  _(all sub-blocks committed)_" if finished and not client.done else ""),
     ]
     if client.error:
         parts.append(f"**ERROR:** `{client.error}`")
@@ -274,13 +282,32 @@ def _save_trace(client: BackendClient, label: str) -> str:
 def build_ui(default_backend: str, default_problem_idx: int):
     import gradio as gr  # type: ignore
 
-    state = gr.State(value=BackendClient(default_backend))
-
     with gr.Blocks(title="Sfumato Inference Visualizer", theme=gr.themes.Default()) as demo:
+        state = gr.State(value=BackendClient(default_backend))
         gr.Markdown(
             "# Sfumato — step-by-step LLaDA + commit-LoRA + AR-extend\n"
-            "_Workstream C, Phase 2._ Watch the four LLaDA sub-blocks unfold one at a time. "
-            "Hover any cell for entropy + top-5 logits. Buttons let you swap mechanism mid-flight."
+            "_Workstream C, Phase 2._\n\n"
+            "**What you're looking at.** LLaDA generates a 128-token answer in **4 sub-blocks of 32 tokens** "
+            "(`gen_length=128`, `sub_block_length=32`). Each row of the grid below is one sub-block; "
+            "each cell is one committed token. Generation goes left→right, top→bottom.\n\n"
+            "**Color = per-token Shannon entropy.** Cool blue = the model was confident "
+            "(low entropy, sharp distribution); warm amber = uncertain (high entropy). "
+            "Watch how later blocks get cooler — the model commits fewer alternatives "
+            "as the answer crystallizes.\n\n"
+            "**Green border = commit-LoRA active on that block.** With `commit_n_blocks=3` (the v3 "
+            "headline setting), commit-LoRA fires on the LAST 3 sub-blocks (rows 1,2,3). "
+            "In this mock you'll see those rows visibly cooler than block 0 — that's the "
+            "trained adapter sharpening the answer-span logits.\n\n"
+            "**Hover any cell** for the raw token, top-5 alternatives, and which mechanism "
+            "produced it. **Auto-run** below = one click, watch all 4 blocks fill in. "
+            "**Manual mode** = stop at any boundary and pivot (AR-extend grafts Qwen tokens; "
+            "Cmaj-branch forks into _b_ parallel LLaDA branches and majority-votes).\n\n"
+            "_Note: with `MOCK_MODELS=1` the **problem** is a synthetic placeholder "
+            "(`Mock problem N: 2 + N = ?`, gold = `2+N`) and the **cells** are generic "
+            "reasoning words — neither comes from a real model or a real GSM8K item. "
+            "The point of mock is to exercise the UI/HTTP/queue plumbing end-to-end. "
+            "For real LLaDA-8B + v3 LoRA tokens (and real GSM8K problems), run on a "
+            "4090 pod — see `LOCAL_QUICKSTART.md` Option B._"
         )
 
         with gr.Row():
@@ -307,9 +334,19 @@ def build_ui(default_backend: str, default_problem_idx: int):
                 grid_html = gr.HTML(label="Token grid (4×32)")
                 summary_md = gr.Markdown(label="Session state")
 
+        gr.Markdown(
+            "### Auto mode — one click, runs all 4 sub-blocks"
+        )
+        with gr.Row():
+            auto_btn = gr.Button("Auto-run (all blocks)", variant="primary")
+            auto_delay = gr.Slider(
+                minimum=0.0, maximum=2.0, value=0.4, step=0.1,
+                label="delay between blocks (s) — slower = easier to watch",
+            )
+
         gr.Markdown("### Manual mode — choose a directive for the next sub-block")
         with gr.Row():
-            cont_btn = gr.Button("Continue LLaDA", variant="primary")
+            cont_btn = gr.Button("Continue LLaDA")
             with gr.Column():
                 ar_n = gr.Slider(minimum=1, maximum=24, value=6, step=1, label="AR n_tokens")
                 ar_btn = gr.Button("Switch to AR-extend")
@@ -382,6 +419,34 @@ def build_ui(default_backend: str, default_problem_idx: int):
         def on_stop(client):
             return on_step(client, "stop", 6, "", 5)
 
+        def on_auto(client, delay):
+            """Auto-advance: continue_llada until session done or 4 blocks reached.
+
+            Generator handler so Gradio streams each sub-block to the UI as
+            it lands, rather than blocking until the whole sequence finishes.
+            """
+            if not client.session_id:
+                client.error = "no session — click Start first"
+                yield (
+                    client, _grid_html(client.steps),
+                    _state_summary(client), _trace_pane(client),
+                )
+                return
+            max_blocks = 4
+            while not client.done and len(client.steps) < max_blocks:
+                try:
+                    client.step(directive="continue_llada")
+                except Exception as exc:
+                    client.error = repr(exc)
+                    break
+                yield (
+                    client, _grid_html(client.steps),
+                    _state_summary(client), _trace_pane(client),
+                )
+                if client.done:
+                    break
+                time.sleep(max(0.0, float(delay)))
+
         def on_save(client, lbl):
             try:
                 msg = _save_trace(client, lbl)
@@ -395,6 +460,8 @@ def build_ui(default_backend: str, default_problem_idx: int):
                     apply_commit, commit_n_blocks, mock_chk],
             outputs=[state, grid_html, summary_md, trace_md, health_md],
         )
+        auto_btn.click(on_auto, [state, auto_delay],
+                       [state, grid_html, summary_md, trace_md])
         cont_btn.click(on_continue, [state],
                        [state, grid_html, summary_md, trace_md])
         ar_btn.click(on_ar, [state, ar_n],

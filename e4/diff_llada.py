@@ -141,6 +141,44 @@ class _Mock:
             num_blocks = self.gen_length // self.sub_block_length
             commit_n = max(1, min(commit_n_blocks, num_blocks))
             first_commit = num_blocks - commit_n
+            # Try to compute the actual answer for the synthetic mock problem
+            # so block 3's "#### <num>" tokens line up with the gold the
+            # harness reports. Mock problems are "Mock problem N: 2 + N = ?"
+            # → answer = N + 2. Fall back to "<num>" if the prompt doesn't
+            # match (e.g. real-mode caller passes step_callback to the mock).
+            import re as _re
+            m = _re.search(r"(\d+)\s*\+\s*(\d+)\s*=\s*\?", prompt)
+            answer_str = str(int(m.group(1)) + int(m.group(2))) if m else "<num>"
+            answer_digits = list(answer_str) if answer_str != "<num>" else ["<num>"]
+            # Generic per-block reasoning vocabulary so cells look like a CoT
+            # trace without committing to a specific problem. Block 0 = setup,
+            # block 1 = arithmetic, block 2 = consolidation, block 3 = final
+            # answer span (with the actual computed sum embedded).
+            block_vocab = [
+                ["Let", "'s", "think", "step", "by", "step", ".", "We", "are",
+                 "given", "a", "math", "problem", "with", "two", "numbers",
+                 "to", "combine", ".", "Identify", "the", "operands", ",",
+                 "apply", "the", "operator", ",", "and", "report", "the",
+                 "value", "."],
+                ["Step", "1", ":", "read", "the", "operands", ".", "Step", "2",
+                 ":", "apply", "the", "operator", "(", "addition", ")", ".",
+                 "Step", "3", ":", "compute", "the", "sum", ".", "Sum", "=",
+                 "operand_a", "+", "operand_b", ".", "Carry", "."],
+                ["The", "result", "is", "the", "arithmetic", "sum", "of", "the",
+                 "two", "values", ".", "Verify", "by", "re", "-", "adding", "in",
+                 "the", "opposite", "order", "(", "commutative", ")", ".",
+                 "Both", "directions", "agree", ".", "Answer", "is", "stable",
+                 "."],
+                ["Final", "answer", ":", "the", "sum", "is", *answer_digits,
+                 ".", "####", *answer_digits, " ", " ", " ", " ", " ", " ", " ",
+                 " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+                 " ", " "][:32],
+            ]
+            # Per-block entropy band: early blocks uncertain, later blocks more
+            # confident; commit-LoRA-active blocks pulled even lower (the whole
+            # point of the commit adapter — sharpen final-block answer logits).
+            band_no_commit = [(0.9, 1.6), (0.6, 1.2), (0.4, 0.9), (0.3, 0.7)]
+            band_commit    = [(0.9, 1.6), (0.4, 0.8), (0.25, 0.55), (0.10, 0.30)]
             rng_seed = seed
             for b_idx in range(num_blocks):
                 rng_seed = (rng_seed * 1103515245 + 12345) & 0xFFFFFFFF
@@ -151,9 +189,12 @@ class _Mock:
                     )
                 )
                 tokens = [(rng_seed + p) & 0xFFFF for p in positions]
-                strings = [f"<m{b_idx}_{i}>" for i in range(len(positions))]
+                vocab = block_vocab[b_idx % len(block_vocab)]
+                strings = [vocab[i % len(vocab)] for i in range(len(positions))]
+                commit_active = bool(apply_commit) and (b_idx >= first_commit)
+                lo, hi = (band_commit if commit_active else band_no_commit)[b_idx]
                 ent = [
-                    0.05 + 0.6 * ((p * 2654435761) & 0xFF) / 255.0
+                    lo + (hi - lo) * (((p * 2654435761) & 0xFF) / 255.0)
                     for p in positions
                 ]
                 topk = [
@@ -170,7 +211,7 @@ class _Mock:
                     positions=positions,
                     entropy=ent,
                     top_k_logits=topk,
-                    commit_lora_active=bool(apply_commit) and (b_idx >= first_commit),
+                    commit_lora_active=commit_active,
                     logit_shift_norm=None,
                     temperature=float(temperature),
                     steps_per_block=max(k_steps // num_blocks, 1),

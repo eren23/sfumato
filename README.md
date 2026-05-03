@@ -107,6 +107,63 @@ accuracy lands in W&B and in `e4/results/`.
 `MOCK_MODELS=1` runs the harness without loading real weights — useful for
 verifying the Crucible parser path before paying for a GPU.
 
+### C. Local inference with the trained hybrid (cmajc-v3 / c2c / c3)
+
+"Hybrid training" = the two LoRAs we trained on top of LLaDA-8B-Instruct
+(Track 1: `prefix-robust-v3`, Track 2: `commit-v3`) composed with Qwen2.5
+into the cmajc / c2c / c3 conditions. Same `e4/runner.py` entry point —
+the env vars decide whether the trained adapters are loaded.
+
+**Hardware constraints.** Real-mode LLaDA-8B requires CUDA (no MPS path).
+On a Mac/CPU the `.to("cuda")` falls back to fp32 CPU and will OOM at
+~32 GB resident or run unusably slow. Use `MOCK_MODELS=1` on the laptop;
+provision a 4090 (Crucible/RunPod, $0.20–0.34/h) for real generation.
+
+Setup once:
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install transformers==4.46.3 peft accelerate datasets huggingface_hub wandb numpy scipy
+export HF_TOKEN=hf_...   # only needed if any LoRA repo is private
+```
+
+Mock smoke (laptop, ~5s, validates the whole hybrid plumbing without
+loading weights — adapters are name-checked but not downloaded):
+```bash
+MOCK_MODELS=1 CONDITION=cmajc K_STEPS=64 N_PROBLEMS=5 SEED=0 \
+  LORA_PATH=eren23/sfumato-llada-prefix-robust-v3 \
+  COMMIT_LORA_PATH=eren23/sfumato-llada-commit-v3 \
+  COMMIT_N_BLOCKS=3 BRANCHES=5 TEMP=0.7 \
+  python e4/runner.py
+```
+
+Real cmajc-v3 (the headline 82.5% recipe; CUDA ≥24 GB):
+```bash
+WANDB_DISABLED=1 CONDITION=cmajc K_STEPS=64 N_PROBLEMS=5 SEED=0 \
+  LORA_PATH=eren23/sfumato-llada-prefix-robust-v3 \
+  COMMIT_LORA_PATH=eren23/sfumato-llada-commit-v3 \
+  COMMIT_N_BLOCKS=3 BRANCHES=5 TEMP=0.7 \
+  python e4/runner.py
+# bump N_PROBLEMS=200 for the full dev split
+```
+
+Single-shot variants (cheaper, same adapters):
+```bash
+# c2c — diffusion + commit-LoRA only (no branching, no AR):
+CONDITION=c2c K_STEPS=64 N_PROBLEMS=5 SEED=0 \
+  LORA_PATH=eren23/sfumato-llada-prefix-robust-v3 \
+  COMMIT_LORA_PATH=eren23/sfumato-llada-commit-v3 \
+  COMMIT_N_BLOCKS=3 python e4/runner.py
+
+# c3 — AR plan -> diffusion CoT -> AR finalize (no commit):
+CONDITION=c3 K_STEPS=64 N_PROBLEMS=5 SEED=0 \
+  LORA_PATH=eren23/sfumato-llada-prefix-robust-v3 \
+  python e4/runner.py
+```
+
+Token-by-token visualizer (live grid, manual-mode buttons at every
+sub-block boundary): see `phase2/inference_viz/LOCAL_QUICKSTART.md`.
+Mock mode runs locally, real mode tunnels to a pod.
+
 ## Key conditions
 
 - `c1` — pure AR (Qwen alone)
