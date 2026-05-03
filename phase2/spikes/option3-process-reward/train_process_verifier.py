@@ -28,8 +28,10 @@ try:
 except ImportError:
     HAVE_SCIPY = False
 
+import os as _os
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[3]
-RICH_PATH = REPO_ROOT / "phase2/spikes/option3-process-reward/rich_substrate.jsonl"
+RICH_PATH = pathlib.Path(_os.environ.get("RICH_PATH",
+    str(REPO_ROOT / "phase2/spikes/option3-process-reward/rich_substrate.jsonl")))
 OUT_PATH = REPO_ROOT / "phase2/spikes/option3-process-reward/option3_results.json"
 
 

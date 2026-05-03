@@ -39,6 +39,7 @@ COMMIT_LORA_PATH = "eren23/sfumato-llada-commit-v3"
 DIFF_MODEL = "GSAI-ML/LLaDA-8B-Instruct"
 
 N_PROBLEMS = int(os.environ.get("N_PROBLEMS", "50"))
+PROBLEM_OFFSET = int(os.environ.get("PROBLEM_OFFSET", "0"))
 B = int(os.environ.get("BRANCHES", "5"))
 K_STEPS = int(os.environ.get("K_STEPS", "64"))
 TEMPERATURE = float(os.environ.get("TEMPERATURE", "0.7"))
@@ -87,9 +88,10 @@ def main() -> int:
     model = diff_llada.load(DIFF_MODEL, mock=False, lora_path=LORA_PATH, commit_lora_path=COMMIT_LORA_PATH)
     print(f"[rich] loaded in {time.time() - t0:.1f}s", flush=True)
 
-    print(f"[rich] loading {N_PROBLEMS} problems...", flush=True)
-    problems = runner.load_problems(N_PROBLEMS, DEV_INDICES_PATH)
-    print(f"[rich] {len(problems)} problems loaded", flush=True)
+    print(f"[rich] loading {N_PROBLEMS} problems (offset={PROBLEM_OFFSET})...", flush=True)
+    all_problems = runner.load_problems(N_PROBLEMS + PROBLEM_OFFSET, DEV_INDICES_PATH)
+    problems = all_problems[PROBLEM_OFFSET:PROBLEM_OFFSET + N_PROBLEMS]
+    print(f"[rich] {len(problems)} problems loaded (slice [{PROBLEM_OFFSET}:{PROBLEM_OFFSET+N_PROBLEMS}])", flush=True)
 
     n_correct_total = 0
     n_branches_total = 0

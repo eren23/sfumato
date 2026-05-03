@@ -19,14 +19,20 @@ mkdir -p "$LOGDIR"
 
 declare -a MODELS=(
   "Qwen/Qwen3-Embedding-8B"
+  "Skywork/Skywork-Reward-Llama-3.1-8B-v0.2"
+  "Alibaba-NLP/gte-Qwen2-7B-instruct"
   "Qwen/Qwen3.6-27B"
-  "Qwen/Qwen2.5-72B-Instruct"   # only on A6000+; will OOM on 4090
+  "Qwen/Qwen2.5-72B-Instruct"        # only on A6000+
+  "meta-llama/Llama-3.3-70B-Instruct" # only on A6000+
 )
 
 declare -a TAGS=(
   "qwen3emb8b"
+  "skywork-rm-llama-8b"
+  "gte-qwen2-7b"
   "qwen36-27b"
   "qwen25-72b-instruct"
+  "llama33-70b-instruct"
 )
 
 for i in "${!MODELS[@]}"; do
