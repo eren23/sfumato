@@ -1,0 +1,56 @@
+{
+  "model_id": "symbolic-arithmetic-verifier",
+  "rich_path": "/tmp/rich_substrate_n500.jsonl",
+  "n_branches": 1051,
+  "n_problems": 211,
+  "fold_results": [
+    {
+      "n_problems": 42,
+      "cmaj_acc": 0.8571428571428571,
+      "verifier_acc": 0.7619047619047619,
+      "oracle_acc": 0.9523809523809523,
+      "verifier_recovers": 1,
+      "delta_pp": -9.523809523809524
+    },
+    {
+      "n_problems": 42,
+      "cmaj_acc": 0.7142857142857143,
+      "verifier_acc": 0.6428571428571429,
+      "oracle_acc": 0.8095238095238095,
+      "verifier_recovers": 0,
+      "delta_pp": -7.142857142857142
+    },
+    {
+      "n_problems": 42,
+      "cmaj_acc": 0.7142857142857143,
+      "verifier_acc": 0.6904761904761905,
+      "oracle_acc": 0.7619047619047619,
+      "verifier_recovers": 1,
+      "delta_pp": -2.380952380952381
+    },
+    {
+      "n_problems": 42,
+      "cmaj_acc": 0.8095238095238095,
+      "verifier_acc": 0.6904761904761905,
+      "oracle_acc": 0.8571428571428571,
+      "verifier_recovers": 0,
+      "delta_pp": -11.904761904761903
+    },
+    {
+      "n_problems": 43,
+      "cmaj_acc": 0.8604651162790697,
+      "verifier_acc": 0.7209302325581395,
+      "oracle_acc": 0.9302325581395349,
+      "verifier_recovers": 0,
+      "delta_pp": -13.953488372093023
+    }
+  ],
+  "mean_cmaj": 0.7911406423034328,
+  "mean_verifier": 0.701328903654485,
+  "mean_oracle": 0.8622369878183832,
+  "delta_pp_vs_cmaj": -8.981173864894787,
+  "decision": "LOSS",
+  "n_branches_with_statements": 714,
+  "mean_statements_per_branch": 1.8839200761179828,
+  "mean_correct_statements_per_branch": 1.632730732635585
+}

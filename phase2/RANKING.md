@@ -75,11 +75,57 @@ classification at GSM8K-200 — neither with capacity (up to 72B), domain-tuning
 (math LMs, reward LMs), nor with richer process features (entropy /
 top-1-margin / commit-LoRA-fraction trajectory aggregates).
 
-Future avenues that would change this conclusion:
-- **Branch-pair contrastive verifier:** train on pairs from same problem
-  (which-of-these-two-is-better), not on absolute labels.
-- **Step-level reward** rather than trajectory aggregate (true PRM training,
-  not just feature MLP).
-- **Larger substrate (N=500-2000)** to escape the N=200 over-fit regime.
-- **Different problem distribution** — GSM8K may be too easy/uniform for
-  verifier signal to emerge.
+## Night-3 follow-up (May 4): three new approaches, all LOSS, plus diagnosis
+
+After the original 14 LOSSes, we tested every "future avenue" listed below:
+
+| # | Approach | N | cmaj | verifier | oracle | Δpp | Decision |
+|---|----------|---|------|----------|--------|-----|----------|
+| 5 | option-3 process-MLP scaled to N=500 | 500 | 79.1 | 73.0 | 86.2 | −6.16 | LOSS |
+| 6 | branch-pair contrastive (within-problem pair ranking) | 500 | 79.1 | 73.4 | 86.2 | −5.73 | LOSS |
+| 7 | step-level PRM (per-step features, not aggregates) | 500 | 79.1 | 71.5 | 86.2 | −7.61 | LOSS |
+| 8 | option-2 Qwen2.5-32B-Instruct (4-bit) | 200 | 80.5 | 77.0 | 89.5 | −3.50 | LOSS |
+| 9 | **symbolic arithmetic verifier** (zero-ML, AST-walk re-computation) | 500 | 79.1 | 70.1 | 86.2 | −8.98 | LOSS |
+
+Same pattern: more substrate, more capacity, smarter loss → still LOSS.
+
+### Why nothing works (Prong-2 substrate inspection)
+
+Of N=211 problems in the N=500 substrate, only **15 problems** are even
+recoverable (cmaj fails AND oracle could win). For each verifier, "win"
+requires correctly identifying the minority-correct branch in 5–10 of those
+15 cases. None get more than 1.
+
+Hand inspection of those 15 (`phase2/spikes/option3-process-reward/cmaj_failures_inspection.md`)
+reveals the **mechanism**: LLaDA's failure mode on GSM8K is *problem
+comprehension*, not *arithmetic*. Example (problem_id=1071, gold=251):
+
+- 3/5 wrong branches: `41 * $6 = $246, $125 + $246 = $371` ← arithmetic 100%
+  correct, **but they charged $6 for ALL 41 guests instead of just the 21
+  additional ones**.
+- 2/5 right branches: `(41 - 20) * $6 = $126, $125 + $126 = $251` ←
+  arithmetic 100% correct AND right setup.
+
+Both wrong and right branches contain only correct arithmetic statements.
+This is why:
+- **Symbolic verification** (Prong 3) fails: every branch's stmt-checks pass.
+- **Per-branch supervised verifiers** fail: surface features (entropy, margin,
+  text similarity) cannot distinguish "wrong setup with right arithmetic"
+  from "right setup with right arithmetic" without external reasoning.
+- **Math-tuned LMs** fail *more*: their tighter calibration on math-format
+  text amplifies the false equivalence.
+
+Only a verifier strictly stronger at *problem decomposition* than the
+generator can win — i.e., a frontier LM (Claude/GPT/Gemini) called as judge.
+Prong 1 (OpenRouter judge) is set up to test exactly this; awaiting API key.
+
+## Future avenues that would change the conclusion
+
+- **External frontier judge** (Claude / GPT / Gemini via OpenRouter) — only
+  remaining test of "is the gap closable in principle." If frontier judges
+  also lose, gap is irreducible at this dataset scale.
+- **Different problem distribution** — GSM8K dev may be too uniform; MATH/
+  AIME/Olympiad-bench have weaker cmaj baselines so verifier has more room.
+- **Branch resampling instead of reranking** — when cmaj < 50% majority,
+  generate 5 *more* branches and re-vote. Trades compute for accuracy
+  without needing a verifier at all.
