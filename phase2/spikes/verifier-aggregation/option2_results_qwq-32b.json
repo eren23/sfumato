@@ -1,0 +1,70 @@
+{
+  "model_id": "Qwen/QwQ-32B",
+  "n_branches": 1750,
+  "n_problems": 200,
+  "cv_folds": 5,
+  "max_len": 768,
+  "fold_results": [
+    {
+      "n_problems": 40,
+      "n_train_branches": 1355,
+      "n_test_branches": 395,
+      "cmaj_acc": 0.8,
+      "verifier_acc": 0.775,
+      "oracle_acc": 0.95,
+      "verifier_recovers": 2,
+      "delta_pp": -2.5,
+      "gap_closure": -0.16666666666666666
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1385,
+      "n_test_branches": 365,
+      "cmaj_acc": 0.8,
+      "verifier_acc": 0.725,
+      "oracle_acc": 0.875,
+      "verifier_recovers": 1,
+      "delta_pp": -7.5,
+      "gap_closure": -1.0
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1415,
+      "n_test_branches": 335,
+      "cmaj_acc": 0.75,
+      "verifier_acc": 0.65,
+      "oracle_acc": 0.85,
+      "verifier_recovers": 0,
+      "delta_pp": -10.0,
+      "gap_closure": -1.0
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1415,
+      "n_test_branches": 335,
+      "cmaj_acc": 0.825,
+      "verifier_acc": 0.775,
+      "oracle_acc": 0.875,
+      "verifier_recovers": 1,
+      "delta_pp": -5.0,
+      "gap_closure": -1.0
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1430,
+      "n_test_branches": 320,
+      "cmaj_acc": 0.85,
+      "verifier_acc": 0.85,
+      "oracle_acc": 0.925,
+      "verifier_recovers": 1,
+      "delta_pp": 0.0,
+      "gap_closure": 0.0
+    }
+  ],
+  "mean_cmaj": 0.8049999999999999,
+  "mean_verifier": 0.755,
+  "mean_oracle": 0.8949999999999999,
+  "delta_pp_vs_cmaj": -4.999999999999993,
+  "gap_closure": -0.555555555555555,
+  "pre_reg_decision": "LOSS"
+}

@@ -78,9 +78,10 @@ def load_problem_texts() -> dict[str, str]:
     return {str(idx): ds[idx]["question"] for idx in spec["indices"]}
 
 
-def call_judge(client, judge: str, problem: str, solution: str, max_tokens: int = 4) -> str:
-    """Returns 'YES' or 'NO' (best-effort)."""
-    resp = client.chat.completions.create(
+def call_judge(client, judge: str, problem: str, solution: str,
+               max_tokens: int = 4, timeout: float = 45.0) -> str:
+    """Returns 'YES' or 'NO' (best-effort). Per-call timeout guards against hangs."""
+    resp = client.with_options(timeout=timeout).chat.completions.create(
         model=judge,
         messages=[
             {"role": "user", "content": JUDGE_PROMPT.format(problem=problem, solution=solution)},
@@ -88,7 +89,7 @@ def call_judge(client, judge: str, problem: str, solution: str, max_tokens: int 
         max_tokens=max_tokens,
         temperature=0.0,
     )
-    txt = resp.choices[0].message.content.strip().upper()
+    txt = (resp.choices[0].message.content or "").strip().upper()
     if "YES" in txt[:5]:
         return "YES"
     if "NO" in txt[:4]:
@@ -178,21 +179,33 @@ def main():
     ap.add_argument("--judges", nargs="+", default=DEFAULT_JUDGES)
     ap.add_argument("--max-branches-per-problem", type=int, default=None,
                     help="Cap calls per problem (e.g. 5 for cmaj b=5; None = use all)")
-    ap.add_argument("--api-key-env", default="OPENROUTER_API_KEY")
+    ap.add_argument("--api-key-env", default=None,
+                    help="env var (default tries OPEN_ROUTER_API_KEY then OPENROUTER_API_KEY)")
     args = ap.parse_args()
 
-    api_key = os.environ.get(args.api_key_env)
+    candidates = [args.api_key_env] if args.api_key_env else \
+                 ["OPEN_ROUTER_API_KEY", "OPENROUTER_API_KEY"]
+    api_key = None
+    chosen_key = None
+    # Try env vars first
+    for k in candidates:
+        if k and os.environ.get(k):
+            api_key = os.environ[k]; chosen_key = k; break
+    # Then .env
     if not api_key:
-        # Try .env file
         env_path = REPO_ROOT / ".env"
         if env_path.exists():
             for line in env_path.read_text().splitlines():
-                if line.startswith(args.api_key_env + "="):
-                    api_key = line.split("=", 1)[1].strip().strip('"').strip("'")
-                    break
+                for k in candidates:
+                    if k and line.strip().startswith(k + "="):
+                        api_key = line.split("=", 1)[1].strip().strip('"').strip("'")
+                        chosen_key = k
+                        break
+                if api_key: break
     if not api_key:
-        print(f"FATAL: {args.api_key_env} not set in env or .env", file=sys.stderr)
+        print(f"FATAL: none of {candidates} set in env or .env", file=sys.stderr)
         sys.exit(1)
+    print(f"[judge] using {chosen_key}", flush=True)
 
     if not RICH_PATH.exists():
         print(f"FATAL: substrate {RICH_PATH} missing"); sys.exit(1)
@@ -204,7 +217,8 @@ def main():
     print(f"[judge] {len(problem_texts)} problem texts loaded", flush=True)
 
     from openai import OpenAI
-    client = OpenAI(api_key=api_key, base_url="https://openrouter.ai/api/v1")
+    client = OpenAI(api_key=api_key, base_url="https://openrouter.ai/api/v1",
+                    timeout=45.0, max_retries=2)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for judge in args.judges:
