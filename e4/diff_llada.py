@@ -329,28 +329,51 @@ def _add_gumbel_noise_batched(logits, temperature: float, generators):
     `logits` is (B, L, V). `generators` is a list of B torch.Generator on the
     same device as logits. Each row b gets noise drawn from generators[b] so
     branches stay independently seeded across calls.
+
+    Memory-wise, the naive `torch.stack` of B fp64 noise tensors holds
+    `B × L × V × 8` bytes simultaneously which OOMs on a 48GB A6000 at
+    B=5, L+gen≈280, V≈126K (peak ≈1.4 GB just for noise on top of the
+    8B-param bf16 model and per-step activations). We instead allocate one
+    output tensor and write each row's gumbel-corrected logits in place,
+    so peak noise allocation is **one row** rather than B.
     """
     import torch  # type: ignore
 
     if temperature <= 0.0:
         return logits.to(torch.float64)
-    logits = logits.to(torch.float64)
-    B = logits.shape[0]
+    logits_f64 = logits.to(torch.float64)
+    B = logits_f64.shape[0]
+    out = torch.empty_like(logits_f64)
+    inv_t = 1.0 / float(temperature)
+
     if generators is None or len(generators) != B:
         # Fallback: global RNG (loses per-branch determinism but won't crash).
-        noise = torch.rand_like(logits, dtype=torch.float64).clamp_(min=1e-20, max=1.0)
-    else:
-        noise_rows = []
         for b in range(B):
-            n = torch.empty(
-                logits.shape[1:],
+            noise = torch.empty(
+                logits_f64.shape[1:],
                 dtype=torch.float64,
-                device=logits.device,
+                device=logits_f64.device,
+            ).uniform_(0.0, 1.0).clamp_(min=1e-20, max=1.0)
+            torch.log_(noise)
+            torch.neg_(noise)
+            torch.log_(noise)
+            torch.neg_(noise)  # noise now == -log(-log(uniform))
+            out[b] = logits_f64[b] * inv_t + noise
+            del noise
+    else:
+        for b in range(B):
+            noise = torch.empty(
+                logits_f64.shape[1:],
+                dtype=torch.float64,
+                device=logits_f64.device,
             ).uniform_(0.0, 1.0, generator=generators[b]).clamp_(min=1e-20, max=1.0)
-            noise_rows.append(n)
-        noise = torch.stack(noise_rows, dim=0)
-    gumbel = -torch.log(-torch.log(noise))
-    return logits / temperature + gumbel
+            torch.log_(noise)
+            torch.neg_(noise)
+            torch.log_(noise)
+            torch.neg_(noise)
+            out[b] = logits_f64[b] * inv_t + noise
+            del noise
+    return out
 
 
 def _num_transfer_tokens(mask_index, steps: int):
@@ -963,9 +986,16 @@ class _Real:
                     logits, temperature=temperature, generators=generators
                 )
                 x0 = torch.argmax(logits_n, dim=-1)
+                # Free the fp64 gumbel-corrected logits before softmax allocates
+                # another full (B, L, V) tensor.
+                del logits_n
 
-                p = F.softmax(logits.to(torch.float64), dim=-1)
+                # fp32 softmax instead of fp64 — halves the (B, L, V) allocation
+                # and the gather-confidence is a single value per position so
+                # fp32 precision is more than sufficient.
+                p = F.softmax(logits.float(), dim=-1)
                 conf = torch.gather(p, dim=-1, index=x0.unsqueeze(-1)).squeeze(-1)
+                del p
                 conf[:, blk_end:] = float("-inf")
 
                 x0 = torch.where(mask_index, x0, x)
