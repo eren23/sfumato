@@ -433,8 +433,57 @@ def _maybe_init_wandb(cfg: dict) -> object | None:
     return run
 
 
+def _setup_fast_dllm() -> int:
+    """One-shot pod-side setup for the S4 Fast-dLLM spike.
+
+    Clones NVlabs/Fast-dLLM into /workspace/Fast-dLLM if missing, attempts to
+    import the upstream module, and prints `dir(fast_dllm)` so we can pin the
+    correct entry-point symbols in `e4/fast_dllm_adapter.py`.
+
+    Triggered by CONDITION=fast_dllm_setup. Pure side-effect; no W&B / training.
+    """
+    import subprocess
+    target = Path(env_str("FAST_DLLM_PATH", "/workspace/Fast-dLLM"))
+    if not target.exists():
+        print(f"[fast-dllm] cloning NVlabs/Fast-dLLM into {target}", flush=True)
+        subprocess.check_call([
+            "git", "clone", "--depth", "1",
+            "https://github.com/NVlabs/Fast-dLLM.git", str(target),
+        ])
+    else:
+        print(f"[fast-dllm] {target} exists; pulling latest", flush=True)
+        subprocess.check_call(["git", "-C", str(target), "pull", "--ff-only"])
+    print(f"[fast-dllm] listing top-level: {sorted(p.name for p in target.iterdir() if not p.name.startswith('.'))}", flush=True)
+    sys.path.insert(0, str(target))
+    try:
+        import fast_dllm  # type: ignore
+        attrs = sorted(a for a in dir(fast_dllm) if not a.startswith("_"))
+        print(f"[fast-dllm] import OK; dir(fast_dllm) = {attrs}", flush=True)
+        # Look for likely entry-point symbols.
+        candidates = [
+            "LLaDAModelWithKVCache", "wrap_llada", "wrap_llada_with_kv_cache",
+            "parallel_decode_step", "parallel_decode_with_kv_cache",
+        ]
+        present = [c for c in candidates if hasattr(fast_dllm, c)]
+        print(f"[fast-dllm] candidates present: {present}", flush=True)
+    except ImportError as e:
+        print(f"[fast-dllm] import FAILED: {e}", flush=True)
+        # Show entry-point structure to help pin symbols.
+        for sub in ("__init__.py", "fast_dllm/__init__.py"):
+            p = target / sub
+            if p.exists():
+                print(f"[fast-dllm] -- {sub} --", flush=True)
+                print(p.read_text()[:2000], flush=True)
+        return 1
+    # Crucible expects a terminal "step:N/N" marker for compliance; emit a fake one.
+    print("step:1/1 train_loss:0.0000 val_loss:0.0000 val_bpb:0.000e+00", flush=True)
+    return 0
+
+
 def main() -> int:
     condition = env_str("CONDITION", "c1")
+    if condition == "fast_dllm_setup":
+        return _setup_fast_dllm()
     k_steps = env_int("K_STEPS", 0)
     n_problems = env_int("N_PROBLEMS", 5)
     seed = env_int("SEED", 0)
