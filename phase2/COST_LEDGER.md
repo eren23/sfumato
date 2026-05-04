@@ -35,8 +35,17 @@ Direct SSH debug sessions for development do **not** go in this ledger.
 | 2026-05-03 15:19 UTC | B (D3.5) | Option-2 spike attempt #3: Qwen-encoder verifier 5-fold CV on 1750 branches | $0.10 | $0.08 | **complete** | LOSS: verifier 72.0% vs cmaj 80.5% (Δ -8.5pp). 11s embed + 100s train. D3.5 dead in supervised form. Pre-reg threshold ≥83% not met. |
 | 2026-05-03 15:46 UTC | B (D3.5) | "Go-crazy" attempt: ABL_B + Qwen-7B Hail Mary — 3 failed pod cycles (Crucible bootstrap broken at install_uv on this date) | $0.10 | $0.10 | **partial** | Each cycle ~$0.03. Eventually bypassed Crucible bootstrap with manual SSH. |
 | 2026-05-03 16:05 UTC | Phase1-overflow + B (D3.5) | ABL_B sanity probe + Qwen-7B Hail Mary verifier (manual-bootstrap pod) | $0.15 | $0.12 | **complete** | **ABL_B PASS 5/5**: commit-v3 modifies output (`#### N` → `Answer: N`). **Qwen-7B verifier LOSS** but improving: 76.5% vs cmaj 80.5% (Δ -4.0pp, vs 0.5B's -8.5pp). Encoder scaling trend: TF-IDF -14pp → 0.5B -8.5pp → 7B -4.0pp. Linear extrapolation suggests 32B+ might cross. Bug analysis written to `<parameter-golf_dev>/CRUCIBLE_BUG_ANALYSIS.md`. |
+| 2026-05-03 17:30 UTC | C | Workstream-C real-mode trace expansion: 5 attempts at server-on-pod (FastAPI + HTTP + nohup-SSH-backgrounding) all failed at SSH session-detachment | $0.30 | $0.30 | **superseded** | Pivoted approach: standalone script that imports `diff_llada` directly with `step_callback`. No HTTP, no backgrounding. |
+| 2026-05-03 19:43 UTC | C | Workstream-C real-mode trace expansion (final): standalone `make_real_traces.py` on pod | $0.10 | $0.10 | **complete** | **7/7 traces succeeded.** First trace 97s (model load), rest ~5.5s each. Total compute ~7 min. Files: `phase2/inference_viz/traces/trace_real_p*.jsonl`. D1 substrate now ready (28 state-action pairs). |
+| 2026-05-03 20:13 UTC | B + C | Multi-spike: rich substrate cmaj N=50 b=5 with step_callback + option-3 process-reward verifier + Qwen2.5-Math-7B verifier + Qwen3.5-9B verifier (failed) | $0.25 | $0.20 | **partial** | Rich substrate ✓ (250 records, 6.4MB at `phase2/spikes/option3-process-reward/rich_substrate.jsonl`). Option-3 LOSS −8pp at small data. Math-7B LOSS −6.5pp (math-tuning hurt). Qwen3.5-9B failed (transformers 4.46 unsupported). |
+| 2026-05-03 20:48 UTC | B | Qwen3 family bootstrap retries (transformers 4.51) — 2 attempts, both bootstrap-failed at smoke-test quote-escape bug | $0.10 | $0.10 | **failed** | Cleared by removing the smoke test in next attempt. |
+| 2026-05-03 20:56 UTC | B | Qwen3-Embedding-{4B,8B} + Qwen3-8B verifiers on 1750 branches (transformers 4.51.3) | $0.20 | $0.20 | **complete** | All 3 LOSS. Qwen3-Embedding-4B −12pp (worst), Qwen3-Embedding-8B −8pp, Qwen3-8B chat −5.5pp. **Embedding-specific models WORSE than chat-LMs at same params** — counter-intuitive finding. **Qwen2.5-7B chat remains best at −4pp across 8 architectures tested.** |
 
-**Running total: $2.85 / $20.00**
+**Running total: $3.75 / $20.00**
+
+(Phase 2 through 2026-05-03 ~21:15 UTC. Headroom: $16.25 for any Phase-3 work.)
+
+(Phase 2 through 2026-05-03 ~19:45 UTC. Headroom: $16.75 for option-3 process-reward verifier on the new C-traces, larger-encoder verifier, or Phase-3 work.)
 
 (Tonight's go-crazy added: $0.30 incl. failed attempts. Big wins: ABL_B closes Phase-1 reviewer concern; Qwen-7B encoder-scaling trend is itself a publishable observation.)
 

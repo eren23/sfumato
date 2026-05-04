@@ -201,6 +201,64 @@ D3.5 is **dead in the Phase-2 budget** but **alive as a Phase-3 candidate** with
 
 Both are deferred to Phase 3. For the Phase-2 paper, the honest take is: voting-rule gap is real and reproducible; per-branch verifiers narrow but don't close it; encoder scaling shows monotone improvement (TF-IDF → 0.5B → 7B: gap closure −156% → −94% → −44%) which is itself a publishable trend.
 
+---
+
+## Night-1 ADDENDUM #4 — 2026-05-03 ~21:15 UTC: 3 more Qwen3 family verifiers tested, ALL LOSS
+
+After option-2's monotone-improving trend with model scale (TF-IDF → 0.5B → 7B narrowed gap by 5pp each ~10×), tested broader architecture variants from current Qwen3 family (proper HF org-listing search instead of guessing from training memory):
+
+### Settings (all 5-fold CV on combined N=1750 substrate)
+
+| Encoder | Params | Mean verifier | Δ vs cmaj 80.5% | Embed time |
+|---|---:|---:|---:|---:|
+| Qwen3-Embedding-4B | 4B | 68.5% | **−12.0 pp** | 30s |
+| Qwen2.5-Math-7B | 7B | 74.0% | −6.5 pp | 41s |
+| Qwen3-Embedding-8B | 8B | 72.5% | −8.0 pp | 59s |
+| Qwen3-8B (chat) | 8B | 75.0% | −5.5 pp | 55s |
+
+Combined with prior runs:
+
+### Full encoder-scaling table (8 architectures total)
+
+| Encoder | Params | Mean verifier | Δ vs cmaj | Gap-closure |
+|---|---:|---:|---:|---:|
+| TF-IDF + LR | ~250K | 66.5% | −14.0 pp | −156% |
+| Qwen3-Embedding-4B | 4B | 68.5% | −12.0 pp | −133% |
+| Qwen2.5-0.5B | 500M | 72.0% | −8.5 pp | −94% |
+| Qwen3-Embedding-8B | 8B | 72.5% | −8.0 pp | −89% |
+| Qwen2.5-Math-7B | 7B | 74.0% | −6.5 pp | −72% |
+| Qwen3-8B (chat) | 8B | 75.0% | −5.5 pp | −61% |
+| **Qwen2.5-7B (chat)** | **7B** | **76.5%** | **−4.0 pp** | **−44%** ← best |
+
+### Surprising findings
+
+1. **Embedding-specific models are WORSE than chat models** at same param count: Qwen3-Embedding-8B (−8.0pp) loses to Qwen3-8B chat (−5.5pp) and Qwen2.5-7B chat (−4.0pp). Counter-intuitive — embedding models are PURPOSE-BUILT for representation tasks. Possible explanation: embedding models are trained for *similarity* objectives (cosine/InfoNCE) which compress features in ways that lose specific answer-correctness signal. Chat models retain richer per-token semantics in mean-pooled features.
+
+2. **Math-tuning HURT verifier quality**: Qwen2.5-Math-7B (−6.5pp) vs plain Qwen2.5-7B (−4.0pp). Math-specific fine-tuning probably collapses features around math-vocabulary, losing discriminative signal for *correctness within math*. The math-tuned features encode "is this math?" rather than "is this math correct?".
+
+3. **Newer Qwen3 generation didn't help vs Qwen2.5**: Qwen3-8B (−5.5pp) is essentially equivalent to Qwen2.5-7B (−4.0pp) — small architecture/training improvements don't translate to verifier improvements at this scale. The bottleneck is dataset size or feature-space, not model recency.
+
+4. **Encoder-scaling trend within chat-LM family is monotone but flattening**: each ~10× scale narrowed gap by ~5pp early (TF-IDF → 0.5B), then ~3-4pp (0.5B → 7B). Linear extrap to crossing cmaj baseline at 32B+ may be optimistic if the curve continues to flatten.
+
+### Final D3.5 verdict (8 architectures, all LOSS)
+
+**No per-branch supervised classifier we tested closes the voting-rule gap at this dataset scale (200 problems, 1750 branches).** The gap is real and reproducible (8-12pp), but it appears to require either:
+
+- (a) **Massive scale**: Qwen-32B+ encoder ($5-10+ per spike). Unclear if monotone trend continues.
+- (b) **Step-level supervision**: PRM800K-style human annotation on per-step trajectory features. Expensive in human time but proven elsewhere.
+- (c) **Different paradigm entirely**: not per-branch classification. E.g., generative re-ranking, debate-style critic, contrastive learning across branches of the same problem rather than independent classification.
+
+For the Phase-2 paper, the honest punchline updates from "encoder scaling narrows the gap monotonically (3 points)" to:
+
+> **We tried 8 verifier architectures spanning 4 orders of magnitude in encoder size. All under-perform majority vote. The encoder-scaling trend within plain chat-LMs is monotonically narrowing (−14pp → −4pp), but embedding-specific and math-specific architectures perform WORSE, suggesting the bottleneck is the supervised-classification objective itself rather than feature quality.**
+
+This is a much stronger, more honest negative-result section than just "we tried 3 things."
+
+### Cost
+
+This addendum's compute: ~$0.20 (Qwen3 family) + ~$0.05 failed transformers-version-bug retries = ~$0.25.
+Cumulative Phase-2: **~$3.75 / $20**.
+
 ## Deviations from pre-reg
 
 1. **Decision rule pivot**: PRE_REG.md said "best verifier acc". This was a

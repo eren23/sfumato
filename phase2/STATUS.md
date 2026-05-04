@@ -73,6 +73,13 @@ Workstream C has pinned the per-step schema at `phase2/STATUS.md` lines 51-63: `
   - **Crucible Bug Analysis written** to `<parameter-golf_dev>/CRUCIBLE_BUG_ANALYSIS.md` — 7 bugs documented with concrete fix proposals + file:line references for the agent picking up the parameter-golf_dev repo.
   - **Spiderchat: 6 notes total** pushed (4 night-1 + 2 morning).
   - **Phase 2 cumulative: $2.85 / $20**, $17.15 left. Workstream-C trace expansion (~$0.30) is the next obvious gpu-spend if D1 graduates cleanly from this state.
+2026-05-03 19:43 UTC | **Workstream-C real-mode trace expansion DONE**.
+  - **7 STATUS-schema JSONL traces** generated via `phase2/inference_viz/make_real_traces.py` (standalone script after 5 failed server-on-pod attempts at SSH backgrounding). Files: `phase2/inference_viz/traces/trace_real_p{10,20,30,40,50,60,70}_*.jsonl`. Each ~25KB, 4 sub-block records.
+  - Approach: import `e4.diff_llada` directly with a `step_callback`. Records each StepState as JSONL matching the STATUS-schema; `manual_intervention` field holds the planned directive (continue_llada / switch_to_ar:N / branch_cmaj:b).
+  - **D1 (mode router) substrate now exists**: 7 traces × 4 sub-blocks × varied mechanism labels = 28 (state, action) pairs. Tiny but enough to sketch bandit-on-replay architecture.
+  - Cost: $0.10 successful + $0.30 across 5 server-on-pod failed attempts = $0.40 net for this delivery. **Cumulative Phase 2: $3.25 / $20.**
+  - **Paper section drafted** at `phase2/paper_section_voting_gap.md` (7 subsections including encoder-scaling table, multi-seed variance bar, ABL_B closure). Pushed to spiderchat as [[Sfumato — Phase 2 paper section ...]].
+  - **Crucible itself fixed** in commit `e4b6adf` of parameter-golf_dev — all 7 bugs from `CRUCIBLE_BUG_ANALYSIS.md` closed.
   - **Wins (3):** D3.5 proposal written, D3.5 spike scaffold + preliminary LOSS, **Workstream C real-mode validation** (c2c on Janet's-ducks problem 0 with v3+commit-v3, acc=1.0, JSONL pulled to `phase2/inference_viz/traces/trace_c2c_real_mode_v3commit_problem42.jsonl`).
   - **Partial:** 4-tau live confirmation (only 2 runs at effective τ=0.7 due to override bug) → mean a_b=0.70 N=20, qualitatively matches offline a_b=0.78 N=50.
   - **Lost:** N=200 substrate (bootstrap fail on 2nd pod), multi-seed v3 cmajc (OOM cascade), τ=1.0/1.3 confirmations (OOM cascade).
