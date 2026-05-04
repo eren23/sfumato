@@ -135,10 +135,14 @@ def fast_dllm_generate(
     mask_id: int = 126336,
     remasking: str = "low_confidence",
 ):
-    """Call Fast-dLLM v1's `generate()` end-to-end. Returns full (1, L+gen) sequence."""
+    """Call Fast-dLLM v1's `generate()` end-to-end.
+
+    Upstream returns `(x_full, nfe)` where x_full is (1, L+gen_length) and
+    nfe is the number-of-forward-evaluations counter. Returns the tensor.
+    """
     _ensure_upstream_on_path()
     assert _GENERATE_FN is not None
-    return _GENERATE_FN(
+    out = _GENERATE_FN(
         model,
         prompt_ids,
         steps=steps,
@@ -150,3 +154,6 @@ def fast_dllm_generate(
         threshold=threshold,
         factor=factor,
     )
+    if isinstance(out, tuple):
+        return out[0]
+    return out
