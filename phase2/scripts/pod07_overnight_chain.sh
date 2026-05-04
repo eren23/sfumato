@@ -25,6 +25,7 @@ echo "================================================================"
 echo "[chain07] $(date -u +%FT%TZ) — substrate p200..499 (N=300, b=5, ~3.5h)"
 echo "================================================================"
 N_PROBLEMS=300 PROBLEM_OFFSET=200 BRANCHES=5 \
+  DEV_INDICES_PATH=/workspace/sfumato/e4/data/gsm8k_dev_500.json \
   "$PY" phase2/spikes/option3-process-reward/make_rich_substrate.py 2>&1 \
   | tee "$LOGDIR/01_substrate_p200_499.log"
 mv -v "$PHASE1_SUBSTRATE" "$P200_499" 2>/dev/null || true

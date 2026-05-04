@@ -32,7 +32,8 @@ sys.path.insert(0, str(REPO_ROOT))
 from e4 import diff_llada, runner  # noqa: E402
 
 OUT_PATH = REPO_ROOT / "phase2/spikes/option3-process-reward/rich_substrate.jsonl"
-DEV_INDICES_PATH = REPO_ROOT / "e4/data/gsm8k_dev_200.json"
+DEV_INDICES_PATH = Path(os.environ.get("DEV_INDICES_PATH",
+    str(REPO_ROOT / "e4/data/gsm8k_dev_200.json")))
 
 LORA_PATH = "eren23/sfumato-llada-prefix-robust-v3"
 COMMIT_LORA_PATH = "eren23/sfumato-llada-commit-v3"
