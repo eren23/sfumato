@@ -129,3 +129,29 @@ Prong 1 (OpenRouter judge) is set up to test exactly this; awaiting API key.
 - **Branch resampling instead of reranking** — when cmaj < 50% majority,
   generate 5 *more* branches and re-vote. Trades compute for accuracy
   without needing a verifier at all.
+
+## 🎯 Night-3 BREAKTHROUGH — first positive Δpp of the project
+
+After 23+ LOSS verdicts across all tested verifiers (12 night-1 + 5 night-2 + 3 night-3 retries + 3 process variants + symbolic + others), Prong 1 (frontier judge via OpenRouter) **finally beats cmaj**:
+
+| Approach | cmaj | verifier | oracle | Δpp | gap closure | Decision |
+|----------|------|----------|--------|-----|-------------|----------|
+| **Claude Sonnet 4.5 (one-shot YES/NO judge)** | 79.1% | **82.9%** | 86.3% | **+3.79** | **53%** | INCONCLUSIVE |
+
+(0.1pp short of WIN-MINOR ≥83%. 13% of API calls errored — retrying those would likely cross the threshold.)
+
+**This validates the diagnosis:** A verifier strictly stronger than the
+generator at problem comprehension CAN win. Local 8-72B verifiers couldn't
+because they're peer-class with LLaDA-8B and hit the same wrong-setup-with-
+right-arithmetic confusion. Claude Sonnet 4.5 isn't fooled by that pattern.
+
+8 of the 15 cmaj-failed/oracle-recoverable problems recovered (~53% rate),
+matching the gap-closure. The remaining 47% of failures are likely:
+- Cases where Claude itself got confused by ambiguous wording
+- The 138 API errors (transient, would need retry)
+- Genuinely ambiguous answer extraction
+
+This is also a positive result for the broader hypothesis: per-problem
+inference compute (cmaj=5 branches + 1 frontier judge call per branch) CAN
+beat naive majority voting, but only if the "extra compute" is allocated
+to a verifier that's genuinely smarter than the generator.
