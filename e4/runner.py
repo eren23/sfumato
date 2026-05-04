@@ -77,7 +77,10 @@ def _make_esc_callback(diff_model, n_branches: int, esc_state: dict):
                 txt = tokenizer.decode(
                     x[bi, L:end].tolist(), skip_special_tokens=True
                 )
-                a = grade.extract_answer(txt)
+                # Use the strict final-answer pattern. Mid-reasoning numbers
+                # like "16 - 3 = 13" return "" → ESC waits for the answer
+                # span ("#### N" / "Answer: N") to actually land.
+                a = grade.extract_final_answer(txt)
                 partial.append(a or None)
             except Exception:
                 partial.append(None)
