@@ -41,9 +41,24 @@ _UPSTREAM_LOADED = False
 _UPSTREAM_MOD = None
 
 
+_LLADA_MODEL_CLS = None
+_GENERATE_FN = None
+
+
 def _ensure_upstream_on_path() -> None:
-    """Inject FAST_DLLM_PATH at the head of sys.path if set."""
-    global _UPSTREAM_LOADED, _UPSTREAM_MOD
+    """Inject Fast-dLLM v1/llada and v1/llada/model into sys.path.
+
+    Upstream layout (verified via gh API on commit @ 2026-05-04):
+      Fast-dLLM/
+      ├── v1/llada/generate.py   → exports `generate(model, prompt, steps=..., gen_length=..., block_length=..., temperature=..., threshold=..., factor=...)`
+      ├── v1/llada/model/modeling_llada.py → `LLaDAModelLM` (custom HF subclass with KV-cache support)
+      └── v2/                    → block-diffusion variant (not used here)
+
+    Both paths must be on sys.path because generate.py does
+    `from model.modeling_llada import LLaDAModelLM` (relative-style with
+    no leading dot, requires `v1/llada` on path).
+    """
+    global _UPSTREAM_LOADED, _LLADA_MODEL_CLS, _GENERATE_FN
     if _UPSTREAM_LOADED:
         return
     path = os.environ.get("FAST_DLLM_PATH")
@@ -57,18 +72,31 @@ def _ensure_upstream_on_path() -> None:
         raise ImportError(
             f"FAST_DLLM_PATH={path} is not a directory; clone NVlabs/Fast-dLLM there."
         )
-    if path not in sys.path:
-        sys.path.insert(0, path)
-    # Try the most likely entry-point names. Adjust at integration time
-    # once the upstream layout is known on the pod.
+    llada_root = os.path.join(path, "v1", "llada")
+    if not os.path.isdir(llada_root):
+        raise ImportError(
+            f"FAST_DLLM_PATH={path} does not contain v1/llada/. "
+            f"Pull the latest upstream main."
+        )
+    # Prepend the LLaDA-specific paths.
+    for p in (llada_root, os.path.join(llada_root, "model")):
+        if p not in sys.path:
+            sys.path.insert(0, p)
     try:
-        # Speculative — verify against the upstream README + module list.
-        import fast_dllm as _mod  # type: ignore
-        _UPSTREAM_MOD = _mod
+        from model.modeling_llada import LLaDAModelLM  # type: ignore
+        _LLADA_MODEL_CLS = LLaDAModelLM
     except ImportError as e:
         raise ImportError(
-            f"FAST_DLLM_PATH={path} loaded but upstream module 'fast_dllm' "
-            f"not importable. Verify the package layout. Underlying: {e}"
+            f"FAST_DLLM_PATH={path}/v1/llada loaded but `model.modeling_llada.LLaDAModelLM` "
+            f"is not importable. Underlying: {e}"
+        )
+    try:
+        from generate import generate as _g  # type: ignore
+        _GENERATE_FN = _g
+    except ImportError as e:
+        raise ImportError(
+            f"FAST_DLLM_PATH={path}/v1/llada loaded but `generate.generate` "
+            f"is not importable. Underlying: {e}"
         )
     _UPSTREAM_LOADED = True
 
@@ -77,57 +105,48 @@ def is_enabled() -> bool:
     return os.environ.get("FAST_DLLM", "0") == "1"
 
 
-def wrap_for_fast_dllm(model: Any, tokenizer: Any) -> Any:
-    """Wrap an HF-loaded LLaDA model with Fast-dLLM's KV-cache + parallel decoder.
+def load_fast_dllm_model(name: str, dtype, device, hf_token=None):
+    """Load LLaDA via Fast-dLLM's `LLaDAModelLM.from_pretrained` instead of HF AutoModel.
 
-    Returns a model-like object that supports the upstream's parallel
-    decoding API. On error, raises ImportError so `_ensure_loaded` can
-    surface a useful message.
+    Drop-in replacement for `AutoModel.from_pretrained(name, trust_remote_code=True)`
+    that wires the LLaDA modeling code with KV-cache + parallel-decoding hooks.
     """
     _ensure_upstream_on_path()
-    assert _UPSTREAM_MOD is not None
-    # Speculative API call. The upstream (per the paper) exposes a
-    # function or class named something like `LLaDAModelWithKVCache` or
-    # `wrap_llada_with_kv_cache`. The exact symbol must be chosen on
-    # first integration on the pod.
-    if hasattr(_UPSTREAM_MOD, "LLaDAModelWithKVCache"):
-        return _UPSTREAM_MOD.LLaDAModelWithKVCache(model, tokenizer)
-    if hasattr(_UPSTREAM_MOD, "wrap_llada"):
-        return _UPSTREAM_MOD.wrap_llada(model, tokenizer)
-    raise ImportError(
-        "Upstream Fast-dLLM module loaded but neither LLaDAModelWithKVCache "
-        "nor wrap_llada are exported. Inspect the upstream repo's __init__.py "
-        "and pin the correct symbol here."
-    )
+    assert _LLADA_MODEL_CLS is not None
+    kwargs = {"torch_dtype": dtype}
+    if hf_token:
+        kwargs["token"] = hf_token
+    model = _LLADA_MODEL_CLS.from_pretrained(name, **kwargs)
+    if "cuda" in str(device):
+        model = model.to("cuda")
+    model.requires_grad_(False)
+    return model
 
 
-def parallel_decode_step(
-    wrapped_model: Any,
-    x: Any,
-    threshold: float,
-    blk_start: int,
-    blk_end: int,
-) -> tuple[Any, Any]:
-    """One Fast-dLLM v1 confidence-aware parallel decode step.
-
-    Returns (committed_mask, x_after) where committed_mask is a bool
-    tensor over the gen window indicating which positions were
-    committed this step, and x_after is the updated sequence tensor.
-
-    The exact upstream signature is version-dependent; see the
-    paper-pinned blog post and repo README.
-    """
+def fast_dllm_generate(
+    model,
+    prompt_ids,                 # (1, L)
+    steps: int,
+    gen_length: int,
+    block_length: int,
+    temperature: float,
+    threshold: float | None = None,
+    factor: float | None = None,
+    mask_id: int = 126336,
+    remasking: str = "low_confidence",
+):
+    """Call Fast-dLLM v1's `generate()` end-to-end. Returns full (1, L+gen) sequence."""
     _ensure_upstream_on_path()
-    assert _UPSTREAM_MOD is not None
-    if hasattr(wrapped_model, "parallel_decode_with_kv_cache"):
-        return wrapped_model.parallel_decode_with_kv_cache(
-            x, threshold=threshold, blk_start=blk_start, blk_end=blk_end
-        )
-    if hasattr(_UPSTREAM_MOD, "parallel_decode_step"):
-        return _UPSTREAM_MOD.parallel_decode_step(
-            wrapped_model, x, threshold, blk_start, blk_end
-        )
-    raise ImportError(
-        "Upstream Fast-dLLM does not expose a parallel_decode hook on the "
-        "wrapped model. Check the integration point in the upstream README."
+    assert _GENERATE_FN is not None
+    return _GENERATE_FN(
+        model,
+        prompt_ids,
+        steps=steps,
+        gen_length=gen_length,
+        block_length=block_length,
+        temperature=temperature,
+        remasking=remasking,
+        mask_id=mask_id,
+        threshold=threshold,
+        factor=factor,
     )

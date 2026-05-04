@@ -376,6 +376,16 @@ def _add_gumbel_noise_batched(logits, temperature: float, generators):
     return out
 
 
+def _os_get_hf_token():
+    """Read HF token from any of the standard env names. Returns None when unset."""
+    import os as _os
+    return (
+        _os.environ.get("HF_TOKEN")
+        or _os.environ.get("HUGGINGFACE_HUB_TOKEN")
+        or _os.environ.get("HUGGING_FACE_HUB_TOKEN")
+    )
+
+
 def _num_transfer_tokens(mask_index, steps: int):
     """How many masked positions to commit at each diffusion step.
 
@@ -434,16 +444,33 @@ class _Real:
             self.name, trust_remote_code=True
         )
         dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
-        # NOTE: LLaDA's custom modeling code (trust_remote_code) targets
-        # transformers ≤ 4.x. Pin transformers==4.46.3 on the pod.
-        model = AutoModel.from_pretrained(
-            self.name,
-            torch_dtype=dtype,
-            trust_remote_code=True,
-        )
-        if torch.cuda.is_available():
-            model = model.to("cuda")
-        model.requires_grad_(False)
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+
+        # S4: load via Fast-dLLM v1's LLaDAModelLM (custom HF subclass with
+        # block-wise KV-cache support). Otherwise fall through to vanilla
+        # AutoModel + LLaDA's trust_remote_code modeling.
+        from e4 import fast_dllm_adapter as _fdll
+        if _fdll.is_enabled():
+            try:
+                model = _fdll.load_fast_dllm_model(
+                    self.name, dtype=dtype, device=device,
+                    hf_token=_os_get_hf_token(),
+                )
+            except ImportError as _e:
+                raise RuntimeError(
+                    f"FAST_DLLM=1 set but Fast-dLLM model load failed: {_e}"
+                ) from _e
+        else:
+            # NOTE: LLaDA's custom modeling code (trust_remote_code) targets
+            # transformers ≤ 4.x. Pin transformers==4.46.3 on the pod.
+            model = AutoModel.from_pretrained(
+                self.name,
+                torch_dtype=dtype,
+                trust_remote_code=True,
+            )
+            if torch.cuda.is_available():
+                model = model.to("cuda")
+            model.requires_grad_(False)
 
         # Apply LoRA if requested. PEFT adapter switching is slow per-call
         # (it walks every Linear layer), so the runner only switches at most
@@ -495,19 +522,8 @@ class _Real:
             )
             model.disable_adapter_layers()
 
-        # S4: optionally wrap with Fast-dLLM v1 KV-cache when FAST_DLLM=1.
-        # Default off — env-gated so the legacy path is unchanged when the
-        # adapter isn't requested.
-        from e4 import fast_dllm_adapter as _fdll
-        if _fdll.is_enabled():
-            try:
-                model = _fdll.wrap_for_fast_dllm(model, self._tokenizer)
-            except ImportError as _e:
-                # Bubble up as a helpful warning; do NOT silently fall back to
-                # legacy when the user explicitly asked for FAST_DLLM=1.
-                raise RuntimeError(
-                    f"FAST_DLLM=1 set but upstream wrapping failed: {_e}"
-                ) from _e
+        # NOTE: S4 model-class swap happens above in the AutoModel-vs-Fast-dLLM
+        # branch. PEFT adapters wrap whichever underlying model was chosen.
 
         self._model = model
 
@@ -536,6 +552,27 @@ class _Real:
         """
         import torch  # type: ignore
         import torch.nn.functional as F  # type: ignore
+        import os as _os
+
+        # S4 fastpath: when FAST_DLLM=1, call upstream `generate()` end-to-end
+        # (KV-cache + confidence-aware parallel decoding from arXiv:2505.22618).
+        # Skips our per-step loop entirely. step_callback is ignored on this
+        # path — Fast-dLLM doesn't expose sub-block boundaries; trace-mode
+        # users should set FAST_DLLM=0.
+        if _os.environ.get("FAST_DLLM", "0") == "1":
+            from e4 import fast_dllm_adapter as _fdll
+            threshold = _os.environ.get("FAST_DLLM_TAU")
+            tau = float(threshold) if threshold else None
+            full = _fdll.fast_dllm_generate(
+                self._model,
+                prompt_ids,
+                steps=max(steps, 4),
+                gen_length=self.gen_length,
+                block_length=self.sub_block_length,
+                temperature=temperature,
+                threshold=tau,
+            )
+            return full[:, prompt_ids.shape[1]:]
 
         cb = step_callback or _default_step_callback
 
