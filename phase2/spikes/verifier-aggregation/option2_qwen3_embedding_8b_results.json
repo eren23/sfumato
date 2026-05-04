@@ -1,0 +1,70 @@
+{
+  "model_id": "Qwen/Qwen3-Embedding-8B",
+  "n_branches": 1750,
+  "n_problems": 200,
+  "cv_folds": 5,
+  "max_len": 512,
+  "fold_results": [
+    {
+      "n_problems": 40,
+      "n_train_branches": 1355,
+      "n_test_branches": 395,
+      "cmaj_acc": 0.8,
+      "verifier_acc": 0.725,
+      "oracle_acc": 0.95,
+      "verifier_recovers": 2,
+      "delta_pp": -7.5,
+      "gap_closure": -0.5
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1385,
+      "n_test_branches": 365,
+      "cmaj_acc": 0.8,
+      "verifier_acc": 0.625,
+      "oracle_acc": 0.875,
+      "verifier_recovers": 1,
+      "delta_pp": -17.5,
+      "gap_closure": -2.3333333333333335
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1415,
+      "n_test_branches": 335,
+      "cmaj_acc": 0.75,
+      "verifier_acc": 0.7,
+      "oracle_acc": 0.85,
+      "verifier_recovers": 1,
+      "delta_pp": -5.0,
+      "gap_closure": -0.5
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1415,
+      "n_test_branches": 335,
+      "cmaj_acc": 0.825,
+      "verifier_acc": 0.725,
+      "oracle_acc": 0.875,
+      "verifier_recovers": 1,
+      "delta_pp": -10.0,
+      "gap_closure": -2.0
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1430,
+      "n_test_branches": 320,
+      "cmaj_acc": 0.85,
+      "verifier_acc": 0.85,
+      "oracle_acc": 0.925,
+      "verifier_recovers": 1,
+      "delta_pp": 0.0,
+      "gap_closure": 0.0
+    }
+  ],
+  "mean_cmaj": 0.8049999999999999,
+  "mean_verifier": 0.725,
+  "mean_oracle": 0.8949999999999999,
+  "delta_pp_vs_cmaj": -7.9999999999999964,
+  "gap_closure": -0.8888888888888887,
+  "pre_reg_decision": "LOSS"
+}

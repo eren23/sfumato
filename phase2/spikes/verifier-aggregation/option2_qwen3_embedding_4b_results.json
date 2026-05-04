@@ -1,0 +1,70 @@
+{
+  "model_id": "Qwen/Qwen3-Embedding-4B",
+  "n_branches": 1750,
+  "n_problems": 200,
+  "cv_folds": 5,
+  "max_len": 512,
+  "fold_results": [
+    {
+      "n_problems": 40,
+      "n_train_branches": 1355,
+      "n_test_branches": 395,
+      "cmaj_acc": 0.8,
+      "verifier_acc": 0.675,
+      "oracle_acc": 0.95,
+      "verifier_recovers": 0,
+      "delta_pp": -12.5,
+      "gap_closure": -0.8333333333333334
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1385,
+      "n_test_branches": 365,
+      "cmaj_acc": 0.8,
+      "verifier_acc": 0.6,
+      "oracle_acc": 0.875,
+      "verifier_recovers": 1,
+      "delta_pp": -20.0,
+      "gap_closure": -2.6666666666666665
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1415,
+      "n_test_branches": 335,
+      "cmaj_acc": 0.75,
+      "verifier_acc": 0.6,
+      "oracle_acc": 0.85,
+      "verifier_recovers": 0,
+      "delta_pp": -15.0,
+      "gap_closure": -1.5
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1415,
+      "n_test_branches": 335,
+      "cmaj_acc": 0.825,
+      "verifier_acc": 0.8,
+      "oracle_acc": 0.875,
+      "verifier_recovers": 1,
+      "delta_pp": -2.5,
+      "gap_closure": -0.5
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1430,
+      "n_test_branches": 320,
+      "cmaj_acc": 0.85,
+      "verifier_acc": 0.75,
+      "oracle_acc": 0.925,
+      "verifier_recovers": 0,
+      "delta_pp": -10.0,
+      "gap_closure": -1.3333333333333333
+    }
+  ],
+  "mean_cmaj": 0.8049999999999999,
+  "mean_verifier": 0.6849999999999999,
+  "mean_oracle": 0.8949999999999999,
+  "delta_pp_vs_cmaj": -12.0,
+  "gap_closure": -1.3333333333333337,
+  "pre_reg_decision": "LOSS"
+}
