@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sfumato — Reasoning Trace Browser</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="brand">
+      <h1>Sfumato</h1>
+      <p class="tag">Hybrid AR + Diffusion reasoning on GSM8K</p>
+    </div>
+    <nav>
+      <a href="#browse" class="nav-link active" data-target="browse">Browse</a>
+      <a href="#about" class="nav-link" data-target="about">About</a>
+      <a href="https://github.com/eren23/sfumato" class="nav-link external" target="_blank" rel="noopener">Repo</a>
+      <a href="https://github.com/eren23/sfumato_paper" class="nav-link external" target="_blank" rel="noopener">Paper</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+<!-- ============== BROWSE ============== -->
+<section id="browse" class="page active">
+  <div class="hero">
+    <h2>Browse the validation set</h2>
+    <p class="lede">
+      Sfumato runs <strong>5 stochastic LLaDA branches</strong> per problem
+      and majority-votes on the extracted answer. Browse the full
+      validation set below — every example shows all 5 reasoning traces,
+      the vote tally, and whether the system landed on the correct answer.
+    </p>
+    <div class="stats" id="stats"></div>
+  </div>
+
+  <div class="filter-bar">
+    <input type="text" id="search" placeholder="Search question text…" aria-label="Search">
+    <div class="tag-pills" id="tag-pills"></div>
+    <div class="filter-row">
+      <label>
+        Source:
+        <select id="source-filter">
+          <option value="">all</option>
+        </select>
+      </label>
+      <label>
+        Correctness:
+        <select id="correct-filter">
+          <option value="">all</option>
+          <option value="true">correct only</option>
+          <option value="false">wrong only</option>
+        </select>
+      </label>
+      <button id="random-btn" class="btn">🎲 Random</button>
+      <span class="results-count" id="results-count"></span>
+    </div>
+  </div>
+
+  <ul id="problem-list" class="problem-list"></ul>
+  <div class="pagination">
+    <button id="prev-page" class="btn">← Prev</button>
+    <span id="page-info"></span>
+    <button id="next-page" class="btn">Next →</button>
+  </div>
+</section>
+
+<!-- ============== DETAIL ============== -->
+<section id="detail" class="page">
+  <button id="back-btn" class="btn back">← Back to browse</button>
+  <article id="detail-content"></article>
+</section>
+
+<!-- ============== ABOUT ============== -->
+<section id="about" class="page">
+  <h2>What is sfumato?</h2>
+  <p>
+    Sfumato is a research system that solves grade-school math word
+    problems (GSM8K) using a <strong>hybrid of two language models</strong>
+    that reason in fundamentally different ways:
+  </p>
+  <dl class="kv">
+    <dt>Qwen2.5</dt><dd>An autoregressive (AR) model. Reads left-to-right, writes one token at a time. The "linear thinker."</dd>
+    <dt>LLaDA-8B</dt><dd>A mask-diffusion language model. Starts with a fully masked answer slot and fills in tokens iteratively, in any order, refining its guesses over multiple rounds. The "global thinker."</dd>
+  </dl>
+
+  <h3>Why 5 branches?</h3>
+  <p>
+    LLaDA's filling-in process has a stochastic step (temperature&nbsp;0.7),
+    so running it 5 times on the same problem produces 5 different
+    reasoning traces. We then <strong>majority-vote</strong> on the final
+    extracted number. When 4 of 5 branches agree on the same answer,
+    voting confidence is high; when only 3 of 5 agree, it's a near-tie.
+  </p>
+
+  <h3>What is "commit-LoRA"?</h3>
+  <p>
+    A small fine-tune (≈14M parameters) trained to fire only during the
+    last 3 of 4 sub-blocks of LLaDA's denoising schedule. Its job is to
+    stabilise the answer-formatting at the end of generation —
+    "<code>Answer: 18</code>" or "<code>#### 18</code>" — without
+    redirecting the underlying reasoning. It's why the
+    <code>cmajc</code> condition outperforms plain <code>cmaj</code>
+    (82.5% vs 79.5%, a +3pp super-additive lift the paper calls
+    "no double-dip violated upward").
+  </p>
+
+  <h3>Headline numbers</h3>
+  <ul>
+    <li><strong>cmaj-v3 = 79.5%</strong> on GSM8K-test (5 branches, base model + prefix-robust LoRA, seed 0, N=200).</li>
+    <li><strong>cmajc-v3 = 82.5%</strong> on GSM8K-test (cmaj + commit-LoRA per branch, seed 0, N=200; multi-seed mean = 82.2%, σ ≈ 0.3pp).</li>
+    <li>Total compute spend across the entire paper: ≈$3.50 of RunPod 4090 spot.</li>
+  </ul>
+
+  <h3>What each tag means</h3>
+  <dl class="kv">
+    <dt><span class="tag-pill">unanimous_correct</span></dt><dd>All 5 branches voted the same correct answer. The "easy" cases.</dd>
+    <dt><span class="tag-pill">clear_majority_correct</span></dt><dd>4 of 5 branches voted correctly; one diverged.</dd>
+    <dt><span class="tag-pill">near_tie_correct</span></dt><dd>Only 3 of 5 — minimum quorum — agreed on the right answer. Voting was load-bearing.</dd>
+    <dt><span class="tag-pill warn">near_tie_wrong</span></dt><dd>3 of 5 agreed but the majority was wrong. Failure mode: branches confidently disagreed.</dd>
+    <dt><span class="tag-pill warn">unanimous_wrong</span></dt><dd>All 5 agreed on a wrong answer. The model has a systematic blind spot here.</dd>
+    <dt><span class="tag-pill">redundancy_save</span></dt><dd>At least one branch dissented but the majority still landed correct. Demonstrates self-consistency value.</dd>
+    <dt><span class="tag-pill ok">commit_lora_repair</span></dt><dd>cmaj got it wrong, cmajc (with commit-LoRA) got it right on the same problem. Direct evidence of where commit-LoRA contributes.</dd>
+  </dl>
+
+  <h3>Citations & links</h3>
+  <ul>
+    <li><a href="https://github.com/eren23/sfumato" target="_blank" rel="noopener">Source code</a> (MIT)</li>
+    <li><a href="https://github.com/eren23/sfumato_paper" target="_blank" rel="noopener">Paper repo (LaTeX + PDF)</a></li>
+    <li><a href="https://huggingface.co/eren23/sfumato-llada-prefix-robust-v3" target="_blank" rel="noopener">Track-1 prefix-robust LoRA (HF)</a></li>
+    <li><a href="https://huggingface.co/eren23/sfumato-llada-commit-v3" target="_blank" rel="noopener">Track-2 commit-LoRA (HF)</a></li>
+    <li>Base model: <a href="https://huggingface.co/GSAI-ML/LLaDA-8B-Instruct" target="_blank" rel="noopener">LLaDA-8B-Instruct</a> (<a href="https://arxiv.org/abs/2502.09992" target="_blank" rel="noopener">arXiv 2502.09992</a>)</li>
+    <li>AR planner: <a href="https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct" target="_blank" rel="noopener">Qwen2.5-1.5B-Instruct</a></li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>
+      Sfumato &middot; MIT-licensed research code.
+      Showcase generated <span id="generated-at"></span> from
+      <code>e4/results/raw_{cmaj,cmajc}_*N{200,100}.jsonl</code>.
+    </p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
