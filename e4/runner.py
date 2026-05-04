@@ -454,27 +454,41 @@ def _setup_fast_dllm() -> int:
         print(f"[fast-dllm] {target} exists; pulling latest", flush=True)
         subprocess.check_call(["git", "-C", str(target), "pull", "--ff-only"])
     print(f"[fast-dllm] listing top-level: {sorted(p.name for p in target.iterdir() if not p.name.startswith('.'))}", flush=True)
+    # Walk v1/ + v2/ + fast_dvlm/ to map the actual layout
+    for sub in ("v1", "v2", "fast_dvlm"):
+        d = target / sub
+        if not d.exists():
+            continue
+        print(f"[fast-dllm] -- {sub}/ contents --", flush=True)
+        for entry in sorted(d.iterdir()):
+            if entry.name.startswith("."):
+                continue
+            tag = "DIR" if entry.is_dir() else "   "
+            print(f"  {tag} {entry.name}", flush=True)
+        # If there's a README, print first 60 lines for the integration recipe
+        readme = d / "README.md"
+        if readme.exists():
+            print(f"[fast-dllm] -- {sub}/README.md (first 80 lines) --", flush=True)
+            for line in readme.read_text().splitlines()[:80]:
+                print(f"  {line}", flush=True)
+    # Try v1 as the entry — that's where the LLaDA KV-cache lives per paper §3
+    sys.path.insert(0, str(target / "v1"))
     sys.path.insert(0, str(target))
-    try:
-        import fast_dllm  # type: ignore
-        attrs = sorted(a for a in dir(fast_dllm) if not a.startswith("_"))
-        print(f"[fast-dllm] import OK; dir(fast_dllm) = {attrs}", flush=True)
-        # Look for likely entry-point symbols.
-        candidates = [
-            "LLaDAModelWithKVCache", "wrap_llada", "wrap_llada_with_kv_cache",
-            "parallel_decode_step", "parallel_decode_with_kv_cache",
-        ]
-        present = [c for c in candidates if hasattr(fast_dllm, c)]
-        print(f"[fast-dllm] candidates present: {present}", flush=True)
-    except ImportError as e:
-        print(f"[fast-dllm] import FAILED: {e}", flush=True)
-        # Show entry-point structure to help pin symbols.
-        for sub in ("__init__.py", "fast_dllm/__init__.py"):
-            p = target / sub
-            if p.exists():
-                print(f"[fast-dllm] -- {sub} --", flush=True)
-                print(p.read_text()[:2000], flush=True)
-        return 1
+    candidates_path = [
+        ("fast_dllm", []),
+        ("v1.model", ["LLaDAModelLM", "LLaDAModelWithKVCache"]),
+        ("v1.generate", ["generate", "parallel_decode"]),
+        ("v1", []),
+        ("model", []),
+        ("generate", []),
+    ]
+    for mod_name, attrs in candidates_path:
+        try:
+            mod = __import__(mod_name, fromlist=["*"])
+            present = [a for a in dir(mod) if not a.startswith("_")]
+            print(f"[fast-dllm] import OK: {mod_name}; symbols (first 30): {present[:30]}", flush=True)
+        except Exception as e:
+            print(f"[fast-dllm] import FAIL: {mod_name}: {type(e).__name__}: {e}", flush=True)
     # Crucible expects a terminal "step:N/N" marker for compliance; emit a fake one.
     print("step:1/1 train_loss:0.0000 val_loss:0.0000 val_bpb:0.000e+00", flush=True)
     return 0
