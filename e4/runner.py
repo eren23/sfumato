@@ -271,22 +271,39 @@ def run_condition(
         # S0: branches run in a single batched (B, L+gen) forward pass.
         # S1: ESC quorum exit prunes branches once a majority agree at a
         # late sub-block boundary; winner is taken from the ESC quorum.
+        # BATCHED=0 forces the legacy sequential loop for paired wallclock comparison.
         from collections import Counter
 
         n_branches = int(os.environ.get("BRANCHES", "5"))
         temperature = float(os.environ.get("TEMP", "0.7"))
+        batched = os.environ.get("BATCHED", "1") == "1"
         seeds_b = [seed * 100 + b for b in range(n_branches)]
         esc_state: dict = {}
-        cb = _make_esc_callback(diff_model, n_branches, esc_state)
-        results = diff_model.denoise_block_batched(
-            prompt=q,
-            k_steps=k_steps,
-            seeds=seeds_b,
-            temperature=temperature,
-            step_callback=cb,
-        )
-        branches = [r[0] for r in results]
-        total = sum(r[1] for r in results)
+        if batched:
+            cb = _make_esc_callback(diff_model, n_branches, esc_state)
+            results = diff_model.denoise_block_batched(
+                prompt=q,
+                k_steps=k_steps,
+                seeds=seeds_b,
+                temperature=temperature,
+                step_callback=cb,
+            )
+            branches = [r[0] for r in results]
+            total = sum(r[1] for r in results)
+        else:
+            # BATCHED=0 — legacy per-seed sequential loop. Reproduces the
+            # pre-S0 implementation for paired wallclock baselines.
+            branches = []
+            total = 0
+            for s in seeds_b:
+                cot, used = diff_model.denoise_block(
+                    prompt=q,
+                    k_steps=k_steps,
+                    seed=s,
+                    temperature=temperature,
+                )
+                branches.append(cot)
+                total += used
         answers = [grade.extract_answer(b) for b in branches]
         counts = Counter(a for a in answers if a)
         if esc_state.get("winner"):
@@ -308,24 +325,41 @@ def run_condition(
         # S0: branches run in a single batched call; commit-LoRA toggles
         # exactly twice (on at first_commit_block, off after last block).
         # S1: ESC quorum exit; same semantics as cmaj.
+        # BATCHED=0 forces legacy sequential for paired baselines.
         from collections import Counter
 
         n_branches = int(os.environ.get("BRANCHES", "5"))
         temperature = float(os.environ.get("TEMP", "0.7"))
+        batched = os.environ.get("BATCHED", "1") == "1"
         seeds_b = [seed * 100 + b for b in range(n_branches)]
         esc_state: dict = {}
-        cb = _make_esc_callback(diff_model, n_branches, esc_state)
-        results = diff_model.denoise_block_batched(
-            prompt=q,
-            k_steps=k_steps,
-            seeds=seeds_b,
-            temperature=temperature,
-            apply_commit=True,
-            commit_n_blocks=_get_commit_n_blocks(),
-            step_callback=cb,
-        )
-        branches = [r[0] for r in results]
-        total = sum(r[1] for r in results)
+        if batched:
+            cb = _make_esc_callback(diff_model, n_branches, esc_state)
+            results = diff_model.denoise_block_batched(
+                prompt=q,
+                k_steps=k_steps,
+                seeds=seeds_b,
+                temperature=temperature,
+                apply_commit=True,
+                commit_n_blocks=_get_commit_n_blocks(),
+                step_callback=cb,
+            )
+            branches = [r[0] for r in results]
+            total = sum(r[1] for r in results)
+        else:
+            branches = []
+            total = 0
+            for s in seeds_b:
+                cot, used = diff_model.denoise_block(
+                    prompt=q,
+                    k_steps=k_steps,
+                    seed=s,
+                    temperature=temperature,
+                    apply_commit=True,
+                    commit_n_blocks=_get_commit_n_blocks(),
+                )
+                branches.append(cot)
+                total += used
         answers = [grade.extract_answer(b) for b in branches]
         counts = Counter(a for a in answers if a)
         if esc_state.get("winner"):
