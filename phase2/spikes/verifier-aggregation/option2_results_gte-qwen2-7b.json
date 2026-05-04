@@ -1,0 +1,70 @@
+{
+  "model_id": "Alibaba-NLP/gte-Qwen2-7B-instruct",
+  "n_branches": 1750,
+  "n_problems": 200,
+  "cv_folds": 5,
+  "max_len": 768,
+  "fold_results": [
+    {
+      "n_problems": 40,
+      "n_train_branches": 1355,
+      "n_test_branches": 395,
+      "cmaj_acc": 0.8,
+      "verifier_acc": 0.725,
+      "oracle_acc": 0.95,
+      "verifier_recovers": 2,
+      "delta_pp": -7.5,
+      "gap_closure": -0.5
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1385,
+      "n_test_branches": 365,
+      "cmaj_acc": 0.8,
+      "verifier_acc": 0.675,
+      "oracle_acc": 0.875,
+      "verifier_recovers": 0,
+      "delta_pp": -12.5,
+      "gap_closure": -1.6666666666666667
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1415,
+      "n_test_branches": 335,
+      "cmaj_acc": 0.75,
+      "verifier_acc": 0.65,
+      "oracle_acc": 0.85,
+      "verifier_recovers": 1,
+      "delta_pp": -10.0,
+      "gap_closure": -1.0
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1415,
+      "n_test_branches": 335,
+      "cmaj_acc": 0.825,
+      "verifier_acc": 0.7,
+      "oracle_acc": 0.875,
+      "verifier_recovers": 0,
+      "delta_pp": -12.5,
+      "gap_closure": -2.5
+    },
+    {
+      "n_problems": 40,
+      "n_train_branches": 1430,
+      "n_test_branches": 320,
+      "cmaj_acc": 0.85,
+      "verifier_acc": 0.75,
+      "oracle_acc": 0.925,
+      "verifier_recovers": 1,
+      "delta_pp": -10.0,
+      "gap_closure": -1.3333333333333333
+    }
+  ],
+  "mean_cmaj": 0.8049999999999999,
+  "mean_verifier": 0.7,
+  "mean_oracle": 0.8949999999999999,
+  "delta_pp_vs_cmaj": -10.499999999999998,
+  "gap_closure": -1.166666666666667,
+  "pre_reg_decision": "LOSS"
+}
