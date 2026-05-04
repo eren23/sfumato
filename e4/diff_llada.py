@@ -100,6 +100,54 @@ def _default_step_callback(state: StepState) -> StepDirective:
 
 StepCallback = Callable[[StepState], StepDirective]
 
+
+# ── Batched callback contract (S0 branch batching) ─────────────────────────
+# When `denoise_block_batched` is used to run B branches in a single forward
+# pass, the per-row StepState above is replaced with a `BatchStepState` that
+# carries the live `(B, L+gen)` tensor so the caller (cmaj/cmajc/cmerge in
+# runner.py) can vote on partial extracted answers across rows. ESC quorum
+# (S1) returns a `BatchStepDirective` with per-row `should_stop` flags;
+# pruned rows freeze (their transfer mask becomes all-False) but still
+# occupy their batch slot until the outermost loop completes.
+
+@dataclass
+class BatchStepState:
+    """Per-batch snapshot at sub-block boundary for batched cmaj/cmajc/cmerge."""
+
+    step_idx: int
+    sub_block: int
+    num_blocks: int
+    B: int                              # number of branches
+    active: list[bool]                  # which rows are still committing
+    x_handle: Any = None                # live (B, L+gen) tensor; do NOT mutate
+    prompt_len: int = 0
+    block_start: int = 0
+    block_end: int = 0
+    commit_lora_active: bool = False
+    temperature: float = 0.0
+    steps_per_block: int = 0
+    wallclock_ms: int = 0
+
+
+@dataclass
+class BatchStepDirective:
+    """Per-row directive for the next sub-block in batched mode."""
+
+    should_stop: list[bool] = field(default_factory=list)
+
+    @classmethod
+    def continue_all(cls, B: int) -> "BatchStepDirective":
+        return cls(should_stop=[False] * B)
+
+
+def _default_batch_step_callback(state: "BatchStepState") -> "BatchStepDirective":
+    """No-op default — preserves bit-identical (per-row) behavior."""
+    return BatchStepDirective.continue_all(state.B)
+
+
+BatchStepCallback = Callable[["BatchStepState"], "BatchStepDirective"]
+
+
 _LLADA_MASK_ID = 126336  # LLaDA's [MASK] token id
 _LLADA_EOT_ID = 126081   # LLaDA's <|endoftext|> id (for optional masking, see LLaDA App. B.4)
 
@@ -233,6 +281,36 @@ class _Mock:
         )
         return text, used
 
+    def denoise_block_batched(
+        self,
+        prompt: str,
+        k_steps: int,
+        seeds: list[int],
+        temperature: float = 0.0,
+        apply_commit: bool = False,
+        commit_n_blocks: int = 1,
+        step_callback: Optional["BatchStepCallback"] = None,
+    ) -> list[tuple[str, int]]:
+        """Mock-mode batched denoise — pass-through to per-seed denoise_block.
+
+        Mock has no batched semantics to optimise; this exists so the
+        runner.py cmaj/cmajc/cmerge codepath can drive batched API uniformly
+        in MOCK_MODELS=1 smoke tests. ESC/step_callback in mock mode is
+        ignored (mock has no live tensor to vote on).
+        """
+        return [
+            self.denoise_block(
+                prompt=prompt,
+                k_steps=k_steps,
+                seed=int(s),
+                temperature=temperature,
+                apply_commit=apply_commit,
+                commit_n_blocks=commit_n_blocks,
+                step_callback=None,
+            )
+            for s in seeds
+        ]
+
 
 def _add_gumbel_noise(logits, temperature: float):
     import torch  # type: ignore
@@ -241,6 +319,36 @@ def _add_gumbel_noise(logits, temperature: float):
         return logits.to(torch.float64)
     logits = logits.to(torch.float64)
     noise = torch.rand_like(logits, dtype=torch.float64).clamp_(min=1e-20, max=1.0)
+    gumbel = -torch.log(-torch.log(noise))
+    return logits / temperature + gumbel
+
+
+def _add_gumbel_noise_batched(logits, temperature: float, generators):
+    """Batched gumbel noise with per-row torch.Generator for branch determinism.
+
+    `logits` is (B, L, V). `generators` is a list of B torch.Generator on the
+    same device as logits. Each row b gets noise drawn from generators[b] so
+    branches stay independently seeded across calls.
+    """
+    import torch  # type: ignore
+
+    if temperature <= 0.0:
+        return logits.to(torch.float64)
+    logits = logits.to(torch.float64)
+    B = logits.shape[0]
+    if generators is None or len(generators) != B:
+        # Fallback: global RNG (loses per-branch determinism but won't crash).
+        noise = torch.rand_like(logits, dtype=torch.float64).clamp_(min=1e-20, max=1.0)
+    else:
+        noise_rows = []
+        for b in range(B):
+            n = torch.empty(
+                logits.shape[1:],
+                dtype=torch.float64,
+                device=logits.device,
+            ).uniform_(0.0, 1.0, generator=generators[b]).clamp_(min=1e-20, max=1.0)
+            noise_rows.append(n)
+        noise = torch.stack(noise_rows, dim=0)
     gumbel = -torch.log(-torch.log(noise))
     return logits / temperature + gumbel
 
@@ -363,6 +471,20 @@ class _Real:
                 token=_hf_token,
             )
             model.disable_adapter_layers()
+
+        # S4: optionally wrap with Fast-dLLM v1 KV-cache when FAST_DLLM=1.
+        # Default off — env-gated so the legacy path is unchanged when the
+        # adapter isn't requested.
+        from e4 import fast_dllm_adapter as _fdll
+        if _fdll.is_enabled():
+            try:
+                model = _fdll.wrap_for_fast_dllm(model, self._tokenizer)
+            except ImportError as _e:
+                # Bubble up as a helpful warning; do NOT silently fall back to
+                # legacy when the user explicitly asked for FAST_DLLM=1.
+                raise RuntimeError(
+                    f"FAST_DLLM=1 set but upstream wrapping failed: {_e}"
+                ) from _e
 
         self._model = model
 
@@ -492,6 +614,14 @@ class _Real:
                 except Exception:
                     token_strings = ["?"] * len(committed_tokens)
 
+            # S3: populate logit_shift_norm only when commit-LoRA is active and
+            # the LOGIT_SHIFT_NORM env knob is on. Costs 1 extra forward.
+            shift_norm: Optional[float] = None
+            if commit_active_now and last_logits is not None:
+                shift_norm = self._maybe_logit_shift_norm(
+                    last_logits, x, committed_positions
+                )
+
             state = StepState(
                 step_idx=step_idx,
                 sub_block=b_idx,
@@ -503,7 +633,7 @@ class _Real:
                 entropy=committed_entropy,
                 top_k_logits=committed_topk,
                 commit_lora_active=commit_active_now,
-                logit_shift_norm=None,
+                logit_shift_norm=shift_norm,
                 temperature=float(temperature),
                 steps_per_block=steps_per_block,
                 wallclock_ms=wallclock_ms,
@@ -551,6 +681,14 @@ class _Real:
     # These are no-ops if no commit adapter is configured. Switching is at
     # most once-per-denoise (never per diffusion step) because PEFT walks
     # every Linear layer to flip adapters and is not free.
+    #
+    # S2 merge-on-toggle: after switching to the commit adapter, call
+    # `merge_adapter()` so subsequent forward passes use a pre-fused
+    # `W_merged = W_base + α/r · B @ A` instead of doing two matmuls per
+    # Linear per step. `unmerge_adapter()` reverses the math exactly
+    # (PEFT's merge is `W += α/r · BA`, unmerge is `W -= α/r · BA`),
+    # within bf16 rounding. The merge fires at most twice per
+    # `denoise_block` call.
     def _enable_commit(self) -> None:
         if not self.commit_lora_path:
             return
@@ -561,15 +699,73 @@ class _Real:
         else:
             # Commit-only → just enable adapter layers (commit is the only one).
             model.enable_adapter_layers()  # type: ignore[attr-defined]
+        # S2: pre-fuse the active adapter into the base weights so each
+        # subsequent forward is one matmul per Linear instead of two.
+        try:
+            model.merge_adapter()  # type: ignore[attr-defined]
+            self._commit_merged = True
+        except Exception:
+            # PEFT versions before merge_adapter or models without LoRA-on-Linear
+            # silently keep the un-merged path.
+            self._commit_merged = False
 
     def _disable_commit(self) -> None:
         if not self.commit_lora_path:
             return
         model = self._model
+        # S2: unmerge first so the base weights are restored before we
+        # switch back to the base_lora adapter (or disable layers).
+        if getattr(self, "_commit_merged", False):
+            try:
+                model.unmerge_adapter()  # type: ignore[attr-defined]
+            except Exception:
+                pass
+            self._commit_merged = False
         if self.lora_path:
             model.set_adapter("base_lora")  # type: ignore[attr-defined]
         else:
             model.disable_adapter_layers()  # type: ignore[attr-defined]
+
+    # ── S3: logit-shift measurement helper ─────────────────────────────────
+    # When LOGIT_SHIFT_NORM=1 in the environment, fires at the LAST step of
+    # each commit-active sub-block. Returns the L2 norm of
+    # (logits_with_commit - logits_base) over committed positions, or None
+    # when disabled / inapplicable. Always involves one extra base-only
+    # forward pass — gated to avoid the cost on production runs.
+    def _maybe_logit_shift_norm(
+        self,
+        logits_with_commit,
+        x,
+        committed_positions: list[int],
+    ):
+        import os as _os
+        if _os.environ.get("LOGIT_SHIFT_NORM", "0") != "1":
+            return None
+        if not self.commit_lora_path or not getattr(self, "_commit_merged", False):
+            return None
+        if not committed_positions:
+            return 0.0
+        import torch  # type: ignore
+        model = self._model
+        # Temporarily un-merge to get a clean base forward.
+        try:
+            model.unmerge_adapter()  # type: ignore[attr-defined]
+            self._commit_merged = False
+            with torch.no_grad():
+                logits_base = model(x).logits  # type: ignore[attr-defined]
+            # Re-merge so the next step keeps the speed win.
+            model.merge_adapter()  # type: ignore[attr-defined]
+            self._commit_merged = True
+        except Exception:
+            return None
+        # L2 norm over committed positions of (commit - base) on row 0.
+        # For batched mode, caller passes a single row's slice.
+        idx = torch.tensor(committed_positions, device=x.device, dtype=torch.long)
+        diff = (
+            logits_with_commit.index_select(-2, idx)
+            - logits_base.index_select(-2, idx)
+        )
+        return float(diff.norm().item())
 
     def denoise_block(
         self,
@@ -623,6 +819,201 @@ class _Real:
             name=self.name, n_tokens=self.gen_length, n_steps=max(k_steps, 4)
         )
         return text.strip(), used
+
+    # ── S0: batched denoise ─────────────────────────────────────────────────
+    # Same prompt, B independent stochastic branches in one (B, L+gen) forward
+    # pass. Used by runner.py:cmaj/cmajc/cmerge. The legacy `denoise_block`
+    # path stays bit-identical because none of its callers touch _generate_batched.
+    def denoise_block_batched(
+        self,
+        prompt: str,
+        k_steps: int,
+        seeds: list[int],
+        temperature: float = 0.7,
+        apply_commit: bool = False,
+        commit_n_blocks: int = 1,
+        step_callback: Optional["BatchStepCallback"] = None,
+    ) -> list[tuple[str, int]]:
+        """Denoise B branches sharing the same prompt in a single batched call.
+
+        seeds[i] becomes the seed for branch i (independent torch.Generator
+        per row → branches diverge). Returns one (text, flops) tuple per
+        branch in input order. step_callback (BatchStepCallback) fires once
+        per sub-block boundary; ESC quorum directives can flip per-row stop
+        flags so pruned rows freeze without aborting the batched matmul.
+        """
+        import torch  # type: ignore
+
+        self._ensure_loaded()
+        B = len(seeds)
+        if B == 0:
+            return []
+        if B == 1:
+            # Single-branch path: defer to the legacy code so backcompat is preserved.
+            return [
+                self.denoise_block(
+                    prompt=prompt,
+                    k_steps=k_steps,
+                    seed=int(seeds[0]),
+                    temperature=temperature,
+                    apply_commit=apply_commit,
+                    commit_n_blocks=commit_n_blocks,
+                )
+            ]
+
+        messages = [
+            {"role": "system", "content": _DENOISE_SYS},
+            {"role": "user", "content": prompt},
+        ]
+        prompt_text = self._tokenizer.apply_chat_template(  # type: ignore[attr-defined]
+            messages, tokenize=False, add_generation_prompt=True
+        )
+        prompt_ids_single = self._tokenizer(
+            prompt_text, return_tensors="pt"
+        )["input_ids"].to(self._model.device)  # type: ignore[attr-defined]
+        prompt_ids = prompt_ids_single.expand(B, -1).contiguous()
+
+        device = self._model.device  # type: ignore[attr-defined]
+        # Per-row Generator. Use device='cuda' if model is on GPU; CPU otherwise.
+        gen_device = "cuda" if "cuda" in str(device) else "cpu"
+        generators = [
+            torch.Generator(device=gen_device).manual_seed(int(s)) for s in seeds
+        ]
+
+        commit_last = bool(apply_commit) and bool(self.commit_lora_path)
+        gen_ids_batched = self._generate_batched(
+            prompt_ids,
+            steps=max(k_steps, 4),
+            temperature=temperature,
+            commit_last_block=commit_last,
+            commit_n_blocks=commit_n_blocks,
+            generators=generators,
+            step_callback=step_callback,
+        )
+        texts = self._tokenizer.batch_decode(  # type: ignore[attr-defined]
+            gen_ids_batched, skip_special_tokens=True
+        )
+        used_per = flops_mod.llada_forward_flops(
+            name=self.name, n_tokens=self.gen_length, n_steps=max(k_steps, 4)
+        )
+        return [(t.strip(), used_per) for t in texts]
+
+    def _generate_batched(
+        self,
+        prompt_ids,                     # (B, L) on model device
+        steps: int,
+        temperature: float,
+        commit_last_block: bool = False,
+        commit_n_blocks: int = 1,
+        generators=None,                # list[torch.Generator] of length B
+        step_callback: Optional["BatchStepCallback"] = None,
+    ):
+        """Batched semi-AR denoiser. See `_generate` for single-row reference."""
+        import torch  # type: ignore
+        import torch.nn.functional as F  # type: ignore
+
+        device = self._model.device  # type: ignore[attr-defined]
+        B, L = prompt_ids.shape
+        gen_length = self.gen_length
+        block_length = self.sub_block_length
+        assert gen_length % block_length == 0
+        num_blocks = gen_length // block_length
+        if steps % num_blocks != 0:
+            steps = ((steps + num_blocks - 1) // num_blocks) * num_blocks
+        steps_per_block = steps // num_blocks
+        commit_n_blocks = max(1, min(commit_n_blocks, num_blocks))
+        first_commit_block = num_blocks - commit_n_blocks
+
+        x = torch.full(
+            (B, L + gen_length),
+            _LLADA_MASK_ID,
+            dtype=torch.long,
+            device=device,
+        )
+        x[:, :L] = prompt_ids
+
+        # Per-row "still committing" flag — flipped to False by ESC quorum (S1).
+        active = torch.ones(B, dtype=torch.bool, device=device)
+
+        b_idx = 0
+        step_idx = 0
+        while b_idx < num_blocks:
+            if commit_last_block and b_idx == first_commit_block:
+                self._enable_commit()
+            commit_active_now = bool(
+                commit_last_block and b_idx >= first_commit_block
+            )
+
+            blk_start = L + b_idx * block_length
+            blk_end = L + (b_idx + 1) * block_length
+            block_mask = (x[:, blk_start:blk_end] == _LLADA_MASK_ID)
+            n_transfer = _num_transfer_tokens(block_mask, steps_per_block)  # (B, S)
+
+            t0 = time.time()
+            for s in range(steps_per_block):
+                mask_index = x == _LLADA_MASK_ID
+                logits = self._model(x).logits  # type: ignore[attr-defined]  # (B, L+gen, V)
+
+                logits_n = _add_gumbel_noise_batched(
+                    logits, temperature=temperature, generators=generators
+                )
+                x0 = torch.argmax(logits_n, dim=-1)
+
+                p = F.softmax(logits.to(torch.float64), dim=-1)
+                conf = torch.gather(p, dim=-1, index=x0.unsqueeze(-1)).squeeze(-1)
+                conf[:, blk_end:] = float("-inf")
+
+                x0 = torch.where(mask_index, x0, x)
+                conf = torch.where(
+                    mask_index, conf, torch.full_like(conf, float("-inf"))
+                )
+
+                # Per-row topk + commit. Pruned rows (active[bi]=False) skip.
+                transfer = torch.zeros_like(x0, dtype=torch.bool)
+                for bi in range(B):
+                    if not bool(active[bi].item()):
+                        continue
+                    k = int(n_transfer[bi, s].item())
+                    if k > 0:
+                        _, sel = torch.topk(conf[bi], k=k)
+                        transfer[bi, sel] = True
+
+                x[transfer] = x0[transfer]
+
+            wallclock_ms = int((time.time() - t0) * 1000)
+
+            # Sub-block boundary: fire batched callback if provided.
+            if step_callback is not None:
+                state = BatchStepState(
+                    step_idx=step_idx,
+                    sub_block=b_idx,
+                    num_blocks=num_blocks,
+                    B=B,
+                    active=active.tolist(),
+                    x_handle=x,
+                    prompt_len=int(L),
+                    block_start=blk_start,
+                    block_end=blk_end,
+                    commit_lora_active=commit_active_now,
+                    temperature=float(temperature),
+                    steps_per_block=steps_per_block,
+                    wallclock_ms=wallclock_ms,
+                )
+                directive = step_callback(state)
+                if directive is not None and directive.should_stop:
+                    for bi in range(B):
+                        if bi < len(directive.should_stop) and directive.should_stop[bi]:
+                            active[bi] = False
+                    if not bool(active.any().item()):
+                        break
+
+            b_idx += 1
+            step_idx += 1
+
+        if commit_last_block:
+            self._disable_commit()
+
+        return x[:, L:]
 
 
 def load(

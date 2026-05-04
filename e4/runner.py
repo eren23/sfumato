@@ -40,6 +40,67 @@ def _get_commit_n_blocks() -> int:
     return _COMMIT_N_BLOCKS
 
 
+def _make_esc_callback(diff_model, n_branches: int, esc_state: dict):
+    """Build an ESC quorum=ceil(B/2)+1 batched step_callback.
+
+    Fires only at sub-blocks >= ESC_MIN_BLOCK (default 2 of 4) so the answer
+    span has time to land. Decodes each row's committed prefix, extracts the
+    last numeric span, votes. When a quorum agrees, marks remaining rows
+    `should_stop` and stashes the trigger block + winner in `esc_state`.
+
+    Returns None when ESC is disabled (env ESC != "1") or the underlying
+    tokenizer is unavailable (mock mode) — caller can skip passing a callback.
+    """
+    if os.environ.get("ESC", "0") != "1":
+        return None
+    tokenizer = getattr(diff_model, "_tokenizer", None)
+    if tokenizer is None:
+        return None
+    from collections import Counter as _Counter
+
+    quorum = (n_branches // 2) + 1
+    esc_min_block = int(os.environ.get("ESC_MIN_BLOCK", "2"))
+
+    def cb(state):
+        # Default: keep all branches running.
+        if state.sub_block < esc_min_block:
+            return diff_llada.BatchStepDirective.continue_all(state.B)
+        x = state.x_handle
+        L = state.prompt_len
+        end = state.block_end
+        partial: list[str | None] = []
+        for bi in range(state.B):
+            if not state.active[bi]:
+                partial.append(None)
+                continue
+            try:
+                txt = tokenizer.decode(
+                    x[bi, L:end].tolist(), skip_special_tokens=True
+                )
+                a = grade.extract_answer(txt)
+                partial.append(a or None)
+            except Exception:
+                partial.append(None)
+        counts = _Counter(a for a in partial if a)
+        if not counts:
+            return diff_llada.BatchStepDirective.continue_all(state.B)
+        top_a, top_c = counts.most_common(1)[0]
+        if top_c >= quorum:
+            should_stop = [
+                bool(state.active[bi]) and partial[bi] != top_a
+                for bi in range(state.B)
+            ]
+            if esc_state.get("trigger_block") is None:
+                esc_state["trigger_block"] = state.sub_block
+                esc_state["winner"] = top_a
+                esc_state["branches_pruned"] = sum(should_stop)
+                esc_state["partial_answers"] = list(partial)
+            return diff_llada.BatchStepDirective(should_stop=should_stop)
+        return diff_llada.BatchStepDirective.continue_all(state.B)
+
+    return cb
+
+
 def env_str(key: str, default: str) -> str:
     return os.environ.get(key, default)
 
@@ -207,75 +268,95 @@ def run_condition(
         # without any AR step. Temperature>0 is REQUIRED for branches to
         # diverge — at temp=0 LLaDA's gumbel sampling is deterministic and
         # all branches produce identical output (verified by sweep accident).
+        # S0: branches run in a single batched (B, L+gen) forward pass.
+        # S1: ESC quorum exit prunes branches once a majority agree at a
+        # late sub-block boundary; winner is taken from the ESC quorum.
         from collections import Counter
 
         n_branches = int(os.environ.get("BRANCHES", "5"))
         temperature = float(os.environ.get("TEMP", "0.7"))
-        branches: list[str] = []
-        total = 0
-        for b in range(n_branches):
-            cot, used = diff_model.denoise_block(
-                prompt=q,
-                k_steps=k_steps,
-                seed=seed * 100 + b,
-                temperature=temperature,
-            )
-            branches.append(cot)
-            total += used
+        seeds_b = [seed * 100 + b for b in range(n_branches)]
+        esc_state: dict = {}
+        cb = _make_esc_callback(diff_model, n_branches, esc_state)
+        results = diff_model.denoise_block_batched(
+            prompt=q,
+            k_steps=k_steps,
+            seeds=seeds_b,
+            temperature=temperature,
+            step_callback=cb,
+        )
+        branches = [r[0] for r in results]
+        total = sum(r[1] for r in results)
         answers = [grade.extract_answer(b) for b in branches]
         counts = Counter(a for a in answers if a)
-        winner = counts.most_common(1)[0][0] if counts else (answers[0] or "")
+        if esc_state.get("winner"):
+            winner = esc_state["winner"]
+        else:
+            winner = counts.most_common(1)[0][0] if counts else (answers[0] or "")
         for i, b in enumerate(branches):
             trace[f"branch_{i}"] = b
         trace["votes"] = " | ".join(answers)
         trace["winner"] = winner
+        if esc_state.get("trigger_block") is not None:
+            trace["esc_trigger_block"] = esc_state["trigger_block"]
+            trace["esc_branches_pruned"] = esc_state["branches_pruned"]
         return winner, total, trace
     if condition == "cmajc":
         # cmaj + commit adapter on each branch's final sub-block, THEN
         # majority-vote on the extracted numeric answers. Tests whether
         # commit + branching double-dips (additive vs subsumed).
+        # S0: branches run in a single batched call; commit-LoRA toggles
+        # exactly twice (on at first_commit_block, off after last block).
+        # S1: ESC quorum exit; same semantics as cmaj.
         from collections import Counter
 
         n_branches = int(os.environ.get("BRANCHES", "5"))
         temperature = float(os.environ.get("TEMP", "0.7"))
-        branches: list[str] = []
-        total = 0
-        for b in range(n_branches):
-            cot, used = diff_model.denoise_block(
-                prompt=q,
-                k_steps=k_steps,
-                seed=seed * 100 + b,
-                temperature=temperature,
-                apply_commit=True,
-                commit_n_blocks=_get_commit_n_blocks(),
-            )
-            branches.append(cot)
-            total += used
+        seeds_b = [seed * 100 + b for b in range(n_branches)]
+        esc_state: dict = {}
+        cb = _make_esc_callback(diff_model, n_branches, esc_state)
+        results = diff_model.denoise_block_batched(
+            prompt=q,
+            k_steps=k_steps,
+            seeds=seeds_b,
+            temperature=temperature,
+            apply_commit=True,
+            commit_n_blocks=_get_commit_n_blocks(),
+            step_callback=cb,
+        )
+        branches = [r[0] for r in results]
+        total = sum(r[1] for r in results)
         answers = [grade.extract_answer(b) for b in branches]
         counts = Counter(a for a in answers if a)
-        winner = counts.most_common(1)[0][0] if counts else (answers[0] or "")
+        if esc_state.get("winner"):
+            winner = esc_state["winner"]
+        else:
+            winner = counts.most_common(1)[0][0] if counts else (answers[0] or "")
         for i, b in enumerate(branches):
             trace[f"branch_{i}"] = b
         trace["votes"] = " | ".join(answers)
         trace["winner"] = winner
+        if esc_state.get("trigger_block") is not None:
+            trace["esc_trigger_block"] = esc_state["trigger_block"]
+            trace["esc_branches_pruned"] = esc_state["branches_pruned"]
         return winner, total, trace
     if condition == "cmerge":
         # Parallel diffusion branches -> AR merger. Inverse of C3:
         # diffusion-germinate-multiple -> AR-converge-into-one. Same temp>0
         # requirement as cmaj for branches to actually diverge.
+        # S0: branches run batched. ESC not applied — final AR merger needs
+        # all branches as candidates regardless of mid-flight agreement.
         n_branches = int(os.environ.get("BRANCHES", "3"))
         temperature = float(os.environ.get("TEMP", "0.7"))
-        branches: list[str] = []
-        total = 0
-        for b in range(n_branches):
-            cot, used = diff_model.denoise_block(
-                prompt=q,
-                k_steps=k_steps,
-                seed=seed * 100 + b,
-                temperature=temperature,
-            )
-            branches.append(cot)
-            total += used
+        seeds_b = [seed * 100 + b for b in range(n_branches)]
+        results = diff_model.denoise_block_batched(
+            prompt=q,
+            k_steps=k_steps,
+            seeds=seeds_b,
+            temperature=temperature,
+        )
+        branches = [r[0] for r in results]
+        total = sum(r[1] for r in results)
         joined = "\n\n---\n\n".join(
             f"Candidate {i+1}:\n{b}" for i, b in enumerate(branches)
         )
@@ -366,9 +447,11 @@ def main() -> int:
     rows: list[dict] = []
     t0 = time.time()
     for i, prob in enumerate(problems):
+        t_prob = time.time()
         pred, used, trace = run_condition(
             prob, condition, k_steps, ar_model, diff_model, seed=seed
         )
+        wallclock_ms = int((time.time() - t_prob) * 1000)
         correct = grade.is_correct(pred, prob["answer"])
         n_correct += int(correct)
         total_flops += used
@@ -387,6 +470,7 @@ def main() -> int:
                 "gold": prob["answer"],
                 "correct": correct,
                 "flops": used,
+                "wallclock_ms": wallclock_ms,
                 "trace": trace,
             }
         )
