@@ -39,3 +39,4 @@ phase2/inference_viz/traces/trace_v2_*.jsonl
 phase2/inference_viz/traces/trace_v2_*.gif
 phase2/inference_viz/traces/trace_real_*.gif
 phase2/inference_viz/traces/make_real_traces*_summary.json
+phase2/inference_viz/traces/comparisons/
