@@ -692,6 +692,7 @@ class _Real:
     def _enable_commit(self) -> None:
         if not self.commit_lora_path:
             return
+        import os as _os
         model = self._model
         if self.lora_path:
             # Both base + commit loaded as named adapters → switch to commit.
@@ -701,6 +702,10 @@ class _Real:
             model.enable_adapter_layers()  # type: ignore[attr-defined]
         # S2: pre-fuse the active adapter into the base weights so each
         # subsequent forward is one matmul per Linear instead of two.
+        # MERGE_ADAPTER=0 disables the S2 path for paired baseline runs.
+        if _os.environ.get("MERGE_ADAPTER", "1") != "1":
+            self._commit_merged = False
+            return
         try:
             model.merge_adapter()  # type: ignore[attr-defined]
             self._commit_merged = True
