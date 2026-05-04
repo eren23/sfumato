@@ -55,7 +55,7 @@ def _step_features(record: dict, block_idx: int) -> np.ndarray:
         float(record.get("commit_lora_active", False)),
         float(record.get("logit_shift_norm") or 0.0),
         float(record.get("wallclock_ms", 0)) / 1000.0,
-        float(record.get("tokens_committed", 0)),
+        float(len(record.get("tokens_committed", []) or []) if isinstance(record.get("tokens_committed"), list) else (record.get("tokens_committed") or 0)),
         float(block_idx) / N_BLOCKS_MAX,
         float(n) / 32.0,
     ], dtype=np.float32)
