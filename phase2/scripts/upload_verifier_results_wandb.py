@@ -24,6 +24,8 @@ OPTION3_PATTERNS = [
     REPO_ROOT / "phase2/spikes/option3-process-reward/option3_pair_results.json",
     REPO_ROOT / "phase2/spikes/option3-process-reward/option3_step_prm_results.json",
 ]
+SYMBOLIC_PATTERN = REPO_ROOT / "phase2/spikes/symbolic-verifier/results.json"
+JUDGE_PATTERN = REPO_ROOT / "phase2/spikes/strong-judge/results_*.json"
 
 
 def upload_one(path: pathlib.Path, group: str):
@@ -71,6 +73,10 @@ def main():
             else:
                 grp = "option3-process-mlp"
             files.append((p, grp))
+    if SYMBOLIC_PATTERN.exists():
+        files.append((SYMBOLIC_PATTERN, "symbolic-arithmetic"))
+    for f in sorted(glob.glob(str(JUDGE_PATTERN))):
+        files.append((pathlib.Path(f), "strong-judge"))
     print(f"uploading {len(files)} verifier results to W&B project '{PROJECT}'")
     for p, grp in files:
         try:
