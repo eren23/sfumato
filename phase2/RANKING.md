@@ -130,15 +130,18 @@ Prong 1 (OpenRouter judge) is set up to test exactly this; awaiting API key.
   generate 5 *more* branches and re-vote. Trades compute for accuracy
   without needing a verifier at all.
 
-## 🎯 Night-3 BREAKTHROUGH — first positive Δpp of the project
+## 🏆 Night-3 BREAKTHROUGH → WIN-MINOR
 
-After 23+ LOSS verdicts across all tested verifiers (12 night-1 + 5 night-2 + 3 night-3 retries + 3 process variants + symbolic + others), Prong 1 (frontier judge via OpenRouter) **finally beats cmaj**:
+After 23+ LOSS verdicts across all tested verifiers (12 night-1 + 5 night-2 + 3 night-3 retries + 3 process variants + symbolic + others), Prong 1 (frontier judge via OpenRouter) **wins decisively**:
 
 | Approach | cmaj | verifier | oracle | Δpp | gap closure | Decision |
 |----------|------|----------|--------|-----|-------------|----------|
-| **Claude Sonnet 4.5 (one-shot YES/NO judge)** | 79.1% | **82.9%** | 86.3% | **+3.79** | **53%** | INCONCLUSIVE |
+| Claude Sonnet 4.5 (one-shot YES/NO) | 79.1% | 82.9% | 86.3% | +3.79 | 53% | INCONCLUSIVE |
+| **Claude Sonnet 4.5 (CoT then VERDICT)** | 79.1% | **85.3%** | 86.3% | **+6.16** | **86%** | **WIN-MINOR** ✅ |
 
-(0.1pp short of WIN-MINOR ≥83%. 13% of API calls errored — retrying those would likely cross the threshold.)
+CoT prompting (work through the math first, then output VERDICT) recovered 13 of 15 cmaj-failed problems (vs 8 with simple YES/NO). Closes 86% of the cmaj-oracle gap. Cost: ~$1 in OpenRouter API calls.
+
+The +2.4pp jump from YES/NO → CoT confirms the night-3 diagnosis: failure mode is problem comprehension. CoT prompts force the verifier to reconstruct the problem setup from scratch, catching the wrong-setup-with-right-arithmetic cases that fooled every peer-class verifier.
 
 **This validates the diagnosis:** A verifier strictly stronger than the
 generator at problem comprehension CAN win. Local 8-72B verifiers couldn't

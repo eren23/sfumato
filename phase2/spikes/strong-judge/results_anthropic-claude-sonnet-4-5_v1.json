@@ -1,0 +1,682 @@
+{
+  "model_id": "anthropic/claude-sonnet-4.5",
+  "judge_tag": "anthropic-claude-sonnet-4-5",
+  "rich_path": "/tmp/rich_substrate_n500.jsonl",
+  "n_branches": 1051,
+  "mean_cmaj": 0.7914691943127962,
+  "mean_verifier": 0.8293838862559242,
+  "mean_oracle": 0.8625592417061612,
+  "delta_pp_vs_cmaj": 3.7914691943127963,
+  "verifier_recovers": 8,
+  "decision": "INCONCLUSIVE",
+  "n_problems": 211,
+  "openrouter_meta": {
+    "n_calls": 1051,
+    "n_yes": 592,
+    "n_err": 138,
+    "wall_s": 253.2474319934845,
+    "concurrency": 8
+  },
+  "by_problem": [
+    {
+      "problem_id": "1311",
+      "gold": "594",
+      "cmaj_pick": "594",
+      "verifier_pick": "594",
+      "yes_per_branch": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "votes": [
+        "594",
+        "594",
+        "594",
+        "594",
+        "594"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "585",
+      "gold": "40",
+      "cmaj_pick": "20",
+      "verifier_pick": "20",
+      "yes_per_branch": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "votes": [
+        "10",
+        "20",
+        "20",
+        "20",
+        "20"
+      ],
+      "cmaj_hit": false,
+      "verifier_hit": false
+    },
+    {
+      "problem_id": "827",
+      "gold": "11",
+      "cmaj_pick": "8",
+      "verifier_pick": "8",
+      "yes_per_branch": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "votes": [
+        "12",
+        "8",
+        "1",
+        "6",
+        "8"
+      ],
+      "cmaj_hit": false,
+      "verifier_hit": false
+    },
+    {
+      "problem_id": "1265",
+      "gold": "36",
+      "cmaj_pick": "36",
+      "verifier_pick": "36",
+      "yes_per_branch": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "votes": [
+        "36",
+        "24",
+        "120",
+        "36",
+        "36"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "637",
+      "gold": "17",
+      "cmaj_pick": "17",
+      "verifier_pick": "17",
+      "yes_per_branch": [
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "votes": [
+        "11",
+        "17",
+        "17",
+        "17",
+        "17"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "938",
+      "gold": "4",
+      "cmaj_pick": "4",
+      "verifier_pick": "4",
+      "yes_per_branch": [
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "votes": [
+        "4",
+        "4",
+        "2",
+        "4",
+        "4"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "472",
+      "gold": "6",
+      "cmaj_pick": "6",
+      "verifier_pick": "6",
+      "yes_per_branch": [
+        1,
+        0,
+        1,
+        1,
+        0
+      ],
+      "votes": [
+        "6",
+        "6",
+        "6",
+        "6",
+        "6"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "722",
+      "gold": "255",
+      "cmaj_pick": "255",
+      "verifier_pick": "255",
+      "yes_per_branch": [
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "votes": [
+        "2555",
+        "255",
+        "245",
+        "255",
+        "375"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "823",
+      "gold": "14",
+      "cmaj_pick": "18",
+      "verifier_pick": "18",
+      "yes_per_branch": [
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "votes": [
+        "18",
+        "22",
+        "18",
+        "18",
+        "18"
+      ],
+      "cmaj_hit": false,
+      "verifier_hit": false
+    },
+    {
+      "problem_id": "958",
+      "gold": "40",
+      "cmaj_pick": "40",
+      "verifier_pick": "40",
+      "yes_per_branch": [
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "votes": [
+        "40",
+        "40",
+        "20",
+        "40",
+        "39"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "323",
+      "gold": "75",
+      "cmaj_pick": "75",
+      "verifier_pick": "75",
+      "yes_per_branch": [
+        0,
+        1,
+        1,
+        0,
+        1
+      ],
+      "votes": [
+        "75",
+        "75",
+        "75",
+        "675",
+        "75"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "910",
+      "gold": "700",
+      "cmaj_pick": "700",
+      "verifier_pick": "700",
+      "yes_per_branch": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "votes": [
+        "700",
+        "700",
+        "700",
+        "700",
+        "700"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "1283",
+      "gold": "60",
+      "cmaj_pick": "60",
+      "verifier_pick": "60",
+      "yes_per_branch": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "votes": [
+        "60",
+        "60",
+        "60",
+        "60",
+        "60"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "937",
+      "gold": "159",
+      "cmaj_pick": "159",
+      "verifier_pick": "159",
+      "yes_per_branch": [
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      "votes": [
+        "159",
+        "159",
+        "159",
+        "159",
+        "159"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "499",
+      "gold": "10",
+      "cmaj_pick": "10",
+      "verifier_pick": "10",
+      "yes_per_branch": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "votes": [
+        "10",
+        "10",
+        "10",
+        "10",
+        "10"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "775",
+      "gold": "276",
+      "cmaj_pick": "276",
+      "verifier_pick": "276",
+      "yes_per_branch": [
+        0,
+        1,
+        0,
+        1,
+        1
+      ],
+      "votes": [
+        "276",
+        "276",
+        "76",
+        "276",
+        "276"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "1024",
+      "gold": "300",
+      "cmaj_pick": "300",
+      "verifier_pick": "300",
+      "yes_per_branch": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "votes": [
+        "300",
+        "300",
+        "300",
+        "300",
+        "300"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "1317",
+      "gold": "5",
+      "cmaj_pick": "15",
+      "verifier_pick": "15",
+      "yes_per_branch": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "votes": [
+        "15",
+        "5",
+        "15",
+        "5",
+        "15"
+      ],
+      "cmaj_hit": false,
+      "verifier_hit": false
+    },
+    {
+      "problem_id": "708",
+      "gold": "168",
+      "cmaj_pick": "168",
+      "verifier_pick": "168",
+      "yes_per_branch": [
+        1,
+        0,
+        0,
+        1,
+        1
+      ],
+      "votes": [
+        "168",
+        "168",
+        "84",
+        "168",
+        "168"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "308",
+      "gold": "6",
+      "cmaj_pick": "6",
+      "verifier_pick": "6",
+      "yes_per_branch": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "votes": [
+        "6",
+        "6",
+        "6",
+        "6",
+        "6"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "440",
+      "gold": "98",
+      "cmaj_pick": "246",
+      "verifier_pick": "246",
+      "yes_per_branch": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "votes": [
+        "246",
+        "94",
+        "140",
+        "320",
+        "98"
+      ],
+      "cmaj_hit": false,
+      "verifier_hit": false
+    },
+    {
+      "problem_id": "513",
+      "gold": "300",
+      "cmaj_pick": "300",
+      "verifier_pick": "300",
+      "yes_per_branch": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "votes": [
+        "300",
+        "300",
+        "300",
+        "300",
+        "300"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "438",
+      "gold": "2",
+      "cmaj_pick": "2",
+      "verifier_pick": "2",
+      "yes_per_branch": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "votes": [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "527",
+      "gold": "48",
+      "cmaj_pick": "48",
+      "verifier_pick": "48",
+      "yes_per_branch": [
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      "votes": [
+        "48",
+        "480",
+        "48",
+        "48",
+        "48"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "1073",
+      "gold": "21",
+      "cmaj_pick": "21",
+      "verifier_pick": "21",
+      "yes_per_branch": [
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "votes": [
+        "5",
+        "33",
+        "21",
+        "43",
+        "21"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "1028",
+      "gold": "200",
+      "cmaj_pick": "200",
+      "verifier_pick": "200",
+      "yes_per_branch": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "votes": [
+        "200",
+        "200",
+        "200",
+        "200",
+        "200"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "453",
+      "gold": "6400",
+      "cmaj_pick": "4800",
+      "verifier_pick": "4800",
+      "yes_per_branch": [
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "votes": [
+        "4800",
+        "4800",
+        "6400",
+        "4800",
+        "4800"
+      ],
+      "cmaj_hit": false,
+      "verifier_hit": false
+    },
+    {
+      "problem_id": "996",
+      "gold": "3",
+      "cmaj_pick": "3",
+      "verifier_pick": "3",
+      "yes_per_branch": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "votes": [
+        "3",
+        "11.5",
+        "3",
+        "3",
+        "3"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    },
+    {
+      "problem_id": "812",
+      "gold": "79",
+      "cmaj_pick": "86",
+      "verifier_pick": "86",
+      "yes_per_branch": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "votes": [
+        "86",
+        "73",
+        "124",
+        "88",
+        "96"
+      ],
+      "cmaj_hit": false,
+      "verifier_hit": false
+    },
+    {
+      "problem_id": "207",
+      "gold": "2600",
+      "cmaj_pick": "2600",
+      "verifier_pick": "2600",
+      "yes_per_branch": [
+        1,
+        1,
+        0,
+        0,
+        1
+      ],
+      "votes": [
+        "2600",
+        "2600",
+        "2600",
+        "1160",
+        "2600"
+      ],
+      "cmaj_hit": true,
+      "verifier_hit": true
+    }
+  ]
+}
