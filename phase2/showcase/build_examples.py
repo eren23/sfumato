@@ -27,9 +27,27 @@ OUT = REPO_ROOT / "phase2" / "showcase" / "static" / "examples.json"
 # Source JSONLs to merge. Each row already has condition/seed/k_steps/
 # pred/gold/correct/flops/trace. We add question + tags.
 SOURCES = {
+    # Big legacy runs (Phase-1 paper data)
     "cmaj_n200_v3LoRA_seed0": RESULTS / "raw_cmaj_k64_seed0_b5_v3LoRA_N200.jsonl",
     "cmajc_n100_v3LoRA_seed1": RESULTS / "raw_cmajc_k64_seed1_b5_v3LoRA_N100.jsonl",
     "cmajc_n100_v3LoRA_seed2": RESULTS / "raw_cmajc_k64_seed2_b5_v3LoRA_N100.jsonl",
+    # All-conditions sweep N=20 (post-spike-chain showcase data)
+    "c1_n20_seed0":      RESULTS / "raw_c1_k0_seed0.jsonl",
+    "c2_n20_seed0":      RESULTS / "raw_c2_k64_seed0.jsonl",
+    "c2_n20_seed1":      RESULTS / "raw_c2_k64_seed1.jsonl",
+    "c2c_n20_seed0":     RESULTS / "raw_c2c_k64_seed0.jsonl",
+    "c2c_n20_seed1":     RESULTS / "raw_c2c_k64_seed1.jsonl",
+    "c2c_n20_seed2":     RESULTS / "raw_c2c_k64_seed2.jsonl",
+    "c2hint_n20_seed0":  RESULTS / "raw_c2hint_k64_seed0.jsonl",
+    "c2hint_n20_seed1":  RESULTS / "raw_c2hint_k64_seed1.jsonl",
+    "c2empty_n20_seed0": RESULTS / "raw_c2empty_k64_seed0.jsonl",
+    "c3_n20_seed0":      RESULTS / "raw_c3_k64_seed0.jsonl",
+    "c3p_n20_seed0":     RESULTS / "raw_c3p_k64_seed0.jsonl",
+    "c4_n20_seed0":      RESULTS / "raw_c4_k64_seed0.jsonl",
+    "cmaj_n20_seed0":    RESULTS / "raw_cmaj_k64_seed0.jsonl",
+    "cmajc_n20_seed0":   RESULTS / "raw_cmajc_k64_seed0.jsonl",
+    "cmerge_n20_seed0":  RESULTS / "raw_cmerge_k64_seed0.jsonl",
+    "crev_n20_seed0":    RESULTS / "raw_crev_k64_seed0.jsonl",
 }
 
 # Speed-comparison "post-spike" sources keyed by SAME stem as a baseline
@@ -69,39 +87,52 @@ def _load_gsm8k_test() -> list[dict]:
     return out
 
 
-def _tags_for(rec: dict, n_branches: int = 5) -> list[str]:
-    """Compute category tags from a single record."""
+def _detect_n_branches(trace: dict) -> int:
+    """Count branch_* keys in a trace dict; 0 if single-branch / no branching."""
+    return sum(1 for k in trace if k.startswith("branch_"))
+
+
+def _tags_for(rec: dict) -> list[str]:
+    """Compute category tags. Auto-detects n_branches from trace shape."""
     tags: list[str] = []
     correct = bool(rec.get("correct"))
-    votes_str = rec["trace"].get("votes", "")
+    cond = rec.get("condition", "")
+    trace = rec["trace"]
+    n_branches = _detect_n_branches(trace)
+
+    # Always tag the condition family.
+    tags.append(f"cond_{cond}")
+    if cond == "cmajc":
+        tags.append("commit_lora_active")
+    if "esc_trigger_block" in trace:
+        tags.append("esc_early_trigger")
+
+    if n_branches == 0:
+        # Single-branch path. Just tag correctness.
+        tags.append("single_branch_correct" if correct else "single_branch_wrong")
+        return tags
+
+    # Branched path: tally votes.
+    votes_str = trace.get("votes", "")
     votes = [v.strip() for v in votes_str.split("|")] if votes_str else []
     nonempty = [v for v in votes if v]
     counts = Counter(nonempty)
-    winner = rec["trace"].get("winner", "")
-
     if not counts:
         tags.append("no_extractable_answer")
         return tags
 
     top_a, top_c = counts.most_common(1)[0]
-    if top_c == n_branches and correct:
-        tags.append("unanimous_correct")
-    elif top_c == n_branches and not correct:
-        tags.append("unanimous_wrong")
-    elif top_c == (n_branches // 2) + 1:  # 3 of 5
+    quorum = (n_branches // 2) + 1
+    clear = quorum + 1
+    if top_c == n_branches:
+        tags.append("unanimous_correct" if correct else "unanimous_wrong")
+    elif top_c == quorum:
         tags.append("near_tie_correct" if correct else "near_tie_wrong")
-    elif top_c == (n_branches // 2) + 2:  # 4 of 5
+    elif top_c >= clear:
         tags.append("clear_majority_correct" if correct else "clear_majority_wrong")
 
-    # Redundancy save: at least one branch dissented but vote still correct.
     if correct and len(set(nonempty)) > 1:
         tags.append("redundancy_save")
-
-    if "esc_trigger_block" in rec["trace"]:
-        tags.append("esc_early_trigger")
-
-    if rec.get("condition") == "cmajc":
-        tags.append("commit_lora_active")
     return tags
 
 
@@ -130,6 +161,12 @@ def _merge_sources_with_questions(
                 q = questions[idx]
                 tags = _tags_for(rec)
 
+                trace = rec["trace"]
+                n_branches = _detect_n_branches(trace)
+                # Collect branch traces (variable count). Empty list when
+                # single-branch (cot/diffusion_cot/finalize fields used instead).
+                branches = [trace.get(f"branch_{i}", "") for i in range(n_branches)]
+
                 merged = {
                     "source": src_name,
                     "id": str(rec["id"]),
@@ -139,7 +176,7 @@ def _merge_sources_with_questions(
                     "seed": rec["seed"],
                     "lora_path": rec.get("lora_path", ""),
                     "commit_lora_path": rec.get("commit_lora_path", ""),
-                    "n_branches": 5,
+                    "n_branches": n_branches,
                     "question": q["question"],
                     "gold": q["gold"],
                     "gold_rationale": q["gold_rationale"],
@@ -147,14 +184,17 @@ def _merge_sources_with_questions(
                     "correct": bool(rec["correct"]),
                     "flops": rec.get("flops", 0),
                     "wallclock_ms": rec.get("wallclock_ms"),
-                    "branches": [
-                        rec["trace"].get(f"branch_{i}", "")
-                        for i in range(5)
-                    ],
-                    "votes_str": rec["trace"].get("votes", ""),
-                    "winner": rec["trace"].get("winner", ""),
-                    "esc_trigger_block": rec["trace"].get("esc_trigger_block"),
-                    "esc_branches_pruned": rec["trace"].get("esc_branches_pruned"),
+                    "branches": branches,
+                    # Single-branch trace fields (kept verbatim for the frontend).
+                    "cot": trace.get("cot", ""),
+                    "plan": trace.get("plan", ""),
+                    "diffusion_cot": trace.get("diffusion_cot", ""),
+                    "diffusion_scaffold": trace.get("diffusion_scaffold", ""),
+                    "finalize": trace.get("finalize", ""),
+                    "votes_str": trace.get("votes", ""),
+                    "winner": trace.get("winner", ""),
+                    "esc_trigger_block": trace.get("esc_trigger_block"),
+                    "esc_branches_pruned": trace.get("esc_branches_pruned"),
                     "tags": tags,
                 }
                 out.append(merged)

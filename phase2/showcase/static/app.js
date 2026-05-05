@@ -249,52 +249,71 @@ function renderDetail(source, idxStr) {
     wrap.appendChild(renderSpeedPanel(r));
   }
 
-  // Vote bar (gold-aware)
-  const votesArr = (r.votes_str || "").split("|").map((s) => s.trim());
-  const tally = el("div", { class: "vote-tally" },
-    el("h3", {}, `5-branch vote tally`),
-  );
-  const bar = el("div", { class: "vote-bar" });
-  for (const v of votesArr) {
-    let cls = "vote-cell";
-    if (!v) cls += " empty";
-    else if (v === r.gold) cls += " correct";
-    else cls += " wrong";
-    bar.appendChild(el("div", { class: cls }, v || "·"));
-  }
-  tally.appendChild(bar);
-  wrap.appendChild(tally);
-
-  // Branches
-  const branches = el("div", { class: "branches" });
-  for (let i = 0; i < r.branches.length; i++) {
-    const text = r.branches[i] || "";
-    const voted = votesArr[i] || "";
-    const matchesGold = voted === r.gold;
-    const isWinner = voted === r.winner && r.winner !== "";
-    const card = el("div", {
-      class: `branch-card${isWinner ? " winner" : ""} collapsed`,
-    });
-    const toggle = el("span", { class: "branch-toggle" }, "expand ▾");
-    toggle.addEventListener("click", () => {
-      card.classList.toggle("collapsed");
-      toggle.textContent = card.classList.contains("collapsed")
-        ? "expand ▾" : "collapse ▴";
-    });
-    const head = el("div", { class: "branch-head" },
-      el("span", { class: "branch-num" }, `Branch ${i}${isWinner ? " · winner" : ""}`),
-      el("span", {
-        class: `branch-vote ${voted ? (matchesGold ? "match-gold" : "no-match") : ""}`,
-      }, `vote: ${voted || "—"}`),
-      toggle,
+  // Vote bar (gold-aware) — only for branched conditions
+  const nB = r.n_branches || 0;
+  if (nB > 0) {
+    const votesArr = (r.votes_str || "").split("|").map((s) => s.trim());
+    const tally = el("div", { class: "vote-tally" },
+      el("h3", {}, `${nB}-branch vote tally`),
     );
-    const body = el("div", { class: "branch-body" }, text || "(empty)");
-    card.appendChild(head);
-    card.appendChild(body);
-    branches.appendChild(card);
+    const bar = el("div", { class: "vote-bar" });
+    for (const v of votesArr) {
+      let cls = "vote-cell";
+      if (!v) cls += " empty";
+      else if (v === r.gold) cls += " correct";
+      else cls += " wrong";
+      bar.appendChild(el("div", { class: cls }, v || "·"));
+    }
+    tally.appendChild(bar);
+    wrap.appendChild(tally);
+
+    // Branches
+    const branches = el("div", { class: "branches" });
+    for (let i = 0; i < r.branches.length; i++) {
+      const text = r.branches[i] || "";
+      const voted = votesArr[i] || "";
+      const matchesGold = voted === r.gold;
+      const isWinner = voted === r.winner && r.winner !== "";
+      branches.appendChild(renderTraceCard(`Branch ${i}${isWinner ? " · winner" : ""}`, text, voted, matchesGold, isWinner));
+    }
+    if (r.finalize) {
+      // cmerge: AR finalize step after the branches
+      branches.appendChild(renderTraceCard("AR finalize (Qwen)", r.finalize, r.pred, r.pred === r.gold, false));
+    }
+    wrap.appendChild(el("h3", {}, "Reasoning traces"));
+    wrap.appendChild(branches);
+  } else {
+    // Single-branch path — render whichever trace fields exist
+    wrap.appendChild(el("h3", {}, "Reasoning trace"));
+    const traces = el("div", { class: "branches" });
+    if (r.cot) traces.appendChild(renderTraceCard("AR CoT (Qwen)", r.cot, r.pred, r.pred === r.gold, false));
+    if (r.plan) traces.appendChild(renderTraceCard("AR plan (Qwen)", r.plan, "", false, false));
+    if (r.diffusion_scaffold) traces.appendChild(renderTraceCard("Diffusion scaffold (LLaDA)", r.diffusion_scaffold, "", false, false));
+    if (r.diffusion_cot) traces.appendChild(renderTraceCard("Diffusion CoT (LLaDA)", r.diffusion_cot, r.pred, r.pred === r.gold, false));
+    if (r.finalize) traces.appendChild(renderTraceCard("AR finalize (Qwen)", r.finalize, r.pred, r.pred === r.gold, false));
+    wrap.appendChild(traces);
   }
-  wrap.appendChild(el("h3", {}, "Reasoning traces"));
-  wrap.appendChild(branches);
+}
+
+function renderTraceCard(label, text, voted, matchesGold, isWinner) {
+  const card = el("div", {
+    class: `branch-card${isWinner ? " winner" : ""} collapsed`,
+  });
+  const toggle = el("span", { class: "branch-toggle" }, "expand ▾");
+  toggle.addEventListener("click", () => {
+    card.classList.toggle("collapsed");
+    toggle.textContent = card.classList.contains("collapsed")
+      ? "expand ▾" : "collapse ▴";
+  });
+  const voteSpan = voted ? el("span", {
+    class: `branch-vote ${matchesGold ? "match-gold" : "no-match"}`,
+  }, `→ ${voted}`) : null;
+  const headChildren = [el("span", { class: "branch-num" }, label)];
+  if (voteSpan) headChildren.push(voteSpan);
+  headChildren.push(toggle);
+  card.appendChild(el("div", { class: "branch-head" }, ...headChildren));
+  card.appendChild(el("div", { class: "branch-body" }, text || "(empty)"));
+  return card;
 }
 
 // ── Speed panel (showcase v1) ─────────────────────────────────────────────
@@ -340,6 +359,46 @@ function renderSpeedPanel(r) {
   return wrap;
 }
 
+// ── Animations ────────────────────────────────────────────────────────────
+const ANIMATIONS = [
+  { file: "trace_real_p10_all_llada.gif",   label: "Pure LLaDA p10" },
+  { file: "trace_real_p20_all_llada.gif",   label: "Pure LLaDA p20" },
+  { file: "trace_real_p60_all_llada.gif",   label: "Pure LLaDA p60" },
+  { file: "trace_real_p30_ar_handoff.gif",  label: "AR-handoff p30" },
+  { file: "trace_real_p50_mid_ar_handoff.gif", label: "Mid AR-handoff p50" },
+  { file: "trace_real_p40_cmaj_branch.gif", label: "cmaj branch p40" },
+  { file: "trace_real_p70_early_cmaj.gif",  label: "Early cmaj p70" },
+  { file: "trace_v2_p10_all_llada.gif",     label: "v2 LLaDA p10" },
+  { file: "trace_v2_p11_all_llada.gif",     label: "v2 LLaDA p11" },
+  { file: "trace_v2_p12_all_llada.gif",     label: "v2 LLaDA p12" },
+  { file: "trace_v2_p13_all_llada.gif",     label: "v2 LLaDA p13" },
+  { file: "trace_v2_p14_all_llada.gif",     label: "v2 LLaDA p14" },
+  { file: "trace_v2_p30_ar_at_0_n4.gif",    label: "AR-extend at sub-block 0 (n=4)" },
+  { file: "trace_v2_p31_ar_at_1_n6.gif",    label: "AR-extend at sub-block 1 (n=6)" },
+  { file: "trace_v2_p32_ar_at_2_n8.gif",    label: "AR-extend at sub-block 2 (n=8)" },
+  { file: "trace_v2_p33_ar_at_3_n12.gif",   label: "AR-extend at sub-block 3 (n=12)" },
+  { file: "trace_v2_p60_cmaj_at_2_b5.gif",  label: "cmaj b=5 at sub-block 2" },
+  { file: "trace_v2_p61_cmaj_at_3_b3.gif",  label: "cmaj b=3 at sub-block 3" },
+  { file: "trace_v2_p62_cmaj_at_0_b5.gif",  label: "cmaj b=5 at sub-block 0" },
+  { file: "trace_v2_p63_cmaj_at_1_b3.gif",  label: "cmaj b=3 at sub-block 1" },
+];
+
+function renderAnimations() {
+  const wrap = $("#animations-grid");
+  if (!wrap || wrap.children.length > 0) return;
+  for (const a of ANIMATIONS) {
+    const card = el("div", { class: "anim-card" });
+    const img = el("img", {
+      src: `animations/${a.file}`,
+      alt: a.label,
+      loading: "lazy",
+    });
+    card.appendChild(img);
+    card.appendChild(el("div", { class: "anim-label" }, a.label));
+    wrap.appendChild(card);
+  }
+}
+
 // ── Routing ────────────────────────────────────────────────────────────────
 function route() {
   const h = location.hash.slice(1) || "browse";
@@ -352,6 +411,13 @@ function route() {
     const idx = parts[2];
     $("#detail").classList.add("active");
     renderDetail(source, idx);
+    window.scrollTo(0, 0);
+    return;
+  }
+  if (h === "animations") {
+    $("#animations").classList.add("active");
+    $$(`.nav-link[data-target="animations"]`).forEach((a) => a.classList.add("active"));
+    renderAnimations();
     window.scrollTo(0, 0);
     return;
   }

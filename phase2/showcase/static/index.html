@@ -16,6 +16,7 @@
     </div>
     <nav>
       <a href="#browse" class="nav-link active" data-target="browse">Browse</a>
+      <a href="#animations" class="nav-link" data-target="animations">Animations</a>
       <a href="#about" class="nav-link" data-target="about">About</a>
       <a href="https://github.com/eren23/sfumato" class="nav-link external" target="_blank" rel="noopener">Repo</a>
       <a href="https://github.com/eren23/sfumato_paper" class="nav-link external" target="_blank" rel="noopener">Paper</a>
@@ -73,6 +74,19 @@
 <section id="detail" class="page">
   <button id="back-btn" class="btn back">← Back to browse</button>
   <article id="detail-content"></article>
+</section>
+
+<!-- ============== ANIMATIONS ============== -->
+<section id="animations" class="page">
+  <h2>Step-by-step inference animations</h2>
+  <p class="lede">
+    Each animation shows LLaDA's <strong>4 sub-block × 32-token</strong>
+    semi-AR denoising loop frame-by-frame. Cells brighten as confidence
+    grows; commit-LoRA toggles on for the last 3 sub-blocks (v3 setup).
+    Some traces include manual mode-switching (AR-extend / cmaj branch)
+    for visual diversity.
+  </p>
+  <div class="animations-grid" id="animations-grid"></div>
 </section>
 
 <!-- ============== ABOUT ============== -->
