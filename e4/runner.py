@@ -518,7 +518,8 @@ def main() -> int:
     _COMMIT_N_BLOCKS = env_int("COMMIT_N_BLOCKS", 1)
 
     random.seed(seed)
-    dev_indices = REPO_ROOT / "e4" / "data" / "gsm8k_dev_200.json"
+    indices_filename = os.environ.get("DEV_INDICES_FILE", "gsm8k_dev_200.json")
+    dev_indices = REPO_ROOT / "e4" / "data" / indices_filename
     problems = load_problems(n_problems, dev_indices)
 
     ar_model = ar_qwen.load(ar_model_name, mock=mock)
