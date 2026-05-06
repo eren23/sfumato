@@ -277,6 +277,16 @@ or TimeStep Master and (we hope) easy for downstream teams to adopt.
   0.865 vs 0.83. We document this honestly: at peer weight scale, a
   monolithic AR with stronger pretraining beats the hybrid stack on
   GSM8K. The hybrid earns its weight only at <3B planner class.
+- **Bandit-on-replay mode router (D1)**: at the 20-idx × 12-condition
+  full-coverage substrate, a contextual bandit over per-problem text
+  features (length, number-tokens, TF-IDF) reached 0.65 LOOCV vs
+  always-c2empty fixed baseline 0.75 (oracle 0.85). Same pathology as
+  the voting-rule gap (§2): supervised classification with surface
+  features and small N cannot recover the oracle ceiling, whether the
+  classifier scores per-branch (verifier) or per-problem (mode router).
+  Sub-block-level routing (the original D1 proposal) needs trace data
+  not yet collected at scale; flagged as future work.
+  See `phase2/spikes/D1-mode-router/RESULT.md`.
 
 ---
 
