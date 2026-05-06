@@ -554,24 +554,60 @@ class _Real:
         import torch.nn.functional as F  # type: ignore
         import os as _os
 
-        # S4 fastpath: when FAST_DLLM=1, call upstream `generate()` end-to-end
+        # S4 fastpath: when FAST_DLLM=1, call upstream Fast-dLLM
         # (KV-cache + confidence-aware parallel decoding from arXiv:2505.22618).
-        # Skips our per-step loop entirely. step_callback is ignored on this
-        # path — Fast-dLLM doesn't expose sub-block boundaries; trace-mode
-        # users should set FAST_DLLM=0.
+        # Two flavors:
+        #   (a) commit_last_block=False: one-shot upstream generate() over
+        #       the full gen_length (legacy fastpath, ignores step_callback).
+        #   (b) commit_last_block=True: blockwise wrapper that runs upstream
+        #       generate() once per sub-block, toggling commit-LoRA between
+        #       blocks via _enable_commit/_disable_commit at the boundary
+        #       identified by the K2 ablation (off for sub-block 1, on for
+        #       the last commit_n_blocks blocks). Productizes the Phase-2
+        #       commit-LoRA finding into the Fast-dLLM speedup path.
         if _os.environ.get("FAST_DLLM", "0") == "1":
             from e4 import fast_dllm_adapter as _fdll
             threshold = _os.environ.get("FAST_DLLM_TAU")
             tau = float(threshold) if threshold else None
-            full = _fdll.fast_dllm_generate(
-                self._model,
-                prompt_ids,
-                steps=max(steps, 4),
-                gen_length=self.gen_length,
-                block_length=self.sub_block_length,
-                temperature=temperature,
-                threshold=tau,
-            )
+            num_blocks_fd = self.gen_length // self.sub_block_length
+            assert self.gen_length % self.sub_block_length == 0
+            steps_total = max(steps, 4)
+            if steps_total % num_blocks_fd != 0:
+                steps_total = ((steps_total + num_blocks_fd - 1) // num_blocks_fd) * num_blocks_fd
+            steps_per_block_fd = steps_total // num_blocks_fd
+            if commit_last_block:
+                _commit_n = max(1, min(commit_n_blocks, num_blocks_fd))
+                first_commit_block = num_blocks_fd - _commit_n
+
+                def _on_block_start(blk: int) -> None:
+                    if blk == first_commit_block:
+                        self._enable_commit()
+
+                def _on_block_end(blk: int) -> None:
+                    if blk == num_blocks_fd - 1:
+                        self._disable_commit()
+
+                full, _ = _fdll.fast_dllm_generate_blockwise(
+                    self._model,
+                    prompt_ids,
+                    steps_per_block=steps_per_block_fd,
+                    block_length=self.sub_block_length,
+                    num_blocks=num_blocks_fd,
+                    temperature=temperature,
+                    on_block_start=_on_block_start,
+                    on_block_end=_on_block_end,
+                    threshold=tau,
+                )
+            else:
+                full = _fdll.fast_dllm_generate(
+                    self._model,
+                    prompt_ids,
+                    steps=steps_total,
+                    gen_length=self.gen_length,
+                    block_length=self.sub_block_length,
+                    temperature=temperature,
+                    threshold=tau,
+                )
             return full[:, prompt_ids.shape[1]:]
 
         cb = step_callback or _default_step_callback

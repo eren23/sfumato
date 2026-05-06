@@ -157,3 +157,61 @@ def fast_dllm_generate(
     if isinstance(out, tuple):
         return out[0]
     return out
+
+
+def fast_dllm_generate_blockwise(
+    model,
+    prompt_ids,                 # (1, L)
+    steps_per_block: int,
+    block_length: int,
+    num_blocks: int,
+    temperature: float,
+    on_block_start=None,        # Callable[[int blk_idx], None] | None
+    on_block_end=None,          # Callable[[int blk_idx], None] | None
+    threshold: float | None = None,
+    factor: float | None = None,
+    mask_id: int = 126336,
+    remasking: str = "low_confidence",
+):
+    """Sub-block-aware Fast-dLLM wrapper for commit-LoRA-toggled inference.
+
+    Iterates upstream `generate()` once per sub-block. Between blocks,
+    invokes the on_block_start/on_block_end callbacks so the caller can
+    toggle a PEFT adapter (e.g. commit-LoRA) via merge/unmerge at the
+    schedule boundary identified by the K2 ablation result
+    (sub-block-1 boundary, see phase2/spikes/k2-commit-blocks-ablation).
+
+    The cumulative gen_length matches the one-shot caller:
+        total_gen = num_blocks * block_length
+
+    Returns the full sequence (1, L + total_gen). nfe-style counters from
+    upstream are summed in `_BLOCKWISE_NFE_TOTAL` (reset on each call).
+    """
+    _ensure_upstream_on_path()
+    assert _GENERATE_FN is not None
+    x = prompt_ids
+    total_nfe = 0
+    for blk in range(num_blocks):
+        if on_block_start is not None:
+            on_block_start(blk)
+        out = _GENERATE_FN(
+            model,
+            x,
+            steps=steps_per_block,
+            gen_length=block_length,
+            block_length=block_length,
+            temperature=temperature,
+            remasking=remasking,
+            mask_id=mask_id,
+            threshold=threshold,
+            factor=factor,
+        )
+        if isinstance(out, tuple):
+            x = out[0]
+            if len(out) > 1 and isinstance(out[1], (int, float)):
+                total_nfe += int(out[1])
+        else:
+            x = out
+        if on_block_end is not None:
+            on_block_end(blk)
+    return x, total_nfe
