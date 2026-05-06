@@ -575,7 +575,22 @@ class _Real:
             if steps_total % num_blocks_fd != 0:
                 steps_total = ((steps_total + num_blocks_fd - 1) // num_blocks_fd) * num_blocks_fd
             steps_per_block_fd = steps_total // num_blocks_fd
-            if commit_last_block:
+            # T1.C result (phase2/spikes/fast-dllm-commit-aware/RESULT.md):
+            # the blockwise wrapper around upstream `generate()` violates its
+            # one-shot (prompt, gen_length) contract — calling it 4× per
+            # problem appends fresh masks each call instead of refining the
+            # in-flight trajectory. Result: cmajc N=20 acc=0.45 (vs 0.80
+            # baseline), speedup=1.7× (vs 4× target). LOSS.
+            #
+            # Safety guard: blockwise path is gated behind FAST_DLLM_BLOCKWISE=1
+            # opt-in. Default FAST_DLLM=1 (with or without commit_last_block)
+            # falls through to the legacy non-toggled one-shot fastpath —
+            # commit-LoRA is bypassed, but the Phase-2 c2 / cmaj 6.5× speedup
+            # is preserved bit-identically. Until a fork-based or
+            # reimplementation-based fix lands, the blockwise path should
+            # only be used by callers explicitly testing it.
+            blockwise_opt_in = _os.environ.get("FAST_DLLM_BLOCKWISE", "0") == "1"
+            if commit_last_block and blockwise_opt_in:
                 _commit_n = max(1, min(commit_n_blocks, num_blocks_fd))
                 first_commit_block = num_blocks_fd - _commit_n
 
@@ -599,6 +614,9 @@ class _Real:
                     threshold=tau,
                 )
             else:
+                # Legacy one-shot fastpath. commit_last_block is silently
+                # ignored on this branch (commit-LoRA bypassed) — see T1.C
+                # RESULT for details.
                 full = _fdll.fast_dllm_generate(
                     self._model,
                     prompt_ids,
