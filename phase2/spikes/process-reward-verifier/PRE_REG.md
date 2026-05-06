@@ -16,13 +16,20 @@ per problem.
 ## Substrate
 
 - **Source:** sfumato runner cmajc branch trajectories with new
-  `TRACE_STEPS=1 LOGIT_SHIFT_NORM=1` plumbing landed in commit
-  `04f01db` (T1.B.1).
+  `TRACE_STEPS=1` plumbing landed in commit `04f01db` (T1.B.1).
 - **Harvest:** cmajc N=100 problems × 5 branches = 500 trajectories.
-  Pod: 48GB A40 spot (24GB OOMs with shadow forward enabled for
-  `LOGIT_SHIFT_NORM=1`).
+- **Pod note:** Crucible provisioner returned a 24GB 4090 spot
+  (`parameter-golf__sfumato-prm-01`) instead of the 48GB A40 the
+  plan called for. To stay on this pod and avoid re-provisioning
+  cost, this pre-reg drops `LOGIT_SHIFT_NORM=1` from the harvest
+  config — the shadow forward is what pushed 24GB to OOM in past
+  runs. Feature list adjusted accordingly (see Features section).
+  This is a scope reduction, not a methodology change: if the
+  remaining entropy + commit_lora flag features alone close the
+  gap, that's a stronger result; if they don't, re-running on a
+  48GB pod with logit_shift_norm is a clear follow-up.
 - **Env:** `BATCHED=0 BRANCHES=5 K_STEPS=64 TEMP=0.7 SEED=0
-  COMMIT_N_BLOCKS=3 TRACE_STEPS=1 LOGIT_SHIFT_NORM=1`. Sequential
+  COMMIT_N_BLOCKS=3 TRACE_STEPS=1` (no LOGIT_SHIFT_NORM). Sequential
   branches required because trace dump is wired only into
   `denoise_block` (single-row); batched path uses BatchStepState
   which doesn't expose entropy / logit_shift_norm yet.
@@ -39,16 +46,18 @@ For each sub-block s in {0,1,2,3} of branch b on problem i:
 - `entropy_mean[s]` — mean of `state.entropy` (top-k entropy over
   the sub-block's committed positions)
 - `entropy_max[s]` — max of `state.entropy`
-- `logit_shift_norm[s]` — L2 norm of (logits_with_adapter -
-  logits_without_adapter) at the toggle boundary (NaN before the
-  first toggle)
 - `commit_lora_active[s]` — bool, set by the runner toggle
 - `n_committed[s]` — number of tokens committed in this sub-block
+- `wallclock_ms[s]` — per-sub-block wall time
 
-Aggregated to a 16-dim feature vector per (b, i):
-`[entropy_mean[0..3], entropy_max[0..3], logit_shift_norm[1..3],
-commit_lora_active_fraction, mean_entropy, std_entropy,
-mean_logit_shift]`.
+Aggregated to a ~14-dim feature vector per (b, i):
+`[entropy_mean[0..3], entropy_max[0..3], commit_lora_active_fraction,
+mean_entropy, std_entropy, max_entropy_subblock_argmax,
+final_block_entropy_mean, ratio_block_3_to_block_0]`.
+
+`logit_shift_norm` was dropped from the harvest after the provisioner
+returned a 24GB pod (see Substrate note); it remains a planned
+follow-up if the entropy-only baseline shows partial signal.
 
 ## Method
 
