@@ -278,6 +278,7 @@ the GPU sizing blocked Phase 2.
 
 ### 3.5 Position vs related work
 
+**Adapter-conditioning prior art:**
 - **TC-LoRA** (NeurIPS-25 workshop, arXiv 2510.09561) and **TimeStep
   Master** (ICML-25, arXiv 2503.07416) condition adapters on
   *training-time* timesteps via hypernetworks / mixture-of-experts.
@@ -289,11 +290,31 @@ the GPU sizing blocked Phase 2.
   makes the schedule-toggle meaningful — but does not address adapter
   scheduling.
 
+**Schedule-modification prior art (different abstraction than ours):**
+The closest published work modifies the commit *schedule itself* rather
+than toggling adapters across a fixed schedule. None of these works
+toggles a per-block adapter:
+
+- **dParallel** (arXiv 2509.26488) — LoRA distillation with
+  certainty-forcing that changes the per-step commit count (training-
+  time, continuous schedule). Stackable with commit-LoRA in principle;
+  orthogonal mechanism.
+- **Learn2PD** (arXiv 2509.25188, ICLR-26) — learnable per-position
+  parallel-decode gate. Per-position granularity, not per-block;
+  conditions on hidden states, not on schedule index.
+- **APD** (arXiv 2506.00413, NeurIPS-25 oral) — multiplicative dLLM ×
+  AR-auxiliary mixture for dynamic block size. Architecture-level
+  fusion, not adapter scheduling.
+- **Prophet** (arXiv 2508.19982) — training-free early-commit rule
+  based on top-2 logit gap. Modifies *when* to stop, not *which*
+  adapter is active.
+
 The minimal claim is: **a single boolean schedule mask suffices to gain
 +2.7 pp on top of self-consistency on this substrate, at zero
 additional inference cost beyond the LoRA weights**. This is
-mechanistically simpler than TC-LoRA or TimeStep Master and (we hope)
-easy for downstream teams to adopt.
+mechanistically simpler than TC-LoRA or TimeStep Master and orthogonal
+to dParallel / Learn2PD / APD / Prophet (which modify the commit
+schedule itself, not the adapter active across the schedule).
 
 ---
 
@@ -367,3 +388,7 @@ easy for downstream teams to adopt.
 - "TC-LoRA: Timestep-Conditioned LoRA Hypernetworks," arXiv 2510.09561, NeurIPS-25 workshop.
 - "TimeStep Master: Asymmetrical Mixture of Timestep LoRA Experts," arXiv 2503.07416, ICML-25.
 - LLaDA-1.5 (VRPO), arXiv 2505.19223, May 2025.
+- Bao et al., "dParallel: Certainty-forced parallel decoding for diffusion LMs," arXiv 2509.26488.
+- "Learn2PD: Learnable per-position parallel-decode gate," arXiv 2509.25188, ICLR-26.
+- Israel et al., "APD: Adaptive Parallel Decoding," arXiv 2506.00413, NeurIPS-25 oral.
+- "Prophet: Diffusion LMs Know the Answer Before Decoding," arXiv 2508.19982.
