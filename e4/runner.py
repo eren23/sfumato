@@ -146,14 +146,18 @@ def load_problems(n: int, dev_indices_path: Path) -> list[dict]:
     from datasets import load_dataset  # type: ignore
 
     ds = load_dataset(spec["dataset"], spec.get("config", "main"), split=spec["split"])
-    return [
-        {
-            "id": str(i),
-            "question": ds[i]["question"],
-            "answer": ds[i]["answer"].split("####")[-1].strip(),
-        }
-        for i in spec["indices"][:n]
-    ]
+    qcol = spec.get("question_col", "question")
+    acol = spec.get("answer_col", "answer")
+    extract_split = spec.get("answer_extract_split")  # e.g. "####" for GSM8K; None to use raw
+    out = []
+    for i in spec["indices"][:n]:
+        raw_ans = ds[i][acol]
+        if extract_split:
+            ans = raw_ans.split(extract_split)[-1].strip()
+        else:
+            ans = str(raw_ans).strip()
+        out.append({"id": str(i), "question": ds[i][qcol], "answer": ans})
+    return out
 
 
 def run_condition(
