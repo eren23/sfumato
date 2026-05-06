@@ -14,18 +14,20 @@ twofold. **(i) The voting-rule gap is structural and encoder-bound:**
 across 8 verifier architectures spanning 4 orders of magnitude in
 parameter count (TF-IDF→Qwen2.5-7B), no per-branch supervised classifier
 recovers the oracle ceiling that simple majority vote fails to capture
-(~9pp on GSM8K-test N=200). The encoder-scaling trend within plain
+(9 pp on GSM8K-test N=200). The encoder-scaling trend within plain
 chat-LMs is monotonically narrowing (gap-closure: −156% → −44%), but
 embedding-specific and math-specific architectures perform *worse*,
 suggesting the bottleneck is the supervised-classification objective
 rather than feature quality. **(ii) Inference-time discrete schedule
 toggling is a useful primitive:** activating a small (~14M parameter)
-adapter only on the last 3 of 4 semi-AR sub-blocks ("commit-LoRA")
-yields a +3.5pp super-additive lift over majority vote on the same
-substrate, replicable across seeds (σ ≈ 0.85pp), and orthogonal to
-prefix-robustness fine-tuning. We position both findings against
-Block Diffusion (Arrelou et al., ICLR-25), Planned Diffusion (2024),
-Temporal Self-Consistency (2025), and TC-LoRA / TimeStep Master.
+adapter only on sub-blocks 2–4 of a 4-sub-block semi-AR schedule
+("commit-LoRA") yields a +2.7 pp super-additive lift over majority
+vote (multi-seed mean, σ ≈ 0.85 pp), and a K2 ablation produces an
+inverted-U curve (k=0 → 0.805, k=3 → 0.822 mean, k=4 → 0.790) that
+identifies the sub-block-1 boundary as load-bearing. We position both
+findings against Block Diffusion (Arrelou et al., ICLR-25), Planned
+Diffusion (2024), Temporal Self-Consistency (2025), and TC-LoRA /
+TimeStep Master.
 
 ---
 
@@ -56,11 +58,23 @@ Temporal Self-Consistency (2025), and TC-LoRA / TimeStep Master.
   of 32 tokens each.
 - All experiments on GSM8K-test, frozen 200-problem dev split, integrity-
   hashed.
-- Total compute spend across the entire study: **~$15 of RunPod 4090 spot.**
+- Total compute spend across the entire study: **~$17 of RunPod 4090 +
+  A6000 spot** (cumulative across Phase-1 substrate harvest, Phase-2
+  spike chain, the verifier sweep, and the K2 + bandit-on-replay
+  ablations).
 
-### 1.3 Two contributions, two figures
+### 1.3 Two main contributions
 
-(short forward-pointer to §2 and §3)
+§2 documents the voting-rule gap as a structural property of
+mask-diffusion branch ensembles that 8 verifier architectures fail to
+close, with figure `fig_voting_gap_confusion` (per-problem 2×2
+contingency on N=200) and figure `fig_verifier_encoder_scale`
+(monotone-narrowing trend across 4 OOM in encoder size). §3 documents
+commit-LoRA as an inference-time discrete schedule toggle, with figure
+`fig_commit_lora_k2_sweep` (the K2 inverted-U peaking at k=3). §4
+collects honest negatives — including an offline-replay mode-router
+spike whose failure mode parallels §2's voting-rule gap and points at
+the same path forward (process supervision, larger encoders, more data).
 
 ---
 
@@ -175,20 +189,23 @@ fix**.
 ## 3. Commit-LoRA: schedule-aware adapter toggling
 
 > **Claim:** Activating a small (14M-parameter) LoRA only on the last 3
-> of 4 semi-AR sub-blocks ("commit-LoRA") gives a +3.5pp super-additive
+> of 4 semi-AR sub-blocks ("commit-LoRA") gives a +2.7 pp super-additive
 > lift over majority vote on a prefix-robust-LoRA-conditioned base. The
 > effect is replicable across seeds, predicted to be subadditive by a
 > "no double-dip" hypothesis, and instead measured to be *upward
-> super-additive*. This is, to our knowledge, the first inference-time
+> super-additive*. A K2 ablation (k ∈ {0, 3, 4}) yields an inverted-U
+> peaking at k=3, with the sub-block-1 boundary load-bearing
+> (k=4 → −3.2 pp). This is, to our knowledge, the first inference-time
 > *discrete schedule toggle* of an adapter for semi-AR diffusion LMs.
 
 ### 3.1 Setup and the unexpected lift
 
 - Semi-AR LLaDA generation: 4 sub-blocks × 32 tokens each, k=64 steps total.
 - `cmaj` (5 branches + majority vote) with prefix-robust-v3 LoRA:
-  **0.795** on N=200.
+  **0.795** on N=200 (single seed, this work).
 - `cmajc` (same, plus commit-LoRA active for sub-blocks 2–4 only):
-  **0.825** on N=200, multi-seed mean **0.822**, σ ≈ 0.85pp.
+  **0.825** on N=200 seed=0; **multi-seed mean 0.822** across seeds
+  {0, 1, 2}, σ ≈ 0.85 pp.
 - The commit-LoRA was trained on the same Track-2 v3 recipe, but with a
   schedule-conditioned masking that only touches sub-blocks 2–4 during
   fine-tuning.
@@ -196,8 +213,8 @@ fix**.
 The pre-registered hypothesis (from the original RANKING.md) was
 *subadditivity*: "no double-dip" — both adapters can't compound because
 they're trained on overlapping data. **The measured effect is upward
-super-additive**: +3.5pp over cmaj baseline, well outside the σ ≈ 0.85pp
-multi-seed noise band.
+super-additive**: +2.7 pp on the multi-seed mean (cmaj 79.5 → cmajc
+mean 82.2), well outside the σ ≈ 0.85 pp noise band.
 
 ### 3.2 Mechanism — sub-block boundaries matter (K2 ablation)
 
@@ -231,11 +248,16 @@ Figure: `phase2/figures/fig_commit_lora_k2_sweep.{pdf,png}` — the
 inverted-U with Clopper-Pearson 95% CIs and σ band for the multi-seed
 k=3 baseline.
 
-### 3.3 Cross-substrate validity (Track B.3)
+### 3.3 Cross-substrate validity (deferred to Phase 3)
 
-(If we get to Block-Diffusion / BD3-LMs as the substrate, fill in:
-N=50 cmajc on `kuleshov-group/bd3lm-owt-block_size8` with a fresh 14M
-commit-LoRA trained via the same Track-2 v3 recipe.)
+We did not fork Block Diffusion (BD3-LMs, Arrelou et al. ICLR-25,
+`kuleshov-group/bd3lm-owt-block_size8`) and train a fresh commit-LoRA on
+top within the Phase-2 budget. The natural test would be: does the K2
+inverted-U replicate when the underlying DLM defines its own block
+structure, or is the schedule-toggle's value tied specifically to
+LLaDA's semi-AR sub-block schedule? Pre-reg + scaffold are flagged for
+Phase 3; estimated cost ~$10 for fresh-LoRA training + the K2 sweep on
+the new substrate.
 
 ### 3.4 Cross-domain validity (Track B.4 — deferred to Phase 3)
 
@@ -268,9 +290,10 @@ the GPU sizing blocked Phase 2.
   scheduling.
 
 The minimal claim is: **a single boolean schedule mask suffices to gain
-+3.5pp on top of self-consistency, at zero additional inference cost
-beyond the LoRA weights**. This is mechanistically simpler than TC-LoRA
-or TimeStep Master and (we hope) easy for downstream teams to adopt.
++2.7 pp on top of self-consistency on this substrate, at zero
+additional inference cost beyond the LoRA weights**. This is
+mechanistically simpler than TC-LoRA or TimeStep Master and (we hope)
+easy for downstream teams to adopt.
 
 ---
 
