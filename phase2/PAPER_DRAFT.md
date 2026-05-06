@@ -237,10 +237,22 @@ k=3 baseline.
 N=50 cmajc on `kuleshov-group/bd3lm-owt-block_size8` with a fresh 14M
 commit-LoRA trained via the same Track-2 v3 recipe.)
 
-### 3.4 Cross-domain validity (Track B.4)
+### 3.4 Cross-domain validity (Track B.4 — deferred to Phase 3)
 
-(MATH-500 cell, N=50, with the GSM8K-trained commit-LoRA. If it
-transfers, the lift is stack-level, not GSM8K-format-level.)
+We attempted MATH-500 N=50 with the GSM8K-trained commit-LoRA on a 24GB
+4090 spot pod. Both BRANCHES=5 (cmajc) and BRANCHES=1 (c2c) variants
+hit `torch.OutOfMemoryError` at step ~4: MATH-500's longer prompts (LaTeX
+notation, multi-line problem statements) plus the LoRA forward path
+exceed the 24GB budget. With our reproducible-cost constraint of 24GB
+spot, we cannot run this cross-domain probe in Phase 2.
+
+We flag this as a Phase-3 follow-up: a single 48GB-pod run (~$0.50,
+~30 min) on `HuggingFaceH4/MATH-500` with the existing v3 commit-LoRA
+would settle whether the inverted-U schedule-toggle generalizes beyond
+the GSM8K format the LoRAs were trained on. Pre-reg + scaffold are
+already in `e4/data/math500_indices.json` (commit `1938182`) and the
+runner has a column-name adapter for `problem`/`answer` schema; only
+the GPU sizing blocked Phase 2.
 
 ### 3.5 Position vs related work
 
