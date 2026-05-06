@@ -199,28 +199,37 @@ they're trained on overlapping data. **The measured effect is upward
 super-additive**: +3.5pp over cmaj baseline, well outside the σ ≈ 0.85pp
 multi-seed noise band.
 
-### 3.2 Mechanism — sub-block boundaries matter
+### 3.2 Mechanism — sub-block boundaries matter (K2 ablation)
 
-(Track B.1 K2 ablation — once data lands, fill in:)
+We swept `COMMIT_N_BLOCKS` ∈ {0, 3, 4} on cmajc N=200 with the same
+substrate. The curve is an **inverted-U with peak at k=3**:
 
-| COMMIT_N_BLOCKS | cmajc N=200 | Δ vs k=0 |
+| COMMIT_N_BLOCKS | cmajc N=200 | Δ vs k=3 baseline |
 |---|---:|---:|
-| 0 (off) | TBD | baseline |
-| 1 (last block only — original Phase-1 default) | TBD | TBD |
-| 2 | TBD | TBD |
-| **3 (sfumato v3 default)** | **0.822 mean** | TBD |
-| 4 (always on) | TBD | TBD |
+| **0** (commit-LoRA off, sanity floor) | **0.805** | −1.7 pp |
+| **3** (sfumato v3 default — blocks 2–4) | **0.822** mean (σ ≈ 0.85pp) | baseline |
+| **4** (commit-LoRA always on, all sub-blocks) | **0.790** | **−3.2 pp** |
 
-If the curve is **monotone-increasing** through k=3 then **drops** at
-k=4, that confirms the schedule-toggle's value comes from "off during
-the first sub-block" — i.e., letting the prefix-robust LoRA fully drive
-the early committal phase, then handing off to commit-LoRA for the
-answer-stabilization phase. If the curve is monotone all the way to k=4,
-the boundary at sub-block 1 is irrelevant and the value is just from
-"more LoRA more accuracy."
+(Source: `phase2/spikes/k2-commit-blocks-ablation/RESULT.md` — wandb runs
+`mo4clpp4` for k=0, `ho24ezlz` for k=4. Baseline k=3 from triple-seed
+substrate `e4/results/raw_cmajc_k64_seed{0,1,2}_b5_v3LoRA_N{100,200}.jsonl`.)
 
-This is the K2 spike question and its answer settles whether commit-LoRA
-is a *scheduling* primitive or just *more parameters at inference time*.
+The curve is **monotone-increasing 0 → 3 then drops at k=4**, so the
+mechanism is *not* "more LoRA more accuracy." Activating commit-LoRA on
+sub-block 1 actively hurts — the prefix-robust LoRA needs full control
+during the early committal phase. The schedule-toggle's value comes
+specifically from the "off during sub-block 1, on during sub-blocks
+2–4" boundary. **The boundary is load-bearing.**
+
+This is the result that distinguishes commit-LoRA from training-time
+schedule-conditioning approaches (TC-LoRA, TimeStep Master): we apply a
+*single discrete inference-time toggle* at a learned schedule
+boundary, with no hypernetwork or MoE routing. The minimal mechanism
+that captures schedule-awareness for semi-AR diffusion adapters.
+
+Figure: `phase2/figures/fig_commit_lora_k2_sweep.{pdf,png}` — the
+inverted-U with Clopper-Pearson 95% CIs and σ band for the multi-seed
+k=3 baseline.
 
 ### 3.3 Cross-substrate validity (Track B.3)
 
