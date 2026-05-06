@@ -41,3 +41,5 @@ phase2/inference_viz/traces/trace_real_*.gif
 phase2/inference_viz/traces/make_real_traces*_summary.json
 phase2/inference_viz/traces/comparisons/
 e4/results/traces/
+phase2/frontier_compare/results_50/_errors_*
+.playwright-mcp/

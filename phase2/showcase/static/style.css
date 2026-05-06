@@ -269,6 +269,61 @@ nav { display: flex; gap: 18px; }
 .speedup-badge.warn { background: var(--warn-soft); color: var(--warn); }
 .speed-note { margin-top: 10px; font-size: 12px; color: var(--sub); }
 
+/* ── Frontier compare panel (showcase Phase C) ── */
+.frontier-panel {
+  margin-bottom: 22px;
+  padding: 16px 18px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--card-bg);
+}
+.frontier-panel h3 { font-size: 14px; margin-bottom: 12px; color: var(--ink); font-weight: 600; }
+.frontier-tier-header {
+  font-size: 11px;
+  color: var(--sub);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 12px 0 6px;
+  font-weight: 600;
+}
+.frontier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px;
+}
+.frontier-cell {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--rule);
+  background: var(--bg);
+  font-size: 12px;
+}
+.frontier-cell .model-name { font-weight: 600; color: var(--ink); }
+.frontier-cell .model-tier { font-size: 11px; color: var(--sub); }
+.frontier-cell .verdict { font-family: ui-monospace, monospace; }
+.frontier-cell .latency { font-size: 11px; color: var(--sub); font-family: ui-monospace, monospace; }
+.frontier-cell.correct { border-color: var(--ok); background: var(--ok-soft); }
+.frontier-cell.wrong { border-color: var(--warn); background: var(--warn-soft); }
+.frontier-cell.self {
+  margin-bottom: 12px;
+  border-width: 2px;
+  padding: 10px 14px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+}
+.frontier-callout {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.frontier-callout.ok { background: var(--ok-soft); color: var(--ok); border: 1px solid var(--ok); }
+
 /* ── Animations gallery ── */
 .animations-grid {
   display: grid;

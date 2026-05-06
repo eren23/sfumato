@@ -42,6 +42,7 @@ const TAG_CLASSES = {
   "no_extractable_answer": "warn",
   "commit_lora_repair": "ok",
   "redundancy_save": "ok",
+  "frontier_unique_win_peer": "ok",
 };
 const tagClass = (t) => TAG_CLASSES[t] || "";
 
@@ -249,6 +250,12 @@ function renderDetail(source, idxStr) {
     wrap.appendChild(renderSpeedPanel(r));
   }
 
+  // Frontier-compare panel (showcase Phase C) — present on records whose
+  // idx falls in the frontier_compare/results_50 pilot (idx 0..49).
+  if (r.frontier_compare && Object.keys(r.frontier_compare).length > 0) {
+    wrap.appendChild(renderFrontierPanel(r));
+  }
+
   // Vote bar (gold-aware) — only for branched conditions
   const nB = r.n_branches || 0;
   if (nB > 0) {
@@ -355,6 +362,63 @@ function renderSpeedPanel(r) {
     wrap.appendChild(el("p", { class: "speed-note" },
       `Note: post-spike prediction "${r.pred_post}" differs from pre-spike "${r.pred}". This is expected when seeds map differently across implementations.`,
     ));
+  }
+  return wrap;
+}
+
+// ── Frontier compare (showcase Phase C) ───────────────────────────────────
+const TIER_LABELS = {
+  "frontier":  "Frontier (closed)",
+  "oss-large": "OSS large (70B+)",
+  "oss-mid":   "OSS mid (30B)",
+  "oss-peer":  "OSS peer (7-8B)",
+};
+const TIER_ORDER = ["frontier", "oss-large", "oss-mid", "oss-peer"];
+
+function renderFrontierPanel(r) {
+  const wrap = el("div", { class: "frontier-panel" });
+  wrap.appendChild(el("h3", {}, "Frontier comparison (idx 0–49 pilot, N=50)"));
+
+  // Sfumato self-cell up top.
+  const sfumatoCell = el("div", {
+    class: `frontier-cell self ${r.correct ? "correct" : "wrong"}`,
+  },
+    el("span", { class: "model-name" }, `sfumato ${r.condition} (this run)`),
+    el("span", { class: "model-tier" }, "≈7B active params"),
+    el("span", { class: "verdict" },
+      `${r.correct ? "✓" : "✗"} pred=${r.pred || "—"}`),
+  );
+  wrap.appendChild(sfumatoCell);
+
+  // Group cells by tier.
+  const byTier = {};
+  for (const [stem, c] of Object.entries(r.frontier_compare)) {
+    (byTier[c.tier] = byTier[c.tier] || []).push({ stem, ...c });
+  }
+  for (const tier of TIER_ORDER) {
+    const cells = byTier[tier] || [];
+    if (cells.length === 0) continue;
+    wrap.appendChild(el("div", { class: "frontier-tier-header" }, TIER_LABELS[tier] || tier));
+    const grid = el("div", { class: "frontier-grid" });
+    for (const c of cells) {
+      const lat = c.latency_ms != null ? `${(c.latency_ms / 1000).toFixed(1)}s` : "—";
+      const cost = c.cost != null ? `$${c.cost.toFixed(4)}` : "";
+      grid.appendChild(el("div", {
+        class: `frontier-cell ${c.correct ? "correct" : "wrong"}`,
+      },
+        el("span", { class: "model-name" }, c.display),
+        el("span", { class: "verdict" },
+          `${c.correct ? "✓" : "✗"} ${c.pred || "—"}`),
+        el("span", { class: "latency" }, `${lat}${cost ? " · " + cost : ""}`),
+      ));
+    }
+    wrap.appendChild(grid);
+  }
+
+  // Unique-win callout for the 3-cell tag.
+  if (r.tags.includes("frontier_unique_win_peer")) {
+    wrap.appendChild(el("div", { class: "frontier-callout ok" },
+      "🏆 Sfumato got this right; no peer-class 7-8B model (Qwen2.5 7B / Llama 3.1 8B / Mistral 7B v0.1) did."));
   }
   return wrap;
 }

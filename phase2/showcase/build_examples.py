@@ -21,6 +21,25 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 RESULTS = REPO_ROOT / "e4" / "results"
+FRONTIER_DIR = REPO_ROOT / "phase2" / "frontier_compare" / "results_50"
+
+# Frontier_compare model order for the showcase Detail page. Tier label
+# governs how the frontend groups models. Skip files matching skip_substrs.
+FRONTIER_MODELS = [
+    # (file_stem, display_name, tier)
+    ("claude45",       "Claude Sonnet 4.5",   "frontier"),
+    ("gpt4o",          "GPT-4o",              "frontier"),
+    ("gemini25",       "Gemini 2.5 Pro",      "frontier"),
+    ("deepseek_chat",  "DeepSeek Chat",       "oss-large"),
+    ("qwen25_72b",     "Qwen2.5 72B",         "oss-large"),
+    ("llama33_70b",    "Llama 3.3 70B",       "oss-large"),
+    ("qwen3_30b_a3b",  "Qwen3 30B-A3B",       "oss-mid"),
+    ("qwen25_7b",      "Qwen2.5 7B",          "oss-peer"),
+    ("llama31_8b",     "Llama 3.1 8B",        "oss-peer"),
+    ("mistral_7b_v01", "Mistral 7B v0.1",     "oss-peer"),
+]
+# 7-8B "peer class" — the fairest comparison to sfumato's ~7B active params.
+PEER_STEMS = {"qwen25_7b", "llama31_8b", "mistral_7b_v01"}
 # Write into static/ so the deploy directory (Pages root) is self-contained.
 OUT = REPO_ROOT / "phase2" / "showcase" / "static" / "examples.json"
 
@@ -271,6 +290,73 @@ def _attach_speed_pairs(
     return updated
 
 
+def _load_frontier_compare() -> dict[int, dict[str, dict]]:
+    """Load 10 frontier_compare/results_50/<model>.jsonl files.
+
+    Returns: {idx: {stem: {pred, correct, latency_ms, cost, display, tier}}}
+    Skips truncated/error subdirs and any model file missing from disk.
+    """
+    out: dict[int, dict[str, dict]] = {}
+    for stem, display, tier in FRONTIER_MODELS:
+        path = FRONTIER_DIR / f"{stem}.jsonl"
+        if not path.exists():
+            print(f"[frontier] skip missing: {path}", file=sys.stderr)
+            continue
+        for line in path.read_text().splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            r = json.loads(line)
+            idx = int(r["idx"])
+            cell = {
+                "pred": r.get("pred"),
+                "correct": bool(r.get("correct")),
+                "latency_ms": r.get("latency_ms"),
+                "cost": (r.get("usage") or {}).get("cost"),
+                "display": display,
+                "tier": tier,
+            }
+            out.setdefault(idx, {})[stem] = cell
+    return out
+
+
+def _attach_frontier_compare(
+    records: list[dict],
+    frontier: dict[int, dict[str, dict]],
+) -> int:
+    """For records with idx in frontier (idx 0..49), attach a
+    `frontier_compare` dict and tag `frontier_unique_win_peer` when sfumato
+    is correct AND no peer-class 7-8B model is correct on that idx.
+
+    Only tags on cmajc records (the primary sfumato condition this pilot
+    compared against). Returns count of records updated.
+    """
+    if not frontier:
+        return 0
+    updated = 0
+    tagged_unique = 0
+    for r in records:
+        cells = frontier.get(r["idx"])
+        if not cells:
+            continue
+        # Attach the per-model comparison block.
+        r["frontier_compare"] = cells
+        updated += 1
+        # Tag unique-WIN over peer class only on cmajc records (primary
+        # sfumato condition the pilot compared against).
+        if r["condition"] == "cmajc" and r["correct"]:
+            peer_correct = any(
+                cells.get(p, {}).get("correct", False) for p in PEER_STEMS
+            )
+            if not peer_correct:
+                if "frontier_unique_win_peer" not in r["tags"]:
+                    r["tags"].append("frontier_unique_win_peer")
+                    tagged_unique += 1
+    print(f"[frontier] attached frontier_compare to {updated} records "
+          f"(unique_win_peer tagged: {tagged_unique})")
+    return updated
+
+
 def _join_cmaj_vs_cmajc_repair(records: list[dict]) -> int:
     """Tag commit_lora_repair: same idx where cmaj loses but cmajc wins.
 
@@ -314,6 +400,10 @@ def main() -> None:
 
     speed_n = _attach_speed_pairs(records, SPEED_PAIRS)
     print(f"[showcase] attached speed-pair records: {speed_n}", flush=True)
+
+    frontier = _load_frontier_compare()
+    front_n = _attach_frontier_compare(records, frontier)
+    print(f"[showcase] frontier_compare records: {front_n}", flush=True)
 
     # Re-aggregate tag counts after repair pass.
     tag_counts: Counter = Counter()
