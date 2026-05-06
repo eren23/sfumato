@@ -24,6 +24,7 @@ import random
 import sys
 import time
 from pathlib import Path
+from typing import Optional
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
@@ -38,6 +39,59 @@ _COMMIT_N_BLOCKS: int = 1
 
 def _get_commit_n_blocks() -> int:
     return _COMMIT_N_BLOCKS
+
+
+# T1.B per-step trace dump. Default OFF (TRACE_STEPS env var). When ON,
+# writes one JSONL line per StepState (sub-block boundary) to a sidecar
+# file under e4/results/traces/<wandb_run>/branch_<b>_idx_<i>.jsonl. Used
+# by phase2/spikes/process-reward-verifier to train an MLP head over the
+# per-step feature stream (entropy, logit_shift_norm, commit_lora_active,
+# mechanism). Only wired into single-branch sequential paths (cmaj/cmajc
+# with BATCHED=0); the batched path uses BatchStepState which doesn't
+# expose entropy / logit_shift_norm yet — see Phase-3 plan T1.B.1.
+_TRACE_DUMP_DIR: Optional[Path] = None
+_CURRENT_PROBLEM_IDX: Optional[int] = None
+
+
+def _trace_dump_enabled() -> bool:
+    return os.environ.get("TRACE_STEPS", "0") == "1"
+
+
+def _make_trace_dump_callback(branch_idx: int):
+    """Factory: returns a step_callback that writes StepState records to a
+    sidecar JSONL keyed on (branch_idx, problem_idx). Only fires when
+    TRACE_STEPS=1 AND _TRACE_DUMP_DIR + _CURRENT_PROBLEM_IDX are set by
+    main(). Always returns continue_llada() so behavior is bit-identical.
+    """
+    if _TRACE_DUMP_DIR is None or _CURRENT_PROBLEM_IDX is None:
+        return None
+    out_path = _TRACE_DUMP_DIR / f"branch_{branch_idx}_idx_{_CURRENT_PROBLEM_IDX}.jsonl"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    def cb(state):
+        # Defensive: state.entropy / top_k_logits may be empty in the mock
+        # path; guard with `if`.
+        rec = {
+            "step_idx": state.step_idx,
+            "sub_block": state.sub_block,
+            "num_blocks": state.num_blocks,
+            "mechanism": state.mechanism,
+            "entropy_mean": (
+                float(sum(state.entropy) / len(state.entropy))
+                if state.entropy else None
+            ),
+            "entropy_max": float(max(state.entropy)) if state.entropy else None,
+            "n_committed": len(state.tokens_committed),
+            "commit_lora_active": state.commit_lora_active,
+            "logit_shift_norm": state.logit_shift_norm,
+            "temperature": state.temperature,
+            "wallclock_ms": state.wallclock_ms,
+        }
+        with out_path.open("a") as f:
+            f.write(json.dumps(rec) + "\n")
+        return diff_llada.StepDirective.continue_llada()
+
+    return cb
 
 
 def _make_esc_callback(diff_model, n_branches: int, esc_state: dict):
@@ -300,14 +354,19 @@ def run_condition(
         else:
             # BATCHED=0 — legacy per-seed sequential loop. Reproduces the
             # pre-S0 implementation for paired wallclock baselines.
+            # T1.B: when TRACE_STEPS=1, attach a per-branch trace dump
+            # callback to harvest StepState (entropy, logit_shift_norm,
+            # commit_lora_active, mechanism) for the PRM verifier spike.
             branches = []
             total = 0
-            for s in seeds_b:
+            for bi, s in enumerate(seeds_b):
+                cb_trace = _make_trace_dump_callback(bi) if _trace_dump_enabled() else None
                 cot, used = diff_model.denoise_block(
                     prompt=q,
                     k_steps=k_steps,
                     seed=s,
                     temperature=temperature,
+                    step_callback=cb_trace,
                 )
                 branches.append(cot)
                 total += used
@@ -354,9 +413,11 @@ def run_condition(
             branches = [r[0] for r in results]
             total = sum(r[1] for r in results)
         else:
+            # T1.B: cmajc sequential path with optional per-branch trace dump.
             branches = []
             total = 0
-            for s in seeds_b:
+            for bi, s in enumerate(seeds_b):
+                cb_trace = _make_trace_dump_callback(bi) if _trace_dump_enabled() else None
                 cot, used = diff_model.denoise_block(
                     prompt=q,
                     k_steps=k_steps,
@@ -364,6 +425,7 @@ def run_condition(
                     temperature=temperature,
                     apply_commit=True,
                     commit_n_blocks=_get_commit_n_blocks(),
+                    step_callback=cb_trace,
                 )
                 branches.append(cot)
                 total += used
@@ -547,11 +609,24 @@ def main() -> int:
         }
     )
 
+    # T1.B trace dump init: when TRACE_STEPS=1, sidecar JSONLs land under
+    # e4/results/traces/<run_name>/branch_*_idx_*.jsonl. Falls back to a
+    # timestamped dir if WANDB_RUN_NAME is unset.
+    global _TRACE_DUMP_DIR, _CURRENT_PROBLEM_IDX
+    if _trace_dump_enabled():
+        run_name = os.environ.get("WANDB_RUN_NAME") or os.environ.get(
+            "WANDB_NAME"
+        ) or f"trace-{int(time.time())}"
+        _TRACE_DUMP_DIR = REPO_ROOT / "e4" / "results" / "traces" / run_name
+        _TRACE_DUMP_DIR.mkdir(parents=True, exist_ok=True)
+        print(f"[E4] TRACE_STEPS=1 → sidecar dir {_TRACE_DUMP_DIR}", flush=True)
+
     n_correct = 0
     total_flops = 0
     rows: list[dict] = []
     t0 = time.time()
     for i, prob in enumerate(problems):
+        _CURRENT_PROBLEM_IDX = i
         t_prob = time.time()
         pred, used, trace = run_condition(
             prob, condition, k_steps, ar_model, diff_model, seed=seed
