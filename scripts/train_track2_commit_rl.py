@@ -47,14 +47,10 @@ RESOLVED (2026-05 — Phase-4 Direction A blockers landed):
     + `phase_emb.set_adapter_disabled(True)` for the frozen-base log-probs.
 
 REMAINING TODO:
-  - phase_emb_subblock wrapping inside cmajc generate: `denoise_block`'s
-    step_callback fires AT each sub-block boundary, after the sub-block
-    forward completes. Cleanly bracketing each sub-block forward with
-    `phase_emb_subblock(t=sub_block+1)` requires a hook INSIDE `_generate`'s
-    inner loop in `e4/diff_llada.py`. Until that lands, rollouts run with
-    phase_emb at zero-init (effectively no schedule-conditioning); the
-    GRPO infrastructure works but the schedule-conditional advantage isn't
-    yet realized.
+  (none — phase_emb sub-block writer landed in `e4/diff_llada.py:
+  _Real.denoise_block` inner loop. Reader is `_pes.get_sub_block()`
+  inside `_wrapped_forward`. Writer side is gated on env `SCHEDULE_RL=1`
+  so production paths bypass entirely.)
 
 LANDED (2026-05 — phase4 Direction A real-path rollout):
   - `_rollout` real path: drives `model.denoise_block(...)` with a
@@ -75,7 +71,6 @@ import math
 import os
 import random
 import sys
-import threading
 import time
 from collections import deque
 from pathlib import Path
@@ -237,32 +232,39 @@ def _check_jaccard_tripwire(commit_token_ids_per_prompt: List[List[int]]) -> boo
 # ----------------------------------------------------------------------------
 # Phase embedding (4-vector additive bias on LoRA-A for layers 24-31)
 # ----------------------------------------------------------------------------
-# Thread-local sub-block index. Set inside `phase_emb_subblock(t)` and read
-# by every wrapped LoRA-A forward. Using thread-local (not a model attribute)
-# means concurrent eval threads / DataLoader workers don't trip on each
-# other's t. None means "no phase active — fall through to base forward".
-_phase_local = threading.local()
-_phase_local.t = None
+# Sub-block index lives in `e4.phase_emb_state` (shared library) so the
+# diffusion runner in `e4/diff_llada.py:_Real.denoise_block` can WRITE the
+# index from inside its inner forward loop without importing anything from
+# `scripts/`. The MethodType monkey-patch below READS the same thread-local
+# from the LoRA-A forward.
+from e4 import phase_emb_state as _pes
 
 
 @contextlib.contextmanager
 def phase_emb_subblock(t: Optional[int]):
-    """Context manager: set the thread-local phase index for a sub-block.
+    """Context manager: set the shared phase index for a sub-block.
 
-    Usage (in _rollout / GPU loop, AFTER each sub-block boundary):
+    Usage in tests / smokes (where SCHEDULE_RL is set explicitly OR we
+    want to bypass the gate):
         with phase_emb_subblock(state.sub_block + 1):
             <call into _generate for the next sub-block>
+
+    In production rollouts the writer side of the thread-local is owned
+    by `e4.diff_llada._Real.denoise_block` (which writes `b_idx` per
+    sub-block when `SCHEDULE_RL=1`); this context manager exists so unit
+    smokes can drive the monkey-patch without spinning the diffusion
+    runner.
 
     `t=0` and `t=None` are both treated as "skip the phase add" (commit-LoRA
     is OFF on sub-block 0 by design). The wrapped LoRA-A forward also skips
     when the adapter is disabled (KL frozen-base pass).
     """
-    prev = getattr(_phase_local, "t", None)
-    _phase_local.t = t
+    prev = _pes.get_sub_block()
+    _pes.force_set_sub_block(t)
     try:
         yield
     finally:
-        _phase_local.t = prev
+        _pes.force_set_sub_block(prev)
 
 
 class PhaseEmbedding:
@@ -310,7 +312,7 @@ class PhaseEmbedding:
 
         def _wrapped_forward(self_mod: Any, x: Any) -> Any:
             out = self_mod._orig_forward_for_phase(x)
-            t = getattr(_phase_local, "t", None)
+            t = _pes.get_sub_block()
             disabled = getattr(self_mod, "_sfumato_adapter_disabled", False)
             if t is None or t == 0 or disabled:
                 return out
@@ -872,7 +874,7 @@ def _smoke() -> int:
 
         def _wrapped(self_mod, x):
             out = self_mod._orig(x)
-            t = getattr(_phase_local, "t", None)
+            t = _pes.get_sub_block()
             disabled = getattr(self_mod, "_sfumato_adapter_disabled", False)
             if t is None or t == 0 or disabled:
                 return out
@@ -1029,6 +1031,81 @@ def _smoke() -> int:
         )
     except ImportError:
         print("[smoke] e4.diff_llada unavailable — smoke 10 skipped", flush=True)
+
+    # ---- 11. phase_emb_state env-gate + writer wiring via _Mock ----
+    # Verifies that:
+    #   (a) e4.phase_emb_state.set_sub_block respects the SCHEDULE_RL gate
+    #       (no-op when SCHEDULE_RL is unset; writes when set).
+    #   (b) e4.diff_llada._Mock.denoise_block fires the writer at each
+    #       sub-block boundary so a step_callback can OBSERVE
+    #       _pes.get_sub_block() == b_idx between callbacks.
+    #   (c) After denoise_block returns, the LoRA-A monkey-patch reader
+    #       (smoke 8 already covered the math; this one verifies the
+    #       end-to-end value path via the shared module).
+    try:
+        import e4.diff_llada as _diff  # type: ignore
+        from e4 import phase_emb_state as _pes_t  # type: ignore
+
+        # (a) gate off → no-op writes.
+        os.environ.pop("SCHEDULE_RL", None)
+        _pes_t.clear()
+        _pes_t.set_sub_block(2)
+        if _pes_t.get_sub_block() is not None:
+            fail.append(
+                f"smoke11 SCHEDULE_RL gate failed: set_sub_block(2) wrote "
+                f"{_pes_t.get_sub_block()!r} when gate is off"
+            )
+
+        # (b) gate on → writer fires from inside _Mock.denoise_block; capture
+        # the sub_block-index sequence the runner publishes BETWEEN sub-block
+        # callbacks (i.e. just before each callback, the writer sets t=b_idx).
+        os.environ["SCHEDULE_RL"] = "1"
+        _pes_t.clear()
+        observed: List[Optional[int]] = []
+        # The writer fires BEFORE the StepState is built (see _Mock loop body
+        # in e4/diff_llada.py). The callback runs AFTER, so by callback-time
+        # _pes.get_sub_block() should equal state.sub_block.
+        def _cb_obs(state: Any) -> Any:
+            observed.append(_pes_t.get_sub_block())
+            return None
+
+        mock_diff_b = _diff.load("mock-llada-pes", mock=True)
+        mock_diff_b.denoise_block(
+            prompt="Mock problem 7: 2 + 7 = ?",
+            k_steps=64,
+            seed=42,
+            temperature=0.0,
+            apply_commit=True,
+            commit_n_blocks=3,
+            step_callback=_cb_obs,
+        )
+        # Expect 4 callbacks (one per sub-block) with t == sub_block index.
+        if observed != [0, 1, 2, 3]:
+            fail.append(
+                f"smoke11 writer wiring failed: observed {observed!r} "
+                f"!= [0, 1, 2, 3]"
+            )
+
+        # (c) After the loop, the thread-local should hold the LAST sub-block
+        # index (no automatic clear). main_train can `_pes.clear()` between
+        # rollouts if it wants the slate clean.
+        if _pes_t.get_sub_block() != 3:
+            fail.append(
+                f"smoke11 final state expected 3, got {_pes_t.get_sub_block()!r}"
+            )
+
+        # Restore the env to a clean slate so subsequent test runs / smokes
+        # don't accidentally rely on the gate.
+        os.environ.pop("SCHEDULE_RL", None)
+        _pes_t.clear()
+
+        print(
+            f"[smoke] phase_emb_state writer wiring: SCHEDULE_RL gate OK, "
+            f"observed sub-blocks {observed}",
+            flush=True,
+        )
+    except ImportError:
+        print("[smoke] e4.diff_llada/phase_emb_state unavailable — smoke 11 skipped", flush=True)
 
     # ---- verdict ----
     if fail:

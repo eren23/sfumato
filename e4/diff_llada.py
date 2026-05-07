@@ -234,7 +234,12 @@ class _Mock:
             band_no_commit = [(0.9, 1.6), (0.6, 1.2), (0.4, 0.9), (0.3, 0.7)]
             band_commit    = [(0.9, 1.6), (0.4, 0.8), (0.25, 0.55), (0.10, 0.30)]
             rng_seed = seed
+            # Phase-4 Direction A: mirror _Real's writer side so mock-mode
+            # rollouts also drive the schedule-RLHF thread-local. No-op
+            # unless SCHEDULE_RL=1.
+            from e4 import phase_emb_state as _pes
             for b_idx in range(num_blocks):
+                _pes.set_sub_block(b_idx)
                 rng_seed = (rng_seed * 1103515245 + 12345) & 0xFFFFFFFF
                 positions = list(
                     range(
@@ -686,6 +691,14 @@ class _Real:
             # the sub-block boundary before the callback fires.
             emit_logprobs = _os.environ.get("EMIT_LOGPROBS", "0") == "1"
             committed_logit_rows: list[Any] = []
+
+            # Phase-4 Direction A: publish the current sub-block index so
+            # the schedule-RLHF trainer's monkey-patched LoRA-A forward
+            # can add phase_emb[b_idx] to its output. No-op unless the
+            # writer-side env gate SCHEDULE_RL=1 is set, so production
+            # runs pay one os.environ.get per sub-block and nothing else.
+            from e4 import phase_emb_state as _pes
+            _pes.set_sub_block(b_idx)
 
             for s in range(steps_per_block):
                 mask_index = x == _LLADA_MASK_ID
