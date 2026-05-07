@@ -43,3 +43,6 @@ phase2/inference_viz/traces/comparisons/
 e4/results/traces/
 phase2/frontier_compare/results_50/_errors_*
 .playwright-mcp/
+
+# Local-only Phase-4 adapter artifacts (too large for git)
+artifacts/

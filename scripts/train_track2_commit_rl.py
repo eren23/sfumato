@@ -322,13 +322,25 @@ class PhaseEmbedding:
 
         n_patched = 0
         target_layer_set = set(LORA_LAYERS_TO_TRANSFORM)
+        # PEFT stores the LoRA-A linear at `<...>.lora_A.<adapter_name>`. The
+        # adapter name varies per-load (e.g. `default` for unnamed adapters,
+        # `commit` for the sfumato commit-LoRA). Match by penultimate segment
+        # = "lora_A" so we hit the active adapter's LoRA-A regardless of
+        # which name PEFT assigned it.
         for name, module in peft_model.named_modules():
-            if not name.endswith("lora_A.default"):
+            parts = name.split(".")
+            if len(parts) < 2 or parts[-2] != "lora_A":
                 continue
+            # Skip the ModuleDict container itself; only patch the leaf Linear.
+            try:
+                import torch.nn as _nn
+                if not isinstance(module, _nn.Linear):
+                    continue
+            except ImportError:
+                pass
             layer_idx = _extract_layer_idx(name)
             if layer_idx is None or layer_idx not in target_layer_set:
                 continue
-            # Save the original forward as a bound method we can restore.
             module._orig_forward_for_phase = module.forward
             module.forward = MethodType(_wrapped_forward, module)
             self._patched.append(module)
@@ -1306,13 +1318,14 @@ def main_train() -> int:
         print(f"ERROR: missing dependency: {exc}", file=sys.stderr)
         return 2
 
-    # CRITICAL: enable the phase_emb writer side BEFORE any rollout fires.
-    # diff_llada._Real.denoise_block calls _pes.set_sub_block(b_idx) inside
-    # its inner forward loop; that's a no-op unless this env is set.
+    # CRITICAL env setup: writer side of phase_emb thread-local + un-merged
+    # LoRA so backward through lora_A/B is non-trivial + cuda allocator
+    # tweak so 24GB GPUs don't fragment-OOM during the per-(rollout,sb)
+    # rescore forward.
     os.environ["SCHEDULE_RL"] = "1"
-    # Also flip EMIT_LOGPROBS so StepState carries committed_logits per
-    # sub-block — _rollout consumes those for log_pi_theta.
     os.environ["EMIT_LOGPROBS"] = "1"
+    os.environ["MERGE_ADAPTER"] = "0"
+    os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
     torch.manual_seed(SEED)
     if torch.cuda.is_available():
@@ -1422,67 +1435,92 @@ def main_train() -> int:
                 )
                 return 3
 
-            # -- re-score committed positions through LIVE peft_model (with grad) --
-            # The captured committed_logits in StepState are detached, so the
-            # rollout-time log_probs can't drive backward. Replace each rollout's
-            # log_probs_per_sb with re-scored, gradient-bearing log_pi_theta.
-            rescored: List[RolloutResult] = []
-            for committed_per_sb, _, text, reward in rollouts:
-                lp_per_sb = _rescore_committed_logprobs(
-                    diff_model,
-                    row["question"],
-                    committed_per_sb,
-                    num_sub_blocks=NUM_SUB_BLOCKS,
-                    commit_n_blocks=COMMIT_N_BLOCKS,
-                )
-                rescored.append(
-                    RolloutResult(committed_per_sb, lp_per_sb, text, reward)
-                )
+            # -- restore adapter forward path + LoRA grads after rollout --
+            # diff_llada._Real.denoise_block calls _disable_commit() at the
+            # end of each rollout, which (a) disables the LoRA branch in
+            # forward and (b) sets requires_grad=False on commit-LoRA params
+            # under PEFT 0.19. Re-enable both so the rescore forward sees
+            # the LoRA branch and backward can update lora_A/B.
+            peft_model.enable_adapter_layers()
+            peft_model.set_adapter("commit")
+            for p_name, p in peft_model.named_parameters():
+                if ".lora_" in p_name and ".commit" in p_name:
+                    p.requires_grad_(True)
 
-            # -- loss --
-            loss, stats = grpo_loss(rescored, commit_n_blocks=COMMIT_N_BLOCKS)
-
-            # -- KL anchor (Phase-4 Direction A) --
-            # For each rollout, re-score the committed positions twice:
-            #   Forward A (adapter ON, phase_emb ON)  → log_pi_theta.
-            #   Forward B (adapter OFF, phase add OFF) → log_pi_frozen.
-            # KL is the Schulman-k3 estimator over committed positions.
-            #
-            # The frozen pass NEVER samples — it just re-evaluates log-probs
-            # on the already-committed tokens. log_pi_theta comes from the
-            # `committed_logits` field on StepState (populated by _generate
-            # when EMIT_LOGPROBS=1 — set by the rollout harness).
-            kl_terms: List[Any] = []
-            for committed_per_sb, log_probs_per_sb, _, _ in rollouts:
-                # log_probs_per_sb is parallel to committed_per_sb but the
-                # first sub-block is empty (commit-LoRA OFF). For each
-                # commit-active sub-block we need the captured logits;
-                # those live on the rollout step states (the harness is
-                # responsible for plumbing them through). For now the
-                # rollout protocol carries lp_per_sb as the (theta) log-
-                # probs already; the frozen pass below re-runs the model
-                # to get log_pi_frozen on the same positions.
-                pass
-            # NOTE: full KL plumbing requires the GPU rollout harness
-            # (currently NotImplementedError) to expose committed_logits +
-            # token_ids alongside lp_per_sb. The math below is exercised
-            # in smoke-8; the GPU integration just needs to call
-            # phase_emb.set_adapter_disabled(True) + model.disable_adapter_layers()
-            # for forward B, then restore.
-            kl_total = sum(kl_terms) if kl_terms else 0.0
-            if hasattr(loss, "backward") and kl_terms:
-                loss = loss + KL_BETA * kl_total
-
+            # -- per-(rollout, sub-block) rescore + backward --
+            # Doing one big rescore for all M rollouts × T commit-active
+            # sub-blocks blows VRAM on 24GB. Instead: forward + backward +
+            # free per sub-block, accumulating grads on the trainable
+            # tensors. optim.step() is called after the whole prompt's M
+            # rollouts have contributed.
+            from e4 import phase_emb_state as _pes
+            sub_block_length = 32
+            mask_id = _diff._LLADA_MASK_ID
             optim.zero_grad(set_to_none=True)
-            if hasattr(loss, "backward"):
-                loss.backward()
-                torch.nn.utils.clip_grad_norm_(trainable, max_norm=1.0)
-                optim.step()
+            advantages = grpo_advantages(
+                [float(r[3]) for r in rollouts], eps=ADV_EPS
+            )
+
+            n_backward = 0
+            total_loss_scalar = 0.0
+            for r_i, (committed_per_sb, _, _, _) in enumerate(rollouts):
+                A = advantages[r_i]
+                # Pre-build the chat-templated prompt prefix once per rollout.
+                messages = [
+                    {"role": "system", "content": _diff._DENOISE_SYS},
+                    {"role": "user", "content": row["question"]},
+                ]
+                prompt_token_ids = tokenizer.apply_chat_template(
+                    messages, tokenize=True, add_generation_prompt=True
+                )
+                prompt_len = len(prompt_token_ids)
+
+                def _pad(ids, n=sub_block_length):
+                    ids = list(ids)
+                    return ids[:n] if len(ids) >= n else ids + [mask_id] * (n - len(ids))
+
+                padded = [
+                    _pad(committed_per_sb[sb] if sb < len(committed_per_sb) else [])
+                    for sb in range(NUM_SUB_BLOCKS)
+                ]
+                for t in range(1, COMMIT_N_BLOCKS + 1):
+                    committed_t = list(committed_per_sb[t]) if t < len(committed_per_sb) else []
+                    if not committed_t:
+                        continue
+                    seq = list(prompt_token_ids)
+                    for sb in range(NUM_SUB_BLOCKS):
+                        seq.extend(padded[sb] if sb < t else [mask_id] * sub_block_length)
+                    full_ids = torch.tensor([seq], dtype=torch.long, device="cuda")
+                    _pes.force_set_sub_block(t)
+                    try:
+                        outputs = peft_model(full_ids)
+                        logits = outputs.logits if hasattr(outputs, "logits") else outputs[0]
+                        sb_start = prompt_len + t * sub_block_length
+                        n_committed = len(committed_t)
+                        sb_logits = logits[0, sb_start : sb_start + n_committed]
+                        log_p = torch.nn.functional.log_softmax(sb_logits, dim=-1)
+                        committed_ids = torch.tensor(committed_t, dtype=torch.long, device="cuda")
+                        token_lp = log_p.gather(1, committed_ids.unsqueeze(1)).squeeze(1)
+                        sb_loss = -(token_lp.sum()) * float(A)
+                        total_loss_scalar += float(sb_loss.detach())
+                        sb_loss.backward()
+                        n_backward += 1
+                    finally:
+                        _pes.clear()
+                    del outputs, logits, sb_logits, log_p, token_lp, sb_loss, full_ids, committed_ids
+                    torch.cuda.empty_cache()
+
+            torch.nn.utils.clip_grad_norm_(trainable, max_norm=1.0)
+            optim.step()
             global_step += 1
 
-            if global_step % LOG_INTERVAL == 0:
-                lf = float(loss) if hasattr(loss, "item") else float(loss)
-                print(f"step:{global_step}/{total_steps} train_loss:{lf:.4f}", flush=True)
+            mean_r = sum(float(r[3]) for r in rollouts) / max(1, len(rollouts))
+            if global_step % LOG_INTERVAL == 0 or global_step <= 5:
+                print(
+                    f"step:{global_step}/{total_steps} train_loss:{total_loss_scalar:.4f} "
+                    f"reward_mean:{mean_r:.3f} jaccard:{sim:.3f} n_backward:{n_backward}",
+                    flush=True,
+                )
 
             # -- early-stop check --
             if EVAL_INTERVAL > 0 and global_step % EVAL_INTERVAL == 0:
@@ -1502,8 +1540,11 @@ def main_train() -> int:
                     return 4
 
     # -- final save --
-    model.save_pretrained(str(SAVE_DIR))
+    # `model` is the `_Real` diff_llada wrapper; save the underlying peft
+    # model (which holds the LoRA adapter weights). Also dump phase_emb.
+    peft_model.save_pretrained(str(SAVE_DIR))
     tokenizer.save_pretrained(str(SAVE_DIR))
+    torch.save(phase_emb.param.detach().cpu(), Path(SAVE_DIR) / "phase_emb.pt")
     total_bytes = sum(p.stat().st_size for p in SAVE_DIR.rglob("*") if p.is_file())
     print(f"Serialized model {SAVE_DIR} {total_bytes} bytes", flush=True)
     elapsed = time.monotonic() - start
