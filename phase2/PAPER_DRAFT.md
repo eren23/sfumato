@@ -410,11 +410,27 @@ schedule itself, not the adapter active across the schedule).
   at this scale supervised classification might be data-bound rather
   than feature-bound. Process-reward / step-level supervision was not
   attempted.
-- We did not explore temporal self-consistency (vote across denoising
-  steps), which is a more recent angle (arXiv 2508.09138).
+- We did explore temporal self-consistency (vote across denoising
+  sub-blocks), see §4 T3.C. Our schedule-conditional weighting did
+  not extend Zhang et al. 2025 (arXiv 2508.09138)'s exponential-decay
+  result.
 - The commit-LoRA result is on a single LoRA architecture (rank-16,
   attention-only); we do not characterize how the lift scales with
   rank or coverage.
+- **Cross-DLM-family generality:** the K2 inverted-U finding is
+  defined for *sub-block-structured* mask-diffusion samplers (LLaDA's
+  semi-AR 4×32-token schedule, BD3-LMs, Planned Diffusion). Phase-4
+  Phase-1 audit of DiffuLLaMA (HKU-NLP, arXiv 2410.17891) confirmed
+  it is a vanilla LlamaForCausalLM trained with a *flat random-keep*
+  diffusion schedule — no native sub-blocks. The K2 toggle's discrete
+  on/off-at-known-position identity cannot be replicated on flat-
+  schedule samplers without (a) forcing chunks onto a non-trained
+  schedule (confounded), (b) redefining K2 as a fraction-of-steps
+  milestone (different claim), or (c) retraining the adapter under
+  the native schedule (drift from LLaDA recipe). We frame K2 as a
+  property of block-structured mask diffusion specifically, and
+  leave flat-schedule generalization to future work. See
+  `phase2/spikes/diffullama-cross-substrate/PHASE1_AUDIT.md`.
 
 ---
 
