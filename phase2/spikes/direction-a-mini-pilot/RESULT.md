@@ -2,13 +2,13 @@
 
 **Pre-reg:** plan file `bro-bro-bro-bro-prancy-volcano.md` "Phase-4 NEXT" section.
 **Date:** 2026-05-07. **Cost:** ~$1.50 (RTX 4090 24GB on-demand, ~3.5h).
-**Outcome:** **PASS-with-caveat.** Plumbing fully validated end-to-end on
-real GPU; Direction A's training loop is now eng-complete and runs at
-scale. **First-pass eval shows the trained adapter regressed below the
-untrained baseline** (MATH-500 numeric N=20 idx 0..19: 0.350 vs ~0.41
-baseline, −6pp), confirming the locked PRE_REG sanity rules pass while
-also showing a 50-step pilot is too short / too unanchored to produce a
-meaningful policy improvement.
+**Outcome:** **PASS.** Plumbing fully validated end-to-end on real GPU;
+Direction A's training loop is now eng-complete and runs at scale.
+Paired baseline-vs-trained on MATH-500 numeric N=20 idx 0..19 shows
+**net Δ = −1 problem (= statistical noise)**: baseline 0.400 (8/20),
+trained 0.350 (7/20), one prediction flipped (idx=1: 42→126). 19 of
+20 predictions identical between baseline and trained — training was
+gentle, neither destructive nor productive at 50 steps.
 
 ---
 
@@ -62,10 +62,13 @@ meaningful policy improvement.
 | 50-step training | 881s (~17.6s/step) | 4 rollouts (no_grad) + 12 backward forwards (with grad), 12 backwards × 50 = 600 weight updates |
 | **N=20 eval (separate run)** | **327s** | cmajc-k3 N=20 BRANCHES=5 |
 
-| Metric | This pilot | Baseline (cmajc-v3) |
+| Metric | This pilot | Baseline (paired) |
 |---|---:|---:|
-| MATH-500 numeric N=20 idx 0..19 acc | **0.350** | ~0.41 (proxy from N=200) |
-| Δ vs baseline | **−6 pp** | (baseline) |
+| MATH-500 numeric N=20 idx 0..19 acc | **0.350 (7/20)** | **0.400 (8/20)** |
+| Δ vs paired baseline | **−1 problem** (idx=1 flipped 42→126) | — |
+| 95% CI on Δ (binomial N=20) | **±20pp** | — |
+| Identical predictions | 19/20 | 19/20 |
+| Net flip count | 1 lost, 0 gained | — |
 
 ## Step-by-step training trace (selected)
 
@@ -86,7 +89,24 @@ meaningful policy improvement.
 rollouts agree (reward_mean ∈ {0.0, 1.0}); GRPO's group-relative
 advantages collapse to zero in those cases, contributing no gradient.
 
-## Why the trained adapter regressed
+## Why the trained adapter is statistically equivalent to baseline
+
+**Paired comparison reveals near-identical behavior.** 19 of 20
+predictions are bit-identical between baseline-v3 and the trained
+adapter (same `pred` field, same `correct` outcome). Only idx=1
+flipped (gold=42, baseline=42 ✓, trained=126 ✗) — a single problem
+on N=20, well within binomial CI ±20pp.
+
+This is the natural reading of the 50-step pilot: ~33 of 50 training
+prompts had GRPO advantages collapse to zero (uniform reward across
+M=4 rollouts → no learning signal), and the ~17 informative updates
+were too few to noticeably shift the policy. The training infra
+worked exactly as designed — gradients flowed, the optimizer stepped,
+the model didn't diverge — but the data scale + missing KL anchor
+mean the LoRA didn't move far enough to register on a 20-problem
+held-out set.
+
+## Why a longer pilot might tell a different story
 
 Three independent contributors to the −6 pp regression:
 
