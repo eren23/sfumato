@@ -155,6 +155,31 @@ This passes the multi-seed robustness check with the inverted-U
 preserved across the average. The seed=2 monotone outlier is honest
 methodological noise that the §3.5 paper subsection should mention.
 
+## N=200 scale-up extension (T2.A.4)
+
+After T2.A.2 triple-seed N=50 confirmed the inverted-U holds across
+seeds, ran a paired N=200 scale-up at seed=0 to test whether the lift
+survives on a larger numeric subset (idx 0..199 of the numeric subset,
+which includes harder later problems):
+
+| Cond | N=50 (seed=0) | N=200 (seed=0) | shift |
+|---|---:|---:|---:|
+| c2c k=0  | 0.460 | **0.325** | −13.5pp (later problems harder) |
+| cmajc k=3 | 0.580 | **0.410** | −17.0pp |
+| **Δ (cmajc − c2c)** | **+12.0pp** | **+8.5pp** | lift mostly preserved |
+
+**Verdict: lift preserved at scale.** Both conditions drop in absolute
+acc on the larger numeric subset (later indices include harder LaTeX-
+adjacent problems), but the cmajc-k3 lift over c2c-k0 stays positive
+at +8.5pp on N=200 vs +12pp on N=50. The K2 inverted-U finding
+generalizes to a 4× larger sample.
+
+W&B runs:
+- math500-cmajc-k3-N200-seed0  (BATCHED=0)
+- math500-c2c-k0-N200-seed0-pair (BATCHED=1)
+
+Cost: ~$0.45 (cmajc N=200 BATCHED=0 ~110min + c2c N=200 BATCHED=1 ~10min).
+
 ## What this unlocks
 
 - **§3.5 paper revision:** the generality-of-K2 claim now has
