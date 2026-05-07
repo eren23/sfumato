@@ -54,6 +54,12 @@ class StepState:
     prompt_len: int = 0
     block_start: int = 0
     block_end: int = 0
+    # Phase-4 Direction A: pre-softmax logits over freshly-committed positions.
+    # Populated by `_generate` ONLY when `EMIT_LOGPROBS=1` env var is set;
+    # otherwise None so we pay no perf cost on production / smoke runs.
+    # Shape (n_committed, vocab_size); ordering matches `tokens_committed`
+    # and `positions`. Detached + on CPU so the callback can stash it freely.
+    committed_logits: Any = None
 
 
 @dataclass
@@ -674,6 +680,12 @@ class _Real:
             committed_entropy: list[float] = []
             committed_topk: list[list[tuple[int, float]]] = []
             last_logits = None  # for logit_shift_norm if we ever shadow-run base
+            # Phase-4 Direction A: full logits row over freshly-committed
+            # positions, captured ONLY when EMIT_LOGPROBS=1. List of
+            # (vocab,) CPU tensors; stacked into (n_committed, vocab) at
+            # the sub-block boundary before the callback fires.
+            emit_logprobs = _os.environ.get("EMIT_LOGPROBS", "0") == "1"
+            committed_logit_rows: list[Any] = []
 
             for s in range(steps_per_block):
                 mask_index = x == _LLADA_MASK_ID
@@ -712,6 +724,14 @@ class _Real:
                                     for j in range(5)
                                 ]
                             )
+                            # Phase-4 Direction A: stash full pre-softmax
+                            # logits row for the freshly-committed position.
+                            # Detach + CPU + clone so the train-time loop can
+                            # re-score independently of the live graph.
+                            if emit_logprobs:
+                                committed_logit_rows.append(
+                                    logits[0, pos].detach().clone().cpu()
+                                )
 
                 x[transfer] = x0[transfer]
                 last_logits = logits
@@ -736,6 +756,13 @@ class _Real:
                     last_logits, x, committed_positions
                 )
 
+            # Phase-4 Direction A: stack per-position logit rows captured
+            # during the diffusion rounds for this sub-block. Empty stack →
+            # None (no committed positions OR EMIT_LOGPROBS=0).
+            committed_logits_tensor: Any = None
+            if emit_logprobs and committed_logit_rows:
+                committed_logits_tensor = torch.stack(committed_logit_rows, dim=0)
+
             state = StepState(
                 step_idx=step_idx,
                 sub_block=b_idx,
@@ -755,6 +782,7 @@ class _Real:
                 prompt_len=int(prompt_ids.shape[1]),
                 block_start=blk_start,
                 block_end=blk_end,
+                committed_logits=committed_logits_tensor,
             )
 
             directive = cb(state)
