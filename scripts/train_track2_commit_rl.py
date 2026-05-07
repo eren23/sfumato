@@ -47,12 +47,24 @@ RESOLVED (2026-05 — Phase-4 Direction A blockers landed):
     + `phase_emb.set_adapter_disabled(True)` for the frozen-base log-probs.
 
 REMAINING TODO:
-  - GPU rollout harness: `_rollout` real path still NotImplementedError.
-    The plumbing it needs is in place — once budget approval lands, the
-    rollout loop just calls `_generate` with EMIT_LOGPROBS=1 + the
-    phase_emb_subblock(t=state.sub_block+1) context manager bracketing
-    each sub-block boundary, and grabs `state.committed_logits` from the
-    callback into the lp_per_sb structure.
+  - phase_emb_subblock wrapping inside cmajc generate: `denoise_block`'s
+    step_callback fires AT each sub-block boundary, after the sub-block
+    forward completes. Cleanly bracketing each sub-block forward with
+    `phase_emb_subblock(t=sub_block+1)` requires a hook INSIDE `_generate`'s
+    inner loop in `e4/diff_llada.py`. Until that lands, rollouts run with
+    phase_emb at zero-init (effectively no schedule-conditioning); the
+    GRPO infrastructure works but the schedule-conditional advantage isn't
+    yet realized.
+
+LANDED (2026-05 — phase4 Direction A real-path rollout):
+  - `_rollout` real path: drives `model.denoise_block(...)` with a
+    step_callback that captures per-sub-block `tokens_committed` +
+    `committed_logits` from StepState (with EMIT_LOGPROBS=1 set in env),
+    then computes per-token log-pi via `_logits_to_token_logprobs` for
+    each commit-active sub-block (1..commit_n_blocks). Sub-block 0 stays
+    empty (commit-LoRA OFF). Reward = `e4.grade.is_correct(text, gold)`.
+    Returns `List[RolloutResult]` (NamedTuple, tuple-iterable for legacy
+    consumers in grpo_loss / main_train).
 """
 
 from __future__ import annotations
@@ -68,7 +80,7 @@ import time
 from collections import deque
 from pathlib import Path
 from types import MethodType
-from typing import Any, Callable, List, Optional, Sequence, Tuple
+from typing import Any, Callable, List, NamedTuple, Optional, Sequence, Tuple
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
@@ -406,8 +418,50 @@ def _extract_layer_idx(module_name: str) -> Optional[int]:
 
 
 # ----------------------------------------------------------------------------
-# Rollout harness (signature complete; inner loop GPU-only - TODO marked)
+# Rollout harness
 # ----------------------------------------------------------------------------
+class RolloutResult(NamedTuple):
+    """One cmajc-k3 rollout's payload.
+
+    NamedTuple so existing tuple-unpacking call sites (grpo_loss, main_train,
+    smoke 5) continue to work — `(committed, lp, text, reward) = result`.
+
+    Fields:
+      committed_tokens: per-sub-block list of committed token ids.
+        len == num_sub_blocks; each inner list is the ids committed during
+        that sub-block.
+      committed_logprobs: per-sub-block list of per-token log-pi values.
+        Each inner element is either:
+          - a torch.Tensor of shape (n_committed,) when EMIT_LOGPROBS=1 was
+            honoured by diff_llada (real GPU path);
+          - a python list[float] (CPU smoke fallback path);
+          - an empty list [] for sub-blocks where commit-LoRA is OFF
+            (sub-block 0 by default) OR when `committed_logits` was None
+            (mock mode / EMIT_LOGPROBS=0).
+        Sub-blocks 1..commit_n_blocks carry gradients in the real path.
+      final_text: detokenized completion text.
+      reward: e4.grade.is_correct(final_text, gold) -> {0.0, 1.0}.
+    """
+
+    committed_tokens: List[List[int]]
+    committed_logprobs: List[Any]
+    final_text: str
+    reward: float
+
+
+def _zero_logprobs_like(n: int) -> Any:
+    """Per-token log-prob placeholder when committed_logits is unavailable.
+
+    Returns a torch zero-tensor of shape (n,) when torch is importable, else
+    a python list. The grpo_loss path detects torch.Tensor automatically.
+    """
+    try:
+        import torch  # type: ignore
+        return torch.zeros(n)
+    except ImportError:
+        return [0.0] * n
+
+
 def _rollout(
     model: Any,
     tokenizer: Any,
@@ -418,53 +472,56 @@ def _rollout(
     n_branches: int = 5,
     m: int = M_ROLLOUTS,
     temperature: float = ROLLOUT_TEMPERATURE,
+    seed: int = 0,
     commit_n_blocks: int = COMMIT_N_BLOCKS,
     num_sub_blocks: int = NUM_SUB_BLOCKS,
-) -> List[Tuple[List[List[int]], List[List[float]], str, float]]:
+) -> List[RolloutResult]:
     """Run M cmajc-k3 rollouts for a single prompt.
 
-    Returns a list of length M, each entry:
-        (committed_token_ids_per_subblock, log_probs_per_token, final_text, reward)
-      - committed_token_ids_per_subblock: list of length `num_sub_blocks`,
-        each a list[int] of the token ids committed in that sub-block.
-        Sub-blocks where commit-LoRA is OFF (sub-block 0 by default) still
-        return the committed ids (we just don't compute gradients on them).
-      - log_probs_per_token: parallel structure to committed ids; per-token
-        log pi over the COMMIT-active sub-blocks (1..commit_n_blocks).
-        For OFF sub-blocks this is an empty list.
-      - final_text: detokenized completion.
-      - reward: e4.grade.is_correct(final_text, gold) -> {0.0, 1.0}.
+    Returns a list of length M of `RolloutResult`s. The named tuple is
+    iterable, so legacy `(committed, lp, text, reward)` unpacking still
+    works (grpo_loss + smoke 5 / main_train).
 
-    GPU-only TODO:
-      The current `e4/diff_llada._generate` step_callback does NOT expose
-      pre-softmax logits at sub-block boundaries - only `tokens_committed`
-      and `top_k_logits` (rank-k truncated). To get gradients we need a
-      new optional `StepState.committed_logits` field, populated inside
-      `_generate` by stashing the logits of the freshly-committed positions
-      BEFORE the argmax/sample step. Once shipped, the loop below becomes:
+    Real path (when `model` is a real or mock `e4.diff_llada` instance):
+      For each rollout i in 0..m-1:
+        - Set EMIT_LOGPROBS=1 in os.environ so StepState.committed_logits
+          is populated by `_generate`.
+        - Call `model.denoise_block(prompt, k_steps, seed=seed*1000+i,
+          temperature, apply_commit=True, commit_n_blocks=commit_n_blocks,
+          step_callback=cb)`.
+        - The callback `cb` captures `state.tokens_committed` +
+          `state.committed_logits` per sub-block into per-rollout lists.
+        - After denoise_block returns the final text, compute log-probs
+          via `_logits_to_token_logprobs(captured_logits, captured_tokens)`
+          for each commit-active sub-block (1..commit_n_blocks). Sub-block 0
+          stays empty (commit-LoRA OFF). When `committed_logits` is None
+          (mock mode, or EMIT_LOGPROBS not honored), fall back to a zero
+          tensor of the right length so downstream grpo_loss still finds a
+          tensor to .stack().
+        - Reward = float(e4.grade.is_correct(final_text, gold)).
 
-          for i in range(m):
-              model._sfumato_phase_idx = 0
-              committed_per_sb, lp_per_sb = [], []
-              def cb(state):
-                  model._sfumato_phase_idx = state.sub_block + 1
-                  if state.sub_block + 1 <= commit_n_blocks:
-                      lp_per_sb.append(_logits_to_logprobs(state.committed_logits,
-                                                            state.tokens_committed))
-                  else:
-                      lp_per_sb.append([])
-                  committed_per_sb.append(state.tokens_committed)
-                  return continue_llada()
-              text = run_cmajc_k3(model, tokenizer, prompt, k_steps, n_branches,
-                                   temperature, step_callback=cb)
-              from e4.grade import is_correct
-              r = float(is_correct(text, gold))
-              out.append((committed_per_sb, lp_per_sb, text, r))
+    Mock-stub fallback (when `model is None` AND MOCK_MODELS=1):
+      Synthesize a deterministic-ish rollout structure via random; used by
+      smoke 5 (no model load at all). When `model` is a real _Mock object
+      we go through the real path above and exercise the actual callback
+      plumbing.
+
+    TODO (phase_emb wrapping inside cmajc generate):
+      The phase_emb additive bias on LoRA-A needs to be active for each
+      sub-block forward, but `denoise_block`'s step_callback fires AT the
+      sub-block BOUNDARY (after the forward completes), not as a bracket
+      around the next forward. Cleanly wrapping each sub-block forward
+      requires a hook inside `_generate`'s inner loop in `e4/diff_llada.py`.
+      Until that hook lands, rollouts run with phase_emb at zero-init
+      (effectively no schedule-conditioning); the GRPO infrastructure works
+      but the schedule-conditional advantage isn't yet realized. The k3 KL
+      anchor + advantage-weighted log-pi still flow correctly.
     """
-    # Smoke / no-GPU path: synthesize a deterministic-ish dummy rollout.
-    if model is None or os.environ.get("MOCK_MODELS") == "1":
+    # Stub fallback (no diff-model object at all): synthetic dummy rollouts.
+    # Used by smoke 5 to exercise GRPO arithmetic without any model.
+    if model is None and os.environ.get("MOCK_MODELS") == "1":
         rng = random.Random(hash((prompt, gold)) & 0xFFFFFFFF)
-        out: List[Tuple[List[List[int]], List[List[float]], str, float]] = []
+        out_stub: List[RolloutResult] = []
         for i in range(m):
             committed = [[rng.randint(0, 32000) for _ in range(8)] for _ in range(num_sub_blocks)]
             log_probs = [
@@ -474,14 +531,101 @@ def _rollout(
             ]
             final_text = f"[mock rollout {i} for prompt[:32]={prompt[:32]!r}]"
             reward = float(rng.random() < 0.5)
-            out.append((committed, log_probs, final_text, reward))
-        return out
+            out_stub.append(RolloutResult(committed, log_probs, final_text, reward))
+        return out_stub
 
-    # Real path: not implemented here (see TODO above + module docstring).
-    raise NotImplementedError(
-        "Real GPU rollout path requires e4/diff_llada._generate to expose "
-        "per-sub-block committed_logits. See module-level TODO."
-    )
+    # Real path: requires a diff-model object exposing `.denoise_block(...)`
+    # with a step_callback contract matching e4/diff_llada.StepState.
+    if not hasattr(model, "denoise_block"):
+        raise TypeError(
+            f"_rollout real path requires a diff-model with .denoise_block; "
+            f"got {type(model).__name__}. Pass a `e4.diff_llada.load(...)` "
+            f"instance or set MOCK_MODELS=1 with model=None for the smoke stub."
+        )
+
+    # Late import: e4.grade is cheap and torch-free.
+    from e4.grade import is_correct  # type: ignore
+
+    # Lazy torch import — only needed for log-prob extraction. If torch isn't
+    # available we still produce results (with python-list zero log-probs).
+    _torch_available = True
+    try:
+        import torch  # type: ignore  # noqa: F401
+    except ImportError:
+        _torch_available = False
+
+    # Honor EMIT_LOGPROBS=1 contract: diff_llada._generate stashes per-sub-
+    # block committed logits onto StepState only when this env var is set.
+    # We set it for the duration of the rollout call and restore it after.
+    prev_emit = os.environ.get("EMIT_LOGPROBS")
+    os.environ["EMIT_LOGPROBS"] = "1"
+    try:
+        results: List[RolloutResult] = []
+        for i in range(m):
+            seed_i = seed * 1000 + i
+            captured_tokens: List[List[int]] = []
+            captured_logits: List[Any] = []  # per sub-block; None or tensor
+
+            def _cb(state: Any) -> Any:  # noqa: ANN401
+                # state is e4.diff_llada.StepState
+                captured_tokens.append(list(state.tokens_committed))
+                captured_logits.append(state.committed_logits)
+                # Default directive: continue the LLaDA schedule unchanged.
+                # We can't construct StepDirective without importing it;
+                # returning None is treated as continue_llada by both real
+                # and mock _generate (see e4/diff_llada.py:278-280).
+                return None
+
+            text, _flops = model.denoise_block(
+                prompt=prompt,
+                k_steps=k_steps,
+                seed=seed_i,
+                temperature=temperature,
+                apply_commit=True,
+                commit_n_blocks=commit_n_blocks,
+                step_callback=_cb,
+            )
+
+            # Pad / truncate the captured per-sub-block lists to exactly
+            # `num_sub_blocks` so downstream tripwire + grpo_loss code can
+            # index without bounds checks.
+            while len(captured_tokens) < num_sub_blocks:
+                captured_tokens.append([])
+                captured_logits.append(None)
+            captured_tokens = captured_tokens[:num_sub_blocks]
+            captured_logits = captured_logits[:num_sub_blocks]
+
+            # Build per-sub-block log-prob payloads.
+            #   - sub-block 0 (commit-LoRA OFF): empty list.
+            #   - commit-active sub-blocks: extract per-token log-pi from
+            #     the captured pre-softmax logits + committed tokens, OR
+            #     fall back to zero log-probs of the right length when
+            #     committed_logits is None (mock / EMIT_LOGPROBS unwired).
+            lp_per_sb: List[Any] = []
+            for sb_idx in range(num_sub_blocks):
+                tokens_here = captured_tokens[sb_idx]
+                logits_here = captured_logits[sb_idx]
+                if not (1 <= sb_idx <= commit_n_blocks) or not tokens_here:
+                    lp_per_sb.append([])
+                    continue
+                if logits_here is not None and _torch_available:
+                    lp_per_sb.append(
+                        _logits_to_token_logprobs(logits_here, tokens_here)
+                    )
+                else:
+                    # Mock or EMIT_LOGPROBS-unwired: zero placeholder so
+                    # downstream grpo_loss .stack() still finds a tensor.
+                    lp_per_sb.append(_zero_logprobs_like(len(tokens_here)))
+
+            reward = 1.0 if is_correct(text, gold) else 0.0
+            results.append(RolloutResult(captured_tokens, lp_per_sb, text, reward))
+    finally:
+        if prev_emit is None:
+            os.environ.pop("EMIT_LOGPROBS", None)
+        else:
+            os.environ["EMIT_LOGPROBS"] = prev_emit
+
+    return results
 
 
 # ----------------------------------------------------------------------------
@@ -806,6 +950,85 @@ def _smoke() -> int:
         )
     except ImportError:
         print("[smoke] torch unavailable — smoke 9 skipped", flush=True)
+
+    # ---- 10. _rollout real-path on _Mock diff-model (GPU plumbing exercised) ----
+    # Drive _rollout through `e4.diff_llada.load(mock=True)` so the actual
+    # denoise_block + step_callback contract is exercised. The mock doesn't
+    # populate committed_logits (always None), so we expect zero-tensor /
+    # empty-list log_probs; what we're verifying is the shape contract +
+    # that the real-path code branches without raising.
+    try:
+        import e4.diff_llada as _diff  # type: ignore
+
+        os.environ["MOCK_MODELS"] = "1"
+        mock_diff = _diff.load("mock-llada", mock=True)
+        out_real = _rollout(
+            model=mock_diff,
+            tokenizer=None,
+            prompt="Mock problem 1: 2 + 1 = ?",
+            gold="3",
+            m=4,
+            seed=0,
+        )
+        if len(out_real) != 4:
+            fail.append(f"smoke10 _rollout returned {len(out_real)} rollouts, expected 4")
+        for i, res in enumerate(out_real):
+            # NamedTuple unpacks like a tuple.
+            committed_per_sb, lp_per_sb, text, reward = res
+            # Also confirm the named-field access works.
+            if res.final_text != text:
+                fail.append(f"smoke10 rollout {i} named-field/tuple mismatch")
+            if len(committed_per_sb) != NUM_SUB_BLOCKS:
+                fail.append(
+                    f"smoke10 rollout {i} committed_per_sb len {len(committed_per_sb)} "
+                    f"!= {NUM_SUB_BLOCKS}"
+                )
+            if len(lp_per_sb) != NUM_SUB_BLOCKS:
+                fail.append(
+                    f"smoke10 rollout {i} lp_per_sb len {len(lp_per_sb)} "
+                    f"!= {NUM_SUB_BLOCKS}"
+                )
+            # Sub-block 0 (commit-LoRA OFF) must be empty.
+            if lp_per_sb[0]:
+                fail.append(f"smoke10 rollout {i} sub-block 0 lp not empty")
+            # Sub-blocks 1..commit_n_blocks should have a tensor / list with
+            # the same length as committed_per_sb[sb] (mock fills 32 tokens).
+            for sb in range(1, COMMIT_N_BLOCKS + 1):
+                expected_len = len(committed_per_sb[sb])
+                got = lp_per_sb[sb]
+                # Either a torch.Tensor or python list — both have len.
+                got_len = (
+                    int(got.shape[0])
+                    if hasattr(got, "shape") and len(getattr(got, "shape", ())) >= 1
+                    else len(got)
+                )
+                if got_len != expected_len:
+                    fail.append(
+                        f"smoke10 rollout {i} sb{sb} lp len {got_len} != "
+                        f"committed len {expected_len}"
+                    )
+            if not isinstance(text, str) or not text:
+                fail.append(f"smoke10 rollout {i} final_text empty/not-str: {text!r}")
+            if reward not in (0.0, 1.0):
+                fail.append(f"smoke10 rollout {i} reward {reward} not binary")
+        # Determinism check: same seed → same final text across two calls.
+        out_b = _rollout(
+            model=mock_diff,
+            tokenizer=None,
+            prompt="Mock problem 1: 2 + 1 = ?",
+            gold="3",
+            m=4,
+            seed=0,
+        )
+        if [r.final_text for r in out_real] != [r.final_text for r in out_b]:
+            fail.append("smoke10 _rollout not deterministic for fixed seed")
+        print(
+            f"[smoke] _rollout real-path on _Mock: M={len(out_real)} "
+            f"sub_blocks={NUM_SUB_BLOCKS} reward_set={sorted({r.reward for r in out_real})}",
+            flush=True,
+        )
+    except ImportError:
+        print("[smoke] e4.diff_llada unavailable — smoke 10 skipped", flush=True)
 
     # ---- verdict ----
     if fail:
