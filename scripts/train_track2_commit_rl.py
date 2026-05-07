@@ -1491,23 +1491,58 @@ def main_train() -> int:
                     for sb in range(NUM_SUB_BLOCKS):
                         seq.extend(padded[sb] if sb < t else [mask_id] * sub_block_length)
                     full_ids = torch.tensor([seq], dtype=torch.long, device="cuda")
+                    sb_start = prompt_len + t * sub_block_length
+                    n_committed = len(committed_t)
+                    committed_ids = torch.tensor(committed_t, dtype=torch.long, device="cuda")
+
+                    # Forward A: adapter ON, phase_emb ON, grad enabled.
                     _pes.force_set_sub_block(t)
                     try:
-                        outputs = peft_model(full_ids)
-                        logits = outputs.logits if hasattr(outputs, "logits") else outputs[0]
-                        sb_start = prompt_len + t * sub_block_length
-                        n_committed = len(committed_t)
-                        sb_logits = logits[0, sb_start : sb_start + n_committed]
-                        log_p = torch.nn.functional.log_softmax(sb_logits, dim=-1)
-                        committed_ids = torch.tensor(committed_t, dtype=torch.long, device="cuda")
-                        token_lp = log_p.gather(1, committed_ids.unsqueeze(1)).squeeze(1)
-                        sb_loss = -(token_lp.sum()) * float(A)
-                        total_loss_scalar += float(sb_loss.detach())
-                        sb_loss.backward()
-                        n_backward += 1
+                        outputs_a = peft_model(full_ids)
+                        logits_a = outputs_a.logits if hasattr(outputs_a, "logits") else outputs_a[0]
+                        sb_logits_a = logits_a[0, sb_start : sb_start + n_committed]
+                        log_p_a = torch.nn.functional.log_softmax(sb_logits_a, dim=-1)
+                        token_lp_theta = log_p_a.gather(1, committed_ids.unsqueeze(1)).squeeze(1)
                     finally:
                         _pes.clear()
-                    del outputs, logits, sb_logits, log_p, token_lp, sb_loss, full_ids, committed_ids
+
+                    # Forward B (KL anchor, no grad): adapter OFF, phase_emb skip.
+                    # Schulman k3 KL = (exp(-delta) - 1 + delta), delta = log_pi_theta - log_pi_frozen.
+                    # KL is always >= 0 by construction. Gradient flows ONLY through
+                    # log_pi_theta (forward A path); log_pi_frozen is detached.
+                    if KL_BETA > 0.0:
+                        peft_model.disable_adapter_layers()
+                        phase_emb.set_adapter_disabled(True)
+                        try:
+                            with torch.no_grad():
+                                outputs_b = peft_model(full_ids)
+                                logits_b = outputs_b.logits if hasattr(outputs_b, "logits") else outputs_b[0]
+                                sb_logits_b = logits_b[0, sb_start : sb_start + n_committed]
+                                log_p_b = torch.nn.functional.log_softmax(sb_logits_b, dim=-1)
+                                token_lp_frozen = log_p_b.gather(1, committed_ids.unsqueeze(1)).squeeze(1)
+                            del outputs_b, logits_b, sb_logits_b, log_p_b
+                        finally:
+                            phase_emb.set_adapter_disabled(False)
+                            peft_model.enable_adapter_layers()
+                            peft_model.set_adapter("commit")
+                            # disable_adapter_layers also flips requires_grad off; restore.
+                            for p_name, p in peft_model.named_parameters():
+                                if ".lora_" in p_name and ".commit" in p_name:
+                                    p.requires_grad_(True)
+                        kl_term = kl_k3_estimator(token_lp_theta, token_lp_frozen).sum()
+                    else:
+                        kl_term = torch.zeros((), device=token_lp_theta.device)
+
+                    pg_loss = -(token_lp_theta.sum()) * float(A)
+                    sb_loss = pg_loss + KL_BETA * kl_term
+                    total_loss_scalar += float(sb_loss.detach())
+                    sb_loss.backward()
+                    n_backward += 1
+
+                    del outputs_a, logits_a, sb_logits_a, log_p_a, token_lp_theta
+                    if KL_BETA > 0.0:
+                        del token_lp_frozen, kl_term
+                    del pg_loss, sb_loss, full_ids, committed_ids
                     torch.cuda.empty_cache()
 
             torch.nn.utils.clip_grad_norm_(trainable, max_norm=1.0)
