@@ -2,6 +2,11 @@
   "dataset": "gsm8k",
   "config": "main",
   "split": "test",
+  "count": 1319,
+  "question_col": "question",
+  "answer_col": "answer",
+  "answer_extract_split": "####",
+  "notes": "Full GSM8K-test split, idx 0..1318. Headline N=1319 for paper \u00a73.5 cmajc-k3 evaluation.",
   "indices": [
     0,
     1,
@@ -1323,7 +1328,5 @@
     1317,
     1318
   ],
-  "count": 1319,
-  "notes": "Full GSM8K-test split, idx 0..1318, ordered. For evaluating the entire test set rather than the 200-problem dev subset.",
-  "integrity_sha256": "1c72e9e3821d9361a83f6a7dc60c04bbf9489affdda324f4a80c087aeb7fd08d"
+  "integrity_sha256": "4087ab8103c4ab32f9bd4fe05e99c3def274bf8dee159c86eed824e35243b536"
 }
