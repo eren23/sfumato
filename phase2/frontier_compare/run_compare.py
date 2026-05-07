@@ -301,6 +301,9 @@ def main():
     ap.add_argument("--concurrency", type=int, default=8)
     ap.add_argument("--budget-usd", type=float, default=1.00,
                     help="hard cap on total estimated OpenRouter spend")
+    ap.add_argument("--dataset", default="gsm8k",
+                    choices=["gsm8k", "math500_numeric"],
+                    help="which substrate to evaluate on")
     args = ap.parse_args()
 
     api_key = _load_api_key()
@@ -316,12 +319,23 @@ def main():
         else pathlib.Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"[run_compare] loading GSM8K test split via datasets...", flush=True)
     from datasets import load_dataset
-    ds = load_dataset("gsm8k", "main", split="test")
-    problems = [{"idx": i, "question": ds[i]["question"], "answer": ds[i]["answer"]}
-                for i in range(args.n)]
-    print(f"[run_compare] {len(problems)} problems loaded (idx 0..{args.n-1})", flush=True)
+    if args.dataset == "gsm8k":
+        print(f"[run_compare] loading GSM8K test split via datasets...", flush=True)
+        ds = load_dataset("gsm8k", "main", split="test")
+        problems = [{"idx": i, "question": ds[i]["question"], "answer": ds[i]["answer"]}
+                    for i in range(args.n)]
+    else:  # math500_numeric
+        print(f"[run_compare] loading MATH-500 numeric subset...", flush=True)
+        with (REPO_ROOT / "e4/data/math500_numeric_indices.json").open() as f:
+            spec = json.load(f)
+        ds = load_dataset(spec["dataset"], spec.get("config"), split=spec["split"])
+        # Take first args.n indices from numeric subset
+        numeric_idxs = spec["indices"][:args.n]
+        problems = [{"idx": i, "question": ds[i]["problem"],
+                     "answer": str(ds[i]["answer"]).strip()}
+                    for i in numeric_idxs]
+    print(f"[run_compare] {len(problems)} problems loaded (idx range varies by --dataset)", flush=True)
 
     aliases = [a.strip() for a in args.models.split(",") if a.strip()]
     resolved = []

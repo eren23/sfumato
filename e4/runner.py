@@ -57,16 +57,24 @@ def _trace_dump_enabled() -> bool:
     return os.environ.get("TRACE_STEPS", "0") == "1"
 
 
-def _make_trace_dump_callback(branch_idx: int):
+def _make_trace_dump_callback(branch_idx: int, diff_model=None):
     """Factory: returns a step_callback that writes StepState records to a
     sidecar JSONL keyed on (branch_idx, problem_idx). Only fires when
     TRACE_STEPS=1 AND _TRACE_DUMP_DIR + _CURRENT_PROBLEM_IDX are set by
     main(). Always returns continue_llada() so behavior is bit-identical.
+
+    When EMIT_PARTIAL_PREDS=1 AND diff_model.tokenizer is available, also
+    decodes the committed prefix at each sub-block boundary and emits the
+    extracted partial answer to the JSONL — used by T3.C Temporal-SC ×
+    commit-LoRA aggregator.
     """
     if _TRACE_DUMP_DIR is None or _CURRENT_PROBLEM_IDX is None:
         return None
     out_path = _TRACE_DUMP_DIR / f"branch_{branch_idx}_idx_{_CURRENT_PROBLEM_IDX}.jsonl"
     out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    emit_partial = os.environ.get("EMIT_PARTIAL_PREDS", "0") == "1"
+    tokenizer = getattr(diff_model, "_tokenizer", None) if (emit_partial and diff_model is not None) else None
 
     def cb(state):
         # Defensive: state.entropy / top_k_logits may be empty in the mock
@@ -87,6 +95,16 @@ def _make_trace_dump_callback(branch_idx: int):
             "temperature": state.temperature,
             "wallclock_ms": state.wallclock_ms,
         }
+        # T3.C: decode committed prefix → partial answer extraction.
+        if tokenizer is not None and state.x_handle is not None:
+            try:
+                tok_ids = state.x_handle[0, state.prompt_len:state.block_end].tolist()
+                txt = tokenizer.decode(tok_ids, skip_special_tokens=True)
+                rec["partial_text_len"] = len(txt)
+                rec["partial_answer_strict"] = grade.extract_final_answer(txt)
+                rec["partial_answer_loose"] = grade.extract_answer(txt)
+            except Exception as e:
+                rec["partial_decode_error"] = str(e)[:120]
         with out_path.open("a") as f:
             f.write(json.dumps(rec) + "\n")
         return diff_llada.StepDirective.continue_llada()
@@ -360,7 +378,7 @@ def run_condition(
             branches = []
             total = 0
             for bi, s in enumerate(seeds_b):
-                cb_trace = _make_trace_dump_callback(bi) if _trace_dump_enabled() else None
+                cb_trace = _make_trace_dump_callback(bi, diff_model=diff_model) if _trace_dump_enabled() else None
                 cot, used = diff_model.denoise_block(
                     prompt=q,
                     k_steps=k_steps,
@@ -417,7 +435,7 @@ def run_condition(
             branches = []
             total = 0
             for bi, s in enumerate(seeds_b):
-                cb_trace = _make_trace_dump_callback(bi) if _trace_dump_enabled() else None
+                cb_trace = _make_trace_dump_callback(bi, diff_model=diff_model) if _trace_dump_enabled() else None
                 cot, used = diff_model.denoise_block(
                     prompt=q,
                     k_steps=k_steps,
