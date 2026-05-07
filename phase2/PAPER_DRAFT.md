@@ -163,7 +163,38 @@ as confirmation that the *information* is recoverable from the branch
 text — just not by per-branch supervised classification at our dataset
 scale.
 
-### 2.5 What this means for self-consistency
+### 2.5 Process supervision: two pre-registered LOSSes, expected per literature
+
+Phase-3 added two direct tests of the obvious "process supervision"
+remedy hinted at by §2.4. Both are pre-registered LOSSes, and both
+are **expected per the 2024–2026 PRM literature** rather than
+methodology failures. T1.B v1 trained an MLP reranker on 14-d
+sub-block entropy + commit-LoRA-active features over 500 labelled
+trace-records (N=100 problems × 5 branches × 4 sub-blocks): PRM-rerank
+0.76 vs cmajc-vote 0.80 (Δ = −4pp). T1.B-redux added shadow-forward
+`logit_shift_norm` features (19-d, same scale): PRM-rerank 0.73 vs
+cmajc-vote 0.86 (Δ = −13pp, LOSS-CONFIRMED). Every heuristic and every
+classifier we tried lost to the vote. This negative is consistent with
+the documented small-scale failure regime of discriminative
+surface-feature PRMs: PRM800K (Lightman et al. 2023, arXiv 2305.20050)
+trains on ~1600× more problems (12K vs sfumato's 100); ThinkPRM
+(Khalil et al. 2025, arXiv 2504.16828) shows that at 8K labels
+*generative* verification beats discriminative PRMs trained on 100×
+more data; ProcessBench (arXiv 2412.06559) shows problem diversity
+(100K diverse > 12K PRM800K) dominates raw label volume; "What Are
+Step-Level Reward Models Rewarding?" (arXiv 2412.15904) demonstrates
+that discriminative PRMs at this scale learn spurious surface features
+(word count, formatting) rather than logical correctness; and Wang et
+al. 2022 self-consistency (arXiv 2203.11171) remains competitive with
+trained verifiers at N<1000. Sfumato's substrate scale and feature
+richness fall outside both regimes the field has shown work
+(generative reasoning, large diverse problem pools), so the LOSS is
+informative — it documents a concrete instance of the predicted
+failure mode on a diffusion-LM substrate — not a flaw in the protocol.
+See `phase2/research/r5_prm_failure_modes_priorart.md` for the full
+literature review.
+
+### 2.6 What this means for self-consistency
 
 Self-consistency (Wang 2022) and its variants assume that branch
 correctness is a function of branch-level features that a small verifier
@@ -381,6 +412,9 @@ schedule itself, not the adapter active across the schedule).
 - Wang et al. 2022, "Self-Consistency Improves Chain of Thought Reasoning in Language Models," arXiv 2203.11171.
 - Cobbe et al. 2021, "Training Verifiers to Solve Math Word Problems," arXiv 2110.14168.
 - Lightman et al. 2023, "Let's Verify Step by Step" (PRM800K), arXiv 2305.20050.
+- Khalil et al. 2025, "Process Reward Models That Think" (ThinkPRM), arXiv 2504.16828, TMLR / OpenReview.
+- Alibaba Qwen Team 2024, "ProcessBench: Identifying Process Errors in Mathematical Reasoning," arXiv 2412.06559.
+- Zhang et al. 2024, "What Are Step-Level Reward Models Rewarding?", arXiv 2412.15904.
 - Nie et al. 2025, "LLaDA: A Mask Diffusion Language Model," arXiv 2502.09992.
 - Arrelou et al. 2025, "Block Diffusion: Interpolating Between Autoregressive and Diffusion Language Models," arXiv 2503.09573 (ICLR-25).
 - "Planned Diffusion," arXiv 2510.18087, Oct 2024 (ICLR-26).
