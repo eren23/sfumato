@@ -364,6 +364,31 @@ schedule itself, not the adapter active across the schedule).
   0.865 vs 0.83. We document this honestly: at peer weight scale, a
   monolithic AR with stronger pretraining beats the hybrid stack on
   GSM8K. The hybrid earns its weight only at <3B planner class.
+- **Schedule-conditional Temporal-SC voting (T3.C)**: schedule-weighted
+  vote (1.5× active sub-blocks / 1.0× inactive) regressed −4pp under
+  strict pattern matching on GSM8K dev_200 N=100 (cmajc-vote 0.82,
+  Temporal-SC 0.78). Diagnostic: the canonical answer span (`####` /
+  `Answer:`) only materializes at sub-block 3 of 4 in 94% of branches,
+  so the 1.5× weight on sub-blocks 1–2 amplifies a near-empty channel.
+  Cites Zhang et al. 2025 (arXiv 2508.09138) "Time Is a Feature" as
+  direct prior on temporal-SC voting in dLLMs; our schedule-conditional
+  weight does not extend their result. See
+  `phase2/spikes/temporal-sc-commit-lora/RESULT.md`.
+- **Schedule-RLHF mini-pilot (Phase-4 Direction A)**: 50-step GRPO over
+  commit-LoRA with phase-embedding additive bias on LoRA-A is
+  statistically indistinguishable from baseline on MATH-500 numeric
+  N=20 (paired: trained 0.350 vs baseline 0.400, 19/20 predictions
+  identical, 1 problem flipped). Plumbing PASS (24/24 phase-emb hooks,
+  97 LoRA-A grads, no NaN, no tripwire). Without KL anchor and at
+  N=200 substrate × 1 epoch, training is too gentle to register on
+  20-problem held-out. See `phase2/spikes/direction-a-mini-pilot/RESULT.md`.
+- **LLaDA-1.5 base swap (Phase-4 Direction C-cheap)**: drop-in swap
+  from LLaDA-8B-Instruct to LLaDA-1.5 (VRPO post-trained successor)
+  with frozen v3 LoRAs landed MATH-500 numeric N=50 cmajc-k3 = 0.56,
+  −2pp below the 0.58 LLaDA-8B-Instruct reference. Adapter compat
+  passed cleanly; capability transfer failed. The peer-class gap is
+  not explained by base-model VRPO post-training. See
+  `phase2/spikes/llada-15-base-swap/RESULT.md`.
 - **Bandit-on-replay mode router (D1)**: at the 20-idx × 12-condition
   full-coverage substrate, a contextual bandit over per-problem text
   features (length, number-tokens, TF-IDF) reached 0.65 LOOCV vs
