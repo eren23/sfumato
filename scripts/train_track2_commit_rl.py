@@ -357,6 +357,108 @@ class PhaseEmbedding:
         self._patched = []
 
 
+def _rescore_committed_logprobs(
+    diff_model: Any,
+    prompt_text: str,
+    committed_per_sb: Sequence[Sequence[int]],
+    *,
+    num_sub_blocks: int = 4,
+    commit_n_blocks: int = 3,
+    sub_block_length: int = 32,
+    mask_id: Optional[int] = None,
+) -> List[Any]:
+    """Re-score the committed tokens through the LIVE peft_model with grad.
+
+    `committed_logits` captured during rollout are detached (per
+    `e4/diff_llada.py:744-746`), so the grpo_loss tensor built from them
+    has no autograd path back to the LoRA / phase_emb params. To make
+    the policy gradient actually update the model, we run ONE forward per
+    commit-active sub-block t in {1..commit_n_blocks} with phase_emb[t]
+    set via the shared thread-local, and extract log-pi at the
+    sub-block-t positions.
+
+    Re-score input per sub-block t:
+      [chat-templated prompt]
+      [committed tokens for sub-blocks 0..t-1]
+      [MASK tokens for sub-blocks t..N-1]
+
+    This mirrors the diffusion state at sub-block t entry — model sees
+    the prefix that was already committed, masks for everything else.
+    log_pi_theta is then log_softmax(model_logits)[committed_token_at_p]
+    for each position p in sub-block t.
+
+    Returns: list of length num_sub_blocks; entries 1..commit_n_blocks are
+    (T_t,) tensors connected to the autograd graph. Sub-block 0 stays
+    empty (commit-LoRA OFF).
+    """
+    import torch
+    import torch.nn.functional as F
+
+    from e4 import phase_emb_state as _pes
+    from e4 import diff_llada as _diff
+
+    tokenizer = diff_model._tokenizer
+    model = diff_model._model
+    device = next(model.parameters()).device
+    if mask_id is None:
+        mask_id = _diff._LLADA_MASK_ID
+
+    # Build chat-templated prompt — match _DENOISE_SYS exactly so the
+    # re-score sees the same prompt embedding the rollout did.
+    messages = [
+        {"role": "system", "content": _diff._DENOISE_SYS},
+        {"role": "user", "content": prompt_text},
+    ]
+    prompt_token_ids = tokenizer.apply_chat_template(  # type: ignore[attr-defined]
+        messages, tokenize=True, add_generation_prompt=True
+    )
+    prompt_len = len(prompt_token_ids)
+
+    # Pre-pad each sub-block to exactly sub_block_length so absolute
+    # position arithmetic stays simple.
+    def _pad(ids: Sequence[int]) -> List[int]:
+        ids = list(ids)
+        if len(ids) >= sub_block_length:
+            return ids[:sub_block_length]
+        return ids + [mask_id] * (sub_block_length - len(ids))
+
+    padded_per_sb: List[List[int]] = [
+        _pad(committed_per_sb[sb] if sb < len(committed_per_sb) else [])
+        for sb in range(num_sub_blocks)
+    ]
+
+    out_lp: List[Any] = [torch.zeros(0, device=device) for _ in range(num_sub_blocks)]
+
+    for t in range(1, commit_n_blocks + 1):
+        committed_t = list(committed_per_sb[t]) if t < len(committed_per_sb) else []
+        if not committed_t:
+            continue
+        # Input = prompt + sub-blocks 0..t-1 (committed) + sub-blocks t.. (masks).
+        seq: List[int] = list(prompt_token_ids)
+        for sb in range(num_sub_blocks):
+            if sb < t:
+                seq.extend(padded_per_sb[sb])
+            else:
+                seq.extend([mask_id] * sub_block_length)
+        full_ids = torch.tensor([seq], dtype=torch.long, device=device)
+
+        _pes.force_set_sub_block(t)
+        try:
+            outputs = model(full_ids)
+            logits = outputs.logits if hasattr(outputs, "logits") else outputs[0]
+            sb_start = prompt_len + t * sub_block_length
+            n_committed = len(committed_t)
+            sb_logits = logits[0, sb_start : sb_start + n_committed]  # (n, vocab)
+            log_p = F.log_softmax(sb_logits, dim=-1)
+            committed_ids = torch.tensor(committed_t, dtype=torch.long, device=device)
+            token_lp = log_p.gather(1, committed_ids.unsqueeze(1)).squeeze(1)
+            out_lp[t] = token_lp
+        finally:
+            _pes.clear()
+
+    return out_lp
+
+
 def _logits_to_token_logprobs(logits: Any, token_ids: Sequence[int]) -> Any:
     """Per-position log pi(committed_token) from captured logits.
 
@@ -1032,6 +1134,70 @@ def _smoke() -> int:
     except ImportError:
         print("[smoke] e4.diff_llada unavailable — smoke 10 skipped", flush=True)
 
+    # ---- 12. _rescore_committed_logprobs grad path (real torch grad) ----
+    # Build a tiny stand-in model that mimics LLaDA's `model(input_ids).logits`
+    # contract, plug it into a _Real instance, and verify the re-score
+    # function returns gradient-bearing log-probs that touch the model's
+    # trainable params. Without this the policy gradient is a no-op even
+    # if optimizer.step runs.
+    try:
+        import torch  # type: ignore
+        import torch.nn as nn  # type: ignore
+        from types import SimpleNamespace
+
+        class _TinyLLaDA(nn.Module):
+            def __init__(self, vocab=128):
+                super().__init__()
+                self.embed = nn.Embedding(vocab, 16)
+                self.head = nn.Linear(16, vocab)
+
+            def forward(self, input_ids):
+                h = self.embed(input_ids)
+                logits = self.head(h)
+                return SimpleNamespace(logits=logits)
+
+        class _TinyTokenizer:
+            def __init__(self, vocab=128):
+                self.vocab = vocab
+
+            def apply_chat_template(self, messages, tokenize=True, add_generation_prompt=True):
+                text = " ".join(m["content"] for m in messages) + " [GEN]"
+                return [hash(w) % self.vocab for w in text.split()]
+
+        torch.manual_seed(7)
+        tiny = _TinyLLaDA(vocab=128)
+        diff_stub = SimpleNamespace(_model=tiny, _tokenizer=_TinyTokenizer(128))
+
+        # 4 sub-blocks, each with 8 committed tokens (sub_block_length=8 here).
+        committed = [[(i * 7 + j) % 128 for j in range(8)] for i in range(4)]
+        lp_per_sb = _rescore_committed_logprobs(
+            diff_stub, "What is 2 + 3?", committed,
+            num_sub_blocks=4, commit_n_blocks=3, sub_block_length=8,
+            mask_id=0,  # tiny vocab, override LLaDA's 126336 default
+        )
+        # Verify shape contract.
+        if len(lp_per_sb) != 4:
+            fail.append(f"smoke12 lp_per_sb len {len(lp_per_sb)} != 4")
+        for sb in range(1, 4):
+            t = lp_per_sb[sb]
+            if not torch.is_tensor(t) or t.dim() != 1 or t.shape[0] != 8:
+                fail.append(f"smoke12 sub-block {sb}: bad shape {getattr(t, 'shape', t)!r}")
+        # Verify autograd path: a sum of all log-pi should produce non-zero
+        # grads on the tiny model's head bias.
+        loss = sum(t.sum() for sb, t in enumerate(lp_per_sb) if torch.is_tensor(t) and t.numel())
+        loss.backward()
+        head_grad = tiny.head.weight.grad
+        if head_grad is None or head_grad.abs().sum().item() == 0.0:
+            fail.append("smoke12 backward produced no grad on tiny.head.weight")
+        print(
+            f"[smoke] _rescore grad path OK: lp[1..3] shapes "
+            f"{[lp_per_sb[s].shape for s in (1,2,3)]} "
+            f"head_grad_l1={head_grad.abs().sum().item():.3f}",
+            flush=True,
+        )
+    except ImportError:
+        print("[smoke] torch unavailable — smoke 12 skipped", flush=True)
+
     # ---- 11. phase_emb_state env-gate + writer wiring via _Mock ----
     # Verifies that:
     #   (a) e4.phase_emb_state.set_sub_block respects the SCHEDULE_RL gate
@@ -1121,49 +1287,85 @@ def _smoke() -> int:
 # Main training loop (GPU; sketched - see TODOs in module docstring)
 # ----------------------------------------------------------------------------
 def main_train() -> int:
-    """Real GPU training entrypoint. Sketch-quality - ships when the
-    diff_llada committed-logits hook is in place. Until then, --smoke is
-    the only supported invocation.
+    """Real GPU training entrypoint.
+
+    Loads LLaDA + commit-LoRA via `e4.diff_llada._Real` so the rollout
+    path (which calls `model.denoise_block(...)`) and the optimizer
+    (which steps on `peft_model.parameters()`) both reference the SAME
+    underlying peft-wrapped HF model. Rollouts are fired through the
+    diff-model wrapper; backward + optimizer.step touch the underlying
+    PEFT params directly. Setting `SCHEDULE_RL=1` at startup so the
+    diff_llada inner-loop writer publishes the current sub-block index
+    to the phase_emb thread-local on every diffusion forward.
     """
     try:
         import torch
-        from peft import LoraConfig, PeftModel, get_peft_model
+        from peft import PeftModel
         from transformers import AutoModel, AutoTokenizer
     except ImportError as exc:
         print(f"ERROR: missing dependency: {exc}", file=sys.stderr)
         return 2
+
+    # CRITICAL: enable the phase_emb writer side BEFORE any rollout fires.
+    # diff_llada._Real.denoise_block calls _pes.set_sub_block(b_idx) inside
+    # its inner forward loop; that's a no-op unless this env is set.
+    os.environ["SCHEDULE_RL"] = "1"
+    # Also flip EMIT_LOGPROBS so StepState carries committed_logits per
+    # sub-block — _rollout consumes those for log_pi_theta.
+    os.environ["EMIT_LOGPROBS"] = "1"
 
     torch.manual_seed(SEED)
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(SEED)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # -- model + LoRA --
+    # -- diff-model + LoRA (trainable!) --
+    # We bypass diff_llada.load() because that path freezes everything
+    # (is_trainable=False). Instead: load the HF model directly, wrap with
+    # commit-LoRA via PeftModel.from_pretrained(is_trainable=True), then
+    # stuff into a _Real instance so denoise_block / step_callback all work.
     print(f"Loading base model: {MODEL_NAME}", flush=True)
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, trust_remote_code=True)
-    model = AutoModel.from_pretrained(
-        MODEL_NAME, trust_remote_code=True, torch_dtype=torch.bfloat16
-    ).to(device)
+    dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
+    base_model = AutoModel.from_pretrained(
+        MODEL_NAME, trust_remote_code=True, torch_dtype=dtype
+    )
+    if torch.cuda.is_available():
+        base_model = base_model.to("cuda")
+    base_model.requires_grad_(False)
 
-    if RESUME_FROM:
-        print(f"Resuming LoRA adapter from {RESUME_FROM}", flush=True)
-        model = PeftModel.from_pretrained(model, RESUME_FROM, is_trainable=True)
-    else:
-        cfg = LoraConfig(
-            r=LORA_R, lora_alpha=LORA_ALPHA, lora_dropout=LORA_DROPOUT,
-            bias="none", task_type="CAUSAL_LM",
-            target_modules=LORA_TARGETS,
-        )
-        model = get_peft_model(model, cfg)
+    if not RESUME_FROM:
+        print("ERROR: RESUME_FROM is required (commit-LoRA v3 to fine-tune).", file=sys.stderr)
+        return 2
+    print(f"Resuming commit-LoRA from {RESUME_FROM} with is_trainable=True", flush=True)
+    _hf_token = (
+        os.environ.get("HF_TOKEN")
+        or os.environ.get("HUGGINGFACE_HUB_TOKEN")
+        or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+    )
+    peft_model = PeftModel.from_pretrained(
+        base_model, RESUME_FROM,
+        is_trainable=True, adapter_name="commit", token=_hf_token,
+    )
 
-    # -- phase emb --
+    # Wrap into a _Real instance so _rollout's `.denoise_block` works.
+    import e4.diff_llada as _diff
+    diff_model = _diff._Real(name=MODEL_NAME)
+    diff_model._model = peft_model
+    diff_model._tokenizer = tokenizer
+
+    # -- phase emb (attaches to peft_model so backward flows through) --
     phase_emb = PhaseEmbedding(num_phases=NUM_SUB_BLOCKS, lora_rank=LORA_R)
-    n_hooked = phase_emb.attach(model)
+    n_hooked = phase_emb.attach(peft_model)
     expected_hooks = len(LORA_LAYERS_TO_TRANSFORM) * len(LORA_TARGETS)
     print(f"Phase-emb hooks installed: {n_hooked} (expected {expected_hooks})", flush=True)
+    if torch.cuda.is_available():
+        phase_emb.param.data = phase_emb.param.data.to("cuda")
 
     # -- optimizer (LoRA params + phase_emb) --
-    trainable = [p for p in model.parameters() if p.requires_grad] + [phase_emb.param]
+    trainable = [p for p in peft_model.parameters() if p.requires_grad] + [phase_emb.param]
+    n_train = sum(p.numel() for p in trainable)
+    print(f"Trainable params: {n_train:,} ({len(trainable)} tensors)", flush=True)
     optim = torch.optim.AdamW(trainable, lr=LR, betas=(0.9, 0.95), weight_decay=0.0)
 
     # -- substrate --
@@ -1172,7 +1374,14 @@ def main_train() -> int:
     with open(SUBSTRATE_JSONL) as f:
         for line in f:
             rows.append(_json.loads(line))
+    # MINI_PILOT slice: first MINI_PILOT_N rows when env set.
+    mini_pilot_n = _env_int("MINI_PILOT_N", 0)
+    if mini_pilot_n > 0:
+        rows = rows[:mini_pilot_n]
+        print(f"[MINI_PILOT] using first {len(rows)} rows of substrate", flush=True)
     print(f"Substrate: {len(rows)} prompts from {SUBSTRATE_JSONL}", flush=True)
+    # Use the diff-model wrapper for rollouts.
+    model = diff_model
 
     tripwire = JaccardTripwire()
     SAVE_DIR.mkdir(parents=True, exist_ok=True)
@@ -1187,7 +1396,11 @@ def main_train() -> int:
         rng.shuffle(order)
         for idx in order:
             row = rows[idx]
-            rollouts = _rollout(model, tokenizer, row["question"], row["gold"], m=M_ROLLOUTS)
+            # Rollout under no_grad so the M denoise calls don't blow VRAM.
+            with torch.no_grad():
+                rollouts = _rollout(
+                    model, tokenizer, row["question"], row["gold"], m=M_ROLLOUTS,
+                )
 
             # -- tripwire --
             for committed_per_sb, _, _, _ in rollouts:
@@ -1209,8 +1422,25 @@ def main_train() -> int:
                 )
                 return 3
 
+            # -- re-score committed positions through LIVE peft_model (with grad) --
+            # The captured committed_logits in StepState are detached, so the
+            # rollout-time log_probs can't drive backward. Replace each rollout's
+            # log_probs_per_sb with re-scored, gradient-bearing log_pi_theta.
+            rescored: List[RolloutResult] = []
+            for committed_per_sb, _, text, reward in rollouts:
+                lp_per_sb = _rescore_committed_logprobs(
+                    diff_model,
+                    row["question"],
+                    committed_per_sb,
+                    num_sub_blocks=NUM_SUB_BLOCKS,
+                    commit_n_blocks=COMMIT_N_BLOCKS,
+                )
+                rescored.append(
+                    RolloutResult(committed_per_sb, lp_per_sb, text, reward)
+                )
+
             # -- loss --
-            loss, stats = grpo_loss(rollouts, commit_n_blocks=COMMIT_N_BLOCKS)
+            loss, stats = grpo_loss(rescored, commit_n_blocks=COMMIT_N_BLOCKS)
 
             # -- KL anchor (Phase-4 Direction A) --
             # For each rollout, re-score the committed positions twice:
