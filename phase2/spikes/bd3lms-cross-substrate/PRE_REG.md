@@ -85,7 +85,50 @@ like T2.A. Required engineering:
 | LoRA training on BD3 base (~1 GPU-day, 48GB on-demand) | ~$8 |
 | K-sweep × 4 conditions × N=50 | ~$2 |
 | Pod overhead + buffer | ~$2 |
-| **Total** | **~$12** |
+| **Total (original estimate)** | **~$12** |
+
+## Cost re-estimate (2026-05-07)
+
+The 2026-05-06 PRE_REG above assumed reuse of LLaDA's `generate.py`
+contract on BD3-LMs. A WebFetch + arXiv read on 2026-05-07 (during the
+Phase-4 T2.C scaffold dispatch) revealed three blockers that triple the
+real cost:
+
+1. **BD3-LMs ships OWT pretrain ONLY.** The released checkpoints
+   (`kuleshov-group/bd3lm-owt-block_size{4,8,16}` and `block_size1024-pretrain`
+   on HF) are pure perplexity-trained on OpenWebText. There is **no math
+   instruction-tuned variant**. To compare apples-to-apples with LLaDA-8B-
+   Instruct, BD3 must first be SFT'd on GSM8K-train (~7.5k examples).
+2. **No PEFT/LoRA infrastructure exists.** BD3's model class is a custom
+   DiT, not a `transformers.AutoModel` subclass. `peft.PeftModel.from_pretrained`
+   does NOT work out of the box. The LoRA target-module discovery + adapter
+   wiring + serialize/load cycle has to be added to BD3's model class.
+3. **Hydra-only sampler.** BD3's release entrypoint is
+   `main.py mode=sample_eval` driven by Hydra config. No programmatic
+   `_generate(prompt_ids, k_steps, ...)` Python entrypoint matching the
+   LLaDA contract — must be lifted out of the Hydra sampler loop into a
+   reusable function.
+
+Realistic re-estimate:
+
+| Phase | Eng-days | $ |
+|---|---:|---:|
+| Phase 1: fork BD3 Hydra repo + local/pod env | 3-4 | $0 |
+| Phase 2: SFT BD3-base on GSM8K-train (~7.5k examples) | 2-3 | $15-25 |
+| Phase 3: add PEFT/LoRA infra to BD3 model class | 3-4 | $0 |
+| Phase 4: train commit-LoRA on BD3-base+SFT | 2-3 | $5-10 |
+| Phase 5: K-sweep dispatch (cmajc k=2/3/4 vs c2c k=0) | 1 | $2-3 |
+| Phase 6: buffer (debugging + paper write-up) | 2-3 | $10-20 |
+| **Total (realistic)** | **14-21 days** | **~$40-60** |
+
+That's **3-4× the original estimate** ($12 + 10-14 days → $40-60 + 14-21
+days). The decision rules above are unchanged — only the cost amendment.
+
+**Status (2026-05-07):** scaffolds landed at `e4/diff_bd3.py` and
+`scripts/train_bd3_commit_lora.py` (Phase-4 T2.C dispatch). Both raise
+NotImplementedError / print the eng-prereq table. Direction A
+(schedule-RLHF) is the prioritized Phase-4 bet; T2.C stays scaffolded
+but unfunded until budget approval.
 
 ## Files (when this fires)
 
