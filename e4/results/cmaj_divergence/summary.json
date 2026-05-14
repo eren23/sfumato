@@ -1,0 +1,63 @@
+{
+  "input_jsonl": "/Users/eren/Documents/AI/sfumato/e4/results/raw_cmaj_k64_seed0_b5_v3LoRA_N200.jsonl",
+  "n_total_problems": 200,
+  "n_disagreement_problems": 108,
+  "pct_disagreement": 54.0,
+  "cmaj_acc_on_disagreement": 63.89,
+  "token_first_divergence_pct": {
+    "0": 91.67,
+    "1": 8.33,
+    "2": 0.0,
+    "3": 0.0,
+    "none": 0.0
+  },
+  "semantic_first_divergence_pct": {
+    "0": 88.89,
+    "1": 9.26,
+    "2": 0.93,
+    "3": 0.0,
+    "none": 0.93
+  },
+  "pct_diverge_sb_geq1_token": 8.33,
+  "pct_diverge_sb_geq1_semantic": 10.19,
+  "pct_diverge_sb0_token": 91.67,
+  "pct_diverge_sb0_semantic": 88.89,
+  "token_first_div_by_correctness": {
+    "cmaj_correct": {
+      "0": 64,
+      "1": 5,
+      "2": 0,
+      "3": 0,
+      "none": 0
+    },
+    "cmaj_incorrect": {
+      "0": 35,
+      "1": 4,
+      "2": 0,
+      "3": 0,
+      "none": 0
+    }
+  },
+  "semantic_first_div_by_correctness": {
+    "cmaj_correct": {
+      "0": 63,
+      "1": 5,
+      "2": 1,
+      "3": 0,
+      "none": 0
+    },
+    "cmaj_incorrect": {
+      "0": 33,
+      "1": 5,
+      "2": 0,
+      "3": 0,
+      "none": 1
+    }
+  },
+  "token_semantic_agreement_rate": 95.37,
+  "outcome_band": "sb0_geq80",
+  "edit_threshold": 3,
+  "cosine_threshold": 0.7,
+  "gen_len": 128,
+  "sub_block_len": 32
+}

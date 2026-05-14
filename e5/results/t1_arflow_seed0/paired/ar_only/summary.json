@@ -1,0 +1,16 @@
+{
+  "variant": "ar_only",
+  "n_params": 36812544,
+  "d_model": 384,
+  "n_layers": 6,
+  "n_heads": 4,
+  "block_size": 256,
+  "max_steps": 3000,
+  "batch_size": 8,
+  "peak_lr": 0.0006,
+  "seed": 0,
+  "cond_prompt_len": 64,
+  "wall_s": 73.7,
+  "final_ar_loss": 3.002089500427246,
+  "final_flow_loss": NaN
+}

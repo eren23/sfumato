@@ -1,0 +1,1256 @@
+{
+  "flow_full_seed0": {
+    "model.pt": {
+      "error": "load_failed: __init__() got an unexpected keyword argument 'sigma_min'"
+    }
+  },
+  "t0_120M_10k_seed80": {
+    "ar_only/model.pt": {
+      "avg_nll": 1.329874,
+      "perplexity": 3.7806,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "composite/model.pt": {
+      "avg_nll": 1.539776,
+      "perplexity": 4.6635,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 7.204421,
+      "perplexity": 1345.3655,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 1.341239,
+      "perplexity": 3.8238,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 15.138428,
+      "perplexity": 3754356.7681,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    }
+  },
+  "t0_120M_10k_seed81": {
+    "ar_only/model.pt": {
+      "avg_nll": 1.252975,
+      "perplexity": 3.5007,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "composite/model.pt": {
+      "avg_nll": 1.531528,
+      "perplexity": 4.6252,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 10.510405,
+      "perplexity": 36695.3267,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 1.288348,
+      "perplexity": 3.6268,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 9.338587,
+      "perplexity": 11368.3341,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    }
+  },
+  "t0_120M_6k_seed90": {
+    "ar_only/model.pt": {
+      "avg_nll": 1.826938,
+      "perplexity": 6.2148,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.009223,
+      "perplexity": 7.4575,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 8.023439,
+      "perplexity": 3051.6541,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 1.706653,
+      "perplexity": 5.5105,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 11.522535,
+      "perplexity": 100965.5885,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    }
+  },
+  "t0_120M_seed96": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.3673,
+      "perplexity": 10.6686,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.557607,
+      "perplexity": 12.9049,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 6.311604,
+      "perplexity": 550.928,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.252626,
+      "perplexity": 9.5127,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 7.22654,
+      "perplexity": 1375.4554,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    }
+  },
+  "t0_120M_seed97": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.391486,
+      "perplexity": 10.9297,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.579113,
+      "perplexity": 13.1854,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 11.639403,
+      "perplexity": 113482.4331,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.248627,
+      "perplexity": 9.4747,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 14.590789,
+      "perplexity": 2171197.1314,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    }
+  },
+  "t0_120M_seed98": {
+    "paired/ar_only/model.pt": {
+      "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 17.522003,
+      "perplexity": 40710743.7184,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    }
+  },
+  "t0_120M_seed99": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.402338,
+      "perplexity": 11.049,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.59301,
+      "perplexity": 13.37,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 10.013917,
+      "perplexity": 22335.1459,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.272177,
+      "perplexity": 9.7005,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 8.926654,
+      "perplexity": 7530.0287,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    }
+  },
+  "t0_200M_seed50": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.48783,
+      "perplexity": 12.0351,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.683964,
+      "perplexity": 14.643,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 6.663574,
+      "perplexity": 783.3453,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.227719,
+      "perplexity": 9.2787,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 8.841888,
+      "perplexity": 6918.0426,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    }
+  },
+  "t0_200M_seed51": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.626819,
+      "perplexity": 13.8297,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.793173,
+      "perplexity": 16.3328,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 7.317533,
+      "perplexity": 1506.4833,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.31113,
+      "perplexity": 10.0858,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 10.087691,
+      "perplexity": 24045.2149,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    }
+  },
+  "t0_200M_seed52": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.526907,
+      "perplexity": 12.5147,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.816433,
+      "perplexity": 16.7171,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 13.389283,
+      "perplexity": 652967.6765,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.265749,
+      "perplexity": 9.6383,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 11.614841,
+      "perplexity": 110729.0137,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    }
+  },
+  "t0_200M_seed53": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.557138,
+      "perplexity": 12.8988,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.823927,
+      "perplexity": 16.8429,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 15.34355,
+      "perplexity": 4609133.2726,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.277397,
+      "perplexity": 9.7513,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 6.441707,
+      "perplexity": 627.4768,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    }
+  },
+  "t0_200M_seed54": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.613133,
+      "perplexity": 13.6417,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.774181,
+      "perplexity": 16.0255,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 12.260857,
+      "perplexity": 211262.4897,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.279405,
+      "perplexity": 9.7709,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 15.67679,
+      "perplexity": 6431959.9073,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    }
+  },
+  "t0_200M_seed55": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.558961,
+      "perplexity": 12.9224,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.841292,
+      "perplexity": 17.1379,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 10.187231,
+      "perplexity": 26561.8357,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.31914,
+      "perplexity": 10.1669,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 6.356927,
+      "perplexity": 576.4721,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    }
+  },
+  "t0_200M_seed56": {
+    "diff_only/model.pt": {
+      "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.299155,
+      "perplexity": 9.9658,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 14.14954,
+      "perplexity": 1396584.8397,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    }
+  },
+  "t0_200M_seed58": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.590518,
+      "perplexity": 13.3367,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.742849,
+      "perplexity": 15.5312,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 15.469822,
+      "perplexity": 5229479.7075,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.22426,
+      "perplexity": 9.2466,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 15.774232,
+      "perplexity": 7090254.8804,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    }
+  },
+  "t0_200M_seed59": {
+    "paired/ar_only/model.pt": {
+      "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 8.173517,
+      "perplexity": 3545.7921,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    }
+  },
+  "t0_200M_seed60": {
+    "paired/diff_only/model.pt": {
+      "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+    }
+  },
+  "t0_200M_seed61": {
+    "diff_only/model.pt": {
+      "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.287298,
+      "perplexity": 9.8483,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 6.83183,
+      "perplexity": 926.8853,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    }
+  },
+  "t0_200M_seed62": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.631716,
+      "perplexity": 13.8976,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.881068,
+      "perplexity": 17.8333,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 6.328198,
+      "perplexity": 560.1463,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.287891,
+      "perplexity": 9.8541,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 11.096179,
+      "perplexity": 65918.8171,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    }
+  },
+  "t0_200M_seed63": {
+    "paired/ar_only/model.pt": {
+      "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 6.329719,
+      "perplexity": 560.9991,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 72081920
+    }
+  },
+  "t0_250M_seed40": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.715468,
+      "perplexity": 15.1117,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 254169088
+    },
+    "composite/model.pt": {
+      "avg_nll": 3.026198,
+      "perplexity": 20.6187,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 254169088
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 14.960568,
+      "perplexity": 3142622.4276,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 254169088
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.446859,
+      "perplexity": 11.552,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 9.044837,
+      "perplexity": 8474.666,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 110195712
+    }
+  },
+  "t0_300M_seed30": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.926214,
+      "perplexity": 18.6569,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 341621760
+    },
+    "composite/model.pt": {
+      "avg_nll": 3.345849,
+      "perplexity": 28.3847,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 341621760
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 7.939783,
+      "perplexity": 2806.7521,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 341621760
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.666483,
+      "perplexity": 14.3893,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 142438912
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 12.809411,
+      "perplexity": 365642.4847,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 142438912
+    }
+  },
+  "t0_3k_seed1": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.248561,
+      "perplexity": 9.4741,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.430269,
+      "perplexity": 11.3619,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 24.720093,
+      "perplexity": 54425188407.906,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.380148,
+      "perplexity": 10.8065,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 30171648
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 6.677561,
+      "perplexity": 794.3795,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 30171648
+    }
+  },
+  "t0_3k_seed2": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.267424,
+      "perplexity": 9.6545,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.410539,
+      "perplexity": 11.14,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 6.330259,
+      "perplexity": 561.3018,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.426167,
+      "perplexity": 11.3154,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 30171648
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 6.738962,
+      "perplexity": 844.6839,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 30171648
+    }
+  },
+  "t0_3k_seed3": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.2425,
+      "perplexity": 9.4168,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.431403,
+      "perplexity": 11.3748,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 6.613816,
+      "perplexity": 745.3217,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.365987,
+      "perplexity": 10.6546,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 30171648
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 13.663115,
+      "perplexity": 858648.9334,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 30171648
+    }
+  },
+  "t0_3k_seed4": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.233998,
+      "perplexity": 9.3371,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.466381,
+      "perplexity": 11.7797,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 6.346682,
+      "perplexity": 570.5965,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.395851,
+      "perplexity": 10.9775,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 30171648
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 13.157022,
+      "perplexity": 517633.2638,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 30171648
+    }
+  },
+  "t0_60M_10k_seed20": {
+    "ar_only/model.pt": {
+      "avg_nll": 1.310899,
+      "perplexity": 3.7095,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "composite/model.pt": {
+      "avg_nll": 1.49034,
+      "perplexity": 4.4386,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 35.597596,
+      "perplexity": 2882966922923888.0,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 1.514848,
+      "perplexity": 4.5487,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 30171648
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 7.939113,
+      "perplexity": 2804.8715,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 30171648
+    }
+  },
+  "t0_60M_6k_seed10": {
+    "ar_only/model.pt": {
+      "avg_nll": 1.767569,
+      "perplexity": 5.8566,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "composite/model.pt": {
+      "avg_nll": 1.908863,
+      "perplexity": 6.7454,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 16.568115,
+      "perplexity": 15683421.834,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 1.926642,
+      "perplexity": 6.8664,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 30171648
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 13.661068,
+      "perplexity": 856892.3751,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 30171648
+    }
+  },
+  "t1_arflow_seed0": {
+    "paired/ar_only/model.pt": {
+      "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+    },
+    "paired/flow_only/model.pt": {
+      "avg_nll": 10.806987,
+      "perplexity": 49364.5224,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "arflow",
+      "n_params": 36812544
+    }
+  },
+  "t1_arflow_seed1": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.34115,
+      "perplexity": 10.3932,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "arflow",
+      "n_params": 66259968
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.516885,
+      "perplexity": 12.3899,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "arflow",
+      "n_params": 66259968
+    },
+    "flow_only/model.pt": {
+      "avg_nll": 10.952403,
+      "perplexity": 57091.0725,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "arflow",
+      "n_params": 66259968
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.312508,
+      "perplexity": 10.0997,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "arflow",
+      "n_params": 36812544
+    },
+    "paired/flow_only/model.pt": {
+      "avg_nll": 10.918521,
+      "perplexity": 55189.13,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "arflow",
+      "n_params": 36812544
+    }
+  },
+  "t1_arflow_seed2": {
+    "paired/ar_only/model.pt": {
+      "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+    },
+    "paired/flow_only/model.pt": {
+      "avg_nll": 10.975108,
+      "perplexity": 58402.1649,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "arflow",
+      "n_params": 36812544
+    }
+  },
+  "toy_composite_seed0": {
+    "ar_only/model.pt": {
+      "avg_nll": 2.322535,
+      "perplexity": 10.2015,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "composite/model.pt": {
+      "avg_nll": 2.486345,
+      "perplexity": 12.0173,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "diff_only/model.pt": {
+      "avg_nll": 7.646593,
+      "perplexity": 2093.5015,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 51308544
+    },
+    "paired/ar_only/model.pt": {
+      "avg_nll": 2.418325,
+      "perplexity": 11.227,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 30171648
+    },
+    "paired/diff_only/model.pt": {
+      "avg_nll": 14.337898,
+      "perplexity": 1686048.6677,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 30171648
+    }
+  }
+}

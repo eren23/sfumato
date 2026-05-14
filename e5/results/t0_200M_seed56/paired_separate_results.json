@@ -1,0 +1,359 @@
+{
+  "mode": "paired_separate",
+  "n": 50,
+  "n_correct": 0,
+  "accuracy": 0.0,
+  "wall_s": 16.1,
+  "results": [
+    {
+      "idx": 0,
+      "gold": "18",
+      "pred": "48.",
+      "correct": 0,
+      "text": " She has 12 eggs a total of 12*2=<<12*2=24>>24 eggs.\nShe has 12 eggs each day for a total of 12*2=<<12*2=24>>24 eggs.\nShe has a total of 24*2=<<24*2=48>>48......................................"
+    },
+    {
+      "idx": 1,
+      "gold": "3",
+      "pred": "2",
+      "correct": 0,
+      "text": " The first two times the number of blueberries that the number of blueberries that the number of blueberries is 2*2=<<2*2=4>>4 blue.\nThe number of blue and blueberries that are blue, so the total number of blue and blue is 2*2=<<2*......................................"
+    },
+    {
+      "idx": 2,
+      "gold": "70000",
+      "pred": "800",
+      "correct": 0,
+      "text": " He gets a total of $100,000+$100,000=$<<100000+100000=2000>>2000\nHe gets a total of 2*$100=$<<2*100=100000>>100,000\nSo he pays 100*$100=$<<100*100=800>>800 $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $"
+    },
+    {
+      "idx": 3,
+      "gold": "540",
+      "pred": "1200",
+      "correct": 0,
+      "text": " He runs 2*60=<<2*60=120>>120 feet\nSo he runs a total of 60*60=<<60*60=1200>>1200 feet\nSo he runs a total of 1200*3=<<1200*3=1200>>1200 feet\nSo he runs a total of 1200+......................................"
+    },
+    {
+      "idx": 4,
+      "gold": "20",
+      "pred": "8",
+      "correct": 0,
+      "text": " She has 20 cups of the day, so she has 20/20 = <<20/20=4>>4 cups of water.\nShe has 4 cups of water, so she has 4*4 = <<4*4=16>>16 cups of water.\nShe has 8 cups of water, so she......................................"
+    },
+    {
+      "idx": 5,
+      "gold": "64",
+      "pred": "10",
+      "correct": 0,
+      "text": " The total cost of the price of the price of the price of the price of the price is $5 x 20/100 = $<<5*20/100=10>>10.\nThe total cost of the price of the price of the price is $10 + $10 = $<<10+10=.. $. $. $. $ $ $.. $ $ $.. $. $ $ $ $. $ $ $ $ $ $ $ $ $. $.."
+    },
+    {
+      "idx": 6,
+      "gold": "260",
+      "pred": "40",
+      "correct": 0,
+      "text": " If the number of flowers in the first two times the first two times the number of flowers in the first two days, the number of flowers in the first two days is 20*2=<<20*2=40>>40\nThe number of flowers in the first two days is 40+40=<<40+......................................"
+    },
+    {
+      "idx": 7,
+      "gold": "160",
+      "pred": "60",
+      "correct": 0,
+      "text": " First find the total number of minutes to find the total time: 2 * 40 minutes/hour = <<2*40=40>>40 minutes\nThen find the total time: 40 minutes + 40 minutes = <<40+40=60>>60 minutes\nThen divide the total time to find the total time to find......................................"
+    },
+    {
+      "idx": 8,
+      "gold": "45",
+      "pred": "8",
+      "correct": 0,
+      "text": " He spends 2*2=<<2*2=4>>4 hours\nSo he spends 2*2=<<2*2=4>>4 hours\nSo he spends 4*2=<<4*2=4>>4 hours\nSo he spends 4*2=<<4*2=8>>......................................"
+    },
+    {
+      "idx": 9,
+      "gold": "460",
+      "pred": "20",
+      "correct": 0,
+      "text": " First find the total amount of time she spends on the total: $10 + $2 = $<<10+2=10>>10\nThen find the total amount of money she spends on the total: $10 + $10 = $<<10+10=20>>20\nThen divide the total amount she $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $"
+    },
+    {
+      "idx": 10,
+      "gold": "366",
+      "pred": "1200.",
+      "correct": 0,
+      "text": " The first month is 60/100*60=<<60/100*60=60>>60\nThe second month of the second month is 60*60=<<60*60=1200>>1200\nThe total number of days in the first month is 1200+1200=<<1200+1200=1200>>1200......................................"
+    },
+    {
+      "idx": 11,
+      "gold": "694",
+      "pred": "80",
+      "correct": 0,
+      "text": " The total cost of the total cost of the store is $80 + $80 = $<<80+80=80>>80\nThe total cost of the total cost of the store is $80 + $80 = $<<80+80=80>>80\nThe total cost of the total cost of the store $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $"
+    },
+    {
+      "idx": 12,
+      "gold": "13",
+      "pred": "90",
+      "correct": 0,
+      "text": " The total cost of the dog is $90 + $3 = $<<90+3=90>>90\nThe total cost of the dog is $90 + $90 = $<<90+90=90>>90\nThe total cost of the dog is $90 + $90 = $<<90+90 $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $"
+    },
+    {
+      "idx": 13,
+      "gold": "18",
+      "pred": "-5.",
+      "correct": 0,
+      "text": " First find the total number of green-fifths of green-fifths of green-fifths of green-fifths of red-fifths of red-5-5-5-5-5-5-5-5-5-5-5-5-5-5-5-5......................................"
+    },
+    {
+      "idx": 14,
+      "gold": "60",
+      "pred": "60.",
+      "correct": 0,
+      "text": " If the number of students in the class is 20, then the total number of students in the class is 20+20 = <<20+20=40>>40\nIf the number of students in the class is 40, the total number of students in the class is 40+40 = <<40+40=60......................................"
+    },
+    {
+      "idx": 15,
+      "gold": "125",
+      "pred": "18.",
+      "correct": 0,
+      "text": " The total cost of the price of the first month is 2*2.5 = $<<2*2.5=6>>6.\nThe total cost of the second month is $6 + $6 = $<<6+6=18>>18.\nThe total cost of the first month is $......................................"
+    },
+    {
+      "idx": 16,
+      "gold": "230",
+      "pred": "100",
+      "correct": 0,
+      "text": " The total distance of the first day is 100 miles + 80 miles = <<100+80=100>>100 miles.\nThe total distance of the first day is 100 miles + 100 miles = <<100+100=100>>100 miles.\nThe total distance of the second day is 100 miles + 100 miles =......................................"
+    },
+    {
+      "idx": 17,
+      "gold": "57500",
+      "pred": "800",
+      "correct": 0,
+      "text": " First find the total amount of money she spends per week: $20/hour * $10/hour = $<<20*10=100>>100/week\nThen find the total amount of money she spends per week: $100/week * $20/week = $<<100*20=800>> $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $"
+    },
+    {
+      "idx": 18,
+      "gold": "7",
+      "pred": "12.",
+      "correct": 0,
+      "text": " She has 3*2=<<3*2=6>>6 eggs per day\nSo she has 6*2=<<6*2=12>>12 eggs\n#### 12......................................"
+    },
+    {
+      "idx": 19,
+      "gold": "6",
+      "pred": "13.",
+      "correct": 0,
+      "text": " First find the total distance of the time she needs to find the total time: 4 miles + 4 miles + 4 miles + 4 miles = <<4+4+4+4=13>>13 miles\nThen divide the total time to find the total time she needs to find the total time: 13 miles + 13......................................"
+    },
+    {
+      "idx": 20,
+      "gold": "15",
+      "pred": "10",
+      "correct": 0,
+      "text": " The total number of water is 10 liters/100 * 15 liters/100 = <<10/100*15/100=10>>10 liters.\nThe total number of liters of water that are in the first two-hour is 10 liters + 10 liters = <<10+10=......................................"
+    },
+    {
+      "idx": 21,
+      "gold": "14",
+      "pred": null,
+      "correct": 0,
+      "text": " If the sum of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of......................................"
+    },
+    {
+      "idx": 22,
+      "gold": "7",
+      "pred": "42",
+      "correct": 0,
+      "text": " He bought 3*2=<<3*2=6>>6 candy\nSo he bought 6*2=<<6*2=12>>12 candy\nSo he bought 12*2=<<12*2=24>>24 candy\nSo he bought 24+24=<<24+24=42>>......................................"
+    },
+    {
+      "idx": 23,
+      "gold": "8",
+      "pred": "2.",
+      "correct": 0,
+      "text": " The first hour is 2*2=<<2*2=4>>4 feet.\nThe second hour is 2*2=<<2*2=4>>4 feet.\nThe second hour is 4*2=<<4*2=8>>8 feet.\nThe second hour is 8*2......................................"
+    },
+    {
+      "idx": 24,
+      "gold": "26",
+      "pred": "5.",
+      "correct": 0,
+      "text": " The price of the books is $19.50 x $19.50 = $<<19.5*19.5=19.50>>19.50\nThe total cost of the books is $19.50 + $19.50 = $<<19.5.50+19.5.5......................................"
+    },
+    {
+      "idx": 25,
+      "gold": "2",
+      "pred": "20",
+      "correct": 0,
+      "text": " The total cost of the apples is $8 + $8 = $<<8+8=16>>16.\nThe total cost of the apples is $8 + $16 = $<<8+16=32>>32.\nThe total cost of the apples is $20 + $20 = $<<20 $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $"
+    },
+    {
+      "idx": 26,
+      "gold": "243",
+      "pred": null,
+      "correct": 0,
+      "text": " The cost of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $"
+    },
+    {
+      "idx": 27,
+      "gold": "16",
+      "pred": "800.",
+      "correct": 0,
+      "text": " She has a total of 15*4 = <<15*4=80>>80 ice cream\nShe has a total of 80*4 = <<80*4=800>>800 dollars\nShe has a total of 800+800 = <<800+800=800>>800 dollars\n####800......................................"
+    },
+    {
+      "idx": 28,
+      "gold": "25",
+      "pred": "90",
+      "correct": 0,
+      "text": " He runs a total of 30 + 15 = <<30+15=60>>60 miles.\nHe runs for a total of 60 + 30 = <<60+30=90>>90 miles.\nHe runs a total of 90 + 90 = <<90+90=90>>90 miles.\nHe runs a......................................"
+    },
+    {
+      "idx": 29,
+      "gold": "104",
+      "pred": null,
+      "correct": 0,
+      "text": " The total cost of the price of the price of the price of the price of the two pairs of the two pairs of the two pairs of the two pairs of the two pairs of the two pairs of the two pairs of the two pairs of the two pairs of the two pairs of the two pairs of the two pairs of......................................"
+    },
+    {
+      "idx": 30,
+      "gold": "109",
+      "pred": null,
+      "correct": 0,
+      "text": " If the sum of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of......................................"
+    },
+    {
+      "idx": 31,
+      "gold": "80",
+      "pred": "100",
+      "correct": 0,
+      "text": " If the number of jellybeans in the second box is 80, then the total number of jellybeans is 80+20 = <<80+20=100>>100\nThe total number of jellybeans that the second box is 100+100 = <<100+100=100>>100\nThe total number of jellybeans......................................"
+    },
+    {
+      "idx": 32,
+      "gold": "35",
+      "pred": "40",
+      "correct": 0,
+      "text": " He spends 10*2=<<10*2=20>>20 hours\nSo he spends 20*2=<<20*2=40>>40 hours\nSo he spends 40*2=<<40*2=40>>40 hours\nSo he spends 40*2=<<40*2=40>>......................................"
+    },
+    {
+      "idx": 33,
+      "gold": "70",
+      "pred": "50",
+      "correct": 0,
+      "text": " If there are 50 more than twice as many as many as the number of gold coins as the number of gold coins as the number of gold coins as the number of gold coins as the number of gold coins as the number of gold coins as the number of gold coins as the number of gold coins as the number of blue......................................"
+    },
+    {
+      "idx": 34,
+      "gold": "23",
+      "pred": "20",
+      "correct": 0,
+      "text": " If there are 20 more than twice as many times as many times as many times as many times as many times as many times as the number of times as the number of times the number of times the number of times the number of times the number of times the number of times the number of times the number of times the......................................"
+    },
+    {
+      "idx": 35,
+      "gold": "9",
+      "pred": "150",
+      "correct": 0,
+      "text": " He scored 20+20=<<20+20=60>>60 points\nSo he scored 60/20=<<60/20=5>>5 points\nSo he scored 5*10=<<5*10=50>>50 points\nSo he scored 50+50=<<50+50=150>>......................................"
+    },
+    {
+      "idx": 36,
+      "gold": "75",
+      "pred": "8.00",
+      "correct": 0,
+      "text": " He spends 2*2=<<2*2=4.00>>4.00 hours\nSo he spends 2*2=<<2*2=4.00>>4.00 hours\nSo he spends 2*4=<<2*4=8.00>>8.00 hours\nSo he......................................"
+    },
+    {
+      "idx": 37,
+      "gold": "2",
+      "pred": "20",
+      "correct": 0,
+      "text": " He has $20 x 8 = $<<20*8=100>>100.\nHe has $100 - $20 = $<<100-20=20>>20 left.\nHe has $20 - $20 = $<<20-20=20>>20 left.\nHe has $20 - $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $"
+    },
+    {
+      "idx": 38,
+      "gold": "10",
+      "pred": "4",
+      "correct": 0,
+      "text": " He runs 2*2=<<2*2=4>>4 hours a day\nSo he runs 2*2=<<2*2=4>>4 hours a day\nSo he runs 4*4=<<4*4=16>>16 hours a week\nSo he runs 16*4=<<......................................"
+    },
+    {
+      "idx": 39,
+      "gold": "18",
+      "pred": "36",
+      "correct": 0,
+      "text": " First find the total time she spends per hour: 3 hours/hour * 3 hours/hour = <<3*3=6>>6 hours\nThen find the total time she spends on the time: 6 hours/hour * 6 hours/hour = <<6*6=36>>36 hours\nThen find the......................................"
+    },
+    {
+      "idx": 40,
+      "gold": "8",
+      "pred": "8.",
+      "correct": 0,
+      "text": " If the number of years is the number of years, then he is 2*2 = <<2*2=4>>4 years old.\nIf he is currently 2 years old, then he is 4*2 = <<4*2=8>>8 years old.\n#### 8......................................"
+    },
+    {
+      "idx": 41,
+      "gold": "200",
+      "pred": "12",
+      "correct": 0,
+      "text": " The total number of green feet in the first two days is 3*2=<<3*2=6>>6 feet.\nThe total number of square feet in the first two days is 6+6=<<6+6=12>>12 feet.\nThe total number of square feet in the first two......................................"
+    },
+    {
+      "idx": 42,
+      "gold": "26",
+      "pred": "12",
+      "correct": 0,
+      "text": " The total number of pieces of pieces of pizza is 4*4 = <<4*4=16>>16 pieces\nThe number of pieces of pieces of pizza is 16-16 = <<16-16=12>>12 pieces\nThe total number of pieces of pizza is 12+12 = <<12+12=......................................"
+    },
+    {
+      "idx": 43,
+      "gold": "48",
+      "pred": "2000",
+      "correct": 0,
+      "text": " First find the total number of calories per box: 1000 calories/hour * 1000 calories/hour = <<1000*1000=2000>>2000 calories\nThen find the total number of calories per box: 2000 calories/hour * 1000 calories/hour = <<2000*1000=2000>>2000 calories\nThen find the total......................................"
+    },
+    {
+      "idx": 44,
+      "gold": "20",
+      "pred": "40.",
+      "correct": 0,
+      "text": " He sells 20 pounds of shoes for $2.00 each so that's 20*2 = $<<20*2=40.00>>40.00\nHe sells 20 pounds of shoes for $2.00 each so he makes 20*2 = $<<20*2=40.00>>40. $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $"
+    },
+    {
+      "idx": 45,
+      "gold": "104",
+      "pred": "10",
+      "correct": 0,
+      "text": " On Tuesday, she spends 5*2=<<5*2=10>>10 hours.\nOn Tuesday, she spends 5*2=<<5*2=10>>10 hours.\nOn Tuesday, she spends 5*2=<<5*2=10>>10 hours.\nOn Tuesday, she......................................"
+    },
+    {
+      "idx": 46,
+      "gold": "163",
+      "pred": "44",
+      "correct": 0,
+      "text": " She had a total of 52+23=<<52+23=44>>44 cups of food.\nShe had a total of 44+44=<<44+44=44>>44 cups of food.\nShe had a total of 44+44=<<44+44=44>>44 ounces of food......................................"
+    },
+    {
+      "idx": 47,
+      "gold": "800",
+      "pred": "200.",
+      "correct": 0,
+      "text": " The cost of the blue and the blue and the blue shirts cost of the blue shirts is $200.00 so that's 200*200 = $<<200*200=800.00>>800.00\nThe total cost of the blue shirts is $200.00+$200 = $<<200+200......................................"
+    },
+    {
+      "idx": 48,
+      "gold": "8",
+      "pred": "36",
+      "correct": 0,
+      "text": " The total weight of the two is 6 inches + 6 inches = <<6+6=18>>18 inches.\nThe total weight of the two is 18 inches + 6 inches = <<18+6=36>>36 inches.\nThe total weight of the two is 36 inches + 36 inches = <<36+......................................"
+    },
+    {
+      "idx": 49,
+      "gold": "30",
+      "pred": "40",
+      "correct": 0,
+      "text": " If the number of sq ft in the first two, the total number of sq ft is 15*4 = <<15*4=60>>60\nThe total number of sq ft in the first two is 10*4 = <<10*4=40>>40\nThe total number of sq ft in the first......................................"
+    }
+  ]
+}

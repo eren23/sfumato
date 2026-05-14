@@ -46,3 +46,12 @@ phase2/frontier_compare/results_50/_errors_*
 
 # Local-only Phase-4 adapter artifacts (too large for git)
 artifacts/
+
+# E5 composite-training checkpoints (large; reproducible from training scripts)
+e5/results/**/*.pt
+e5/results/flow_full_seed*/
+
+# E4 ad-hoc raw experiment outputs (kept locally; metadata committed)
+e4/data/rl_substrate_*.jsonl
+e4/results/math500/raw_*.jsonl
+phase2/frontier_compare/results_50/*.truncated_*

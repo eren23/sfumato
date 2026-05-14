@@ -1,0 +1,359 @@
+{
+  "mode": "ar",
+  "n": 50,
+  "n_correct": 2,
+  "accuracy": 0.04,
+  "wall_s": 21.9,
+  "results": [
+    {
+      "idx": 0,
+      "gold": "18",
+      "pred": "64",
+      "correct": 0,
+      "text": " First find the total number of eggs she makes from the cakes: 16 eggs/day * 4 weeks = <<16*4=64>>64 eggs\nThen find the total number of eggs she makes from the cakes: 64 eggs/day * 4 weeks = <<64*4=128>>128 eggs\nThen find the total number of eggs she makes from the cakes: 64 eggs/day * 4 weeks = <<64*4=128>>128 eggs\nThen add the number of eggs she makes from the total number of eggs she makes from the cakes to find the total number of eggs she makes from the cakes: 64 eggs +"
+    },
+    {
+      "idx": 1,
+      "gold": "3",
+      "pred": "6",
+      "correct": 0,
+      "text": " The number of red tractor is 2*2=<<2*2=4>>4.\nThe number of green tractor is 2*2=<<2*2=4>>4.\nThe number of green tractor is 4+4=<<4+4=6>>6.\n#### 6"
+    },
+    {
+      "idx": 2,
+      "gold": "70000",
+      "pred": "1000",
+      "correct": 0,
+      "text": " The cost of the house was 200,000+200,000=$<<20000+20000=1000>>1000\nSo he made a profit of 200,000-200,000=$<<20000-20000=1000>>1000\n#### 1000"
+    },
+    {
+      "idx": 3,
+      "gold": "540",
+      "pred": "360",
+      "correct": 0,
+      "text": " He runs 3*60=<<3*60=180>>180 meters a week\nSo he runs 180*2=<<180*2=360>>360 meters a week\n#### 360"
+    },
+    {
+      "idx": 4,
+      "gold": "20",
+      "pred": "2",
+      "correct": 0,
+      "text": " She gave her 3 cups of chicken to her friends so she has 3+3 = <<3+3=5>>5 cups of chicken\nShe gave her 3 cups of chicken to her friends so she has 3-3 = <<3-3=2>>2 cups of chicken left\nShe gave her 2 cups of chicken to her friends so she has 2-2 = <<2-2=2>>2 cups of chicken\nShe gave her 2 cups of chicken to her friends so she has 2-2 = <<2-2=2>>2 cups of chicken\n#### 2"
+    },
+    {
+      "idx": 5,
+      "gold": "64",
+      "pred": "60.",
+      "correct": 0,
+      "text": " The cost of the first two walls is $5 x 2 = $<<5*2=10>>10.\nThe cost of the first two walls is $5 x 2 = $<<5*2=10>>10.\nThe cost of the first two walls is $10 x 2 = $<<10*2=20>>20.\nThe cost of the first two walls is $10 x 2 = $<<10*2=20>>20.\nThe total cost of the first two floors is $20 + $20 + $20 = $<<20+20+20=60>>60.\nThe"
+    },
+    {
+      "idx": 6,
+      "gold": "260",
+      "pred": "120",
+      "correct": 0,
+      "text": " If the number of cows is twice the number of cows, then the number of cows that T has is 2*20 = <<2*20=40>>40\nThe number of cows that T-shirts is 40*2 = <<40*2=80>>80\nThe total number of cows and t-shirts is 80+20 = <<80+20=100>>100\nThe number of cows that T-shirts and t-shirts is 100+20 = <<100+20=120>>120\n#### 120"
+    },
+    {
+      "idx": 7,
+      "gold": "160",
+      "pred": "4",
+      "correct": 0,
+      "text": " First find the total time Carla spends waiting from the first and second round: 200 minutes + 40 minutes = <<200+40=280>>280 minutes\nThen divide the number of minutes by the number of minutes per minute to find the number of minutes: 280 minutes / 60 minutes/minute = <<280/60=4>>4 minutes\n#### 4"
+    },
+    {
+      "idx": 8,
+      "gold": "45",
+      "pred": "60",
+      "correct": 0,
+      "text": " He spends 60/2=<<60/2=30>>30 hours on the first\nHe spends 30/2=<<30/2=15>>15 hours on the second\nHe spends 30+30=<<30+30=60>>60 hours on the second\nHe spends 60/2=<<60/2=30>>30 hours on the second trip\nSo he spends 30+30=<<30+30=60>>60 hours on the third trip\n#### 60"
+    },
+    {
+      "idx": 9,
+      "gold": "460",
+      "pred": "180",
+      "correct": 0,
+      "text": " In the first week, she earns 40*1.2=<<40*1.2=40>>40 dollars\nIn the second week, she earns 40*2=<<40*2=80>>80 dollars\nIn the third week, she earns 40*2=<<40*2=80>>80 dollars\nIn the fourth week, she earns 80+80=<<80+80=180>>180 dollars\nIn the fourth week, she earns 180/2=<<180/2=90>>90 dollars\nIn the fourth week, she earns 90+90=<<90+90=180>>180"
+    },
+    {
+      "idx": 10,
+      "gold": "366",
+      "pred": "42",
+      "correct": 0,
+      "text": " The second month was 60*3=<<60*3=180>>180\nThe third month was 60*.2=<<60*.2=30>>30\nThe third month was 30*2=<<30*2=60>>60\nThe third month was 60*.2=<<60*.2=12>>12\nThe third month was 30+12=<<30+12=42>>42\n#### 42"
+    },
+    {
+      "idx": 11,
+      "gold": "694",
+      "pred": "56",
+      "correct": 0,
+      "text": " The cost of the cupcakes is 3 * $44 = $<<3*44=168>>168.\nThe cost of the cupcakes is $168 - $44 = $<<168-44=56>>56.\nThe cost of the cupcakes is $56 / $44 = $<<56/44=2>>2.\nThe cost of the cupcakes is $2.50 x 2 = $<<2.5*2=6>>6.\nThe cost of the cupcakes is $56 - $6 = $<<56-6=56>>56.\n#### 56"
+    },
+    {
+      "idx": 12,
+      "gold": "13",
+      "pred": "90",
+      "correct": 0,
+      "text": " The trees will cost $90 because 7 x 7 = <<7*7=90>>90\nIt will cost $90 to make because 90 x 1.5 = <<90*1.5=90>>90\nIt will cost $90 to make the trees because 90 x 3 = <<90*3=90>>90\nIt will cost $90 to make the trees because 90 x .5 = <<90*.5=90>>90\nIt will cost $90 to make the trees because 90 x .75 = <<90*.75=90>>90\n#### 90"
+    },
+    {
+      "idx": 13,
+      "gold": "18",
+      "pred": "6",
+      "correct": 0,
+      "text": " The number of green home is 2 + 2 = <<2+2=4>>4.\nThe number of green home after the store is 4 + 2 = <<4+2=6>>6.\nThe number of green home after the store is 6 + 6 = <<6+6=12>>12.\nThe number of green home after the store is 12 - 6 = <<12-6=6>>6.\n#### 6"
+    },
+    {
+      "idx": 14,
+      "gold": "60",
+      "pred": "12",
+      "correct": 0,
+      "text": " The number of students in the class is 20/100*20 = <<20/100*20=4>>4\nThe number of students in the class is 20-4 = <<20-4=12>>12\nThe number of students in the class is 20-12 = <<20-12=12>>12\nThe number of students in the class is 20-12 = <<20-12=12>>12\n#### 12"
+    },
+    {
+      "idx": 15,
+      "gold": "125",
+      "pred": "48000",
+      "correct": 0,
+      "text": " The total amount of money the discount is $8,000 + $8,000 = $<<8000+8000=48000>>48,000.\nThe total amount of money the discount for the store is $48,000 + $48,000 = $<<48000+48000=48000>>48,000.\nThe total amount of money the store will be $48,000 + $48,000 = $<<48000+48000=48000>>48,000.\nThe total amount of money the store will be $48,000 + $48,000 = $<<48000"
+    },
+    {
+      "idx": 16,
+      "gold": "230",
+      "pred": "200",
+      "correct": 0,
+      "text": " The first day they travel 200 miles because 200 / 2 = <<200/2=200>>200\nThe second day they travel 200 miles because 200 / 2 = <<200/2=200>>200\nThe second day they travel 200 miles because 200 / 2 = <<200/2=200>>200\nThe second day they travel 200 miles because 200 / 2 = <<200/2=200>>200\nThe second day they travel 200 miles because 200 / 2 = <<200/2=200>>200\nThe second day they traveled 200 miles because 200 / 2 = <<200/2=200>>200\nThe second"
+    },
+    {
+      "idx": 17,
+      "gold": "57500",
+      "pred": "15000",
+      "correct": 0,
+      "text": " First find the total cost of the first month: $20/week * 15 days/week = $<<20*15=300>>300\nThen find the total cost of the second month: $300/week * 15 days/week = $<<300*15=900>>900\nThen find the total cost of the second month: $600/week * 15 months/month = $<<600*15=4500>>4500\nThen find the total cost of the first month: $150/month * 15 months = $<<150*15=15000>>15000\nThen add the cost of the"
+    },
+    {
+      "idx": 18,
+      "gold": "7",
+      "pred": "96",
+      "correct": 0,
+      "text": " She makes 3 eggs every day for 4 weeks so she makes 3*4 = <<3*4=12>>12 eggs\nShe makes 3 eggs every day for 4 weeks so she makes 3*4 = <<3*4=12>>12 eggs\nShe makes 12 eggs every day for 4 weeks so she makes 12*4 = <<12*4=48>>48 eggs\nShe makes 48 eggs per week for 4 weeks so she makes 48*4 = <<48*4=96>>96 eggs\n#### 96"
+    },
+    {
+      "idx": 19,
+      "gold": "6",
+      "pred": "5",
+      "correct": 0,
+      "text": " First find the total distance she needs to walk to the first two miles: 12 miles + 4 miles = <<12+4=20>>20 miles\nThen divide the distance between the first two miles to find the total distance: 20 miles / 2 = <<20/2=10>>10 miles\nThen divide the distance between the first two miles to find the total distance: 10 miles / 2 = <<10/2=5>>5 miles\n#### 5"
+    },
+    {
+      "idx": 20,
+      "gold": "15",
+      "pred": "6",
+      "correct": 0,
+      "text": " First find the total water in the water: 40 liters * 3 liters/gallon = <<40*3=120>>120 liters\nThen find the total water in the water: 120 liters + 30 liters = <<120+30=180>>180 liters\nThen divide the water by the number of liters per water to find the total water in the water: 180 liters / 30 liters/gallon = <<180/30=6>>6 liters\n#### 6"
+    },
+    {
+      "idx": 21,
+      "gold": "14",
+      "pred": "35",
+      "correct": 0,
+      "text": " If the age of the sister was 23 years old, then the age of the sister was 23 - 6 = <<23-6=15>>15 years old.\nIf the age of the sister was 15 years old, then the sum of the ages was 15 + 15 = <<15+15=35>>35 years old.\n#### 35"
+    },
+    {
+      "idx": 22,
+      "gold": "7",
+      "pred": "72",
+      "correct": 0,
+      "text": " He bought 8*3=<<8*3=24>>24 customers\nSo he bought 24/2=<<24/2=12>>12 customers\nSo he bought 12*3=<<12*3=36>>36 customers\nSo he bought 36+36=<<36+36=72>>72 customers\n#### 72"
+    },
+    {
+      "idx": 23,
+      "gold": "8",
+      "pred": "2",
+      "correct": 0,
+      "text": " The first 2 hours is 2*2=<<2*2=4>>4 meters\nThe second 2 hours is 4*2=<<4*2=8>>8 meters\nThe third 2 hours is 8*2=<<8*2=16>>16 meters\nThe fourth hour is 8+4=<<8+4=12>>12 meters\nThe fourth hour is 12/12=<<12/12=2>>2 meters\n#### 2"
+    },
+    {
+      "idx": 24,
+      "gold": "26",
+      "pred": "3",
+      "correct": 0,
+      "text": " The price of the book is $19.50 x 25% = $<<19.50*25*.01=13.50>>13.50.\nThe price of the book is $13.50 x 25% = $<<13.50*25*.01=13.50>>13.50.\nSo, the price of the book is $13.50 - $13.50 = $<<13.50-13.5=3.50>>3.50.\n#### 3"
+    },
+    {
+      "idx": 25,
+      "gold": "2",
+      "pred": "180",
+      "correct": 0,
+      "text": " The total cost of the chicken and the pizza is $12 + $3.50 = $<<12+3.5=20>>20.\nThe total cost of the pizza is $20 + $20 = $<<20+20=60>>60.\nThe total cost of the pizza is $60 + $60 = $<<60+60=180>>180.\n#### 180"
+    },
+    {
+      "idx": 26,
+      "gold": "243",
+      "pred": "2",
+      "correct": 0,
+      "text": " The cost of the pants is 3 * $16 = $<<3*16=48>>48.\nThe cost of the pants is 3 * $32 = $<<3*32=96>>96.\nThe cost of the pants is $48 + $28 = $<<48+28=84>>84.\nThe cost of the pants is $84 / $42 = $<<84/42=2>>2.\n#### 2"
+    },
+    {
+      "idx": 27,
+      "gold": "16",
+      "pred": "4.00",
+      "correct": 0,
+      "text": " She buys 1 cup of ice cream for $4.00 per ice cream and she buys a $4.00 so that's 4*4 = $<<4*4=16.00>>16.00\nShe buys 2 cups of ice cream for $4.00 a pound so that's 2*4 = $<<2*4=8.00>>8.00\nShe buys 2 cups of ice cream for $4.00 a pound so that's 2*4 = $<<2*4=8.00>>8.00\nShe buys 2 cups of ice cream for $4.00 a pound"
+    },
+    {
+      "idx": 28,
+      "gold": "25",
+      "pred": "35",
+      "correct": 0,
+      "text": " The first trip was 30/2 = <<30/2=15>>15 miles.\nThe second trip was 30/2 = <<30/2=15>>15 miles.\nThe third trip was 15+15 = <<15+15=35>>35 miles.\nThe third trip was 15+15 = <<15+15=35>>35 miles.\n#### 35"
+    },
+    {
+      "idx": 29,
+      "gold": "104",
+      "pred": "135",
+      "correct": 0,
+      "text": " The total cost of the shoes is 5 * 2 = <<5*2=10>>10.\nThe total cost of the shoes is 10 + 10 + 10 = <<10+10+10=30>>30.\nThe total cost of the shoes is 30 + 30 + 30 = <<30+30+30=90>>90.\nThe total cost of the two pairs of shoes is 90 + 90 = <<90+90=270>>270.\nThe cost of the shoes is 270 / 2 = <<270/2=135>>135.\nThe cost of the shoes is 135 / 3 = <<135/"
+    },
+    {
+      "idx": 30,
+      "gold": "109",
+      "pred": "6",
+      "correct": 0,
+      "text": " If the sum of their ages is 15, then the sum of their ages is 15-7 = <<15-7=8>>8 years.\nThe sum of their ages is 8+8 = <<8+8=18>>18 years.\nThe sum of their ages is 18-12 = <<18-12=6>>6\n#### 6"
+    },
+    {
+      "idx": 31,
+      "gold": "80",
+      "pred": "80",
+      "correct": 1,
+      "text": " The first number is 80 because 80 x .25 = <<80*.25=80>>80\nThe second and second friend is 80 because 80 + 80 = <<80+80=80>>80\nThe third friend is 80 because 80 x .8 = <<80*.8=80>>80\nThe third friend is 80 because 80 + 80 = <<80+80=80>>80\nThe fourth friend is 80 because 80 x .8 = <<80*.8=80>>80\nThe fourth friend is 80 because 80 + 80 = <<80+80=80>>80\n#### 80"
+    },
+    {
+      "idx": 32,
+      "gold": "35",
+      "pred": "2000",
+      "correct": 0,
+      "text": " He takes 10*2=<<10*2=20>>20 hours a day\nSo he takes 20*5=<<20*5=100>>100 hours a day\nSo he takes 100*20=<<100*20=2000>>2000 hours a week\n#### 2000"
+    },
+    {
+      "idx": 33,
+      "gold": "70",
+      "pred": null,
+      "correct": 0,
+      "text": " Let x be the number of gold coins.\nThe number of gold coins is x + x = x\nThe number of gold coins is x + x = x + x\nThe number of gold coins is x + x = x + x = x\nThe number of gold coins is x + x = x = x\nThe number of gold is x = x = x = x = x\nThe number of gold coins is x = x = x = x = x\nThe number of gold coins is x = x = x = x\nThe number of gold coins is x + x = x\nThe number of gold coins"
+    },
+    {
+      "idx": 34,
+      "gold": "23",
+      "pred": "55",
+      "correct": 0,
+      "text": " If Catud has 40 more than twice as many as Catud, then he has 40/2=<<40/2=20>>20choice.\nTogether, they have 40+5=<<40+5=35>>35\nTogether, they have 35+35=<<35+35=55>>55choice.\n#### 55"
+    },
+    {
+      "idx": 35,
+      "gold": "9",
+      "pred": "100",
+      "correct": 0,
+      "text": " In the second hour he scored 40/100*4=<<40/100*4=8>>8 points.\nIn the third hour he scored 10*4=<<10*4=40>>40 points.\nIn the third hour he scored 10*4=<<10*4=40>>40 points.\nIn the third hour he scored 40+10=<<40+10=70>>70 points.\nIn the fourth hour he scored 70/100*70=<<70/100*70=28>>28 points.\nIn total, he scored 70+28=<<70+28=100"
+    },
+    {
+      "idx": 36,
+      "gold": "75",
+      "pred": "200",
+      "correct": 0,
+      "text": " He eats 2*4=<<2*4=8>>8 days of the 8 days\nSo he spends 8*5=<<8*5=40>>40 days of the week\nThat means he spends 40*5=$<<40*5=200>>200\n#### 200"
+    },
+    {
+      "idx": 37,
+      "gold": "2",
+      "pred": "20",
+      "correct": 0,
+      "text": " He has $15 left after buying the video game because 8 - 8 = <<8-8=15>>15\nHe has $20 left because 15 - 8 = <<15-8=20>>20\nHe has $20 left because 20 - 20 = <<20-20=20>>20\nHe has $20 left because 20 / 5 = <<20/5=20>>20\n#### 20"
+    },
+    {
+      "idx": 38,
+      "gold": "10",
+      "pred": "24",
+      "correct": 0,
+      "text": " He runs 3*2=<<3*2=6>>6 miles a week\nSo he runs 6*2=<<6*2=12>>12 miles a week\nSo he runs 6*2=<<6*2=12>>12 miles a week\nSo he runs 12*2=<<12*2=24>>24 miles a week\n#### 24"
+    },
+    {
+      "idx": 39,
+      "gold": "18",
+      "pred": "64",
+      "correct": 0,
+      "text": " If she runs at a speed of 4 miles per hour, then she runs at 4 miles per hour, she runs at 4*4=<<4*4=16>>16 miles per hour.\nIf she runs at a speed of 8 miles per hour, she runs at 8 miles per hour, she runs 8*8=<<8*8=64>>64 miles per hour.\nIf she runs at a speed of 8 miles per hour, she runs at 8 miles per hour, she runs 8*8=<<8*8=64>>64 miles per hour.\n#### 64"
+    },
+    {
+      "idx": 40,
+      "gold": "8",
+      "pred": "11",
+      "correct": 0,
+      "text": " If Peter is twice as old as Peter, then he is 2*1 = <<2*1=2>>2 years old.\nSince Peter is currently twice as old as Peter, he is 2*2 = <<2*2=4>>4 years old.\nIn five years, Peter will be 4+5 = <<4+5=7>>7 years old.\nIn five years, Peter will be 7+5 = <<7+5=11>>11 years old.\n#### 11"
+    },
+    {
+      "idx": 41,
+      "gold": "200",
+      "pred": "1200",
+      "correct": 0,
+      "text": " If the candy can be the candy can be the candy in the candy, the candy can be 3*400=<<3*400=1200>>1200 feet.\nIf the candy can be filled the candy in the candy, the candy can be 1200-1200=<<1200-1200=1200>>1200 feet.\n#### 1200"
+    },
+    {
+      "idx": 42,
+      "gold": "26",
+      "pred": "6",
+      "correct": 0,
+      "text": " She had 5 x 8 = <<5*8=40>>40 pieces of bread.\nShe had 40 - 8 = <<40-8=48>>48 pieces of bread left.\nShe had 48/8 = <<48/8=6>>6 pieces of bread.\n#### 6"
+    },
+    {
+      "idx": 43,
+      "gold": "48",
+      "pred": "1500",
+      "correct": 0,
+      "text": " The total number of calories the bags is 1500 calories/500 = <<1500/500=3>>3 bags\nThe total number of boxes of chips that the bags is 3 x 500 = <<3*500=1500>>1500\nThe total number of boxes of boxes of boxes is 1500 calories + 1500 calories = <<1500+1500=1500>>1500\n#### 1500"
+    },
+    {
+      "idx": 44,
+      "gold": "20",
+      "pred": "20",
+      "correct": 1,
+      "text": " He sells 10 pounds of meat for $10.00 each so he makes 10*10 = $<<10*10=100.00>>100.00\nHe sells each of the 20 pounds of meat for $10.00 so he makes 20*10 = $<<20*10=200.00>>200.00\nHe sells each of the 20 pounds of meat for $10.00 so he makes 20*10 = $<<20*10=200.00>>200.00\nHe sells each of the 20 pounds of meat for $200.00 so he makes 20*200 = $<<20*"
+    },
+    {
+      "idx": 45,
+      "gold": "104",
+      "pred": "48",
+      "correct": 0,
+      "text": " On Tuesday, she watches 2/5*4 = <<2/5*4=4>>4 more than she did on Tuesday.\nOn Tuesday, she watches 2*4 = <<2*4=8>>8 hours.\nOn Wednesday, she watches 8*2 = <<8*2=16>>16 hours.\nOn Wednesday, she watches 8*2 = <<8*2=16>>16 hours.\nOn Wednesday, she watches 8+16 = <<8+16=24>>24 hours.\nOn Wednesday, she watches 24*2 = <<24*2=48>>48 hours."
+    },
+    {
+      "idx": 46,
+      "gold": "163",
+      "pred": "6",
+      "correct": 0,
+      "text": " She put half of the remaining amount of the day, which means she had 16/2=<<16/2=8>>8 more cups of coffee than she had on her first day.\nOn the second day, she had 8-8=<<8-8=2>>2 cups of coffee.\nOn the third day, she had 8-2=<<8-2=6>>6 cups of coffee.\nOn the third day, she had 6-2=<<6-2=4>>4 cups of coffee.\nOn the fourth day, she had 4+6=<<4+6="
+    },
+    {
+      "idx": 47,
+      "gold": "800",
+      "pred": "200",
+      "correct": 0,
+      "text": " The green tractor cost 200*2=$<<200*2=400>>400\nSo he spent 200*100=$<<200*100=1000>>1000 on red tractor\nSo he spent 1000-200=$<<1000-200=200>>200 on red tract green tract red\n#### 200"
+    },
+    {
+      "idx": 48,
+      "gold": "8",
+      "pred": "144",
+      "correct": 0,
+      "text": " The volume of the blocks in the garden is 4 x 6 = <<4*6=24>>24 inches.\nThe volume of the garden is 24 x 6 = <<24*6=144>>144 inches.\nThe volume of the garden is 48 x 6 = <<48*6=144>>144 inches.\n#### 144"
+    },
+    {
+      "idx": 49,
+      "gold": "30",
+      "pred": "45",
+      "correct": 0,
+      "text": " First find the total number of rooms in the building: 15 floors/floor * 3 floors/floor = <<15*3/4=15>>15 rooms/floor\nThen find the total number of rooms in the building: 15 rooms/floor * 3 rooms/floor = <<15*3=45>>45 rooms\nThen find the total number of rooms in the building: 15 rooms/floor * 3 rooms/floor = <<15*3=45>>45 rooms\nThen add the number of rooms in the building to find the total number of rooms in the building: 45 rooms + 45 rooms = <<45+45="
+    }
+  ]
+}

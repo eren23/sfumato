@@ -1,0 +1,15 @@
+{
+  "variant": "diff_only",
+  "n_params": 72081920,
+  "d_model": 640,
+  "n_layers": 8,
+  "n_heads": 8,
+  "block_size": 256,
+  "max_steps": 3000,
+  "batch_size": 8,
+  "peak_lr": 0.0006,
+  "seed": 50,
+  "wall_s": 73.1,
+  "final_ar_loss": NaN,
+  "final_diff_loss": 6.479321002960205
+}

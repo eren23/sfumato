@@ -1,0 +1,8 @@
+{
+  "model": "anthropic/claude-sonnet-4.5",
+  "n_problems": 200,
+  "n_ok": 200,
+  "n_error": 0,
+  "wall_s": 145.73,
+  "concurrency": 6
+}

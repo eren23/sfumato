@@ -1,0 +1,4509 @@
+{
+  "flow_full_seed0/model.pt": {
+    "error": "load_failed: __init__() got an unexpected keyword argument 'sigma_min'"
+  },
+  "t0_120M_10k_seed80/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 1.6202,
+      "bin1_avg_nll": 1.3527,
+      "bin2_avg_nll": 1.3986,
+      "bin3_avg_nll": 0.9368
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.7295,
+      "perplexity": 45682.54,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.6435,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.2277,
+      "ood_perplexity": 10174.82,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 1.6779,
+      "mean_correct_prob": 0.637,
+      "top1_accuracy": 0.7365,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_10k_seed80/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 1.8437,
+      "bin1_avg_nll": 1.5676,
+      "bin2_avg_nll": 1.6322,
+      "bin3_avg_nll": 1.1033
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.4349,
+      "perplexity": 229.27,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.477,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.1873,
+      "ood_perplexity": 9772.33,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 1.871,
+      "mean_correct_prob": 0.5953,
+      "top1_accuracy": 0.7005,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_10k_seed80/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 7.5955,
+      "bin1_avg_nll": 7.0578,
+      "bin2_avg_nll": 7.3037,
+      "bin3_avg_nll": 6.8477
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.0116,
+      "perplexity": 408.14,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.9356,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 15.3156,
+      "ood_perplexity": 4482157.51,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 3.5843,
+      "mean_correct_prob": 0.0211,
+      "top1_accuracy": 0.0356,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_10k_seed80/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 1.6217,
+      "bin1_avg_nll": 1.3903,
+      "bin2_avg_nll": 1.4024,
+      "bin3_avg_nll": 0.9396
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 9.858,
+      "perplexity": 19110.9,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 9.9238,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9324,
+      "ood_perplexity": 7573.06,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 1.6677,
+      "mean_correct_prob": 0.6381,
+      "top1_accuracy": 0.7367,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_10k_seed80/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 15.0677,
+      "bin1_avg_nll": 15.1863,
+      "bin2_avg_nll": 15.0986,
+      "bin3_avg_nll": 15.2037
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.0531,
+      "perplexity": 425.43,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.9799,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 13.1272,
+      "ood_perplexity": 502432.31,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.7378,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_10k_seed81/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 1.5104,
+      "bin1_avg_nll": 1.2611,
+      "bin2_avg_nll": 1.3227,
+      "bin3_avg_nll": 0.9077
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.7188,
+      "perplexity": 45196.05,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.6484,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.2885,
+      "ood_perplexity": 10812.57,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 1.6156,
+      "mean_correct_prob": 0.648,
+      "top1_accuracy": 0.7499,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_10k_seed81/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 1.8061,
+      "bin1_avg_nll": 1.5447,
+      "bin2_avg_nll": 1.6353,
+      "bin3_avg_nll": 1.1287
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.4797,
+      "perplexity": 239.77,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.509,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.1793,
+      "ood_perplexity": 9693.89,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 1.868,
+      "mean_correct_prob": 0.5938,
+      "top1_accuracy": 0.6999,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_10k_seed81/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 10.5293,
+      "bin1_avg_nll": 10.5102,
+      "bin2_avg_nll": 10.5023,
+      "bin3_avg_nll": 10.4994
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.0535,
+      "perplexity": 425.58,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.9838,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 10.6516,
+      "ood_perplexity": 42262.09,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.7103,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_10k_seed81/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 1.5423,
+      "bin1_avg_nll": 1.302,
+      "bin2_avg_nll": 1.3665,
+      "bin3_avg_nll": 0.9324
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.8007,
+      "perplexity": 133349.08,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.9121,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.002,
+      "ood_perplexity": 8119.19,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 1.6354,
+      "mean_correct_prob": 0.6446,
+      "top1_accuracy": 0.7446,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_10k_seed81/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 9.4115,
+      "bin1_avg_nll": 9.3284,
+      "bin2_avg_nll": 9.3511,
+      "bin3_avg_nll": 9.2609
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.0687,
+      "perplexity": 432.12,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.9981,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 10.1394,
+      "ood_perplexity": 25321.04,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.252,
+      "mean_correct_prob": 0.0001,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_6k_seed90/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.1469,
+      "bin1_avg_nll": 1.8694,
+      "bin2_avg_nll": 1.934,
+      "bin3_avg_nll": 1.3443
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.2128,
+      "perplexity": 74072.97,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.2371,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.274,
+      "ood_perplexity": 10657.17,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.0681,
+      "mean_correct_prob": 0.5425,
+      "top1_accuracy": 0.6542,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_6k_seed90/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.3582,
+      "bin1_avg_nll": 2.0376,
+      "bin2_avg_nll": 2.0873,
+      "bin3_avg_nll": 1.5404
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.6338,
+      "perplexity": 279.73,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.5331,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.0892,
+      "ood_perplexity": 8858.75,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.2379,
+      "mean_correct_prob": 0.5078,
+      "top1_accuracy": 0.6218,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_6k_seed90/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 8.0593,
+      "bin1_avg_nll": 7.9883,
+      "bin2_avg_nll": 8.0471,
+      "bin3_avg_nll": 7.9978
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.069,
+      "perplexity": 432.23,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.9926,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.5893,
+      "ood_perplexity": 14607.74,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.2387,
+      "mean_correct_prob": 0.0005,
+      "top1_accuracy": 0.0182,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_6k_seed90/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.026,
+      "bin1_avg_nll": 1.7445,
+      "bin2_avg_nll": 1.7894,
+      "bin3_avg_nll": 1.2541
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.9011,
+      "perplexity": 54236.81,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.867,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.02,
+      "ood_perplexity": 8267.08,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 1.9699,
+      "mean_correct_prob": 0.5705,
+      "top1_accuracy": 0.6731,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_6k_seed90/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 11.4643,
+      "bin1_avg_nll": 11.5565,
+      "bin2_avg_nll": 11.4935,
+      "bin3_avg_nll": 11.5779
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.041,
+      "perplexity": 420.32,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.9732,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 11.1445,
+      "ood_perplexity": 69180.15,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.7409,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed96/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.6996,
+      "bin1_avg_nll": 2.3971,
+      "bin2_avg_nll": 2.4612,
+      "bin3_avg_nll": 1.8981
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.6302,
+      "perplexity": 41365.0,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.6116,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.0134,
+      "ood_perplexity": 8212.32,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5598,
+      "mean_correct_prob": 0.4415,
+      "top1_accuracy": 0.5569,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed96/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.9143,
+      "bin1_avg_nll": 2.5635,
+      "bin2_avg_nll": 2.6273,
+      "bin3_avg_nll": 2.1121
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.8641,
+      "perplexity": 352.15,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.7664,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.1427,
+      "ood_perplexity": 9345.86,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.7498,
+      "mean_correct_prob": 0.4073,
+      "top1_accuracy": 0.5261,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed96/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 6.4917,
+      "bin1_avg_nll": 6.2392,
+      "bin2_avg_nll": 6.3568,
+      "bin3_avg_nll": 6.1529
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1355,
+      "perplexity": 461.96,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0587,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 10.107,
+      "ood_perplexity": 24515.09,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 6.7459,
+      "mean_correct_prob": 0.0065,
+      "top1_accuracy": 0.0176,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed96/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.6015,
+      "bin1_avg_nll": 2.2855,
+      "bin2_avg_nll": 2.3576,
+      "bin3_avg_nll": 1.7519
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.321,
+      "perplexity": 30364.18,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.4296,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9659,
+      "ood_perplexity": 7831.75,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.508,
+      "mean_correct_prob": 0.4689,
+      "top1_accuracy": 0.5837,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed96/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 7.3303,
+      "bin1_avg_nll": 7.1785,
+      "bin2_avg_nll": 7.2689,
+      "bin3_avg_nll": 7.1248
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1469,
+      "perplexity": 467.29,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0635,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.6021,
+      "ood_perplexity": 14795.67,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 9.3154,
+      "mean_correct_prob": 0.0012,
+      "top1_accuracy": 0.0189,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed97/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.7035,
+      "bin1_avg_nll": 2.4164,
+      "bin2_avg_nll": 2.4706,
+      "bin3_avg_nll": 1.9633
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.8267,
+      "perplexity": 50345.9,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.87,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.1742,
+      "ood_perplexity": 9644.98,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.6442,
+      "mean_correct_prob": 0.4335,
+      "top1_accuracy": 0.5563,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed97/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.8873,
+      "bin1_avg_nll": 2.5989,
+      "bin2_avg_nll": 2.6693,
+      "bin3_avg_nll": 2.1489
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.7912,
+      "perplexity": 327.4,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.7184,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.2047,
+      "ood_perplexity": 9943.49,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.8536,
+      "mean_correct_prob": 0.3968,
+      "top1_accuracy": 0.5248,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed97/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 11.6338,
+      "bin1_avg_nll": 11.6408,
+      "bin2_avg_nll": 11.6605,
+      "bin3_avg_nll": 11.6222
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1533,
+      "perplexity": 470.26,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0768,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 11.4519,
+      "ood_perplexity": 94082.78,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.7032,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed97/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.5653,
+      "bin1_avg_nll": 2.2816,
+      "bin2_avg_nll": 2.3424,
+      "bin3_avg_nll": 1.7925
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.8928,
+      "perplexity": 53789.13,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.9658,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.974,
+      "ood_perplexity": 7895.13,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5202,
+      "mean_correct_prob": 0.4669,
+      "top1_accuracy": 0.5841,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed97/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 14.5169,
+      "bin1_avg_nll": 14.6207,
+      "bin2_avg_nll": 14.6071,
+      "bin3_avg_nll": 14.6201
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1421,
+      "perplexity": 465.01,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0604,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 11.6938,
+      "ood_perplexity": 119823.05,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.6876,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed98/paired/ar_only/model.pt": {
+    "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+  },
+  "t0_120M_seed98/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 17.3845,
+      "bin1_avg_nll": 17.5627,
+      "bin2_avg_nll": 17.4893,
+      "bin3_avg_nll": 17.6561
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.0864,
+      "perplexity": 439.82,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0137,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 14.7154,
+      "ood_perplexity": 2459386.34,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.6684,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed99/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.7366,
+      "bin1_avg_nll": 2.4222,
+      "bin2_avg_nll": 2.5053,
+      "bin3_avg_nll": 1.932
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.2621,
+      "perplexity": 77819.29,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.3681,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.0951,
+      "ood_perplexity": 8911.08,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.624,
+      "mean_correct_prob": 0.4356,
+      "top1_accuracy": 0.5545,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed99/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.9284,
+      "bin1_avg_nll": 2.5945,
+      "bin2_avg_nll": 2.6965,
+      "bin3_avg_nll": 2.1396
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.8815,
+      "perplexity": 358.36,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.7884,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.1719,
+      "ood_perplexity": 9623.12,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.8132,
+      "mean_correct_prob": 0.3973,
+      "top1_accuracy": 0.5169,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed99/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 10.0587,
+      "bin1_avg_nll": 9.9985,
+      "bin2_avg_nll": 10.0194,
+      "bin3_avg_nll": 9.9777
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1553,
+      "perplexity": 471.22,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0808,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 10.5109,
+      "ood_perplexity": 36714.39,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.698,
+      "mean_correct_prob": 0.0001,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed99/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.6112,
+      "bin1_avg_nll": 2.3161,
+      "bin2_avg_nll": 2.3896,
+      "bin3_avg_nll": 1.7576
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.8133,
+      "perplexity": 49676.7,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.8064,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.0827,
+      "ood_perplexity": 8801.37,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.54,
+      "mean_correct_prob": 0.4637,
+      "top1_accuracy": 0.5839,
+      "n_tokens": 8297
+    }
+  },
+  "t0_120M_seed99/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 8.9886,
+      "bin1_avg_nll": 8.8815,
+      "bin2_avg_nll": 8.9661,
+      "bin3_avg_nll": 8.8681
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1275,
+      "perplexity": 458.28,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0423,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.7914,
+      "ood_perplexity": 17878.97,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.653,
+      "mean_correct_prob": 0.0002,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed50/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.8268,
+      "bin1_avg_nll": 2.5011,
+      "bin2_avg_nll": 2.5804,
+      "bin3_avg_nll": 2.0298
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.5171,
+      "perplexity": 100419.85,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.4493,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.1899,
+      "ood_perplexity": 9798.12,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.756,
+      "mean_correct_prob": 0.4137,
+      "top1_accuracy": 0.5345,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed50/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 3.0231,
+      "bin1_avg_nll": 2.6711,
+      "bin2_avg_nll": 2.7643,
+      "bin3_avg_nll": 2.2648
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.8623,
+      "perplexity": 351.52,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.7666,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.2369,
+      "ood_perplexity": 10269.4,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 3.0093,
+      "mean_correct_prob": 0.3727,
+      "top1_accuracy": 0.5011,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed50/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 6.8025,
+      "bin1_avg_nll": 6.5959,
+      "bin2_avg_nll": 6.6984,
+      "bin3_avg_nll": 6.553
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1336,
+      "perplexity": 461.11,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0575,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.4049,
+      "ood_perplexity": 12147.91,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 8.2849,
+      "mean_correct_prob": 0.0031,
+      "top1_accuracy": 0.0168,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed50/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.5666,
+      "bin1_avg_nll": 2.2715,
+      "bin2_avg_nll": 2.3195,
+      "bin3_avg_nll": 1.7397
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.7796,
+      "perplexity": 48030.77,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.7699,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9593,
+      "ood_perplexity": 7780.13,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.4828,
+      "mean_correct_prob": 0.4685,
+      "top1_accuracy": 0.5811,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed50/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 8.8842,
+      "bin1_avg_nll": 8.8082,
+      "bin2_avg_nll": 8.8541,
+      "bin3_avg_nll": 8.8199
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.133,
+      "perplexity": 460.81,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0571,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.9158,
+      "ood_perplexity": 20246.9,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.5266,
+      "mean_correct_prob": 0.0002,
+      "top1_accuracy": 0.0392,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed51/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.933,
+      "bin1_avg_nll": 2.6026,
+      "bin2_avg_nll": 2.7018,
+      "bin3_avg_nll": 2.2587
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.5127,
+      "perplexity": 36778.59,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.5408,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.2392,
+      "ood_perplexity": 10293.24,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.8884,
+      "mean_correct_prob": 0.3848,
+      "top1_accuracy": 0.5044,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed51/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 3.11,
+      "bin1_avg_nll": 2.7929,
+      "bin2_avg_nll": 2.8778,
+      "bin3_avg_nll": 2.3799
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.071,
+      "perplexity": 159.33,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.9621,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.291,
+      "ood_perplexity": 10840.34,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.9981,
+      "mean_correct_prob": 0.3613,
+      "top1_accuracy": 0.4778,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed51/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 7.4327,
+      "bin1_avg_nll": 7.2677,
+      "bin2_avg_nll": 7.3464,
+      "bin3_avg_nll": 7.2195
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1436,
+      "perplexity": 465.71,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0677,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.4169,
+      "ood_perplexity": 12294.06,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 9.5792,
+      "mean_correct_prob": 0.0012,
+      "top1_accuracy": 0.0311,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed51/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.6371,
+      "bin1_avg_nll": 2.347,
+      "bin2_avg_nll": 2.3876,
+      "bin3_avg_nll": 1.86
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.0947,
+      "perplexity": 65819.86,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.0999,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.0317,
+      "ood_perplexity": 8363.69,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5304,
+      "mean_correct_prob": 0.4575,
+      "top1_accuracy": 0.5729,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed51/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 10.1183,
+      "bin1_avg_nll": 10.0833,
+      "bin2_avg_nll": 10.1029,
+      "bin3_avg_nll": 10.0449
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1434,
+      "perplexity": 465.62,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.066,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 10.5188,
+      "ood_perplexity": 37004.24,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.6642,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed52/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.8798,
+      "bin1_avg_nll": 2.5291,
+      "bin2_avg_nll": 2.6218,
+      "bin3_avg_nll": 2.0634
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.4353,
+      "perplexity": 34038.8,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.4579,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.2046,
+      "ood_perplexity": 9942.76,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.7725,
+      "mean_correct_prob": 0.4092,
+      "top1_accuracy": 0.5345,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed52/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 3.1506,
+      "bin1_avg_nll": 2.7653,
+      "bin2_avg_nll": 2.8989,
+      "bin3_avg_nll": 2.439
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.713,
+      "perplexity": 302.78,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.8246,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.1611,
+      "ood_perplexity": 9519.74,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 3.0907,
+      "mean_correct_prob": 0.3427,
+      "top1_accuracy": 0.4675,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed52/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 13.3467,
+      "bin1_avg_nll": 13.4078,
+      "bin2_avg_nll": 13.3817,
+      "bin3_avg_nll": 13.4223
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1199,
+      "perplexity": 454.82,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0511,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 12.3401,
+      "ood_perplexity": 228686.87,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.683,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed52/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.62,
+      "bin1_avg_nll": 2.2905,
+      "bin2_avg_nll": 2.3636,
+      "bin3_avg_nll": 1.7749
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.7731,
+      "perplexity": 47720.3,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.635,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.0676,
+      "ood_perplexity": 8669.7,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5444,
+      "mean_correct_prob": 0.4598,
+      "top1_accuracy": 0.5805,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed52/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 11.6103,
+      "bin1_avg_nll": 11.6363,
+      "bin2_avg_nll": 11.6053,
+      "bin3_avg_nll": 11.6076
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1462,
+      "perplexity": 466.96,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0656,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 11.1717,
+      "ood_perplexity": 71089.34,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.7194,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed53/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.8804,
+      "bin1_avg_nll": 2.581,
+      "bin2_avg_nll": 2.6436,
+      "bin3_avg_nll": 2.1109
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.9106,
+      "perplexity": 54753.81,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.9242,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.0235,
+      "ood_perplexity": 8295.37,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.8481,
+      "mean_correct_prob": 0.4008,
+      "top1_accuracy": 0.5226,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed53/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 3.1183,
+      "bin1_avg_nll": 2.8146,
+      "bin2_avg_nll": 2.9341,
+      "bin3_avg_nll": 2.4168
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 4.974,
+      "perplexity": 144.61,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.816,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.1873,
+      "ood_perplexity": 9772.07,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 3.0721,
+      "mean_correct_prob": 0.3516,
+      "top1_accuracy": 0.4732,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed53/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 15.2237,
+      "bin1_avg_nll": 15.4023,
+      "bin2_avg_nll": 15.3087,
+      "bin3_avg_nll": 15.4434
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1512,
+      "perplexity": 469.29,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0917,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 13.1061,
+      "ood_perplexity": 491952.37,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.6586,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed53/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.6114,
+      "bin1_avg_nll": 2.3223,
+      "bin2_avg_nll": 2.3738,
+      "bin3_avg_nll": 1.7885
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.0275,
+      "perplexity": 61540.59,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.9646,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9013,
+      "ood_perplexity": 7341.64,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5618,
+      "mean_correct_prob": 0.4602,
+      "top1_accuracy": 0.578,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed53/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 6.6055,
+      "bin1_avg_nll": 6.3798,
+      "bin2_avg_nll": 6.4897,
+      "bin3_avg_nll": 6.2862
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1359,
+      "perplexity": 462.15,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0609,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.6641,
+      "ood_perplexity": 15742.48,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 7.6217,
+      "mean_correct_prob": 0.0042,
+      "top1_accuracy": 0.0311,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed54/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.9213,
+      "bin1_avg_nll": 2.617,
+      "bin2_avg_nll": 2.6972,
+      "bin3_avg_nll": 2.2051
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.7106,
+      "perplexity": 44830.57,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.721,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.2034,
+      "ood_perplexity": 9931.21,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.8027,
+      "mean_correct_prob": 0.3917,
+      "top1_accuracy": 0.5148,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed54/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 3.1091,
+      "bin1_avg_nll": 2.7402,
+      "bin2_avg_nll": 2.8782,
+      "bin3_avg_nll": 2.3565
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 4.9627,
+      "perplexity": 142.98,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.823,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.2819,
+      "ood_perplexity": 10742.09,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.9848,
+      "mean_correct_prob": 0.3625,
+      "top1_accuracy": 0.4878,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed54/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 12.2425,
+      "bin1_avg_nll": 12.2724,
+      "bin2_avg_nll": 12.2626,
+      "bin3_avg_nll": 12.2664
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.071,
+      "perplexity": 433.12,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.9984,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 11.7393,
+      "ood_perplexity": 125403.91,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.6961,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed54/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.6247,
+      "bin1_avg_nll": 2.3039,
+      "bin2_avg_nll": 2.3742,
+      "bin3_avg_nll": 1.8011
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.7376,
+      "perplexity": 46054.31,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.8143,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9907,
+      "ood_perplexity": 8027.73,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.489,
+      "mean_correct_prob": 0.4617,
+      "top1_accuracy": 0.5796,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed54/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 15.554,
+      "bin1_avg_nll": 15.7228,
+      "bin2_avg_nll": 15.6664,
+      "bin3_avg_nll": 15.7676
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.0642,
+      "perplexity": 430.17,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.984,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 13.4257,
+      "ood_perplexity": 677189.57,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.6625,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed55/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.9055,
+      "bin1_avg_nll": 2.5655,
+      "bin2_avg_nll": 2.6511,
+      "bin3_avg_nll": 2.1004
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.0753,
+      "perplexity": 64556.07,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.0432,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.0793,
+      "ood_perplexity": 8771.5,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.7916,
+      "mean_correct_prob": 0.4048,
+      "top1_accuracy": 0.5302,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed55/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 3.1757,
+      "bin1_avg_nll": 2.8298,
+      "bin2_avg_nll": 2.9063,
+      "bin3_avg_nll": 2.4413
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.9061,
+      "perplexity": 367.27,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.8257,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.1505,
+      "ood_perplexity": 9419.09,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 3.1047,
+      "mean_correct_prob": 0.3442,
+      "top1_accuracy": 0.4714,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed55/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 10.2156,
+      "bin1_avg_nll": 10.161,
+      "bin2_avg_nll": 10.2028,
+      "bin3_avg_nll": 10.1686
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1526,
+      "perplexity": 469.93,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0788,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 10.6205,
+      "ood_perplexity": 40965.23,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.6871,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed55/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.6744,
+      "bin1_avg_nll": 2.3605,
+      "bin2_avg_nll": 2.4228,
+      "bin3_avg_nll": 1.8045
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.995,
+      "perplexity": 59573.67,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.9175,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.0336,
+      "ood_perplexity": 8379.58,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5182,
+      "mean_correct_prob": 0.4592,
+      "top1_accuracy": 0.5727,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed55/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 6.5172,
+      "bin1_avg_nll": 6.2862,
+      "bin2_avg_nll": 6.3971,
+      "bin3_avg_nll": 6.222
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1418,
+      "perplexity": 464.89,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0648,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.8434,
+      "ood_perplexity": 18834.16,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 7.0481,
+      "mean_correct_prob": 0.0049,
+      "top1_accuracy": 0.0311,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed56/diff_only/model.pt": {
+    "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+  },
+  "t0_200M_seed56/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.6386,
+      "bin1_avg_nll": 2.3421,
+      "bin2_avg_nll": 2.4098,
+      "bin3_avg_nll": 1.7921
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.1188,
+      "perplexity": 67430.16,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.0624,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.075,
+      "ood_perplexity": 8734.47,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5722,
+      "mean_correct_prob": 0.4594,
+      "top1_accuracy": 0.5749,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed56/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 14.0896,
+      "bin1_avg_nll": 14.1866,
+      "bin2_avg_nll": 14.144,
+      "bin3_avg_nll": 14.1796
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.0797,
+      "perplexity": 436.91,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0085,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 12.8177,
+      "ood_perplexity": 368670.71,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.6882,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed58/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.9152,
+      "bin1_avg_nll": 2.5666,
+      "bin2_avg_nll": 2.6908,
+      "bin3_avg_nll": 2.1771
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.4701,
+      "perplexity": 35246.46,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.4597,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.2222,
+      "ood_perplexity": 10118.81,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.8022,
+      "mean_correct_prob": 0.3914,
+      "top1_accuracy": 0.5156,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed58/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 3.0746,
+      "bin1_avg_nll": 2.7292,
+      "bin2_avg_nll": 2.8264,
+      "bin3_avg_nll": 2.3288
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 4.9118,
+      "perplexity": 135.88,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.8143,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.3748,
+      "ood_perplexity": 11787.2,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.9178,
+      "mean_correct_prob": 0.367,
+      "top1_accuracy": 0.4908,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed58/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 15.4057,
+      "bin1_avg_nll": 15.5007,
+      "bin2_avg_nll": 15.411,
+      "bin3_avg_nll": 15.5648
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.085,
+      "perplexity": 439.22,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0147,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 13.2544,
+      "ood_perplexity": 570556.62,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.6579,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed58/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.5647,
+      "bin1_avg_nll": 2.2713,
+      "bin2_avg_nll": 2.3218,
+      "bin3_avg_nll": 1.7255
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.4207,
+      "perplexity": 91192.62,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.3978,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.8985,
+      "ood_perplexity": 7321.02,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.4846,
+      "mean_correct_prob": 0.4687,
+      "top1_accuracy": 0.587,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed58/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 15.67,
+      "bin1_avg_nll": 15.8216,
+      "bin2_avg_nll": 15.7465,
+      "bin3_avg_nll": 15.8622
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1292,
+      "perplexity": 459.08,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0561,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 13.4509,
+      "ood_perplexity": 694501.35,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.6631,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed59/paired/ar_only/model.pt": {
+    "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+  },
+  "t0_200M_seed59/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 8.2542,
+      "bin1_avg_nll": 8.1552,
+      "bin2_avg_nll": 8.1945,
+      "bin3_avg_nll": 8.0873
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1346,
+      "perplexity": 461.54,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0512,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.6801,
+      "ood_perplexity": 15996.8,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.3153,
+      "mean_correct_prob": 0.0004,
+      "top1_accuracy": 0.0077,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed60/paired/diff_only/model.pt": {
+    "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+  },
+  "t0_200M_seed61/diff_only/model.pt": {
+    "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+  },
+  "t0_200M_seed61/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.6267,
+      "bin1_avg_nll": 2.311,
+      "bin2_avg_nll": 2.3921,
+      "bin3_avg_nll": 1.8058
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.8656,
+      "perplexity": 52345.86,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.8041,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9928,
+      "ood_perplexity": 8045.33,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5115,
+      "mean_correct_prob": 0.4615,
+      "top1_accuracy": 0.5751,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed61/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 6.992,
+      "bin1_avg_nll": 6.7684,
+      "bin2_avg_nll": 6.8486,
+      "bin3_avg_nll": 6.7136
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1372,
+      "perplexity": 462.77,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.058,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.3967,
+      "ood_perplexity": 12048.94,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 8.5797,
+      "mean_correct_prob": 0.0023,
+      "top1_accuracy": 0.0378,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed62/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.9327,
+      "bin1_avg_nll": 2.645,
+      "bin2_avg_nll": 2.7265,
+      "bin3_avg_nll": 2.2106
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.7681,
+      "perplexity": 47483.98,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.7474,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.1211,
+      "ood_perplexity": 9145.93,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.9056,
+      "mean_correct_prob": 0.3841,
+      "top1_accuracy": 0.5084,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed62/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 3.1734,
+      "bin1_avg_nll": 2.875,
+      "bin2_avg_nll": 2.9613,
+      "bin3_avg_nll": 2.5034
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.9164,
+      "perplexity": 371.07,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.826,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.2031,
+      "ood_perplexity": 9927.7,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 3.1875,
+      "mean_correct_prob": 0.3325,
+      "top1_accuracy": 0.4578,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed62/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 161713664,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 6.4991,
+      "bin1_avg_nll": 6.2609,
+      "bin2_avg_nll": 6.3663,
+      "bin3_avg_nll": 6.181
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1398,
+      "perplexity": 463.98,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0644,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.7039,
+      "ood_perplexity": 16382.07,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 7.0006,
+      "mean_correct_prob": 0.0051,
+      "top1_accuracy": 0.0147,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed62/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.634,
+      "bin1_avg_nll": 2.3027,
+      "bin2_avg_nll": 2.42,
+      "bin3_avg_nll": 1.7806
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.1449,
+      "perplexity": 25459.81,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.1677,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9816,
+      "ood_perplexity": 7955.08,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5934,
+      "mean_correct_prob": 0.4616,
+      "top1_accuracy": 0.5811,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed62/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 11.0808,
+      "bin1_avg_nll": 11.0963,
+      "bin2_avg_nll": 11.0773,
+      "bin3_avg_nll": 11.1312
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1402,
+      "perplexity": 464.13,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0658,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 11.0501,
+      "ood_perplexity": 62949.02,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.7179,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_200M_seed63/paired/ar_only/model.pt": {
+    "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+  },
+  "t0_200M_seed63/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 72081920,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 6.5706,
+      "bin1_avg_nll": 6.2536,
+      "bin2_avg_nll": 6.4113,
+      "bin3_avg_nll": 6.0748
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1211,
+      "perplexity": 455.35,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0418,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 11.5387,
+      "ood_perplexity": 102611.63,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 5.2804,
+      "mean_correct_prob": 0.0113,
+      "top1_accuracy": 0.0168,
+      "n_tokens": 8297
+    }
+  },
+  "t0_250M_seed40/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 254169088,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 3.0524,
+      "bin1_avg_nll": 2.7021,
+      "bin2_avg_nll": 2.8029,
+      "bin3_avg_nll": 2.2918
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.0978,
+      "perplexity": 66022.77,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.1286,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.2058,
+      "ood_perplexity": 9954.77,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.9468,
+      "mean_correct_prob": 0.3672,
+      "top1_accuracy": 0.4867,
+      "n_tokens": 8297
+    }
+  },
+  "t0_250M_seed40/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 254169088,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 3.3355,
+      "bin1_avg_nll": 2.989,
+      "bin2_avg_nll": 3.0909,
+      "bin3_avg_nll": 2.6784
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.5174,
+      "perplexity": 248.98,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.9974,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.349,
+      "ood_perplexity": 11487.49,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 3.2818,
+      "mean_correct_prob": 0.3184,
+      "top1_accuracy": 0.444,
+      "n_tokens": 8297
+    }
+  },
+  "t0_250M_seed40/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 254169088,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 14.8501,
+      "bin1_avg_nll": 15.0182,
+      "bin2_avg_nll": 14.9251,
+      "bin3_avg_nll": 15.0525
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.072,
+      "perplexity": 433.56,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.013,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 12.9863,
+      "ood_perplexity": 436391.52,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.6501,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_250M_seed40/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.7962,
+      "bin1_avg_nll": 2.4571,
+      "bin2_avg_nll": 2.5327,
+      "bin3_avg_nll": 1.9881
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.5072,
+      "perplexity": 99432.83,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.4511,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.0127,
+      "ood_perplexity": 8207.04,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.6806,
+      "mean_correct_prob": 0.4225,
+      "top1_accuracy": 0.5419,
+      "n_tokens": 8297
+    }
+  },
+  "t0_250M_seed40/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 110195712,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 9.1053,
+      "bin1_avg_nll": 9.0148,
+      "bin2_avg_nll": 9.0646,
+      "bin3_avg_nll": 8.9927
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.0914,
+      "perplexity": 442.02,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0191,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 10.1595,
+      "ood_perplexity": 25836.45,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.6339,
+      "mean_correct_prob": 0.0002,
+      "top1_accuracy": 0.0012,
+      "n_tokens": 8297
+    }
+  },
+  "t0_300M_seed30/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 341621760,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 3.2759,
+      "bin1_avg_nll": 2.8858,
+      "bin2_avg_nll": 3.0202,
+      "bin3_avg_nll": 2.51
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.5712,
+      "perplexity": 38995.01,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.5723,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.3149,
+      "ood_perplexity": 11101.85,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 3.108,
+      "mean_correct_prob": 0.3389,
+      "top1_accuracy": 0.4558,
+      "n_tokens": 8297
+    }
+  },
+  "t0_300M_seed30/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 341621760,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 3.6132,
+      "bin1_avg_nll": 3.2722,
+      "bin2_avg_nll": 3.4265,
+      "bin3_avg_nll": 3.0621
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.3509,
+      "perplexity": 210.79,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.8778,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.5137,
+      "ood_perplexity": 13544.66,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 3.5671,
+      "mean_correct_prob": 0.2666,
+      "top1_accuracy": 0.3838,
+      "n_tokens": 8297
+    }
+  },
+  "t0_300M_seed30/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 341621760,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 8.0113,
+      "bin1_avg_nll": 7.9109,
+      "bin2_avg_nll": 7.9564,
+      "bin3_avg_nll": 7.8782
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.0759,
+      "perplexity": 435.24,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.9912,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.6383,
+      "ood_perplexity": 15341.14,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.1295,
+      "mean_correct_prob": 0.0006,
+      "top1_accuracy": 0.0147,
+      "n_tokens": 8297
+    }
+  },
+  "t0_300M_seed30/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 142438912,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 3.0373,
+      "bin1_avg_nll": 2.6784,
+      "bin2_avg_nll": 2.7296,
+      "bin3_avg_nll": 2.2071
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.9819,
+      "perplexity": 58802.07,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.9637,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.5097,
+      "ood_perplexity": 13490.21,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.8835,
+      "mean_correct_prob": 0.3776,
+      "top1_accuracy": 0.4958,
+      "n_tokens": 8297
+    }
+  },
+  "t0_300M_seed30/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 142438912,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 12.7812,
+      "bin1_avg_nll": 12.8389,
+      "bin2_avg_nll": 12.8031,
+      "bin3_avg_nll": 12.8152
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1147,
+      "perplexity": 452.48,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0385,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 12.0409,
+      "ood_perplexity": 169552.17,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.69,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed1/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.6058,
+      "bin1_avg_nll": 2.276,
+      "bin2_avg_nll": 2.3573,
+      "bin3_avg_nll": 1.7409
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.7514,
+      "perplexity": 46696.86,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.817,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9492,
+      "ood_perplexity": 7701.94,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5308,
+      "mean_correct_prob": 0.465,
+      "top1_accuracy": 0.5783,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed1/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.7816,
+      "bin1_avg_nll": 2.4467,
+      "bin2_avg_nll": 2.5219,
+      "bin3_avg_nll": 1.9573
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.8563,
+      "perplexity": 349.43,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.7774,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9692,
+      "ood_perplexity": 7856.96,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.7494,
+      "mean_correct_prob": 0.4325,
+      "top1_accuracy": 0.5556,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed1/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 24.3642,
+      "bin1_avg_nll": 24.8301,
+      "bin2_avg_nll": 24.6501,
+      "bin3_avg_nll": 25.0477
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.144,
+      "perplexity": 465.9,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0624,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 18.248,
+      "ood_perplexity": 84138769.96,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.6021,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed1/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 30171648,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.756,
+      "bin1_avg_nll": 2.4201,
+      "bin2_avg_nll": 2.463,
+      "bin3_avg_nll": 1.867
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.7211,
+      "perplexity": 45303.44,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.7693,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9628,
+      "ood_perplexity": 7807.19,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.6532,
+      "mean_correct_prob": 0.4448,
+      "top1_accuracy": 0.5667,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed1/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 30171648,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 6.8379,
+      "bin1_avg_nll": 6.6276,
+      "bin2_avg_nll": 6.7059,
+      "bin3_avg_nll": 6.5336
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.0982,
+      "perplexity": 445.05,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0255,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.2501,
+      "ood_perplexity": 10405.49,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 8.5899,
+      "mean_correct_prob": 0.0027,
+      "top1_accuracy": 0.0342,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed2/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.601,
+      "bin1_avg_nll": 2.305,
+      "bin2_avg_nll": 2.3835,
+      "bin3_avg_nll": 1.7665
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.1282,
+      "perplexity": 68062.6,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.0584,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9699,
+      "ood_perplexity": 7862.87,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5321,
+      "mean_correct_prob": 0.4636,
+      "top1_accuracy": 0.5802,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed2/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.7407,
+      "bin1_avg_nll": 2.4218,
+      "bin2_avg_nll": 2.5181,
+      "bin3_avg_nll": 1.9483
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.8624,
+      "perplexity": 351.58,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.7763,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.0374,
+      "ood_perplexity": 8411.6,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.7329,
+      "mean_correct_prob": 0.4335,
+      "top1_accuracy": 0.5567,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed2/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 6.4786,
+      "bin1_avg_nll": 6.2532,
+      "bin2_avg_nll": 6.3795,
+      "bin3_avg_nll": 6.2049
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1312,
+      "perplexity": 459.97,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.055,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.6315,
+      "ood_perplexity": 15237.99,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 7.1705,
+      "mean_correct_prob": 0.005,
+      "top1_accuracy": 0.0311,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed2/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 30171648,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.7699,
+      "bin1_avg_nll": 2.4413,
+      "bin2_avg_nll": 2.5345,
+      "bin3_avg_nll": 1.9452
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.4263,
+      "perplexity": 33736.39,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.4779,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9944,
+      "ood_perplexity": 8058.04,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.7038,
+      "mean_correct_prob": 0.4361,
+      "top1_accuracy": 0.5569,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed2/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 30171648,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 6.858,
+      "bin1_avg_nll": 6.7043,
+      "bin2_avg_nll": 6.7771,
+      "bin3_avg_nll": 6.6122
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.13,
+      "perplexity": 459.46,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.058,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.3827,
+      "ood_perplexity": 11880.91,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 8.5859,
+      "mean_correct_prob": 0.0023,
+      "top1_accuracy": 0.0311,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed3/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.5802,
+      "bin1_avg_nll": 2.3026,
+      "bin2_avg_nll": 2.327,
+      "bin3_avg_nll": 1.7467
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.4478,
+      "perplexity": 34467.22,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.4008,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9623,
+      "ood_perplexity": 7803.47,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5412,
+      "mean_correct_prob": 0.4642,
+      "top1_accuracy": 0.586,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed3/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.8041,
+      "bin1_avg_nll": 2.458,
+      "bin2_avg_nll": 2.5051,
+      "bin3_avg_nll": 1.9443
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.8275,
+      "perplexity": 339.51,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.7381,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.0965,
+      "ood_perplexity": 8923.78,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.6845,
+      "mean_correct_prob": 0.4338,
+      "top1_accuracy": 0.5582,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed3/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 6.7628,
+      "bin1_avg_nll": 6.5567,
+      "bin2_avg_nll": 6.6497,
+      "bin3_avg_nll": 6.4812
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1347,
+      "perplexity": 461.61,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0568,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.3088,
+      "ood_perplexity": 11034.31,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 8.4344,
+      "mean_correct_prob": 0.003,
+      "top1_accuracy": 0.0322,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed3/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 30171648,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.7373,
+      "bin1_avg_nll": 2.4042,
+      "bin2_avg_nll": 2.4437,
+      "bin3_avg_nll": 1.8645
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.519,
+      "perplexity": 37012.21,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.53,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9845,
+      "ood_perplexity": 7978.26,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5957,
+      "mean_correct_prob": 0.4483,
+      "top1_accuracy": 0.5688,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed3/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 30171648,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 13.6198,
+      "bin1_avg_nll": 13.9276,
+      "bin2_avg_nll": 13.3399,
+      "bin3_avg_nll": 13.7703
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1332,
+      "perplexity": 460.93,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0428,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 10.398,
+      "ood_perplexity": 32792.73,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.4512,
+      "mean_correct_prob": 0.0003,
+      "top1_accuracy": 0.0084,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed4/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.5713,
+      "bin1_avg_nll": 2.2602,
+      "bin2_avg_nll": 2.355,
+      "bin3_avg_nll": 1.7356
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.3205,
+      "perplexity": 82493.08,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.279,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.8851,
+      "ood_perplexity": 7223.29,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5316,
+      "mean_correct_prob": 0.468,
+      "top1_accuracy": 0.5876,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed4/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.7943,
+      "bin1_avg_nll": 2.4801,
+      "bin2_avg_nll": 2.5675,
+      "bin3_avg_nll": 2.0106
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.8155,
+      "perplexity": 335.47,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.7165,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.109,
+      "ood_perplexity": 9036.29,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.7386,
+      "mean_correct_prob": 0.4276,
+      "top1_accuracy": 0.5531,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed4/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 6.5213,
+      "bin1_avg_nll": 6.2812,
+      "bin2_avg_nll": 6.3741,
+      "bin3_avg_nll": 6.2046
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.6612,
+      "perplexity": 781.46,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.2345,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 12.8858,
+      "ood_perplexity": 394658.02,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 7.2818,
+      "mean_correct_prob": 0.0054,
+      "top1_accuracy": 0.0311,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed4/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 30171648,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.7307,
+      "bin1_avg_nll": 2.4215,
+      "bin2_avg_nll": 2.5028,
+      "bin3_avg_nll": 1.9149
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.4332,
+      "perplexity": 33969.73,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.48,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.0558,
+      "ood_perplexity": 8567.83,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.702,
+      "mean_correct_prob": 0.4424,
+      "top1_accuracy": 0.5666,
+      "n_tokens": 8297
+    }
+  },
+  "t0_3k_seed4/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 30171648,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 13.1352,
+      "bin1_avg_nll": 13.1609,
+      "bin2_avg_nll": 13.1502,
+      "bin3_avg_nll": 13.1826
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1564,
+      "perplexity": 471.72,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0802,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 12.278,
+      "ood_perplexity": 214907.97,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.7144,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_60M_10k_seed20/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 1.5797,
+      "bin1_avg_nll": 1.3505,
+      "bin2_avg_nll": 1.3933,
+      "bin3_avg_nll": 0.9091
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.1884,
+      "perplexity": 72286.11,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.3101,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9624,
+      "ood_perplexity": 7804.43,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 1.5992,
+      "mean_correct_prob": 0.6454,
+      "top1_accuracy": 0.7447,
+      "n_tokens": 8297
+    }
+  },
+  "t0_60M_10k_seed20/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 1.7737,
+      "bin1_avg_nll": 1.5224,
+      "bin2_avg_nll": 1.5811,
+      "bin3_avg_nll": 1.0725
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.3567,
+      "perplexity": 212.01,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.3361,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.1678,
+      "ood_perplexity": 9583.53,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 1.7673,
+      "mean_correct_prob": 0.6112,
+      "top1_accuracy": 0.7153,
+      "n_tokens": 8297
+    }
+  },
+  "t0_60M_10k_seed20/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 35.092,
+      "bin1_avg_nll": 35.7667,
+      "bin2_avg_nll": 35.4921,
+      "bin3_avg_nll": 36.0561
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.0419,
+      "perplexity": 420.67,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.9667,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 25.321,
+      "ood_perplexity": 99257677974.01,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.5089,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_60M_10k_seed20/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 30171648,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 1.7971,
+      "bin1_avg_nll": 1.5667,
+      "bin2_avg_nll": 1.6032,
+      "bin3_avg_nll": 1.0806
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.0834,
+      "perplexity": 65082.83,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.1033,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.019,
+      "ood_perplexity": 8258.51,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 1.7786,
+      "mean_correct_prob": 0.6038,
+      "top1_accuracy": 0.7115,
+      "n_tokens": 8297
+    }
+  },
+  "t0_60M_10k_seed20/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 30171648,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 7.9743,
+      "bin1_avg_nll": 7.9141,
+      "bin2_avg_nll": 7.9527,
+      "bin3_avg_nll": 7.9143
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.053,
+      "perplexity": 425.4,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.9834,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.4427,
+      "ood_perplexity": 12615.25,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.1898,
+      "mean_correct_prob": 0.0005,
+      "top1_accuracy": 0.0231,
+      "n_tokens": 8297
+    }
+  },
+  "t0_60M_6k_seed10/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.071,
+      "bin1_avg_nll": 1.8093,
+      "bin2_avg_nll": 1.8655,
+      "bin3_avg_nll": 1.312
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.0247,
+      "perplexity": 22578.31,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.1279,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.943,
+      "ood_perplexity": 7654.23,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.052,
+      "mean_correct_prob": 0.5571,
+      "top1_accuracy": 0.6623,
+      "n_tokens": 8297
+    }
+  },
+  "t0_60M_6k_seed10/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.2161,
+      "bin1_avg_nll": 1.96,
+      "bin2_avg_nll": 2.0315,
+      "bin3_avg_nll": 1.4145
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.6294,
+      "perplexity": 278.49,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.5524,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.036,
+      "ood_perplexity": 8400.38,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.1522,
+      "mean_correct_prob": 0.5368,
+      "top1_accuracy": 0.6442,
+      "n_tokens": 8297
+    }
+  },
+  "t0_60M_6k_seed10/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 16.4806,
+      "bin1_avg_nll": 16.6288,
+      "bin2_avg_nll": 16.5216,
+      "bin3_avg_nll": 16.6445
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.0505,
+      "perplexity": 424.32,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.9785,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 13.8314,
+      "ood_perplexity": 1015985.13,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.7123,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t0_60M_6k_seed10/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 30171648,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.2463,
+      "bin1_avg_nll": 1.974,
+      "bin2_avg_nll": 2.0462,
+      "bin3_avg_nll": 1.4265
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.8787,
+      "perplexity": 53034.78,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.1176,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9921,
+      "ood_perplexity": 8039.22,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.1484,
+      "mean_correct_prob": 0.5334,
+      "top1_accuracy": 0.6391,
+      "n_tokens": 8297
+    }
+  },
+  "t0_60M_6k_seed10/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 30171648,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 13.6295,
+      "bin1_avg_nll": 13.6566,
+      "bin2_avg_nll": 13.6528,
+      "bin3_avg_nll": 13.7066
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.0859,
+      "perplexity": 439.62,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.9996,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 14.057,
+      "ood_perplexity": 1273163.17,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.7077,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  },
+  "t1_arflow_seed0/paired/ar_only/model.pt": {
+    "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+  },
+  "t1_arflow_seed0/paired/flow_only/model.pt": {
+    "kind": "arflow",
+    "n_params": 36812544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 10.8056,
+      "bin1_avg_nll": 10.7987,
+      "bin2_avg_nll": 10.8053,
+      "bin3_avg_nll": 10.8186
+    },
+    "probe1_diff_axis": {
+      "avg_nll": null,
+      "note": "ARFlow model \u2014 flow-axis perplexity needs a different probe"
+    },
+    "probe2_fim": {
+      "avg_nll": null,
+      "note": "ARFlow continuous flow FIM TBD"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 10.9045,
+      "ood_perplexity": 54422.6,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.7607,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0005,
+      "n_tokens": 8297
+    }
+  },
+  "t1_arflow_seed1/ar_only/model.pt": {
+    "kind": "arflow",
+    "n_params": 66259968,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.7024,
+      "bin1_avg_nll": 2.3397,
+      "bin2_avg_nll": 2.4165,
+      "bin3_avg_nll": 1.8926
+    },
+    "probe1_diff_axis": {
+      "avg_nll": null,
+      "note": "ARFlow model \u2014 flow-axis perplexity needs a different probe"
+    },
+    "probe2_fim": {
+      "avg_nll": null,
+      "note": "ARFlow continuous flow FIM TBD"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.8571,
+      "ood_perplexity": 7023.88,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.6965,
+      "mean_correct_prob": 0.4373,
+      "top1_accuracy": 0.559,
+      "n_tokens": 8297
+    }
+  },
+  "t1_arflow_seed1/composite/model.pt": {
+    "kind": "arflow",
+    "n_params": 66259968,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.8906,
+      "bin1_avg_nll": 2.4939,
+      "bin2_avg_nll": 2.5922,
+      "bin3_avg_nll": 2.0773
+    },
+    "probe1_diff_axis": {
+      "avg_nll": null,
+      "note": "ARFlow model \u2014 flow-axis perplexity needs a different probe"
+    },
+    "probe2_fim": {
+      "avg_nll": null,
+      "note": "ARFlow continuous flow FIM TBD"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9174,
+      "ood_perplexity": 7460.82,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.865,
+      "mean_correct_prob": 0.4099,
+      "top1_accuracy": 0.5343,
+      "n_tokens": 8297
+    }
+  },
+  "t1_arflow_seed1/flow_only/model.pt": {
+    "kind": "arflow",
+    "n_params": 66259968,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 10.9822,
+      "bin1_avg_nll": 10.9565,
+      "bin2_avg_nll": 10.9448,
+      "bin3_avg_nll": 10.9252
+    },
+    "probe1_diff_axis": {
+      "avg_nll": null,
+      "note": "ARFlow model \u2014 flow-axis perplexity needs a different probe"
+    },
+    "probe2_fim": {
+      "avg_nll": null,
+      "note": "ARFlow continuous flow FIM TBD"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 10.97,
+      "ood_perplexity": 58102.05,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.7386,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0001,
+      "n_tokens": 8297
+    }
+  },
+  "t1_arflow_seed1/paired/ar_only/model.pt": {
+    "kind": "arflow",
+    "n_params": 36812544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.6859,
+      "bin1_avg_nll": 2.3245,
+      "bin2_avg_nll": 2.3807,
+      "bin3_avg_nll": 1.8453
+    },
+    "probe1_diff_axis": {
+      "avg_nll": null,
+      "note": "ARFlow model \u2014 flow-axis perplexity needs a different probe"
+    },
+    "probe2_fim": {
+      "avg_nll": null,
+      "note": "ARFlow continuous flow FIM TBD"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.8383,
+      "ood_perplexity": 6893.11,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.7357,
+      "mean_correct_prob": 0.4511,
+      "top1_accuracy": 0.5739,
+      "n_tokens": 8297
+    }
+  },
+  "t1_arflow_seed1/paired/flow_only/model.pt": {
+    "kind": "arflow",
+    "n_params": 36812544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 10.9462,
+      "bin1_avg_nll": 10.9193,
+      "bin2_avg_nll": 10.9082,
+      "bin3_avg_nll": 10.8997
+    },
+    "probe1_diff_axis": {
+      "avg_nll": null,
+      "note": "ARFlow model \u2014 flow-axis perplexity needs a different probe"
+    },
+    "probe2_fim": {
+      "avg_nll": null,
+      "note": "ARFlow continuous flow FIM TBD"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 10.8811,
+      "ood_perplexity": 53162.07,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.7613,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0001,
+      "n_tokens": 8297
+    }
+  },
+  "t1_arflow_seed2/paired/ar_only/model.pt": {
+    "error": "load_failed: PytorchStreamReader failed reading zip archive: failed finding central directory"
+  },
+  "t1_arflow_seed2/paired/flow_only/model.pt": {
+    "kind": "arflow",
+    "n_params": 36812544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 10.9192,
+      "bin1_avg_nll": 10.96,
+      "bin2_avg_nll": 11.0161,
+      "bin3_avg_nll": 11.0062
+    },
+    "probe1_diff_axis": {
+      "avg_nll": null,
+      "note": "ARFlow model \u2014 flow-axis perplexity needs a different probe"
+    },
+    "probe2_fim": {
+      "avg_nll": null,
+      "note": "ARFlow continuous flow FIM TBD"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 10.9031,
+      "ood_perplexity": 54346.6,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.7603,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0001,
+      "n_tokens": 8297
+    }
+  },
+  "toy_composite_seed0/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.65,
+      "bin1_avg_nll": 2.3285,
+      "bin2_avg_nll": 2.4368,
+      "bin3_avg_nll": 1.8617
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 11.2174,
+      "perplexity": 74416.49,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 11.1945,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9347,
+      "ood_perplexity": 7591.24,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.5601,
+      "mean_correct_prob": 0.4556,
+      "top1_accuracy": 0.575,
+      "n_tokens": 8297
+    }
+  },
+  "toy_composite_seed0/composite/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.82,
+      "bin1_avg_nll": 2.4876,
+      "bin2_avg_nll": 2.5937,
+      "bin3_avg_nll": 2.0309
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 5.8467,
+      "perplexity": 346.09,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 5.7402,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.0962,
+      "ood_perplexity": 8921.23,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.7752,
+      "mean_correct_prob": 0.4238,
+      "top1_accuracy": 0.5474,
+      "n_tokens": 8297
+    }
+  },
+  "toy_composite_seed0/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 51308544,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 7.7126,
+      "bin1_avg_nll": 7.5908,
+      "bin2_avg_nll": 7.6785,
+      "bin3_avg_nll": 7.6023
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1429,
+      "perplexity": 465.42,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0677,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 9.5138,
+      "ood_perplexity": 13545.69,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 9.9882,
+      "mean_correct_prob": 0.0007,
+      "top1_accuracy": 0.0171,
+      "n_tokens": 8297
+    }
+  },
+  "toy_composite_seed0/paired/ar_only/model.pt": {
+    "kind": "composite",
+    "n_params": 30171648,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 2.766,
+      "bin1_avg_nll": 2.4499,
+      "bin2_avg_nll": 2.5262,
+      "bin3_avg_nll": 1.9172
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 10.8788,
+      "perplexity": 53041.63,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 10.9348,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 8.9944,
+      "ood_perplexity": 8057.57,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 2.6097,
+      "mean_correct_prob": 0.4434,
+      "top1_accuracy": 0.5608,
+      "n_tokens": 8297
+    }
+  },
+  "toy_composite_seed0/paired/diff_only/model.pt": {
+    "kind": "composite",
+    "n_params": 30171648,
+    "probe4_pos_strat": {
+      "bin0_avg_nll": 14.4372,
+      "bin1_avg_nll": 14.3034,
+      "bin2_avg_nll": 14.3685,
+      "bin3_avg_nll": 14.2389
+    },
+    "probe1_diff_axis": {
+      "avg_nll": 6.1408,
+      "perplexity": 464.44,
+      "n_masked_tokens": 4125,
+      "mask_ratio": 0.5
+    },
+    "probe2_fim": {
+      "fim_diff_avg_nll": 6.0631,
+      "n_middle_tokens": 1780,
+      "mid_mask_len": 20,
+      "suffix_len": 20,
+      "note": "composite-only (diff mode); pure-AR can't see suffix and would be strictly higher NLL on the same tokens"
+    },
+    "probe3_ood": {
+      "ood_avg_nll": 14.7637,
+      "ood_perplexity": 2581059.54,
+      "n_tokens": 6468,
+      "n_chunks": 50
+    },
+    "probe7_calibration": {
+      "mean_entropy_nats": 10.7198,
+      "mean_correct_prob": 0.0,
+      "top1_accuracy": 0.0,
+      "n_tokens": 8297
+    }
+  }
+}

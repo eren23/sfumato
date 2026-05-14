@@ -1,0 +1,359 @@
+{
+  "mode": "paired",
+  "n": 50,
+  "n_correct": 0,
+  "accuracy": 0.0,
+  "wall_s": 25.8,
+  "results": [
+    {
+      "idx": 0,
+      "gold": "18",
+      "pred": "2",
+      "correct": 0,
+      "text": " The total cost of the total amount of the total amount of the cost of the cost of the cost of the price of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the total amount of the total amount of the total amount of money is $10 x $2=<<**2=<<<<**.\nAnswer:\nAnswer::\nAnswer:\nAnswer::\nAnswer:\nAnswer:\nAnswer:\nAnswer:\n"
+    },
+    {
+      "idx": 1,
+      "gold": "3",
+      "pred": "12",
+      "correct": 0,
+      "text": " The total number of people, the number of people are 2*2 = <<2*2=12>>12 people.\nThe number of people is 2+2 = <<2+2=12>>12.\nThe number of people are 2+2 = <<2+2=12>>12 people.\nAnswer::\n:\nAnswer:\n\n\nAnswer:\nAnswer:\n\n\n\nAnswer:\nAnswer:\n\n\n\nAnswer:\nAnswer:\n\nAnswer"
+    },
+    {
+      "idx": 2,
+      "gold": "70000",
+      "pred": null,
+      "correct": 0,
+      "text": " The total cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the the of the of the..\nAnswer:\nAnswer:.\nAnswer:\n.\nAnswer: the of of the of the the of the of the total of the of"
+    },
+    {
+      "idx": 3,
+      "gold": "540",
+      "pred": "2",
+      "correct": 0,
+      "text": " He has a total of 2*2=<<2*2=12>>12 pounds of water\nSo he needs to make a total of 2*2=<<2*2=12>>12 pounds of water\nSo he needs to make a total of 10*2=<<10*2=12>>>>\nAnswer:          >>>>==<<<<**2=<<>>.\nAnswer==>>=<<>>=<<>>"
+    },
+    {
+      "idx": 4,
+      "gold": "20",
+      "pred": "2",
+      "correct": 0,
+      "text": " The total number of people are 20*2=<<20*2=12>>12 pounds of water.\nThe total number of people are 50+10=<<20+10=20>>20 pounds of water.\nThe total number of people is 100+10=<<10+10=20>>20==<<=<<<<**2=<<<<=<<<<=<<>>.\nAnswer:\nAnswer:\nAnswer:>>>>=<<>>=>> of the>>"
+    },
+    {
+      "idx": 5,
+      "gold": "64",
+      "pred": null,
+      "correct": 0,
+      "text": " The total cost of the cost of the price of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the price of the cost of the cost of the cost of the cost of the cost of the of the of the of the of the of the of the of the.\nAnswer:\n.\nAnswer:\nAnswer:\nAnswer:\nAnswer:\nAnswer::."
+    },
+    {
+      "idx": 6,
+      "gold": "260",
+      "pred": null,
+      "correct": 0,
+      "text": " First find how many marbles as many marbles as many marbles as many marbles as many marbles as many marbles as the number of marbles: If the number of marbles in the number of marbles in the number of marbles: If the number of marbles: If the number of mar the number number number number number number number number number number number number number number number number number number number number number number number number number number number number number number number number number number number number number"
+    },
+    {
+      "idx": 7,
+      "gold": "160",
+      "pred": "2",
+      "correct": 0,
+      "text": " First find the total number of minutes: 2 * 2 = <<2*2=12>>12 minutes\nThen find the number of minutes: 2 minutes * 2 = <<2*2=6>>6 minutes\nThen multiply the number of minutes: 2 minutes * 2 minutes/week = <<2*2=>>>>>> of of the\n:\nAnswer:\nAnswer\n:\n:\n of the number of the number of the number of the number\n\nAnswer:\nAnswer\nAnswer"
+    },
+    {
+      "idx": 8,
+      "gold": "45",
+      "pred": "2",
+      "correct": 0,
+      "text": " The total number of hours, the first day is 2*2=<<2*2=12>>12 hours\nSo the total number of hours is 2*2=<<2*2=2>>4 hours\nSo, he needs to the total number of hours, he needs to the first day is 2=<<>><<=<<*>>\nAnswer:\n\nAnswer:\nSo\nAnswer:                  "
+    },
+    {
+      "idx": 9,
+      "gold": "460",
+      "pred": "2",
+      "correct": 0,
+      "text": " The total amount of the total number of hours is $10 x $2 = $<<20*2=10>>10.\nThe total cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost is $10 x $ $<<*2=>> of the\nAnswer:\nAnswerAnswer::\nAnswer:\nAnswer:\nAnswer:\nAnswer:\nAnswer:\nAnswer:\nAnswer:"
+    },
+    {
+      "idx": 10,
+      "gold": "366",
+      "pred": "10",
+      "correct": 0,
+      "text": " The number of people has 2*2 = <<2*2=12>>12 people.\nThe total number of people are 2*2 = <<10*2=12>>12 people.\nThe total number of people is 2+2 = <<12+2=10>>10 people.\nThe total number of the number of the number of the number of the number of the number of the number of the number of the number of of the number of the number of the number the number of"
+    },
+    {
+      "idx": 11,
+      "gold": "694",
+      "pred": null,
+      "correct": 0,
+      "text": " The total cost of the price of the price of the total cost of the cost of the cost of the price of the price of the cost of the cost of the price of the cost of the price of the cost of the cost of the cost of the price of the price of the price of the price of the price.\n\nAnswer: of the the of the of the of the of the of the of the of the of the of the of.\nAnswerAnswer:\nAnswer:\nAnswer:"
+    },
+    {
+      "idx": 12,
+      "gold": "13",
+      "pred": null,
+      "correct": 0,
+      "text": " The first week, the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of money, the total amount of the total amount of money, the total amount of money, the total amount of the total amount of the total amount of the total amount of the total of the.\nAnswer\nAnswer:.\nAnswer.\nAnswer\n\nAnswer:\nAnswer\nAnswer\nAnswer::\nAnswer:\nAnswer\n\nAnswer:\nAnswer:"
+    },
+    {
+      "idx": 13,
+      "gold": "18",
+      "pred": "12",
+      "correct": 0,
+      "text": " First find how many cans of the number of cans of the number of cans of the number of the number of cans by the number of cans of the number of cans of the number of cans of the number of cans of the number of cans: 2 * 2 = <<2*2=6>>12 pounds\nThen of the of the number of the number of the number of the number of the number of the number of the number of of the of the number of the number of the of the number of"
+    },
+    {
+      "idx": 14,
+      "gold": "60",
+      "pred": "10",
+      "correct": 0,
+      "text": " The total number of people are in the number of students in the number of students in the number of students in the number of students in the number of students are 2*2 = <<2*2=10>>10\nThe total number of people in the number of people in the number of people are sold in the number of the number of the number of the number of the number of the number of the number of the number of the number of of the number of the number of the number of the number"
+    },
+    {
+      "idx": 15,
+      "gold": "125",
+      "pred": null,
+      "correct": 0,
+      "text": " The total of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the total cost of the price of the the the of the the of the the the of of the of the of the of the the of the of the of the of the of the the of the of the of the of"
+    },
+    {
+      "idx": 16,
+      "gold": "230",
+      "pred": "150",
+      "correct": 0,
+      "text": " The total number of hours, the first day is 60+20=<<200+200=200>>200 miles.\n#### 150 the of=<<+*2=>>>> of the of of the number of the of the of the of the of the of the number of the of the of the\nAnswer\n"
+    },
+    {
+      "idx": 17,
+      "gold": "57500",
+      "pred": null,
+      "correct": 0,
+      "text": " The total of the total amount of the total of the total amount of the total amount of money, the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the the of the total of the the the the the of of the of the the the total of the the the total the total of of the of the of the the the the total the"
+    },
+    {
+      "idx": 18,
+      "gold": "7",
+      "pred": "12",
+      "correct": 0,
+      "text": " The total of 2*2 = <<3*2=12>>12 liters.\nThe total number of liters is 2*2=10>>10 liters.\nThe total number of water is 2*2 = <<2*2=12>>12 liters.\nThe total number of water\nAnswer:\nAnswer\nAnswer:\nAnswer:\n\n\nAnswer:\nAnswer:\nAnswer\nAnswer::\nAnswer:\nAnswer:\nAnswer:\nAnswer:\n"
+    },
+    {
+      "idx": 19,
+      "gold": "6",
+      "pred": "2",
+      "correct": 0,
+      "text": " First find the total number of minutes: 2 minutes * 2 minutes = <<2*2=6>>6 minutes\nThen find the total number of minutes: 2 minutes * 2 minutes = <<2*2=6>>12 minutes\nThen find the total number of minutes: 2 minutes * 2 minutes/week = <<*2=>> the number of the the number of of the number of the the number number of the number of the number of the number of the number of the number of the number"
+    },
+    {
+      "idx": 20,
+      "gold": "15",
+      "pred": "8",
+      "correct": 0,
+      "text": " The total number of marbles is 2 + 2 = <<2+2=10>>10 marbles.\nThe total number of marbles is 2 + 2 = <<2+2=10>>10 marbles.\nThe total number of marbles + 2 = <<2+2=8>>8 mar the number of of the number of the number of>> of of of of of the number number of the number of the number of of the number of of the of the number of the number"
+    },
+    {
+      "idx": 21,
+      "gold": "14",
+      "pred": "2",
+      "correct": 0,
+      "text": " The first day, the first day, the first day, the first day, the first day, the first day, the first day is 2 + 2 = <<2+2=12>>12 years.\n#### 2\nAnswer\n:\n####\n\n####Question:\n####::\n:\n:\n\n\n\n:\n\nAnswer:\nAnswer:\n\n\n"
+    },
+    {
+      "idx": 22,
+      "gold": "7",
+      "pred": "10",
+      "correct": 0,
+      "text": " He has 2*2 = <<2*2=10>>10\nHe has 2*2 = <<2*2=10>>10\nHe has 2*2 = <<2*2=10>>10\nHe has 2*2 = <<10-10=10>>10\nHe has a total of>>..\nSo he.\nSo he.\nSo\nSo.\nAnswer:\nAnswer:\nAnswer: \nAnswerAnswer:\nAnswer:\nAnswer:\n"
+    },
+    {
+      "idx": 23,
+      "gold": "8",
+      "pred": "4",
+      "correct": 0,
+      "text": " The total of the first day is 1/2 = <<3*2=12>>12\nThe total number of people is the first day is 1/2 = <<3*2=12>>12\nThe total number of people is 1/2 = <<1/2=6>>4\nThe total of the of the of the of the of the of the of the of of the of\nAnswer:\n of the of the of the of of the of the of the of of the"
+    },
+    {
+      "idx": 24,
+      "gold": "26",
+      "pred": "2",
+      "correct": 0,
+      "text": " The total cost of the first day is $10 x $2 = $<<10*2=12>>12.\nThe total cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost $<<*2=<<>>.\n\nAnswer:\nAnswer:\nAnswer:\n\nAnswer:\n\nAnswer\nAnswer\nAnswer:\n of the of the total of the"
+    },
+    {
+      "idx": 25,
+      "gold": "2",
+      "pred": null,
+      "correct": 0,
+      "text": " The total cost of the cost of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the of the of of the of the the of of the of the of the of of the total of the of the of the of the total of the total of the of the of the"
+    },
+    {
+      "idx": 26,
+      "gold": "243",
+      "pred": null,
+      "correct": 0,
+      "text": " The total cost of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the the of the the of the of the of the of the of the of the of the of the of the of the of the the of the the of the.\nAnswer:\n"
+    },
+    {
+      "idx": 27,
+      "gold": "16",
+      "pred": null,
+      "correct": 0,
+      "text": " The total cost of the price of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the price of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the.\nAnswer:\nAnswer\nAnswer:\n\n\nAnswer:\n.\n\n\n.\nAnswer::\nAnswer:\nAnswer:\nAnswer:\nAnswer:Answer"
+    },
+    {
+      "idx": 28,
+      "gold": "25",
+      "pred": "60",
+      "correct": 0,
+      "text": " First find the total number of hours: First find the total number of hours: First find the total number of minutes: 2 minutes * 2 = <<2*2=60>>60 minutes\nThen find the total number of minutes * 2 minutes = <<2*2=60>>60 minutes\nThen find the total number of the number of the number of the number of the number of the number of the number of the number\nThen find the number of the number of the number of the number of the"
+    },
+    {
+      "idx": 29,
+      "gold": "104",
+      "pred": "10.",
+      "correct": 0,
+      "text": " The total cost of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price of the total amount of the total amount of money is $10.\nTheQuestion:\nAnswer:\nAnswer:\nAnswer:\nAnswer:\n####Question:\nAnswer:\nAnswer:\nAnswer $<<*=<<>>.\nAnswer:\n"
+    },
+    {
+      "idx": 30,
+      "gold": "109",
+      "pred": null,
+      "correct": 0,
+      "text": " If the first day, the second day, the first day, the first day, the first day, the first day, the first day, the first day, the first day, the first day, the second day, the total number of years, the number of years, the number of years, the number of the number number of the number the number of the number of the number of the the the the the number of the number of the the number of the number of the the number number of the"
+    },
+    {
+      "idx": 31,
+      "gold": "80",
+      "pred": null,
+      "correct": 0,
+      "text": " The total number of apples in the number of apples in the number of apples in the number of the number of people in the number of apples, the total number of people are in the number of people in the number of people in the number of people in the number of people in the number of people in the number of the the number of the of the the of the of the number the of of the number of of the of the of the number of the number of of the number of of the of the"
+    },
+    {
+      "idx": 32,
+      "gold": "35",
+      "pred": "12",
+      "correct": 0,
+      "text": " He needs to make a total of 10*2=<<10*2=12>>12 hours\nSo he needs to make 2*2=<<2*2=<<2*2=12>>12 hours\nSo he needs to make a total of 10*2=<<2*2=12>>\n   =>>=<<*==>>>>=>>>>=>>=<<*>>=>>=>>=<<>>=>>  \nSo \nAnswer"
+    },
+    {
+      "idx": 33,
+      "gold": "70",
+      "pred": "10",
+      "correct": 0,
+      "text": " The number of people is 2 + 2 = <<12+2=12>>12\nThe number of people is 2 + 2 = <<2+3=6>>8\nThe total number of people is the number of people is 100 + 2 = <<2+2=10>>10\nThe number of people\n:\n#### <<+>> of>> of\n####Question:\n\n####Question>> of\nAnswer:\nAnswer:\n####Question:\n:\n:"
+    },
+    {
+      "idx": 34,
+      "gold": "23",
+      "pred": "2",
+      "correct": 0,
+      "text": " If there are 2*2 = <<2*2=12>>12\nThe number of people is 2+2 = <<2+2=12>>12\nThe number of people is 2+2 = <<2+2=10>>10\nThe number of people is 2+2 = <<2+2=>>\n\nAnswer::\n:\n\n:\n:\n:>> <<==>>\n>> of\n:\n::\n\n\nAnswer::\nAnswer"
+    },
+    {
+      "idx": 35,
+      "gold": "9",
+      "pred": "2",
+      "correct": 0,
+      "text": " The first day, he has 2*2=<<2*2=12>>12 hours\nSo he has 2*2=<<2*2=<<2*2=12>>12 hours\nSo he has 2*2=<<2*2=10>>10 hours\nSo he has 2*2=<<>>=<<>>=>>>>===<<=<<*=<<*=>>>>=<<>>>>=<<>>=>>=>>>>==>>"
+    },
+    {
+      "idx": 36,
+      "gold": "75",
+      "pred": null,
+      "correct": 0,
+      "text": " The first year, the first year, the first year, the first year, the first year, the first year, the first year, the first year, the first year, the first year, the first year, the first year, the first year, the first year, the first year, the first year, the.\nSo. .\nAnswer:\nAnswer\nAnswer\n\nSo.\nAnswer::\nSo..\n.\nAnswer:\nSo.\n.\nSo"
+    },
+    {
+      "idx": 37,
+      "gold": "2",
+      "pred": null,
+      "correct": 0,
+      "text": " The total cost of the price of the cost of the price of the price of the price of the cost of the cost of the price of the price of the price of the price of the cost of the price of the price of the price of the price of the price of the cost of the price of the price of the the of the of the.\nAnswer::\n####Question:\nAnswer:\nAnswer.\n\nAnswer:\n####Question:\nAnswer:\nAnswer::"
+    },
+    {
+      "idx": 38,
+      "gold": "10",
+      "pred": "2",
+      "correct": 0,
+      "text": " First find the total number of minutes: First find the total number of minutes: First find the total number of minutes: 2*2=<<2*2=2>>2 hours\nThen find the total number of minutes per hour: 2*2=<<2*2=12>>6 hours\nThen find the number>>=<<>>*2=>>>>=<<*2=<<>>>>>>>>*2=>>>>*2==<<<<*2=<<*>>"
+    },
+    {
+      "idx": 39,
+      "gold": "18",
+      "pred": "2",
+      "correct": 0,
+      "text": " First find the number of minutes per hour: 2 hours * 2 minutes = <<2*2=12>>12 minutes\nThen find the number of minutes per hour: 2 hours * 2 minutes = <<2*2=12>>12 minutes\nThen find the number of minutes / 2 minutes/week = <<2=*2=>>\n\nAnswer::\nAnswer\n:\nThen:\nAnswerAnswer:\nAnswer::\nAnswer:\n:\nAnswer:\nAnswer\n:\n"
+    },
+    {
+      "idx": 40,
+      "gold": "8",
+      "pred": "2",
+      "correct": 0,
+      "text": " The total number of apples is 3*2 = <<2*2=60>>40\nThe number of water is 3+2 = <<3+2+4+2+4+2 = <<10+10=10>>10\nThe number of people is 2+2+2+2+2=>>>>\nAnswer:\n\nAnswer:\nAnswer:\nAnswer\nAnswer::\n\nAnswer:\n####\nAnswer:\n:\nAnswer:\n####\nAnswer"
+    },
+    {
+      "idx": 41,
+      "gold": "200",
+      "pred": "10",
+      "correct": 0,
+      "text": " The total number of people is 100*2 = <<20*2=10>>20\nThe total number of the number of people is 100+20 = <<20+20=60>>40\n#### 10Question:\nAnswer::\nAnswer::\nAnswer:\n:\n:\n####Question::\n####Question:\nAnswer:\n:Question::"
+    },
+    {
+      "idx": 42,
+      "gold": "26",
+      "pred": "12",
+      "correct": 0,
+      "text": " The total number of people are 2*2 = <<2*2=12>>12 pounds of water.\nThe total number of people is 2*2 = <<2*2=10>>10 pounds of water.\nThe total number of people is 2*2 = <<2*2=12>>12=>> of the of the of the\nAnswer\nAnswer::\nAnswer::\nAnswer:\nAnswer:\nAnswer\nAnswer:\n\nSo\nAnswer:\nAnswer:"
+    },
+    {
+      "idx": 43,
+      "gold": "48",
+      "pred": null,
+      "correct": 0,
+      "text": " First find the number of the number of cans of the number of cans of the number of cans of the number of cans of the number of cans of the number of cans of the number of cans of the number of cans of the number of cans of the number of cans of the number of cans: First find the number of of the number number of of the number number of the number number of the number of the number of the number of the number of of the number of the number of number number of the"
+    },
+    {
+      "idx": 44,
+      "gold": "20",
+      "pred": null,
+      "correct": 0,
+      "text": " The total cost of the cost of the price of the cost of the price of the price of the price of the cost of the cost of the cost of the price of the cost of the price of the price of the cost of the cost of the price of the cost of the price of the cost of the price of the the of the the of the of the total of the of the of the the the of of the total of the the of the the of the the the of the total of of the"
+    },
+    {
+      "idx": 45,
+      "gold": "104",
+      "pred": "2",
+      "correct": 0,
+      "text": " First find the total number of minutes: 2 minutes/2=<<2*2=10>>10 minutes\nThen find the total number of minutes: 2 minutes/week * 2 minutes/week = <<2*2=10>>10 minutes\nThen find the total number of time: 2 minutes/2=>>>>\nAnswer:\n::\n\nAnswer:\n:\n::\n::\nAnswer:\nAnswer:\nAnswer:\n:\nAnswer:\nAnswer:\n"
+    },
+    {
+      "idx": 46,
+      "gold": "163",
+      "pred": "2",
+      "correct": 0,
+      "text": " First find the number of students in the number of students: 20%*2=<<20*2=10>>10 pounds\nThen find the number of days: 12-3=<<2*2=10>>10 pounds\nThen find the number of the number of apples: 2*2=<<2==>>>> of the of the total of the the the number the number of the the number of the number of the number of the number of the the number of the number of the"
+    },
+    {
+      "idx": 47,
+      "gold": "800",
+      "pred": null,
+      "correct": 0,
+      "text": " The total cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the total of the total of the.\nAnswer:\nAnswer:\nAnswer:\nAnswer\nAnswer:\nAnswer:\nAnswer:\nAnswer:\nAnswer::\nAnswer:"
+    },
+    {
+      "idx": 48,
+      "gold": "8",
+      "pred": "12",
+      "correct": 0,
+      "text": " The total number of the number of hours, so that is 2*2 = <<2*2=12>>12 feet\nThe number of hours is 2*2 = <<2*2=12>>12 hours\nThe total number of hours is 2*2 = <<2*2=12>>12 hours\nAnswer:\nAnswer:\nAnswer::\nAnswer:\n\nAnswer:\nAnswer:\nAnswer:\nAnswer:\n.\nAnswer:\nAnswer:\n\nAnswer:"
+    },
+    {
+      "idx": 49,
+      "gold": "30",
+      "pred": "2",
+      "correct": 0,
+      "text": " The total number of people is 2*2 = <<2*2=10>>10\nThe number of people are sold is 2*2 = <<2*2=10>>10\nThe number of people are 2*2 = <<2*2=10>>10\nThe total number of people are 2\n\n####Question:\n\nAnswer\n\nAnswer:\nAnswer:\nAnswer:\n\nAnswer:\nAnswer::\nAnswer:\n\nAnswer::\nAnswer\n"
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+{
+  "mode": "ar",
+  "n": 50,
+  "n_correct": 1,
+  "accuracy": 0.02,
+  "wall_s": 14.5,
+  "results": [
+    {
+      "idx": 0,
+      "gold": "18",
+      "pred": "12",
+      "correct": 0,
+      "text": " The total cost of the first day is $2 + $2 = $<<2+2=6>>6.\nThe total amount of money she bought is $6 + $6 = $<<6+6=12>>12.\nThe total amount of money she bought is $6 + $12 = $<<6+12=12>>12.\n#### 12"
+    },
+    {
+      "idx": 1,
+      "gold": "3",
+      "pred": "8",
+      "correct": 0,
+      "text": " The total number of blueberries that is 2*2=<<2*2=4>>4 blue.\nThe total number of blue and the number of blue and blue and blue and blue and blue and blue is 2*2=<<2*2=4>>4.\nThe total number of blue and blue and blue and blue and blue and blue and blue and blue, is 4+4=<<4+4=8>>8.\n#### 8"
+    },
+    {
+      "idx": 2,
+      "gold": "70000",
+      "pred": "100000",
+      "correct": 0,
+      "text": " He buys 100% of the price of the price of the price of the price of the price of the price of the price of the price of the price of the price is $100,000-$100,000=$<<100000-100000=100000>>100,000\nSo he paid $100,000-$100,000=$<<100000-100000=100000>>100,000\n#### 100,000"
+    },
+    {
+      "idx": 3,
+      "gold": "540",
+      "pred": "1200",
+      "correct": 0,
+      "text": " He needs to run a total of 60*60=<<60*60=600>>600 square feet\nSo he needs to run 120*60=<<120*60=1200>>1200 square feet\n#### 1200"
+    },
+    {
+      "idx": 4,
+      "gold": "20",
+      "pred": "5",
+      "correct": 0,
+      "text": " She gave away 5 bags of bread to 5 bags of bread to 5 bags of bread, so she had 5*5=<<5*5=50>>50 boxes of bread.\nShe gave her friends, so she had 20-5=<<20-5=5>>5 boxes of bread.\nShe gave her friends to her friends, so she had 10-5=<<10-5=5>>5 boxes of bread.\n#### 5"
+    },
+    {
+      "idx": 5,
+      "gold": "64",
+      "pred": "45",
+      "correct": 0,
+      "text": " The total cost of the first two friends is $5 x $5 = $<<5*5=50>>50.\nThe total cost of the second and the second price of the second is $5 + $5 = $<<5+5=15>>15.\nThe total cost of the second and the second is $15 + $15 = $<<15+15=45>>45.\nThe total cost of the second and the second is $15 + $45 = $<<15+45=45>>45.\nThe total cost of the second and the second is $45 + $45 = $"
+    },
+    {
+      "idx": 6,
+      "gold": "260",
+      "pred": "120",
+      "correct": 0,
+      "text": " If there are 20 times as many times as many as many as many as the number of animals as the number of animals as the number of animals as the number of animals as the number of animals as the number of animals is 2*20=<<2*20=40>>40\nIf the number of dogs in the number of dogs is 40, then the number of dogs is 40+40=<<40+40=120>>120\n#### 120"
+    },
+    {
+      "idx": 7,
+      "gold": "160",
+      "pred": "200",
+      "correct": 0,
+      "text": " First find the total number of time she needs to find the total time: 200 minutes/hour * 100% = <<200*100*.01=200>>200 minutes\nThen add the number of minutes she needs to find the total time she needs to find the total time: 200 minutes + 200 minutes = <<200+200=200>>200 minutes\nThen add the total time she needs to find the total time: 200 minutes + 200 minutes = <<200+200=200>>200 minutes\n#### 200"
+    },
+    {
+      "idx": 8,
+      "gold": "45",
+      "pred": "16",
+      "correct": 0,
+      "text": " He spends 2*2=<<2*2=4>>4 hours\nSo he spends 2*2=<<2*2=4>>4 hours\nSo he spends 4*2=<<4*2=8>>8 hours\nSo he spends 8*2=<<8*2=16>>16 hours\n#### 16"
+    },
+    {
+      "idx": 9,
+      "gold": "460",
+      "pred": "45.",
+      "correct": 0,
+      "text": " The total cost of the first week is $10 + $10 = $<<10+10=15>>15.\nThe total cost of the second week is $15 + $15 = $<<15+15=45>>45.\nThe total cost of the second week is $15 + $45 = $<<15+45=45>>45.\nThe total cost of the second week is $45 + $45 = $<<45+45=45>>45.\nThe total cost of the second week is $45 + $45 = $<<45+45=45>>45.\nThe total cost"
+    },
+    {
+      "idx": 10,
+      "gold": "366",
+      "pred": "90",
+      "correct": 0,
+      "text": " The number of the first year is 30/100*30 = <<30/100*30=30>>30 years.\nThe total number of years in the second year is 30+30 = <<30+30=90>>90 years.\nThe total number of years in the second year is 90+30 = <<90+30=90>>90 years.\nThe total number of years in the second year is 90+30 = <<90+30=90>>90 years.\n#### 90"
+    },
+    {
+      "idx": 11,
+      "gold": "694",
+      "pred": null,
+      "correct": 0,
+      "text": " The total cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the cost of the"
+    },
+    {
+      "idx": 12,
+      "gold": "13",
+      "pred": "90.",
+      "correct": 0,
+      "text": " The total cost of the first year is $90 + $15 = $<<90+15=90>>90.\nThe total cost of the second year is $90 + $90 = $<<90+90=90>>90.\nThe total cost of the second year is $90 + $90 = $<<90+90=90>>90.\nThe total cost of the second year is $90 + $90 = $<<90+90=90>>90.\nThe total cost of the second year is $90 + $90 = $<<90+90=90>>90.\nThe total cost"
+    },
+    {
+      "idx": 13,
+      "gold": "18",
+      "pred": "4",
+      "correct": 0,
+      "text": " First find the total number of blue and the total number of blue and blue and blue and blue and blue and blue and blue and blue and blue and blue and blue and blue, we get 2*2=<<2*2=4>>4 blue and blue and blue and blue and blue and blue-third of blue-third of the number of blue-third of blue-third of blue-third of blue-third of blue-4.\n#### 4"
+    },
+    {
+      "idx": 14,
+      "gold": "60",
+      "pred": "240",
+      "correct": 0,
+      "text": " The number of students in the class is 50/100*40 = <<50/100*40=40>>40 students.\nThe number of students in the class is 40-40 = <<40-40=40>>40.\nThe total number of students in the class is 40+40 = <<40+40=240>>240 students.\nThe total number of students in the class is 240+240 = <<240+240=240>>240 students.\n#### 240"
+    },
+    {
+      "idx": 15,
+      "gold": "125",
+      "pred": "12000",
+      "correct": 0,
+      "text": " The total cost of the price of the price of the price of the price of the price of the price of the price is $8,000 * $8 = $<<8000*8=12000>>12,000.\nThe total cost of the price of the price of the price is $12,000 + $12,000 = $<<12000+12000=12000>>12,000.\n#### 12,000"
+    },
+    {
+      "idx": 16,
+      "gold": "230",
+      "pred": "100",
+      "correct": 0,
+      "text": " The total distance of the first day is 100 miles + 100 miles = <<100+100=100>>100 miles.\nThe second day, the second day is 100 miles + 100 miles = <<100+100=100>>100 miles.\nThe second day, the second day, the second day, the second day, the second day is 100 miles + 100 miles = <<100+100=100>>100 miles.\nThe second day, the second day, the second day, the second day, the second day is 100 miles + 100 miles = <<100+100=100>>100 miles.\nThe second day,"
+    },
+    {
+      "idx": 17,
+      "gold": "57500",
+      "pred": "60",
+      "correct": 0,
+      "text": " First find the total time she spends on a week: $10/hour * $10/hour = $<<10*10=60>>60/hour\nThen find the total amount of money she spends on the total amount of money she spends on the total amount of money she spends on the total amount of money she spends on the first week: $60/hour * $10/hour = $<<60*10=120>>120\nThen find the total amount of money she spends on the total amount of money she spends on the second week: $120/hour * $60/hour = $<<120*60"
+    },
+    {
+      "idx": 18,
+      "gold": "7",
+      "pred": "24",
+      "correct": 0,
+      "text": " She can make 3*2=<<3*2=6>>6 eggs\nShe can make 6*2=<<6*2=12>>12 eggs\nShe can make 12*2=<<12*2=24>>24 eggs\nShe can make 24*2=<<24*2=24>>24 eggs\n#### 24"
+    },
+    {
+      "idx": 19,
+      "gold": "6",
+      "pred": "24",
+      "correct": 0,
+      "text": " First find the total time she spends on the total time: 4 miles * 4 miles/hour = <<4*4=24>>24 miles\nThen find the total miles she spends on the total miles: 24 miles + 24 miles = <<24+24=24>>24 miles\nThen add the total miles to find the total miles she spends: 24 miles + 24 miles = <<24+24=24>>24 miles\n#### 24"
+    },
+    {
+      "idx": 20,
+      "gold": "15",
+      "pred": "72",
+      "correct": 0,
+      "text": " First find the total number of water per minute: 12 gallons/hour * 12 gallons/hour = <<12*12=72>>72 gallons\nThen find the total number of water per minute: 24 gallons/hour * 12 gallons/hour = <<24*12=72>>72 gallons\nThen find the total number of gallons of water per hour: 24 gallons/hour * 12 gallons/hour = <<24*12=72>>72 gallons\nThen find the total number of gallons of gallons of water per hour: 24 gallons/hour * 12 gallons/hour = <<24*12=72>>72 gallons\nThen find"
+    },
+    {
+      "idx": 21,
+      "gold": "14",
+      "pred": "36",
+      "correct": 0,
+      "text": " First find the total number of years: 6 years * 6 years = <<6*6=72>>72 years\nThen find the total number of years: 24 years + 24 years = <<24+24=36>>36 years\nThen add the number of years to find the total number of years: 36 years + 24 years = <<36+24=36>>36 years\nThen add the number of years to find the total number of years: 36 years + 36 years = <<36+36=36>>36 years\n#### 36"
+    },
+    {
+      "idx": 22,
+      "gold": "7",
+      "pred": "9",
+      "correct": 0,
+      "text": " The first 3 * 3 = <<3*3=9>>9 people.\nThe second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day"
+    },
+    {
+      "idx": 23,
+      "gold": "8",
+      "pred": "8",
+      "correct": 1,
+      "text": " The first hour is 2*2=<<2*2=20>>20\nThe total number of inches per hour is 2*2=<<2*2=4>>4 inches\nThe total number of inches is 2*2=<<2*2=4>>4 inches\nThe total number of inches is 4+4=<<4+4=8>>8 inches\n#### 8"
+    },
+    {
+      "idx": 24,
+      "gold": "26",
+      "pred": "21",
+      "correct": 0,
+      "text": " The total cost of the price of the books is $19 + $19 = $<<19+19=21>>21.\nThe total cost of the books is $21 + $21 = $<<21+21=21>>21.\nThe total cost of the books is $21 + $21 = $<<21+21=21>>21.\nThe total cost of the books is $21 + $21 = $<<21+21=21>>21.\n#### 21"
+    },
+    {
+      "idx": 25,
+      "gold": "2",
+      "pred": "36",
+      "correct": 0,
+      "text": " The total cost of apples cost of apples is $6 + $6 = $<<6+6=12>>12.\nThe total cost of the apples is $12 + $12 = $<<12+12=18>>18.\nThe total cost of the apples is $12 + $18 = $<<12+18=36>>36.\n#### 36"
+    },
+    {
+      "idx": 26,
+      "gold": "243",
+      "pred": "22",
+      "correct": 0,
+      "text": " The total cost of the price of the price of the price of the price of the price of the price of the price is $22 + $22 = $<<22+22=22>>22.\nThe total cost of the price of the price of the price of the price is $22 + $22 = $<<22+22=22>>22.\nThe total cost of the price of the price of the price of the price is $22 + $22 = $<<22+22=22>>22.\nThe total cost of the price of the price of the price of the price is $22 + $"
+    },
+    {
+      "idx": 27,
+      "gold": "16",
+      "pred": "36.00",
+      "correct": 0,
+      "text": " She needs to buy a total of $4.00 a total of $4.00 and she needs to buy a total of $4.00+$4.00 = $<<4+4=12.00>>12.00\nShe needs to buy a total of $12.00 and she needs to buy a total of $12.00+$12 = $<<12+12=36.00>>36.00\nShe needs to buy $12.00 and she needs to buy a total of $36.00 and she will cost $36.00 so she will cost $36.00 and"
+    },
+    {
+      "idx": 28,
+      "gold": "25",
+      "pred": "180",
+      "correct": 0,
+      "text": " The second day is 60 miles + 20 miles = <<60+20=60>>60 miles.\nThe second day, the second day, the second day, the second day is 60 miles + 60 miles = <<60+60=120>>120 miles.\nThe second day, the second day, the second day, the second day is 120 miles + 60 miles = <<120+60=180>>180 miles.\nThe second day, the second day, the second day, the second day, the second day, the second day is 180 miles + 60 miles = <<180+60=180>>180 miles.\n"
+    },
+    {
+      "idx": 29,
+      "gold": "104",
+      "pred": "26",
+      "correct": 0,
+      "text": " The total cost of the price of the price of the price of the price of the price is $26 + $17 = $<<26+17=26>>26.\nThe total cost of the price of the price of the price is $26 + $26 = $<<26+26=26>>26.\nThe total cost of the price of the price of the price of the price is $26 + $26 = $<<26+26=26>>26.\nThe total cost of the price of the price is $26 + $26 = $<<26+26=26>>26.\n#### 26"
+    },
+    {
+      "idx": 30,
+      "gold": "109",
+      "pred": "3",
+      "correct": 0,
+      "text": " If the age is 3 years, then the age is 3 years, then the age is 3 years, then the age is 3 years old, then the age is 3 years old, then the age is 3 years old, and the age is 3 years old is 3 years old, and the age is 3 years old, and the age is 3 years old, and the age is 3 years old, and the age is 3 years old, and the age is 3 years old, and the age is 3 years old, and the age is 3 years old, and the age is 3 years old, and the age is 3 years old"
+    },
+    {
+      "idx": 31,
+      "gold": "80",
+      "pred": null,
+      "correct": 0,
+      "text": " The number of the second and the second equation by the second equation by the second equation by the second and the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second and the second equation by the second equation by the second equation by the second equation by the second and the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the"
+    },
+    {
+      "idx": 32,
+      "gold": "35",
+      "pred": "8",
+      "correct": 0,
+      "text": " He spends 2*2=<<2*2=4>>4 hours a week\nSo he spends 2*2=<<2*2=4>>4 hours a week\nSo he spends 4*2=<<4*2=8>>8 hours a week\n#### 8"
+    },
+    {
+      "idx": 33,
+      "gold": "70",
+      "pred": "2",
+      "correct": 0,
+      "text": " Let X be the number of blue marbles.\nThe number of blue marbles is x+2*x+2*x+2*x+2*x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+"
+    },
+    {
+      "idx": 34,
+      "gold": "23",
+      "pred": "80",
+      "correct": 0,
+      "text": " First find the total number of mice: 40 + 40 = <<40+40=160>>160\nThen add the number of votes: 160 + 80 = <<160+80=160>>160\nThen add the number of votes: 160% - 80% = <<160-80*.01=80>>80\nThen add the number of the number of votes to find the total number of votes: 80% - 80% = <<80-80=80>>80\n#### 80"
+    },
+    {
+      "idx": 35,
+      "gold": "9",
+      "pred": "200",
+      "correct": 0,
+      "text": " He scored 20*20=<<20*20=200>>200 points\nSo he scored 200+200=<<200+200=200>>200 points\nSo he scored 200+200=<<200+200=200>>200 points\n#### 200"
+    },
+    {
+      "idx": 36,
+      "gold": "75",
+      "pred": "8",
+      "correct": 0,
+      "text": " He buys 2*2=<<2*2=4>>4 hours\nSo he buys 2*2=<<2*2=4>>4 hours\nSo he buys 4*2=<<4*2=8>>8 hours\n#### 8"
+    },
+    {
+      "idx": 37,
+      "gold": "2",
+      "pred": "150",
+      "correct": 0,
+      "text": " He has $15 x $15 = $<<15*15=150>>150.\nHe has $15 x $15 = $<<15*15=150>>150.\nHe has $150 - $150 = $<<150-150=150>>150 left.\nHe has $150 - $150 = $<<150-150=150>>150 left.\n#### 150"
+    },
+    {
+      "idx": 38,
+      "gold": "10",
+      "pred": "16",
+      "correct": 0,
+      "text": " He spends 2*2=<<2*2=4>>4 hours\nSo he spends 2*2=<<2*2=4>>4 hours\nSo he spends 4*2=<<4*2=8>>8 hours\nSo he spends 8*2=<<8*2=16>>16 hours\n#### 16"
+    },
+    {
+      "idx": 39,
+      "gold": "18",
+      "pred": "36",
+      "correct": 0,
+      "text": " First find the total time she spends on the total time she spends on the distance: 3 miles * 2 = <<3*2=6>>6 miles\nThen find the total time she spends on the total time: 6 miles + 6 miles = <<6+6=12>>12 miles\nThen add the total time she spends on the time she spends on the time: 12 miles + 12 miles = <<12+12=36>>36 miles\nThen add the total miles to find the total time she spends: 36 miles + 12 miles = <<36+12=36>>36 miles\n#### 36"
+    },
+    {
+      "idx": 40,
+      "gold": "8",
+      "pred": "16",
+      "correct": 0,
+      "text": " If the age is 2 years old, then the age is 2*2=<<2*2=4>>4 years old.\nThe total age of the age is 4+4=<<4+4=8>>8 years old.\nThe total age of the age is 8+8=<<8+8=16>>16 years old.\n#### 16"
+    },
+    {
+      "idx": 41,
+      "gold": "200",
+      "pred": "16",
+      "correct": 0,
+      "text": " The total number of square feet of square feet of square feet is 2*2=<<2*2=4>>4\nThe total number of square feet is 4+4=<<4+4=8>>8\nThe total number of square feet is 8+8=<<8+8=16>>16\n#### 16"
+    },
+    {
+      "idx": 42,
+      "gold": "26",
+      "pred": "42",
+      "correct": 0,
+      "text": " The total number of slices of slices of slices of slices of slices of bread is 8 + 8 = <<8+8=16>>16\nThe total number of slices of slices is 16 + 16 = <<16+16=28>>28\nThe total number of slices of slices is 28 + 14 = <<28+14=42>>42\n#### 42"
+    },
+    {
+      "idx": 43,
+      "gold": "48",
+      "pred": "600",
+      "correct": 0,
+      "text": " First find the total number of calories in the total number of calories in the number of calories: 600 calories / 2 = <<600/2=600>>600 calories/hour\nThen find the total number of calories in the total number of calories: 600 calories/hour * 2 = <<600*2=600>>600 calories/hour\nThen find the total number of calories in the total number of calories in the number of calories: 600 calories/hour * 2 = <<600*2=600>>600 calories/hour\nThen find the total number of water in the total number of water in the total number of water in the"
+    },
+    {
+      "idx": 44,
+      "gold": "20",
+      "pred": "4",
+      "correct": 0,
+      "text": " He needs to buy 2*2=<<2*2=4>>4 pounds of bread\nSo he needs to buy 2*2=<<2*2=4>>4 pounds of bread\n#### 4"
+    },
+    {
+      "idx": 45,
+      "gold": "104",
+      "pred": "60",
+      "correct": 0,
+      "text": " On Tuesday, she spent 2/5*2/5=<<2/5*2=5>>5 hours on Tuesday.\nOn Wednesday she spent 2*5=<<2*5=20>>20 hours on Tuesday.\nOn Wednesday she spent 2*5=<<2*5=20>>20 hours on Tuesday.\nOn Wednesday, she spent 20+20=<<20+20=60>>60 hours on Tuesday.\n#### 60"
+    },
+    {
+      "idx": 46,
+      "gold": "163",
+      "pred": "45",
+      "correct": 0,
+      "text": " She got a total of 5+2=<<5+2=5>>5 pounds of water.\nShe got a total of 5+5=<<5+5=15>>15 pounds of water.\nShe spent a total of 15+15=<<15+15=45>>45 pounds of water.\n#### 45"
+    },
+    {
+      "idx": 47,
+      "gold": "800",
+      "pred": "600",
+      "correct": 0,
+      "text": " He spent 20*40=<<20*40=200>>200 red\nSo he spent 200*40=<<200*40=600>>600 blue\nSo he spent 600-600=<<600-600=600>>600\n#### 600"
+    },
+    {
+      "idx": 48,
+      "gold": "8",
+      "pred": "36",
+      "correct": 0,
+      "text": " The total number of inches is 6 + 6 = <<6+6=12>>12 inches\nThe total height of the height of the height is 12 + 12 = <<12+12=36>>36 inches\nThe total height of the height of the height of the height is 36 inches + 36 inches = <<36+36=36>>36 inches\n#### 36"
+    },
+    {
+      "idx": 49,
+      "gold": "30",
+      "pred": "36",
+      "correct": 0,
+      "text": " The total number of birds in the first two is 8 + 6 = <<8+6=12>>12\nThe total number of birds in the first two is 12 + 12 = <<12+12=36>>36\nThe total number of birds in the second and the second and the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second equation by the second"
+    }
+  ]
+}

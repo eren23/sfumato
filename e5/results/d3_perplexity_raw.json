@@ -1,0 +1,199 @@
+{
+  "d2_diff6k_seed60": {
+    "diff_only/model.pt": {
+      "avg_nll": 9.039482,
+      "perplexity": 8429.4119,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    }
+  },
+  "d2_diff6k_seed61": {
+    "diff_only/model.pt": {
+      "avg_nll": 10.605822,
+      "perplexity": 40369.1986,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    }
+  },
+  "d2_diff6k_seed62": {
+    "diff_only/model.pt": {
+      "avg_nll": 6.414896,
+      "perplexity": 610.8769,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    }
+  },
+  "d3_curve": {
+    "2000p/ar_only/seed70/model.pt": {
+      "avg_nll": 2.906567,
+      "perplexity": 18.2939,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "2000p/ar_only/seed71/model.pt": {
+      "avg_nll": 2.894254,
+      "perplexity": 18.07,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "2000p/ar_only/seed72/model.pt": {
+      "avg_nll": 2.865564,
+      "perplexity": 17.5589,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "2000p/composite/seed70/model.pt": {
+      "avg_nll": 3.037682,
+      "perplexity": 20.8568,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "2000p/composite/seed71/model.pt": {
+      "avg_nll": 2.987376,
+      "perplexity": 19.8336,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "2000p/composite/seed72/model.pt": {
+      "avg_nll": 3.028851,
+      "perplexity": 20.6735,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "4000p/ar_only/seed70/model.pt": {
+      "avg_nll": 2.754146,
+      "perplexity": 15.7076,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "4000p/ar_only/seed71/model.pt": {
+      "avg_nll": 2.703106,
+      "perplexity": 14.926,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "4000p/ar_only/seed72/model.pt": {
+      "avg_nll": 2.682021,
+      "perplexity": 14.6146,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "4000p/composite/seed70/model.pt": {
+      "avg_nll": 3.02006,
+      "perplexity": 20.4925,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "4000p/composite/seed71/model.pt": {
+      "avg_nll": 2.982445,
+      "perplexity": 19.736,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "4000p/composite/seed72/model.pt": {
+      "avg_nll": 2.930048,
+      "perplexity": 18.7285,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "500p/ar_only/seed70/model.pt": {
+      "avg_nll": 4.916345,
+      "perplexity": 136.5028,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "500p/ar_only/seed71/model.pt": {
+      "avg_nll": 4.84242,
+      "perplexity": 126.7758,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "500p/ar_only/seed72/model.pt": {
+      "avg_nll": 4.91289,
+      "perplexity": 136.032,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "500p/composite/seed70/model.pt": {
+      "avg_nll": 4.574889,
+      "perplexity": 97.0172,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "500p/composite/seed71/model.pt": {
+      "avg_nll": 4.450215,
+      "perplexity": 85.6453,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    },
+    "500p/composite/seed72/model.pt": {
+      "avg_nll": 4.458226,
+      "perplexity": 86.3342,
+      "total_tokens": 8297,
+      "n_problems_scored": 94,
+      "n_skipped": 6,
+      "kind": "composite",
+      "n_params": 161713664
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "variant": "ar_only",
+  "n_params": 72081920,
+  "d_model": 640,
+  "n_layers": 8,
+  "n_heads": 8,
+  "block_size": 256,
+  "max_steps": 3000,
+  "batch_size": 8,
+  "peak_lr": 0.0006,
+  "seed": 55,
+  "wall_s": 144.6,
+  "final_ar_loss": 3.1417274475097656,
+  "final_diff_loss": NaN
+}

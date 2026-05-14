@@ -1,0 +1,359 @@
+{
+  "mode": "ar",
+  "n": 50,
+  "n_correct": 1,
+  "accuracy": 0.02,
+  "wall_s": 18.9,
+  "results": [
+    {
+      "idx": 0,
+      "gold": "18",
+      "pred": "14",
+      "correct": 0,
+      "text": " The total cost of the eggs is $2 + $2 = $<<2+2=4>>4.\nThe total cost of the eggs is $4 + $4 = $<<4+4=7>>7.\nThe total cost of the eggs is $7 + $7 = $<<7+7=14>>14.\n#### 14"
+    },
+    {
+      "idx": 1,
+      "gold": "3",
+      "pred": "27",
+      "correct": 0,
+      "text": " The total number of blue tiles in the first two days is 2*2=<<2*2=4>>4.\nThe total number of tiles in the second day is 2*2=<<2*2=4>>4.\nThe total number of tiles in the second day is 4+4=<<4+4=12>>12.\nThe total number of tiles in the second day is 12+12=<<12+12=27>>27\nThe total number of tiles in the second day is 27+27=<<27+27=27>>27\nThe total number of tiles in the second"
+    },
+    {
+      "idx": 2,
+      "gold": "70000",
+      "pred": "12000",
+      "correct": 0,
+      "text": " He bought a total of $50,000+$50,000=$<<10000+5000=800000>>800,000\nHe bought a total of $400,000+$400,000=$<<400000+400000=800000>>800,000\nHe bought a total of $800,000+$800,000=$<<800000+800000=12000>>12,000\n#### 12,000"
+    },
+    {
+      "idx": 3,
+      "gold": "540",
+      "pred": "600",
+      "correct": 0,
+      "text": " He runs 3*60=<<3*60=120>>120 meters per day\nSo he runs 60*60=<<60*60=600>>600 meters per day\nSo he runs 60*60=<<60*60=600>>600 meters per day\n#### 600"
+    },
+    {
+      "idx": 4,
+      "gold": "20",
+      "pred": "20",
+      "correct": 1,
+      "text": " She has 20 cups of eggs for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a day for a"
+    },
+    {
+      "idx": 5,
+      "gold": "64",
+      "pred": "60",
+      "correct": 0,
+      "text": " The first two bags of the second box of the second box is $5 x .5 = $<<5*.5=5>>5.\nThe second box of the second box of the second box is $5 x 12 = $<<5*12=60>>60.\nThe second box of the second box of the second box is $5 x 12 = $<<5*12=60>>60.\nThe second box of the second box of the second box is $60 - $60 = $<<60-60=60>>60.\nThe third box of the second box is $60 - $60"
+    },
+    {
+      "idx": 6,
+      "gold": "260",
+      "pred": "20",
+      "correct": 0,
+      "text": " If the number of people in the first two have is 20, then the number of people is 20, then the number of people in the first, the second is 20, the number of people in the second equation is 20, the number of people, and the number of people in the second equation is 20, the number of people in the second equation, which is 20, which is 20, and the number of people in the second equation, the second equation, the third of the third of the third of the third of the third of the second equation, the third of the third of the third of the third of the third of"
+    },
+    {
+      "idx": 7,
+      "gold": "160",
+      "pred": "350",
+      "correct": 0,
+      "text": " First find the total number of minutes she spends on the first: 200 minutes + 20 minutes = <<200+20=150>>150 minutes\nThen find the total time she spends on the second: 100 minutes + 100 minutes = <<100+100=150>>150 minutes\nThen divide the number of minutes to find the total time she spends on the number of minutes to find the total time she spends on the total time she spends: 150 minutes + 150 minutes = <<150+150=350>>350 minutes\nThen divide the number of minutes she spends on the time she spends on the time she spends on the time she spends on"
+    },
+    {
+      "idx": 8,
+      "gold": "45",
+      "pred": "480",
+      "correct": 0,
+      "text": " He spends 2 hours a total of 2*30=<<2*30=60>>60 hours\nHe spends 2*60=<<2*60=120>>120 hours\nSo he spends 60*60=<<60*60=480>>480 hours\n#### 480"
+    },
+    {
+      "idx": 9,
+      "gold": "460",
+      "pred": "12000",
+      "correct": 0,
+      "text": " First find the total amount of money she spends on the first week: $10 * $10/hour = $<<10*10=80>>80/hour\nThen find the total amount of money she spends on the second week: $80/hour * $10/hour = $<<80*10=800>>800/hour\nThen find the total amount of money she spends on the first week: $800/hour * $10/hour = $<<800*10=12000>>12,000/hour\nThen find the total amount of money she spends on the second week: $12,000/"
+    },
+    {
+      "idx": 10,
+      "gold": "366",
+      "pred": "20",
+      "correct": 0,
+      "text": " The first year was 60% * 60% = <<60*.01*60*.01=20>>20% of the first year.\nThe second year was 20% * 60% = <<20*.01*60*.01=10>>10 years.\nThe second year, the third year was 20% * 20% = <<20*20*.01=10>>10 years.\nThe third year, the third year was 10% * 20% = <<10*20*.01=10>>10 years.\nThe third year, the third year was 10 years + 10 years = <<10+10=20"
+    },
+    {
+      "idx": 11,
+      "gold": "694",
+      "pred": "55",
+      "correct": 0,
+      "text": " The total cost of the two dozen is $56 + $56 = $<<56+56=55>>55\nThe total cost of the two boxes is $55 + $55 = $<<55+55=55>>55\nThe total cost of the two boxes is $55 + $55 = $<<55+55=55>>55\nThe total cost of the two boxes is $55 + $55 = $<<55+55=55>>55\n#### 55"
+    },
+    {
+      "idx": 12,
+      "gold": "13",
+      "pred": "120",
+      "correct": 0,
+      "text": " First find the total amount of money he needs to buy: $60 + $60 = $<<60+60=120>>120.\nThen find how much money he needs to buy the total amount of money he needs to buy: $120 + $120 = $<<120+120=360>>360.\nThen divide the amount of money he needs to find how much he needs to buy the total amount of money he needs to buy: $360 - $360 = $<<360-360=120>>120.\n#### 120"
+    },
+    {
+      "idx": 13,
+      "gold": "18",
+      "pred": "60",
+      "correct": 0,
+      "text": " First find the total number of blue tiles in the first two people in the second house: 5 people * 2 people = <<5*2=10>>10 people\nThen find the total number of people in the second house: 10 people + 10 people = <<10+10=20>>20 people\nThen divide the number of people in the second house to find the total number of people in the second house: 20 people + 20 people = <<20+20=60>>60 people\nThen divide the number of people in the second house to find the total number of people in the second house: 60 people + 60 people ="
+    },
+    {
+      "idx": 14,
+      "gold": "60",
+      "pred": "10",
+      "correct": 0,
+      "text": " The number of students in the class is 20/100*20 = <<20/100*20=20>>20 students.\nThe number of students in the class is 20-20 = <<20-20=20>>20 students.\nThe number of students in the class is 20-20 = <<20-20=10>>10 students.\nThe number of students in the class is 20-10 = <<20-10=10>>10 students.\nThe number of students in the class is 20-10 = <<20-10=10>>10 students.\nThe number of students in the class is 10"
+    },
+    {
+      "idx": 15,
+      "gold": "125",
+      "pred": "16000",
+      "correct": 0,
+      "text": " The total amount of money the price of the price of the month is $8,000 * 2/100 = $<<80000*2/100=80000>>8,000.\nThe total amount of money they will be $8,000 + $8,000 = $<<80000+80000=16000>>16,000.\nThe total amount of money they will be $8,000 + $8,000 = $<<80000+80000=16000>>16,000.\n#### 16000"
+    },
+    {
+      "idx": 16,
+      "gold": "230",
+      "pred": "150",
+      "correct": 0,
+      "text": " The total distance of the first day is 150 miles / 2 = <<150/2=150>>150 miles.\nThe second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day, the second day,"
+    },
+    {
+      "idx": 17,
+      "gold": "57500",
+      "pred": "600",
+      "correct": 0,
+      "text": " First find the total amount of money she spends by the number of hours she spends per month: $20/hour * $20/hour = $<<20*20=200>>200/hour\nThen find the total amount of money she spends from the new monthly: $20/hour * $20/hour = $<<20*20=300>>300/hour\nThen find the total amount of money she spends from the new monthly earnings: $200/hour * $20/hour = $<<200*20=600>>600/hour\nThen find the total amount of money she spends by the total amount of"
+    },
+    {
+      "idx": 18,
+      "gold": "7",
+      "pred": "27",
+      "correct": 0,
+      "text": " She makes 3 x 3 = <<3*3=12>>12 eggs a week.\nShe makes 12 x 3 = <<12*3=36>>36 eggs for the week.\nShe makes a total of 36 + 36 = <<36+36=54>>54 eggs.\nShe makes a total of 54 + 54 = <<54+54=54>>54 eggs.\nShe makes a total of 54 + 54 = <<54+54=54>>54 eggs.\nShe makes 54 / 2 = <<54/2=27>>27 eggs.\nShe makes 27 - 27 = <<27-27=27"
+    },
+    {
+      "idx": 19,
+      "gold": "6",
+      "pred": "12",
+      "correct": 0,
+      "text": " First find the total distance she spends from the distance she spends on the distance she spends on the first hour: 3 miles / 3 miles/hour = <<3/3=2>>2 hours\nThen find the total distance she spends on the second hour: 2 miles + 2 miles = <<2+2=4>>4 hours\nThen add the second time she spends on the second hour to find the total time she spends on the second time she spends on the second time she spends on the second hour: 4 miles + 4 miles = <<4+4=12>>12 miles\nThen add the second time she spends on the"
+    },
+    {
+      "idx": 20,
+      "gold": "15",
+      "pred": "480",
+      "correct": 0,
+      "text": " First find the total number of water in the first two days: 6 liters * 6 liters/day = <<6*6=36>>36 liters/day\nThen find the total number of water in the second day: 36 ounces/hour * 6 ounces/hour = <<36*6=108>>108 ounces/hour\nThen find the total number of water in the second day: 36 ounces/hour * 6 days = <<36*6=108>>108 ounces/hour\nThen find the total number of water in the second day: 180 ounces/hour * 6 days = <<180*6=480"
+    },
+    {
+      "idx": 21,
+      "gold": "14",
+      "pred": null,
+      "correct": 0,
+      "text": " If the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the"
+    },
+    {
+      "idx": 22,
+      "gold": "7",
+      "pred": "28",
+      "correct": 0,
+      "text": " He bought 4 x 2 = <<4*2=8>>8 people on Tuesday.\nHe bought 4 x 2 = <<4*2=8>>8 people on Tuesday.\nHe bought 4 x 2 = <<4*2=8>>8 people on Tuesday.\nHe bought 4 x 2 = <<4*2=8>>8 people on Tuesday.\nHe bought 4 x 2 = <<4*2=8>>8 people on Tuesday.\nHe bought 8 x 2 = <<8*2=16>>16 people on Tuesday.\nHe sold 16 + 16 = <<16+16=28>>28"
+    },
+    {
+      "idx": 23,
+      "gold": "8",
+      "pred": "500",
+      "correct": 0,
+      "text": " First find the total number of hours the number of hours the number of hours per hour: 50 hours * 5 hours/hour = <<50*5=500>>500 hours\nThen find the total number of hours of hours in the first hour: 500 hours * 5 hours/hour = <<500*5=500>>500 hours\nThen find the total number of hours in the second hour: 500 hours + 500 hours = <<500+500=500>>500 hours\nThen multiply the number of hours by the number of hours to find the total number of hours to find the total number of hours: 500 hours + 500 hours ="
+    },
+    {
+      "idx": 24,
+      "gold": "26",
+      "pred": "14",
+      "correct": 0,
+      "text": " The total cost of the book is $19.50 x 25% = $<<19.50*25*.01=14.50>>14.50.50.\nThe cost of the books is $14.50 x 25% = $<<14.50*25*.01=14.50>>14.50.50.50.50.\nThe total cost of the books is $14.50 + $14.50 = $<<14.50+14.50=14.50>>14.50.50.50.50.50.\nThe total cost of the books is $14"
+    },
+    {
+      "idx": 25,
+      "gold": "2",
+      "pred": "3",
+      "correct": 0,
+      "text": " The total cost of the food is $12.50 x 2 = $<<12.50*2=12.50>>12.50.50.50.50.\nThe total cost of the food is $12.50 + $12.50 = $<<12.50+12.5=12.50>>12.50.50.50.50\nThe cost of the food is $12.50 - $12.50 = $<<12.50-12.50=3.50>>3.50.50.50.50.\n#### 3"
+    },
+    {
+      "idx": 26,
+      "gold": "243",
+      "pred": "38",
+      "correct": 0,
+      "text": " The total cost of the shoes is $22 + $22 = $<<22+22=38>>38.\nThe total cost of the shoes is $38 + $38 = $<<38+38=38>>38.\nThe total cost of the shoes is $38 + $38 = $<<38+38=38>>38.\n#### 38"
+    },
+    {
+      "idx": 27,
+      "gold": "16",
+      "pred": "5",
+      "correct": 0,
+      "text": " She has 60/20=<<60/20=10>>10 cups of chocolate bars\nShe has 10-10=<<10-10=5>>5 cups of chocolate bars\nShe has 10-10=<<10-10=5>>5 cups of chocolate bars\n#### 5"
+    },
+    {
+      "idx": 28,
+      "gold": "25",
+      "pred": "14",
+      "correct": 0,
+      "text": " First find the total distance he spends on the first trip: 30 miles + 20 miles = <<30+20=60>>60 miles\nThen find the total distance he spends on the second trip: 60 miles + 60 miles = <<60+60=120>>120 miles\nThen divide the number of miles by the number of miles to find the total distance he spends on the second trip: 120 miles / 60 miles/hour = <<120/60=4>>4 miles\nThen find the total distance he spends on the second trip: 4 miles + 4 miles = <<4+4=14>>14 miles\nThen divide the"
+    },
+    {
+      "idx": 29,
+      "gold": "104",
+      "pred": "33",
+      "correct": 0,
+      "text": " The total cost of the price of the price of the price of the price of the two pairs of money is $33 * 2 = $<<33*2=33>>33.\nThe total cost of the three pairs of the three pairs of the three pairs of money she paid is $33 + $33 = $<<33+33=33>>33.\nThe total cost of the three pairs of money she paid is $33 + $33 = $<<33+33=33>>33.\n#### 33"
+    },
+    {
+      "idx": 30,
+      "gold": "109",
+      "pred": null,
+      "correct": 0,
+      "text": " If the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the"
+    },
+    {
+      "idx": 31,
+      "gold": "80",
+      "pred": "60",
+      "correct": 0,
+      "text": " If the number of jellybeans is 20% more than the number of jelly beans, then the number of jelly beans is 20/100*20 = <<20/100*20=10>>10.\nThe total number of jellybeans in the second equation is 20/100*20 = <<20/100*20=10>>10.\nThe total number of jellybeans in the second equation is 10+10 = <<10+10=20>>20.\nThe total number of jellybeans in the second equation is 20+20 = <<20+20=60>>60\nThe total number of red and blue and"
+    },
+    {
+      "idx": 32,
+      "gold": "35",
+      "pred": "800",
+      "correct": 0,
+      "text": " He spends 10*10=<<10*10=40>>40 hours\nSo he spends 40*20=<<40*20=800>>800 hours\nSo he spends 800*2=<<800*2=800>>800 hours\n#### 800"
+    },
+    {
+      "idx": 33,
+      "gold": "70",
+      "pred": "20",
+      "correct": 0,
+      "text": " Let x be the number of marbles.\nThe number of marbles that are red marbles.\nThe number of marbles is x = <<4*2=8>>8.\nThe number of marbles is 40 marbles - 6 marbles = <<40-6=20>>20 marbles.\n#### 20"
+    },
+    {
+      "idx": 34,
+      "gold": "23",
+      "pred": "40",
+      "correct": 0,
+      "text": " If the number of spots is 40, then the number of spots is 40, then the number of spots is 40/2 = <<40/2=40>>40\nIf the number of spots in the first and the second equation is 40, then the number of spots is 40, then the number of spots in the second equation is 40, the number of the number of spots in the second equation is 40, the number of the number of spots in the second equation, the number of spots in the second equation is 40-40 = <<40-40=40>>40\nThe total number of spots in the second equation is"
+    },
+    {
+      "idx": 35,
+      "gold": "9",
+      "pred": "20",
+      "correct": 0,
+      "text": " The second day he scored 20% of the second day, so he scored 20/100*20 = <<20/100*20=10>>10 points.\nThe second day he scored 20% of the second day, so he scored 20/100*20 = <<20/100*20=10>>10 points.\nThe third day he scored 20% of the second day, so he scored 20/100*20 = <<20/100*20=10>>10 points.\nThe total points he scored in the second day is 10+10 = <<10+10=20>>20 points.\nThe"
+    },
+    {
+      "idx": 36,
+      "gold": "75",
+      "pred": "15",
+      "correct": 0,
+      "text": " He spends 2*2=<<2*2=4>>4 hours on the week\nSo he spends 2*2=<<2*2=4>>4 hours\nSo he spends 2*2=<<2*2=4>>4 hours a day\nSo he spends 4*2=<<4*2=8>>8 hours\nSo he spends 8*2=<<8*2=15>>15 hours a week\n#### 15"
+    },
+    {
+      "idx": 37,
+      "gold": "2",
+      "pred": "5",
+      "correct": 0,
+      "text": " He has $15 because 12 x .5 = <<12*.5=6>>6\nHe has $10 because 6 x .5 = <<6*.5=5>>5\nHe has $10 because 10 x .5 = <<10*.5=5>>5\nHe has $5 because 5 x .5 = <<5*.5=5>>5\nHe has $5 because 5 x .5 = <<5*.5=5>>5\nHe has $5 because 5 x .5 = <<5*.5=5>>5\nHe has $5 because 5 + 5 = <<5+5="
+    },
+    {
+      "idx": 38,
+      "gold": "10",
+      "pred": "240",
+      "correct": 0,
+      "text": " He runs 2*60=<<2*60=120>>120 miles per day\nSo he runs 60/3=<<60/3=30>>30 miles per day\nSo he runs 30*60=<<30*60=240>>240 miles per day\n#### 240"
+    },
+    {
+      "idx": 39,
+      "gold": "18",
+      "pred": null,
+      "correct": 0,
+      "text": " First find the distance she spends on the distance she spends on the distance she spends on the distance she spends on the distance she spends on the distance she spends on the distance she spends on the distance she spends on the distance she spends on the time she spends on the time she spends on the time she spends on the time she spends on the time she spends on the time she spends on the time she spends on the time she spends on the time she spends on the same time she spends on the same time she spends on the same time. How many miles does she spend on the week?\nAnswer: First find the total time she spends"
+    },
+    {
+      "idx": 40,
+      "gold": "8",
+      "pred": null,
+      "correct": 0,
+      "text": " Let x be the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age of the age"
+    },
+    {
+      "idx": 41,
+      "gold": "200",
+      "pred": null,
+      "correct": 0,
+      "text": " If the number of square feet of square feet of the first equation into the second side, the second equation into the second equation, the second equation into the second equation, the second equation into the first equation, the second equation into the second equation, the second equation into the second equation, the second equation into the first equation, the second equation into the first, the second equation into the second equation, the second equation into the first, the second equation into the second equation, the second equation into the first, the second equation into the first, the second equation into the first, the second equation into the second equation, the second equation"
+    },
+    {
+      "idx": 42,
+      "gold": "26",
+      "pred": "5",
+      "correct": 0,
+      "text": " There were 5 pieces of the box, so there were 5*2 = <<5*2=10>>10 pieces of pizza.\nThere were 10 pieces of the box, so there were 10-10 = <<10-10=10>>10 pieces of bread left.\nThere were 10 pieces of the box, so there were 10-10 = <<10-10=5>>5 pieces of bread left.\n#### 5"
+    },
+    {
+      "idx": 43,
+      "gold": "48",
+      "pred": "600",
+      "correct": 0,
+      "text": " First find the total number of calories per bag of calories per bag: 600 calories/gallon * 200 calories/gallon = <<600*200=600>>600 calories\nThen find the total number of calories in the box: 600 calories + 600 calories = <<600+600=600>>600 calories\nThen divide the number of calories by the number of calories per box of calories per box to find the total number of calories: 600 calories/gallon * 200 calories/gallon = <<600*200=600>>600 calories\nThen find the total number of calories in the box of calories in the box of calories in"
+    },
+    {
+      "idx": 44,
+      "gold": "20",
+      "pred": "10.00",
+      "correct": 0,
+      "text": " He buys 10 pounds of food for $10.00 each so he can make 10*10 = $<<10*10=50.00>>50.00\nHe can make $10.00 each so he can make 10*10 = $<<10*10=100.00>>100.00\nHe can make $10.00 on the $10.00 on the entire price of the other two pounds of food, so he can make 10*10 = $<<10*10=80.00>>80.00\nHe can make $100.00 on the $10.00 on the other two"
+    },
+    {
+      "idx": 45,
+      "gold": "104",
+      "pred": "5",
+      "correct": 0,
+      "text": " On Tuesday, she spends 2*5=<<2*5=10>>10 hours.\nOn Wednesday, she spends 2*10=<<2*10=20>>20 hours.\nOn Tuesday, she spends 2*20=<<2*20=40>>40 hours.\nOn Wednesday, she spends 20+40=<<20+40=60>>60 hours.\nOn Tuesday, she spends 60/60=<<60/60=5>>5 hours.\n#### 5"
+    },
+    {
+      "idx": 46,
+      "gold": "163",
+      "pred": "70",
+      "correct": 0,
+      "text": " She had a total of 70+20=<<70+20=70>>70 cups of bread.\nShe had a total of 70+20=<<70+20=70>>70 cups of bread.\nShe had a total of 70+70=<<70+70=70>>70 cups of bread.\n#### 70"
+    },
+    {
+      "idx": 47,
+      "gold": "800",
+      "pred": "1200",
+      "correct": 0,
+      "text": " He spent $200.00 on the blue and $40.00 on the blue and the blue and the blue pencils so he spent $40.00*40 = $<<40*40=800.00>>800.00\nHe spent $800 on the blue pencils so he spent $800+$800 = $<<800+800=1200.00>>1200.00 on the blue pencils\nHe spent $1200 on the blue pencils and $1200 on the blue pencils so he spent 1200-1200 = $<<1200-1200=1200>>1200 on the blue pencils\n#### 1200"
+    },
+    {
+      "idx": 48,
+      "gold": "8",
+      "pred": "24",
+      "correct": 0,
+      "text": " The first two of the second side is 6 inches because 6 x 6 = <<6*6=24>>24\nThe second side is 24 inches because 24 x 6 = <<24*6=48>>48\nThe second side is 24 inches because 24 x 2 = <<24*2=24>>24\nThe second side is 24 inches because 24 x 2 = <<24*2=24>>24\nThe second side is 24 inches because 24 x 2 = <<24*2=24>>24\nThe second side is 24 inches because 24 x 2 = <<24*2=24>>24\nThe second side is"
+    },
+    {
+      "idx": 49,
+      "gold": "30",
+      "pred": "240",
+      "correct": 0,
+      "text": " The total number of chairs in the house is 15 * 8 = <<15*8=120>>120\nThe total number of chairs in the house is 120 + 40 = <<120+40=240>>240\nThe total number of chairs in the house is 240 + 240 = <<240+240=240>>240\nThe total number of chairs in the house is 240 + 240 = <<240+240=240>>240\nThe total number of people in the house is 240 + 240 = <<240+240=240>>240\n#### 240"
+    }
+  ]
+}
