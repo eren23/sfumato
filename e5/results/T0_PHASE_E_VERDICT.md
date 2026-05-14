@@ -4,7 +4,7 @@
 
 - E3a: composite_ms64_32 = 4.00±0.57% vs ar_only 1.60±0.36%, Δ = +2.40pp → strong_workshop
 - E3b: composite wins at 3/3 scales (>0.2 NLL) → TMLR
-- E3c: deltas=[-0.165, 0.052], monotone=True, crossover=True → TMLR
+- E3c: deltas=[-0.165, 0.052, 0.18], monotone=True, crossover=True → TMLR
 - 
 OVERALL: TMLR with caveats / strong workshop
 
@@ -38,3 +38,4 @@ n_seeds = 5
 |---|---|---|---|---|
 | 800p | 3.53 | 3.695 | -0.165 | 3 |
 | 1200p | 3.194 | 3.142 | +0.052 | 3 |
+| 1500p | 3.09 | 2.91 | +0.180 | 3 |
