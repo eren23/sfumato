@@ -162,7 +162,26 @@ Each is cheap (~$3-5 GPU per).
 - Overnight: ~$10
 - Morning: ~$3
 - Phase D: ~$3
-- **Total: ~$16**
+- Phase E (in flight): ~$5
+- **Total: ~$21**
+
+## Phase E (TMLR upgrade — in flight 2026-05-14)
+
+Three experiments running on RunPod sfumato_e5 pods to upgrade workshop-grade
+to TMLR-grade:
+
+- **E3a** — probe-5 multi-seed to n=8 (5 fresh 200M seeds + prior 3).
+  Tightens mode-switching CI. Output: `e5/results/e3a_probe5_n8/summary.json`.
+- **E3b** — D2 multi-scale compute-matched control. Pure-diff-6k at 60M,
+  120M, 300M × 3 seeds each. Tests joint-training scale invariance.
+  Output: `e5/results/e3b_multiscale_d2/summary.json`.
+- **E3c** — D3 crossover refinement at 800p, 1200p, 1500p × 3 seeds each.
+  Localises the data-efficiency crossover.
+  Output: `e5/results/e3c_d3_crossover/summary.json`.
+
+Final verdict (TMLR / workshop) emitted by
+`e5/scripts/finalize_e3.py` → `e5/results/T0_PHASE_E_VERDICT.md`.
+Live-updated paper draft skeleton at `sfumato_paper/paper_C/`.
 
 ## Files
 
