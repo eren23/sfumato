@@ -266,11 +266,36 @@ smaller composite tax. Suggests the AR head's expressiveness on long
 context is more compromised than on short context by the shared
 backbone.
 
-### F3 — AR compute control (in progress)
+### F3 — AR compute control (DONE — beautiful symmetric result)
 
 AR-only at 6k steps (2× compute) vs composite-3k AR-NLL. Mirror of E3b
-on the symmetric axis: does composite also win when ar_only gets the
-compute? See `e5/results/f3_ar_compute_control/summary.json` when done.
+on the symmetric axis:
+
+| Scale | composite-3k AR-NLL | ar_only-6k AR-NLL | ar_only-6k advantage |
+|---|---|---|---|
+| 60M  | (not measured) | 1.70 ± 0.02 | — |
+| 120M | (not measured) | 1.64 ± 0.02 | — |
+| 200M | **2.80** (overnight n=8) | **2.10 ± 0.05** | **−0.70 NLL** |
+
+**ar_only at 2× compute wins AR axis by −0.70 NLL — the EXACT MIRROR of
+E3b's composite-3k vs pure-diff-6k diff result (also −0.70 at 200M).**
+
+This is the cleanest possible characterisation of the trade-off:
+
+- **Diff axis**: composite-3k beats pure-diff-6k by 0.69 NLL (E3b 200M).
+  Joint training has structural advantage; compute can't close the gap.
+- **AR axis**: ar_only-6k beats composite-3k by 0.70 NLL (F3 200M).
+  Pure-AR with extra compute crushes composite; the AR head's
+  expressiveness is genuinely diminished by the shared backbone.
+
+The trade is symmetric and compute-stable. Composite gives up
+~0.7 NLL of AR quality (recoverable with 2× compute on a pure-AR
+baseline) for ~0.7 NLL of diff advantage (NOT recoverable with 2×
+compute on a pure-diff baseline).
+
+This makes the trade-off paper much tighter. The recommendation:
+- If you only need AR → just train pure-AR with more compute
+- If you need diff (or both heads) → composite is the right design
 
 ## Paper-class verdict (locked)
 

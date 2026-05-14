@@ -1,0 +1,56 @@
+[
+  {
+    "scale": "60M",
+    "seed": 130,
+    "steps": 6000,
+    "ar_nll_6k": 1.6844
+  },
+  {
+    "scale": "60M",
+    "seed": 131,
+    "steps": 6000,
+    "ar_nll_6k": 1.6846
+  },
+  {
+    "scale": "60M",
+    "seed": 132,
+    "steps": 6000,
+    "ar_nll_6k": 1.728
+  },
+  {
+    "scale": "120M",
+    "seed": 130,
+    "steps": 6000,
+    "ar_nll_6k": 1.6482
+  },
+  {
+    "scale": "120M",
+    "seed": 131,
+    "steps": 6000,
+    "ar_nll_6k": 1.6119
+  },
+  {
+    "scale": "120M",
+    "seed": 132,
+    "steps": 6000,
+    "ar_nll_6k": 1.67
+  },
+  {
+    "scale": "200M",
+    "seed": 130,
+    "steps": 6000,
+    "ar_nll_6k": 2.0641
+  },
+  {
+    "scale": "200M",
+    "seed": 131,
+    "steps": 6000,
+    "ar_nll_6k": 2.0785
+  },
+  {
+    "scale": "200M",
+    "seed": 132,
+    "steps": 6000,
+    "ar_nll_6k": 2.1712
+  }
+]
