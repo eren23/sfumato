@@ -1,0 +1,15 @@
+{
+  "variant": "composite",
+  "n_params": 161713664,
+  "d_model": 896,
+  "n_layers": 12,
+  "n_heads": 16,
+  "block_size": 256,
+  "max_steps": 3000,
+  "batch_size": 8,
+  "peak_lr": 0.0006,
+  "seed": 74,
+  "wall_s": 239.2,
+  "final_ar_loss": 3.466733932495117,
+  "final_diff_loss": 6.374985694885254
+}
