@@ -1,0 +1,182 @@
+[
+  {
+    "size": 800,
+    "variant": "composite",
+    "seed": 90,
+    "steps": 3000,
+    "n_train_tokens": 124887,
+    "avg_nll": 3.5209,
+    "perplexity": 33.82,
+    "n_tokens": 8297
+  },
+  {
+    "size": 800,
+    "variant": "composite",
+    "seed": 91,
+    "steps": 3000,
+    "n_train_tokens": 124887,
+    "avg_nll": 3.5151,
+    "perplexity": 33.62,
+    "n_tokens": 8297
+  },
+  {
+    "size": 800,
+    "variant": "composite",
+    "seed": 92,
+    "steps": 3000,
+    "n_train_tokens": 124887,
+    "avg_nll": 3.553,
+    "perplexity": 34.92,
+    "n_tokens": 8297
+  },
+  {
+    "size": 800,
+    "variant": "ar_only",
+    "seed": 90,
+    "steps": 3000,
+    "n_train_tokens": 124887,
+    "avg_nll": 3.7339,
+    "perplexity": 41.84,
+    "n_tokens": 8297
+  },
+  {
+    "size": 800,
+    "variant": "ar_only",
+    "seed": 91,
+    "steps": 3000,
+    "n_train_tokens": 124887,
+    "avg_nll": 3.5886,
+    "perplexity": 36.18,
+    "n_tokens": 8297
+  },
+  {
+    "size": 800,
+    "variant": "ar_only",
+    "seed": 92,
+    "steps": 3000,
+    "n_train_tokens": 124887,
+    "avg_nll": 3.7628,
+    "perplexity": 43.07,
+    "n_tokens": 8297
+  },
+  {
+    "size": 1200,
+    "variant": "composite",
+    "seed": 90,
+    "steps": 3000,
+    "n_train_tokens": 187331,
+    "avg_nll": 3.1886,
+    "perplexity": 24.26,
+    "n_tokens": 8297
+  },
+  {
+    "size": 1200,
+    "variant": "composite",
+    "seed": 91,
+    "steps": 3000,
+    "n_train_tokens": 187331,
+    "avg_nll": 3.1814,
+    "perplexity": 24.08,
+    "n_tokens": 8297
+  },
+  {
+    "size": 1200,
+    "variant": "composite",
+    "seed": 92,
+    "steps": 3000,
+    "n_train_tokens": 187331,
+    "avg_nll": 3.2112,
+    "perplexity": 24.81,
+    "n_tokens": 8297
+  },
+  {
+    "size": 1200,
+    "variant": "ar_only",
+    "seed": 90,
+    "steps": 3000,
+    "n_train_tokens": 187331,
+    "avg_nll": 3.1319,
+    "perplexity": 22.92,
+    "n_tokens": 8297
+  },
+  {
+    "size": 1200,
+    "variant": "ar_only",
+    "seed": 91,
+    "steps": 3000,
+    "n_train_tokens": 187331,
+    "avg_nll": 3.1518,
+    "perplexity": 23.38,
+    "n_tokens": 8297
+  },
+  {
+    "size": 1200,
+    "variant": "ar_only",
+    "seed": 92,
+    "steps": 3000,
+    "n_train_tokens": 187331,
+    "avg_nll": 3.141,
+    "perplexity": 23.13,
+    "n_tokens": 8297
+  },
+  {
+    "size": 1500,
+    "variant": "composite",
+    "seed": 90,
+    "steps": 3000,
+    "n_train_tokens": 234164,
+    "avg_nll": 2.9755,
+    "perplexity": 19.6,
+    "n_tokens": 8297
+  },
+  {
+    "size": 1500,
+    "variant": "composite",
+    "seed": 91,
+    "steps": 3000,
+    "n_train_tokens": 234164,
+    "avg_nll": 3.165,
+    "perplexity": 23.69,
+    "n_tokens": 8297
+  },
+  {
+    "size": 1500,
+    "variant": "composite",
+    "seed": 92,
+    "steps": 3000,
+    "n_train_tokens": 234164,
+    "avg_nll": 3.1287,
+    "perplexity": 22.84,
+    "n_tokens": 8297
+  },
+  {
+    "size": 1500,
+    "variant": "ar_only",
+    "seed": 90,
+    "steps": 3000,
+    "n_train_tokens": 234164,
+    "avg_nll": 2.9174,
+    "perplexity": 18.49,
+    "n_tokens": 8297
+  },
+  {
+    "size": 1500,
+    "variant": "ar_only",
+    "seed": 91,
+    "steps": 3000,
+    "n_train_tokens": 234164,
+    "avg_nll": 2.8474,
+    "perplexity": 17.24,
+    "n_tokens": 8297
+  },
+  {
+    "size": 1500,
+    "variant": "ar_only",
+    "seed": 92,
+    "steps": 3000,
+    "n_train_tokens": 234164,
+    "avg_nll": 2.9648,
+    "perplexity": 19.39,
+    "n_tokens": 8297
+  }
+]

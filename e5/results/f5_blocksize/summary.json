@@ -1,0 +1,86 @@
+[
+  {
+    "block_size": 128,
+    "variant": "composite",
+    "seed": 150,
+    "steps": 3000,
+    "ar_nll": 3.5007
+  },
+  {
+    "block_size": 128,
+    "variant": "composite",
+    "seed": 151,
+    "steps": 3000,
+    "ar_nll": 3.1898
+  },
+  {
+    "block_size": 128,
+    "variant": "composite",
+    "seed": 152,
+    "steps": 3000,
+    "ar_nll": 3.2908
+  },
+  {
+    "block_size": 128,
+    "variant": "ar_only",
+    "seed": 150,
+    "steps": 3000,
+    "ar_nll": 3.3781
+  },
+  {
+    "block_size": 128,
+    "variant": "ar_only",
+    "seed": 151,
+    "steps": 3000,
+    "ar_nll": 3.0534
+  },
+  {
+    "block_size": 128,
+    "variant": "ar_only",
+    "seed": 152,
+    "steps": 3000,
+    "ar_nll": 3.0577
+  },
+  {
+    "block_size": 256,
+    "variant": "composite",
+    "seed": 150,
+    "steps": 3000,
+    "ar_nll": 2.8829
+  },
+  {
+    "block_size": 256,
+    "variant": "composite",
+    "seed": 151,
+    "steps": 3000,
+    "ar_nll": 2.8636
+  },
+  {
+    "block_size": 256,
+    "variant": "composite",
+    "seed": 152,
+    "steps": 3000,
+    "ar_nll": 2.9399
+  },
+  {
+    "block_size": 256,
+    "variant": "ar_only",
+    "seed": 150,
+    "steps": 3000,
+    "ar_nll": 2.5264
+  },
+  {
+    "block_size": 256,
+    "variant": "ar_only",
+    "seed": 151,
+    "steps": 3000,
+    "ar_nll": 2.6136
+  },
+  {
+    "block_size": 256,
+    "variant": "ar_only",
+    "seed": 152,
+    "steps": 3000,
+    "ar_nll": 2.5775
+  }
+]

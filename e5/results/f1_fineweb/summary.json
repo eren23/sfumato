@@ -1,0 +1,122 @@
+[
+  {
+    "n_train_tokens": 5000000,
+    "variant": "composite",
+    "seed": 110,
+    "steps": 3000,
+    "avg_nll": 6.7014,
+    "perplexity": 813.53,
+    "n_tokens": 19900,
+    "n_chunks": 100
+  },
+  {
+    "n_train_tokens": 5000000,
+    "variant": "composite",
+    "seed": 111,
+    "steps": 3000,
+    "avg_nll": 6.6814,
+    "perplexity": 797.46,
+    "n_tokens": 19900,
+    "n_chunks": 100
+  },
+  {
+    "n_train_tokens": 5000000,
+    "variant": "composite",
+    "seed": 112,
+    "steps": 3000,
+    "avg_nll": 6.6941,
+    "perplexity": 807.63,
+    "n_tokens": 19900,
+    "n_chunks": 100
+  },
+  {
+    "n_train_tokens": 5000000,
+    "variant": "ar_only",
+    "seed": 110,
+    "steps": 3000,
+    "avg_nll": 6.6421,
+    "perplexity": 766.69,
+    "n_tokens": 19900,
+    "n_chunks": 100
+  },
+  {
+    "n_train_tokens": 5000000,
+    "variant": "ar_only",
+    "seed": 111,
+    "steps": 3000,
+    "avg_nll": 6.6344,
+    "perplexity": 760.8,
+    "n_tokens": 19900,
+    "n_chunks": 100
+  },
+  {
+    "n_train_tokens": 5000000,
+    "variant": "ar_only",
+    "seed": 112,
+    "steps": 3000,
+    "avg_nll": 6.6498,
+    "perplexity": 772.63,
+    "n_tokens": 19900,
+    "n_chunks": 100
+  },
+  {
+    "n_train_tokens": 10000000,
+    "variant": "composite",
+    "seed": 110,
+    "steps": 3000,
+    "avg_nll": 6.7109,
+    "perplexity": 821.32,
+    "n_tokens": 19900,
+    "n_chunks": 100
+  },
+  {
+    "n_train_tokens": 10000000,
+    "variant": "composite",
+    "seed": 111,
+    "steps": 3000,
+    "avg_nll": 6.6905,
+    "perplexity": 804.76,
+    "n_tokens": 19900,
+    "n_chunks": 100
+  },
+  {
+    "n_train_tokens": 10000000,
+    "variant": "composite",
+    "seed": 112,
+    "steps": 3000,
+    "avg_nll": 6.6866,
+    "perplexity": 801.63,
+    "n_tokens": 19900,
+    "n_chunks": 100
+  },
+  {
+    "n_train_tokens": 10000000,
+    "variant": "ar_only",
+    "seed": 110,
+    "steps": 3000,
+    "avg_nll": 6.6515,
+    "perplexity": 773.91,
+    "n_tokens": 19900,
+    "n_chunks": 100
+  },
+  {
+    "n_train_tokens": 10000000,
+    "variant": "ar_only",
+    "seed": 111,
+    "steps": 3000,
+    "avg_nll": 6.6315,
+    "perplexity": 758.62,
+    "n_tokens": 19900,
+    "n_chunks": 100
+  },
+  {
+    "n_train_tokens": 10000000,
+    "variant": "ar_only",
+    "seed": 112,
+    "steps": 3000,
+    "avg_nll": 6.6474,
+    "perplexity": 770.8,
+    "n_tokens": 19900,
+    "n_chunks": 100
+  }
+]
