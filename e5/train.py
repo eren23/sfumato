@@ -76,11 +76,28 @@ def alpha_schedule(step: int, max_steps: int, variant: str) -> float:
       composite: 1.0 → 0.5 linear over training (warm-start AR, then mix)
       ar_only: 1.0 always
       diff_only: 0.0 always
+      composite_fixed_<value>: constant α = <value>/100 (e.g. composite_fixed_30 → 0.30)
+
+    Honored env override: ALPHA_OVERRIDE=0.3 forces α to that value across
+    all composite-class variants (overrides the schedule).
     """
+    env_override = os.environ.get("ALPHA_OVERRIDE")
     if variant == "ar_only":
         return 1.0
     if variant == "diff_only":
         return 0.0
+    if variant.startswith("composite_fixed_"):
+        try:
+            pct = int(variant.split("_")[-1])
+            return pct / 100.0
+        except ValueError:
+            pass
+    if env_override is not None and variant in ("composite",) or variant.startswith("composite"):
+        if env_override is not None:
+            try:
+                return float(env_override)
+            except ValueError:
+                pass
     if variant == "composite":
         progress = min(max(step / max(1, max_steps), 0.0), 1.0)
         return 1.0 - 0.5 * progress

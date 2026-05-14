@@ -117,6 +117,60 @@ def make_diff_batch(window: torch.Tensor, mask_token_id: int) -> tuple[torch.Ten
     return idx_masked, idx_original, masked
 
 
+def load_fineweb_tokens(
+    n_tokens: int = 50_000_000,
+    tokenizer_name: str = DEFAULT_TOKENIZER,
+    cache_dir: Path | None = None,
+    seed: int = 1337,
+) -> np.ndarray:
+    """Stream the FineWeb-Edu sample from HF, tokenize, return first `n_tokens`.
+
+    Cached under ~/.cache/sfumato_e5/fineweb_<tokenizer>_<n>.npy.
+
+    Parameter-Golf substrate: this is the FineWeb-based corpus used by the
+    OpenAI Parameter Golf LM competition (willdepueoai/parameter-golf). We
+    tokenize with GPT-2 BPE for compatibility with the existing CompositeLM
+    vocab (50258 = 50257 + MASK).
+    """
+    cache_dir = cache_dir or Path.home() / ".cache" / "sfumato_e5"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    cache_path = cache_dir / f"fineweb_{tokenizer_name}_{n_tokens}.npy"
+    if cache_path.exists():
+        arr = np.load(cache_path)
+        if len(arr) >= n_tokens:
+            return arr[:n_tokens]
+        # else fall through to extend
+
+    from datasets import load_dataset
+    from transformers import AutoTokenizer
+
+    tok = AutoTokenizer.from_pretrained(tokenizer_name)
+    if tok.eos_token_id is None:
+        tok.eos_token_id = GPT2_EOT
+
+    # Stream FineWeb-Edu (10B sample) — broad clean English web text.
+    ds = load_dataset("HuggingFaceFW/fineweb-edu", name="sample-10BT",
+                      split="train", streaming=True)
+    ds = ds.shuffle(seed=seed, buffer_size=1000)
+
+    chunks: list[np.ndarray] = []
+    total = 0
+    for ex in ds:
+        text = ex.get("text", "")
+        if not text:
+            continue
+        ids = tok.encode(text, add_special_tokens=False)
+        chunks.append(np.array(ids, dtype=np.uint16))
+        chunks.append(np.array([GPT2_EOT], dtype=np.uint16))
+        total += len(ids) + 1
+        if total >= n_tokens:
+            break
+
+    full = np.concatenate(chunks)[:n_tokens]
+    np.save(cache_path, full)
+    return full
+
+
 def load_gsm8k_dev_questions(
     indices_json: Path = Path("e4/data/gsm8k_dev_200.json"),
     n: int = 50,
