@@ -266,6 +266,45 @@ smaller composite tax. Suggests the AR head's expressiveness on long
 context is more compromised than on short context by the shared
 backbone.
 
+### F4 — 500M scale leap (DONE, n=3 per cell)
+
+Tests whether the trade-off behavior continues at the scale leap from 300M
+to 500M (d=1280, L=24, H=20, ~538M params). 15 cells × 3 seeds.
+
+| Variant | Steps | AR-NLL | diff-NLL |
+|---|---|---|---|
+| composite-3k | 3k | **3.40** | **5.74** |
+| ar_only-3k | 3k | 3.21 | (head untrained) |
+| diff_only-3k | 3k | (head untrained) | 6.14 |
+| ar_only-6k | 6k | **3.57** | (head untrained) |
+| diff_only-6k | 6k | (head untrained) | 6.10 |
+
+Trade-off summary at 500M:
+
+| Comparison | Δ NLL | Interpretation |
+|---|---|---|
+| composite-3k vs ar_only-3k (AR) | +0.19 | Small AR tax — smaller than 200M's +0.22 |
+| **composite-3k vs ar_only-6k (AR)** | **−0.17** | 🔥 **Composite BEATS pure-AR-6k** — REVERSAL of F3 at 200M |
+| composite-3k vs diff_only-3k (diff) | −0.40 | Composite wins diff |
+| composite-3k vs diff_only-6k (diff) | −0.36 | Composite wins diff vs compute-matched pure-diff |
+
+**The most interesting 500M finding: the AR compute-matched comparison
+REVERSES at scale.** At 200M (F3), pure-AR-6k crushes composite-3k by
+0.70 NLL. At 500M, pure-AR-6k is +0.17 NLL WORSE than composite-3k —
+because pure-AR overfits the 4M-token GSM8K corpus when given 6k steps
+at 538M parameters. ar_only-6k seeds: [3.30, 3.82, 3.58], showing
+high variance characteristic of overfitting onset.
+
+**The nuance: diff-axis advantage SHRANK at 500M** (−0.36 vs 200M's −0.69).
+Either composite-3k at 500M is undertrained (a 538M model on 4M tokens
+for 3k steps may need more steps), or the structural advantage plateaus
+above 300M. We did NOT measure composite-6k at 500M to disambiguate.
+
+The scaling story is more nuanced than "composite advantage grows
+monotonically" — it grows from 60M to 300M and may plateau or invert
+at 500M depending on convergence. The AR compute-matched reversal is
+the cleanest novel finding at 500M.
+
 ### F3 — AR compute control (DONE — beautiful symmetric result)
 
 AR-only at 6k steps (2× compute) vs composite-3k AR-NLL. Mirror of E3b

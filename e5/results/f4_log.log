@@ -1,0 +1,543 @@
+device=cuda seeds=[170, 171, 172] d=1280 L=24 H=20
+Generating train split:   0%|          | 0/7473 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 7473/7473 [00:00<00:00, 706790.40 examples/s]
+Generating test split:   0%|          | 0/1319 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 1319/1319 [00:00<00:00, 453391.82 examples/s]
+loaded 1,166,609 train tokens, 100 probe problems
+
+[composite_3k seed=170] training 3000 steps...
+[composite] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[composite] step     0/3000 mode=ar   loss=11.0962 α=1.00 lr=0.00e+00 wall=1s
+[composite] step   200/3000 mode=ar   loss=5.3090 α=0.97 lr=6.00e-04 wall=45s
+[composite] step   400/3000 mode=ar   loss=4.8502 α=0.93 lr=5.93e-04 wall=90s
+[composite] step   600/3000 mode=ar   loss=4.4374 α=0.90 lr=5.73e-04 wall=135s
+[composite] step   800/3000 mode=ar   loss=4.8424 α=0.87 lr=5.41e-04 wall=180s
+[composite] step  1000/3000 mode=ar   loss=4.1931 α=0.83 lr=4.98e-04 wall=225s
+[composite] step  1200/3000 mode=ar   loss=4.1643 α=0.80 lr=4.47e-04 wall=270s
+[composite] step  1400/3000 mode=ar   loss=3.9454 α=0.77 lr=3.90e-04 wall=315s
+[composite] step  1600/3000 mode=ar   loss=3.8837 α=0.73 lr=3.30e-04 wall=360s
+[composite] step  1800/3000 mode=ar   loss=3.5255 α=0.70 lr=2.70e-04 wall=405s
+[composite] step  2000/3000 mode=diff loss=6.3888 α=0.67 lr=2.13e-04 wall=450s
+[composite] step  2200/3000 mode=ar   loss=4.0737 α=0.63 lr=1.62e-04 wall=495s
+[composite] step  2400/3000 mode=diff loss=6.1667 α=0.60 lr=1.19e-04 wall=540s
+[composite] step  2600/3000 mode=ar   loss=3.7208 α=0.57 lr=8.67e-05 wall=585s
+[composite] step  2800/3000 mode=ar   loss=3.6256 α=0.53 lr=6.68e-05 wall=630s
+[composite] done. 675s. wrote /workspace/sfumato/e5/results/f4_500m/composite_3k/seed170/model.pt and /workspace/sfumato/e5/results/f4_500m/composite_3k/seed170/summary.json
+  train wall_s=689.3
+  n_params=538.3M  AR-NLL=3.2166  diff-NLL=5.2608
+
+[ar_only_3k seed=170] training 3000 steps...
+[ar_only] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[ar_only] step     0/3000 mode=ar   loss=11.0962 α=1.00 lr=0.00e+00 wall=0s
+[ar_only] step   200/3000 mode=ar   loss=5.2504 α=1.00 lr=6.00e-04 wall=45s
+[ar_only] step   400/3000 mode=ar   loss=4.8167 α=1.00 lr=5.93e-04 wall=90s
+[ar_only] step   600/3000 mode=ar   loss=4.4178 α=1.00 lr=5.73e-04 wall=136s
+[ar_only] step   800/3000 mode=ar   loss=4.8209 α=1.00 lr=5.41e-04 wall=181s
+[ar_only] step  1000/3000 mode=ar   loss=4.1364 α=1.00 lr=4.98e-04 wall=226s
+[ar_only] step  1200/3000 mode=ar   loss=4.1107 α=1.00 lr=4.47e-04 wall=271s
+[ar_only] step  1400/3000 mode=ar   loss=3.8798 α=1.00 lr=3.90e-04 wall=316s
+[ar_only] step  1600/3000 mode=ar   loss=3.8287 α=1.00 lr=3.30e-04 wall=361s
+[ar_only] step  1800/3000 mode=ar   loss=3.5019 α=1.00 lr=2.70e-04 wall=406s
+[ar_only] step  2000/3000 mode=ar   loss=3.9785 α=1.00 lr=2.13e-04 wall=451s
+[ar_only] step  2200/3000 mode=ar   loss=4.0418 α=1.00 lr=1.62e-04 wall=496s
+[ar_only] step  2400/3000 mode=ar   loss=3.9362 α=1.00 lr=1.19e-04 wall=542s
+[ar_only] step  2600/3000 mode=ar   loss=3.6123 α=1.00 lr=8.67e-05 wall=587s
+[ar_only] step  2800/3000 mode=ar   loss=3.5523 α=1.00 lr=6.68e-05 wall=632s
+[ar_only] done. 677s. wrote /workspace/sfumato/e5/results/f4_500m/ar_only_3k/seed170/model.pt and /workspace/sfumato/e5/results/f4_500m/ar_only_3k/seed170/summary.json
+  train wall_s=689.1
+  n_params=538.3M  AR-NLL=3.0616  diff-NLL=11.0571
+
+[diff_only_3k seed=170] training 3000 steps...
+[diff_only] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[diff_only] step     0/3000 mode=diff loss=10.8297 α=0.00 lr=0.00e+00 wall=0s
+[diff_only] step   200/3000 mode=diff loss=6.8781 α=0.00 lr=6.00e-04 wall=45s
+[diff_only] step   400/3000 mode=diff loss=6.5025 α=0.00 lr=5.93e-04 wall=90s
+[diff_only] step   600/3000 mode=diff loss=6.3325 α=0.00 lr=5.73e-04 wall=135s
+[diff_only] step   800/3000 mode=diff loss=6.6265 α=0.00 lr=5.41e-04 wall=180s
+[diff_only] step  1000/3000 mode=diff loss=6.3412 α=0.00 lr=4.98e-04 wall=225s
+[diff_only] step  1200/3000 mode=diff loss=6.5321 α=0.00 lr=4.47e-04 wall=270s
+[diff_only] step  1400/3000 mode=diff loss=6.4222 α=0.00 lr=3.90e-04 wall=315s
+[diff_only] step  1600/3000 mode=diff loss=6.3976 α=0.00 lr=3.30e-04 wall=360s
+[diff_only] step  1800/3000 mode=diff loss=6.1612 α=0.00 lr=2.70e-04 wall=404s
+[diff_only] step  2000/3000 mode=diff loss=6.5921 α=0.00 lr=2.13e-04 wall=450s
+[diff_only] step  2200/3000 mode=diff loss=6.5523 α=0.00 lr=1.62e-04 wall=495s
+[diff_only] step  2400/3000 mode=diff loss=6.3895 α=0.00 lr=1.19e-04 wall=540s
+[diff_only] step  2600/3000 mode=diff loss=6.4277 α=0.00 lr=8.67e-05 wall=585s
+[diff_only] step  2800/3000 mode=diff loss=6.3013 α=0.00 lr=6.68e-05 wall=630s
+[diff_only] done. 674s. wrote /workspace/sfumato/e5/results/f4_500m/diff_only_3k/seed170/model.pt and /workspace/sfumato/e5/results/f4_500m/diff_only_3k/seed170/summary.json
+  train wall_s=689.5
+  n_params=538.3M  AR-NLL=6.3342  diff-NLL=6.1386
+
+[composite_3k seed=171] training 3000 steps...
+[composite] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[composite] step     0/3000 mode=ar   loss=11.1344 α=1.00 lr=0.00e+00 wall=0s
+[composite] step   200/3000 mode=ar   loss=5.1884 α=0.97 lr=6.00e-04 wall=45s
+[composite] step   400/3000 mode=ar   loss=4.7924 α=0.93 lr=5.93e-04 wall=90s
+[composite] step   600/3000 mode=diff loss=6.6895 α=0.90 lr=5.73e-04 wall=135s
+[composite] step   800/3000 mode=ar   loss=4.1888 α=0.87 lr=5.41e-04 wall=180s
+[composite] step  1000/3000 mode=ar   loss=4.1855 α=0.83 lr=4.98e-04 wall=225s
+[composite] step  1200/3000 mode=ar   loss=4.1105 α=0.80 lr=4.47e-04 wall=270s
+[composite] step  1400/3000 mode=ar   loss=4.1322 α=0.77 lr=3.90e-04 wall=316s
+[composite] step  1600/3000 mode=diff loss=6.4670 α=0.73 lr=3.30e-04 wall=361s
+[composite] step  1800/3000 mode=ar   loss=4.3227 α=0.70 lr=2.70e-04 wall=406s
+[composite] step  2000/3000 mode=ar   loss=3.8771 α=0.67 lr=2.13e-04 wall=451s
+[composite] step  2200/3000 mode=ar   loss=4.0276 α=0.63 lr=1.62e-04 wall=496s
+[composite] step  2400/3000 mode=ar   loss=3.9575 α=0.60 lr=1.19e-04 wall=541s
+[composite] step  2600/3000 mode=ar   loss=3.9074 α=0.57 lr=8.67e-05 wall=586s
+[composite] step  2800/3000 mode=diff loss=6.4016 α=0.53 lr=6.68e-05 wall=631s
+[composite] done. 676s. wrote /workspace/sfumato/e5/results/f4_500m/composite_3k/seed171/model.pt and /workspace/sfumato/e5/results/f4_500m/composite_3k/seed171/summary.json
+  train wall_s=691.2
+  n_params=538.3M  AR-NLL=3.4029  diff-NLL=5.9861
+
+[ar_only_3k seed=171] training 3000 steps...
+[ar_only] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[ar_only] step     0/3000 mode=ar   loss=11.1344 α=1.00 lr=0.00e+00 wall=0s
+[ar_only] step   200/3000 mode=ar   loss=5.1697 α=1.00 lr=6.00e-04 wall=45s
+[ar_only] step   400/3000 mode=ar   loss=4.8125 α=1.00 lr=5.93e-04 wall=91s
+[ar_only] step   600/3000 mode=ar   loss=4.3843 α=1.00 lr=5.73e-04 wall=136s
+[ar_only] step   800/3000 mode=ar   loss=4.2015 α=1.00 lr=5.41e-04 wall=181s
+[ar_only] step  1000/3000 mode=ar   loss=4.1297 α=1.00 lr=4.98e-04 wall=226s
+[ar_only] step  1200/3000 mode=ar   loss=4.0874 α=1.00 lr=4.47e-04 wall=271s
+[ar_only] step  1400/3000 mode=ar   loss=4.0649 α=1.00 lr=3.90e-04 wall=316s
+[ar_only] step  1600/3000 mode=ar   loss=4.2028 α=1.00 lr=3.30e-04 wall=362s
+[ar_only] step  1800/3000 mode=ar   loss=4.1963 α=1.00 lr=2.70e-04 wall=407s
+[ar_only] step  2000/3000 mode=ar   loss=3.7883 α=1.00 lr=2.13e-04 wall=452s
+[ar_only] step  2200/3000 mode=ar   loss=3.9272 α=1.00 lr=1.62e-04 wall=497s
+[ar_only] step  2400/3000 mode=ar   loss=3.8849 α=1.00 lr=1.19e-04 wall=542s
+[ar_only] step  2600/3000 mode=ar   loss=3.8466 α=1.00 lr=8.67e-05 wall=587s
+[ar_only] step  2800/3000 mode=ar   loss=3.7532 α=1.00 lr=6.68e-05 wall=632s
+[ar_only] done. 677s. wrote /workspace/sfumato/e5/results/f4_500m/ar_only_3k/seed171/model.pt and /workspace/sfumato/e5/results/f4_500m/ar_only_3k/seed171/summary.json
+  train wall_s=691.9
+  n_params=538.3M  AR-NLL=3.3311  diff-NLL=11.0168
+
+[diff_only_3k seed=171] training 3000 steps...
+[diff_only] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[diff_only] step     0/3000 mode=diff loss=10.8312 α=0.00 lr=0.00e+00 wall=0s
+[diff_only] step   200/3000 mode=diff loss=6.5788 α=0.00 lr=6.00e-04 wall=45s
+[diff_only] step   400/3000 mode=diff loss=6.4305 α=0.00 lr=5.93e-04 wall=90s
+[diff_only] step   600/3000 mode=diff loss=6.5943 α=0.00 lr=5.73e-04 wall=135s
+[diff_only] step   800/3000 mode=diff loss=6.4984 α=0.00 lr=5.41e-04 wall=180s
+[diff_only] step  1000/3000 mode=diff loss=6.3119 α=0.00 lr=4.98e-04 wall=225s
+[diff_only] step  1200/3000 mode=diff loss=6.3994 α=0.00 lr=4.47e-04 wall=270s
+[diff_only] step  1400/3000 mode=diff loss=6.4125 α=0.00 lr=3.90e-04 wall=315s
+[diff_only] step  1600/3000 mode=diff loss=6.5611 α=0.00 lr=3.30e-04 wall=360s
+[diff_only] step  1800/3000 mode=diff loss=6.5564 α=0.00 lr=2.70e-04 wall=405s
+[diff_only] step  2000/3000 mode=diff loss=6.3334 α=0.00 lr=2.13e-04 wall=450s
+[diff_only] step  2200/3000 mode=diff loss=6.5159 α=0.00 lr=1.62e-04 wall=495s
+[diff_only] step  2400/3000 mode=diff loss=6.4473 α=0.00 lr=1.19e-04 wall=540s
+[diff_only] step  2600/3000 mode=diff loss=6.3661 α=0.00 lr=8.67e-05 wall=585s
+[diff_only] step  2800/3000 mode=diff loss=6.6664 α=0.00 lr=6.68e-05 wall=630s
+[diff_only] done. 674s. wrote /workspace/sfumato/e5/results/f4_500m/diff_only_3k/seed171/model.pt and /workspace/sfumato/e5/results/f4_500m/diff_only_3k/seed171/summary.json
+  train wall_s=686.9
+  n_params=538.3M  AR-NLL=12.2073  diff-NLL=6.1413
+
+[composite_3k seed=172] training 3000 steps...
+[composite] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[composite] step     0/3000 mode=ar   loss=11.1402 α=1.00 lr=0.00e+00 wall=0s
+[composite] step   200/3000 mode=ar   loss=4.7606 α=0.97 lr=6.00e-04 wall=45s
+[composite] step   400/3000 mode=ar   loss=4.8733 α=0.93 lr=5.93e-04 wall=90s
+[composite] step   600/3000 mode=ar   loss=4.7541 α=0.90 lr=5.73e-04 wall=135s
+[composite] step   800/3000 mode=ar   loss=4.5555 α=0.87 lr=5.41e-04 wall=180s
+[composite] step  1000/3000 mode=diff loss=6.6531 α=0.83 lr=4.98e-04 wall=225s
+[composite] step  1200/3000 mode=ar   loss=4.2295 α=0.80 lr=4.47e-04 wall=270s
+[composite] step  1400/3000 mode=diff loss=6.7108 α=0.77 lr=3.90e-04 wall=315s
+[composite] step  1600/3000 mode=diff loss=6.5191 α=0.73 lr=3.30e-04 wall=360s
+[composite] step  1800/3000 mode=diff loss=6.4973 α=0.70 lr=2.70e-04 wall=405s
+[composite] step  2000/3000 mode=ar   loss=4.1853 α=0.67 lr=2.13e-04 wall=450s
+[composite] step  2200/3000 mode=ar   loss=4.1420 α=0.63 lr=1.62e-04 wall=496s
+[composite] step  2400/3000 mode=diff loss=6.2637 α=0.60 lr=1.19e-04 wall=541s
+[composite] step  2600/3000 mode=diff loss=6.2362 α=0.57 lr=8.67e-05 wall=586s
+[composite] step  2800/3000 mode=diff loss=6.2901 α=0.53 lr=6.68e-05 wall=631s
+[composite] done. 676s. wrote /workspace/sfumato/e5/results/f4_500m/composite_3k/seed172/model.pt and /workspace/sfumato/e5/results/f4_500m/composite_3k/seed172/summary.json
+  train wall_s=690.1
+  n_params=538.3M  AR-NLL=3.5676  diff-NLL=5.9675
+
+[ar_only_3k seed=172] training 3000 steps...
+[ar_only] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[ar_only] step     0/3000 mode=ar   loss=11.1402 α=1.00 lr=0.00e+00 wall=0s
+[ar_only] step   200/3000 mode=ar   loss=4.7368 α=1.00 lr=6.00e-04 wall=45s
+[ar_only] step   400/3000 mode=ar   loss=4.8042 α=1.00 lr=5.93e-04 wall=90s
+[ar_only] step   600/3000 mode=ar   loss=4.6992 α=1.00 lr=5.73e-04 wall=136s
+[ar_only] step   800/3000 mode=ar   loss=4.4384 α=1.00 lr=5.41e-04 wall=181s
+[ar_only] step  1000/3000 mode=ar   loss=4.2878 α=1.00 lr=4.98e-04 wall=226s
+[ar_only] step  1200/3000 mode=ar   loss=4.0066 α=1.00 lr=4.47e-04 wall=271s
+[ar_only] step  1400/3000 mode=ar   loss=4.3197 α=1.00 lr=3.90e-04 wall=317s
+[ar_only] step  1600/3000 mode=ar   loss=4.2374 α=1.00 lr=3.30e-04 wall=362s
+[ar_only] step  1800/3000 mode=ar   loss=4.2294 α=1.00 lr=2.70e-04 wall=407s
+[ar_only] step  2000/3000 mode=ar   loss=3.9598 α=1.00 lr=2.13e-04 wall=452s
+[ar_only] step  2200/3000 mode=ar   loss=3.8844 α=1.00 lr=1.62e-04 wall=498s
+[ar_only] step  2400/3000 mode=ar   loss=3.7459 α=1.00 lr=1.19e-04 wall=543s
+[ar_only] step  2600/3000 mode=ar   loss=3.6806 α=1.00 lr=8.67e-05 wall=588s
+[ar_only] step  2800/3000 mode=ar   loss=3.8543 α=1.00 lr=6.68e-05 wall=633s
+[ar_only] done. 678s. wrote /workspace/sfumato/e5/results/f4_500m/ar_only_3k/seed172/model.pt and /workspace/sfumato/e5/results/f4_500m/ar_only_3k/seed172/summary.json
+  train wall_s=693.1
+  n_params=538.3M  AR-NLL=3.2356  diff-NLL=10.8075
+
+[diff_only_3k seed=172] training 3000 steps...
+[diff_only] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[diff_only] step     0/3000 mode=diff loss=10.8263 α=0.00 lr=0.00e+00 wall=0s
+[diff_only] step   200/3000 mode=diff loss=6.4884 α=0.00 lr=6.00e-04 wall=45s
+[diff_only] step   400/3000 mode=diff loss=6.5828 α=0.00 lr=5.93e-04 wall=90s
+[diff_only] step   600/3000 mode=diff loss=6.6809 α=0.00 lr=5.73e-04 wall=135s
+[diff_only] step   800/3000 mode=diff loss=6.4852 α=0.00 lr=5.41e-04 wall=180s
+[diff_only] step  1000/3000 mode=diff loss=6.4792 α=0.00 lr=4.98e-04 wall=225s
+[diff_only] step  1200/3000 mode=diff loss=6.4063 α=0.00 lr=4.47e-04 wall=270s
+[diff_only] step  1400/3000 mode=diff loss=6.6691 α=0.00 lr=3.90e-04 wall=315s
+[diff_only] step  1600/3000 mode=diff loss=6.6679 α=0.00 lr=3.30e-04 wall=360s
+[diff_only] step  1800/3000 mode=diff loss=6.4922 α=0.00 lr=2.70e-04 wall=405s
+[diff_only] step  2000/3000 mode=diff loss=6.5035 α=0.00 lr=2.13e-04 wall=450s
+[diff_only] step  2200/3000 mode=diff loss=6.4915 α=0.00 lr=1.62e-04 wall=495s
+[diff_only] step  2400/3000 mode=diff loss=6.3488 α=0.00 lr=1.19e-04 wall=540s
+[diff_only] step  2600/3000 mode=diff loss=6.2231 α=0.00 lr=8.67e-05 wall=586s
+[diff_only] step  2800/3000 mode=diff loss=6.4575 α=0.00 lr=6.68e-05 wall=631s
+[diff_only] done. 676s. wrote /workspace/sfumato/e5/results/f4_500m/diff_only_3k/seed172/model.pt and /workspace/sfumato/e5/results/f4_500m/diff_only_3k/seed172/summary.json
+  train wall_s=689.8
+  n_params=538.3M  AR-NLL=18.0666  diff-NLL=6.1411
+
+[ar_only_6k seed=170] training 6000 steps...
+[ar_only] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[ar_only] step     0/6000 mode=ar   loss=11.0962 α=1.00 lr=0.00e+00 wall=0s
+[ar_only] step   200/6000 mode=ar   loss=5.2504 α=1.00 lr=6.00e-04 wall=45s
+[ar_only] step   400/6000 mode=ar   loss=4.8017 α=1.00 lr=5.98e-04 wall=90s
+[ar_only] step   600/6000 mode=ar   loss=4.4168 α=1.00 lr=5.94e-04 wall=135s
+[ar_only] step   800/6000 mode=ar   loss=4.8372 α=1.00 lr=5.86e-04 wall=180s
+[ar_only] step  1000/6000 mode=ar   loss=4.1666 α=1.00 lr=5.75e-04 wall=225s
+[ar_only] step  1200/6000 mode=ar   loss=4.1700 α=1.00 lr=5.61e-04 wall=271s
+[ar_only] step  1400/6000 mode=ar   loss=4.0765 α=1.00 lr=5.45e-04 wall=316s
+[ar_only] step  1600/6000 mode=ar   loss=3.9656 α=1.00 lr=5.26e-04 wall=361s
+[ar_only] step  1800/6000 mode=ar   loss=3.7140 α=1.00 lr=5.05e-04 wall=406s
+[ar_only] step  2000/6000 mode=ar   loss=4.2495 α=1.00 lr=4.82e-04 wall=451s
+[ar_only] step  2200/6000 mode=ar   loss=4.3298 α=1.00 lr=4.56e-04 wall=496s
+[ar_only] step  2400/6000 mode=ar   loss=4.3430 α=1.00 lr=4.30e-04 wall=541s
+[ar_only] step  2600/6000 mode=ar   loss=4.1064 α=1.00 lr=4.02e-04 wall=586s
+[ar_only] step  2800/6000 mode=ar   loss=3.9895 α=1.00 lr=3.74e-04 wall=631s
+[ar_only] step  3000/6000 mode=ar   loss=4.4558 α=1.00 lr=3.45e-04 wall=676s
+[ar_only] step  3200/6000 mode=ar   loss=4.0357 α=1.00 lr=3.15e-04 wall=721s
+[ar_only] step  3400/6000 mode=ar   loss=4.2831 α=1.00 lr=2.86e-04 wall=766s
+[ar_only] step  3600/6000 mode=ar   loss=4.2555 α=1.00 lr=2.58e-04 wall=811s
+[ar_only] step  3800/6000 mode=ar   loss=4.1459 α=1.00 lr=2.30e-04 wall=856s
+[ar_only] step  4000/6000 mode=ar   loss=4.1548 α=1.00 lr=2.04e-04 wall=901s
+[ar_only] step  4200/6000 mode=ar   loss=3.9073 α=1.00 lr=1.78e-04 wall=946s
+[ar_only] step  4400/6000 mode=ar   loss=3.9383 α=1.00 lr=1.55e-04 wall=991s
+[ar_only] step  4600/6000 mode=ar   loss=4.3775 α=1.00 lr=1.34e-04 wall=1036s
+[ar_only] step  4800/6000 mode=ar   loss=3.9373 α=1.00 lr=1.15e-04 wall=1081s
+[ar_only] step  5000/6000 mode=ar   loss=3.8986 α=1.00 lr=9.86e-05 wall=1127s
+[ar_only] step  5200/6000 mode=ar   loss=3.7517 α=1.00 lr=8.50e-05 wall=1172s
+[ar_only] step  5400/6000 mode=ar   loss=3.9143 α=1.00 lr=7.41e-05 wall=1217s
+[ar_only] step  5600/6000 mode=ar   loss=3.8762 α=1.00 lr=6.63e-05 wall=1262s
+[ar_only] step  5800/6000 mode=ar   loss=3.8193 α=1.00 lr=6.16e-05 wall=1307s
+[ar_only] done. 1352s. wrote /workspace/sfumato/e5/results/f4_500m/ar_only_6k/seed170/model.pt and /workspace/sfumato/e5/results/f4_500m/ar_only_6k/seed170/summary.json
+  train wall_s=1366.2
+  n_params=538.3M  AR-NLL=3.3029  diff-NLL=10.7194
+
+[diff_only_6k seed=170] training 6000 steps...
+[diff_only] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[diff_only] step     0/6000 mode=diff loss=10.8297 α=0.00 lr=0.00e+00 wall=0s
+[diff_only] step   200/6000 mode=diff loss=6.8781 α=0.00 lr=6.00e-04 wall=45s
+[diff_only] step   400/6000 mode=diff loss=6.4601 α=0.00 lr=5.98e-04 wall=90s
+[diff_only] step   600/6000 mode=diff loss=6.3649 α=0.00 lr=5.94e-04 wall=135s
+[diff_only] step   800/6000 mode=diff loss=6.6690 α=0.00 lr=5.86e-04 wall=180s
+[diff_only] step  1000/6000 mode=diff loss=6.3646 α=0.00 lr=5.75e-04 wall=225s
+[diff_only] step  1200/6000 mode=diff loss=6.4995 α=0.00 lr=5.61e-04 wall=270s
+[diff_only] step  1400/6000 mode=diff loss=6.4382 α=0.00 lr=5.45e-04 wall=315s
+[diff_only] step  1600/6000 mode=diff loss=6.4222 α=0.00 lr=5.26e-04 wall=360s
+[diff_only] step  1800/6000 mode=diff loss=6.3279 α=0.00 lr=5.05e-04 wall=405s
+[diff_only] step  2000/6000 mode=diff loss=6.6244 α=0.00 lr=4.82e-04 wall=450s
+[diff_only] step  2200/6000 mode=diff loss=6.5979 α=0.00 lr=4.56e-04 wall=495s
+[diff_only] step  2400/6000 mode=diff loss=6.3901 α=0.00 lr=4.30e-04 wall=540s
+[diff_only] step  2600/6000 mode=diff loss=6.5103 α=0.00 lr=4.02e-04 wall=585s
+[diff_only] step  2800/6000 mode=diff loss=6.4625 α=0.00 lr=3.74e-04 wall=630s
+[diff_only] step  3000/6000 mode=diff loss=6.6359 α=0.00 lr=3.45e-04 wall=675s
+[diff_only] step  3200/6000 mode=diff loss=6.2150 α=0.00 lr=3.15e-04 wall=720s
+[diff_only] step  3400/6000 mode=diff loss=6.4744 α=0.00 lr=2.86e-04 wall=765s
+[diff_only] step  3600/6000 mode=diff loss=6.5553 α=0.00 lr=2.58e-04 wall=811s
+[diff_only] step  3800/6000 mode=diff loss=6.3724 α=0.00 lr=2.30e-04 wall=856s
+[diff_only] step  4000/6000 mode=diff loss=6.4743 α=0.00 lr=2.04e-04 wall=901s
+[diff_only] step  4200/6000 mode=diff loss=6.2891 α=0.00 lr=1.78e-04 wall=946s
+[diff_only] step  4400/6000 mode=diff loss=6.3046 α=0.00 lr=1.55e-04 wall=991s
+[diff_only] step  4600/6000 mode=diff loss=6.6661 α=0.00 lr=1.34e-04 wall=1036s
+[diff_only] step  4800/6000 mode=diff loss=6.4870 α=0.00 lr=1.15e-04 wall=1081s
+[diff_only] step  5000/6000 mode=diff loss=6.2989 α=0.00 lr=9.86e-05 wall=1126s
+[diff_only] step  5200/6000 mode=diff loss=6.1094 α=0.00 lr=8.50e-05 wall=1171s
+[diff_only] step  5400/6000 mode=diff loss=6.4274 α=0.00 lr=7.41e-05 wall=1216s
+[diff_only] step  5600/6000 mode=diff loss=6.4623 α=0.00 lr=6.63e-05 wall=1261s
+[diff_only] step  5800/6000 mode=diff loss=6.5384 α=0.00 lr=6.16e-05 wall=1306s
+[diff_only] done. 1350s. wrote /workspace/sfumato/e5/results/f4_500m/diff_only_6k/seed170/model.pt and /workspace/sfumato/e5/results/f4_500m/diff_only_6k/seed170/summary.json
+  train wall_s=1367.1
+  n_params=538.3M  AR-NLL=11.6706  diff-NLL=6.1008
+
+[ar_only_6k seed=171] training 6000 steps...
+[ar_only] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[ar_only] step     0/6000 mode=ar   loss=11.1344 α=1.00 lr=0.00e+00 wall=0s
+[ar_only] step   200/6000 mode=ar   loss=5.1697 α=1.00 lr=6.00e-04 wall=45s
+[ar_only] step   400/6000 mode=ar   loss=4.7875 α=1.00 lr=5.98e-04 wall=90s
+[ar_only] step   600/6000 mode=ar   loss=4.4475 α=1.00 lr=5.94e-04 wall=135s
+[ar_only] step   800/6000 mode=ar   loss=4.2741 α=1.00 lr=5.86e-04 wall=181s
+[ar_only] step  1000/6000 mode=ar   loss=4.2093 α=1.00 lr=5.75e-04 wall=226s
+[ar_only] step  1200/6000 mode=ar   loss=4.2033 α=1.00 lr=5.61e-04 wall=271s
+[ar_only] step  1400/6000 mode=ar   loss=4.2378 α=1.00 lr=5.45e-04 wall=316s
+[ar_only] step  1600/6000 mode=ar   loss=4.4458 α=1.00 lr=5.26e-04 wall=361s
+[ar_only] step  1800/6000 mode=ar   loss=4.6477 α=1.00 lr=5.05e-04 wall=407s
+[ar_only] step  2000/6000 mode=ar   loss=4.3100 α=1.00 lr=4.82e-04 wall=452s
+[ar_only] step  2200/6000 mode=ar   loss=4.5340 α=1.00 lr=4.56e-04 wall=497s
+[ar_only] step  2400/6000 mode=ar   loss=4.5788 α=1.00 lr=4.30e-04 wall=542s
+[ar_only] step  2600/6000 mode=ar   loss=4.5408 α=1.00 lr=4.02e-04 wall=587s
+[ar_only] step  2800/6000 mode=ar   loss=4.5373 α=1.00 lr=3.74e-04 wall=632s
+[ar_only] step  3000/6000 mode=ar   loss=4.6808 α=1.00 lr=3.45e-04 wall=677s
+[ar_only] step  3200/6000 mode=ar   loss=4.7636 α=1.00 lr=3.15e-04 wall=723s
+[ar_only] step  3400/6000 mode=ar   loss=4.6267 α=1.00 lr=2.86e-04 wall=768s
+[ar_only] step  3600/6000 mode=ar   loss=4.6342 α=1.00 lr=2.58e-04 wall=813s
+[ar_only] step  3800/6000 mode=ar   loss=4.8500 α=1.00 lr=2.30e-04 wall=858s
+[ar_only] step  4000/6000 mode=ar   loss=4.3150 α=1.00 lr=2.04e-04 wall=903s
+[ar_only] step  4200/6000 mode=ar   loss=4.6231 α=1.00 lr=1.78e-04 wall=948s
+[ar_only] step  4400/6000 mode=ar   loss=4.7719 α=1.00 lr=1.55e-04 wall=993s
+[ar_only] step  4600/6000 mode=ar   loss=4.5443 α=1.00 lr=1.34e-04 wall=1038s
+[ar_only] step  4800/6000 mode=ar   loss=4.4736 α=1.00 lr=1.15e-04 wall=1083s
+[ar_only] step  5000/6000 mode=ar   loss=4.4662 α=1.00 lr=9.86e-05 wall=1128s
+[ar_only] step  5200/6000 mode=ar   loss=4.4176 α=1.00 lr=8.50e-05 wall=1173s
+[ar_only] step  5400/6000 mode=ar   loss=4.4736 α=1.00 lr=7.41e-05 wall=1218s
+[ar_only] step  5600/6000 mode=ar   loss=4.2155 α=1.00 lr=6.63e-05 wall=1263s
+[ar_only] step  5800/6000 mode=ar   loss=4.3399 α=1.00 lr=6.16e-05 wall=1308s
+[ar_only] done. 1352s. wrote /workspace/sfumato/e5/results/f4_500m/ar_only_6k/seed171/model.pt and /workspace/sfumato/e5/results/f4_500m/ar_only_6k/seed171/summary.json
+  train wall_s=1364.2
+  n_params=538.3M  AR-NLL=3.8211  diff-NLL=11.0104
+
+[diff_only_6k seed=171] training 6000 steps...
+[diff_only] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[diff_only] step     0/6000 mode=diff loss=10.8312 α=0.00 lr=0.00e+00 wall=0s
+[diff_only] step   200/6000 mode=diff loss=6.5788 α=0.00 lr=6.00e-04 wall=45s
+[diff_only] step   400/6000 mode=diff loss=6.4324 α=0.00 lr=5.98e-04 wall=90s
+[diff_only] step   600/6000 mode=diff loss=6.5716 α=0.00 lr=5.94e-04 wall=135s
+[diff_only] step   800/6000 mode=diff loss=6.5095 α=0.00 lr=5.86e-04 wall=180s
+[diff_only] step  1000/6000 mode=diff loss=6.3287 α=0.00 lr=5.75e-04 wall=225s
+[diff_only] step  1200/6000 mode=diff loss=6.4156 α=0.00 lr=5.61e-04 wall=270s
+[diff_only] step  1400/6000 mode=diff loss=6.4303 α=0.00 lr=5.45e-04 wall=314s
+[diff_only] step  1600/6000 mode=diff loss=6.5112 α=0.00 lr=5.26e-04 wall=359s
+[diff_only] step  1800/6000 mode=diff loss=6.5687 α=0.00 lr=5.05e-04 wall=404s
+[diff_only] step  2000/6000 mode=diff loss=6.3780 α=0.00 lr=4.82e-04 wall=449s
+[diff_only] step  2200/6000 mode=diff loss=6.5857 α=0.00 lr=4.56e-04 wall=494s
+[diff_only] step  2400/6000 mode=diff loss=6.5364 α=0.00 lr=4.30e-04 wall=539s
+[diff_only] step  2600/6000 mode=diff loss=6.4221 α=0.00 lr=4.02e-04 wall=584s
+[diff_only] step  2800/6000 mode=diff loss=6.6859 α=0.00 lr=3.74e-04 wall=629s
+[diff_only] step  3000/6000 mode=diff loss=6.5520 α=0.00 lr=3.45e-04 wall=674s
+[diff_only] step  3200/6000 mode=diff loss=6.5210 α=0.00 lr=3.15e-04 wall=719s
+[diff_only] step  3400/6000 mode=diff loss=6.5136 α=0.00 lr=2.86e-04 wall=764s
+[diff_only] step  3600/6000 mode=diff loss=6.3055 α=0.00 lr=2.58e-04 wall=808s
+[diff_only] step  3800/6000 mode=diff loss=6.5794 α=0.00 lr=2.30e-04 wall=853s
+[diff_only] step  4000/6000 mode=diff loss=6.2070 α=0.00 lr=2.04e-04 wall=898s
+[diff_only] step  4200/6000 mode=diff loss=6.4035 α=0.00 lr=1.78e-04 wall=943s
+[diff_only] step  4400/6000 mode=diff loss=6.5383 α=0.00 lr=1.55e-04 wall=988s
+[diff_only] step  4600/6000 mode=diff loss=6.5830 α=0.00 lr=1.34e-04 wall=1033s
+[diff_only] step  4800/6000 mode=diff loss=6.5337 α=0.00 lr=1.15e-04 wall=1078s
+[diff_only] step  5000/6000 mode=diff loss=6.3314 α=0.00 lr=9.86e-05 wall=1123s
+[diff_only] step  5200/6000 mode=diff loss=6.4080 α=0.00 lr=8.50e-05 wall=1168s
+[diff_only] step  5400/6000 mode=diff loss=6.5564 α=0.00 lr=7.41e-05 wall=1213s
+[diff_only] step  5600/6000 mode=diff loss=6.3210 α=0.00 lr=6.63e-05 wall=1258s
+[diff_only] step  5800/6000 mode=diff loss=6.3393 α=0.00 lr=6.16e-05 wall=1303s
+[diff_only] done. 1347s. wrote /workspace/sfumato/e5/results/f4_500m/diff_only_6k/seed171/model.pt and /workspace/sfumato/e5/results/f4_500m/diff_only_6k/seed171/summary.json
+  train wall_s=1361.9
+  n_params=538.3M  AR-NLL=9.2401  diff-NLL=6.0919
+
+[ar_only_6k seed=172] training 6000 steps...
+[ar_only] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[ar_only] step     0/6000 mode=ar   loss=11.1402 α=1.00 lr=0.00e+00 wall=0s
+[ar_only] step   200/6000 mode=ar   loss=4.7368 α=1.00 lr=6.00e-04 wall=45s
+[ar_only] step   400/6000 mode=ar   loss=4.8099 α=1.00 lr=5.98e-04 wall=90s
+[ar_only] step   600/6000 mode=ar   loss=4.7271 α=1.00 lr=5.94e-04 wall=135s
+[ar_only] step   800/6000 mode=ar   loss=4.4708 α=1.00 lr=5.86e-04 wall=180s
+[ar_only] step  1000/6000 mode=ar   loss=4.3482 α=1.00 lr=5.75e-04 wall=226s
+[ar_only] step  1200/6000 mode=ar   loss=4.0372 α=1.00 lr=5.61e-04 wall=271s
+[ar_only] step  1400/6000 mode=ar   loss=4.4082 α=1.00 lr=5.45e-04 wall=316s
+[ar_only] step  1600/6000 mode=ar   loss=4.3925 α=1.00 lr=5.26e-04 wall=361s
+[ar_only] step  1800/6000 mode=ar   loss=4.4326 α=1.00 lr=5.05e-04 wall=406s
+[ar_only] step  2000/6000 mode=ar   loss=4.2972 α=1.00 lr=4.82e-04 wall=451s
+[ar_only] step  2200/6000 mode=ar   loss=4.3529 α=1.00 lr=4.56e-04 wall=496s
+[ar_only] step  2400/6000 mode=ar   loss=4.2120 α=1.00 lr=4.30e-04 wall=541s
+[ar_only] step  2600/6000 mode=ar   loss=4.2135 α=1.00 lr=4.02e-04 wall=586s
+[ar_only] step  2800/6000 mode=ar   loss=4.4202 α=1.00 lr=3.74e-04 wall=631s
+[ar_only] step  3000/6000 mode=ar   loss=4.2185 α=1.00 lr=3.45e-04 wall=676s
+[ar_only] step  3200/6000 mode=ar   loss=4.5342 α=1.00 lr=3.15e-04 wall=721s
+[ar_only] step  3400/6000 mode=ar   loss=4.6485 α=1.00 lr=2.86e-04 wall=766s
+[ar_only] step  3600/6000 mode=ar   loss=4.1360 α=1.00 lr=2.58e-04 wall=811s
+[ar_only] step  3800/6000 mode=ar   loss=4.2391 α=1.00 lr=2.30e-04 wall=857s
+[ar_only] step  4000/6000 mode=ar   loss=4.3347 α=1.00 lr=2.04e-04 wall=902s
+[ar_only] step  4200/6000 mode=ar   loss=4.2089 α=1.00 lr=1.78e-04 wall=947s
+[ar_only] step  4400/6000 mode=ar   loss=4.0715 α=1.00 lr=1.55e-04 wall=992s
+[ar_only] step  4600/6000 mode=ar   loss=4.2864 α=1.00 lr=1.34e-04 wall=1037s
+[ar_only] step  4800/6000 mode=ar   loss=3.9652 α=1.00 lr=1.15e-04 wall=1082s
+[ar_only] step  5000/6000 mode=ar   loss=3.8962 α=1.00 lr=9.86e-05 wall=1127s
+[ar_only] step  5200/6000 mode=ar   loss=4.2481 α=1.00 lr=8.50e-05 wall=1172s
+[ar_only] step  5400/6000 mode=ar   loss=4.5567 α=1.00 lr=7.41e-05 wall=1217s
+[ar_only] step  5600/6000 mode=ar   loss=4.0563 α=1.00 lr=6.63e-05 wall=1262s
+[ar_only] step  5800/6000 mode=ar   loss=4.1191 α=1.00 lr=6.16e-05 wall=1307s
+[ar_only] done. 1352s. wrote /workspace/sfumato/e5/results/f4_500m/ar_only_6k/seed172/model.pt and /workspace/sfumato/e5/results/f4_500m/ar_only_6k/seed172/summary.json
+  train wall_s=1364.0
+  n_params=538.3M  AR-NLL=3.5783  diff-NLL=10.7939
+
+[diff_only_6k seed=172] training 6000 steps...
+[diff_only] model: d=1280 L=24 H=20 → 538.3M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[diff_only] step     0/6000 mode=diff loss=10.8263 α=0.00 lr=0.00e+00 wall=0s
+[diff_only] step   200/6000 mode=diff loss=6.4884 α=0.00 lr=6.00e-04 wall=45s
+[diff_only] step   400/6000 mode=diff loss=6.8915 α=0.00 lr=5.98e-04 wall=90s
+[diff_only] step   600/6000 mode=diff loss=6.6190 α=0.00 lr=5.94e-04 wall=135s
+[diff_only] step   800/6000 mode=diff loss=6.6809 α=0.00 lr=5.86e-04 wall=180s
+[diff_only] step  1000/6000 mode=diff loss=6.4024 α=0.00 lr=5.75e-04 wall=225s
+[diff_only] step  1200/6000 mode=diff loss=6.5075 α=0.00 lr=5.61e-04 wall=270s
+[diff_only] step  1400/6000 mode=diff loss=6.7728 α=0.00 lr=5.45e-04 wall=315s
+[diff_only] step  1600/6000 mode=diff loss=6.7039 α=0.00 lr=5.26e-04 wall=359s
+[diff_only] step  1800/6000 mode=diff loss=6.4935 α=0.00 lr=5.05e-04 wall=404s
+[diff_only] step  2000/6000 mode=diff loss=6.5152 α=0.00 lr=4.82e-04 wall=449s
+[diff_only] step  2200/6000 mode=diff loss=6.4787 α=0.00 lr=4.56e-04 wall=494s
+[diff_only] step  2400/6000 mode=diff loss=6.3438 α=0.00 lr=4.30e-04 wall=539s
+[diff_only] step  2600/6000 mode=diff loss=6.2473 α=0.00 lr=4.02e-04 wall=584s
+[diff_only] step  2800/6000 mode=diff loss=6.4914 α=0.00 lr=3.74e-04 wall=629s
+[diff_only] step  3000/6000 mode=diff loss=6.3219 α=0.00 lr=3.45e-04 wall=674s
+[diff_only] step  3200/6000 mode=diff loss=6.7255 α=0.00 lr=3.15e-04 wall=719s
+[diff_only] step  3400/6000 mode=diff loss=6.6679 α=0.00 lr=2.86e-04 wall=764s
+[diff_only] step  3600/6000 mode=diff loss=6.3430 α=0.00 lr=2.58e-04 wall=809s
+[diff_only] step  3800/6000 mode=diff loss=6.3159 α=0.00 lr=2.30e-04 wall=854s
+[diff_only] step  4000/6000 mode=diff loss=6.3695 α=0.00 lr=2.04e-04 wall=898s
+[diff_only] step  4200/6000 mode=diff loss=6.5358 α=0.00 lr=1.78e-04 wall=943s
+[diff_only] step  4400/6000 mode=diff loss=6.3028 α=0.00 lr=1.55e-04 wall=988s
+[diff_only] step  4600/6000 mode=diff loss=6.5516 α=0.00 lr=1.34e-04 wall=1033s
+[diff_only] step  4800/6000 mode=diff loss=6.4022 α=0.00 lr=1.15e-04 wall=1078s
+[diff_only] step  5000/6000 mode=diff loss=6.4126 α=0.00 lr=9.86e-05 wall=1123s
+[diff_only] step  5200/6000 mode=diff loss=6.5581 α=0.00 lr=8.50e-05 wall=1168s
+[diff_only] step  5400/6000 mode=diff loss=6.6472 α=0.00 lr=7.41e-05 wall=1213s
+[diff_only] step  5600/6000 mode=diff loss=6.3979 α=0.00 lr=6.63e-05 wall=1258s
+[diff_only] step  5800/6000 mode=diff loss=6.5188 α=0.00 lr=6.16e-05 wall=1303s
+[diff_only] done. 1348s. wrote /workspace/sfumato/e5/results/f4_500m/diff_only_6k/seed172/model.pt and /workspace/sfumato/e5/results/f4_500m/diff_only_6k/seed172/summary.json
+  train wall_s=1359.0
+  n_params=538.3M  AR-NLL=12.1288  diff-NLL=6.0951
+
+========== FINAL AGGREGATE (500M, GSM8K full) ==========
+  composite_3k: n=3  AR-NLL=3.396  diff-NLL=5.738
+  ar_only_3k: n=3  AR-NLL=3.209  diff-NLL=10.960
+  diff_only_3k: n=3  AR-NLL=12.203  diff-NLL=6.140
+  ar_only_6k: n=3  AR-NLL=3.567  diff-NLL=10.841
+  diff_only_6k: n=3  AR-NLL=11.013  diff-NLL=6.096
+
+--- Trade-off summary at 500M ---
+  AR-axis tax (composite-3k vs ar_only-3k): +0.186 NLL
+  Compute-matched AR (composite-3k vs ar_only-6k): -0.172 NLL
+  Diff-axis advantage (composite-3k vs diff_only-3k): -0.402 NLL
+  Compute-matched diff (composite-3k vs diff_only-6k): -0.358 NLL
+===== F4 DONE Fri May 15 08:09:04 UTC 2026 =====

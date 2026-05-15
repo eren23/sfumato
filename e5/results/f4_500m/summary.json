@@ -1,0 +1,137 @@
+[
+  {
+    "label": "composite_3k",
+    "variant": "composite",
+    "seed": 170,
+    "steps": 3000,
+    "n_params": 538280960,
+    "ar_nll": 3.2166,
+    "diff_nll": 5.2608
+  },
+  {
+    "label": "ar_only_3k",
+    "variant": "ar_only",
+    "seed": 170,
+    "steps": 3000,
+    "n_params": 538280960,
+    "ar_nll": 3.0616,
+    "diff_nll": 11.0571
+  },
+  {
+    "label": "diff_only_3k",
+    "variant": "diff_only",
+    "seed": 170,
+    "steps": 3000,
+    "n_params": 538280960,
+    "ar_nll": 6.3342,
+    "diff_nll": 6.1386
+  },
+  {
+    "label": "composite_3k",
+    "variant": "composite",
+    "seed": 171,
+    "steps": 3000,
+    "n_params": 538280960,
+    "ar_nll": 3.4029,
+    "diff_nll": 5.9861
+  },
+  {
+    "label": "ar_only_3k",
+    "variant": "ar_only",
+    "seed": 171,
+    "steps": 3000,
+    "n_params": 538280960,
+    "ar_nll": 3.3311,
+    "diff_nll": 11.0168
+  },
+  {
+    "label": "diff_only_3k",
+    "variant": "diff_only",
+    "seed": 171,
+    "steps": 3000,
+    "n_params": 538280960,
+    "ar_nll": 12.2073,
+    "diff_nll": 6.1413
+  },
+  {
+    "label": "composite_3k",
+    "variant": "composite",
+    "seed": 172,
+    "steps": 3000,
+    "n_params": 538280960,
+    "ar_nll": 3.5676,
+    "diff_nll": 5.9675
+  },
+  {
+    "label": "ar_only_3k",
+    "variant": "ar_only",
+    "seed": 172,
+    "steps": 3000,
+    "n_params": 538280960,
+    "ar_nll": 3.2356,
+    "diff_nll": 10.8075
+  },
+  {
+    "label": "diff_only_3k",
+    "variant": "diff_only",
+    "seed": 172,
+    "steps": 3000,
+    "n_params": 538280960,
+    "ar_nll": 18.0666,
+    "diff_nll": 6.1411
+  },
+  {
+    "label": "ar_only_6k",
+    "variant": "ar_only",
+    "seed": 170,
+    "steps": 6000,
+    "n_params": 538280960,
+    "ar_nll": 3.3029,
+    "diff_nll": 10.7194
+  },
+  {
+    "label": "diff_only_6k",
+    "variant": "diff_only",
+    "seed": 170,
+    "steps": 6000,
+    "n_params": 538280960,
+    "ar_nll": 11.6706,
+    "diff_nll": 6.1008
+  },
+  {
+    "label": "ar_only_6k",
+    "variant": "ar_only",
+    "seed": 171,
+    "steps": 6000,
+    "n_params": 538280960,
+    "ar_nll": 3.8211,
+    "diff_nll": 11.0104
+  },
+  {
+    "label": "diff_only_6k",
+    "variant": "diff_only",
+    "seed": 171,
+    "steps": 6000,
+    "n_params": 538280960,
+    "ar_nll": 9.2401,
+    "diff_nll": 6.0919
+  },
+  {
+    "label": "ar_only_6k",
+    "variant": "ar_only",
+    "seed": 172,
+    "steps": 6000,
+    "n_params": 538280960,
+    "ar_nll": 3.5783,
+    "diff_nll": 10.7939
+  },
+  {
+    "label": "diff_only_6k",
+    "variant": "diff_only",
+    "seed": 172,
+    "steps": 6000,
+    "n_params": 538280960,
+    "ar_nll": 12.1288,
+    "diff_nll": 6.0951
+  }
+]
