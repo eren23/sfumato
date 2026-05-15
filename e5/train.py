@@ -147,6 +147,28 @@ def train_one(
     summary_path = out_dir / "summary.json"
     log_fh = open(log_path, "w")
 
+    # W&B logging — skip silently if WANDB_API_KEY missing or wandb not installed.
+    wb = None
+    try:
+        if os.environ.get("WANDB_API_KEY") and os.environ.get("WANDB_MODE", "online") != "disabled":
+            import wandb as wb_lib  # noqa
+            wb = wb_lib.init(
+                project=os.environ.get("WANDB_PROJECT", "sfumato-e5"),
+                name=os.environ.get("WANDB_RUN_NAME", f"{out_dir.parent.name}-{variant}-seed{seed}"),
+                group=os.environ.get("WANDB_GROUP", out_dir.parent.name),
+                config={
+                    "variant": variant, "d_model": d_model, "n_layers": n_layers,
+                    "n_heads": n_heads, "max_steps": max_steps, "batch_size": batch_size,
+                    "block_size": block_size, "peak_lr": peak_lr, "seed": seed,
+                    "n_params": n_params, "n_train_tokens": len(tokens),
+                },
+                reinit=True,
+            )
+            print(f"[wandb] init OK: {wb.url if wb else 'no url'}", flush=True)
+    except Exception as e:
+        print(f"[wandb] init failed: {e!s:.200}", flush=True)
+        wb = None
+
     history = {"steps": [], "ar_loss": [], "diff_loss": [], "alpha": [], "lr": [], "wallclock_s": []}
     t0 = time.time()
     rng = np.random.default_rng(seed + 12345)
@@ -211,6 +233,15 @@ def train_one(
             history["alpha"].append(alpha)
             history["lr"].append(lr)
             history["wallclock_s"].append(rec["wallclock_s"])
+            if wb is not None:
+                try:
+                    wb.log({
+                        "step": step, "mode": mode, "loss": rec["loss"],
+                        "ar_loss_last": last_ar, "diff_loss_last": last_diff,
+                        "alpha": alpha, "lr": lr, "wallclock_s": rec["wallclock_s"],
+                    }, step=step)
+                except Exception:
+                    pass
             if step % 200 == 0:
                 print(f"[{variant}] step {step:5d}/{max_steps} mode={mode:4s} loss={float(loss.detach()):.4f} α={alpha:.2f} lr={lr:.2e} wall={rec['wallclock_s']:.0f}s", flush=True)
 
@@ -226,6 +257,15 @@ def train_one(
         "n_params": n_params,
         "max_steps": max_steps,
     }, ckpt_path)
+
+    if wb is not None:
+        try:
+            wb.summary["wall_s"] = wall_s
+            wb.summary["final_ar_loss"] = last_ar
+            wb.summary["final_diff_loss"] = last_diff
+            wb.finish()
+        except Exception:
+            pass
 
     summary = {
         "variant": variant,
