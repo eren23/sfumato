@@ -248,6 +248,11 @@ def main():
                 seed=seed, max_steps=max_steps,
                 batch_size=batch_size, block_size=block_size,
                 peak_lr=peak_lr, eval_every=10**9, n_eval=0, tokens=tokens,
+                val_problems=gsm_probes,
+                sample_prompts=gsm_dev,
+                val_every=1000,
+                sample_every=2000,
+                tokenizer_for_samples=tok,
             )
             print(f"  train wall_s={time.time()-t0:.1f}")
         else:

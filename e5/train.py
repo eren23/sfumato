@@ -119,6 +119,11 @@ def train_one(
     eval_every: int,
     n_eval: int,
     tokens: np.ndarray,
+    val_problems: list | None = None,
+    sample_prompts: list | None = None,
+    val_every: int = 1000,
+    sample_every: int = 2000,
+    tokenizer_for_samples=None,
 ) -> dict:
     torch.manual_seed(seed)
     np.random.seed(seed)
@@ -244,6 +249,57 @@ def train_one(
                     pass
             if step % 200 == 0:
                 print(f"[{variant}] step {step:5d}/{max_steps} mode={mode:4s} loss={float(loss.detach()):.4f} α={alpha:.2f} lr={lr:.2e} wall={rec['wallclock_s']:.0f}s", flush=True)
+
+        # ---- Val NLL on held-out problems ----
+        if val_problems and (step + 1) % val_every == 0 and wb is not None:
+            try:
+                model.train(False)
+                with torch.no_grad():
+                    total_nll = 0.0; cnt = 0
+                    for prompt_ids, ans_ids in val_problems[:50]:
+                        if len(prompt_ids) + len(ans_ids) + 1 > block_size: continue
+                        full = prompt_ids + ans_ids
+                        v_idx = torch.tensor([full], dtype=torch.long, device=device)
+                        v_logits = model(v_idx, mode="ar").float()
+                        ans_start = len(prompt_ids)
+                        v_pred = v_logits[0, ans_start - 1 : ans_start - 1 + len(ans_ids), :]
+                        v_target = torch.tensor(ans_ids, dtype=torch.long, device=device)
+                        v_logp = torch.log_softmax(v_pred, dim=-1)
+                        v_nll = -v_logp.gather(1, v_target.unsqueeze(1)).squeeze(1).sum().item()
+                        total_nll += v_nll; cnt += len(ans_ids)
+                    val_nll = total_nll / max(1, cnt)
+                wb.log({"val_ar_nll": val_nll, "val_ar_perplexity": math.exp(val_nll)}, step=step)
+                print(f"[{variant}] step {step:5d} val_ar_nll={val_nll:.4f}", flush=True)
+            except Exception as e:
+                print(f"[val warn] {e!s:.150}", flush=True)
+            finally:
+                model.train(True)
+
+        # ---- Sample text generation logged to wandb ----
+        if sample_prompts and (step + 1) % sample_every == 0 and wb is not None and tokenizer_for_samples is not None:
+            try:
+                model.train(False)
+                rows = []
+                with torch.no_grad():
+                    for sp in sample_prompts[:3]:
+                        ids = list(sp.get("prompt_tokens", sp) if isinstance(sp, dict) else sp)
+                        gen = list(ids)
+                        for _ in range(64):
+                            ctx = torch.tensor([gen[-block_size:]], dtype=torch.long, device=device)
+                            logits = model(ctx, mode="ar")[:, -1, :]
+                            nxt = int(torch.argmax(logits, dim=-1).item())
+                            if nxt == 50256: break
+                            gen.append(nxt)
+                        cont = tokenizer_for_samples.decode([t for t in gen[len(ids):] if t < 50257], skip_special_tokens=True)
+                        prompt_text = sp["question"] if isinstance(sp, dict) and "question" in sp else "(prompt)"
+                        rows.append([step, prompt_text[:120], cont[:300]])
+                tbl = wb_lib.Table(columns=["step", "prompt", "completion"], data=rows)
+                wb.log({"samples": tbl}, step=step)
+                print(f"[{variant}] step {step:5d} logged {len(rows)} samples to wandb", flush=True)
+            except Exception as e:
+                print(f"[sample warn] {e!s:.150}", flush=True)
+            finally:
+                model.train(True)
 
     log_fh.close()
     wall_s = time.time() - t0
