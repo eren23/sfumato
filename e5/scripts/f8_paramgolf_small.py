@@ -187,11 +187,43 @@ def main():
     print(f"device={device} variants={variants} d={d_model} L={n_layers} H={n_heads}")
     print(f"BS={batch_size} T={block_size} steps={max_steps} target_tokens={n_target_tokens:,}")
 
+    # Up-front wandb.init so the run shows immediately in the dashboard
+    # while we tokenize. train_one() will later open per-variant runs.
+    driver_wb = None
+    try:
+        if os.environ.get("WANDB_API_KEY"):
+            import wandb as wb
+            driver_wb = wb.init(
+                project=os.environ.get("WANDB_PROJECT", "sfumato-e5"),
+                name=f"{out_name}-driver",
+                group=os.environ.get("WANDB_GROUP", out_name),
+                job_type="driver",
+                config={"out_name": out_name, "n_target_tokens": n_target_tokens,
+                        "d_model": d_model, "n_layers": n_layers, "n_heads": n_heads,
+                        "variants": variants, "max_steps": max_steps,
+                        "batch_size": batch_size, "block_size": block_size,
+                        "peak_lr": peak_lr, "seed": seed},
+                reinit=True,
+            )
+            print(f"[wandb-driver] init OK: {driver_wb.url}", flush=True)
+    except Exception as e:
+        print(f"[wandb-driver] init failed: {e!s:.200}", flush=True)
+
     # Pre-fetch tokens on this pod.
     print(f"\nFetching ~{n_target_tokens/1e9:.1f}B FineWeb-Edu tokens (cached on pod)...")
     t0 = time.time()
+    if driver_wb is not None:
+        try: driver_wb.log({"phase": 0, "phase_name": "tokenizing"})
+        except Exception: pass
     tokens = load_fineweb_tokens(n_tokens=n_target_tokens, seed=1337 + seed)
-    print(f"  got {len(tokens):,} tokens in {time.time()-t0:.1f}s")
+    fetch_s = time.time() - t0
+    print(f"  got {len(tokens):,} tokens in {fetch_s:.1f}s")
+    if driver_wb is not None:
+        try:
+            driver_wb.summary["fetch_wall_s"] = fetch_s
+            driver_wb.summary["n_tokens_fetched"] = len(tokens)
+            driver_wb.log({"phase": 1, "phase_name": "fetched"})
+        except Exception: pass
 
     print("\nFetching FineWeb val texts for BPB scoring (independent slice, offset 12000)...")
     val_texts = fetch_fineweb_val_texts(n_texts=200, offset=12000)
