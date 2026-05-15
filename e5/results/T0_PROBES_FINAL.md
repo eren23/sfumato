@@ -305,6 +305,42 @@ monotonically" — it grows from 60M to 300M and may plateau or invert
 at 500M depending on convergence. The AR compute-matched reversal is
 the cleanest novel finding at 500M.
 
+### F6 — B3 paired-separate at 500M total params (DONE — param-matched)
+
+User-requested control to close the param-matched comparison at scale.
+B3 trains two 254M sub-models separately:
+
+| Variant | Params | AR-NLL | diff-NLL |
+|---|---|---|---|
+| B3 ar_only (specialized) | 254M | **2.91** | — |
+| B3 diff_only (specialized) | 254M | — | **6.13** |
+| F4 composite-3k (shared) | 538M | 3.40 | 5.74 |
+
+**Param-matched result at 500M total budget:**
+
+| Axis | B3 (2× 254M) | Composite (1× 538M) | Winner |
+|---|---|---|---|
+| AR | **2.91** | 3.40 | **B3** wins by −0.49 NLL |
+| Diff | 6.13 | **5.74** | **Composite** wins by −0.39 NLL |
+
+**This is the cleanest possible framing** of the trade-off:
+
+- If you can deploy two specialized models, train B3 (ar_only-254M wins
+  the AR axis at half the params, and diff_only-254M loses diff only
+  modestly).
+- If you need ONE model that handles both AR and diff, composite wins
+  the diff axis decisively while paying a manageable AR tax vs the
+  specialized B3 ar_only.
+
+Practical recommendation:
+
+- **AR-only deployment** → train pure-AR at full param budget, use it
+  alone. Beats composite cleanly.
+- **Diff-only deployment** → composite at full param budget beats a
+  specialized diff model at half the budget.
+- **Both modes needed in one model** → composite is the only design
+  that does this; the AR tax is the price.
+
 ### F3 — AR compute control (DONE — beautiful symmetric result)
 
 AR-only at 6k steps (2× compute) vs composite-3k AR-NLL. Mirror of E3b

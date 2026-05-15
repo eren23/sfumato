@@ -1,0 +1,50 @@
+[
+  {
+    "variant": "ar_only",
+    "seed": 180,
+    "steps": 3000,
+    "n_params": 254169088,
+    "ar_nll": 2.9138,
+    "diff_nll": null
+  },
+  {
+    "variant": "ar_only",
+    "seed": 181,
+    "steps": 3000,
+    "n_params": 254169088,
+    "ar_nll": 3.0502,
+    "diff_nll": null
+  },
+  {
+    "variant": "ar_only",
+    "seed": 182,
+    "steps": 3000,
+    "n_params": 254169088,
+    "ar_nll": 2.7718,
+    "diff_nll": null
+  },
+  {
+    "variant": "diff_only",
+    "seed": 180,
+    "steps": 3000,
+    "n_params": 254169088,
+    "ar_nll": null,
+    "diff_nll": 6.1211
+  },
+  {
+    "variant": "diff_only",
+    "seed": 181,
+    "steps": 3000,
+    "n_params": 254169088,
+    "ar_nll": null,
+    "diff_nll": 6.1303
+  },
+  {
+    "variant": "diff_only",
+    "seed": 182,
+    "steps": 3000,
+    "n_params": 254169088,
+    "ar_nll": null,
+    "diff_nll": 6.144
+  }
+]
