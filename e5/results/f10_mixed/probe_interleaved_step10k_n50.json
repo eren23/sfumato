@@ -1,0 +1,1385 @@
+{
+  "ckpt": "/Users/eren/Documents/AI/sfumato/e5/results/f10_mixed/composite/model.pt",
+  "n_eval": 50,
+  "prompt_format": "qa",
+  "decode": {
+    "ar": {
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "no_repeat_ngram_size": 3
+    },
+    "diff": {
+      "diff_temperature": 0.8,
+      "diff_top_p": 0.9,
+      "diff_repetition_penalty": 1.15
+    }
+  },
+  "configs": {
+    "single_ar_128": {
+      "schedule": [
+        [
+          "ar",
+          128
+        ]
+      ],
+      "n": 50,
+      "n_correct": 1,
+      "accuracy": 0.02,
+      "loop_rate_final": 0.0,
+      "mean_intermediate_loop_rate": 0.0,
+      "max_word_run": 4,
+      "wall_s": 266.5,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "20",
+          "correct": 0,
+          "text": " Mary's rabbits are 6-3=<<6-4=20>>20 pounds.\n#### 20\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "23.",
+          "correct": 0,
+          "text": " The total number of bugs on the ground is 1: 4: 6:4: 7:7: 7 6:9: 8:1: 7; 14:9. 10:21: 14:10:00: 10:23:15: 19:33: 21:30: 13:23, 20:12: 11:39: 20:43: 14-26: 32:35: 23:42: 22:33. What percentage of worms is 5: 7.5: 5: 6.8: 9:19: 12:23. What of the following was also mentioned, the one-",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            3
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "18",
+          "correct": 0,
+          "text": " There are 400+100=<<500+150=120>>120\nThe cost of the total amount is 400*.1=$<<300*.1=48>>48\nThe total cost of his home is 40*.4=$<<40*.5=18>>18\n#### 18\n",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            3
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "15",
+          "correct": 0,
+          "text": " First find the total amount of meters in the total number of meters is 5*12=<<5*12*.01=90>>90 meters\nThen multiply the number of units by the total length by the number which we can get: 2/2*3=<<2/2=9>>9 meters\nThe total amount you make is 4*20=<<4*20-10=30>>30 meters\nSince the total volume of meters at the period of time for a total of 10 meters is 9*24= <<7*24+25=15>>15 meters\n#### 15\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "5",
+          "correct": 0,
+          "text": " Every month, what are the number of eggs? If she makes $25 each for her egg, how much will she need for her food to be eaten?\nThe total amount of cow\u2019s milk in the evening is 50 calories. If she sells the eggs at a distance from her egg to her egg at the time, she can make 6 eggs at her egg by buying the eggs. If one egg is 12 eggs, how many eggs is only one egg?\nAccording to the husband, she is 2 times more likely than she was before the end of the winter. On the other hand, she may have made 5 eggs",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            1
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "4",
+          "correct": 0,
+          "text": " First find the total cost of the glass of the kitchen and how much will the total amount of each glass of each item. The total amount is 40/2.\nThe total cost is 5-20+$50 = $1.05.00\nSince the amount of a glass of one glass of another glass of this glass is twice the amount that each glass is sold in order to pay it's worth. If we add this amount to the total consumption of the 3 glass of these glass is now 1/3*$6.01\nTo calculate the amount necessary to pay the glass for a glass bag we add 4*",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            1
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "90",
+          "correct": 0,
+          "text": " H.M. Jackson has twice the amount of pasture in total, 80-50 sheep. How much was there for 2008, compared with what's known about 160+70 = <<160+70=90>>90 sheep.\n#### 90\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "12",
+          "correct": 0,
+          "text": " Fuedo = .1 = .6 = 0.01, $0.05.06.08.08\nHow much money is spent on the web page? The total amount of money spent on an web page is 7.9% for the application (and the amount of time spent on this page) and the amount that the user needs is paid back to the server's URL. If the user wants a new file for the file, then the file will be read for 15 hours. This makes it easier to print a 12-bit version, in order to make sure that the file contains a few items. Finally,",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "25",
+          "correct": 0,
+          "text": " For three hours in a day, he takes up 1/3*50 = <<1/3=5>>5 minutes.\nHe takes two hours to leave the house every two days. If he does one thing in 5 hours on driving, he does 10 minutes per day.\n#### 25\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "72",
+          "correct": 0,
+          "text": " Elissa has $30.4 for her total amount: $6.5 each day she would be given to a weekly amount: 20% on average. How much money will be left in total if she does not.\nAnswer : First find the amount: 4 pounds * 2*$3 = $20.9/day * 5*$150.5 = $120.00\nThen divide the amount of money from her to her daily expenses: $120 - $120 = $<<120-120=72.50>>72.25.50\n#### 72\n",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            4
+          ]
+        }
+      ]
+    },
+    "single_switch_64_32": {
+      "schedule": [
+        [
+          "ar",
+          64
+        ],
+        [
+          "diff",
+          32
+        ]
+      ],
+      "n": 50,
+      "n_correct": 2,
+      "accuracy": 0.04,
+      "loop_rate_final": 0.0,
+      "mean_intermediate_loop_rate": 0.0,
+      "max_word_run": 3,
+      "wall_s": 150.8,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "7",
+          "correct": 0,
+          "text": " There are a total of 2:1*9 = <<2*9=8>>7 liters.\nThe total amount of meat she's food eaten, of\n the and, to.-, to-, a- of-",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "23",
+          "correct": 0,
+          "text": " The number of folds the amount is 1 + 3 + 5 = 2*6+20+20=23>>23\n.- the of, a to- a and theA.. the-",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "200000.",
+          "correct": 0,
+          "text": " His total earnings are as high as $200,000. If he went into the house, how much money would have left for him to go into the home a- to the\n and of that-.\n of of of the that-",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            3
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "5",
+          "correct": 0,
+          "text": " John plans to spend 5*- of,, and. the-\n in. of-\n the the the",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            3
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "20",
+          "correct": 1,
+          "text": " If she wants to give up the amount of feed she needs to give a total of 10 calories for each week, she needs one dose of about 20 kg.:- by-\ufffd\n and a\ufffd\n that- on\n and- that",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "15",
+          "correct": 0,
+          "text": " First find the total cost of each glass costs: 1:25*$4\n2:30+$14\n3:15-, of for the,.- a. and a the the-, and.",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "20",
+          "correct": 0,
+          "text": " Lexington has 10+20 = the for the the-- a\n, of the...- to of",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": null,
+          "correct": 0,
+          "text": " First find the file: A small drive to work a little so that you need to work an hour. Also make sure that you have a copy of the file-\ufffd in,:\n-- in.\n and of and for--",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "18.",
+          "correct": 0,
+          "text": " First find the total number of times in a week to see if the two days are 18. What would you do at the start of the week?\nFor,\ufffd,.,\n a.--, that- on and to and",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "9.50",
+          "correct": 0,
+          "text": " Elissa's total earnings for Elisa's total worth of $6.1 = $9.50\nThus, Elisa has- a-\n the the- of to and to in, to\n a and",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    "interleaved_16_8_x3": {
+      "schedule": [
+        [
+          "ar",
+          16
+        ],
+        [
+          "diff",
+          8
+        ],
+        [
+          "ar",
+          16
+        ],
+        [
+          "diff",
+          8
+        ],
+        [
+          "ar",
+          16
+        ],
+        [
+          "diff",
+          8
+        ]
+      ],
+      "n": 50,
+      "n_correct": 0,
+      "accuracy": 0.0,
+      "loop_rate_final": 0.0,
+      "mean_intermediate_loop_rate": 0.0,
+      "max_word_run": 3,
+      "wall_s": 139.7,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "2014",
+          "correct": 0,
+          "text": " Anne is buying one all of her two this- a damage of, a, 12 pounds a day and bces each if to\n Many- most, car accidents were reported in 2014 for their of to- the the,: and",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "5",
+          "correct": 0,
+          "text": " For each slices, 15 fewer pans are. the.. of and of. of.a. of the. of be the share to- a:s=7x6x5 = <<\ns5 d\n-- the",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "-12.",
+          "correct": 0,
+          "text": " There are 2 * 100 = <<2 of My ( a-: not. 5*10=9>>11 years this and \u2013\n\n-.- 7 - 12 = <<1-12.s theich the, theA",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "5.",
+          "correct": 0,
+          "text": " Charles sets up 20*6 = << the the will and- of The (as in) are 100+4=-3 you5 be. the or 5*.01 is 10*7=,\n\n\ufffd2 load5.",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "1",
+          "correct": 0,
+          "text": " Her neighbors must supply all necessary food in with \ufffd-- a you\n territory for the purpose of feeding and nourishing\ufffd to1\ufffd, and\ufffd how far apart is the amount of time required to that you. as- a sand",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "5",
+          "correct": 0,
+          "text": " He gets 12 * 2 = <<12 a a 2\n the of\ufffd-4*2=40>>40\n) of\ufffd: with-E-. in5, an",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "56",
+          "correct": 0,
+          "text": " In the first year of pampe-. move of- the that a day is at the middle of the day in a in. One to. there are 56 sheep in the day, three from every-- to of the\n",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "-3",
+          "correct": 0,
+          "text": " First find the file in the browser. and the\n of this improve2-year.\nNow that you know that-3wh are. on|/page. Press the file on the\nen\u2014 in emissions\ufffd at- and",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "14",
+          "correct": 0,
+          "text": " Thomas goes through the 5th day and a should-,- and in\n- 14 hours at an average speed of\n as will you,un, to give away the other three minutes. The another\ufffd. they a:s.",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "1.",
+          "correct": 0,
+          "text": " Laisa and her total income is 100- the and working to)\n- China and her average annual wages are-4 to (, not a it's worth getting another 25 dollars and 10 to in everything (1. a the",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "interleaved_8_4_x6": {
+      "schedule": [
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ]
+      ],
+      "n": 50,
+      "n_correct": 0,
+      "accuracy": 0.0,
+      "loop_rate_final": 0.0,
+      "mean_intermediate_loop_rate": 0.0,
+      "max_word_run": 3,
+      "wall_s": 145.8,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "1",
+          "correct": 0,
+          "text": " Mary used $1, \ufffd of of an orange juice in- to on a lemon juice. She But of region to buy the mixture with when,\ufffd the cake is worth just- a you and so there is no you, The we",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "15",
+          "correct": 0,
+          "text": " The first 3 pots the5..1.5 - at in-, 2 more than 100\n the to friend you give the extra the\n- 10 slices of red fibre body time\ufffd a total of 15 to the- 15\n",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "-1",
+          "correct": 0,
+          "text": " First find the costor to the1,500-1, of tolehout is the both\ufffd to his two brothers who and- their/her siblings are,. a\ufffd. . . . ; The by. was",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "2",
+          "correct": 0,
+          "text": " James and Mary are- that, the total meters are 0. a. required amount of 2/ by's of Ourden-Agr the the lack almost always doubled so we\n- to Conjunctulativelyas yourav,",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "14",
+          "correct": 0,
+          "text": " There are 14 total- be you you can take in the\n. us\nSoil count out a on and an hour\nTakes the-.\ufffds. is the doctors- toing\n.e.,'s that may",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "1",
+          "correct": 0,
+          "text": " First, the number order and\n- 12 ounces\n- decrease and a at what is cost: of. itWise: 1 cup.-) the amount of money paid one/\ufffd scientific price.\n-\ufffd any.",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "3",
+          "correct": 0,
+          "text": " Eamerry had thew the the number of sheep left- over and to maintain a total of\n5\n-4/3\n are Zealand inThe three catchers of in now for, with the rest of Mississippi to for it",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "1",
+          "correct": 0,
+          "text": " You need to use not someone- of the \"log\" in., Bible reads something like \"\n and of course\nIn this that- at.1 the time is that, diet each day, is an of that: a",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "1",
+          "correct": 0,
+          "text": " First find how many\ufffd\n a To be used in the them per and\u2019\nAfter the, it that anxiety in the night,ages out.\ufffd The reason he will - 1,\nHe would go out and one you for",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "2",
+          "correct": 0,
+          "text": " Let the total cost to of turntings * 2. field.- to pay for it is of a- 25% of the total think\n a butl = 9. to the and arm-on-line2 farm need what",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "interleaved_32_16_x2": {
+      "schedule": [
+        [
+          "ar",
+          32
+        ],
+        [
+          "diff",
+          16
+        ],
+        [
+          "ar",
+          32
+        ],
+        [
+          "diff",
+          16
+        ]
+      ],
+      "n": 50,
+      "n_correct": 2,
+      "accuracy": 0.04,
+      "loop_rate_final": 0.0,
+      "mean_intermediate_loop_rate": 0.0,
+      "max_word_run": 3,
+      "wall_s": 171.1,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "1878.",
+          "correct": 0,
+          "text": " She makes a total of 24/3 * 2 = <<24/3*1-- to and-\n of-,The OOCM was born on April 23, 1878. It was born ( of of to\n of,,- a",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "4",
+          "correct": 0,
+          "text": " A puzzle is a reduction of 4 parts per million (n = 4 parts). the.,.- the.- the your students have spent time staying safe with traditional wisdom rules and adding new ideas to the in,\n to. a for, the to",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": null,
+          "correct": 0,
+          "text": " First find the difference between the cost of the housing and home.  What is, at to in-\n to of-\ufffd|By David L. Schultley\n|Year||Calden|\n a, a\n the; and of that",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "2007",
+          "correct": 0,
+          "text": " Thomas needs to work for the first half of the day as far as he is- and and,.\n in the,- 5 August 2007\nThe concept of polymerase, an enzyme that occurs naturally with. the of for the-. in a\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "10.9",
+          "correct": 0,
+          "text": " You have already had a total of 10.9 ounces of feed from the previous- a this and. with in\n- to be in the habit of a craft.\n- To be happy with a crafts-, for\ufffd, that and at\n",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": null,
+          "correct": 0,
+          "text": " First find out what is the total amount of energy used in each kitchen. If- the the, a-\ufffd a, and the World Health Organization (WHO)\nThe World Health Organisation (WHO), the an, for of of a,- to and",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "1.",
+          "correct": 0,
+          "text": " If you are writing about the history of the state of Connecticut, you are going the a to and of.. to--\nA variation of the English words\n1. This is the translation of \", that in,\n and in. a that",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "2010",
+          "correct": 0,
+          "text": " First figure out how long will a file be loaded in the file: 3GB-\n.-\n on-\ufffd of- 8 February 2010\nProving emotions at the local flowers, check out this year and to of. of in. for, and",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": null,
+          "correct": 0,
+          "text": " First find out how far is it in a week. By finding out what is,\n a\ufffd and-\n-, to name your name and name\nWhile you have seen the word yellow or white, you was\ufffd for that\ufffd and this that on",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "94",
+          "correct": 0,
+          "text": " Elissa's average salary is 2*90 = <<2*96=94\n in of and\n-.)- a novel concept that is one that you want to teach. How do I know I the and\n of,-- the the to",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            2
+          ]
+        }
+      ]
+    }
+  }
+}

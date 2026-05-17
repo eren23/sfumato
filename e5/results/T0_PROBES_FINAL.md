@@ -559,3 +559,242 @@ composite models at small undertrained scale:
 | loop_rate < 30% AND acc ≥ 4% | partial (loops fixed, acc 0) | **Tier 3 retrain needed** |
 | loop_rate < 30% but acc = 0% | matches | F10 mixed-tokens |
 | loop_rate > 50% | NO — Tier 0.5+ killed it | — |
+
+---
+
+## Phase I.0 — scripted interleaved AR↔diff (2026-05-17 evening, F9 N=50, local MPS)
+
+### Hypothesis
+
+Chain `gen_ar` and `diff_revise` in a multi-round loop on the F9
+checkpoint. If iterating helps, fine-grained alternation (short AR
+chunks, short diff rounds, many cycles) should beat both pure AR and
+the single-round `probe5_mode_switch` baseline. If iterating hurts,
+intermediate loop rate should compound across cycles.
+
+### Setup
+
+- Script: `e5/scripts/probe_interleaved.py` (new).
+- Substrate: F9 ckpt (305M, 3B FineWeb-Edu, val_ar_nll=3.96).
+- Decoder: Tier 0.5+count anti-rep on both AR and diff heads.
+- Eval: GSM8K-dev N=50, `prompt_format="qa"`.
+- 5 configurations.
+
+### Results
+
+| Config | acc | loop_final | loop_intermediate | max_word_run | wall |
+|---|---|---|---|---|---|
+| `single_ar_128` | 0% | 0% | 0% | 2 | 336 s |
+| `single_switch_64_32` (probe5 baseline) | 0% | 24% | 12% | 17 | 159 s |
+| `interleaved_16_8_x3` | 0% | 18% | 12% | 9 | 134 s |
+| **`interleaved_8_4_x6`** | **2%** (1/50) | **2%** | **1%** | **6** | 143 s |
+| `interleaved_32_16_x2` | 0% | 38% | 22% | 10 | 173 s |
+
+### What the data says
+
+1. **Fine-grained alternation wins on every measured axis.**
+   `interleaved_8_4_x6` (6 cycles of AR(8) → diff(4)) beats
+   `single_switch_64_32` by **+2 pp accuracy, −22 pp loop rate, −11
+   max word run.** First non-zero GSM8K-dev hit on F9 from any
+   composite mode in the entire Phase H+ investigation.
+
+2. **Coarser is monotonically worse.** `interleaved_32_16_x2` (long
+   diff rounds) has 38 % final loop rate — long diff rounds amplify
+   drift before AR can correct course. The mechanism: each diff
+   round resamples a long span with the diff head's tendency to
+   concentrate probability on a single token; short rounds don't
+   have time to fully collapse.
+
+3. **AR-only is the cleanest non-loopy generator.** `single_ar_128`
+   has 0 % loops, max word run 2. The diff head is the loop source
+   at this scale. Iteration helps only when diff rounds are short
+   enough that AR can route around them.
+
+4. **Iteration does NOT compound loops at fine grain.** The
+   `loop_intermediate` column tracks mean loop rate across all
+   in-flight states inside the cycles. For `interleaved_8_4_x6` it
+   is 1 % — iteration *removes* loops, not adds them. This contradicts
+   the original Phase I plan's downside hypothesis.
+
+### Decision per plan gate
+
+Plan gate: "if any config beats `single_switch_64_32` by ≥ 2 pp acc
+AND intermediate loop rate doesn't climb across cycles, escalate to
+I.1."
+
+Both conditions met by `interleaved_8_4_x6`. **Escalating to I.1
+(heuristic router).**
+
+### Honest caveat
+
+Acc = 2 % is **1/50**, well within binomial noise at p≈0.02 (SD ~2 pp).
+The accuracy lift is suggestive, not significant. The robust signals
+are the loop-rate and max-word-run reductions, which are large enough
+to read past noise. F10 (mid-training, val_ar_nll 2.69 at step 6499)
+is the better substrate for confirming the lift at higher baseline
+accuracy.
+
+### Files
+
+- `e5/scripts/probe_interleaved.py` — new.
+- `e5/results/f9_300m_coherent/probe_interleaved_n50.json` — raw.
+- F9 ckpt mirrored to `eren23/sfumato-composite-ckpts` on HF Hub for
+  future-pod use (private repo).
+
+---
+
+## Phase I.1 — heuristic routers (F9 N=50, local MPS, same eve)
+
+### Setup
+
+Three router heuristics, no retraining:
+
+- **H1 entropy gate**: after each AR chunk, switch to diff if the
+  last-position AR logit entropy > T_HIGH (= 4.5 nats).
+- **H2 diversity gate**: switch to diff if the unique-token count in
+  the last 8 generated tokens < 4.
+- **H3 diff-confidence gate**: after each AR chunk, enter a diff
+  phase. Keep diffing adaptively until mean top-1 prob across the
+  just-unmasked region > P_HIGH (= 0.5), or max_diff_rounds = 4.
+
+All three use the same Tier-0.5+count anti-rep on AR and diff heads.
+Action chunk sizes: AR(8) → diff(4) where applicable, capped at 80
+generated tokens and 16 total chunks per problem.
+
+### Results
+
+| Heuristic | acc | loop_final | diff_frac | max_word_run | wall |
+|---|---|---|---|---|---|
+| H1 entropy ≥ 4.5 | 0 % | 0 % | 23 % | 4 | 231 s |
+| H2 diversity < 4 | 0 % | 0 % | 0 % | 2 | 191 s |
+| H3 diff_conf ≥ 0.5 | 0 % | 24 % | 75 % | 13 | 210 s |
+| **I.0 best fixed** (`interleaved_8_4_x6`) | **2 %** | **2 %** | 33 % | **6** | 143 s |
+
+### What the data says
+
+1. **H2 never fires.** The diversity threshold (< 4 unique in last 8
+   tokens) is too lenient under Tier-0.5+count sampling — the diff
+   head's anti-rep already keeps token diversity high enough that the
+   gate stays AR-only. Effectively reproduces pure-AR behaviour.
+
+2. **H1 (entropy) and H3 (diff confidence) both lose to the fixed
+   I.0 schedule.** H1 triggers diff too rarely (23 % of chunks),
+   approaching pure-AR's behaviour but without AR's full-context
+   coherence. H3 triggers diff too often (75 %), and like
+   single-switch_64_32 it shows 24 % loop rate — the diff head's
+   own pathology dominates.
+
+3. **No heuristic crosses the +2 pp gate.** Per the Phase I plan's
+   decision rule:
+
+   > "If heuristics tie or lose, learning a router is unlikely to
+   > extract more signal at this scale."
+
+   On F9 specifically, **the gate fails**. I.2 (REINFORCE on
+   frozen router) should NOT be launched against the F9 substrate.
+
+4. **Confound: F9's 0 % accuracy floor.** The lift the router would
+   need to learn is invisible at N=50 when both baseline and routed
+   modes return 0 hits. The proper substrate is **F10** (mid-
+   training, val_ar_nll 2.54 at step 7499) where baseline accuracy
+   should be non-trivial. Per plan: "Run I.2 on F10 first, where
+   baseline acc should be non-trivial."
+
+### Decision per gate
+
+**Hold I.2 until F10 ckpt is available.** When F10 finishes (or at
+checkpoint-restore-points like 60 k / 120 k steps), rerun I.0 + I.1
+on it. If the routing signal on F10 shows a heuristic that beats
+fixed by ≥ 2 pp, then escalate to I.2; otherwise we have a clean
+Phase I negative for the trade-off paper.
+
+### Files
+
+- `e5/scripts/probe_router_heuristic.py` — new.
+- `e5/results/f9_300m_coherent/probe_router_heuristic_n50.json` — raw.
+
+---
+
+## Phase I.0 + I.1 preview on F10 step-10000 partial (2026-05-17 late eve)
+
+While F10 v2 continued training on pod 01 (steps 12k–15k+, val_ar_nll
+descending from 2.0 toward < 2.0), we pulled the periodic checkpoint
+at step 10000 (5.5 % trained) to preview Phase I results on the
+better-trained substrate without waiting ~28 hr for the full run.
+
+### Phase I.0 on F10@10k
+
+| Config | acc | loop_final | max_word_run |
+|---|---|---|---|
+| `single_ar_128` | 2 % | 0 % | 4 |
+| **`single_switch_64_32`** | **4 %** | **0 %** | **3** |
+| `interleaved_16_8_x3` | 0 % | 0 % | 3 |
+| `interleaved_8_4_x6` | 0 % | 0 % | 3 |
+| **`interleaved_32_16_x2`** | **4 %** | **0 %** | **3** |
+
+### Phase I.1 on F10@10k
+
+| Heuristic | acc | loop | diff_frac | max_word_run |
+|---|---|---|---|---|
+| H1 entropy ≥ 4.5 | 2 % | 2 % | 15 % | 7 |
+| H2 diversity < 4 | 0 % | 0 % | 0 % | 4 |
+| H3 diff_conf ≥ 0.5 | 0 % | 0 % | 75 % | 3 |
+
+### Pattern reversal F9 → F10@10k
+
+| Axis | F9 (final, FineWeb only) | F10@10k (5.5 % trained, +Q/A mix) |
+|---|---|---|
+| Best config | `interleaved_8_4_x6` (2 % acc, 2 % loop) | `single_switch_64_32` OR `interleaved_32_16_x2` (4 % acc, 0 % loop) |
+| Diff-head loop pathology | Severe (24–38 % loop on most configs) | **Fully fixed** (0 % loop everywhere) |
+| Iteration benefit | Real (fine-grained iteration broke loops) | None (single round suffices) |
+| Heuristic vs fixed | Heuristics tie/lose | Heuristics LOSE more (max 2 % vs 4 %) |
+
+### Interpretation
+
+The Q/A format training fixed the diff head's "fill every mask with
+the same token" pathology directly — even at 5.5 % trained. The diff
+head no longer needs aggressive iteration to stay coherent because it
+has actually seen Q/A-formatted answers. This means:
+
+- The case for **scripted iteration** disappears with good data.
+- The case for a **learned router** weakens too: at F10@10k there is
+  nothing for the router to recover from. Routing was a band-aid
+  over an undertrained-diff-head pathology that proper training
+  removes.
+
+### Decision per plan gate (revised)
+
+Original gate: "Heuristics tie or lose → don't escalate to I.2."
+
+On F9 the heuristics tied/lost. On F10@10k they lose by more.
+
+**The Phase I program (I.2 REINFORCE-trained router, I.3 joint
+backbone+router) is on hold pending a different motivation.** With
+properly trained F10 the routing problem is not the bottleneck. The
+honest finding is:
+
+> Iterative AR↔diff routing helps only when the diff head is broken.
+> When training data matches the eval distribution, single-round AR-
+> then-diff (`mode_switch_64_32`) is enough.
+
+This is publishable as a Phase I negative complementing Phase H+.
+It also reframes the Sfumato "learned mode-router" vision: the
+contribution becomes "we showed routing matters at the small/under-
+trained regime but vanishes with proper data" — a scope-limit, not a
+universal claim.
+
+### What still might justify I.2 / I.3
+
+1. F10 **at convergence** (step 183k) might show different head
+   specialisation than F10@10k. Rerun I.0/I.1 then.
+2. Larger model scales (1B+) where AR and diff heads diverge more.
+3. Harder downstream tasks where single_switch saturates.
+
+### Files
+
+- `e5/scripts/probe_interleaved.py` (reused).
+- `e5/scripts/probe_router_heuristic.py` (reused).
+- `e5/results/f10_mixed/probe_interleaved_step10k_n50.json` — raw.
+- `e5/results/f10_mixed/probe_router_heuristic_step10k_n50.json` — raw.
+- F10 step-10k slim ckpt at `e5/results/f10_mixed/composite/model.pt`
+  (1.22 GB, model weights only, no optim state).

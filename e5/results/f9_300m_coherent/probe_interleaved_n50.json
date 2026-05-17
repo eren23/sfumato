@@ -1,0 +1,1385 @@
+{
+  "ckpt": "/Users/eren/Documents/AI/sfumato/e5/results/f9_300m_coherent/composite/model.pt",
+  "n_eval": 50,
+  "prompt_format": "qa",
+  "decode": {
+    "ar": {
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "no_repeat_ngram_size": 3
+    },
+    "diff": {
+      "diff_temperature": 0.8,
+      "diff_top_p": 0.9,
+      "diff_repetition_penalty": 1.15
+    }
+  },
+  "configs": {
+    "single_ar_128": {
+      "schedule": [
+        [
+          "ar",
+          128
+        ]
+      ],
+      "n": 50,
+      "n_correct": 0,
+      "accuracy": 0.0,
+      "loop_rate_final": 0.0,
+      "mean_intermediate_loop_rate": 0.0,
+      "max_word_run": 2,
+      "wall_s": 335.6,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": null,
+          "correct": 0,
+          "text": " Her sandpipers eat eggs every day for their eggs. It's hard to say how many eggs a week she produces from her own eggs. She doesn't have to worry about them. If she wants more eggs, she can buy one of her eggs at the farmer's market every day. You can purchase her eggs by selling them at a local or smaller farm. There are other eggs on the market that she would like to find so she can sell her eggs for. If you get one of your chickens for dinner each day, she will get two.\nAnswer. All her eggs are sold in the market everyday. Most of the",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            1
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "5.",
+          "correct": 0,
+          "text": " 50 insertion breakers, but you can see the larger one, so that 100 or 200 will be 2 of those 7,000, 10 or 100.\n(a) The first part of the process is the determine what the process of turning the first part into a second part. The process of making a 6-foot deep hole in the ground.\nThe next step is to test the 5-foot thick wall. This is the final step. You might use one of the following tools: 1. Rbirdsnip. 3. Mackenzie. 4. Open graves.\n5. What do you call the process in this",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            1
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "75000",
+          "correct": 0,
+          "text": " This is a small amount because the owners had to pay to keep the house going until the owner agreed to pay the $75,000 cost.  The owner of the property decided to buy another building if the owner wanted to sell it.  That was an important point to understand and understand, as well as to understand the difference between buying and selling.  If you think that someone may have got too much money, they should be able to evaluate the amount.  There are many reasons why people may not make it right.\nA simple way to find out if someone is making money is to look at your income. As we have",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            1
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "1000",
+          "correct": 0,
+          "text": " It depends on the type of race you have, but you can work out how many calories you need for your race or run a year. For example, if you run 3 miles, then you can run 3.6 days a week without running a second year. If you run 2.6 miles a week, then your run is 5.4 hours.\nIn this section, we will talk about the type and amount of miles you are running a day. Let\u2019s take a look at the type, amount of walk, and how much effort you will be making.\n1,000 square feet\n-   ",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            1
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": null,
+          "correct": 0,
+          "text": " At first, the question is \"What are the birds doing with their food?\", but when the chickens get the answer, they start to run out of food. The next time they run out, they run away and start running out of the food source. It doesn't take a lot of energy for them to run back from their food source until it comes time to start eating again. They eat in a different way from what they ate at the beginning of the meal, and they don't have to eat in the same way every day. This is what happens in the day when they begin eating again after the last meal, so they",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            1
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "3",
+          "correct": 0,
+          "text": " Monstrousar is not aware of all of the data available from the model, so he knows exactly what is needed to make a solution and get his solution. He also has to know the square root of every number in the number sequence and how many times there are any numbers in the row. If he has to do this, he can use a calculator and find the first number and then multiply by 2 to get the square roots of the number. Then he will have to find the answer for the first 3 numbers and then do the same with the last 3 numbers.\nExample: If you want to find out how many numbers you need to",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            1
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "1803",
+          "correct": 0,
+          "text": " 8,000 sheep. That would be 10,000 times more sheep than the Washington D.C. (or Washington D.) and the Seattle D.D.A. (the). Washington D., D. C., Washington D.: The Washington D.). Washington D.; Washington D.-Y. = Both.\nWhen slavery was invented in 1803, it was called \u201cAmerican\u201d because of the fact that many slaves had been taken from Africa before and were sent to America. Today, most states have some form of slavery; however, the vast majority still allow enslaved people to come into the United States. It is not",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": null,
+          "correct": 0,
+          "text": " A very short time and effort (solution) to download and work with the files, you have to change the default setting on the file and update it. The main reason why it doesn't work with a relatively long time is because it requires several different settings that make it hard for you to know which is the best and which is not. The better the setting on your computer, the better the chances are that you have been able to get to a specific file, since your computer has many different versions of the same file. If your system contains a lot of files, it makes sense to click on the text that is below. So",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            1
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "20",
+          "correct": 0,
+          "text": " In our case, John\u2019s parents are on a road that is 80 miles long. The road we use is 25 miles long, so he has to stay in this area for a total of 1 hour to get to his destination.  They drive the other side of the road at a rate of 20 mph, so it takes a lot of time to get there. \n-  We need to stop by the following simple rules to stop.  We want to stop when we stop at a stop sign or two after you have stopped.  If you are sitting at a teacher station or you\u2019re in a special place",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            1
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "4",
+          "correct": 0,
+          "text": " The average monthly wage of Eliza is $1.68 per hour. By the way, by the time Eliza works for 40 hours a week, she has earn $1 million in income every year over this period! She has earned $4 million in all of her work week.\nAlthough Eliza, like most people, does not have much money to spend on anything, she can spend as much money as she can on her own projects. We all love to see Eliza working, but we also appreciate her dedication to helping others.",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            1
+          ]
+        }
+      ]
+    },
+    "single_switch_64_32": {
+      "schedule": [
+        [
+          "ar",
+          64
+        ],
+        [
+          "diff",
+          32
+        ]
+      ],
+      "n": 50,
+      "n_correct": 0,
+      "accuracy": 0.0,
+      "loop_rate_final": 0.24,
+      "mean_intermediate_loop_rate": 0.12,
+      "max_word_run": 17,
+      "wall_s": 159.1,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": null,
+          "correct": 0,
+          "text": " Only a few hundred pounds of ducks are raised annually by her; for the most part, her life is spent on food. Her parents have her chicken farm and chicken chicken chicken eggs chickens chickens chickens chickens eggs chicken eggs chickens she chickens eggs chickens he",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            4
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "434434242344322",
+          "correct": 0,
+          "text": " It\u2019s not a fixed amount of fiber, but you can see from the photo that the wire is about 5 times as much as the 1/23s434434242344322",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "200300200200400100500500500600000100000300100400100",
+          "correct": 0,
+          "text": " The total cost is $20,000 for each home. (This cost was passed on to his son.)  In order to buy the home, he has200300200200400100500500500600000100000300100400100",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "1",
+          "correct": 0,
+          "text": " In the last 3inches of a run, when James runs 2Assistant, each step will be 9 feet long and will have 8 feet of running time. mile mile mile miles miles milemilemile 1 miles miles 1 miles milesmile days mile",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            3
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": null,
+          "correct": 0,
+          "text": " It depends on what type of feeding he/she gets. There are different types of feeds that are recommended by your avian veterinarian. You can get the right How chickens eggs he he What he How What he How he he What What What chickens",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 2,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            3
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "4",
+          "correct": 0,
+          "text": " FOIAar has six red glasses. Each pair of glasses cost $4, but each pair costs $3 and two are already $0.90. If they1234.23 $231 $2 onearar4",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "1500.",
+          "correct": 0,
+          "text": " 1,500. A vast majority of the people who lived in the town came from the shipbuilding industry. The first shipbuilding project in Toulice was city town as as town as town town city as as town city city town city city",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 2,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": null,
+          "correct": 0,
+          "text": " The first issue is that the files are installed in the system. The second issue is with software. A little memory can be needed to do this. That is it it it not it it not it it it it it download it it it it",
+          "final_loopy": 1,
+          "final_word_run": 5,
+          "final_phrase_run": 4,
+          "intermediate_loopy": [
+            0,
+            1
+          ],
+          "intermediate_word_runs": [
+            1,
+            5
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "5",
+          "correct": 0,
+          "text": " We need to be able to get there because this is where we are going to put ourselves in. It would be nice if we could get on the road, 5 that 5 he 2 5 5 2 5 2 5 3 that 5 3 we 5",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "31",
+          "correct": 0,
+          "text": " A 2.8 percent increase in her weekly wage will allow her to earn a 2.5 percent increase. So, she can see that her growth in this.111311122221..31",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "interleaved_16_8_x3": {
+      "schedule": [
+        [
+          "ar",
+          16
+        ],
+        [
+          "diff",
+          8
+        ],
+        [
+          "ar",
+          16
+        ],
+        [
+          "diff",
+          8
+        ],
+        [
+          "ar",
+          16
+        ],
+        [
+          "diff",
+          8
+        ]
+      ],
+      "n": 50,
+      "n_correct": 0,
+      "accuracy": 0.0,
+      "loop_rate_final": 0.18,
+      "mean_intermediate_loop_rate": 0.1167,
+      "max_word_run": 9,
+      "wall_s": 134.0,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": null,
+          "correct": 0,
+          "text": " Ms. Caproni has six eggstss state is marketttooks. What is the difference betweenstt at ssn/st st sg snsnsns she decision of onens",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "10",
+          "correct": 0,
+          "text": " 3.7 million (a million, million billion million million of billion million billion).\n(1.7 trillion million hundred thousand thousand000 hundred hundred thousand8 million)\nThus, if we look thousand hundred thousand thousands10 thousand hundred billion",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "500",
+          "correct": 0,
+          "text": " In a year when the home was needed,,.,..,000 would be the cost of a house to,:00050000100,,000,000. They would sell their500500200100500 these 500 at",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "2.",
+          "correct": 0,
+          "text": " The maximum number of twenty-four can.s\nsss?s = 4, 50 = 6, +s\n, hessss = 2, 6 = 5, + 5s,s, 2.,",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": null,
+          "correct": 0,
+          "text": " One cup of feed in each one of he they one they eat feeding he feed in the first two hours. As the on he food they He If he eat the same amount of feed, his flock he He time eat he he all he",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "4",
+          "correct": 0,
+          "text": " We don't have a specific answer. buyarsarsar tooararar you can never use a full glass inarsar 4arsarsararsar is a convenient way to purchase glasses and $arsarsarsars is morears",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": null,
+          "correct": 0,
+          "text": " The state is the largest producer of sheep of of good of, and of of, small size. It has a total of: of of and and. and are both the highest in the world. of state of of, and of produce",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": null,
+          "correct": 0,
+          "text": " Mac, Mac OS X, and Mac the it the it the it the to download file from the start, but the it the it it it it it it is in. But if you download a that there it it there you download it",
+          "final_loopy": 1,
+          "final_word_run": 6,
+          "final_phrase_run": 2,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "intermediate_word_runs": [
+            2,
+            2,
+            2,
+            6,
+            6,
+            6
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "5",
+          "correct": 0,
+          "text": " It would be a mistake to assume that 5 his get miles it you not go, but 10 your 4 will be left they if you it stop more you your other half of the time.\n2 2 6 1 5 or when then 5",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "1",
+          "correct": 0,
+          "text": " El Sakai and Eliza work in week week her nights. she, $12,000 per week. The answer1 week week she week is week week, but she also receives alied salary her she she she she weeks she day",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            2,
+            2,
+            4
+          ]
+        }
+      ]
+    },
+    "interleaved_8_4_x6": {
+      "schedule": [
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ]
+      ],
+      "n": 50,
+      "n_correct": 1,
+      "accuracy": 0.02,
+      "loop_rate_final": 0.02,
+      "mean_intermediate_loop_rate": 0.0083,
+      "max_word_run": 6,
+      "wall_s": 142.7,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": null,
+          "correct": 0,
+          "text": " In a few days and for of ford\u2019t chickenstts, each morning thes forst chicken are probably wortht shares thes, but the prices andt andt are pretty much and does ands",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": null,
+          "correct": 0,
+          "text": " When the surface is quarter half half half full,  ways half so little half as possible.\n little little little half so much so much little little much little too little so much very very little little so little so great very small little very",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "5",
+          "correct": 0,
+          "text": " The house is worth, $ He the total cost of building,,., would be $,,.. To him this was: so.. .  What did what the. were?\n5). $ ..",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "33",
+          "correct": 0,
+          "text": " A country on assss will have a totalssss of 3, but 3 lose 1 1 1 2 2 2. 14 2 4 5 6 82524 1 5 10 021 33",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "2",
+          "correct": 0,
+          "text": " She needs 2 cups 1 4 eat they need to get her 5 they The they need 2 cups of know birds that for 2 weeks 1 4 60 food food are enough to feed 2 feeding When age feed to take care of next Feed some they",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "3",
+          "correct": 0,
+          "text": " He has 12 of: bought 5 more glasses and spent $. now need needs 12 of them\n is to 25 to be able to find $. to how many glasses?\n so 20 for 15 out of 5 will he 10 3 money",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "64",
+          "correct": 0,
+          "text": " Charleston has 8 sheep 9 1 5 2 2 3 1. 5 6 6 7 8 11 9 10 3 7 9 10 10 11 11 12 9 7 1 8 11 11 14 11 13; 5 4 4 1 2 2 13; 64",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": null,
+          "correct": 0,
+          "text": " The use of a to the download download/set- interval download download download the files, while the the download at download is being started. the file the this link has been in download download to so is it re- it last download with",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "9",
+          "correct": 0,
+          "text": " The driver of the first taking his driving class took the last this minutes their not-so-d 5 by late days and the driver of it, 5 to 10 minutes ahead, bus leaving 9 they had to take their start having you their",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "3",
+          "correct": 0,
+          "text": " El learnt to work 3 week week?s a month? than work work work?\nWhat is week week day work? It's a work work extra work week?an extra work work work work week ? when El work work work work",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            4,
+            4,
+            4
+          ]
+        }
+      ]
+    },
+    "interleaved_32_16_x2": {
+      "schedule": [
+        [
+          "ar",
+          32
+        ],
+        [
+          "diff",
+          16
+        ],
+        [
+          "ar",
+          32
+        ],
+        [
+          "diff",
+          16
+        ]
+      ],
+      "n": 50,
+      "n_correct": 0,
+      "accuracy": 0.0,
+      "loop_rate_final": 0.38,
+      "mean_intermediate_loop_rate": 0.225,
+      "max_word_run": 10,
+      "wall_s": 172.6,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": null,
+          "correct": 0,
+          "text": " Aluvius is a type of bird that has a single offspring at thessssssssssBAD with the title of the fourth edition of\nthe History of Medicine, she diet diet food day food day on to nutrition",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "2020",
+          "correct": 0,
+          "text": " A simple answer: One or two gave us a whole picture. The only problem half one half half half half half half half half of the current variation of the nation\u2019s fossil fuel consumption in 2020, energy is to, all with to for is on",
+          "final_loopy": 1,
+          "final_word_run": 8,
+          "final_phrase_run": 4,
+          "intermediate_loopy": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "intermediate_word_runs": [
+            1,
+            8,
+            8,
+            8
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "200300500100100300100500500600",
+          "correct": 0,
+          "text": " In the first step he issues a plan to do the same thing in the next,000000,.000,,,,Justification for water and fire-whipped or crop-grazing grass200300500100100300100500500600",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "1871",
+          "correct": 0,
+          "text": " The total distance traveled by James is 1,871 kilometers.  What can miles miles mileskmkm km miles miles mileskmThe short form of \u201cmole\u201d is also known as the definitionmkmkmkmkmkmkmkmkmkm",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": null,
+          "correct": 0,
+          "text": " Only one can be given. The whole flock needs to be fed two meals a they they If if they if If they What sheAccording to the latest American Indian and foreign studies, India had a population of approximately are diet that are food? is food that food",
+          "final_loopy": 1,
+          "final_word_run": 2,
+          "final_phrase_run": 3,
+          "intermediate_loopy": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": null,
+          "correct": 0,
+          "text": " At the time of the sale, he needed a special pair of glasses. Hearar glassararararararar arumragha ejhita pata on sasakati price in price money price cost. price. r",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "6000",
+          "correct": 0,
+          "text": " The number of sheep in the city is only 6,000, but that does: and: but of of of and of and to the north of Greece, and north of Athens; south of the Italian peninsula does does does is is does does does does does",
+          "final_loopy": 1,
+          "final_word_run": 5,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "intermediate_word_runs": [
+            1,
+            3,
+            3,
+            5
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "1",
+          "correct": 0,
+          "text": " The download is made after you have completed the installation. If the file contains a it download it it it it download it download it\nThis research paper details the role of an overview of the major hypotheses that led file 1 link. is and link is is download",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            4,
+            4,
+            4
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "1",
+          "correct": 0,
+          "text": " The distance between his car and his office is 0.00. It is impossible hour when he it he going the that 1 hisMysterious-looking painting of a wild sheep, by Bruce C. Lawrence miles miles miles miles miles miles miles miles miles is",
+          "final_loopy": 1,
+          "final_word_run": 9,
+          "final_phrase_run": 5,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            9
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "31",
+          "correct": 0,
+          "text": " Eliz's rate in 48 hours or 85 hours per week is 60 percent of week week week week week week week week week sheThis lesson introduces a discussion of a basic concept known as capacities of the.. is 30. 31, is. in",
+          "final_loopy": 1,
+          "final_word_run": 9,
+          "final_phrase_run": 5,
+          "intermediate_loopy": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "intermediate_word_runs": [
+            1,
+            9,
+            9,
+            9
+          ]
+        }
+      ]
+    }
+  }
+}

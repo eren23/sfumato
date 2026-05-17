@@ -1,0 +1,418 @@
+{
+  "ckpt": "/Users/eren/Documents/AI/sfumato/e5/results/f9_300m_coherent/composite/model.pt",
+  "n_eval": 50,
+  "decode": {
+    "ar": {
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "no_repeat_ngram_size": 3
+    },
+    "diff": {
+      "diff_temperature": 0.8,
+      "diff_top_p": 0.9,
+      "diff_repetition_penalty": 1.15
+    }
+  },
+  "heuristics": {
+    "h1_entropy_t4.5": {
+      "name": "H1 entropy>=4.5",
+      "n": 50,
+      "n_correct": 0,
+      "accuracy": 0.0,
+      "loop_rate_final": 0.0,
+      "max_word_run": 4,
+      "wall_s": 231.0,
+      "trigger_ar_frac": 0.767,
+      "trigger_diff_frac": 0.233,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": null,
+          "correct": 0,
+          "text": " To make up forsles she forts and operate her own farm. When she runs for $ and hers for the same, shes Thessling\u2019d (or, better yet, Thette)\u2019 back at her farms? for and then she makes $ and the next day she has $. After a while, she bought and sold the remaining eggs.",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 14,
+          "n_diff_in_trace": 4
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "300500100500200300400600300300300400300300200300300700800300",
+          "correct": 0,
+          "text": " It takes 5,000 bolts of black fiber to make a000 A 1000A 1 million A 3 100 A 500 A 600 A 500 a 900 a 600 A 800 a 500 A 1 400 A 1 500 A 800 A 250 A 400 A 500 both are made out of white fiber and the white 300500100500200300400600300300300400300300200300300700800300",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 12,
+          "n_diff_in_trace": 2
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "90000",
+          "correct": 0,
+          "text": " From the above graph, and, money, the amount of money available is:\nIn this case, your answer is: In order to use a good house, you must be able to afford a home in a very: is he with an income of $100,000 or $90,000?\nDoes your answer need to be fixed in money?\n\"You can buy a house from",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 12,
+          "n_diff_in_trace": 2
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "12.",
+          "correct": 0,
+          "text": " A team of threes.ss, b, cs 2ss 2t and 1m 1dr 2l2 0mrebm 1st run 3. a1st run 6. a0nd run 7. a4rd run 8. a3rd run 9. a5th run 10. a9rd run 11. a6rd run 12. a",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 14,
+          "n_diff_in_trace": 4
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "30",
+          "correct": 0,
+          "text": " The amount of feed required for each chicken is dependent on the number of chickens, the amount of food a hen needs, the type of system used, the age of the flock, the weight of the result, and the one to feed feeding time. The weight of all eggs in the flock is dependent upon the feed. For example, if feed If feed feed should be 40 grams, then 30 grams",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 12,
+          "n_diff_in_trace": 2
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "17",
+          "correct": 0,
+          "text": " The question is, how much do I pay for a pair what. for is it worth it? Is it worth the amount of money you have at your disposal?\nIn this case, $50 is worth $100 and $200 is worth the $1,000. And the $200 will be that more 17 all right? Yes, but if the total value of the original glass, for example",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 13,
+          "n_diff_in_trace": 2
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "2",
+          "correct": 0,
+          "text": " T testament, 1 in 200,000.\nA Hyp in 3. 1/6,000; The immune system is just as weak as the heart, and it has a in in there at least one of those in it. It is a byproduct of the immune system. When one has a person who has been sick for at least 2 days, then their immune system will react to the",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 12,
+          "n_diff_in_trace": 2
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "-10",
+          "correct": 0,
+          "text": " It takes 5-10 seconds for the file to download and the it the download will be in its gives it now it is in its give up. If the download is not completed should can it that it still have the can may does will the download. For the download then you have to understand how to move on the download between the two you you read will be doing the download when the file is",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 15,
+          "n_diff_in_trace": 5
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "2",
+          "correct": 0,
+          "text": " The average person can drive for 5 days in a row with only about 1,000 miles left to drive at once.  When he reaches some hour day 10, he can take the rest and use the remaining 2 hours to drive back to the beginning of the month on the next day.  What is his journey to the end? \nThe average person will drive from the beginning to the start of the",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 12,
+          "n_diff_in_trace": 1
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "100",
+          "correct": 0,
+          "text": " She earned a minimum wage of $50 for a job that requires a low salary. The pay for this hour's work is $100. pay of pay, but Eliza was working $60 in a few weeks. What kind of wage does Eliza have? She's earning $100 in a day of work. How much money does she receive for her daily wage?\nIn the next section",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 11,
+          "n_diff_in_trace": 1
+        }
+      ]
+    },
+    "h2_diversity_u4": {
+      "name": "H2 diversity<4",
+      "n": 50,
+      "n_correct": 0,
+      "accuracy": 0.0,
+      "loop_rate_final": 0.0,
+      "max_word_run": 2,
+      "wall_s": 191.3,
+      "trigger_ar_frac": 1.0,
+      "trigger_diff_frac": 0.0,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": null,
+          "correct": 0,
+          "text": " The chickens are good at communication and they use a variety of ways to communicate and they usually have a way of telling you when they are hungry or hungry. If a chicken is hungry or that it is not hungry, they may not even think about the food they are eating. They may eat anything but they can eat a lot of it or they will often refuse to go on to the market. There",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "34",
+          "correct": 0,
+          "text": " The number of rods in each pair of brackets is called a post. If the post is equal to 2, then the number of wood pellets that can be used for the three bolts on a set of 34 beams will be a set number.\nHow many beams in total do I need to use for a single beam?\nThe problem with using a beam of copper wire as a frame is that the",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "2.",
+          "correct": 0,
+          "text": " Due to the fact that $10,000 was owned by him, he eventually changed his property.  Now, it is his own house.\n2. Why does Vyath think he can change the price of the firewood?\n arteries of carpenter on an electric cord are the two major things that affect the rate of fire, because the one that causes fire is the one with",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "-6",
+          "correct": 0,
+          "text": " In the three perseverance tests, James has three sets of 10 stops, two sets of five, and one set of eight (in 4 short runs, there is only 5 sets). The speed limit is 7 km/h for 3 days; 5-8 km/hr for 3.\nWhat happens if he runs too fast?\nIt will be 2 weeks before he could run 5-6",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "100",
+          "correct": 0,
+          "text": " The correct answer is 12 eggs. A chicken has 50 eggs. When a chicken that has 50 from one chickens is assigned a food, the chicken gets 20 eggs in its own feed and you need 10 to get the new one at this time. If you were lucky, you would have a chicken with 100 eggs.\nIn this experiment, the birds will be fed different amount of food in order to",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": null,
+          "correct": 0,
+          "text": " He has no money to use them. When he sets out for work, he goes to the shop to get them. There are no books on this list, and all the things that he needs to know are that he has to purchase a pair of glasses. If he gets them, he can go to his own shop and buy a pair. But he doesn't have to buy them. They just",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "3",
+          "correct": 0,
+          "text": " In the former case, Toulice and Charleston are right at least four sheep and the present number is 9. The original number of sheep were 23. They had 5 sheep and 5 goats but the present time, there was 6 sheep and 3 goats. Since Toulart was named for Williams, its natural name was People\u2019s wide and rich. It has now become a popular part of the local culture and is also known",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 11,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": null,
+          "correct": 0,
+          "text": " In the first step of download a file is a command line in a Word document. You should copy the command line to your Word document and click on the \u201cAtom\u201d link on the Word document to open the file. The \u201catom\u2019s\u201d command will start up the file and enable the to go into it. It is not recommended that you should copy a",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "2005",
+          "correct": 0,
+          "text": " John has been a victim of driver fatigue since he was a child and he knows that the driver is not safe. However, he is still a bit of a victim in many cases as he is distracted and in many of his cases is confused by other drivers.\nJohn has been an active participant in the No Child Left Behind Act since 2005 and has been involved with the No Kids Left Behind act since",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "40",
+          "correct": 0,
+          "text": " A 30-hour workweek is an eight-hour system of work. The amount of time it takes to complete each task varies depending on the individual's work style and overall productivity level. For example, a 40-hour job may cost a 5 percent increase in their work efforts at a 50-hour point. In a 40 hour workweek, the amount of work that goes into the job may",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        }
+      ]
+    },
+    "h3_diff_confidence_p0.5": {
+      "name": "H3 diff_conf>=0.5",
+      "n": 50,
+      "n_correct": 0,
+      "accuracy": 0.0,
+      "loop_rate_final": 0.24,
+      "max_word_run": 13,
+      "wall_s": 209.8,
+      "trigger_ar_frac": 0.248,
+      "trigger_diff_frac": 0.752,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": null,
+          "correct": 0,
+          "text": "s $ of thes at thessss aboutss ofst andssss the two largest ducks that she makes each day.",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "-3",
+          "correct": 0,
+          "text": " half fiber in half fiber half half half half half 2 double double double quarter quarter most double Half quarter a double quarterhalf side of fiber.\n2-3",
+          "final_loopy": 1,
+          "final_word_run": 5,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "5.",
+          "correct": 0,
+          "text": ".,000 he,,.s000000; thousand,000. say bought the his buy,;;:1 million.\n5.  The",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "3",
+          "correct": 0,
+          "text": "ss\nsss 1 runss 3sss.\nssd.\nts\nmdmt\ntmtd",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 19,
+          "n_diff_in_trace": 15
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "0",
+          "correct": 0,
+          "text": " feed at feed feed eat feed she feed 0 they which he feeding she they . if eat if at when if if he does eat. We know that he has",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "000",
+          "correct": 0,
+          "text": " buy,: buyer bought bought $ can 10 iter buter 3er 3 3 3 5: $er 8 $ is only $.000 per gallon",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "9",
+          "correct": 0,
+          "text": " 2 and as 1 as 2 and and 3 3 1 2 2 one 1 5 7 8 6 4 3 5 6 4 6 9 5 10 9 7 3 9",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 17,
+          "n_diff_in_trace": 13
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": null,
+          "correct": 0,
+          "text": " at the the the the the the the the the it the the it that the takes that that there it it it get the download and then you have to be",
+          "final_loopy": 1,
+          "final_word_run": 9,
+          "final_phrase_run": 5,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "3",
+          "correct": 0,
+          "text": " starts not drive help he walk 5 what 5 get stay they going his go that 3 5 after their when getting 3 so they can get a big start in their",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": null,
+          "correct": 0,
+          "text": " week week she week week week first she week week week week week week week week weeks weeks week week week weeks week weeks day week weeks world week week month week",
+          "final_loopy": 1,
+          "final_word_run": 8,
+          "final_phrase_run": 4,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        }
+      ]
+    }
+  }
+}

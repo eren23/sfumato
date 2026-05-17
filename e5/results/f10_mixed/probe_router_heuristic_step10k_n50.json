@@ -1,0 +1,418 @@
+{
+  "ckpt": "/Users/eren/Documents/AI/sfumato/e5/results/f10_mixed/composite/model.pt",
+  "n_eval": 50,
+  "decode": {
+    "ar": {
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "no_repeat_ngram_size": 3
+    },
+    "diff": {
+      "diff_temperature": 0.8,
+      "diff_top_p": 0.9,
+      "diff_repetition_penalty": 1.15
+    }
+  },
+  "heuristics": {
+    "h1_entropy_t4.5": {
+      "name": "H1 entropy>=4.5",
+      "n": 50,
+      "n_correct": 1,
+      "accuracy": 0.02,
+      "loop_rate_final": 0.02,
+      "max_word_run": 7,
+      "wall_s": 211.9,
+      "trigger_ar_frac": 0.848,
+      "trigger_diff_frac": 0.152,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "12.01",
+          "correct": 0,
+          "text": " The total amount of bakesubbins is $1.30 = $0.05.00\nThe total amount that bakes Boutens are 2*6/20 = $3.04\nThere are 150+$400.00 so the total amount is 7 * 0.05/100*12.01\nThere is a total amount for dakesNobling, which is one",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "40",
+          "correct": 0,
+          "text": " A carriage is needed the a the aspads, so that a rope can be used for the first 1 time. If the *y-\ns, then ATCT = $200 + $20 = $500 = $<<500+20=40>>40.\nThus, there to What/ time are the total cost of the copper wire?\n#### 40\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 3
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "15",
+          "correct": 0,
+          "text": " First find the total cost of the home and his customers. Then use the total amount of money needed to get the cost of building his house. . For example, one might have medicinal and it that costs $20, ins between/home or home.ur- whens are left. The cost of cleaning a house is 15% more than the total for a single day.  What would",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 13,
+          "n_diff_in_trace": 3
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "90",
+          "correct": 0,
+          "text": " To make the difference between 2*3 = <<2*4=45>>45 meters.\nHe takes 70% of his total meters on the focuses.\n#### 90\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "15",
+          "correct": 0,
+          "text": " In a day the cows were 12-16 eggs * 60-50 = <<12*60=60>>60 eggs.  The amount of feed was reduced by 14-20=40>>40 kilograms.\nThe total amount of time she spent on the week is 18-25=<<18-26=15>>15 eggs per week.\nIn a week the blood supply to the feed",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "15",
+          "correct": 0,
+          "text": " First find the number of cups left by:\n- Place and a of the number\n- Remove the number with the number that the drink is 15%\n- Then add the amount of water used in each bottle\nThen add the water the cup into the bag to the bag. As a final shower, add it to the volume of the food to the following washing:\nThe amount of paint",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 11,
+          "n_diff_in_trace": 1
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "32",
+          "correct": 0,
+          "text": " There are 2 sheep * 20 sheep * 10 sheep * 5 sheep * 4 sheep * 2 cattle * 1 sheep * 3 sheep * 1 cattle * 6 sheep * 15 sheep * 25 sheep * 100 sheep * 50 sheep * 9 sheep * 1000 sheep * 30 sheep * 500 sheep * 22 sheep * 18 sheep * 200 sheep * 12 sheep * 75 sheep * 21 sheep * 14 sheep * 32 sheep *",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": null,
+          "correct": 0,
+          "text": " First find the output atA task. If you install the file, then use the command to download- and. tool that will be used. After you install it, save the from comprehensive-\nFirst use the control method\nTo access your file, use the date that you need to run the file as needed. In this case, open the file in the file. Also, select the file",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 13,
+          "n_diff_in_trace": 3
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "24",
+          "correct": 0,
+          "text": " Peter and Paul are planning for 3 minutes, 2 hours, 1 hour, 2 nights, 1/2 of 15 minutes, and 2 hours after any walking. There are 27 * 18 = <<22*21=48>>48 hours. On the other hand, he has 300+48 = <<- that on2=24>>24 hours.\n#### 24\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 1
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "25",
+          "correct": 0,
+          "text": " Elissa's total earnings for one hour is 80*100 = <<80*100=20>>20 minutes\nHis total earnings are 40+20 = <<40-20=30>>30 minutes\nSince Eliza paid $12.8/day in the week, there are 4*30 = <<4*30=25>>25 hours\n#### 25\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        }
+      ]
+    },
+    "h2_diversity_u4": {
+      "name": "H2 diversity<4",
+      "n": 50,
+      "n_correct": 0,
+      "accuracy": 0.0,
+      "loop_rate_final": 0.0,
+      "max_word_run": 4,
+      "wall_s": 177.1,
+      "trigger_ar_frac": 1.0,
+      "trigger_diff_frac": 0.0,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "70",
+          "correct": 0,
+          "text": " She has a total of 6 * 10 = <<7*10=60>>60 eggs.\nShe has an average of 5 + 12 = <<5+12=30>>30 eggs. There are 30-50 = <<30-50=70>>70 eggs left.\n#### 70\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "42",
+          "correct": 0,
+          "text": " First find the number of foliage trees, the number will be 5*4=<<6*3=50>>50\nThen multiply by the number that are the number by the size of the foliage: The foliage is the number based on the number divided by the percentage: 50% = <<50*.01=36>>37\n#### 42\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "10",
+          "correct": 0,
+          "text": " The house has a very low cost and it makes a relatively inexpensive and economical money.  What is the house's average cost?\nSince we spend time with the highest cost of a home, there are no income when there is a cost of $100.00 at a rate of about 10% in the past year. If the income of a house can be used as a payment for the one",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "6",
+          "correct": 0,
+          "text": " John has 5*2 = <<5*2=12>>12 hours\nHe is now there for 1 week so 1/3 = <<1/4=6>>6 hours\nSo the number of pounds of dollars in the total amount of meters is 2*2 + 2 + 2+3 = 4 pounds\n#### 6\n",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "50500",
+          "correct": 0,
+          "text": " You can make a big difference between two packs: 1 cup of dairy, 2 cup of milk, 2 pieces of milk (1 cup of honey) 3 ounces of food per day\nIf you are planning to pay a monthly wage, you must pay $20,000 to pay $50,500 for every pound of food.  What will be the difference between all the amount of money and the",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "5",
+          "correct": 0,
+          "text": " Some of the lights cost $10,000 at a cost of $3,500 in an hour; the total cost would be $1,500 by the other amount; the remaining lights cost 2,000; and the smaller lights cost 1,500. The more money is paid. There are two main types of glass, each with 2,500+20=30, and each has 5",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "22",
+          "correct": 0,
+          "text": " Mary Jane is 16-12=<<16-12-12+26=23>>23 sheep\nSo there are 21 sheep + 5 sheep + 9 sheep = <<22+7=21>>21 sheep\n#### 22\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "2",
+          "correct": 0,
+          "text": " If there are a 50GB file running at a time, how many type of component is destroyed?\nThat means that there are 100GB files running per day, so every time you have to download a document, we get your full name on all the other file (you are ready for all details). Here's what happens if there are 2GB files left.\nSo what will be done?",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "5.05",
+          "correct": 0,
+          "text": " John's total weight is 1.05, 10% is 35.05 = <<1.05=29.01>>29.02\nHe spends 9.05 on his average once every day on the 5th of the 5 hours (36.05/m3) so that the total amount he spends the last 60 minutes per hour is $30.05 / 5.05\nA",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "7",
+          "correct": 0,
+          "text": " Elici and his friends are 26 * 2 = <<27*2=11>>12 hours on the first 15 days of work and there is 12 + 14 = <<13+14=3>>3 hours left to work, because she is 20 - 3 = <<20-3=7>>7 hours.\nEl culminated in the total amount of time that she had spent on a week for",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        }
+      ]
+    },
+    "h3_diff_confidence_p0.5": {
+      "name": "H3 diff_conf>=0.5",
+      "n": 50,
+      "n_correct": 0,
+      "accuracy": 0.0,
+      "loop_rate_final": 0.0,
+      "max_word_run": 3,
+      "wall_s": 207.2,
+      "trigger_ar_frac": 0.25,
+      "trigger_diff_frac": 0.75,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "100",
+          "correct": 0,
+          "text": " of, introduced some a- to, I the-. of each said,A in a\n's- realize a total of 12.50 pounds / 100",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "1",
+          "correct": 0,
+          "text": ".\n the. the the, a of1\ufffd a.- of of\ufffd a not- you-, to be in there; the others on a",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": null,
+          "correct": 0,
+          "text": ". to the. of\n-.-\n to andThe, it in,/ the ( a: and, in) its importance is the high",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": null,
+          "correct": 0,
+          "text": " the- about\n in. that the of to- that\ufffd?:/ we.\ufffd on as for of and of and, through the day to-",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": null,
+          "correct": 0,
+          "text": " this- a this\n? with-\ufffd as\ufffd the number\n to this- in with that to\ufffd.. Then it is like keeping the weight limit",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "20",
+          "correct": 0,
+          "text": "- the\n- Reading- and a have at percent and. the in, that the of, a-sicle is 10*3=$<<20*",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": null,
+          "correct": 0,
+          "text": ", Get the a of the- theen of water.\n that the of in-.. to- to\nso that there is only one sheep at",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "12",
+          "correct": 0,
+          "text": " speaking12- some\n of-. and an in- and of Earth-. it a..\n an., is a command. It has to be",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "1",
+          "correct": 0,
+          "text": "-\n, book a. ( you that and- I to\n. for\ufffd 2000 at\ufffd a of,-\nE = 0 and = 1 in",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": null,
+          "correct": 0,
+          "text": "\n the from smoke to a to- on the., in of companies/ men, some and\n,\ufffd Wineosh have an average annual salary of",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        }
+      ]
+    }
+  }
+}
