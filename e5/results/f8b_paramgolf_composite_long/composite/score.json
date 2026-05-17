@@ -1,0 +1,10 @@
+{
+  "variant": "composite",
+  "n_params": 8092160,
+  "artifact_mb": 15.4345703125,
+  "fineweb_bpb": 1.4014,
+  "fineweb_avg_nll_per_tok": 4.5646,
+  "gsm8k_ar_nll": 5.1384,
+  "seed": 220,
+  "max_steps": 60000
+}

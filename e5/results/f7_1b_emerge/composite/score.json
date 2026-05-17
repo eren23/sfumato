@@ -1,0 +1,8 @@
+{
+  "variant": "composite",
+  "n_params": 760756224,
+  "ar_nll": 7.0251,
+  "seed": 200,
+  "max_steps": 20000,
+  "block_size": 1024
+}

@@ -1,0 +1,327 @@
+{
+  "decode_config": {
+    "ar": {
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "no_repeat_ngram_size": 3
+    },
+    "diff": {
+      "diff_temperature": 0.8,
+      "diff_top_p": 0.9,
+      "diff_repetition_penalty": 1.15
+    }
+  },
+  "ar_only": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 329.0,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "1.",
+        "correct": 0,
+        "text": " There are two eggs a day, one each day when she is eating chicken. The last egg is then sold to the farmer's farm for $4. The farmer's profits will be used to feed the birds so the birds can eat all the eggs they need.\nFor more information on the farm, see Birding the Farm, chapter 1."
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": null,
+        "correct": 0,
+        "text": " It\u2019s not difficult to imagine a full-scale fashion store to have a large group of waiting customers. In this case, the principle is similar to the general principle and features are similar. The best way to be sure you\u2019re doing something is to take the time to read the instructions on the label or video, and then say, \u201cWe\u2019ve got some long-term storage problems but what if?\u201d As a result, you\u2018ll probably get all the details, and you can see that the only thing left is the process. If you\u201dre asking for the details about what"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "40",
+        "correct": 0,
+        "text": " There were 150 homes that had 1,200 windows with the same total amount of windows. Each building was built with its own windows. The cost of materials, labor, and labor was a factor that affected the price of all the materials.  Since there were only 40 windows in the building, it would be very difficult to sell all the new windows as the price would increase over time.  \nAnother thing that worked well for his plan was building a new building. Even though he was successful, he is also good at solving problems because he does not have to spend a lot of money on building a house in order to build a"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "3",
+        "correct": 0,
+        "text": " In my school days, we have 3 thin runners and 2 bar racers. The difference between the three is that 3 running is more efficient in running and 3 sprinting is better in running. I would be too hard on them and their overall performance is poor. It is not a problem to use."
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "800",
+        "correct": 0,
+        "text": " If the chickens are to be fed at night, they will have to eat both feed and food as they begin to develop a hard time eating whole and whole foods. The food that the chickens will eat at night should contain the most calories. A young bird can eat up to five cups of food per day without running out of all the calories. At night, a bird will likely need more calories because the eggs are not laying eggs and so he or she needs to eat more.\nExercise and Nutrition\nAn adult male chicken requires around 500 calories per day. A bird that is mated when the young are born will require about 800"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "100",
+        "correct": 0,
+        "text": " A surprising amount, but in reality it is only a small percentage. The answer to this question is a very simple one: they have 8 glasses. So why are they so expensive?\nThe solution is that the price of the glasses is the same as the amount of glass that can be sold at a lower price. For a glass to cost about $50, the cost of production of glass must increase by 5%. If a glass was worth more than $30, then the price would be $20. This is a huge change from the original design. But since it was made with 100% glass, the price for the glass will"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "1900",
+        "correct": 0,
+        "text": " The answer is no.\nA. Both the people in the city have the same identity as the man who brought about the decline of this city in the early 1900s. The people in my city are all Jews. This city is a city where Jews live in harmony with each other. I cannot really know the facts on this matter. But the fact that I can find the facts about it is that I am not the person who has the right to refuse to accept the information given above. There are Jews in every part of our country but not in the South. It is because of the people who are Jewish that we get the word"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "2",
+        "correct": 0,
+        "text": " First, the download is for 2MB/minute and then the download file is for 1 MB/minute. The download time for this is 11 hours (both an hour and an hour), and it would take 2 hours if it were not to download them. Next, the file will be in memory and that's when the file is opened, so it would be as if it was opening. You can see that after the files have been opened, there are no specific rules about what will happen next. It would take a few seconds for the file to get complete. If you keep the file open all the time, the computer will be"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "5",
+        "correct": 0,
+        "text": " I need to determine the speed at which the driver can drive at 80mph (or better)\nWhat is the driving distance ?\nThe driving distance of a person in a vehicle is the speed that a person has not moved for 2 months at a time.  The driver has already reached their destination and he has no time to reach them at the start of the 5-week period. In other words, he does not have enough time to make the journey for them. If he wants to take his own place at his destination, he needs to be able to do so. However, if he fails to complete the trip, he"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "6.9",
+        "correct": 0,
+        "text": " The total salary of Eliza in this week is between $1,000 and $3,500. In the United States, the salary of their wage for this working week is very low because they work six to eight hours per week. They only pay around $5,000 a year and the average amount of salary is $14,000. The average number of hours they earn is $35,000 per year. For the rest of the week, they are paid 5.7 percent more than the average weekly wage. Eliza is paid $8,500 a month and the median salary of the whole week is 6.9"
+      }
+    ]
+  },
+  "mode_switch_96_32": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 254.7,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " The important part of the birds and duck is that they eat their own food. It's like the chicken of course, it makes a lot of difference to the turkeys. They can run over a lot more than a few hundred times a week. But not all ducks are as good or good as the turfs, chickens chicken chickens chickens chicken chickens eggs chicken chickens chickens chicken chicken chickens chickens chicken eggs chickens chickens eggs"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "25",
+        "correct": 0,
+        "text": " The total length of the spool is 25 feet and that of the front end of the Urdu spool.\n*If you have a little more than one spool, you can use your hands to pull the sparns out of it. There are no beads in the sphering process, but if?ss.ss of?s of ofs ofssssss"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "000",
+        "correct": 0,
+        "text": " Only $100,000!   The house is supposed to be well-ventilated.  However, the owner does not know that his house will not keep up with the new interior.  \nI have a couple of rooms, but I cannot see the new house or the house that has been built since I but I I, I I I,.,000 I,,000,\n but"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "5",
+        "correct": 0,
+        "text": "  The total number of times he runs awives and a Day of Cross can be written as 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 17, 19, 22, 23, 24, 25, 28, 29, 30 8 12 days day day 2 6ss day 1 9 20 10 8s 2 2 5"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " The chicken feed is typically divided into three parts.  What part of the chicken is covered by the skin that covers it?  The second part contains the whole chicken and its side, the middle part is the body of the animal.  The third part contains each of the three parts, the third part includes the entire day food she eat day she day they they and food eat one food two most two one eat"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "2122",
+        "correct": 0,
+        "text": " A $20,000 set for a single-use plastic bag for $10,000. The same set costs only 20%, and another $25,000 is needed for a two-use film. Each of the cost's is $1,100, so he has to buy his own new shop. He can21 $221 $ $22 $212,2's's $"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "300",
+        "correct": 0,
+        "text": " The population of the nation is estimated to be about 50,000. Because of the large amount of sheep that are sold in the country for the majority of its production, they have a very high demand. They are more than 10% of the world's total population. In terms of food, they make up about 8 100 200 250 500 2000 800 500 500 1000 population 200 100 200 400 1000000 500 100 300"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": null,
+        "correct": 0,
+        "text": " There are a couple of reasons why you would need to try and download a File extension. One is that there is a lot of little you can do with it that doesn't have the quality of your files. The other reason is that it is more difficult to make changes in file quality than to try to make sure that it if you it what it so it it it you what it then not what but not how"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "5",
+        "correct": 0,
+        "text": " The distance is 1/2 mile.  What is his speed when he turns off the car?\n vendors: I have a review of your car at work, and will get it back soon. \n3 hours ago\nI bought a new car which was a lot smaller than I ever thought and I bought it 3 3 5 2 miles time you 2 5 he so he 5 5 he 5 1 3 5"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "1111111112111113212",
+        "correct": 0,
+        "text": " A total of $100 per hour is used to pay her hourly wages.\nWho pays the most money1111111112111113212"
+      }
+    ]
+  },
+  "mode_switch_64_32": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 165.1,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " Peter, of course. However, a bird can live in a public place only if it is fed food that is not cooked. He probably takes more than one chicken chicken chickens eggs eggs chickens chickens chicken eggs chickens he eggs chicken chickens chickens chicken chicken he he"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": null,
+        "correct": 0,
+        "text": " Some people have a simple idea to use. You could do this with the same one of the world\u2019s most sophisticated manufacturing processes. The same process wouldsss.sss.....sss.sss"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "500300200500",
+        "correct": 0,
+        "text": " Each of the three houses bought the same amount of furniture at the beginning of the year. There were 40 rooms in each room. The people in each one had500300300600000400200500200100200100100500000 500300200500"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "12",
+        "correct": 0,
+        "text": " 12.000 feet (1,500 meters)\nThe next thing James follows is the rest of his runners:\n- 5/10/11 = 12 run miles mile miles mile mile miles milesmilefoot runningfoot milesmilemile milemile runningmile"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " The \"riese\" chickens do not eat whole grains or other types of food. They tend to eat whole grain products and they are not so full. Their eggs eggs they they they they \" How they \" they If they \" \" \" \" \" chickens"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": null,
+        "correct": 0,
+        "text": " A good question. I don't think I ever have a simple answer so I's not sure. I do have a good answer for you. The simple answer you I you't I I's you's I's's's's's's't you't"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": null,
+        "correct": 0,
+        "text": " The original version of the book stated that, \u201cNo sheep can be found in the city of Charleston because they are located on the southern half of the island as as as as the as the as as? as as on as the as as the as"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "10",
+        "correct": 0,
+        "text": " it took 3 hours to download a 64 MB file, and it takes about 15 minutes to download it. But if you have a Mac with a 10MB, what it it it it that you you it it it that what it it it it it it"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "5",
+        "correct": 0,
+        "text": " It\u2019s 5 miles away when John gets home at 9 pm. \nBut where does he stop at that point?\nThe answer: The driver he 5 he he 5 5 5 2 he 5 5 he he he he 5 5 he he"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "1121111132223",
+        "correct": 0,
+        "text": " The average salary for a female is $5.90. This has a large impact on her overall income. However, since her wage has been reduced by 2511111 $1121111132223"
+      }
+    ]
+  },
+  "paired_64_64": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 184.6,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " Given that she needs to feed a large number of chickens she will need to know how to produce eggs. If she doesn't have access to food, she will be unable to eat the eggs.\nEgg-laying is an excellent way to raise chickens. There are many ways to raise an egg. The easiest eggs chickens chickens chickens eggs eggs she chickens she she she she chickens she she she she she she she she she she she she she she she she she she she she"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "70",
+        "correct": 0,
+        "text": " It takes 100 after it has completed its journey through the process of picking the best quality on the market. The material must be made of a certain amount of fiber that is the smallest weight possible for the lightest part of the pair of threads. The weights for the whole pair of needles are 60 or 70 grams. To of of of of of of of of of of one of of of of of of of of of of of one of of of of of of of of of length"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "500300",
+        "correct": 0,
+        "text": " They have a house that costs $100,000. The house now cost $75,000 . (It is clear from this example that they have only one house at $70,000.) They also buy a home that cost $10,000 or more for $1,000, but that was not so well600300500200100400 What 500400500500200600300000 What What What200 500500100 $300,,000500,300 500,300"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "1",
+        "correct": 0,
+        "text": " The average\nran is 2,000 meters.  What is the maximum speed of\nthe race?\nThe shortest distance a horse can run is 4 miles.  Why are\nhe running so fast when he needs to drive the race? \nWhich equates to 2,500 miles?\nHow long can 1 long miles 1 days distance mile miles run runs miles run running running runs days distance miles runs runs mile days run miles running mile days miles run miles mile runs long"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "2",
+        "correct": 0,
+        "text": " The goal for each age group is to feed the chickens in a group of 7-10 birds per day. At that age, all the chickens have been fed from birth until 2 years old. There are many different ways to feed eggs. You can add milk or fed chicken to your flock every day.\nWhen do? young you food? his young what they When when he How he he food his you eat young he young He he eat he food What days she and eat he"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "80",
+        "correct": 0,
+        "text": " 80%. If he is able to put his money into his own house, he would be able to make a new one.\nCan you think of other people\u2019s ideas about what people can buy and how they can sell? What? What you What What?? What What What?? What How??? What? What? What What? What What What What What What? What"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "4",
+        "correct": 0,
+        "text": " Lee has two sheep, two cattle, and four pigs. 12 8 8 9 10 7 2 8 10 9 9 7 6 2 1 2 11 6 4 3 1 3 5 3 6 2 7 1 7 5 4 5 4"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "1",
+        "correct": 0,
+        "text": " The 30GB file has a total of 8MB for this file.\n1592 MB of disk space is used for the write-in of the file. If you want to make use of it, you would have to download it first because it is very simple and easy to do. If this is not possible then you hard it it it it it it it it it it you hard it hard it it what it hard hard you that hard how what 1 so what that that but"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "5",
+        "correct": 0,
+        "text": " At the end, he does not have the to-do list as he has to do all the work on his own, so he only makes a few trips at a time, but he can still see where he is going. The next time he looks at the road, he also looks at his surroundings and finds out he he he he 5 hour 3 5 5 2 5 4 hour he he hour hour he 5 he 3 3 he 5 5 5 3 2 5 1 5 5 he"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "3",
+        "correct": 0,
+        "text": " Elie's monthly rate is $3.44. In other words, she has an annual salary of $5.33 a month. A company can assume that if her weekly rate is less than $2.43, she will have an annual income of $6.42.111211113.133144213242233413 week43 week3"
+      }
+    ]
+  }
+}

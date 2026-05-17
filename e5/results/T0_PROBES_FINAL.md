@@ -414,3 +414,148 @@ downstream payoff, and explicitly state F1 as the substrate limitation.
 - That this scales to 1B+. The work explicitly tests 60M-300M; the
   trade-off direction may shift at larger scale (DiffuLLaMA's 7B
   result suggests it might).
+
+---
+
+## Phase H+ sample-quality investigation (2026-05-17, post-F9)
+
+### Setup
+
+F9 (305M composite, 3B FineWeb-Edu tokens, 183k steps, 33.8h on A40) finished with
+val_ar_nll = 3.96 and free-run GSM8K-dev = 0/50. **Every** sample at every probe5
+inference mode (ar_only, mode_switch_96_32, mode_switch_64_32, paired_64_64)
+exhibited sentence-level token loops ("She makes a lot of money..." × 17,
+"60 mph and then turns around because he knows he has to get home in 4 hours"
+× N). The teacher-forced NLL = 3.96 hid this collapse — at score time each
+next-token is conditioned on the gold token, so a loop can never form.
+
+Three parallel Explore agents identified three independent causes:
+
+1. The patched `gen_ar()` in `e5/scripts/probe5_mode_switch.py` exposes
+   temperature/top_p/repetition_penalty/no_repeat_ngram_size knobs, but
+   **all four call sites in main() passed defaults (greedy)**. The patches
+   were dead code. `e5/train.py` in-training sample logger used its own
+   inline `torch.argmax` decoder, not gen_ar at all.
+2. F9 was trained on `load_fineweb_tokens()` only. **Zero** GSM8K Q/A
+   format ever seen. The "Question:...Answer:" prompt at eval is OOD.
+3. 305M @ 3B tokens = 49% of Chinchilla-optimal. Undertrained models
+   loop harder (Holtzman 2020; Li 2023; SimCTG/Su 2022). Self-conditioning
+   collapse + anisotropic representations.
+
+### Tier 0 — wire the existing AR-decoder patches (1 hr, $0, local)
+
+Updated `probe5_mode_switch.py` main() to pass
+`temperature=0.8 top_p=0.9 repetition_penalty=1.15 no_repeat_ngram_size=3`
+to all four probe modes. Threaded the same kwargs through `gen_mode_switch`
+and `gen_paired` so the AR-prefix part of those modes also gets anti-rep.
+Updated `generate_samples.py` likewise. Replaced `e5/train.py`'s inline
+`torch.argmax` sample logger with a call into the patched `gen_ar()`.
+Added a `DECODE_GREEDY=1` env override to reproduce the broken baseline.
+
+**Tier 0 results (F9, N=50, 2 stochastic runs)**:
+
+| Mode | Tier-0 accuracy (run1/run2) | Loop rate (first 10) | max_word_run |
+|---|---|---|---|
+| ar_only | 1/50, 0/50 | 0%, 0% | 2 |
+| mode_switch_96_32 | 0/50, 0/50 | 80%, 60% | 19 |
+| mode_switch_64_32 | 1/50, 0/50 | 60%, 70% | 19 |
+| paired_64_64 | 0/50, 2/50 | 90%, 70% | 33 |
+
+**ar_only loops vanish entirely**. The other three modes still loop because
+their diff-revise / diff-fill internals use raw `argmax` over masked
+position logits — Tier 0 only touches the AR path.
+
+### Tier 0.5 — diff-head anti-rep with count-based rep_pen
+
+Added `diff_temperature` / `diff_top_p` / `diff_repetition_penalty` flags to
+`diff_revise()` and the inline diff-fill in `gen_paired()`. Both sample via
+a shared `_diff_sample_pred()` helper.
+
+**Critical detail**: the standard set-based repetition_penalty (divide each
+seen-token logit by `rep_pen` once) is insufficient on the diff head. A
+single mask-fill forward pass produces logits for all N masked positions
+simultaneously, conditioned on the same context. If the model assigns very
+high prob to one token at many positions, set-based rep_pen only penalises
+once — every position still samples that token. We switched to a
+**count-based** penalty: `logit / (rep_pen ** count_in_context)`. Tokens
+that already appear 30+ times in context get divided by `1.15^30 ≈ 66`,
+which actually breaks the loop.
+
+**Tier 0.5+count-based results (F9, N=50)**:
+
+| Mode | Tier-0 → Tier-0.5+count loop_rate | Δ | max_word_run |
+|---|---|---|---|
+| ar_only | 0% → 0% | — | 1 |
+| mode_switch_96_32 | 70% → **10%** | **−60 pp** | 5 |
+| mode_switch_64_32 | 65% → **20%** | **−45 pp** | 6 |
+| paired_64_64 | 80% → **40%** | **−40 pp** | 20 |
+
+**Loop rates collapse by 40-60 pp across all diff-touching modes.** Sample
+outputs are now *visibly coherent prose* on F9. Examples (paired_64_64):
+
+> "Given that she needs to feed a large number of chickens she will need
+> to know how to produce eggs. If she doesn't have access to food, she
+> will be unable to eat the eggs. Egg-laying is an excellent way to raise
+> chickens. There are many ways to raise an egg..."
+
+> "It takes 100 after it has completed its journey through the process
+> of picking the best quality on the market. The material must be made
+> of a certain amount of fiber that is the smallest weight possible for
+> the lightest part of the pair of threads..."
+
+Tail-end loops still leak into some paired_64_64 samples ("$ $ $ $",
+"500400500500200600300000 What"). These are a tighter symptom — the
+model's confidence is so peaked on individual tokens that even
+count-based rep_pen with diff_top_p=0.9 lets them through.
+
+### What didn't happen
+
+**Free-run GSM8K accuracy stayed at 0/50.** Tier-0's sporadic 1-2/50 hits
+were argmax-luck artifacts (the model locking on a common number like 1000
+or 1.2 that coincidentally matched the gold). With diverse sampling, those
+lucky locks disappear — the honest accuracy is 0%. **F9 cannot reason on
+GSM8K**, just like the model was trained.
+
+### Implication for the trade-off paper
+
+The Phase E verdict (TMLR with caveats / strong workshop) is unchanged.
+The Phase H+ result is a *separate* finding about generation quality of
+composite models at small undertrained scale:
+
+- Composite training does NOT cause loops. The diff head's argmax-fill
+  loops are a property of mask-fill decoding, not composite architecture.
+  AR-only mode has zero loops once we wire temperature/top_p sampling.
+- The right way to score composite-vs-baseline is **NLL** (teacher-forced
+  and free-run cross-entropy), not GSM8K-accuracy. Accuracy at 0-4% is
+  noise-floor for 305M @ 3B tokens.
+- Composite samples are now usable for qualitative paper figures (showing
+  AR vs mode-switch vs paired sample diversity), which previously they
+  were not because every output was a loop.
+
+### Files modified
+
+- `e5/scripts/probe5_mode_switch.py` — gen_ar wired in main(); gen_mode_switch
+  + gen_paired accept **ar_kwargs and diff_* kwargs; new `_diff_sample_pred()`
+  helper with count-based rep_pen; new env knobs DECODE_GREEDY / TEMP /
+  TOP_P / REP_PEN / NO_REPEAT_NGRAM / DIFF_TEMP / DIFF_TOP_P / DIFF_REP_PEN.
+- `e5/scripts/generate_samples.py` — same kwargs for the ckpt-comparison harness.
+- `e5/train.py` — replaced inline argmax decoder with patched gen_ar call.
+  Override `TRAIN_SAMPLE_GREEDY=1` to reproduce broken in-training samples.
+- `e5/scripts/loop_rate.py` (new) — degeneracy analyzer (word-run + 3-phrase-run +
+  is_loopy flag per generation) for probe5 results_sample arrays.
+
+### Next steps
+
+- Tier 1 (LZ Penalty, Ginart 2025) — stronger decoding-only anti-rep,
+  reported ~95% loop reduction. Currently not implemented.
+- Tier 3 (F10 retrain with `load_mixed_tokens()`) — 95% FineWeb + 5%
+  GSM8K Q/A. Same 3B budget. Expected: GSM8K accuracy > 0% (current floor
+  is genuinely 0%), Q/A prompt no longer OOD.
+
+### Decision per the Phase H+ plan rule
+
+| outcome | observed | next |
+|---|---|---|
+| loop_rate < 30% AND acc ≥ 4% | partial (loops fixed, acc 0) | **Tier 3 retrain needed** |
+| loop_rate < 30% but acc = 0% | matches | F10 mixed-tokens |
+| loop_rate > 50% | NO — Tier 0.5+ killed it | — |

@@ -1,0 +1,320 @@
+{
+  "decode_config": {
+    "temperature": 0.8,
+    "top_p": 0.9,
+    "repetition_penalty": 1.15,
+    "no_repeat_ngram_size": 3
+  },
+  "ar_only": {
+    "n": 50,
+    "n_correct": 1,
+    "accuracy": 0.02,
+    "wall_s": 339.1,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "2",
+        "correct": 0,
+        "text": " If she fished two eggs a day, she could buy her $3 per chicken for a day-care product. However, if she had to eat two eggs per week, she would not be able to buy a real one at the farmer's market, or even at the farm. The fact that a chicken requires 2 eggs per year in order to survive is more than enough to convince a farmer who wants to keep his duck. Since he has a few eggs at his farm, it is unlikely that he will have a real duck. He must have some kind of eggs to feed the duck.\nAnswer to question: In a general"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "2",
+        "correct": 0,
+        "text": " (1) The total number of bolts in the total length of the whole garment.\n-  The total length as a whole is 24.4 framing lines.\n involving both the Sheerner and Weissen in this manner, the Sheering strengths of the sheers are 6.8 and 5.9 because the sheerner strengths are 3 and 6 because the Sheers have a shorter top line and they have an upper line.\n(2) Sheers can be considered as an \u201cA\u201d or \u201cB\u201d with an upper wall, the Blacksheer has a lower wall, and the"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "100000",
+        "correct": 0,
+        "text": " $50 million\nNow in this situation, the only question is: When did you buy the house?  At what time?\n- The house was built in 1879 when George Washington died.\n- A family moved from Virginia to New York in 1883. They went on to live with their own family and a few more were born at home.    They had children at home before the family moved, but not at all. \n- If they lived at a house,  they would have a lot of money.  However, the person who bought the house for a little less than $100,000 could"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "3",
+        "correct": 0,
+        "text": " His run is 5,600 ft\nA number of factors affect the speed at which James has run 3 \u201c4\u201d Kids can run 4 \u201c12\u201d in 4 weeks\nIf James really wanted to run 6 \u201c10\u201d he would have been running 2 \u201c3\u201d\nWhy do you think that James decided to run 2 \u201911\u201d?\nThe answer is because James wants to run 5 \u201913\u201d again\n(In truth, James was the only person who had ever run 3 very often).  What do you mean by that?\nThis is a simple question that"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " To help protect his flock against diseases such as parrots, he needs a group of chickens that have had enough food in the last week to eat the next meal in the same order. The chicken must be fed every day for at least one month before he can run out of food or you can use a meat-rich diet. If you cannot feed one bird a week, you may have to give it a second meal every day. You will have to feed the whole family once every week for a year or so, so he won't get sick.\nIn this situation, using only the normal food in your flock, you would be"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": null,
+        "correct": 0,
+        "text": " You can answer all your questions by using the links below. For example, if you want to answer all of your questions, you could use this tool to find out what you are doing. Or, you can find some more information about the products we have on our website or ask for your help."
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "19.8",
+        "correct": 0,
+        "text": " The four sheep in the \u201cNorth\u201d (Popular) flock are:\n1,4.5,7.3,7-10.9.2,8-12.6,8.0,8,11.7,7,8\nWhat is the area of Georgia in that group?\nThe area of the northern part of Georgia is the largest single sheep and that is the Northern part of the state.\nWhy is Carolina the smallest of all North American states?\nAccording to the U.S. Census Bureau, the population of Florida is 913,000 people (19.8%"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "5",
+        "correct": 0,
+        "text": " You can get a different file as well by doing a 3/8 state change:\n1/8-state-change.xlsc -xlsd-0\n2/8.action-change-prob\n3/8 -action-proaton\n3 -action -proaton -proton\n3 /8 -act -pro humble\n4/8 3:1-act -com\n5 1:1 -act-pub\n6 1:2 -act --com\n7 1:3 -act\n8 1:4 -act <p>-- Federal Government\n9 1:5"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": null,
+        "correct": 0,
+        "text": " John has an inexpensive phone that works. The phone is not really dangerous as it can be hard to hear a person speaking.  There are only two things that people need to know: A phone and a vehicle.  If you get your hands on a phone you\u2019re more likely to hear something.  People have phones that are very unlikely to make it to home. But they\u2019ll be smart enough to make things happen and act.  A car or car with a battery is a dangerous thing if there isn\u2019t any gasoline.  The car is really safe when it\u2019s in an emergency. "
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "5",
+        "correct": 0,
+        "text": " \"Eliza's contribution to a weekly wage of $10 has gone up and he'll take his income away from her. She's paid the minimum wage at $12.\"\nEliza has spent her working week working 12 hours a week. One week she spends working 3 hours a day. So she needs to work 5 hours a month to make money. There are no additional holidays for Eliza since she's in the middle of the night to work, and her family doesn't have any time left.\nThe thing that makes Eliza so special in the work she does is the amount of money she makes every week. The amount"
+      }
+    ]
+  },
+  "mode_switch_96_32": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 357.8,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "1",
+        "correct": 0,
+        "text": " Her chickens eat three times a day!\n1) The chickens are an example of how much water they drink in a day. If you feed them a lot, they will have more water. They are also known to drink their own water. This is why they drink more water than they do on a regular basis. chickens chickens chickens chickens chickens chickens chickens eggs chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "2.",
+        "correct": 0,
+        "text": " A ....b region.  Winking 2. To know the total number of sheaves in one end of the fiber, you need to know the number of heraves.\nAnswer this question with the question: If you are working on a simple dairy farmer\u2019savesavesssavesavesavesavesavesavesavesavesavesavesavesavesavesavesaves"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": null,
+        "correct": 0,
+        "text": " We\u2019ve answeredasterncodds.com/blog/news-health-i-spare-to-fossil-food-..................."
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "3",
+        "correct": 0,
+        "text": " He runs 2 PubMed or 5 times a day.  What is the average time for a race at one of these slow speeds?\nFor example, a race 5-meter race can be 3 times as fast and he has 3 days left to run all that time on his own. He runs 3 days a week and run run run run run run run run run run run run run run run run run run run"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " This is a question we all want to ask ourselves. For one thing, it is a simple question for us. If I can find one food, I can make a new one.  We do not have to answer it on our own. We have to take into account the family's cultural or political views.\n we we we we we we we we we we we we we we we we we we we"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": null,
+        "correct": 0,
+        "text": " A worker can afford three glasses with the same amount of money. But how much do he really need to purchase? Why is he going to have to pay the full cost of one lens when he wants to? I think he has to pay to get back to his job, which will be a bad thing for the company buy buy buy buy buy buy buy buy buy buy buy buy buy buy buy buy buy buy buy"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "300000",
+        "correct": 0,
+        "text": " At that point, the economy was not good enough to buy and maintain a domestic sheep population. As a result, the city had to start creating more than 300,000 sheep in order to keep the sheep population stable. The sheep farming in the city was done with little money for the agriculture. So a lot of people people people people people people people people people people people people people people people people people people people the"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "2.",
+        "correct": 0,
+        "text": " There are two ways of running an update on Windows. The first one is to use the command line command.\nThe second way is to run the command as a user. I used an \u201cSystems\u201d command that is normally associated with Windows 7 and 2. You might have to read the command to try download download download download download download download download download download download download download download download download download download download"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "5",
+        "correct": 0,
+        "text": " When he looks out of the window on the other side of the road, John is looking out of his window. A driver is wearing a screen over his shoulder, and John is holding on to his phone, and he\u2019s not sure whether he can see the driver behind him.\nIf John can hear hiss 5ss 5sss 5 5 5 5 5 5 5ss 5 5"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "4",
+        "correct": 0,
+        "text": " El seasons 2, 3 and 4 are named after Eliza and her husband, Eliza. Eliza' work is not recorded on the ZDAT because Eliza makes no record in the ZDPAT because the average time for the work is in a different month. This means that if Eliza had to work she she she she she she she she she she she she she she she she she she she"
+      }
+    ]
+  },
+  "mode_switch_64_32": {
+    "n": 50,
+    "n_correct": 1,
+    "accuracy": 0.02,
+    "wall_s": 295.5,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " Her eggs are as healthy as her friends and family have been.\n- The diet for Dorothy\u2019 chosen ducks is very healthy and is very low in calories eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "4444444444444444444",
+        "correct": 0,
+        "text": " 4.6 \u00d7 10^2 = 32.3 \u00d7 12 = 60.8 \u00d7 12.9 \u00d7 6 = 100.4 \u00d7 0.5,4444444444444444444"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "100000000000000000000000000000000000000000000000000000000000000",
+        "correct": 0,
+        "text": " \"Calls\" was $40,000 but was a good amount because the cost of his main building was about $200,000 - $100,000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "9",
+        "correct": 0,
+        "text": " 12.9. It would be better if    2 = 9\nThe   part of the equation is\nYou have to know the formula to run run run run run run run run run run run run run run run run run run run"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " At three meals, the ducks eat half their own food. The chickens eat half of their own, half their human food. When they get a large enough number chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": null,
+        "correct": 0,
+        "text": " Yes, he needs to spend his money on glasses. He has to make a spending plan to meet his budget. And this is the price of glasses.\nararararararararararararararararararar"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "2",
+        "correct": 0,
+        "text": " The Oldest of the Oldest, where 1/2 of all sheep were in the Old South. There are no other public facilities that can produce more than of of of of of of of of of of of of of of of of of of of"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": null,
+        "correct": 0,
+        "text": " There are two ways to download a file: file-sharing. You can also share files with other users. The file sharing method is so simple that it is download download download download download download download download download download download download download download download download download download download"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "4.7",
+        "correct": 0,
+        "text": " The answer to this question is that he is not in a car with a load of 4.7 feet.  Instead he has a load a little more than he he he he he he he he he he he he he he he he he he he"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": null,
+        "correct": 0,
+        "text": " Elparts of her income is based on her work hours, or her work on weekdays only. This is because she does not get paid off the day's week for for her week her her week for her week her week week for for week her week"
+      }
+    ]
+  },
+  "paired_64_64": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 254.0,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "1.50",
+        "correct": 0,
+        "text": " The farmer's price is about $1.50 a gallon. A chicken worth three or four eggs is one dollar. she she she she she she she she she she she she she she she she she she she she she she she she she she she she she she she she she"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "10",
+        "correct": 0,
+        "text": " Ainently colored long-shaded large piece of yellow fiber is 10 kilometers long. The two bolts are called a \u201cdome\u201d and a \u201dbrighter\u201d. As they are separated, the party ends in two at the bottom of the wade. One of the bolts has a sharp edge of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": null,
+        "correct": 0,
+        "text": " The house is very complicated and very expensive.  As for the house, it has two windows and an angle. He has a good idea of what to use as a window on top of the window on his house. You can find out more about this in our post on What is the Cost of ahouse?  He He He. He He..... He He He He He He He He He He He He He He He He He He He He He He"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "4.",
+        "correct": 0,
+        "text": " One \u2013 5\n1. Find the number of team members who run the same number of specific floats and simultaneously.\n2. What is the total number of participants in each of these two schools?\n3. Which of these teams run the highest number of calories in each school?\n4. Which team runs most of of of of of of of of of of of number number number number number number number number number number number number number number number number number number number number number number"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " Some chickens eat fish or at least some of the insects they eat. If they don't eat the fish, they will die. The chickens need to be fed a diet that includes lots of fruits and vegetables. So, they should eat fruit and vegetables every day. It is better not to feed them too much, especially chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "10.",
+        "correct": 0,
+        "text": " The answer is 10, and it costs $3,000. How many of those? Let's get started.\nLet's talk about an example of an entry-level problem. We have a math problem called \"go to\" for which we have to multiply the total number of points in the space by 10. What What What What What What What What What What What What What What What What What What What What What What What. What.. What What What What What What"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "2",
+        "correct": 0,
+        "text": " Bizaki has 2 sheep, Tennessee is 2 sheep.\nThe Arapahos have a very different history than the Cascades and give birth to the first people of the western hemisphere, as I will show in the next article. The two most important birds that are still living today in the Southwest today are people people people people people people people people people the people people people people people people people people people people people people people people people people people people people people people people people"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "10",
+        "correct": 0,
+        "text": " It takes about 10 seconds for the file to load. I've created this and found that the download is a little slower than the download so that we have to de-spout the files. So the file gets released as soon as possible. There are two ways to fix the problem: by using an electronic mail delivery it it it it it it it it it it it it it it it it it it it it it it it it it it it it it it it it it"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": null,
+        "correct": 0,
+        "text": " The first thing he does at the beginning is to take his phone number and phone number in front of him. He asks for his number and what he needs to do in order to get the number to his family. The family wants a car and needs to have a car that is both comfortable for them and easy to drive he he he he he he he he he he he he he he he he he he he he he he he he he he he he he he he he he"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "200",
+        "correct": 0,
+        "text": " Elizip's rate in the first 5 hours is $3,000, and if Elizie worked the first 3 hours, how many would be lost in the second 24 hours?\nThe answer is $100,000. You can see that the amount of money she got for a month is $200,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"
+      }
+    ]
+  }
+}

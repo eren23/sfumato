@@ -106,6 +106,17 @@ def main():
     tok = AutoTokenizer.from_pretrained("gpt2")
     problems = load_gsm8k_dev_questions(n=n_problems)
 
+    if os.environ.get("DECODE_GREEDY", "0") == "1":
+        ar_kw: dict = {}
+    else:
+        ar_kw = dict(
+            temperature=float(os.environ.get("TEMP", "0.8")),
+            top_p=float(os.environ.get("TOP_P", "0.9")),
+            repetition_penalty=float(os.environ.get("REP_PEN", "1.15")),
+            no_repeat_ngram_size=int(os.environ.get("NO_REPEAT_NGRAM", "3")),
+        )
+    print(f"decode: {ar_kw or 'greedy'}")
+
     lines = [f"# Generation samples — 200M seed={seed} (overnight checkpoints)",
              "",
              "Modes compared per problem:",
@@ -134,14 +145,14 @@ def main():
             results = {}
             if variant == "composite":
                 t0 = time.time()
-                results["ar_only"] = gen_ar(model, prompt, max_new=128)
-                results["mode_switch"] = gen_mode_switch(model, prompt, k_ar=96, revise_len=32)
-                results["paired"] = gen_paired(model, prompt, k_ar=64, k_diff=64)
+                results["ar_only"] = gen_ar(model, prompt, max_new=128, **ar_kw)
+                results["mode_switch"] = gen_mode_switch(model, prompt, k_ar=96, revise_len=32, **ar_kw)
+                results["paired"] = gen_paired(model, prompt, k_ar=64, k_diff=64, **ar_kw)
                 results["diff_only"] = gen_diff_only(model, prompt, n_new=128)
                 wall = time.time() - t0
             elif variant == "ar_only":
                 t0 = time.time()
-                results["ar_ckpt_greedy"] = gen_ar(model, prompt, max_new=128)
+                results["ar_ckpt_greedy"] = gen_ar(model, prompt, max_new=128, **ar_kw)
                 wall = time.time() - t0
             else:  # diff_only
                 t0 = time.time()

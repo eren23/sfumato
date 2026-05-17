@@ -39,7 +39,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
 from e5.train import train_one  # noqa: E402
-from e5.data import load_fineweb_tokens, load_gsm8k_dev_questions  # noqa: E402
+from e5.data import load_fineweb_tokens, load_gsm8k_dev_questions, load_mixed_tokens  # noqa: E402
 from e5.model_composite import CompositeConfig, CompositeLM, MASK_TOKEN_ID  # noqa: E402
 from e5.scripts.probe5_mode_switch import gen_ar, gen_mode_switch, gen_paired  # noqa: E402
 
@@ -155,13 +155,24 @@ def main():
     except Exception as e:
         print(f"[wandb-driver] init failed: {e!s:.200}", flush=True)
 
-    # Stream + cache tokens. This uses the existing load_fineweb_tokens cache.
-    print(f"\nFetching ~{n_target_tokens/1e9:.1f}B FineWeb-Edu tokens (cached on pod)...")
+    # Stream + cache tokens. Two modes:
+    #   DATA_LOADER=fineweb (default, F7/F9): raw FineWeb-Edu only
+    #   DATA_LOADER=mixed   (F10): 95% FineWeb + 5% formatted GSM8K Q/A
+    data_loader = os.environ.get("DATA_LOADER", "fineweb").lower()
     t0 = time.time()
     if driver_wb is not None:
-        try: driver_wb.log({"phase": 0, "phase_name": "tokenizing"})
+        try: driver_wb.log({"phase": 0, "phase_name": "tokenizing", "data_loader": data_loader})
         except Exception: pass
-    tokens = load_fineweb_tokens(n_tokens=n_target_tokens, seed=1337 + seed)
+    if data_loader == "mixed":
+        fineweb_target = env_int("MIXED_FINEWEB_TOKENS", 2_850_000_000)
+        gsm8k_repeats = env_int("MIXED_GSM8K_REPEATS", 20)
+        print(f"\nFetching MIXED tokens: ~{fineweb_target/1e9:.2f}B FineWeb + {gsm8k_repeats}× GSM8K Q/A (cached on pod)...")
+        tokens = load_mixed_tokens(fineweb_tokens_target=fineweb_target,
+                                   gsm8k_repeats=gsm8k_repeats,
+                                   seed=1337 + seed)
+    else:
+        print(f"\nFetching ~{n_target_tokens/1e9:.1f}B FineWeb-Edu tokens (cached on pod)...")
+        tokens = load_fineweb_tokens(n_tokens=n_target_tokens, seed=1337 + seed)
     fetch_s = time.time() - t0
     print(f"  got {len(tokens):,} tokens in {fetch_s:.1f}s")
     if driver_wb is not None:

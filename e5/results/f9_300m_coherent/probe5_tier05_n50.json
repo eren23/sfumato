@@ -1,0 +1,327 @@
+{
+  "decode_config": {
+    "ar": {
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "no_repeat_ngram_size": 3
+    },
+    "diff": {
+      "diff_temperature": 0.8,
+      "diff_top_p": 0.9,
+      "diff_repetition_penalty": 1.15
+    }
+  },
+  "ar_only": {
+    "n": 50,
+    "n_correct": 2,
+    "accuracy": 0.04,
+    "wall_s": 335.4,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " She needs at least two eggs per bird to stay healthy. She wants two eggs a day. They need to be kept in an airtight container and kept on the top of the barn for a long period of time to keep them from going bad and becoming sick. This can be done if there are at least one breeding pair of ducks that need one new put together. As they get older, they will have more eggs and so in a short period of years, there is not enough eggs to breed. The birds, however, must be kept on an air tight container. So it's important to keep one or two eggs and keep one"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "3",
+        "correct": 1,
+        "text": " A load of 3 especially made of copper.  Since the black fiber is very expensive to produce, how many\ufffd\u20ac\u0153effective\u2019 are they to produce?  What are the benefits of using them to produce your piece of art?\nAsk: I believe that the two most important elements to consider when making a piece of artwork are the tension and the optical quality of the material you are making the piece. If you have a piece made of felt that is too hot or too cold, the quality is not very good. If the use of a plastic supplement or cloth is too heavy, you might want to make a more durable"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "2001",
+        "correct": 0,
+        "text": " A small house with a pretty good roof. The roofs are nice, the windows have small holes in them that allow you to see the hot air inside. Once you've got that, you'll be able to see how much that house is worth.\nYou're not alone. You've got your own way of thinking about how to help your children grow into the best possible person. These questions can be answered by reading the following books and articles.\nThe Very Great Family Story (Pagian, 2001)\nThis book tells the story of a family whose lives are set on fire and whose survival depends entirely on survival. It's"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "6.",
+        "correct": 0,
+        "text": " First, he runs three Rockegs per day and then 5 for 3.  After 3 years of training he becomes 10 meters a day and 3 for 6.  The total number of running miles per week increases by 2 percent, so he will run 3.\n- A 100 meter run is 2 meters a week and he runs 5.  We have a race track.  This race track is the start of a 5-foot race track that runs every 3 days at first. \n- Once he has finished 2 years and 6 days running, his run is 8 meters a year.  So he is running 6.\n"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " The American (or American) chicken is not a food. It is not the meat that is eaten by humans. The American chicken is the same as the American chicken. It has a white and yellowish color, and it is very light. The difference between the two colors is because the American is a vegetarian, so does the American. Both are part of the same family of chickens. The idea behind the American food is that all chickens have to be fed the same amount of food and the American, not the American's, does not have a different food. But the American meal is what you eat. It contains both protein and fat"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "200",
+        "correct": 0,
+        "text": " With each new class of glasses, he gets 25 pounds a week in his life. On average, one glasses cost $5 a week and 5 pounds a month. An adult might take 40 pounds a year because of his vision. He uses them for only 10 minutes a day. So if the price of an eye prescription is $100 for a person with an eye condition, he will have to pay $50 in the past three months. The cost to get an eye doctor or an ophthalmologist would be about $75 per eye. If you spend 10 dollars for an eye disease, you can have $200 in your lifetime."
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "2.",
+        "correct": 0,
+        "text": " 2.8 million\n4.7 million and the U.S. economy is \u201cconstrained\u201d with the majority of the nation\u2019s meat. What are the current challenges facing our people in a world where they must be able to feed themselves on non-perishable food?\n Answer: A significant portion of the food we eat today comes from animals. We have a population of around 10 billion people. The world\u2019 s meat consumption is projected to reach 5 million by 2050. In comparison, our consumption of animal protein, which is the largest source of protein in the world, is projected at 2."
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "1",
+        "correct": 0,
+        "text": " Yes. If you need to download a file, just try to download it from your computer. And if you need a later download, the Microsoft Windows way only has a preview and on this point you need the source code to download that file. Just click \u201c minus\u201d, and you get a copy.\nFollowing are the steps you should follow to get started with your download.\nStep 1 \u2013 Check your files\nIf you have one or two files in your computer that are not working, you must start by checking them. Once you check the files, you should now be able to see the file and understand the issue."
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "40",
+        "correct": 0,
+        "text": " John starts driving at an angle of 45 degrees. What is this angle? There are two different angles with the speed of 45\u00b0 and 45\u00b0. On one side there is a lot of traffic and on the other side there are no people at all. When he was driving over the road at 40 mph he stopped and after being able drive at 90 mph he knew he had stopped at the right angle. His best estimate of the distance he had left was that he was on his own time at 40mph.  By the time he got home he had done his job and was looking forward to driving and he would be able to do more"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "3",
+        "correct": 0,
+        "text": " El gluten's second-real income is $20. In addition to earning $10 a day and earning $50, El Gallo must earn $4 in order to keep Eliza going every week. The average monthly wage is $14, while the average weekly salary is $22. To compare the two, we need to compare two of El\u00e8s's income, which she benefits every week at approximately $40. This means that Elisa has to work $5 per hour. (3)\nLEARN TO THEGeneration\nIt is common knowledge among the millions of Americans that there are two different sources of income for"
+      }
+    ]
+  },
+  "mode_switch_96_32": {
+    "n": 50,
+    "n_correct": 2,
+    "accuracy": 0.04,
+    "wall_s": 313.8,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " In order to feed a standard constructed chicken, the combination of two or three eggs is a must. The most common one is a lean red chicken with a rooster shell and chicken that has a white or brown shell. A medium-sized chicken with white shell and a white shell is a good choice as it has a eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "33",
+        "correct": 0,
+        "text": " 1 1 3 4 5 6 6 8 9 10 11 12 13 14 17 17 18 20 22 23 25 26 27 29 29 30 33 32 31 33 34 36 37 38 35 40 41 37 38 42 39 38 44 44 43 50 49 45 52 46 57 48 49 47 53 51 49 49 54 55 60 55 56 67 33 33 33 35 55 33 55 33 36 33 33 55 55 55 33 33 33 33 33"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "000000000000000000000000000000000000000000000000000000000",
+        "correct": 0,
+        "text": " The only way he can keep his house and other property alive is by buying more and adding more of them as well. If he doesn\u2019t have enough, the result could be very bad money. When he does, it becomes so bad that he loses out. \nPeople have been trying to find answers to000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "000000000000000000000000000000000000000000000000",
+        "correct": 0,
+        "text": " 1,500,000\nNew age: 40\nNow the golden age of gold\nWe have seen how James might have been able to run this run of 80 meters, but he may not have made any attempts at running it all. The golden age was when he had a surprise. It was in his 1970s000000\n000000000000000000000000000000000000000000000000"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " There are several different types of chickens that eat vegetables. The most common type of vegetable is lettuce. These were originally called lettuce. They have long hair like a bear's coat that can be developed to protect themselves from predators and provide nutrition for the birds. The potassium in tomatoes can also aid in developing the young birds' chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "3.00",
+        "correct": 0,
+        "text": " A tablet can cost $10 and one makes $3.00. The only difference is that the on-screen glasses are a bit more expensive than those made in the store.\nHow much money do you have to spend to purchase an outstanding product in a store?\nThe average income for a person who has access you you you you you you you: you you you::: you you you: you"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "25",
+        "correct": 0,
+        "text": " When the population of the city is 25 percent, how many sheep are there on the island?\nThe following is a question I have been asked when I was a kid in school. It's because of a lot of prejudice and racism against black people. But in this post I'm going to focus on what theians people people people people people people people people people people people people people people people people people people people"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "100",
+        "correct": 0,
+        "text": " If you have $1,000 in your system, this would be 100 journals. You could make it up and save it as your own. So it's possible to get all the information needed to download this file using this same file. The only issue that you need to worry about is that you have to download all it it it it it it it it it it it it it it it it it it it"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "5",
+        "correct": 0,
+        "text": " I would take 8 hours out at a time.  A good question is how far I could go back from my home at 2 hours because I would not be able to get back to work in 4 hour time. If I go back to 4 hours then I would have 4 hours that way.  An answer: I 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "11111",
+        "correct": 0,
+        "text": " Eliz's rate is 7% of the average weekly rate in the last week. His weekly rate is 11%. Since his monthly rate is 8%, the average monthly rate for his weekly rate was 4%.\n1/3 of Eliza would work one week a week if he earned less than $20. Eliza1 her her1 for111 for for11 week11111 for"
+      }
+    ]
+  },
+  "mode_switch_64_32": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 200.6,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " In the past, farmers' markets had a lot of chickens from the farm to the farmer's. The farm industry has been a big source of income for farmers eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "1212121212121212121212121212121212121212",
+        "correct": 0,
+        "text": " 1/4 (3/8) + 2/6 (1/2) = 6/8\n(a) 1/12 - 2/1212121212121212121212121212121212121212"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "000000000000000000000000000000000000000000000000000000000",
+        "correct": 0,
+        "text": " In the story, the cost of the000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "5",
+        "correct": 0,
+        "text": " A 3 beat race is enough for a race to happen.  The race is over and he runs 2,000 km per week. This is a 5- miles miles miles miles miles miles miles miles miles miles miles miles miles miles miles miles miles miles miles"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " The number of birds in each flock is equal to the number of eggs that they produced. If an egg was produced for a single bird, it would be two If he he If If he he If he one If If he If If If he he If"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "15.50",
+        "correct": 0,
+        "text": " It is not difficult to see how many glasses a person can have and how they can get them. The three people who own a telephone are $15.50ar.ararararararararararararararararar"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "2",
+        "correct": 0,
+        "text": " The 2 of us who arrived last week that they got home with two sheep but they were too sick for a ship to get it by was called the \"St us us us us us us us us us us us us us us us us us we us"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": null,
+        "correct": 0,
+        "text": " The download is the \u2018help\u2019 file of the program you are downloading. It needs to be up-to-date. You have to find the it it it it it it it it it it it it it it it it it it it"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": null,
+        "correct": 0,
+        "text": " If John seems to be doing well at this distance then he must have been driving for only a short time and have been a little confused by the situation. The he he he he he he he he he he he he he he he he he he his"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "6.5",
+        "correct": 0,
+        "text": " Elissa's rate is 6.5 percent, so she must be paid on average to get a job on her own. Eliza has to work in the $ her $ week $ $ $. $ $ $ she. she. $ $ she she"
+      }
+    ]
+  },
+  "paired_64_64": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 242.4,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " The hen is a great source of protein, but does not have all of the vitamins that other birds need, so she may not eat the same amount of chicken as she would if she were to eat her own food. So she is not only a good source of food, but she also has a lot of other foods chickens chicken chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens eggs chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "18",
+        "correct": 0,
+        "text": " 7 in total\n1 - 10\n- 1 \u2013 12\n- 4 - 5\n10 + 9 = 12\nAt this point, the overall product will be 80% fiber and 18% fiber. You should be able to see how this can be accomplished for a number of reasons:\nOne of the main reasons of of of of of of of of number of of of of of of number of of of of number of of number number number number number you of number number number"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "000",
+        "correct": 0,
+        "text": " We have 3 houses in each group, and we have 3 homes in each family. The first one is owned by an owner. The second one is that the owner makes $100,000. The third one is the owner who makes $75,000,000 but does not get $75 or $75. The000000000000000 We000 We000000000000 We000 We000000000000 We We000000000000000000 We We000 We, we"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "32",
+        "correct": 0,
+        "text": " The total of 2.24\nWhat is the number of steps in a race?\n- 4 Read the sentences below to determine your overall number of tried and tested responses.\n- 5 For the 2-20-15-15: 15,\n- 8 For the 25-35-35: 32\n- run run run run run run run run run run run run run run run run run run run run run run run run run run run run run run run run run"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "3500",
+        "correct": 0,
+        "text": " The average bird can eat more than 5,000 birds at a time!\nYes, there are 4,000 different types of birds and 5,600 species of mammals.\nThe following table shows the number of different types in a chicken\u2019s diet.\n|Grain-fed chickens||3,500 birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds birds"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": null,
+        "correct": 0,
+        "text": " There are no books in the store. However, they can be found in their own home and in their town. The salt has to come from a well-drained, well-stocked place called the \u201cMedley\u201d, because salt is an important part of the food chain. It is the salt store store store store store store store store store store store store store store store store store store store store store store store store store store store store store store store store store"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "1960",
+        "correct": 0,
+        "text": " The free-market economy is growing. In the 1950s and 1960s, many industries expanded and people started building new businesses and services for themselves and their families. These people were known as industrial workers because of their skills in helping workers make their own products. As such, they created jobs in manufacturing, high-tech jobs jobs jobs jobs jobs jobs jobs jobs jobs jobs jobs many jobs many many many jobs many jobs jobs jobs jobs jobs jobs jobs jobs jobs jobs jobs jobs jobs people jobs"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "8",
+        "correct": 0,
+        "text": " The file appears to be a 2GB file with the name \u201cCAD8\u201d, but it will have a third one for \u201cCapital.\u201d I am not going to click on this one, but I am going to simply look at the image and you will see the file name. If you it it it it it it download it download download download it it it it it download it it it it download it download download download it download download download download download download"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "20",
+        "correct": 0,
+        "text": " He has been asked to drive at a velocity of 60mph and is not aware that he has stopped at 40mph. He does not know that he is going around at 50mph, so he gets around 20mph.  It is possible to use this method to find out the speed of an object.  A number he he he he he he he he he he he he he he he he he he he he he he he he he he he he he he he he he"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": null,
+        "correct": 0,
+        "text": " In many ways, Eliza works all day long and during the day she is paid work each week on her own.\nWhat is Eliza doing every week? He's been doing this for some time now but his father was the only one to do this at his job. Now he wants to make sure that El week week week week week week week week week week week week week week week week week week week week week week week week week week week week week week week week week"
+      }
+    ]
+  }
+}

@@ -278,19 +278,21 @@ def train_one(
         # ---- Sample text generation logged to wandb ----
         if sample_prompts and (step + 1) % sample_every == 0 and wb is not None and tokenizer_for_samples is not None:
             try:
+                from e5.scripts.probe5_mode_switch import gen_ar
                 model.train(False)
                 rows = []
+                # Anti-rep defaults for undertrained models (Holtzman 2020). Override with
+                # TRAIN_SAMPLE_GREEDY=1 to fall back to pure argmax.
+                if os.environ.get("TRAIN_SAMPLE_GREEDY", "0") == "1":
+                    ar_kw: dict = {}
+                else:
+                    ar_kw = dict(temperature=0.8, top_p=0.9,
+                                 repetition_penalty=1.15, no_repeat_ngram_size=3)
                 with torch.no_grad():
                     for sp in sample_prompts[:3]:
                         ids = list(sp.get("prompt_tokens", sp) if isinstance(sp, dict) else sp)
-                        gen = list(ids)
-                        for _ in range(64):
-                            ctx = torch.tensor([gen[-block_size:]], dtype=torch.long, device=device)
-                            logits = model(ctx, mode="ar")[:, -1, :]
-                            nxt = int(torch.argmax(logits, dim=-1).item())
-                            if nxt == 50256: break
-                            gen.append(nxt)
-                        cont = tokenizer_for_samples.decode([t for t in gen[len(ids):] if t < 50257], skip_special_tokens=True)
+                        new_ids = gen_ar(model, ids, max_new=64, **ar_kw)
+                        cont = tokenizer_for_samples.decode([t for t in new_ids if t < 50257], skip_special_tokens=True)
                         prompt_text = sp["question"] if isinstance(sp, dict) and "question" in sp else "(prompt)"
                         rows.append([step, prompt_text[:120], cont[:300]])
                 tbl = wb_lib.Table(columns=["step", "prompt", "completion"], data=rows)

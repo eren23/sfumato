@@ -1,0 +1,489 @@
+=== F8 param-golf-scale ===
+device=cuda variants=['composite'] d=128 L=8 H=8
+BS=64 T=512 steps=60000 target_tokens=200,000,000
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from WANDB_API_KEY.
+wandb: Currently logged in as: eren23 to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: Tracking run with wandb version 0.27.0
+wandb: Run data is saved locally in /workspace/sfumato/wandb/run-20260515_130236-g1e2745i
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run f8b_paramgolf_composite_long-driver
+wandb: ⭐️ View project at https://wandb.ai/eren23/sfumato-e5
+wandb: 🚀 View run at https://wandb.ai/eren23/sfumato-e5/runs/g1e2745i
+[wandb-driver] init OK: https://wandb.ai/eren23/sfumato-e5/runs/g1e2745i
+
+Fetching ~0.2B FineWeb-Edu tokens (cached on pod)...
+/usr/local/lib/python3.12/dist-packages/transformers/utils/hub.py:128: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+Token indices sequence length is longer than the specified maximum sequence length for this model (2562 > 1024). Running this sequence through the model will result in indexing errors
+  got 200,000,000 tokens in 509.6s
+
+Fetching FineWeb val texts for BPB scoring (independent slice, offset 12000)...
+  got 200 val texts (869192 bytes total)
+
+=== Training composite-8M (seed=220, 60000 steps) ===
+[composite] model: d=128 L=8 H=8 → 8.1M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+wandb: Finishing previous runs because reinit is set to True.
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: 
+wandb: Run history:
+wandb: phase ▁█
+wandb: 
+wandb: Run summary:
+wandb:     fetch_wall_s 509.62406
+wandb: n_tokens_fetched 200000000
+wandb:            phase 1
+wandb:       phase_name fetched
+wandb: 
+wandb: 🚀 View run f8b_paramgolf_composite_long-driver at: https://wandb.ai/eren23/sfumato-e5/runs/g1e2745i
+wandb: ⭐️ View project at: https://wandb.ai/eren23/sfumato-e5
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260515_130236-g1e2745i/logs
+wandb: setting up run qzyc0dwa
+wandb: Tracking run with wandb version 0.27.0
+wandb: Run data is saved locally in /workspace/sfumato/wandb/run-20260515_131127-qzyc0dwa
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run f8b_paramgolf_composite_long-composite-seed220
+wandb: ⭐️ View project at https://wandb.ai/eren23/sfumato-e5
+wandb: 🚀 View run at https://wandb.ai/eren23/sfumato-e5/runs/qzyc0dwa
+[wandb] init OK: https://wandb.ai/eren23/sfumato-e5/runs/qzyc0dwa
+[composite] step     0/60000 mode=ar   loss=10.8493 α=1.00 lr=0.00e+00 wall=1s
+[composite] step   200/60000 mode=ar   loss=7.1886 α=1.00 lr=6.00e-04 wall=28s
+[composite] step   400/60000 mode=ar   loss=6.5492 α=1.00 lr=6.00e-04 wall=56s
+[composite] step   600/60000 mode=ar   loss=6.4321 α=0.99 lr=6.00e-04 wall=83s
+[composite] step   800/60000 mode=ar   loss=6.1800 α=0.99 lr=6.00e-04 wall=111s
+[composite] step   999 val_ar_nll=7.0513
+[composite] step  1000/60000 mode=ar   loss=6.1250 α=0.99 lr=6.00e-04 wall=139s
+[composite] step  1200/60000 mode=ar   loss=5.9790 α=0.99 lr=6.00e-04 wall=166s
+[composite] step  1400/60000 mode=ar   loss=5.8921 α=0.99 lr=5.99e-04 wall=194s
+[composite] step  1600/60000 mode=ar   loss=5.8393 α=0.99 lr=5.99e-04 wall=222s
+[composite] step  1800/60000 mode=ar   loss=5.7060 α=0.98 lr=5.99e-04 wall=249s
+[composite] step  1999 val_ar_nll=6.5976
+[composite] step  1999 logged 3 samples to wandb
+[composite] step  2000/60000 mode=ar   loss=5.6941 α=0.98 lr=5.99e-04 wall=278s
+[composite] step  2200/60000 mode=ar   loss=5.6375 α=0.98 lr=5.99e-04 wall=306s
+[composite] step  2400/60000 mode=ar   loss=5.5468 α=0.98 lr=5.98e-04 wall=334s
+[composite] step  2600/60000 mode=ar   loss=5.5286 α=0.98 lr=5.98e-04 wall=361s
+[composite] step  2800/60000 mode=ar   loss=5.4505 α=0.98 lr=5.97e-04 wall=389s
+[composite] step  2999 val_ar_nll=6.3238
+[composite] step  3000/60000 mode=ar   loss=5.4271 α=0.97 lr=5.97e-04 wall=416s
+[composite] step  3200/60000 mode=ar   loss=5.4752 α=0.97 lr=5.97e-04 wall=444s
+[composite] step  3400/60000 mode=ar   loss=5.2565 α=0.97 lr=5.96e-04 wall=471s
+[composite] step  3600/60000 mode=diff loss=7.8928 α=0.97 lr=5.96e-04 wall=499s
+[composite] step  3800/60000 mode=ar   loss=5.2839 α=0.97 lr=5.95e-04 wall=526s
+[composite] step  3999 val_ar_nll=5.9320
+[composite] step  3999 logged 3 samples to wandb
+[composite] step  4000/60000 mode=ar   loss=5.3178 α=0.97 lr=5.95e-04 wall=555s
+[composite] step  4200/60000 mode=ar   loss=5.3561 α=0.96 lr=5.94e-04 wall=582s
+[composite] step  4400/60000 mode=ar   loss=5.2396 α=0.96 lr=5.93e-04 wall=610s
+[composite] step  4600/60000 mode=ar   loss=5.1797 α=0.96 lr=5.93e-04 wall=637s
+[composite] step  4800/60000 mode=ar   loss=5.3185 α=0.96 lr=5.92e-04 wall=665s
+[composite] step  4999 val_ar_nll=6.1287
+[composite] step  5000/60000 mode=ar   loss=5.2551 α=0.96 lr=5.91e-04 wall=692s
+[composite] step  5200/60000 mode=ar   loss=5.2664 α=0.96 lr=5.91e-04 wall=720s
+[composite] step  5400/60000 mode=ar   loss=5.2717 α=0.95 lr=5.90e-04 wall=747s
+[composite] step  5600/60000 mode=ar   loss=5.1535 α=0.95 lr=5.89e-04 wall=775s
+[composite] step  5800/60000 mode=ar   loss=5.1207 α=0.95 lr=5.88e-04 wall=802s
+[composite] step  5999 val_ar_nll=5.9809
+[composite] step  5999 logged 3 samples to wandb
+[composite] step  6000/60000 mode=ar   loss=5.1032 α=0.95 lr=5.88e-04 wall=830s
+[composite] step  6200/60000 mode=ar   loss=5.0944 α=0.95 lr=5.87e-04 wall=858s
+[composite] step  6400/60000 mode=ar   loss=5.1555 α=0.95 lr=5.86e-04 wall=885s
+[composite] step  6600/60000 mode=ar   loss=5.1276 α=0.94 lr=5.85e-04 wall=912s
+[composite] step  6800/60000 mode=ar   loss=5.1203 α=0.94 lr=5.84e-04 wall=940s
+[composite] step  6999 val_ar_nll=5.9361
+[composite] step  7000/60000 mode=ar   loss=5.1146 α=0.94 lr=5.83e-04 wall=968s
+[composite] step  7200/60000 mode=ar   loss=5.0338 α=0.94 lr=5.82e-04 wall=995s
+[composite] step  7400/60000 mode=ar   loss=5.0903 α=0.94 lr=5.81e-04 wall=1022s
+[composite] step  7600/60000 mode=ar   loss=5.0675 α=0.94 lr=5.80e-04 wall=1049s
+[composite] step  7800/60000 mode=ar   loss=5.0510 α=0.94 lr=5.79e-04 wall=1077s
+[composite] step  7999 val_ar_nll=5.6715
+[composite] step  7999 logged 3 samples to wandb
+[composite] step  8000/60000 mode=ar   loss=5.0685 α=0.93 lr=5.78e-04 wall=1105s
+[composite] step  8200/60000 mode=ar   loss=4.9959 α=0.93 lr=5.77e-04 wall=1132s
+[composite] step  8400/60000 mode=ar   loss=5.0545 α=0.93 lr=5.75e-04 wall=1160s
+[composite] step  8600/60000 mode=ar   loss=4.9470 α=0.93 lr=5.74e-04 wall=1187s
+[composite] step  8800/60000 mode=ar   loss=4.9845 α=0.93 lr=5.73e-04 wall=1215s
+[composite] step  8999 val_ar_nll=5.7724
+[composite] step  9000/60000 mode=ar   loss=5.0571 α=0.93 lr=5.72e-04 wall=1242s
+[composite] step  9200/60000 mode=ar   loss=4.9652 α=0.92 lr=5.70e-04 wall=1269s
+[composite] step  9400/60000 mode=ar   loss=5.0203 α=0.92 lr=5.69e-04 wall=1297s
+[composite] step  9600/60000 mode=ar   loss=5.0632 α=0.92 lr=5.68e-04 wall=1324s
+[composite] step  9800/60000 mode=ar   loss=4.9800 α=0.92 lr=5.66e-04 wall=1352s
+[composite] step  9999 val_ar_nll=5.5426
+[composite] step  9999 logged 3 samples to wandb
+[composite] step 10000/60000 mode=ar   loss=4.9821 α=0.92 lr=5.65e-04 wall=1380s
+[composite] step 10200/60000 mode=ar   loss=4.8989 α=0.92 lr=5.64e-04 wall=1407s
+[composite] step 10400/60000 mode=ar   loss=4.9775 α=0.91 lr=5.62e-04 wall=1434s
+[composite] step 10600/60000 mode=ar   loss=5.0070 α=0.91 lr=5.61e-04 wall=1462s
+[composite] step 10800/60000 mode=ar   loss=5.1494 α=0.91 lr=5.59e-04 wall=1489s
+[composite] step 10999 val_ar_nll=5.3772
+[composite] step 11000/60000 mode=ar   loss=4.8689 α=0.91 lr=5.58e-04 wall=1517s
+[composite] step 11200/60000 mode=ar   loss=4.9954 α=0.91 lr=5.56e-04 wall=1544s
+[composite] step 11400/60000 mode=ar   loss=4.9040 α=0.91 lr=5.55e-04 wall=1571s
+[composite] step 11600/60000 mode=ar   loss=5.0126 α=0.90 lr=5.53e-04 wall=1599s
+[composite] step 11800/60000 mode=ar   loss=5.0257 α=0.90 lr=5.51e-04 wall=1626s
+[composite] step 11999 val_ar_nll=5.3558
+[composite] step 11999 logged 3 samples to wandb
+[composite] step 12000/60000 mode=ar   loss=4.9955 α=0.90 lr=5.50e-04 wall=1654s
+[composite] step 12200/60000 mode=ar   loss=4.9613 α=0.90 lr=5.48e-04 wall=1681s
+[composite] step 12400/60000 mode=ar   loss=4.9263 α=0.90 lr=5.46e-04 wall=1708s
+[composite] step 12600/60000 mode=ar   loss=4.9985 α=0.90 lr=5.45e-04 wall=1736s
+[composite] step 12800/60000 mode=ar   loss=5.0028 α=0.89 lr=5.43e-04 wall=1763s
+[composite] step 12999 val_ar_nll=5.3990
+[composite] step 13000/60000 mode=ar   loss=4.8724 α=0.89 lr=5.41e-04 wall=1790s
+[composite] step 13200/60000 mode=ar   loss=4.9382 α=0.89 lr=5.39e-04 wall=1817s
+[composite] step 13400/60000 mode=ar   loss=4.8883 α=0.89 lr=5.38e-04 wall=1845s
+[composite] step 13600/60000 mode=ar   loss=4.8560 α=0.89 lr=5.36e-04 wall=1872s
+[composite] step 13800/60000 mode=ar   loss=4.9482 α=0.89 lr=5.34e-04 wall=1900s
+[composite] step 13999 val_ar_nll=5.3730
+[composite] step 13999 logged 3 samples to wandb
+[composite] step 14000/60000 mode=ar   loss=4.9443 α=0.88 lr=5.32e-04 wall=1928s
+[composite] step 14200/60000 mode=ar   loss=4.8984 α=0.88 lr=5.30e-04 wall=1955s
+[composite] step 14400/60000 mode=ar   loss=4.9439 α=0.88 lr=5.28e-04 wall=1982s
+[composite] step 14600/60000 mode=ar   loss=4.8670 α=0.88 lr=5.26e-04 wall=2009s
+[composite] step 14800/60000 mode=ar   loss=4.9620 α=0.88 lr=5.24e-04 wall=2036s
+[composite] step 14999 val_ar_nll=5.3014
+[composite] step 15000/60000 mode=ar   loss=4.9482 α=0.88 lr=5.22e-04 wall=2063s
+[composite] step 15200/60000 mode=ar   loss=4.8979 α=0.87 lr=5.20e-04 wall=2090s
+[composite] step 15400/60000 mode=ar   loss=4.9548 α=0.87 lr=5.18e-04 wall=2118s
+[composite] step 15600/60000 mode=ar   loss=4.8731 α=0.87 lr=5.16e-04 wall=2145s
+[composite] step 15800/60000 mode=ar   loss=5.1243 α=0.87 lr=5.14e-04 wall=2172s
+[composite] step 15999 val_ar_nll=5.3017
+[composite] step 15999 logged 3 samples to wandb
+[composite] step 16000/60000 mode=ar   loss=4.9468 α=0.87 lr=5.12e-04 wall=2200s
+[composite] step 16200/60000 mode=ar   loss=4.9736 α=0.86 lr=5.10e-04 wall=2227s
+[composite] step 16400/60000 mode=ar   loss=4.9521 α=0.86 lr=5.08e-04 wall=2254s
+[composite] step 16600/60000 mode=ar   loss=4.9023 α=0.86 lr=5.06e-04 wall=2281s
+[composite] step 16800/60000 mode=ar   loss=4.9359 α=0.86 lr=5.04e-04 wall=2308s
+[composite] step 16999 val_ar_nll=5.3278
+[composite] step 17000/60000 mode=ar   loss=4.8639 α=0.86 lr=5.01e-04 wall=2335s
+[composite] step 17200/60000 mode=ar   loss=4.7809 α=0.86 lr=4.99e-04 wall=2362s
+[composite] step 17400/60000 mode=ar   loss=4.8070 α=0.85 lr=4.97e-04 wall=2390s
+[composite] step 17600/60000 mode=ar   loss=4.7731 α=0.85 lr=4.95e-04 wall=2417s
+[composite] step 17800/60000 mode=ar   loss=4.8850 α=0.85 lr=4.93e-04 wall=2444s
+[composite] step 17999 val_ar_nll=5.2710
+[composite] step 17999 logged 3 samples to wandb
+[composite] step 18000/60000 mode=ar   loss=4.8407 α=0.85 lr=4.90e-04 wall=2472s
+[composite] step 18200/60000 mode=ar   loss=4.9230 α=0.85 lr=4.88e-04 wall=2499s
+[composite] step 18400/60000 mode=ar   loss=4.9316 α=0.85 lr=4.86e-04 wall=2526s
+[composite] step 18600/60000 mode=diff loss=7.3543 α=0.84 lr=4.83e-04 wall=2553s
+[composite] step 18800/60000 mode=ar   loss=4.7974 α=0.84 lr=4.81e-04 wall=2580s
+[composite] step 18999 val_ar_nll=5.3536
+[composite] step 19000/60000 mode=ar   loss=4.7797 α=0.84 lr=4.79e-04 wall=2607s
+[composite] step 19200/60000 mode=ar   loss=4.8460 α=0.84 lr=4.76e-04 wall=2634s
+[composite] step 19400/60000 mode=ar   loss=4.8685 α=0.84 lr=4.74e-04 wall=2661s
+[composite] step 19600/60000 mode=diff loss=7.2822 α=0.84 lr=4.71e-04 wall=2688s
+[composite] step 19800/60000 mode=ar   loss=4.8522 α=0.83 lr=4.69e-04 wall=2715s
+[composite] step 19999 val_ar_nll=5.2060
+[composite] step 19999 logged 3 samples to wandb
+[composite] step 20000/60000 mode=ar   loss=4.8218 α=0.83 lr=4.67e-04 wall=2743s
+[composite] step 20200/60000 mode=diff loss=7.2913 α=0.83 lr=4.64e-04 wall=2770s
+[composite] step 20400/60000 mode=ar   loss=4.9509 α=0.83 lr=4.62e-04 wall=2797s
+[composite] step 20600/60000 mode=diff loss=7.3087 α=0.83 lr=4.59e-04 wall=2824s
+[composite] step 20800/60000 mode=ar   loss=4.9041 α=0.83 lr=4.57e-04 wall=2851s
+[composite] step 20999 val_ar_nll=5.2834
+[composite] step 21000/60000 mode=ar   loss=4.8994 α=0.82 lr=4.54e-04 wall=2878s
+[composite] step 21200/60000 mode=ar   loss=4.9383 α=0.82 lr=4.52e-04 wall=2905s
+[composite] step 21400/60000 mode=ar   loss=4.8810 α=0.82 lr=4.49e-04 wall=2932s
+[composite] step 21600/60000 mode=ar   loss=4.9113 α=0.82 lr=4.47e-04 wall=2959s
+[composite] step 21800/60000 mode=ar   loss=4.8966 α=0.82 lr=4.44e-04 wall=2986s
+[composite] step 21999 val_ar_nll=5.2237
+[composite] step 21999 logged 3 samples to wandb
+[composite] step 22000/60000 mode=diff loss=7.2571 α=0.82 lr=4.41e-04 wall=3014s
+[composite] step 22200/60000 mode=ar   loss=4.8356 α=0.81 lr=4.39e-04 wall=3041s
+[composite] step 22400/60000 mode=ar   loss=4.8205 α=0.81 lr=4.36e-04 wall=3068s
+[composite] step 22600/60000 mode=diff loss=7.3077 α=0.81 lr=4.34e-04 wall=3095s
+[composite] step 22800/60000 mode=ar   loss=4.8013 α=0.81 lr=4.31e-04 wall=3122s
+[composite] step 22999 val_ar_nll=5.2653
+[composite] step 23000/60000 mode=ar   loss=4.8859 α=0.81 lr=4.28e-04 wall=3149s
+[composite] step 23200/60000 mode=diff loss=7.2408 α=0.81 lr=4.26e-04 wall=3176s
+[composite] step 23400/60000 mode=ar   loss=4.9192 α=0.80 lr=4.23e-04 wall=3203s
+[composite] step 23600/60000 mode=diff loss=7.2857 α=0.80 lr=4.20e-04 wall=3230s
+[composite] step 23800/60000 mode=ar   loss=4.9255 α=0.80 lr=4.18e-04 wall=3257s
+[composite] step 23999 val_ar_nll=5.2529
+[composite] step 23999 logged 3 samples to wandb
+[composite] step 24000/60000 mode=ar   loss=4.8905 α=0.80 lr=4.15e-04 wall=3285s
+[composite] step 24200/60000 mode=ar   loss=4.8093 α=0.80 lr=4.12e-04 wall=3312s
+[composite] step 24400/60000 mode=ar   loss=4.9172 α=0.80 lr=4.10e-04 wall=3338s
+[composite] step 24600/60000 mode=diff loss=7.3266 α=0.80 lr=4.07e-04 wall=3365s
+[composite] step 24800/60000 mode=ar   loss=4.8714 α=0.79 lr=4.04e-04 wall=3392s
+[composite] step 24999 val_ar_nll=5.2580
+[composite] step 25000/60000 mode=ar   loss=4.8084 α=0.79 lr=4.01e-04 wall=3419s
+[composite] step 25200/60000 mode=diff loss=7.3973 α=0.79 lr=3.99e-04 wall=3446s
+[composite] step 25400/60000 mode=ar   loss=4.8074 α=0.79 lr=3.96e-04 wall=3473s
+[composite] step 25600/60000 mode=ar   loss=4.9439 α=0.79 lr=3.93e-04 wall=3500s
+[composite] step 25800/60000 mode=diff loss=7.2794 α=0.79 lr=3.90e-04 wall=3526s
+[composite] step 25999 val_ar_nll=5.3079
+[composite] step 25999 logged 3 samples to wandb
+[composite] step 26000/60000 mode=diff loss=7.1994 α=0.78 lr=3.88e-04 wall=3554s
+[composite] step 26200/60000 mode=ar   loss=4.9294 α=0.78 lr=3.85e-04 wall=3581s
+[composite] step 26400/60000 mode=ar   loss=4.8267 α=0.78 lr=3.82e-04 wall=3607s
+[composite] step 26600/60000 mode=diff loss=7.2602 α=0.78 lr=3.79e-04 wall=3634s
+[composite] step 26800/60000 mode=ar   loss=4.8147 α=0.78 lr=3.77e-04 wall=3661s
+[composite] step 26999 val_ar_nll=5.1000
+[composite] step 27000/60000 mode=ar   loss=4.9518 α=0.78 lr=3.74e-04 wall=3688s
+[composite] step 27200/60000 mode=ar   loss=4.7827 α=0.77 lr=3.71e-04 wall=3715s
+[composite] step 27400/60000 mode=ar   loss=4.8820 α=0.77 lr=3.68e-04 wall=3741s
+[composite] step 27600/60000 mode=ar   loss=4.7774 α=0.77 lr=3.65e-04 wall=3768s
+[composite] step 27800/60000 mode=ar   loss=4.8396 α=0.77 lr=3.63e-04 wall=3795s
+[composite] step 27999 val_ar_nll=5.0791
+[composite] step 27999 logged 3 samples to wandb
+[composite] step 28000/60000 mode=ar   loss=4.8599 α=0.77 lr=3.60e-04 wall=3822s
+[composite] step 28200/60000 mode=ar   loss=4.8375 α=0.77 lr=3.57e-04 wall=3849s
+[composite] step 28400/60000 mode=diff loss=7.2643 α=0.76 lr=3.54e-04 wall=3876s
+[composite] step 28600/60000 mode=ar   loss=4.8349 α=0.76 lr=3.51e-04 wall=3902s
+[composite] step 28800/60000 mode=ar   loss=4.7885 α=0.76 lr=3.48e-04 wall=3929s
+[composite] step 28999 val_ar_nll=5.1303
+[composite] step 29000/60000 mode=ar   loss=4.8592 α=0.76 lr=3.46e-04 wall=3956s
+[composite] step 29200/60000 mode=ar   loss=4.8535 α=0.76 lr=3.43e-04 wall=3983s
+[composite] step 29400/60000 mode=ar   loss=4.8032 α=0.76 lr=3.40e-04 wall=4010s
+[composite] step 29600/60000 mode=ar   loss=4.7744 α=0.75 lr=3.37e-04 wall=4036s
+[composite] step 29800/60000 mode=diff loss=7.2107 α=0.75 lr=3.34e-04 wall=4063s
+[composite] step 29999 val_ar_nll=5.0377
+[composite] step 29999 logged 3 samples to wandb
+[composite] step 30000/60000 mode=diff loss=7.2310 α=0.75 lr=3.31e-04 wall=4091s
+[composite] step 30200/60000 mode=ar   loss=4.7131 α=0.75 lr=3.29e-04 wall=4117s
+[composite] step 30400/60000 mode=ar   loss=4.8391 α=0.75 lr=3.26e-04 wall=4144s
+[composite] step 30600/60000 mode=diff loss=7.0900 α=0.74 lr=3.23e-04 wall=4171s
+[composite] step 30800/60000 mode=ar   loss=4.8407 α=0.74 lr=3.20e-04 wall=4198s
+[composite] step 30999 val_ar_nll=5.1964
+[composite] step 31000/60000 mode=diff loss=7.1478 α=0.74 lr=3.17e-04 wall=4225s
+[composite] step 31200/60000 mode=ar   loss=4.8775 α=0.74 lr=3.14e-04 wall=4252s
+[composite] step 31400/60000 mode=ar   loss=4.8966 α=0.74 lr=3.12e-04 wall=4278s
+[composite] step 31600/60000 mode=ar   loss=4.9156 α=0.74 lr=3.09e-04 wall=4305s
+[composite] step 31800/60000 mode=ar   loss=4.7062 α=0.73 lr=3.06e-04 wall=4331s
+[composite] step 31999 val_ar_nll=5.2356
+[composite] step 31999 logged 3 samples to wandb
+[composite] step 32000/60000 mode=diff loss=7.2457 α=0.73 lr=3.03e-04 wall=4359s
+[composite] step 32200/60000 mode=ar   loss=4.8215 α=0.73 lr=3.00e-04 wall=4386s
+[composite] step 32400/60000 mode=ar   loss=4.8215 α=0.73 lr=2.97e-04 wall=4413s
+[composite] step 32600/60000 mode=ar   loss=4.8407 α=0.73 lr=2.95e-04 wall=4440s
+[composite] step 32800/60000 mode=ar   loss=4.8234 α=0.73 lr=2.92e-04 wall=4466s
+[composite] step 32999 val_ar_nll=4.9652
+[composite] step 33000/60000 mode=ar   loss=4.7543 α=0.72 lr=2.89e-04 wall=4493s
+[composite] step 33200/60000 mode=ar   loss=4.7915 α=0.72 lr=2.86e-04 wall=4520s
+[composite] step 33400/60000 mode=diff loss=7.1446 α=0.72 lr=2.83e-04 wall=4547s
+[composite] step 33600/60000 mode=diff loss=7.2370 α=0.72 lr=2.81e-04 wall=4573s
+[composite] step 33800/60000 mode=ar   loss=4.8362 α=0.72 lr=2.78e-04 wall=4600s
+[composite] step 33999 val_ar_nll=5.0794
+[composite] step 33999 logged 3 samples to wandb
+[composite] step 34000/60000 mode=diff loss=7.2725 α=0.72 lr=2.75e-04 wall=4628s
+[composite] step 34200/60000 mode=ar   loss=4.8443 α=0.72 lr=2.72e-04 wall=4654s
+[composite] step 34400/60000 mode=ar   loss=4.8166 α=0.71 lr=2.70e-04 wall=4681s
+[composite] step 34600/60000 mode=ar   loss=4.7303 α=0.71 lr=2.67e-04 wall=4707s
+[composite] step 34800/60000 mode=ar   loss=4.8924 α=0.71 lr=2.64e-04 wall=4734s
+[composite] step 34999 val_ar_nll=5.0958
+[composite] step 35000/60000 mode=ar   loss=4.8249 α=0.71 lr=2.61e-04 wall=4761s
+[composite] step 35200/60000 mode=ar   loss=4.8307 α=0.71 lr=2.59e-04 wall=4788s
+[composite] step 35400/60000 mode=ar   loss=4.8118 α=0.71 lr=2.56e-04 wall=4814s
+[composite] step 35600/60000 mode=diff loss=7.1643 α=0.70 lr=2.53e-04 wall=4841s
+[composite] step 35800/60000 mode=ar   loss=4.8131 α=0.70 lr=2.50e-04 wall=4867s
+[composite] step 35999 val_ar_nll=5.1205
+[composite] step 35999 logged 3 samples to wandb
+[composite] step 36000/60000 mode=diff loss=7.1630 α=0.70 lr=2.48e-04 wall=4895s
+[composite] step 36200/60000 mode=ar   loss=4.9134 α=0.70 lr=2.45e-04 wall=4921s
+[composite] step 36400/60000 mode=diff loss=7.1490 α=0.70 lr=2.42e-04 wall=4948s
+[composite] step 36600/60000 mode=ar   loss=4.7079 α=0.70 lr=2.40e-04 wall=4974s
+[composite] step 36800/60000 mode=diff loss=7.2334 α=0.69 lr=2.37e-04 wall=5001s
+[composite] step 36999 val_ar_nll=5.0776
+[composite] step 37000/60000 mode=diff loss=7.0859 α=0.69 lr=2.34e-04 wall=5027s
+[composite] step 37200/60000 mode=ar   loss=4.7219 α=0.69 lr=2.32e-04 wall=5054s
+[composite] step 37400/60000 mode=ar   loss=4.7580 α=0.69 lr=2.29e-04 wall=5081s
+[composite] step 37600/60000 mode=ar   loss=4.8153 α=0.69 lr=2.26e-04 wall=5107s
+[composite] step 37800/60000 mode=ar   loss=4.7312 α=0.69 lr=2.24e-04 wall=5134s
+[composite] step 37999 val_ar_nll=5.1267
+[composite] step 37999 logged 3 samples to wandb
+[composite] step 38000/60000 mode=ar   loss=4.7633 α=0.68 lr=2.21e-04 wall=5161s
+[composite] step 38200/60000 mode=diff loss=7.1955 α=0.68 lr=2.19e-04 wall=5188s
+[composite] step 38400/60000 mode=diff loss=7.1744 α=0.68 lr=2.16e-04 wall=5215s
+[composite] step 38600/60000 mode=diff loss=7.0932 α=0.68 lr=2.13e-04 wall=5242s
+[composite] step 38800/60000 mode=diff loss=7.0902 α=0.68 lr=2.11e-04 wall=5268s
+[composite] step 38999 val_ar_nll=5.1080
+[composite] step 39000/60000 mode=ar   loss=4.8160 α=0.68 lr=2.08e-04 wall=5295s
+[composite] step 39200/60000 mode=ar   loss=4.7368 α=0.67 lr=2.06e-04 wall=5321s
+[composite] step 39400/60000 mode=ar   loss=4.7366 α=0.67 lr=2.03e-04 wall=5348s
+[composite] step 39600/60000 mode=ar   loss=4.6985 α=0.67 lr=2.01e-04 wall=5374s
+[composite] step 39800/60000 mode=ar   loss=4.8061 α=0.67 lr=1.98e-04 wall=5401s
+[composite] step 39999 val_ar_nll=5.0265
+[composite] step 39999 logged 3 samples to wandb
+[composite] step 40000/60000 mode=ar   loss=4.8247 α=0.67 lr=1.96e-04 wall=5428s
+[composite] step 40200/60000 mode=ar   loss=4.7648 α=0.67 lr=1.93e-04 wall=5455s
+[composite] step 40400/60000 mode=diff loss=7.0273 α=0.66 lr=1.91e-04 wall=5481s
+[composite] step 40600/60000 mode=ar   loss=4.7936 α=0.66 lr=1.89e-04 wall=5508s
+[composite] step 40800/60000 mode=ar   loss=4.8049 α=0.66 lr=1.86e-04 wall=5534s
+[composite] step 40999 val_ar_nll=4.9263
+[composite] step 41000/60000 mode=ar   loss=4.7165 α=0.66 lr=1.84e-04 wall=5561s
+[composite] step 41200/60000 mode=ar   loss=4.8146 α=0.66 lr=1.81e-04 wall=5587s
+[composite] step 41400/60000 mode=ar   loss=4.7252 α=0.66 lr=1.79e-04 wall=5614s
+[composite] step 41600/60000 mode=ar   loss=4.7533 α=0.65 lr=1.77e-04 wall=5640s
+[composite] step 41800/60000 mode=ar   loss=4.8476 α=0.65 lr=1.74e-04 wall=5666s
+[composite] step 41999 val_ar_nll=5.0869
+[composite] step 41999 logged 3 samples to wandb
+[composite] step 42000/60000 mode=ar   loss=4.8407 α=0.65 lr=1.72e-04 wall=5693s
+[composite] step 42200/60000 mode=ar   loss=4.8097 α=0.65 lr=1.70e-04 wall=5720s
+[composite] step 42400/60000 mode=ar   loss=4.6741 α=0.65 lr=1.67e-04 wall=5746s
+[composite] step 42600/60000 mode=ar   loss=4.8006 α=0.65 lr=1.65e-04 wall=5772s
+[composite] step 42800/60000 mode=ar   loss=4.8229 α=0.64 lr=1.63e-04 wall=5799s
+[composite] step 42999 val_ar_nll=5.1195
+[composite] step 43000/60000 mode=ar   loss=4.7406 α=0.64 lr=1.61e-04 wall=5825s
+[composite] step 43200/60000 mode=ar   loss=4.7826 α=0.64 lr=1.59e-04 wall=5852s
+[composite] step 43400/60000 mode=ar   loss=4.7803 α=0.64 lr=1.56e-04 wall=5878s
+[composite] step 43600/60000 mode=ar   loss=4.7774 α=0.64 lr=1.54e-04 wall=5905s
+[composite] step 43800/60000 mode=ar   loss=4.7279 α=0.64 lr=1.52e-04 wall=5931s
+[composite] step 43999 val_ar_nll=5.1012
+[composite] step 43999 logged 3 samples to wandb
+[composite] step 44000/60000 mode=diff loss=7.1223 α=0.63 lr=1.50e-04 wall=5958s
+[composite] step 44200/60000 mode=ar   loss=4.7516 α=0.63 lr=1.48e-04 wall=5984s
+[composite] step 44400/60000 mode=ar   loss=4.8674 α=0.63 lr=1.46e-04 wall=6011s
+[composite] step 44600/60000 mode=ar   loss=4.8104 α=0.63 lr=1.44e-04 wall=6037s
+[composite] step 44800/60000 mode=ar   loss=4.7560 α=0.63 lr=1.42e-04 wall=6063s
+[composite] step 44999 val_ar_nll=5.1134
+[composite] step 45000/60000 mode=diff loss=7.0807 α=0.62 lr=1.40e-04 wall=6090s
+[composite] step 45200/60000 mode=ar   loss=4.9076 α=0.62 lr=1.38e-04 wall=6116s
+[composite] step 45400/60000 mode=ar   loss=4.7959 α=0.62 lr=1.36e-04 wall=6142s
+[composite] step 45600/60000 mode=ar   loss=4.7753 α=0.62 lr=1.34e-04 wall=6168s
+[composite] step 45800/60000 mode=ar   loss=4.8778 α=0.62 lr=1.32e-04 wall=6194s
+[composite] step 45999 val_ar_nll=5.1657
+[composite] step 45999 logged 3 samples to wandb
+[composite] step 46000/60000 mode=diff loss=7.1487 α=0.62 lr=1.30e-04 wall=6222s
+[composite] step 46200/60000 mode=ar   loss=4.7857 α=0.61 lr=1.28e-04 wall=6248s
+[composite] step 46400/60000 mode=ar   loss=4.9077 α=0.61 lr=1.26e-04 wall=6274s
+[composite] step 46600/60000 mode=diff loss=7.1119 α=0.61 lr=1.24e-04 wall=6301s
+[composite] step 46800/60000 mode=ar   loss=4.7347 α=0.61 lr=1.22e-04 wall=6327s
+[composite] step 46999 val_ar_nll=5.0779
+[composite] step 47000/60000 mode=ar   loss=4.8753 α=0.61 lr=1.21e-04 wall=6354s
+[composite] step 47200/60000 mode=diff loss=7.0283 α=0.61 lr=1.19e-04 wall=6380s
+[composite] step 47400/60000 mode=ar   loss=4.7273 α=0.60 lr=1.17e-04 wall=6406s
+[composite] step 47600/60000 mode=ar   loss=4.7912 α=0.60 lr=1.15e-04 wall=6432s
+[composite] step 47800/60000 mode=ar   loss=4.8423 α=0.60 lr=1.14e-04 wall=6458s
+[composite] step 47999 val_ar_nll=5.1579
+[composite] step 47999 logged 3 samples to wandb
+[composite] step 48000/60000 mode=diff loss=7.1410 α=0.60 lr=1.12e-04 wall=6485s
+[composite] step 48200/60000 mode=diff loss=7.0788 α=0.60 lr=1.10e-04 wall=6511s
+[composite] step 48400/60000 mode=ar   loss=4.8366 α=0.60 lr=1.09e-04 wall=6538s
+[composite] step 48600/60000 mode=diff loss=7.0907 α=0.59 lr=1.07e-04 wall=6564s
+[composite] step 48800/60000 mode=diff loss=7.0315 α=0.59 lr=1.05e-04 wall=6591s
+[composite] step 48999 val_ar_nll=5.0462
+[composite] step 49000/60000 mode=diff loss=7.1488 α=0.59 lr=1.04e-04 wall=6617s
+[composite] step 49200/60000 mode=ar   loss=4.7111 α=0.59 lr=1.02e-04 wall=6643s
+[composite] step 49400/60000 mode=ar   loss=4.7112 α=0.59 lr=1.01e-04 wall=6670s
+[composite] step 49600/60000 mode=diff loss=7.0913 α=0.59 lr=9.93e-05 wall=6696s
+[composite] step 49800/60000 mode=diff loss=7.0758 α=0.58 lr=9.78e-05 wall=6722s
+[composite] step 49999 val_ar_nll=5.0433
+[composite] step 49999 logged 3 samples to wandb
+[composite] step 50000/60000 mode=ar   loss=4.7313 α=0.58 lr=9.64e-05 wall=6749s
+[composite] step 50200/60000 mode=diff loss=7.0695 α=0.58 lr=9.50e-05 wall=6775s
+[composite] step 50400/60000 mode=ar   loss=4.7334 α=0.58 lr=9.36e-05 wall=6802s
+[composite] step 50600/60000 mode=ar   loss=4.7971 α=0.58 lr=9.23e-05 wall=6828s
+[composite] step 50800/60000 mode=ar   loss=4.7493 α=0.58 lr=9.09e-05 wall=6854s
+[composite] step 50999 val_ar_nll=5.0851
+[composite] step 51000/60000 mode=ar   loss=4.8428 α=0.57 lr=8.96e-05 wall=6881s
+[composite] step 51200/60000 mode=ar   loss=4.7119 α=0.57 lr=8.83e-05 wall=6907s
+[composite] step 51400/60000 mode=ar   loss=4.6827 α=0.57 lr=8.71e-05 wall=6934s
+[composite] step 51600/60000 mode=diff loss=7.0645 α=0.57 lr=8.59e-05 wall=6960s
+[composite] step 51800/60000 mode=ar   loss=4.7705 α=0.57 lr=8.47e-05 wall=6986s
+[composite] step 51999 val_ar_nll=5.0709
+[composite] step 51999 logged 3 samples to wandb
+[composite] step 52000/60000 mode=ar   loss=4.7550 α=0.57 lr=8.35e-05 wall=7013s
+[composite] step 52200/60000 mode=diff loss=7.0838 α=0.56 lr=8.24e-05 wall=7039s
+[composite] step 52400/60000 mode=diff loss=7.1125 α=0.56 lr=8.12e-05 wall=7065s
+[composite] step 52600/60000 mode=diff loss=7.0568 α=0.56 lr=8.01e-05 wall=7091s
+[composite] step 52800/60000 mode=ar   loss=4.7734 α=0.56 lr=7.91e-05 wall=7118s
+[composite] step 52999 val_ar_nll=5.0904
+[composite] step 53000/60000 mode=ar   loss=4.8685 α=0.56 lr=7.81e-05 wall=7144s
+[composite] step 53200/60000 mode=diff loss=7.0056 α=0.56 lr=7.70e-05 wall=7170s
+[composite] step 53400/60000 mode=diff loss=7.0080 α=0.55 lr=7.61e-05 wall=7196s
+[composite] step 53600/60000 mode=ar   loss=4.8150 α=0.55 lr=7.51e-05 wall=7223s
+[composite] step 53800/60000 mode=ar   loss=4.7786 α=0.55 lr=7.42e-05 wall=7249s
+[composite] step 53999 val_ar_nll=5.0883
+[composite] step 53999 logged 3 samples to wandb
+[composite] step 54000/60000 mode=diff loss=7.0789 α=0.55 lr=7.33e-05 wall=7275s
+[composite] step 54200/60000 mode=diff loss=7.0856 α=0.55 lr=7.24e-05 wall=7302s
+[composite] step 54400/60000 mode=diff loss=7.2013 α=0.55 lr=7.16e-05 wall=7328s
+[composite] step 54600/60000 mode=diff loss=7.1561 α=0.54 lr=7.08e-05 wall=7354s
+[composite] step 54800/60000 mode=diff loss=7.1510 α=0.54 lr=7.00e-05 wall=7381s
+[composite] step 54999 val_ar_nll=5.0711
+[composite] step 55000/60000 mode=ar   loss=4.7446 α=0.54 lr=6.93e-05 wall=7407s
+[composite] step 55200/60000 mode=ar   loss=4.7808 α=0.54 lr=6.85e-05 wall=7433s
+[composite] step 55400/60000 mode=ar   loss=4.9056 α=0.54 lr=6.78e-05 wall=7460s
+[composite] step 55600/60000 mode=diff loss=7.0708 α=0.54 lr=6.72e-05 wall=7486s
+[composite] step 55800/60000 mode=diff loss=7.0390 α=0.53 lr=6.65e-05 wall=7512s
+[composite] step 55999 val_ar_nll=5.0822
+[composite] step 55999 logged 3 samples to wandb
+[composite] step 56000/60000 mode=diff loss=7.0733 α=0.53 lr=6.59e-05 wall=7539s
+[composite] step 56200/60000 mode=diff loss=7.1453 α=0.53 lr=6.54e-05 wall=7565s
+[composite] step 56400/60000 mode=diff loss=7.0824 α=0.53 lr=6.48e-05 wall=7591s
+[composite] step 56600/60000 mode=ar   loss=4.7499 α=0.53 lr=6.43e-05 wall=7617s
+[composite] step 56800/60000 mode=ar   loss=4.7390 α=0.53 lr=6.38e-05 wall=7643s
+[composite] step 56999 val_ar_nll=5.0553
+[composite] step 57000/60000 mode=ar   loss=4.8072 α=0.53 lr=6.33e-05 wall=7669s
+[composite] step 57200/60000 mode=diff loss=7.1687 α=0.52 lr=6.29e-05 wall=7695s
+[composite] step 57400/60000 mode=ar   loss=4.8134 α=0.52 lr=6.25e-05 wall=7721s
+[composite] step 57600/60000 mode=diff loss=7.1319 α=0.52 lr=6.21e-05 wall=7747s
+[composite] step 57800/60000 mode=diff loss=7.0478 α=0.52 lr=6.18e-05 wall=7773s
+[composite] step 57999 val_ar_nll=5.0473
+[composite] step 57999 logged 3 samples to wandb
+[composite] step 58000/60000 mode=diff loss=7.0892 α=0.52 lr=6.15e-05 wall=7800s
+[composite] step 58200/60000 mode=diff loss=7.0844 α=0.52 lr=6.12e-05 wall=7826s
+[composite] step 58400/60000 mode=diff loss=7.0710 α=0.51 lr=6.10e-05 wall=7852s
+[composite] step 58600/60000 mode=diff loss=7.0414 α=0.51 lr=6.07e-05 wall=7878s
+[composite] step 58800/60000 mode=diff loss=7.0043 α=0.51 lr=6.05e-05 wall=7904s
+[composite] step 58999 val_ar_nll=5.0531
+[composite] step 59000/60000 mode=ar   loss=4.7758 α=0.51 lr=6.04e-05 wall=7930s
+[composite] step 59200/60000 mode=diff loss=7.0438 α=0.51 lr=6.02e-05 wall=7955s
+[composite] step 59400/60000 mode=diff loss=7.0701 α=0.51 lr=6.01e-05 wall=7981s
+[composite] step 59600/60000 mode=ar   loss=4.7385 α=0.50 lr=6.01e-05 wall=8007s
+[composite] step 59800/60000 mode=diff loss=6.9977 α=0.50 lr=6.00e-05 wall=8033s
+[composite] step 59999 val_ar_nll=5.1282
+[composite] step 59999 logged 3 samples to wandb
+wandb: uploading artifact run-qzyc0dwa-samples; updating run metadata
+wandb: uploading media/table/samples_59999_996e93f0258a185b99bf.table.json; uploading output.log; uploading wandb-summary.json
+wandb: uploading history steps 1258-1259, summary, console lines 389-390
+wandb: 
+wandb: Run history:
+wandb:             alpha ████▇▇▇▇▇▇▆▆▆▆▆▅▅▅▅▅▅▄▄▄▄▄▄▃▃▃▂▂▂▂▂▁▁▁▁▁
+wandb:      ar_loss_last ██▄▄▃▃▂▃▂▂▂▂▂▁▂▂▂▂▂▂▂▂▂▂▁▁▁▂▂▁▁▂▁▁▁▂▂▂▂▁
+wandb:    diff_loss_last █▇▇▆▆▆▄▄▄▃▃▄▄▃▃▃▃▃▂▄▃▃▂▂▁▂▂▂▂▂▁▂▁▂▁▂▂▂▁▂
+wandb:              loss ▄▃▂▂▂▂▂▂▂▂▂█▁█▁▁▂█▂▂▂▂▂▁▁▁▂▁█▇▇▁▁▁▁▇▇▇▇▁
+wandb:                lr ███████▇▆▆▅▅▅▅▅▄▄▄▄▃▃▃▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb:              step ▁▁▂▂▂▃▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▅▅▅▅▆▆▆▆▆▆▆▆▆▇▇██
+wandb:        val_ar_nll █▄▅▄▄▄▃▂▂▃▂▂▂▂▂▂▂▂▂▂▂▂▁▂▁▁▂▂▂▂▁▁▂▁▂▁▂▁▁▂
+wandb: val_ar_perplexity █▄▃▃▃▂▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       wallclock_s ▁▁▁▁▂▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▆▆▆▆▆▆▆▆▇████
+wandb: 
+wandb: Run summary:
+wandb:           alpha 0.50001
+wandb:    ar_loss_last 4.69877
+wandb:  diff_loss_last 7.06425
+wandb:   final_ar_loss 4.69877
+wandb: final_diff_loss 7.06425
+wandb:            loss 4.69877
+wandb:              lr 6e-05
+wandb:            mode ar
+wandb:            step 59999
+wandb:      val_ar_nll 5.12818
+wandb:              +3 ...
+wandb: 
+wandb: 🚀 View run f8b_paramgolf_composite_long-composite-seed220 at: https://wandb.ai/eren23/sfumato-e5/runs/qzyc0dwa
+wandb: ⭐️ View project at: https://wandb.ai/eren23/sfumato-e5
+wandb: Synced 5 W&B file(s), 30 media file(s), 60 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260515_131127-qzyc0dwa/logs
+[composite] done. 8060s. wrote /workspace/sfumato/e5/results/f8b_paramgolf_composite_long/composite/model.pt and /workspace/sfumato/e5/results/f8b_paramgolf_composite_long/composite/summary.json
+  train wall_s=8067.0
+
+=== Scoring + sampling composite ===
+  n_params=8.09M  artifact=15.4 MB bf16  (param-golf cap: 16 MB)
+Token indices sequence length is longer than the specified maximum sequence length for this model (2026 > 1024). Running this sequence through the model will result in indexing errors
+  FineWeb-val BPB: 1.4014  (avg_nll/tok=4.5646)
+  GSM8K AR-NLL: 5.1384
+  wrote /workspace/sfumato/e5/results/f8b_paramgolf_composite_long/composite/samples.md

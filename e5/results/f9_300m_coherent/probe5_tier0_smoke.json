@@ -1,0 +1,124 @@
+{
+  "decode_config": {
+    "temperature": 0.8,
+    "top_p": 0.9,
+    "repetition_penalty": 1.15,
+    "no_repeat_ngram_size": 3
+  },
+  "ar_only": {
+    "n": 3,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 28.0,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "4",
+        "correct": 0,
+        "text": "The farmer's market is home to many small chickens, but the chickens have a larger volume of eggs in the stock market, which makes them better for the farm. In the following example, the farmer\u2019 s help gives the chicken a basic amount of eggs and makes a variety of other items like a hat, a metalcraft, a 2/4 inch plastic bag and a lunch box. The farmer\u2018 s food store has an enormous number of eggs, and the farm\u2019 S family also has the ability to buy the raw material.\nAs you can see, the producer is not looking to get the job done. It"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": null,
+        "correct": 0,
+        "text": " The blue fiber is the same as the red fiber in a blue light, because the red light has a different color than the blue light. The red light uses the same amount of energy to get there. However, the blue fiber has a longer wavelength, so it makes it more efficient to get to a particular color than it would otherwise be.\nWhich of the following is the most popular colors in computer art?\nA) Blue-red\nB) Yellow-blue\nC) Red-purple\nD) Green-yellow\nThe colors we use in computer science are blue, green, red, and blue. There are"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "8",
+        "correct": 0,
+        "text": " As far as I know, I only use the 3-year mark system on the General Publicental School (GCSE) I teach. The GCSE is a good start because of the time period between the grade 6 and 8 GCSE.\nThe GCSE courses are currently being taught at GCSE schools in Gove, Edinburgh and Oxford. There have been three years of so-called \u2018 Become A Project\u2019 where students take the GCSE examinations.\nFor example, the GC Notes are a serious subject and the GCG marks are being studied at GCura schools in Oxford, Leeds and Oxford, and I am trying"
+      }
+    ]
+  },
+  "mode_switch_96_32": {
+    "n": 3,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 12.7,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " Gestation is a lot of work. While he can easily pick up birds, he needs to be very careful when feeding ducks. He needs to know where the chickens are from and how to take them out. If the ducks are sitting on the floor at home, he must be kept away from them and should not be chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "5.",
+        "correct": 0,
+        "text": " 1,2. , 3. , 4. , 5. ."
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "000000000000000000000000000000000000000000000000000000000",
+        "correct": 0,
+        "text": " There are three reasons why he decided to put in $20,000 of maintenance. The first is that he wanted to make his home as easy as possible for everyone who could afford it. In this case, he purchased his own house at $10,000, making $75,000. The second reason why he000000000000000000000000000000000000000000000000000000000"
+      }
+    ]
+  },
+  "mode_switch_64_32": {
+    "n": 3,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 10.3,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "1.5",
+        "correct": 0,
+        "text": " They may cost $4,500, but their bread is a bit less than $1.5. Their duck does not eat her food. The duck will eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "1",
+        "correct": 0,
+        "text": " A detachable steel sheet has 1,000 screws of blue fibers. If you have enough red fiber for your gold-bonded face, you can make 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "000000000000000000000000000000000000000000000000000000000",
+        "correct": 0,
+        "text": " Those with the highest incomes are able to purchase homes at the lowest cost possible. The energy bill is lower than the people who have the most income. They are000000000000000000000000000000000000000000000000000000000"
+      }
+    ]
+  },
+  "paired_64_64": {
+    "n": 3,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 11.0,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " The majority of her chickens are fat, so she could get one in a day if she were the only one to get one. What if she was given a particular type of chicken she is going to eat? Is it better if she has some kind of meat in her food every day or is she likely to be without she she she she she she she she she she she she she she she she she she she she she she she she she she she she she she she she she"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": null,
+        "correct": 0,
+        "text": " One carbon fiber, one steel, one iron.  What does it cost to maintain it?  By taking these factors into account, you can estimate the price of the most common (and expensive) materials for a particular application. The cost of materials is expressed by the price at which they are sold, so you will of of of of one one of of of of of of of of of of of of of one of of one of of of of one one one one one one"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "80",
+        "correct": 0,
+        "text": " The answer is $40,000. At this point he has reduced his house by only 6%!  Since he also wants a house with an income of $80 million, he has said \"centum income\" or, \"an amount that will increase the value.\"\nWhat does this mean?\nThe answer $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $"
+      }
+    ]
+  }
+}

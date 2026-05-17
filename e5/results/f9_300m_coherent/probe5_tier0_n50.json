@@ -1,0 +1,320 @@
+{
+  "decode_config": {
+    "temperature": 0.8,
+    "top_p": 0.9,
+    "repetition_penalty": 1.15,
+    "no_repeat_ngram_size": 3
+  },
+  "ar_only": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 649.4,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "7.",
+        "correct": 0,
+        "text": " In order to know how many chickens are sold in the county each day, two of the important factors to consider is that they are in the farm to which their parents raised them. The mother-in-law in the US provides an income of $20,000. If the family needs more food than the child can provide, the income will be between $6 and $7.\nHow many chickens in the same category would you find in the state? (In order to calculate the number of chickens in that category, you need to multiply it by the number for the total number of eggs that you have). One chicken can carry around"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "12.",
+        "correct": 0,
+        "text": " As you can see from the picture above, the total number of bolts is 6. The total number is 12.\nThe total number divided by the total total number can be related to the total weight of the garment itself.\nThis is a formula for how many waterways will be developed.\nHow do I get my plan?\nYou should not have to worry about the cost of building a new garment for your home. You will have to take into account all the costs involved in building a garment for a given size and style.\nOther details related to clothing construction are listed below."
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": null,
+        "correct": 0,
+        "text": " This is the \" uprising.\" The plot of land that has already been sold by the government is now under attack.  Here is a look at the plot of property that was sold as a result of the coup.\n- A company will sell all the houses in the town until they are done. They use the money to buy more houses and they sell the houses they have purchased. \n- Every time you put money into a house you can see it as a sign of how much money the government gives the people to do it.  It's an example of a show of power.\nHow many of us have in our lives"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "578200",
+        "correct": 0,
+        "text": " 1,800,000,000 feet.  What is the total distance in miles from the base of the mountain on the mountainside?\n answering: A mile.\nteaching: 5,000 mile\nalarm: 556,600\ncoastal area: 985,300 square miles\nvehicle type: passenger car or truck.\nAlarm: 6,200,000.\nelimination speed: 12 km/h\nmeasurement of an object\nGiven: The distance from the top of the mountainsides to the bottom of the valley on the mountain is 578,200 feet\nnumber"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " At most chickens, each bird has two sets of plumage. The first set of plumages for birds has a breast that is about as wide as the head. As long as the bird has at least one breast, she will have a full breast. At least two sets can be fed on the same food. A meal of munching chicken will take about an hour, but she will eat the rest. For chickens, she should eat three different types of foods during the day.\n- Pupy chicken - Always start with a small dose of pea bean and then slowly add it to the diet of your bird. This"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "2",
+        "correct": 0,
+        "text": " I don't want to change my room. The table is so cold, I am not going to put any food on my table, so I'm supposed to keep it in the kitchen. You don't have a idea what kind of food is there. If you have any special items that can be made from wood, you can start with 3/4\" or \"1/2\".\nDo you use your trash to help save the planet? Let me know!"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "1857.",
+        "correct": 0,
+        "text": " The answer is 70. When the first wave of wintry tide from the West came into the city in 1854, they were all dead. In 1854 a few years later, they had reached the 16th-century town of Changinac in western New York City, which in 1856 had 5,000 people. Their population was 6,500 when the government started taking over as a town and made their way into the capital of the state in 1857.\nWhat does the text suggest about the idea of being \"tough\" in the \"new town\" in which the inhabitants lived in? A quick look at"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "-11",
+        "correct": 0,
+        "text": " The simple answer is that the file needs to be as close as possible to its owner. If the owner doesn\u2019t know what their file is or if they have a running machine, they have to be in the wrong place. For instance, if you want to get a download from an older version of the operating system, you need to change the file \u201cGPSF-11\u201d. You also need to try and remove the file from the \u201cNSSR\u201d folder, which is a lot easier to download than the one in the main directory.\nIn this case, all the files are given a"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "1",
+        "correct": 0,
+        "text": " He has to have 3 hours left at an hour of 5mph, because he doesn\u2019t know what time is right there in the city, so he must have 3 days to drive to find his destination.  The journey is not the same as the one that has been since his trip.\nThe average journey around the world has more than 100 miles. A person can travel more than 1,000 miles a day without needing to go longer distances. If the journey is long enough, the journey can take more than five minutes. \nMost people in the world travel for about 1 hour every day. This is because most of"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "13.",
+        "correct": 0,
+        "text": " With this number in mind, she is making a profit of $12,000 in one week and $11,000 over the next two weeks. If she was working 20 hours, she would have earned $15,500 over the past year. (Excerpted from How to Pay theroid.)\nThe percent increases on her income over the previous year have $20,200 and $25,000. By the time she enters school, her income would be below $13,600. So, if she left school, she'd earn $4,300 less than her weekly rate of $13. But if she were doing"
+      }
+    ]
+  },
+  "mode_switch_96_32": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 263.1,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " Because she is a large bird, she can't be easily seen by humans. In fact, she only has two. When she comes to the farm, the other chickens are always there when she is away from home. And so she cannot see the birds.\nWhile it is clear that sea chicks are susceptible to becoming chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens chickens"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "4",
+        "correct": 0,
+        "text": " Three. The one having the same number of screws is one set of three bolts. What are you waiting for?\nA: One set of four (2) axes and one set that has three (4) axes. If you have two sets of four axes, how many screws can you put on a set of of of of of of of of of of of of of one of of one of one one"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": null,
+        "correct": 0,
+        "text": " Where does the profit come from?\nThe following is a set of questions to ask when you need help understanding the concept of cash flow.\n- What is the total amount of money that goes into the house?\n- Is the total value of all the money in the house too much?\nThese questions will answer What What What What What What What What What What What What What What What What What What What"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "20",
+        "correct": 0,
+        "text": "  The average performance of a 10-meter jump start at 2-meter intervals, and the average speed is 6 km/h (km/h = 10 miles per hour).  In a 10 meter jump, the race is completed with a total of three or fourainer points, 1 in every 20 steps, andkmkmkmkmkmkmkmkmkmkmkmkmkmkmkmkmkmkmkm"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " The chickens will eat a good amount of seed every day. If you do not have any more feed, the chicken will die off.  A binder is used to break down the seed, which helps to prevent the birds from eating it. It can be kept in a pocket or a other container that is easily accessible,,,,,,,,,,,,,,,,,,,"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "150",
+        "correct": 0,
+        "text": " booar didn't know how many glasses he needed. When asked, it was all around 20. For a pair of glasses that cost $20 and an 8.75, it took at least 150 minutes to make a change in price. A pair of glass was very expensive, but the difference is huge. In fact $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "000000000000000000000000000000000000000000000000000000000",
+        "correct": 0,
+        "text": " The total number of sheep in the city of Charleston is more than 25 million, and is 10,000 different in size from what is generally expected for the city.\nAccording to National Geographic000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "8",
+        "correct": 0,
+        "text": " I did not have any response from my students, so I simply started with a single file. However, I only had an answer for the first 30GB, so my answer could be \u201c8 hours of download time\u201d. We then split the file into two sections, with one section, where the files are download download download download download download download download download download download download download download download download download download download"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "6",
+        "correct": 0,
+        "text": " At this point, he has the ability to drive. When he hits the road with his hands he drops the road. He doesn\u2019t really have the ability of driving. He\u2019s really had his hands on the road for about 6 hours so it was hard to start or stop a car when he left he he he he he he he he he he he he he he he he he he he"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "200000",
+        "correct": 0,
+        "text": " El Ebony's rate for the second 40 hours is $50,000. She can earn her weekly rate by working 2 hours a week to keep track of her time. This makes her total wages $200,000! What's your average wage?\nMarcelo may need extra wages if he has enough time $ $ $ $ she $ she $ she $ $ she she she $ $ $ $ $"
+      }
+    ]
+  },
+  "mode_switch_64_32": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 167.7,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "3.1",
+        "correct": 0,
+        "text": " Karen's eggs are 2.3g of protein and 3.1g of fat. At the farmer's market daily, she will sell five eggs per month eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "4.2",
+        "correct": 0,
+        "text": " 4.2 clinical-grade copper wire\n- \"Aophysiology of the human body: The human body is a complex organism consisting of a diverse range of. of..... of of.... of of...."
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "000000000000000000000000000000000000000000000000000000000",
+        "correct": 0,
+        "text": " At this point, he has no money to pay for all of his work. His own home is not worth anything. The only thing he has is his imagination000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "8",
+        "correct": 0,
+        "text": " The total distance is 2, forcible. If there are 10, the total distance will be 4.\nThe total distance covered by the run is 8, run run run run run run run run run run run run run run run run run run run"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " The total amount of feed in one meal may be as little as five cups per day. Therefore, the amount of food she needs for her chickens is equal to one one one one one one one one one day one one one one one one one one one"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "20000",
+        "correct": 0,
+        "text": " Blue glasses are generally cheaper than green glasses and are usually expensive at first sight. Blue glasses that can be bought at a grocery store usually cost $20,000 $ $ $ $ $ $ $ $ $ $ $arararar $ $ar $"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "1500",
+        "correct": 0,
+        "text": " Taurice\u2019s sheep is 1,500 sheep. What makes the problem worse is that there are no sheep. The sheep in the city are really Seattle Seattle Seattle Seattle Seattle Seattle Seattle Seattle Seattle Seattle Seattle Seattle Seattle Seattle Seattle Seattle Seattle Seattle Seattle"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": null,
+        "correct": 0,
+        "text": " The answer is \"Yes\", but in this case, we have to run the fire \u201cSender\u201d command to try to get the files right. download download download download download download download download download download download download download download download download download download download"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "-3",
+        "correct": 0,
+        "text": " He is used to the fact that he has two days off from work when he has 1-3 days off with his partner, and he does not have to he he he he he he he he he he he he he he he he he he he"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "543100",
+        "correct": 0,
+        "text": " ElJames's rate is $743,000. So, she makes a total of $543,100 for her weekly pay, but it does not,,, $,,,,,,,,,,,,,,,"
+      }
+    ]
+  },
+  "paired_64_64": {
+    "n": 50,
+    "n_correct": 2,
+    "accuracy": 0.04,
+    "wall_s": 179.6,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "1000",
+        "correct": 0,
+        "text": " A duck's bill is 1,000 pounds. eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs eggs"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "1.",
+        "correct": 0,
+        "text": " 1. The minimum number of threads required to complete the operation of a machine is: 4.\n1. Why do we need to use a single thread?\nFor example, consider the following two separate machines:\n- The one used for daily work is called a committee\n- It is used for doing the same of of of of of of of of of of of of of of machine of of of of of of of of of machine of of of of of of of of"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": null,
+        "correct": 0,
+        "text": " Some people might ask.\nThe first thing that happens is that the home owner has to deal with the same problem every time they get their house, so that when they need it, they cannot buy the house itself again because the owner makes money from the price. You have to know your house\u2019s price. money money money money money money money money money money money money money money money money money money money money money money money money money money money money money money money money money"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "2000000.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "correct": 0,
+        "text": " 2,000,000.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " Four diet\nGaining more than one thousand chickens is not enough anymore because of the long-term economic problems caused by the disease and overfishing.\nHow much feed do you have to give your chicken? Your egg is very precious. The more you feed your poultry, the better off your family will be.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "-9",
+        "correct": 0,
+        "text": " He needs to buy 2 glasses per month. If he doesn't sell his new product, he will need to add another two or three glasses each month.\n3. What are you doing now? (6-9)\nAnswer : I'm not getting your money yet, but you are getting your new tax or.......... you you you you..................."
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "1800",
+        "correct": 0,
+        "text": " The Army Corps of Engineers has 12 sheep. What\u2019s the number of sheep on their list when it comes to the number?\nWater education and conservation has become a big part of public education in the United States. Even the intrepid U.S. Army Corps was influenced by many people in the 1800 the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": null,
+        "correct": 0,
+        "text": " Yes. The file is called \u201c Lynx\u201d and is a text file. If you choose to try this, you will have the file listing.\nHow much do I need to download?\n- You have to download everything first. Just to get started: here is the list of the files you have file file file file file file file file file file file file file file file file file file file file file file file file file file file file file file file file file"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": null,
+        "correct": 0,
+        "text": " In a traffic accident, he must take care to stop the driver and stop the car.\nThis is how John runs and is doing on the road.\nJohn starts to operate his car and the other driver's car. The driver tells him that he will be able to control the car, so that he can avoid he he he he he he he he he he he he he he he he he he he he he he he he he he he he he he he he he"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "1.2",
+        "correct": 0,
+        "text": " Elissa's rate for the third week is approximately $1.2 in the first half of the week. This week's salary includes all the costs for the second and third weeks of a year's work, which include all the expenses for the fourth week of the month. Eliza has enough money to put in all week week week week week week week week week week week week week week week week week week week week week week week week week week week week week week week week week"
+      }
+    ]
+  }
+}

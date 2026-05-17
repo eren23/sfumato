@@ -1,0 +1,10 @@
+{
+  "variant": "ar_only",
+  "n_params": 8092160,
+  "artifact_mb": 15.4345703125,
+  "fineweb_bpb": 1.3778,
+  "fineweb_avg_nll_per_tok": 4.4876,
+  "gsm8k_ar_nll": 5.0214,
+  "seed": 221,
+  "max_steps": 60000
+}

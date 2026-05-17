@@ -123,10 +123,66 @@ def gen_ar(model, prompt, max_new=128, eot=50256, temperature=0.0,
     return idx[0].tolist()[gen_start:]
 
 
+def _diff_sample_pred(logits_pos: torch.Tensor, context_ids: torch.Tensor,
+                      temperature: float = 0.0, top_p: float | None = None,
+                      repetition_penalty: float = 1.0):
+    """Pick a token per masked position given diff-head logits.
+
+    logits_pos: (T, V) float logits at the masked positions in the revise region
+    context_ids: (N,) all tokens in the sequence (used for repetition_penalty)
+    Returns (conf: (T,), pred: (T,)) — the chosen token id and its prob.
+
+    With defaults (temperature=0.0, no top_p, no repetition_penalty), this is
+    equivalent to the original argmax behavior.
+
+    repetition_penalty applies COUNT-BASED: a token that appears N times in
+    context_ids has its logit divided by rep_pen ** N (if positive, multiplied
+    otherwise). This is critical for the diff head: a token that argmaxes at
+    many positions in the same forward pass would otherwise get penalized once
+    in total per the standard set-based rule, which is insufficient to break
+    the "fill every mask with the same token" loop.
+    """
+    logits = logits_pos.clone()
+    if repetition_penalty != 1.0:
+        ctx = context_ids[context_ids < 50257]
+        if ctx.numel() > 0:
+            uniq, counts = torch.unique(ctx, return_counts=True)
+            scale = repetition_penalty ** counts.float()  # (U,)
+            seen_logits = logits[:, uniq]  # (T, U)
+            seen_logits = torch.where(seen_logits > 0, seen_logits / scale,
+                                      seen_logits * scale)
+            logits[:, uniq] = seen_logits
+    if temperature <= 0:
+        probs = torch.softmax(logits.float(), dim=-1)
+        conf, pred = probs.max(dim=-1)
+        return conf, pred
+    logits = logits / temperature
+    if top_p is not None and 0 < top_p < 1.0:
+        sorted_logits, sorted_idx = torch.sort(logits, dim=-1, descending=True)
+        cum_probs = torch.cumsum(torch.softmax(sorted_logits, dim=-1), dim=-1)
+        remove = cum_probs > top_p
+        remove[..., 1:] = remove[..., :-1].clone()
+        remove[..., 0] = False
+        sorted_logits = sorted_logits.masked_fill(remove, float("-inf"))
+        logits = torch.full_like(logits, float("-inf"))
+        logits.scatter_(-1, sorted_idx, sorted_logits)
+    probs = torch.softmax(logits.float(), dim=-1)
+    pred = torch.multinomial(probs, num_samples=1).squeeze(-1)
+    conf = probs.gather(-1, pred.unsqueeze(-1)).squeeze(-1)
+    return conf, pred
+
+
 @torch.no_grad()
-def diff_revise(model, full_ids: list[int], revise_start: int, revise_end: int, n_steps: int = 16):
+def diff_revise(model, full_ids: list[int], revise_start: int, revise_end: int,
+                n_steps: int = 16, diff_temperature: float = 0.0,
+                diff_top_p: float | None = None, diff_repetition_penalty: float = 1.0):
     """Re-mask positions [revise_start, revise_end) and apply iterative
-    diff denoising. Returns the revised token id list."""
+    diff denoising. Returns the revised token id list.
+
+    With default diff_* flags this matches the original argmax behavior.
+    Setting diff_temperature=0.8 + diff_top_p=0.9 + diff_repetition_penalty=1.15
+    breaks the diff-head's tendency to fill every masked position with the
+    same token (the 'eggs eggs eggs' / '1 1 1' loop pathology)."""
     device = next(model.parameters()).device
     idx = torch.tensor([full_ids], dtype=torch.long, device=device)
     # Mask the revise region
@@ -137,8 +193,11 @@ def diff_revise(model, full_ids: list[int], revise_start: int, revise_end: int, 
         masked = (region == MASK_TOKEN_ID)
         if not masked.any():
             break
-        probs = torch.softmax(logits[0, revise_start:revise_end].float(), dim=-1)
-        conf, pred = probs.max(dim=-1)
+        conf, pred = _diff_sample_pred(
+            logits[0, revise_start:revise_end], idx[0],
+            temperature=diff_temperature, top_p=diff_top_p,
+            repetition_penalty=diff_repetition_penalty,
+        )
         n_masked = int(masked.sum().item())
         n_to_unmask = max(1, int(n_masked * (step + 1) / n_steps) - ((revise_end - revise_start) - n_masked))
         n_to_unmask = min(n_to_unmask, n_masked)
@@ -154,25 +213,33 @@ def diff_revise(model, full_ids: list[int], revise_start: int, revise_end: int, 
 
 
 @torch.no_grad()
-def gen_mode_switch(model, prompt, k_ar=96, revise_len=32, n_diff_steps=16):
+def gen_mode_switch(model, prompt, k_ar=96, revise_len=32, n_diff_steps=16,
+                    diff_temperature: float = 0.0, diff_top_p: float | None = None,
+                    diff_repetition_penalty: float = 1.0, **ar_kwargs):
     """AR for first k_ar tokens, then re-mask last revise_len and diff-revise.
-    Total generated tokens = k_ar (the revise overlaps with the last 32 ARs)."""
-    ar_part = gen_ar(model, prompt, max_new=k_ar)
+    Total generated tokens = k_ar (the revise overlaps with the last 32 ARs).
+    ar_kwargs forwarded to gen_ar; diff_* flags forwarded to diff_revise."""
+    ar_part = gen_ar(model, prompt, max_new=k_ar, **ar_kwargs)
     full = prompt + ar_part
     if len(ar_part) < revise_len:
         return ar_part
     revise_end = len(full)
     revise_start = revise_end - revise_len
-    refined = diff_revise(model, full, revise_start, revise_end, n_steps=n_diff_steps)
+    refined = diff_revise(model, full, revise_start, revise_end, n_steps=n_diff_steps,
+                          diff_temperature=diff_temperature, diff_top_p=diff_top_p,
+                          diff_repetition_penalty=diff_repetition_penalty)
     return refined[len(prompt):]
 
 
 @torch.no_grad()
-def gen_paired(model, prompt, k_ar=64, k_diff=64, n_diff_steps=16):
-    """T0's paired mode for reference: AR first k_ar, then diff-fill next k_diff."""
+def gen_paired(model, prompt, k_ar=64, k_diff=64, n_diff_steps=16,
+               diff_temperature: float = 0.0, diff_top_p: float | None = None,
+               diff_repetition_penalty: float = 1.0, **ar_kwargs):
+    """T0's paired mode for reference: AR first k_ar, then diff-fill next k_diff.
+    ar_kwargs forwarded to gen_ar; diff_* flags applied to the diff-fill step."""
     device = next(model.parameters()).device
     cfg = model.cfg
-    ar_part = gen_ar(model, prompt, max_new=k_ar)
+    ar_part = gen_ar(model, prompt, max_new=k_ar, **ar_kwargs)
     extended = prompt + ar_part
     if len(extended) + k_diff > cfg.block_size:
         extended = extended[-(cfg.block_size - k_diff):]
@@ -184,8 +251,11 @@ def gen_paired(model, prompt, k_ar=64, k_diff=64, n_diff_steps=16):
         masked = (region == MASK_TOKEN_ID)
         if not masked.any():
             break
-        probs = torch.softmax(logits[0, gen_start:gen_start + k_diff].float(), dim=-1)
-        conf, pred = probs.max(dim=-1)
+        conf, pred = _diff_sample_pred(
+            logits[0, gen_start:gen_start + k_diff], idx[0],
+            temperature=diff_temperature, top_p=diff_top_p,
+            repetition_penalty=diff_repetition_penalty,
+        )
         n_masked = int(masked.sum().item())
         n_to_unmask = max(1, int(n_masked * (step + 1) / n_diff_steps) - (k_diff - n_masked))
         n_to_unmask = min(n_to_unmask, n_masked)
@@ -218,7 +288,13 @@ def main():
     n_eval = int(os.environ.get("N_EVAL", "50"))
     out_path = Path(os.environ.get("OUT", "probe5_results.json"))
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    if torch.cuda.is_available():
+        device = "cuda"
+    elif hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+        device = "mps"
+    else:
+        device = "cpu"
+    device = os.environ.get("DEVICE", device)
     print(f"device={device} ckpt={ckpt}")
 
     ck = torch.load(ckpt, map_location=device, weights_only=False)
@@ -232,25 +308,51 @@ def main():
     tok = AutoTokenizer.from_pretrained("gpt2")
     problems = load_gsm8k_dev_questions(n=n_eval)
 
-    out = {}
+    # Anti-repetition defaults for undertrained models (Holtzman 2020 for AR,
+    # plus per-position sampling on the diff head to break "fill every mask
+    # with the same token" loops).
+    # Override per-env with DECODE_GREEDY=1 to fall back to pure argmax everywhere.
+    if os.environ.get("DECODE_GREEDY", "0") == "1":
+        ar_kw: dict = {}
+        diff_kw: dict = {}
+        decode_label = "greedy"
+    else:
+        ar_kw = dict(
+            temperature=float(os.environ.get("TEMP", "0.8")),
+            top_p=float(os.environ.get("TOP_P", "0.9")),
+            repetition_penalty=float(os.environ.get("REP_PEN", "1.15")),
+            no_repeat_ngram_size=int(os.environ.get("NO_REPEAT_NGRAM", "3")),
+        )
+        diff_kw = dict(
+            diff_temperature=float(os.environ.get("DIFF_TEMP", "0.8")),
+            diff_top_p=float(os.environ.get("DIFF_TOP_P", "0.9")),
+            diff_repetition_penalty=float(os.environ.get("DIFF_REP_PEN", "1.15")),
+        )
+        decode_label = (f"AR(T={ar_kw['temperature']} top_p={ar_kw['top_p']} "
+                        f"rep_pen={ar_kw['repetition_penalty']} no_rep_ngram={ar_kw['no_repeat_ngram_size']}) "
+                        f"DIFF(T={diff_kw['diff_temperature']} top_p={diff_kw['diff_top_p']} "
+                        f"rep_pen={diff_kw['diff_repetition_penalty']})")
+    print(f"decode: {decode_label}")
+
+    out = {"decode_config": {"ar": ar_kw, "diff": diff_kw} if ar_kw else {"mode": "greedy"}}
     print("\n[ar_only]")
-    r = eval_mode(model, problems, lambda m, pr: gen_ar(m, pr, max_new=128), tok)
-    out["ar_only"] = {k: v for k, v in r.items() if k != "results"}
+    r = eval_mode(model, problems, lambda m, pr: gen_ar(m, pr, max_new=128, **ar_kw), tok)
+    out["ar_only"] = {k: v for k, v in r.items() if k != "results"} | {"results_sample": r["results"][:10]}
     print(f"  acc={r['accuracy']*100:.1f}%")
 
     print("\n[mode_switch] AR 96 + diff-revise last 32")
-    r = eval_mode(model, problems, lambda m, pr: gen_mode_switch(m, pr, k_ar=96, revise_len=32), tok)
-    out["mode_switch_96_32"] = {k: v for k, v in r.items() if k != "results"}
+    r = eval_mode(model, problems, lambda m, pr: gen_mode_switch(m, pr, k_ar=96, revise_len=32, **ar_kw, **diff_kw), tok)
+    out["mode_switch_96_32"] = {k: v for k, v in r.items() if k != "results"} | {"results_sample": r["results"][:10]}
     print(f"  acc={r['accuracy']*100:.1f}%")
 
     print("\n[mode_switch] AR 64 + diff-revise last 32")
-    r = eval_mode(model, problems, lambda m, pr: gen_mode_switch(m, pr, k_ar=64, revise_len=32), tok)
-    out["mode_switch_64_32"] = {k: v for k, v in r.items() if k != "results"}
+    r = eval_mode(model, problems, lambda m, pr: gen_mode_switch(m, pr, k_ar=64, revise_len=32, **ar_kw, **diff_kw), tok)
+    out["mode_switch_64_32"] = {k: v for k, v in r.items() if k != "results"} | {"results_sample": r["results"][:10]}
     print(f"  acc={r['accuracy']*100:.1f}%")
 
     print("\n[paired] AR 64 + diff-fill 64 (T0 baseline)")
-    r = eval_mode(model, problems, lambda m, pr: gen_paired(m, pr, k_ar=64, k_diff=64), tok)
-    out["paired_64_64"] = {k: v for k, v in r.items() if k != "results"}
+    r = eval_mode(model, problems, lambda m, pr: gen_paired(m, pr, k_ar=64, k_diff=64, **ar_kw, **diff_kw), tok)
+    out["paired_64_64"] = {k: v for k, v in r.items() if k != "results"} | {"results_sample": r["results"][:10]}
     print(f"  acc={r['accuracy']*100:.1f}%")
 
     out_path.write_text(json.dumps(out, indent=2))

@@ -1,0 +1,491 @@
+=== F8 param-golf-scale ===
+device=cuda variants=['ar_only'] d=128 L=8 H=8
+BS=64 T=512 steps=60000 target_tokens=200,000,000
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from WANDB_API_KEY.
+wandb: Currently logged in as: eren23 to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: Tracking run with wandb version 0.27.0
+wandb: Run data is saved locally in /workspace/sfumato/wandb/run-20260515_134817-ghvpmmo2
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run f8c_paramgolf_ar_only_long-driver
+wandb: ⭐️ View project at https://wandb.ai/eren23/sfumato-e5
+wandb: 🚀 View run at https://wandb.ai/eren23/sfumato-e5/runs/ghvpmmo2
+[wandb-driver] init OK: https://wandb.ai/eren23/sfumato-e5/runs/ghvpmmo2
+
+Fetching ~0.2B FineWeb-Edu tokens (cached on pod)...
+/usr/local/lib/python3.12/dist-packages/transformers/utils/hub.py:128: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+Token indices sequence length is longer than the specified maximum sequence length for this model (1171 > 1024). Running this sequence through the model will result in indexing errors
+  got 200,000,000 tokens in 572.9s
+
+Fetching FineWeb val texts for BPB scoring (independent slice, offset 12000)...
+  got 200 val texts (869192 bytes total)
+Generating train split:   0%|          | 0/7473 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 7473/7473 [00:00<00:00, 126357.17 examples/s]
+Generating test split:   0%|          | 0/1319 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 1319/1319 [00:00<00:00, 27240.17 examples/s]
+
+=== Training ar_only-8M (seed=221, 60000 steps) ===
+[ar_only] model: d=128 L=8 H=8 → 8.1M params
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+wandb: Finishing previous runs because reinit is set to True.
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: 
+wandb: Run history:
+wandb: phase ▁█
+wandb: 
+wandb: Run summary:
+wandb:     fetch_wall_s 572.92572
+wandb: n_tokens_fetched 200000000
+wandb:            phase 1
+wandb:       phase_name fetched
+wandb: 
+wandb: 🚀 View run f8c_paramgolf_ar_only_long-driver at: https://wandb.ai/eren23/sfumato-e5/runs/ghvpmmo2
+wandb: ⭐️ View project at: https://wandb.ai/eren23/sfumato-e5
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260515_134817-ghvpmmo2/logs
+wandb: setting up run t7rap1kf
+wandb: Tracking run with wandb version 0.27.0
+wandb: Run data is saved locally in /workspace/sfumato/wandb/run-20260515_135809-t7rap1kf
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run f8c_paramgolf_ar_only_long-ar_only-seed221
+wandb: ⭐️ View project at https://wandb.ai/eren23/sfumato-e5
+wandb: 🚀 View run at https://wandb.ai/eren23/sfumato-e5/runs/t7rap1kf
+[wandb] init OK: https://wandb.ai/eren23/sfumato-e5/runs/t7rap1kf
+[ar_only] step     0/60000 mode=ar   loss=10.8515 α=1.00 lr=0.00e+00 wall=1s
+[ar_only] step   200/60000 mode=ar   loss=7.2980 α=1.00 lr=6.00e-04 wall=33s
+[ar_only] step   400/60000 mode=ar   loss=6.6096 α=1.00 lr=6.00e-04 wall=65s
+[ar_only] step   600/60000 mode=ar   loss=6.3854 α=1.00 lr=6.00e-04 wall=97s
+[ar_only] step   800/60000 mode=ar   loss=6.3251 α=1.00 lr=6.00e-04 wall=129s
+[ar_only] step   999 val_ar_nll=7.0823
+[ar_only] step  1000/60000 mode=ar   loss=6.1431 α=1.00 lr=6.00e-04 wall=161s
+[ar_only] step  1200/60000 mode=ar   loss=5.9357 α=1.00 lr=6.00e-04 wall=193s
+[ar_only] step  1400/60000 mode=ar   loss=5.9452 α=1.00 lr=5.99e-04 wall=225s
+[ar_only] step  1600/60000 mode=ar   loss=5.8175 α=1.00 lr=5.99e-04 wall=257s
+[ar_only] step  1800/60000 mode=ar   loss=5.7569 α=1.00 lr=5.99e-04 wall=290s
+[ar_only] step  1999 val_ar_nll=6.5508
+[ar_only] step  1999 logged 3 samples to wandb
+[ar_only] step  2000/60000 mode=ar   loss=5.6145 α=1.00 lr=5.99e-04 wall=323s
+[ar_only] step  2200/60000 mode=ar   loss=5.5819 α=1.00 lr=5.99e-04 wall=355s
+[ar_only] step  2400/60000 mode=ar   loss=5.5492 α=1.00 lr=5.98e-04 wall=387s
+[ar_only] step  2600/60000 mode=ar   loss=5.4555 α=1.00 lr=5.98e-04 wall=419s
+[ar_only] step  2800/60000 mode=ar   loss=5.4467 α=1.00 lr=5.97e-04 wall=451s
+[ar_only] step  2999 val_ar_nll=6.1323
+[ar_only] step  3000/60000 mode=ar   loss=5.5001 α=1.00 lr=5.97e-04 wall=484s
+[ar_only] step  3200/60000 mode=ar   loss=5.4240 α=1.00 lr=5.97e-04 wall=516s
+[ar_only] step  3400/60000 mode=ar   loss=5.4253 α=1.00 lr=5.96e-04 wall=548s
+[ar_only] step  3600/60000 mode=ar   loss=5.2951 α=1.00 lr=5.96e-04 wall=580s
+[ar_only] step  3800/60000 mode=ar   loss=5.3311 α=1.00 lr=5.95e-04 wall=612s
+[ar_only] step  3999 val_ar_nll=6.1827
+[ar_only] step  3999 logged 3 samples to wandb
+[ar_only] step  4000/60000 mode=ar   loss=5.3546 α=1.00 lr=5.95e-04 wall=645s
+[ar_only] step  4200/60000 mode=ar   loss=5.1699 α=1.00 lr=5.94e-04 wall=677s
+[ar_only] step  4400/60000 mode=ar   loss=5.1961 α=1.00 lr=5.93e-04 wall=709s
+[ar_only] step  4600/60000 mode=ar   loss=5.2550 α=1.00 lr=5.93e-04 wall=741s
+[ar_only] step  4800/60000 mode=ar   loss=5.2954 α=1.00 lr=5.92e-04 wall=773s
+[ar_only] step  4999 val_ar_nll=6.0019
+[ar_only] step  5000/60000 mode=ar   loss=5.2195 α=1.00 lr=5.91e-04 wall=805s
+[ar_only] step  5200/60000 mode=ar   loss=5.1109 α=1.00 lr=5.91e-04 wall=837s
+[ar_only] step  5400/60000 mode=ar   loss=5.1468 α=1.00 lr=5.90e-04 wall=869s
+[ar_only] step  5600/60000 mode=ar   loss=5.1132 α=1.00 lr=5.89e-04 wall=901s
+[ar_only] step  5800/60000 mode=ar   loss=5.1402 α=1.00 lr=5.88e-04 wall=933s
+[ar_only] step  5999 val_ar_nll=5.8320
+[ar_only] step  5999 logged 3 samples to wandb
+[ar_only] step  6000/60000 mode=ar   loss=5.0885 α=1.00 lr=5.88e-04 wall=966s
+[ar_only] step  6200/60000 mode=ar   loss=5.1272 α=1.00 lr=5.87e-04 wall=998s
+[ar_only] step  6400/60000 mode=ar   loss=5.0854 α=1.00 lr=5.86e-04 wall=1030s
+[ar_only] step  6600/60000 mode=ar   loss=5.1183 α=1.00 lr=5.85e-04 wall=1062s
+[ar_only] step  6800/60000 mode=ar   loss=5.0654 α=1.00 lr=5.84e-04 wall=1094s
+[ar_only] step  6999 val_ar_nll=5.7238
+[ar_only] step  7000/60000 mode=ar   loss=5.0324 α=1.00 lr=5.83e-04 wall=1126s
+[ar_only] step  7200/60000 mode=ar   loss=4.9971 α=1.00 lr=5.82e-04 wall=1158s
+[ar_only] step  7400/60000 mode=ar   loss=5.0975 α=1.00 lr=5.81e-04 wall=1190s
+[ar_only] step  7600/60000 mode=ar   loss=5.0682 α=1.00 lr=5.80e-04 wall=1222s
+[ar_only] step  7800/60000 mode=ar   loss=4.9852 α=1.00 lr=5.79e-04 wall=1254s
+[ar_only] step  7999 val_ar_nll=5.5733
+[ar_only] step  7999 logged 3 samples to wandb
+[ar_only] step  8000/60000 mode=ar   loss=5.0649 α=1.00 lr=5.78e-04 wall=1287s
+[ar_only] step  8200/60000 mode=ar   loss=4.9919 α=1.00 lr=5.77e-04 wall=1319s
+[ar_only] step  8400/60000 mode=ar   loss=5.0575 α=1.00 lr=5.75e-04 wall=1351s
+[ar_only] step  8600/60000 mode=ar   loss=4.9775 α=1.00 lr=5.74e-04 wall=1383s
+[ar_only] step  8800/60000 mode=ar   loss=5.0813 α=1.00 lr=5.73e-04 wall=1415s
+[ar_only] step  8999 val_ar_nll=5.5448
+[ar_only] step  9000/60000 mode=ar   loss=4.9811 α=1.00 lr=5.72e-04 wall=1447s
+[ar_only] step  9200/60000 mode=ar   loss=5.0729 α=1.00 lr=5.70e-04 wall=1479s
+[ar_only] step  9400/60000 mode=ar   loss=5.0459 α=1.00 lr=5.69e-04 wall=1511s
+[ar_only] step  9600/60000 mode=ar   loss=5.0095 α=1.00 lr=5.68e-04 wall=1543s
+[ar_only] step  9800/60000 mode=ar   loss=4.9303 α=1.00 lr=5.66e-04 wall=1575s
+[ar_only] step  9999 val_ar_nll=5.5102
+[ar_only] step  9999 logged 3 samples to wandb
+[ar_only] step 10000/60000 mode=ar   loss=5.0516 α=1.00 lr=5.65e-04 wall=1608s
+[ar_only] step 10200/60000 mode=ar   loss=4.9490 α=1.00 lr=5.64e-04 wall=1640s
+[ar_only] step 10400/60000 mode=ar   loss=4.9728 α=1.00 lr=5.62e-04 wall=1672s
+[ar_only] step 10600/60000 mode=ar   loss=5.0208 α=1.00 lr=5.61e-04 wall=1704s
+[ar_only] step 10800/60000 mode=ar   loss=4.9390 α=1.00 lr=5.59e-04 wall=1736s
+[ar_only] step 10999 val_ar_nll=5.3263
+[ar_only] step 11000/60000 mode=ar   loss=4.9590 α=1.00 lr=5.58e-04 wall=1768s
+[ar_only] step 11200/60000 mode=ar   loss=5.0267 α=1.00 lr=5.56e-04 wall=1800s
+[ar_only] step 11400/60000 mode=ar   loss=4.8491 α=1.00 lr=5.55e-04 wall=1832s
+[ar_only] step 11600/60000 mode=ar   loss=4.8865 α=1.00 lr=5.53e-04 wall=1864s
+[ar_only] step 11800/60000 mode=ar   loss=4.8401 α=1.00 lr=5.51e-04 wall=1896s
+[ar_only] step 11999 val_ar_nll=5.3587
+[ar_only] step 11999 logged 3 samples to wandb
+[ar_only] step 12000/60000 mode=ar   loss=4.9689 α=1.00 lr=5.50e-04 wall=1929s
+[ar_only] step 12200/60000 mode=ar   loss=4.8120 α=1.00 lr=5.48e-04 wall=1961s
+[ar_only] step 12400/60000 mode=ar   loss=4.9493 α=1.00 lr=5.46e-04 wall=1993s
+[ar_only] step 12600/60000 mode=ar   loss=5.0287 α=1.00 lr=5.45e-04 wall=2025s
+[ar_only] step 12800/60000 mode=ar   loss=4.9912 α=1.00 lr=5.43e-04 wall=2057s
+[ar_only] step 12999 val_ar_nll=5.4678
+[ar_only] step 13000/60000 mode=ar   loss=4.9002 α=1.00 lr=5.41e-04 wall=2089s
+[ar_only] step 13200/60000 mode=ar   loss=4.9524 α=1.00 lr=5.39e-04 wall=2121s
+[ar_only] step 13400/60000 mode=ar   loss=4.8699 α=1.00 lr=5.38e-04 wall=2153s
+[ar_only] step 13600/60000 mode=ar   loss=4.9046 α=1.00 lr=5.36e-04 wall=2185s
+[ar_only] step 13800/60000 mode=ar   loss=4.9275 α=1.00 lr=5.34e-04 wall=2217s
+[ar_only] step 13999 val_ar_nll=5.2732
+[ar_only] step 13999 logged 3 samples to wandb
+[ar_only] step 14000/60000 mode=ar   loss=4.8942 α=1.00 lr=5.32e-04 wall=2250s
+[ar_only] step 14200/60000 mode=ar   loss=4.9314 α=1.00 lr=5.30e-04 wall=2282s
+[ar_only] step 14400/60000 mode=ar   loss=4.9579 α=1.00 lr=5.28e-04 wall=2314s
+[ar_only] step 14600/60000 mode=ar   loss=4.9476 α=1.00 lr=5.26e-04 wall=2346s
+[ar_only] step 14800/60000 mode=ar   loss=4.8365 α=1.00 lr=5.24e-04 wall=2378s
+[ar_only] step 14999 val_ar_nll=5.3767
+[ar_only] step 15000/60000 mode=ar   loss=4.8974 α=1.00 lr=5.22e-04 wall=2410s
+[ar_only] step 15200/60000 mode=ar   loss=4.9437 α=1.00 lr=5.20e-04 wall=2442s
+[ar_only] step 15400/60000 mode=ar   loss=4.9090 α=1.00 lr=5.18e-04 wall=2474s
+[ar_only] step 15600/60000 mode=ar   loss=4.8956 α=1.00 lr=5.16e-04 wall=2506s
+[ar_only] step 15800/60000 mode=ar   loss=4.9235 α=1.00 lr=5.14e-04 wall=2538s
+[ar_only] step 15999 val_ar_nll=5.2515
+[ar_only] step 15999 logged 3 samples to wandb
+[ar_only] step 16000/60000 mode=ar   loss=4.8544 α=1.00 lr=5.12e-04 wall=2571s
+[ar_only] step 16200/60000 mode=ar   loss=4.8437 α=1.00 lr=5.10e-04 wall=2603s
+[ar_only] step 16400/60000 mode=ar   loss=4.8974 α=1.00 lr=5.08e-04 wall=2635s
+[ar_only] step 16600/60000 mode=ar   loss=4.8948 α=1.00 lr=5.06e-04 wall=2667s
+[ar_only] step 16800/60000 mode=ar   loss=4.9216 α=1.00 lr=5.04e-04 wall=2699s
+[ar_only] step 16999 val_ar_nll=5.1108
+[ar_only] step 17000/60000 mode=ar   loss=4.8003 α=1.00 lr=5.01e-04 wall=2731s
+[ar_only] step 17200/60000 mode=ar   loss=4.8713 α=1.00 lr=4.99e-04 wall=2764s
+[ar_only] step 17400/60000 mode=ar   loss=4.8860 α=1.00 lr=4.97e-04 wall=2796s
+[ar_only] step 17600/60000 mode=ar   loss=4.8249 α=1.00 lr=4.95e-04 wall=2828s
+[ar_only] step 17800/60000 mode=ar   loss=4.8400 α=1.00 lr=4.93e-04 wall=2860s
+[ar_only] step 17999 val_ar_nll=5.2245
+[ar_only] step 17999 logged 3 samples to wandb
+[ar_only] step 18000/60000 mode=ar   loss=4.8457 α=1.00 lr=4.90e-04 wall=2892s
+[ar_only] step 18200/60000 mode=ar   loss=4.9551 α=1.00 lr=4.88e-04 wall=2924s
+[ar_only] step 18400/60000 mode=ar   loss=4.8399 α=1.00 lr=4.86e-04 wall=2956s
+[ar_only] step 18600/60000 mode=ar   loss=4.8568 α=1.00 lr=4.83e-04 wall=2988s
+[ar_only] step 18800/60000 mode=ar   loss=4.8206 α=1.00 lr=4.81e-04 wall=3020s
+[ar_only] step 18999 val_ar_nll=5.1252
+[ar_only] step 19000/60000 mode=ar   loss=4.8890 α=1.00 lr=4.79e-04 wall=3053s
+[ar_only] step 19200/60000 mode=ar   loss=4.8169 α=1.00 lr=4.76e-04 wall=3085s
+[ar_only] step 19400/60000 mode=ar   loss=4.8305 α=1.00 lr=4.74e-04 wall=3117s
+[ar_only] step 19600/60000 mode=ar   loss=4.8699 α=1.00 lr=4.71e-04 wall=3149s
+[ar_only] step 19800/60000 mode=ar   loss=4.9313 α=1.00 lr=4.69e-04 wall=3181s
+[ar_only] step 19999 val_ar_nll=5.1536
+[ar_only] step 19999 logged 3 samples to wandb
+[ar_only] step 20000/60000 mode=ar   loss=4.8896 α=1.00 lr=4.67e-04 wall=3214s
+[ar_only] step 20200/60000 mode=ar   loss=4.8832 α=1.00 lr=4.64e-04 wall=3246s
+[ar_only] step 20400/60000 mode=ar   loss=4.8449 α=1.00 lr=4.62e-04 wall=3278s
+[ar_only] step 20600/60000 mode=ar   loss=4.7961 α=1.00 lr=4.59e-04 wall=3310s
+[ar_only] step 20800/60000 mode=ar   loss=4.8278 α=1.00 lr=4.57e-04 wall=3342s
+[ar_only] step 20999 val_ar_nll=5.2506
+[ar_only] step 21000/60000 mode=ar   loss=4.7621 α=1.00 lr=4.54e-04 wall=3374s
+[ar_only] step 21200/60000 mode=ar   loss=4.9272 α=1.00 lr=4.52e-04 wall=3406s
+[ar_only] step 21400/60000 mode=ar   loss=4.8475 α=1.00 lr=4.49e-04 wall=3438s
+[ar_only] step 21600/60000 mode=ar   loss=4.8433 α=1.00 lr=4.47e-04 wall=3470s
+[ar_only] step 21800/60000 mode=ar   loss=4.8899 α=1.00 lr=4.44e-04 wall=3502s
+[ar_only] step 21999 val_ar_nll=5.1221
+[ar_only] step 21999 logged 3 samples to wandb
+[ar_only] step 22000/60000 mode=ar   loss=4.8961 α=1.00 lr=4.41e-04 wall=3536s
+[ar_only] step 22200/60000 mode=ar   loss=4.8437 α=1.00 lr=4.39e-04 wall=3568s
+[ar_only] step 22400/60000 mode=ar   loss=4.7997 α=1.00 lr=4.36e-04 wall=3600s
+[ar_only] step 22600/60000 mode=ar   loss=4.9239 α=1.00 lr=4.34e-04 wall=3632s
+[ar_only] step 22800/60000 mode=ar   loss=4.8127 α=1.00 lr=4.31e-04 wall=3664s
+[ar_only] step 22999 val_ar_nll=5.1583
+[ar_only] step 23000/60000 mode=ar   loss=4.9080 α=1.00 lr=4.28e-04 wall=3696s
+[ar_only] step 23200/60000 mode=ar   loss=4.8409 α=1.00 lr=4.26e-04 wall=3728s
+[ar_only] step 23400/60000 mode=ar   loss=4.7816 α=1.00 lr=4.23e-04 wall=3760s
+[ar_only] step 23600/60000 mode=ar   loss=4.8408 α=1.00 lr=4.20e-04 wall=3792s
+[ar_only] step 23800/60000 mode=ar   loss=4.8901 α=1.00 lr=4.18e-04 wall=3824s
+[ar_only] step 23999 val_ar_nll=5.2057
+[ar_only] step 23999 logged 3 samples to wandb
+[ar_only] step 24000/60000 mode=ar   loss=4.8613 α=1.00 lr=4.15e-04 wall=3857s
+[ar_only] step 24200/60000 mode=ar   loss=4.7548 α=1.00 lr=4.12e-04 wall=3889s
+[ar_only] step 24400/60000 mode=ar   loss=4.8714 α=1.00 lr=4.10e-04 wall=3921s
+[ar_only] step 24600/60000 mode=ar   loss=4.8093 α=1.00 lr=4.07e-04 wall=3953s
+[ar_only] step 24800/60000 mode=ar   loss=4.9029 α=1.00 lr=4.04e-04 wall=3985s
+[ar_only] step 24999 val_ar_nll=5.1759
+[ar_only] step 25000/60000 mode=ar   loss=4.7212 α=1.00 lr=4.01e-04 wall=4017s
+[ar_only] step 25200/60000 mode=ar   loss=4.8275 α=1.00 lr=3.99e-04 wall=4049s
+[ar_only] step 25400/60000 mode=ar   loss=4.7755 α=1.00 lr=3.96e-04 wall=4081s
+[ar_only] step 25600/60000 mode=ar   loss=4.9046 α=1.00 lr=3.93e-04 wall=4113s
+[ar_only] step 25800/60000 mode=ar   loss=4.8198 α=1.00 lr=3.90e-04 wall=4145s
+[ar_only] step 25999 val_ar_nll=5.0705
+[ar_only] step 25999 logged 3 samples to wandb
+[ar_only] step 26000/60000 mode=ar   loss=4.8417 α=1.00 lr=3.88e-04 wall=4178s
+[ar_only] step 26200/60000 mode=ar   loss=4.8438 α=1.00 lr=3.85e-04 wall=4210s
+[ar_only] step 26400/60000 mode=ar   loss=4.8317 α=1.00 lr=3.82e-04 wall=4242s
+[ar_only] step 26600/60000 mode=ar   loss=4.7988 α=1.00 lr=3.79e-04 wall=4274s
+[ar_only] step 26800/60000 mode=ar   loss=4.7359 α=1.00 lr=3.77e-04 wall=4306s
+[ar_only] step 26999 val_ar_nll=5.0997
+[ar_only] step 27000/60000 mode=ar   loss=4.8358 α=1.00 lr=3.74e-04 wall=4338s
+[ar_only] step 27200/60000 mode=ar   loss=4.7565 α=1.00 lr=3.71e-04 wall=4370s
+[ar_only] step 27400/60000 mode=ar   loss=4.7564 α=1.00 lr=3.68e-04 wall=4402s
+[ar_only] step 27600/60000 mode=ar   loss=4.8507 α=1.00 lr=3.65e-04 wall=4434s
+[ar_only] step 27800/60000 mode=ar   loss=4.7527 α=1.00 lr=3.63e-04 wall=4466s
+[ar_only] step 27999 val_ar_nll=5.2120
+[ar_only] step 27999 logged 3 samples to wandb
+[ar_only] step 28000/60000 mode=ar   loss=4.7740 α=1.00 lr=3.60e-04 wall=4499s
+[ar_only] step 28200/60000 mode=ar   loss=4.7704 α=1.00 lr=3.57e-04 wall=4531s
+[ar_only] step 28400/60000 mode=ar   loss=4.8404 α=1.00 lr=3.54e-04 wall=4563s
+[ar_only] step 28600/60000 mode=ar   loss=4.8051 α=1.00 lr=3.51e-04 wall=4595s
+[ar_only] step 28800/60000 mode=ar   loss=4.7981 α=1.00 lr=3.48e-04 wall=4627s
+[ar_only] step 28999 val_ar_nll=5.1550
+[ar_only] step 29000/60000 mode=ar   loss=4.7445 α=1.00 lr=3.46e-04 wall=4659s
+[ar_only] step 29200/60000 mode=ar   loss=4.8581 α=1.00 lr=3.43e-04 wall=4691s
+[ar_only] step 29400/60000 mode=ar   loss=4.8346 α=1.00 lr=3.40e-04 wall=4723s
+[ar_only] step 29600/60000 mode=ar   loss=4.7445 α=1.00 lr=3.37e-04 wall=4756s
+[ar_only] step 29800/60000 mode=ar   loss=4.7422 α=1.00 lr=3.34e-04 wall=4788s
+[ar_only] step 29999 val_ar_nll=5.0047
+[ar_only] step 29999 logged 3 samples to wandb
+[ar_only] step 30000/60000 mode=ar   loss=4.7981 α=1.00 lr=3.31e-04 wall=4821s
+[ar_only] step 30200/60000 mode=ar   loss=4.7889 α=1.00 lr=3.29e-04 wall=4853s
+[ar_only] step 30400/60000 mode=ar   loss=4.8315 α=1.00 lr=3.26e-04 wall=4885s
+[ar_only] step 30600/60000 mode=ar   loss=4.8285 α=1.00 lr=3.23e-04 wall=4917s
+[ar_only] step 30800/60000 mode=ar   loss=4.8089 α=1.00 lr=3.20e-04 wall=4949s
+[ar_only] step 30999 val_ar_nll=5.0090
+[ar_only] step 31000/60000 mode=ar   loss=4.8713 α=1.00 lr=3.17e-04 wall=4981s
+[ar_only] step 31200/60000 mode=ar   loss=4.7128 α=1.00 lr=3.14e-04 wall=5013s
+[ar_only] step 31400/60000 mode=ar   loss=4.7426 α=1.00 lr=3.12e-04 wall=5045s
+[ar_only] step 31600/60000 mode=ar   loss=4.7996 α=1.00 lr=3.09e-04 wall=5077s
+[ar_only] step 31800/60000 mode=ar   loss=4.8522 α=1.00 lr=3.06e-04 wall=5110s
+[ar_only] step 31999 val_ar_nll=5.0410
+[ar_only] step 31999 logged 3 samples to wandb
+[ar_only] step 32000/60000 mode=ar   loss=4.7856 α=1.00 lr=3.03e-04 wall=5142s
+[ar_only] step 32200/60000 mode=ar   loss=4.8056 α=1.00 lr=3.00e-04 wall=5174s
+[ar_only] step 32400/60000 mode=ar   loss=4.9145 α=1.00 lr=2.97e-04 wall=5206s
+[ar_only] step 32600/60000 mode=ar   loss=4.7648 α=1.00 lr=2.95e-04 wall=5238s
+[ar_only] step 32800/60000 mode=ar   loss=4.8202 α=1.00 lr=2.92e-04 wall=5270s
+[ar_only] step 32999 val_ar_nll=5.1547
+[ar_only] step 33000/60000 mode=ar   loss=4.7832 α=1.00 lr=2.89e-04 wall=5303s
+[ar_only] step 33200/60000 mode=ar   loss=4.8479 α=1.00 lr=2.86e-04 wall=5335s
+[ar_only] step 33400/60000 mode=ar   loss=4.7799 α=1.00 lr=2.83e-04 wall=5367s
+[ar_only] step 33600/60000 mode=ar   loss=4.8315 α=1.00 lr=2.81e-04 wall=5399s
+[ar_only] step 33800/60000 mode=ar   loss=4.6720 α=1.00 lr=2.78e-04 wall=5431s
+[ar_only] step 33999 val_ar_nll=5.0735
+[ar_only] step 33999 logged 3 samples to wandb
+[ar_only] step 34000/60000 mode=ar   loss=4.7281 α=1.00 lr=2.75e-04 wall=5464s
+[ar_only] step 34200/60000 mode=ar   loss=4.7675 α=1.00 lr=2.72e-04 wall=5496s
+[ar_only] step 34400/60000 mode=ar   loss=4.7138 α=1.00 lr=2.70e-04 wall=5528s
+[ar_only] step 34600/60000 mode=ar   loss=4.7476 α=1.00 lr=2.67e-04 wall=5560s
+[ar_only] step 34800/60000 mode=ar   loss=4.8210 α=1.00 lr=2.64e-04 wall=5592s
+[ar_only] step 34999 val_ar_nll=5.2042
+[ar_only] step 35000/60000 mode=ar   loss=4.6949 α=1.00 lr=2.61e-04 wall=5624s
+[ar_only] step 35200/60000 mode=ar   loss=4.7868 α=1.00 lr=2.59e-04 wall=5656s
+[ar_only] step 35400/60000 mode=ar   loss=4.7821 α=1.00 lr=2.56e-04 wall=5688s
+[ar_only] step 35600/60000 mode=ar   loss=4.7325 α=1.00 lr=2.53e-04 wall=5720s
+[ar_only] step 35800/60000 mode=ar   loss=4.7726 α=1.00 lr=2.50e-04 wall=5752s
+[ar_only] step 35999 val_ar_nll=5.1046
+[ar_only] step 35999 logged 3 samples to wandb
+[ar_only] step 36000/60000 mode=ar   loss=4.7925 α=1.00 lr=2.48e-04 wall=5785s
+[ar_only] step 36200/60000 mode=ar   loss=4.6812 α=1.00 lr=2.45e-04 wall=5817s
+[ar_only] step 36400/60000 mode=ar   loss=4.8279 α=1.00 lr=2.42e-04 wall=5849s
+[ar_only] step 36600/60000 mode=ar   loss=4.7703 α=1.00 lr=2.40e-04 wall=5881s
+[ar_only] step 36800/60000 mode=ar   loss=4.8017 α=1.00 lr=2.37e-04 wall=5913s
+[ar_only] step 36999 val_ar_nll=5.0013
+[ar_only] step 37000/60000 mode=ar   loss=4.7740 α=1.00 lr=2.34e-04 wall=5945s
+[ar_only] step 37200/60000 mode=ar   loss=4.7398 α=1.00 lr=2.32e-04 wall=5977s
+[ar_only] step 37400/60000 mode=ar   loss=4.8175 α=1.00 lr=2.29e-04 wall=6009s
+[ar_only] step 37600/60000 mode=ar   loss=4.6629 α=1.00 lr=2.26e-04 wall=6041s
+[ar_only] step 37800/60000 mode=ar   loss=4.7643 α=1.00 lr=2.24e-04 wall=6073s
+[ar_only] step 37999 val_ar_nll=5.0937
+[ar_only] step 37999 logged 3 samples to wandb
+[ar_only] step 38000/60000 mode=ar   loss=4.6815 α=1.00 lr=2.21e-04 wall=6106s
+[ar_only] step 38200/60000 mode=ar   loss=4.7499 α=1.00 lr=2.19e-04 wall=6138s
+[ar_only] step 38400/60000 mode=ar   loss=4.7170 α=1.00 lr=2.16e-04 wall=6170s
+[ar_only] step 38600/60000 mode=ar   loss=4.7649 α=1.00 lr=2.13e-04 wall=6202s
+[ar_only] step 38800/60000 mode=ar   loss=4.7784 α=1.00 lr=2.11e-04 wall=6234s
+[ar_only] step 38999 val_ar_nll=5.0403
+[ar_only] step 39000/60000 mode=ar   loss=4.7219 α=1.00 lr=2.08e-04 wall=6266s
+[ar_only] step 39200/60000 mode=ar   loss=4.7223 α=1.00 lr=2.06e-04 wall=6298s
+[ar_only] step 39400/60000 mode=ar   loss=4.7051 α=1.00 lr=2.03e-04 wall=6331s
+[ar_only] step 39600/60000 mode=ar   loss=4.8038 α=1.00 lr=2.01e-04 wall=6363s
+[ar_only] step 39800/60000 mode=ar   loss=4.8090 α=1.00 lr=1.98e-04 wall=6395s
+[ar_only] step 39999 val_ar_nll=5.0575
+[ar_only] step 39999 logged 3 samples to wandb
+[ar_only] step 40000/60000 mode=ar   loss=4.6798 α=1.00 lr=1.96e-04 wall=6428s
+[ar_only] step 40200/60000 mode=ar   loss=4.7248 α=1.00 lr=1.93e-04 wall=6460s
+[ar_only] step 40400/60000 mode=ar   loss=4.8382 α=1.00 lr=1.91e-04 wall=6492s
+[ar_only] step 40600/60000 mode=ar   loss=4.7790 α=1.00 lr=1.89e-04 wall=6524s
+[ar_only] step 40800/60000 mode=ar   loss=4.7427 α=1.00 lr=1.86e-04 wall=6556s
+[ar_only] step 40999 val_ar_nll=5.0351
+[ar_only] step 41000/60000 mode=ar   loss=4.7965 α=1.00 lr=1.84e-04 wall=6588s
+[ar_only] step 41200/60000 mode=ar   loss=4.6985 α=1.00 lr=1.81e-04 wall=6620s
+[ar_only] step 41400/60000 mode=ar   loss=4.7274 α=1.00 lr=1.79e-04 wall=6652s
+[ar_only] step 41600/60000 mode=ar   loss=4.7077 α=1.00 lr=1.77e-04 wall=6684s
+[ar_only] step 41800/60000 mode=ar   loss=4.7360 α=1.00 lr=1.74e-04 wall=6716s
+[ar_only] step 41999 val_ar_nll=5.1626
+[ar_only] step 41999 logged 3 samples to wandb
+[ar_only] step 42000/60000 mode=ar   loss=4.7421 α=1.00 lr=1.72e-04 wall=6749s
+[ar_only] step 42200/60000 mode=ar   loss=4.7064 α=1.00 lr=1.70e-04 wall=6781s
+[ar_only] step 42400/60000 mode=ar   loss=4.7213 α=1.00 lr=1.67e-04 wall=6813s
+[ar_only] step 42600/60000 mode=ar   loss=4.7288 α=1.00 lr=1.65e-04 wall=6845s
+[ar_only] step 42800/60000 mode=ar   loss=4.7519 α=1.00 lr=1.63e-04 wall=6877s
+[ar_only] step 42999 val_ar_nll=5.0370
+[ar_only] step 43000/60000 mode=ar   loss=4.8498 α=1.00 lr=1.61e-04 wall=6909s
+[ar_only] step 43200/60000 mode=ar   loss=4.6356 α=1.00 lr=1.59e-04 wall=6941s
+[ar_only] step 43400/60000 mode=ar   loss=4.6436 α=1.00 lr=1.56e-04 wall=6973s
+[ar_only] step 43600/60000 mode=ar   loss=4.7311 α=1.00 lr=1.54e-04 wall=7005s
+[ar_only] step 43800/60000 mode=ar   loss=4.8053 α=1.00 lr=1.52e-04 wall=7037s
+[ar_only] step 43999 val_ar_nll=5.0640
+[ar_only] step 43999 logged 3 samples to wandb
+[ar_only] step 44000/60000 mode=ar   loss=4.7879 α=1.00 lr=1.50e-04 wall=7070s
+[ar_only] step 44200/60000 mode=ar   loss=4.7371 α=1.00 lr=1.48e-04 wall=7102s
+[ar_only] step 44400/60000 mode=ar   loss=4.7325 α=1.00 lr=1.46e-04 wall=7134s
+[ar_only] step 44600/60000 mode=ar   loss=4.8604 α=1.00 lr=1.44e-04 wall=7166s
+[ar_only] step 44800/60000 mode=ar   loss=4.8277 α=1.00 lr=1.42e-04 wall=7198s
+[ar_only] step 44999 val_ar_nll=5.0705
+[ar_only] step 45000/60000 mode=ar   loss=4.6588 α=1.00 lr=1.40e-04 wall=7230s
+[ar_only] step 45200/60000 mode=ar   loss=4.7427 α=1.00 lr=1.38e-04 wall=7262s
+[ar_only] step 45400/60000 mode=ar   loss=4.7326 α=1.00 lr=1.36e-04 wall=7294s
+[ar_only] step 45600/60000 mode=ar   loss=4.7460 α=1.00 lr=1.34e-04 wall=7326s
+[ar_only] step 45800/60000 mode=ar   loss=4.7274 α=1.00 lr=1.32e-04 wall=7358s
+[ar_only] step 45999 val_ar_nll=5.1119
+[ar_only] step 45999 logged 3 samples to wandb
+[ar_only] step 46000/60000 mode=ar   loss=4.6381 α=1.00 lr=1.30e-04 wall=7391s
+[ar_only] step 46200/60000 mode=ar   loss=4.7083 α=1.00 lr=1.28e-04 wall=7423s
+[ar_only] step 46400/60000 mode=ar   loss=4.6971 α=1.00 lr=1.26e-04 wall=7455s
+[ar_only] step 46600/60000 mode=ar   loss=4.6511 α=1.00 lr=1.24e-04 wall=7487s
+[ar_only] step 46800/60000 mode=ar   loss=4.6926 α=1.00 lr=1.22e-04 wall=7519s
+[ar_only] step 46999 val_ar_nll=5.0636
+[ar_only] step 47000/60000 mode=ar   loss=4.7904 α=1.00 lr=1.21e-04 wall=7551s
+[ar_only] step 47200/60000 mode=ar   loss=4.7282 α=1.00 lr=1.19e-04 wall=7583s
+[ar_only] step 47400/60000 mode=ar   loss=4.7426 α=1.00 lr=1.17e-04 wall=7615s
+[ar_only] step 47600/60000 mode=ar   loss=4.7098 α=1.00 lr=1.15e-04 wall=7647s
+[ar_only] step 47800/60000 mode=ar   loss=4.8109 α=1.00 lr=1.14e-04 wall=7679s
+[ar_only] step 47999 val_ar_nll=4.9893
+[ar_only] step 47999 logged 3 samples to wandb
+[ar_only] step 48000/60000 mode=ar   loss=4.8168 α=1.00 lr=1.12e-04 wall=7713s
+[ar_only] step 48200/60000 mode=ar   loss=4.5896 α=1.00 lr=1.10e-04 wall=7745s
+[ar_only] step 48400/60000 mode=ar   loss=4.7496 α=1.00 lr=1.09e-04 wall=7777s
+[ar_only] step 48600/60000 mode=ar   loss=4.8298 α=1.00 lr=1.07e-04 wall=7810s
+[ar_only] step 48800/60000 mode=ar   loss=4.7252 α=1.00 lr=1.05e-04 wall=7842s
+[ar_only] step 48999 val_ar_nll=4.9827
+[ar_only] step 49000/60000 mode=ar   loss=4.7156 α=1.00 lr=1.04e-04 wall=7874s
+[ar_only] step 49200/60000 mode=ar   loss=4.6577 α=1.00 lr=1.02e-04 wall=7907s
+[ar_only] step 49400/60000 mode=ar   loss=4.7024 α=1.00 lr=1.01e-04 wall=7939s
+[ar_only] step 49600/60000 mode=ar   loss=4.6544 α=1.00 lr=9.93e-05 wall=7971s
+[ar_only] step 49800/60000 mode=ar   loss=4.7189 α=1.00 lr=9.78e-05 wall=8003s
+[ar_only] step 49999 val_ar_nll=5.0581
+[ar_only] step 49999 logged 3 samples to wandb
+[ar_only] step 50000/60000 mode=ar   loss=4.6969 α=1.00 lr=9.64e-05 wall=8035s
+[ar_only] step 50200/60000 mode=ar   loss=4.6656 α=1.00 lr=9.50e-05 wall=8067s
+[ar_only] step 50400/60000 mode=ar   loss=4.7382 α=1.00 lr=9.36e-05 wall=8100s
+[ar_only] step 50600/60000 mode=ar   loss=4.5920 α=1.00 lr=9.23e-05 wall=8132s
+[ar_only] step 50800/60000 mode=ar   loss=4.7424 α=1.00 lr=9.09e-05 wall=8164s
+[ar_only] step 50999 val_ar_nll=5.0078
+[ar_only] step 51000/60000 mode=ar   loss=4.7326 α=1.00 lr=8.96e-05 wall=8196s
+[ar_only] step 51200/60000 mode=ar   loss=4.7108 α=1.00 lr=8.83e-05 wall=8228s
+[ar_only] step 51400/60000 mode=ar   loss=4.8202 α=1.00 lr=8.71e-05 wall=8260s
+[ar_only] step 51600/60000 mode=ar   loss=4.7419 α=1.00 lr=8.59e-05 wall=8293s
+[ar_only] step 51800/60000 mode=ar   loss=4.7214 α=1.00 lr=8.47e-05 wall=8325s
+[ar_only] step 51999 val_ar_nll=5.0287
+[ar_only] step 51999 logged 3 samples to wandb
+[ar_only] step 52000/60000 mode=ar   loss=4.7284 α=1.00 lr=8.35e-05 wall=8358s
+[ar_only] step 52200/60000 mode=ar   loss=4.7195 α=1.00 lr=8.24e-05 wall=8390s
+[ar_only] step 52400/60000 mode=ar   loss=4.7840 α=1.00 lr=8.12e-05 wall=8422s
+[ar_only] step 52600/60000 mode=ar   loss=4.6801 α=1.00 lr=8.01e-05 wall=8454s
+[ar_only] step 52800/60000 mode=ar   loss=4.7047 α=1.00 lr=7.91e-05 wall=8486s
+[ar_only] step 52999 val_ar_nll=5.0163
+[ar_only] step 53000/60000 mode=ar   loss=4.7283 α=1.00 lr=7.81e-05 wall=8518s
+[ar_only] step 53200/60000 mode=ar   loss=4.7644 α=1.00 lr=7.70e-05 wall=8550s
+[ar_only] step 53400/60000 mode=ar   loss=4.8490 α=1.00 lr=7.61e-05 wall=8582s
+[ar_only] step 53600/60000 mode=ar   loss=4.7620 α=1.00 lr=7.51e-05 wall=8614s
+[ar_only] step 53800/60000 mode=ar   loss=4.7183 α=1.00 lr=7.42e-05 wall=8646s
+[ar_only] step 53999 val_ar_nll=5.0237
+[ar_only] step 53999 logged 3 samples to wandb
+[ar_only] step 54000/60000 mode=ar   loss=4.5844 α=1.00 lr=7.33e-05 wall=8679s
+[ar_only] step 54200/60000 mode=ar   loss=4.7945 α=1.00 lr=7.24e-05 wall=8711s
+[ar_only] step 54400/60000 mode=ar   loss=4.6225 α=1.00 lr=7.16e-05 wall=8743s
+[ar_only] step 54600/60000 mode=ar   loss=4.6814 α=1.00 lr=7.08e-05 wall=8775s
+[ar_only] step 54800/60000 mode=ar   loss=4.7537 α=1.00 lr=7.00e-05 wall=8807s
+[ar_only] step 54999 val_ar_nll=5.1362
+[ar_only] step 55000/60000 mode=ar   loss=4.7812 α=1.00 lr=6.93e-05 wall=8839s
+[ar_only] step 55200/60000 mode=ar   loss=4.6505 α=1.00 lr=6.85e-05 wall=8871s
+[ar_only] step 55400/60000 mode=ar   loss=4.6634 α=1.00 lr=6.78e-05 wall=8904s
+[ar_only] step 55600/60000 mode=ar   loss=4.7899 α=1.00 lr=6.72e-05 wall=8936s
+[ar_only] step 55800/60000 mode=ar   loss=4.7360 α=1.00 lr=6.65e-05 wall=8968s
+[ar_only] step 55999 val_ar_nll=5.1286
+[ar_only] step 55999 logged 3 samples to wandb
+[ar_only] step 56000/60000 mode=ar   loss=4.7054 α=1.00 lr=6.59e-05 wall=9000s
+[ar_only] step 56200/60000 mode=ar   loss=4.7088 α=1.00 lr=6.54e-05 wall=9032s
+[ar_only] step 56400/60000 mode=ar   loss=4.6777 α=1.00 lr=6.48e-05 wall=9064s
+[ar_only] step 56600/60000 mode=ar   loss=4.6837 α=1.00 lr=6.43e-05 wall=9096s
+[ar_only] step 56800/60000 mode=ar   loss=4.6896 α=1.00 lr=6.38e-05 wall=9128s
+[ar_only] step 56999 val_ar_nll=5.0537
+[ar_only] step 57000/60000 mode=ar   loss=4.6234 α=1.00 lr=6.33e-05 wall=9160s
+[ar_only] step 57200/60000 mode=ar   loss=4.8040 α=1.00 lr=6.29e-05 wall=9193s
+[ar_only] step 57400/60000 mode=ar   loss=4.5992 α=1.00 lr=6.25e-05 wall=9225s
+[ar_only] step 57600/60000 mode=ar   loss=4.6856 α=1.00 lr=6.21e-05 wall=9257s
+[ar_only] step 57800/60000 mode=ar   loss=4.7426 α=1.00 lr=6.18e-05 wall=9289s
+[ar_only] step 57999 val_ar_nll=5.0400
+[ar_only] step 57999 logged 3 samples to wandb
+[ar_only] step 58000/60000 mode=ar   loss=4.7754 α=1.00 lr=6.15e-05 wall=9322s
+[ar_only] step 58200/60000 mode=ar   loss=4.7145 α=1.00 lr=6.12e-05 wall=9354s
+[ar_only] step 58400/60000 mode=ar   loss=4.7034 α=1.00 lr=6.10e-05 wall=9386s
+[ar_only] step 58600/60000 mode=ar   loss=4.7180 α=1.00 lr=6.07e-05 wall=9418s
+[ar_only] step 58800/60000 mode=ar   loss=4.6698 α=1.00 lr=6.05e-05 wall=9450s
+[ar_only] step 58999 val_ar_nll=5.0719
+[ar_only] step 59000/60000 mode=ar   loss=4.6862 α=1.00 lr=6.04e-05 wall=9482s
+[ar_only] step 59200/60000 mode=ar   loss=4.7201 α=1.00 lr=6.02e-05 wall=9514s
+[ar_only] step 59400/60000 mode=ar   loss=4.7185 α=1.00 lr=6.01e-05 wall=9546s
+[ar_only] step 59600/60000 mode=ar   loss=4.7032 α=1.00 lr=6.01e-05 wall=9578s
+[ar_only] step 59800/60000 mode=ar   loss=4.6149 α=1.00 lr=6.00e-05 wall=9610s
+[ar_only] step 59999 val_ar_nll=5.0222
+[ar_only] step 59999 logged 3 samples to wandb
+wandb: uploading artifact run-t7rap1kf-samples; updating run metadata
+wandb: uploading artifact run-t7rap1kf-samples
+wandb: uploading history steps 1257-1259, summary, console lines 389-390
+wandb: 
+wandb: Run history:
+wandb:             alpha ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:      ar_loss_last █▅▄▃▃▂▂▂▂▂▁▁▁▂▂▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:              loss █▅▅▄▄▃▃▃▃▃▃▂▂▂▂▂▂▂▁▂▂▂▁▁▂▁▂▂▁▂▁▁▁▂▁▁▁▁▂▂
+wandb:                lr ███████▇▇▇▇▇▆▆▆▆▅▅▅▄▄▃▃▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:              step ▁▁▁▁▂▂▂▂▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▆▆▆▆▇▇█████
+wandb:        val_ar_nll █▆▅▅▄▃▃▃▃▂▃▂▁▂▁▂▂▁▂▂▁▁▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: val_ar_perplexity █▅▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       wallclock_s ▁▁▁▂▂▂▂▂▃▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇█████
+wandb:                +1 ...
+wandb: 
+wandb: Run summary:
+wandb:             alpha 1
+wandb:      ar_loss_last 4.60091
+wandb:    diff_loss_last nan
+wandb:     final_ar_loss 4.60091
+wandb:              loss 4.60091
+wandb:                lr 6e-05
+wandb:              mode ar
+wandb:              step 59999
+wandb:        val_ar_nll 5.02221
+wandb: val_ar_perplexity 151.74605
+wandb:                +2 ...
+wandb: 
+wandb: 🚀 View run f8c_paramgolf_ar_only_long-ar_only-seed221 at: https://wandb.ai/eren23/sfumato-e5/runs/t7rap1kf
+wandb: ⭐️ View project at: https://wandb.ai/eren23/sfumato-e5
+wandb: Synced 5 W&B file(s), 30 media file(s), 60 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260515_135809-t7rap1kf/logs
+[ar_only] done. 9643s. wrote /workspace/sfumato/e5/results/f8c_paramgolf_ar_only_long/ar_only/model.pt and /workspace/sfumato/e5/results/f8c_paramgolf_ar_only_long/ar_only/summary.json
+  train wall_s=9648.3
+
+=== Scoring + sampling ar_only ===
+  n_params=8.09M  artifact=15.4 MB bf16  (param-golf cap: 16 MB)
+Token indices sequence length is longer than the specified maximum sequence length for this model (2026 > 1024). Running this sequence through the model will result in indexing errors
+  FineWeb-val BPB: 1.3778  (avg_nll/tok=4.4876)
+  GSM8K AR-NLL: 5.0214
+  wrote /workspace/sfumato/e5/results/f8c_paramgolf_ar_only_long/ar_only/samples.md
