@@ -195,6 +195,11 @@ def main():
         if not ckpt.exists():
             print(f"\n=== Training {variant}-1B (seed={seed}, {max_steps} steps) ===")
             t0 = time.time()
+            # Resume from the existing model.pt if it carries optim state
+            # (final=True chk-ed by load via 'optim_state_dict' presence).
+            resume_path = run_out / "model.pt"
+            if not resume_path.exists():
+                resume_path = None
             train_one(
                 variant=variant,
                 d_model=d_model, n_layers=n_layers, n_heads=n_heads,
@@ -207,6 +212,8 @@ def main():
                 val_every=500,
                 sample_every=1000,
                 tokenizer_for_samples=tok,
+                resume_from=resume_path,
+                save_every=env_int("SAVE_EVERY", 5000),
             )
             print(f"  train wall_s={time.time()-t0:.1f}")
         else:

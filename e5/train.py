@@ -124,6 +124,8 @@ def train_one(
     val_every: int = 1000,
     sample_every: int = 2000,
     tokenizer_for_samples=None,
+    resume_from: Path | None = None,
+    save_every: int = 5000,
 ) -> dict:
     torch.manual_seed(seed)
     np.random.seed(seed)
@@ -180,8 +182,49 @@ def train_one(
 
     last_ar = float("nan")
     last_diff = float("nan")
+    start_step = 0
 
-    for step in range(max_steps):
+    # Optional resume from a full-state checkpoint (model + optim + step + RNG).
+    if resume_from is not None and Path(resume_from).exists():
+        try:
+            ck = torch.load(resume_from, map_location=device, weights_only=False)
+            model.load_state_dict(ck["state_dict"])
+            if "optim_state_dict" in ck:
+                optim.load_state_dict(ck["optim_state_dict"])
+            if "rng_torch" in ck:
+                torch.set_rng_state(ck["rng_torch"].cpu() if hasattr(ck["rng_torch"], "cpu") else ck["rng_torch"])
+            if "rng_numpy" in ck:
+                np.random.set_state(ck["rng_numpy"])
+            start_step = int(ck.get("step", 0)) + 1
+            print(f"[{variant}] resumed from {resume_from} at step {start_step}", flush=True)
+        except Exception as e:
+            print(f"[{variant}] resume failed: {e!s:.200} — starting fresh", flush=True)
+            start_step = 0
+
+    ckpt_path = out_dir / "model.pt"
+
+    def _save_ckpt(at_step: int, final: bool = False) -> None:
+        """Save model + optim + step + RNG so the run can resume.
+        Atomic write: save to model.pt.tmp, then rename to model.pt.
+        """
+        payload = {
+            "config": cfg.__dict__,
+            "state_dict": model.state_dict(),
+            "optim_state_dict": optim.state_dict(),
+            "step": at_step,
+            "peak_lr": peak_lr,
+            "max_steps": max_steps,
+            "variant": variant,
+            "n_params": n_params,
+            "rng_torch": torch.get_rng_state(),
+            "rng_numpy": np.random.get_state(),
+            "final": final,
+        }
+        tmp = ckpt_path.with_suffix(".pt.tmp")
+        torch.save(payload, tmp)
+        tmp.replace(ckpt_path)
+
+    for step in range(start_step, max_steps):
         try:
             window = next(loader_iter)
         except StopIteration:
@@ -220,6 +263,14 @@ def train_one(
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
         optim.step()
+
+        # Periodic full-state checkpoint so a crash doesn't lose the run.
+        if step > 0 and step % save_every == 0:
+            try:
+                _save_ckpt(at_step=step, final=False)
+                print(f"[{variant}] step {step:5d} checkpoint saved -> {ckpt_path}", flush=True)
+            except Exception as e:
+                print(f"[ckpt warn] {e!s:.200}", flush=True)
 
         if step % 50 == 0 or step == max_steps - 1:
             rec = {
@@ -306,15 +357,8 @@ def train_one(
     log_fh.close()
     wall_s = time.time() - t0
 
-    # Save checkpoint (state dict only) for eval
-    ckpt_path = out_dir / "model.pt"
-    torch.save({
-        "config": cfg.__dict__,
-        "state_dict": model.state_dict(),
-        "variant": variant,
-        "n_params": n_params,
-        "max_steps": max_steps,
-    }, ckpt_path)
+    # Final full-state checkpoint (atomic write via _save_ckpt).
+    _save_ckpt(at_step=max_steps - 1, final=True)
 
     if wb is not None:
         try:
