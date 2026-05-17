@@ -175,11 +175,19 @@ def load_gsm8k_dev_questions(
     indices_json: Path = Path("e4/data/gsm8k_dev_200.json"),
     n: int = 50,
     tokenizer_name: str = DEFAULT_TOKENIZER,
+    prompt_format: str = "qa",
+    fewshot_k: int = 2,
 ) -> list[dict]:
-    """Load the GSM8K test problems referenced by the frozen indices file.
+    """Load GSM8K test problems referenced by the frozen indices file.
 
-    Returns a list of {idx, question, gold, question_tokens (list[int])}.
-    Used by the eval loop in `e5.eval`.
+    prompt_format:
+      "qa"     — "Question: ...\\nAnswer:"  (default, original behavior)
+      "prose"  — doc-style preamble, no QA markers (matches FineWeb-Edu
+                 training distribution; model just continues prose)
+      "fewshot" — prepend `fewshot_k` worked examples from GSM8K-train
+                 in raw "Question:...Answer:...#### N\\n\\n" format
+
+    Returns list of {idx, question, gold, prompt_tokens, prompt_text}.
     """
     from datasets import load_dataset
     from transformers import AutoTokenizer
@@ -188,12 +196,77 @@ def load_gsm8k_dev_questions(
     spec = json.loads((repo_root / indices_json).read_text())
     ds = load_dataset(spec["dataset"], spec.get("config", "main"), split=spec["split"])
     tok = AutoTokenizer.from_pretrained(tokenizer_name)
+
+    fewshot_prefix = ""
+    if prompt_format == "fewshot":
+        train_ds = load_dataset("gsm8k", "main", split="train")
+        examples = []
+        for i in range(fewshot_k):
+            ex = train_ds[i]
+            examples.append(f"Question: {ex['question']}\nAnswer: {ex['answer']}\n")
+        fewshot_prefix = "\n".join(examples) + "\n"
+
     out = []
     for idx in spec["indices"][:n]:
         row = ds[idx]
         ans = row["answer"]
         gold = ans.split("####")[-1].strip().replace(",", "") if "####" in ans else ans.strip()
-        text = f"Question: {row['question']}\nAnswer:"
+        if prompt_format == "qa":
+            text = f"Question: {row['question']}\nAnswer:"
+        elif prompt_format == "prose":
+            text = (f"A recent math problem reads: \"{row['question']}\" "
+                    f"The reasoning goes as follows.")
+        elif prompt_format == "fewshot":
+            text = fewshot_prefix + f"Question: {row['question']}\nAnswer:"
+        else:
+            raise ValueError(f"unknown prompt_format={prompt_format!r}")
         toks = tok.encode(text, add_special_tokens=False)
-        out.append({"idx": idx, "question": row["question"], "gold": gold, "prompt_tokens": toks})
+        out.append({"idx": idx, "question": row["question"], "gold": gold,
+                    "prompt_tokens": toks, "prompt_text": text,
+                    "prompt_format": prompt_format})
     return out
+
+
+def load_mixed_tokens(
+    fineweb_tokens_target: int = 2_850_000_000,
+    gsm8k_repeats: int = 20,
+    tokenizer_name: str = DEFAULT_TOKENIZER,
+    cache_dir: Path | None = None,
+    seed: int = 1337,
+) -> np.ndarray:
+    """Mix raw FineWeb-Edu prose (~95%) with formatted GSM8K Q/A (~5%).
+
+    Concatenates `gsm8k_repeats` copies of the full GSM8K-train (~4M
+    tokens × 20 reps = ~80M tokens of Q/A signal) shuffled into the
+    FineWeb stream. Each GSM8K example is formatted as
+    "Question: ...\\nAnswer: ...\\n#### N\\n<EOT>" so the model learns
+    the canonical Q/A structure.
+    """
+    fineweb = load_fineweb_tokens(n_tokens=fineweb_tokens_target,
+                                  tokenizer_name=tokenizer_name,
+                                  cache_dir=cache_dir, seed=seed)
+
+    cache_dir = cache_dir or Path.home() / ".cache" / "sfumato_e5"
+    qa_cache = cache_dir / f"gsm8k_qa_{tokenizer_name}_x{gsm8k_repeats}.npy"
+    if qa_cache.exists():
+        qa = np.load(qa_cache)
+    else:
+        from datasets import load_dataset
+        from transformers import AutoTokenizer
+        tok = AutoTokenizer.from_pretrained(tokenizer_name)
+        ds = load_dataset("gsm8k", "main", split="train")
+        chunks = []
+        for _ in range(gsm8k_repeats):
+            for row in ds:
+                text = f"Question: {row['question']}\nAnswer: {row['answer']}\n"
+                ids = tok.encode(text, add_special_tokens=False)
+                chunks.append(np.array(ids, dtype=np.uint16))
+                chunks.append(np.array([GPT2_EOT], dtype=np.uint16))
+        qa = np.concatenate(chunks)
+        np.save(qa_cache, qa)
+
+    # Interleave: shuffle indices and insert QA chunks at random positions.
+    # Simpler: concatenate qa to fineweb then shuffle whole-document blocks.
+    # For our training (random-window sampler), simple concat suffices.
+    print(f"  fineweb tokens: {len(fineweb):,}  qa tokens: {len(qa):,}")
+    return np.concatenate([fineweb, qa])

@@ -53,22 +53,74 @@ def extract_answer(text: str) -> str | None:
 
 
 @torch.no_grad()
-def gen_ar(model, prompt, max_new=128, eot=50256, temperature=0.0):
+def gen_ar(model, prompt, max_new=128, eot=50256, temperature=0.0,
+           top_p=None, top_k=None, repetition_penalty=1.0,
+           no_repeat_ngram_size=0):
+    """AR decoder with anti-repetition mechanisms.
+
+    Defaults (temperature=0.0, no penalties) reproduce greedy. For
+    undertrained models prefer:
+      temperature=0.8, top_p=0.9, repetition_penalty=1.15, no_repeat_ngram_size=3
+    """
     device = next(model.parameters()).device
     bs = model.cfg.block_size
     idx = torch.tensor([prompt], dtype=torch.long, device=device)
+    gen_start = len(prompt)
     for _ in range(max_new):
         ctx = idx[:, -bs:]
-        logits = model(ctx, mode="ar")[:, -1, :]
+        logits = model(ctx, mode="ar")[:, -1, :].float()
+
+        # Repetition penalty: divide logits of tokens already in sequence by penalty.
+        if repetition_penalty != 1.0:
+            seen = idx[0].tolist()
+            seen_set = set(seen)
+            for tok in seen_set:
+                if logits[0, tok] > 0:
+                    logits[0, tok] = logits[0, tok] / repetition_penalty
+                else:
+                    logits[0, tok] = logits[0, tok] * repetition_penalty
+
+        # No-repeat-ngram: block any (n-1)-gram followed by a token that would
+        # complete an n-gram already in the sequence.
+        if no_repeat_ngram_size > 0:
+            seen = idx[0].tolist()
+            n = no_repeat_ngram_size
+            if len(seen) >= n - 1:
+                tail = tuple(seen[-(n - 1):])
+                banned = set()
+                for i in range(len(seen) - n + 1):
+                    if tuple(seen[i:i + n - 1]) == tail:
+                        banned.add(seen[i + n - 1])
+                for tok in banned:
+                    logits[0, tok] = float("-inf")
+
+        # Sample or argmax
         if temperature <= 0:
             nxt = int(torch.argmax(logits, dim=-1).item())
         else:
-            probs = F.softmax(logits / temperature, dim=-1)
-            nxt = int(torch.multinomial(probs, num_samples=1).item())
+            logits = logits / temperature
+            # top-k filter
+            if top_k is not None and top_k > 0:
+                v, _ = torch.topk(logits, k=min(top_k, logits.size(-1)))
+                logits[logits < v[..., -1, None]] = float("-inf")
+            # top-p filter
+            if top_p is not None and 0 < top_p < 1.0:
+                sorted_logits, sorted_idx = torch.sort(logits, descending=True)
+                cum_probs = torch.cumsum(F.softmax(sorted_logits, dim=-1), dim=-1)
+                # keep tokens where cum_prob <= top_p (always keep top-1)
+                remove = cum_probs > top_p
+                remove[..., 1:] = remove[..., :-1].clone()
+                remove[..., 0] = False
+                logits.scatter_(-1, sorted_idx, sorted_logits.masked_fill(remove, float("-inf")))
+            probs = F.softmax(logits, dim=-1)
+            if torch.isnan(probs).any() or probs.sum() == 0:
+                nxt = int(torch.argmax(logits, dim=-1).item())
+            else:
+                nxt = int(torch.multinomial(probs, num_samples=1).item())
         if nxt == eot:
             break
         idx = torch.cat([idx, torch.tensor([[nxt]], device=device)], dim=1)
-    return idx[0].tolist()[len(prompt):]
+    return idx[0].tolist()[gen_start:]
 
 
 @torch.no_grad()
