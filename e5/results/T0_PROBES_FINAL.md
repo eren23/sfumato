@@ -798,3 +798,45 @@ universal claim.
 - `e5/results/f10_mixed/probe_router_heuristic_step10k_n50.json` — raw.
 - F10 step-10k slim ckpt at `e5/results/f10_mixed/composite/model.pt`
   (1.22 GB, model weights only, no optim state).
+
+### Update — F10 step-35k preview (2026-05-18 ~03:30 CEST)
+
+Pulled the F10 periodic ckpt at step 35,000 (~19 % trained) and reran
+Phase I.0 only:
+
+| Config | acc | loop_final | max_word_run |
+|---|---|---|---|
+| `single_ar_128` | 0 % | 0 % | 4 |
+| `single_switch_64_32` | 0 % | 0 % | 4 |
+| `interleaved_16_8_x3` | 2 % | 0 % | 3 |
+| **`interleaved_8_4_x6`** | **4 %** | **0 %** | **2** |
+| `interleaved_32_16_x2` | 2 % | 4 % | 5 |
+
+The fine-grained `interleaved_8_4_x6` is back to "best" at F10@35k.
+
+### Cross-stage summary (the stable signal)
+
+| stage | best config (acc) | loop rate range | max word run range |
+|---|---|---|---|
+| F9 final (100 %, FineWeb only) | interleaved_8_4_x6 (2 %) | 0–38 % | 2–17 |
+| F10 step-10k (5.5 %, +Q/A) | single_switch / 32_16_x2 (4 %) | **0 %** everywhere | 3–4 |
+| F10 step-35k (19 %, +Q/A) | interleaved_8_4_x6 (4 %) | 0–4 % | 2–5 |
+
+**Across F10 stages the *which-config-wins* shuffles within the
+binomial noise band (±3 pp at N=50). The robust finding is that
+loop-rate collapses to ≈0 % everywhere once F10 sees Q/A signal, even
+at step 10k.** The diff-head pathology is fixed by data, not by
+routing; routing in F10 swings within noise.
+
+The final stage F10 step-183k (~30 hr from start, ~12 hr remaining at
+time of writing) is the definitive substrate. If at convergence
+`interleaved_8_4_x6` is still ≥ 4 % accuracy AND wins by ≥ 2 pp over
+`single_switch_64_32`, the routing-lift claim holds; otherwise the
+Phase I scope-limit ("routing only helps when diff head is broken")
+is the final word at 305 M scale.
+
+### Files (Phase I.0 / I.1)
+
+- `e5/results/f10_mixed/probe_interleaved_step35k_n50.json` — raw.
+- `e5/results/f10_mixed/composite/model_slim_step35k.pt`
+  (1.22 GB, kept locally for follow-up; not committed).

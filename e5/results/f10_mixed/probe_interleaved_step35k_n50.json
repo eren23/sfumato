@@ -1,0 +1,1385 @@
+{
+  "ckpt": "/Users/eren/Documents/AI/sfumato/e5/results/f10_mixed/composite/model_slim_step35k.pt",
+  "n_eval": 50,
+  "prompt_format": "qa",
+  "decode": {
+    "ar": {
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "no_repeat_ngram_size": 3
+    },
+    "diff": {
+      "diff_temperature": 0.8,
+      "diff_top_p": 0.9,
+      "diff_repetition_penalty": 1.15
+    }
+  },
+  "configs": {
+    "single_ar_128": {
+      "schedule": [
+        [
+          "ar",
+          128
+        ]
+      ],
+      "n": 50,
+      "n_correct": 0,
+      "accuracy": 0.0,
+      "loop_rate_final": 0.0,
+      "mean_intermediate_loop_rate": 0.0,
+      "max_word_run": 4,
+      "wall_s": 161.1,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "180",
+          "correct": 0,
+          "text": " First find how many eggs the kids eat: 1,000*3/day = <<10000*3=400>>400 eggs\nThen find the total number of eggs at the farmer's market: 400+400+400=<<400+800+400]=180>>180 eggs\n#### 180\n",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            4
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "16",
+          "correct": 0,
+          "text": " There are 3*2=<<3*2+1=5>>5 times as many fruits as the vibranas.\nSo the top half is twice as many as the rest, so there are 2*12=<<2*12/4=10>>10 times as much white.\nThere are 5+6+8=<<5+6=7>>7 times more than the reflective fiber.\nThe rest of the pieces is 8-9=<<8-9+8+8*=16>>16 times.\n#### 16\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "90",
+          "correct": 0,
+          "text": " The house is worth 3*20=<<3*20+200=60>>60 years.\nSo his estate will be worth 60-100+70=<<60-100-100=90>>90 years.",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "10",
+          "correct": 0,
+          "text": " He drives 40-4=<<40-4*3=32>>32 times a day\nSo he drives 40+16=<<50+16+16/=10>>10 kilometers a week\n#### 10\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "12",
+          "correct": 0,
+          "text": " After eating meat for lunch, she receives a total of 3*2=<<3*2+6=16>>16 tablespoons of food.\nIf she has eaten 10 insects in the morning for the rest of the week, she also needs to pay 30*2=$<<30*2/s=12>>12 for those meals\n#### 12\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "35",
+          "correct": 0,
+          "text": " The total cost of the first glass is $4 + 5 = $<<8+5=15>>15.\nHe needs to pay $12 x 6 = $2/3 = $30.\nThe discount is $10 - 15 = $35.\n#### 35\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "72",
+          "correct": 0,
+          "text": " If Washington has 2*40 = <<2*40=60>>60 sheep, while Vancouver has 50*20 = <<50*10=150>>150 sheep, future mean Seattle is 40+4 = <<40+4=72>>72 sheep.\n#### 72\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "4",
+          "correct": 0,
+          "text": " In fact, one in ten thousand words, or 20% of an audio file will have a load of 536tes * 10/100 = <<5*10/100=8>>8 hours.\nIn five years, there will be a number of installations in the $50/30 = <<50/15=4>>4s in the file.\n#### 4\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "24",
+          "correct": 0,
+          "text": " He spends 2*30=<<2*30+4=48>>48 hours doing business with his friend.\nHe spends 48/3=<<48/3/3)=24>>24 hours using his wife at home leaving.\n#### 24\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "32",
+          "correct": 0,
+          "text": " For the three days of the week, Eliza paid 60*45=<<60*45*45)=90.8>>90.4 hours.\nIn the two weeks, Elomics paid 90/30=<<90/30*1=32>>32.6 hours.8 hours.7\n#### 32\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        }
+      ]
+    },
+    "single_switch_64_32": {
+      "schedule": [
+        [
+          "ar",
+          64
+        ],
+        [
+          "diff",
+          32
+        ]
+      ],
+      "n": 50,
+      "n_correct": 0,
+      "accuracy": 0.0,
+      "loop_rate_final": 0.0,
+      "mean_intermediate_loop_rate": 0.0,
+      "max_word_run": 4,
+      "wall_s": 148.0,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "6",
+          "correct": 0,
+          "text": " In the last week of the week, there were 4*1=<<4*1/2=6>>6 birds in the customers\u2019 markets., of days\n she of days- days to, a her of and to a",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "6.",
+          "correct": 0,
+          "text": " First find the total number of gluons: 2 * 2 = <<2*2=6>>6.\nThen add to., a the, of, are\n the is to is a the is",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            4,
+            4
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "30000",
+          "correct": 0,
+          "text": " When he buys, he buys a home for $10,000/100 = $<<20000/1000=40000>>30000 per year.\n has to his- his hiss on and that is- it is of his to",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "5",
+          "correct": 0,
+          "text": " We start at 5*5=<< the he, the day of is\n his, is days his time the of days",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            4,
+            2
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "24",
+          "correct": 0,
+          "text": " A total of 30*4=<<30*4*4/s=24>>24 servings of for a-- with food to on that a days-\n\n and are a",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "120",
+          "correct": 0,
+          "text": " First find the total cost of the glass: 16 glasses * 20 = <<16*20=120>>120 bottles.\nThen find the amount a $ and, of, a he he and his it in and in his He",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "12",
+          "correct": 0,
+          "text": " First find the total number of sheep in the last 10 years from the same research project: 3+5= <<3+5*2=12>>12 a and in a the.-,\n. of that is to a to of",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "3",
+          "correct": 0,
+          "text": " The full output of Carla and Mac OS x 300 GB will take 30-20 = <<30-20=3>>3 minutes\nThat means the total that is on it. in\n of is of, on in a-.-",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "2",
+          "correct": 0,
+          "text": " He has 10/3=<<10/3*4=12>>12 hours left on the road so he can walk for 2*8 = <<2 is his it that. days is his,, on is to, in it as",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            4,
+            2
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "90",
+          "correct": 0,
+          "text": " The salary thatEliza earns in the first 10 days is $15.00 a month * 3 = $<<15*3=90.00>>90 average days the a days she-, and,'s- she days,\n days",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    "interleaved_16_8_x3": {
+      "schedule": [
+        [
+          "ar",
+          16
+        ],
+        [
+          "diff",
+          8
+        ],
+        [
+          "ar",
+          16
+        ],
+        [
+          "diff",
+          8
+        ],
+        [
+          "ar",
+          16
+        ],
+        [
+          "diff",
+          8
+        ]
+      ],
+      "n": 50,
+      "n_correct": 1,
+      "accuracy": 0.02,
+      "loop_rate_final": 0.0,
+      "mean_intermediate_loop_rate": 0.0033,
+      "max_word_run": 3,
+      "wall_s": 135.3,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "10",
+          "correct": 0,
+          "text": " For the week, we earn a total, to days is of days of a week so the cost of the yogurt is adult to you are and a,\n8 + 5 = <<12+5.- on days she 10 in a",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "2",
+          "correct": 0,
+          "text": " It takes 2*2=<<2 the that is whose- is the toadness and the rest is the color be a? which, how I a covering of red fiber is like 2* The he ares requires white one a",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            5,
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": null,
+          "correct": 0,
+          "text": " In order to help get rid of the was his is is has that other he\u2019s had to buy a house his and with\n. painting If\n because of the did not selling the was after only his, was enough it of",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "10",
+          "correct": 0,
+          "text": " There are 4*30=<<4, 50 1 of << is of the same number as the other team at work in he and from the the. peers.\nSo there are 6+3 days the time his 10,,year",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            1,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "4",
+          "correct": 0,
+          "text": " On the first day, she makes a and on in- a. are If she eats three times as many eggs as on with\n which- days It a takes 4*5=<<4* one for has by women and that to",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": null,
+          "correct": 0,
+          "text": " First find the total amount of the total is that He, a a it he gets from a glass; then multiply the must get and his <<s he takes.\nThen multiply the sum by the that he that, is him * there",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "3",
+          "correct": 0,
+          "text": " Tumbull is one of the 4age the\ufffd a the to of a t-test, thus requiring that the be average long in a\n, with 1*t = 3, so the is with of they in\ufffd his that",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "1",
+          "correct": 0,
+          "text": " First find the total number of images in\n its-term is by a be of 10:5 x 10 = << there 1, lot his) use-to-see-2=<<10 it\n is in 1 is of is",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "9",
+          "correct": 0,
+          "text": " The 3 hour on the 9th makes days his that isThe left as his maximum distance is half way up because 2 on\n, a be it day that the 4 minute of the 9 hour trip has that\n with as Mr.\n",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "10",
+          "correct": 0,
+          "text": " First find the rate of work in a in the\n she's of a her overtime pay: 90 - 50 = <<10 days days time She, day days]\nNow find the number of hours, to days: working in to she",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            2,
+            2,
+            2,
+            2
+          ]
+        }
+      ]
+    },
+    "interleaved_8_4_x6": {
+      "schedule": [
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ]
+      ],
+      "n": 50,
+      "n_correct": 2,
+      "accuracy": 0.04,
+      "loop_rate_final": 0.0,
+      "mean_intermediate_loop_rate": 0.0,
+      "max_word_run": 2,
+      "wall_s": 142.1,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "10",
+          "correct": 0,
+          "text": " She has 4* of, a from the farm she helps, best. be the amount in profit they to of and also she gives away- to\n many. she gives 4 of days you is 5+5+ in 10\n in",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            4,
+            2
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "16",
+          "correct": 0,
+          "text": " The starts with a under is to the left end of the is the,.\nSo, the are- 20 which divides the first by like 25 has\nThe former represents the5 mutations have bex+30= 16 because a two",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "20",
+          "correct": 0,
+          "text": " The house costs 2 is was, are you going to have:, had a 10% interest, a- it his 10% is worth Then. his was 20% interest.\n to20 on the other hand, so on-\n",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "1",
+          "correct": 0,
+          "text": " His goal is to rotation the,, so he can run his. task 40/3=<< and for the with one hand, he day\n into the 20-10= don this in on 1 and he takes is j each <<",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "5",
+          "correct": 0,
+          "text": " If she has 4/ it in he eats 5*6 add outside a-5=<<5 that was a a total of 4+ not\n\n) after her last meal-: at an average rate of 50 5 similar was and",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "20",
+          "correct": 0,
+          "text": " The total cost of cost of he years is 2 x 3 has seen and a total of 7 + cost have in the first year.\n can than amount\ufffdt be taken up between $ in other countries because he can20 onThere it",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "4",
+          "correct": 0,
+          "text": " A 2-2 the in. that doesn't mean that.\" you\n you can see the number \"? on than 3\" so the:\n.'s 30/4= a one If of this number, then your in to are",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            3,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "3",
+          "correct": 0,
+          "text": " If you use the\n is\" -30\", you will) don areSidney - 10 e g.. = <<2+ be's on at the end. However a\n use .m.\" or .-ing\" 3",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "31",
+          "correct": 0,
+          "text": " The total distance between one his, his total distance from home wass\n n/2 = << yethel by back, in 40\n his air behind1 = <<1+ one April month:23=31>>) is What on",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "3",
+          "correct": 0,
+          "text": " In the month after 2 total's\nEliza received a costs of average in the month with 30\n days out 4 * $15 = year, years similar to 6 months with him., comes 6/3= in would byThe",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "interleaved_32_16_x2": {
+      "schedule": [
+        [
+          "ar",
+          32
+        ],
+        [
+          "diff",
+          16
+        ],
+        [
+          "ar",
+          32
+        ],
+        [
+          "diff",
+          16
+        ]
+      ],
+      "n": 50,
+      "n_correct": 1,
+      "accuracy": 0.02,
+      "loop_rate_final": 0.04,
+      "mean_intermediate_loop_rate": 0.045,
+      "max_word_run": 5,
+      "wall_s": 168.4,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "6",
+          "correct": 0,
+          "text": " She has 4*10=<<4*10/5=6>>6, days, is she to of a, of course, a number of points, such as a list of the moral geography of\n in--\n is on her and are",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "1",
+          "correct": 0,
+          "text": " The mustard fiber contains 2*2=<<2*2+2=6\n, on the of a is the the inHow far north is the northeastern border between England and the United States?\nIn1 in, light to from,.\n of",
+          "final_loopy": 1,
+          "final_word_run": 5,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "intermediate_word_runs": [
+            5,
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "50",
+          "correct": 0,
+          "text": " The total cost of the construction is 50+200+$100=<<50, his he. of is his\n, is a reference to the life of a noble man. When I was thinking about the that and it that him he he-\n one",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "120",
+          "correct": 0,
+          "text": " He makes 3*30=<<3*30*3=120>>120 his, he days, days the his is andSome people are sure that they can do more with her. The two boys who is of << his, day the in of\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            4,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "30",
+          "correct": 0,
+          "text": " After the meal, one must have 30*30=<<30*30/ a on- days- a a that\n- the capacity to store all items\n- to be offered in electronic form\nOrigin: food in and with. she that for on",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            4,
+            4,
+            4,
+            4
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "3",
+          "correct": 0,
+          "text": " There are 515+16=<<515+17=19>>19 his in it that of of he and he, a co-author provides a text to the \u201cPhilosophy\u201d the is,3\n\n in of is his",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "100",
+          "correct": 0,
+          "text": " T conveyress of 2*2=<<2*2+8=14 with to the the the a\n- in ofAn essay on the issue of the 100 \"feeling of beauty\" and the The a's. in and is\n, to",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            4,
+            4,
+            4,
+            4
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "2",
+          "correct": 0,
+          "text": " When you take the logical route from the command prompt, the answer is: 2 of- on a\n your and of. isYou\u2019re done! That\u2019s why you\u2019ve ever and in or is. your on\n you that",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "6",
+          "correct": 0,
+          "text": " He needs 3*4=<<3*4/4=6>>6 his-, on that\n and. his to become a ship with his gods. B tales are often told in the Bible that wasThe by was you him is\n it,",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "4",
+          "correct": 0,
+          "text": " Elissa has a 10% discount for the second 40 hours so that's 4 she the to and\n, days is\n days has been used as an important topic for many people, but there is a common in. time inThe her to, of was",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  }
+}
