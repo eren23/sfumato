@@ -1,0 +1,418 @@
+{
+  "ckpt": "/Users/eren/Documents/AI/sfumato/e5/results/f10_mixed/composite/model_slim_step105k.pt",
+  "n_eval": 50,
+  "decode": {
+    "ar": {
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "no_repeat_ngram_size": 3
+    },
+    "diff": {
+      "diff_temperature": 0.8,
+      "diff_top_p": 0.9,
+      "diff_repetition_penalty": 1.15
+    }
+  },
+  "heuristics": {
+    "h1_entropy_t4.5": {
+      "name": "H1 entropy>=4.5",
+      "n": 50,
+      "n_correct": 1,
+      "accuracy": 0.02,
+      "loop_rate_final": 0.02,
+      "max_word_run": 5,
+      "wall_s": 192.2,
+      "trigger_ar_frac": 0.954,
+      "trigger_diff_frac": 0.046,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "33",
+          "correct": 0,
+          "text": " The chickens lay 16 - 3 = <<16-3=10>>10 chicks a week.\n51649 \u2013 516 = <<1549-516=12>>12 birds are left after feeding the pigs.\nSo the total number 121322 birds makes per day is 13+12=<<13+12*2=33>>33.\n#### 33\n",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "trace_len": 12,
+          "n_diff_in_trace": 2
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "5",
+          "correct": 0,
+          "text": " The two electrodes cost $5 x 3 = $<<5*3=15>>15\nSo each bolt is worth $15 - $15 = $5\n#### 5\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "1700",
+          "correct": 0,
+          "text": " The total revenue was601000*. sells out of $200,000 so it cost 60*100=$<<60*100=1600>>1600\nSo the total investment was 1200+$1600=$<<1200+1600=1700>>1700\n#### 1700\n",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 1
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "800",
+          "correct": 0,
+          "text": " The total distance between the 3 miles is 2*60=<<2*60-60=240>>240 feet\nThe distance between his 3 walks is 240/3=<<240/3)=40>>40 feet\nSo in total, the total distance is 200+40= <<200+ 300560 120=800>>800\n#### 800\n",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 1
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "2",
+          "correct": 0,
+          "text": " The chickens are given 15 x 3=<<15*3=45>>45 cups of straw for feed a each each.\nSo, the eggs are given a total of 45+25+30= <<45+25=38>>38 cups of hay per day.\nTherefore, more than half the amount of hay needed for the final feed is 40/2=<<40/2 Get",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 11,
+          "n_diff_in_trace": 1
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "12",
+          "correct": 0,
+          "text": " The cost of a pair of glasses is $5 x 2 = $<<5*2=10>>10.\nThus, they have to spend $10 - $20 = $12 on their expensive glasses.\n#### 12\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "46",
+          "correct": 0,
+          "text": " The number of sheep is equal to the number of cows, so there are 20+4 = <<20+4=21>>21 animals in a herd.\nToulouse is 21-2=<<21- six5 2 5)\nSo, Toulace, and Washington have 21+3=<<23+3*1=46>>46 sheep\n#### 46\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 1
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "40.",
+          "correct": 0,
+          "text": " If the initial file contains a full letter of the original letter, then it only includes one letter of each letter, so it must have been downloaded as soon as possible. To update file file files has to be installed in files its 40. Also, it must not be written down as a result of having the file originally installed.\nThe word 'version' means 'to install' when a new",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 12,
+          "n_diff_in_trace": 2
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "60",
+          "correct": 0,
+          "text": " As John runs, he has a total of 20+60=<<20+60+60>>90 minutes left.\nSo he spends 90/2=<<90/2*90=60>>60 minutes on the 4 hour driving journey.\n#### 60\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "700",
+          "correct": 0,
+          "text": " Elisa's rate in wages is $60/hour * 30 minutes = $<<60*30=300>>300.\nThe monthly wage rate of Eliza is $300 * 2 weeks = $100.\nSo, Elisa made a total of $300 + $100 - $150 = $700 more for the month of work.\n#### 700\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        }
+      ]
+    },
+    "h2_diversity_u4": {
+      "name": "H2 diversity<4",
+      "n": 50,
+      "n_correct": 1,
+      "accuracy": 0.02,
+      "loop_rate_final": 0.08,
+      "max_word_run": 5,
+      "wall_s": 157.0,
+      "trigger_ar_frac": 1.0,
+      "trigger_diff_frac": 0.0,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "3",
+          "correct": 0,
+          "text": " The number of eggs laid by the farmer is 32 - 10 = <<32-10=20>>20.\nShe makes sure each of her hunters has enough eggs to feed them. So, the total number of chickens left by the birds is 20 * 4 = <<20*4=40>>40\nShe gets a maximum of 40 x 4 =<<40*4 = <<40*3",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 10,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "5",
+          "correct": 0,
+          "text": " Let's say we take a total of 2*2 = <<2*2=4>>4 screws.\nWe multiply the screws by 2, so there are 2+2+4 = <<10=20>>20 screws left.\nSo, 20-24 = <<20-24=5>>5 screws in total.\n#### 5\n",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "1500",
+          "correct": 0,
+          "text": " He spent 80*$80=$<<80*80=1600>>1600\nSo his total profit was $1600+$1600=$<<1600+1600=1600\n#### 1500\n",
+          "final_loopy": 1,
+          "final_word_run": 5,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "15",
+          "correct": 0,
+          "text": " He runs 3*3=<<3*3*60=90>>90 minutes\nSo he runs 90/30= <<90/30)=15>>15 minutes a week\n#### 15\n",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "11",
+          "correct": 0,
+          "text": " The number of cups of coffee left by the first feed is 20*3=<<20*3/5=4>>4\nShe now has 4+25=<<4+25-6=11>>11 cups left\n#### 11\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "8",
+          "correct": 0,
+          "text": " All together they had enough money to sell their own glasses to buy 3+16=<<3+16)=14>>14 glasses.\nSo far, they already had 14/4=<<14/4*14=18>>18 glasses left.\nThe total cost is 18-18= <<18-18-17=8>>8 dollars\n#### 8\n",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "30",
+          "correct": 0,
+          "text": " If Charlotte has 18, she has 21+18=<<18+18+17=27>>27 sheep\nThe number of dogs is 24/2=<<24/2*18=6>>6\nIf the total number of animals in Toulice is 24, then there are 26+3=<<26+3+9=30>>30 dogs\n#### 30\n",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "3",
+          "correct": 0,
+          "text": " There are 18 x .5= <<18**.5=9>>9 GB files in a book.\nThere are 9+12=<<9+12-12=12>>12 GB files for this download.\nSo, there are 12 - 12 = <<12- 12=4>>4 books on the download. The file takes a total of 4 + 4 + 3 = <<4+3",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "trace_len": 13,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "18",
+          "correct": 0,
+          "text": " The total amount of money that John spent on driving is $4+$6=$<<4+6=9>>9\nThe cost of going to school is $3/minute so he spends $9*2=$<<9*(2=18>>18 on driving\n#### 18\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "1600",
+          "correct": 0,
+          "text": " Elisa's rate in wages is 5/4 * 60 = <<5*60=300>>300 hours\nShe works a total of 300 * 30 + 600 = <<300*30+600=1600>>1600 hours\n#### 1600\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 2,
+          "trace_len": 16,
+          "n_diff_in_trace": 0
+        }
+      ]
+    },
+    "h3_diff_confidence_p0.5": {
+      "name": "H3 diff_conf>=0.5",
+      "n": 50,
+      "n_correct": 0,
+      "accuracy": 0.0,
+      "loop_rate_final": 0.0,
+      "max_word_run": 4,
+      "wall_s": 210.2,
+      "trigger_ar_frac": 0.253,
+      "trigger_diff_frac": 0.748,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "4",
+          "correct": 0,
+          "text": "* B years 5 b b b b*AASheBBB BBhalfA B AB A Two years B B B third year C 4",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "4",
+          "correct": 0,
+          "text": " one one 100. the one in one of the* one half of  1/ half** half half * * 2 = <<1*2=4",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "60",
+          "correct": 0,
+          "text": " 12060\n1506060 paysQuestion 12030080 << 12060<<120<<120 60 50 140 140 Ltd 60]",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "18",
+          "correct": 0,
+          "text": " runs runs takes run runs walks run runs>> run* gets reads There/ walks route running/ walk path walks route walk= <<9*3=18>>",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": null,
+          "correct": 0,
+          "text": " eggs one each the each each groups* feed them to each each, one one them one* to his her her them each and one to her hens each",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "13",
+          "correct": 0,
+          "text": " 1616 16 1616 16 18 18 17 There18 one\n18 <<\n two 15 two three one 18 There19\n- An additional 13\n-",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "5",
+          "correct": 0,
+          "text": " there 3 3 2 many 5 six Three five three three four Two one There twice Three Three three,\n two eyes together, one eye up and the",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": null,
+          "correct": 0,
+          "text": " plans Car CD CD downloaded Download To Download In take \" files CDment Download files MB files \"\" files Sam fileThen select \" files to download file\" and",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "30",
+          "correct": 0,
+          "text": " he hour place time the the road home home him waiting time home home home home 4 waiting steps 30 he he minutes time walking away from home for a total of",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "15",
+          "correct": 0,
+          "text": "* work $>> tax 5* $ * tax works30 tax extra wage tax paid pay $<< 10 $  10*.01*30=15>>15",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "trace_len": 16,
+          "n_diff_in_trace": 12
+        }
+      ]
+    }
+  }
+}

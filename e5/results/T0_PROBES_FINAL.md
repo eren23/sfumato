@@ -840,3 +840,72 @@ is the final word at 305 M scale.
 - `e5/results/f10_mixed/probe_interleaved_step35k_n50.json` — raw.
 - `e5/results/f10_mixed/composite/model_slim_step35k.pt`
   (1.22 GB, kept locally for follow-up; not committed).
+
+### Update — F10 step-105k preview (2026-05-18 ~17:30 CEST)
+
+Pulled F10 periodic ckpt at step 105,000 (~57.4 % trained, val_ar_nll
+1.37 at training time) and reran Phase I.0 + I.1 at N=50.
+
+**Phase I.0 on F10@105k**:
+
+| Config | acc | loop_final | max_word_run |
+|---|---|---|---|
+| `single_ar_128` | 6 % | 2 % | 6 |
+| `single_switch_64_32` | 0 % | 0 % | 4 |
+| **`interleaved_16_8_x3`** | **8 %** | **0 %** | **3** |
+| `interleaved_8_4_x6` | 0 % | 0 % | 4 |
+| `interleaved_32_16_x2` | 2 % | 4 % | 5 |
+
+**Phase I.1 on F10@105k**:
+
+| Heuristic | acc | loop | diff_frac |
+|---|---|---|---|
+| H1 entropy ≥ 4.5 | 2 % | 2 % | 5 % |
+| H2 diversity < 4 | 2 % | 8 % | 0 % |
+| H3 diff_conf ≥ 0.5 | 0 % | 0 % | 75 % |
+
+### Cross-stage table (updated)
+
+| stage | best fixed config (acc) | best heuristic (acc) | Δ (fixed−heuristic) |
+|---|---|---|---|
+| F9 final (FineWeb only) | `interleaved_8_4_x6` (2 %) | H1/H2/H3 (0 %) | +2 pp |
+| F10 step-10k (5.5 %) | `single_switch_64_32` (4 %) | H1 (2 %) | +2 pp |
+| F10 step-35k (19 %) | `interleaved_8_4_x6` (4 %) | (not run) | — |
+| **F10 step-105k (57 %)** | **`interleaved_16_8_x3` (8 %)** | H1/H2 (2 %) | **+6 pp** |
+
+### Two-sided finding at F10@105k
+
+1. **Phase I.0 gate now crosses**: a fixed iteration schedule
+   (`interleaved_16_8_x3`, 3 rounds of AR(16)+diff(8)) beats
+   `single_switch_64_32` by **+8 pp** (8 % vs 0 %) and the pure-AR
+   baseline by **+2 pp** (8 % vs 6 %). This is the first F10 stage
+   where iteration shows a real lift, not noise.
+
+2. **Phase I.1 heuristics still lose**: max 2 % vs fixed's 8 % is a
+   6 pp deficit. Simple entropy/diversity/confidence gates do not
+   pick the right mode at the right time, even when the routing
+   problem has a non-trivial answer (8 pp gap between fixed
+   schedules).
+
+### Implication for I.2
+
+The combination — fixed iteration helps, simple heuristics don't —
+is the textbook case where a **learned router** could earn its
+weight. Plan's gate: "lift ≥ 4 pp over best fixed at I.1" required
+for I.2 escalation. With I.1 at 2 % and best-fixed I.0 at 8 %, the
+*headroom for a learned router* is up to +6 pp over what heuristics
+can reach.
+
+**Decision**: hold I.2 launch until F10 step-183k (full convergence).
+If the +6 pp headroom persists at convergence, I.2 (REINFORCE on
+frozen F10) becomes worth attempting. If at full convergence all
+fixed schedules tie around the same accuracy (the routing problem
+goes away), the scope-negative remains the final word.
+
+### Files (continued)
+
+- `e5/results/f10_mixed/probe_interleaved_step105k_n50.json` — raw.
+- `e5/results/f10_mixed/probe_router_heuristic_step105k_n50.json` — raw.
+- F10 step-105k slim ckpt at
+  `e5/results/f10_mixed/composite/model_slim_step105k.pt`
+  (1.22 GB, kept locally; not committed).
