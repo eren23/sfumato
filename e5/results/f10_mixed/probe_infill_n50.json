@@ -1,0 +1,18 @@
+{
+  "ckpt": "/Users/eren/Documents/AI/sfumato/e5/results/f10_mixed/composite/model_slim_final.pt",
+  "n_eval": 50,
+  "n_scored": 47,
+  "n_middle_tokens": 940,
+  "mid_mask_len": 20,
+  "suffix_len": 20,
+  "max_len": 512,
+  "wall_s": 8.4,
+  "metrics": {
+    "fim_diff_nll": 6.1288,
+    "ar_no_suffix_nll": 1.2319,
+    "ar_full_nll": 1.2319,
+    "gap_diff_vs_ar_no_suffix": -4.8969,
+    "gap_diff_vs_ar_full": -4.8969
+  },
+  "note": "composite-diff sees BOTH prefix AND suffix bidirectionally. AR-no-suffix is the pure-AR fallback (no suffix context). AR-full is teacher-forced AR with the full ground-truth sequence (still left-to-right, but the per-position predictions cannot use tokens AFTER the predicted position, so suffix-context info is structurally inaccessible to the AR head)."
+}

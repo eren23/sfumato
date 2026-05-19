@@ -1,0 +1,72 @@
+{
+  "ckpt": "/Users/eren/Documents/AI/sfumato/e5/results/f10_mixed/composite/model_slim_final.pt",
+  "device": "mps",
+  "n_params": 305303552,
+  "n_problems": 20,
+  "n_trials": 5,
+  "decode": {
+    "ar": {
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "no_repeat_ngram_size": 3
+    },
+    "diff": {
+      "diff_temperature": 0.8,
+      "diff_top_p": 0.9,
+      "diff_repetition_penalty": 1.15
+    }
+  },
+  "configs": {
+    "composite_ar_128": {
+      "note": "AR head, 128 tokens, 128 forwards",
+      "n_samples": 100,
+      "mean_wall_s": 4.2893,
+      "sd_wall_s": 1.5818,
+      "mean_tokens": 86.38,
+      "tokens_per_sec": 20.14,
+      "target_tokens": 128,
+      "speedup_vs_ar": 1.0
+    },
+    "composite_diff_revise_128_16": {
+      "note": "diff head, 128 tokens, 16 forwards",
+      "n_samples": 100,
+      "mean_wall_s": 1.1693,
+      "sd_wall_s": 0.1002,
+      "mean_tokens": 128,
+      "tokens_per_sec": 109.47,
+      "target_tokens": 128,
+      "speedup_vs_ar": 5.435
+    },
+    "composite_paired_64_64_16": {
+      "note": "AR(64) + diff(64, 16 steps) = 80 forwards",
+      "n_samples": 100,
+      "mean_wall_s": 3.6448,
+      "sd_wall_s": 0.5732,
+      "mean_tokens": 125.77,
+      "tokens_per_sec": 34.51,
+      "target_tokens": 128,
+      "speedup_vs_ar": 1.714
+    },
+    "composite_paired_32_96_16": {
+      "note": "AR(32) + diff(96, 16 steps) = 48 forwards",
+      "n_samples": 100,
+      "mean_wall_s": 2.3041,
+      "sd_wall_s": 0.3024,
+      "mean_tokens": 128,
+      "tokens_per_sec": 55.55,
+      "target_tokens": 128,
+      "speedup_vs_ar": 2.758
+    },
+    "composite_paired_16_112_16": {
+      "note": "AR(16) + diff(112, 16 steps) = 32 forwards",
+      "n_samples": 100,
+      "mean_wall_s": 1.7134,
+      "sd_wall_s": 0.1748,
+      "mean_tokens": 128,
+      "tokens_per_sec": 74.71,
+      "target_tokens": 128,
+      "speedup_vs_ar": 3.71
+    }
+  }
+}
