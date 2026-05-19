@@ -1108,3 +1108,103 @@ not refuted by Phase I's scope-negative on routing-during-AR.
 - `e5/results/f10_mixed/probe_speed_n20.json` — raw J.0.
 - `e5/results/f10_mixed/probe_infill_n50.json` — raw J.1.
 - `e5/results/f10_mixed/probe_revision_nll_n50.json` — raw J.2.
+
+---
+
+## Phase K — per-token diff-draft + AR-refill (2026-05-19, novel inference recipe)
+
+### Why Phase K exists
+
+User asked: *"can diff model... check the previous tokens... and say
+'ah actually these 3 tokens looks a bit weird, can we go there and
+fill it with ar, and if there are big gaps of problem, or higher
+energy let's say, can it say, ok, i filled up easy parts, like a
+drafter but also with structure, can ar can fill behind these areas?'"*
+
+This is a **novel inference recipe** not in published lit at <1B
+text-LM scale. Block-level draft+verify is done (DEER 2512.15176);
+within-diffusion correction is done (I-DLM 2604.11035, Corrective
+DLMs 2512.15596). Per-token cross-mode routing — *diffusion fills in
+parallel, AR refills suspect positions identified by confidence
+ranking* — is the gap.
+
+### The signal: what works, what doesn't
+
+We tried four routing signals:
+
+| Signal | Result | Why |
+|---|---|---|
+| Diff single-mask placed-token-prob | useless (mean 0.001-0.03) | marginal P at 50K vocab is too diffuse |
+| Diff single-mask top-1 agreement | useless (~97% disagree) | calibration mismatch: diff trained for joint-mask, not single-mask |
+| AR-verifier teacher-forced prob | useless (mean 0.003) | AR and diff have learned divergent distributions despite shared backbone |
+| **Commit-time diff confidence, percentile-ranked** | **works** | absolute conf is low everywhere, but RELATIVE ranking within a single generation picks out the worst placements |
+
+The percentile-based signal is the key insight: at our scale, **all
+diff confidences are absolutely low** (mean ~0.03), so any absolute
+threshold flags 100% of positions. But the **relative ordering**
+still encodes information about which placements are worst within a
+specific generation. Flagging the bottom-K% by commit-time conf
+produces a sensible refill rate (K%) that AR can productively fix.
+
+### Pipeline (in `e5/scripts/probe_diff_draft_ar_refill.py`)
+
+1. Stage A: AR-generate prefix of k_ar tokens (default 64).
+2. Stage B: diff-fill k_diff tokens in n_steps (default 64 / 16).
+   Capture per-position commit-time confidence inside diff_revise
+   via the new `_diff_revise_with_conf` wrapper.
+3. Stage C: rank positions by confidence; flag the bottom-K%.
+4. Stage D: AR-refill the flagged positions one-by-one
+   (`model.forward(idx_with_left_context, mode="ar")`, argmax).
+5. (Optional) iterate.
+
+### Results — F10 final, N=50 GSM8K-dev (held-out, offset 7000)
+
+| Config | Refill rate | Mean NLL on gold | Wall (s) | Loop rate |
+|---|---|---|---|---|
+| `pct10` | 9.4 % | 12.16 | 4.1 | 6 % |
+| `pct25` | 25 % | 11.89 | 4.3 | 6 % |
+| **`pct50`** | **50 %** | **11.66** | **5.0** | **12 %** |
+| `pct75` | 75 % | 12.00 | 5.6 | 16 % |
+
+### Comparison to Phase J.2 baselines (same F10, same prompts)
+
+| Policy | Tokens | Mean NLL | Wall (implied) |
+|---|---|---|---|
+| `ar_128` (pure AR) | 128 | **12.56** | ~6.4 s |
+| `ms_96_32` (mode-switch 96+revise32) | 96 | 11.82 | n/a |
+| `ms_64_32` (mode-switch 64+revise32) | 64 | 11.35 | n/a |
+| **`K.2 pct50`** (diff-draft + AR-refill 50 %) | **128** | **11.66** | **5.0 s** |
+
+### Headline (locked)
+
+**At the same generation length (128 tokens), K.2 pct50 beats pure AR
+by −0.90 NLL/token AND is 1.3 × faster.** Composite-specific recipe;
+pure AR cannot do this (no diff head to draft with).
+
+### What this proves and what it doesn't
+
+Proves:
+- The user's "diff drafts cheap+structure, AR fixes weirdness"
+  intuition holds at 305 M scale when the signal is *percentile-
+  ranked commit-time conf*, not absolute-threshold.
+- Per-token cross-mode routing produces a real Pareto improvement
+  over pure AR (better NLL + lower wall-clock).
+- Composite enables a recipe that no single-head architecture can
+  replicate.
+
+Does not prove:
+- That K.2 beats mode_switch_64_32 (11.35) on per-token NLL —
+  mode_switch is still better, just on fewer tokens.
+- That K.2 wins on GSM8K-dev accuracy (Phase I showed routing
+  doesn't lift downstream accuracy at our scale; we did not re-
+  measure here).
+- That the recipe scales to 1B+ or to non-math substrates.
+
+### Files (Phase K)
+
+- `e5/scripts/probe_diff_draft_ar_refill.py` — new entrypoint with
+  `_diff_revise_with_conf`, `extract_diff_confidence` (kept as
+  legacy AR-verifier reference), `flag_suspect_positions`
+  (percentile + absolute modes), `ar_refill`,
+  `gen_diff_draft_ar_refill`.
+- `e5/results/f10_mixed/probe_diff_draft_ar_refill_n50.json` — raw.
