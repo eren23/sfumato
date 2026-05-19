@@ -909,3 +909,83 @@ goes away), the scope-negative remains the final word.
 - F10 step-105k slim ckpt at
   `e5/results/f10_mixed/composite/model_slim_step105k.pt`
   (1.22 GB, kept locally; not committed).
+
+### Update — F10 FINAL (step 183,000, 2026-05-19 ~12:50 CEST)
+
+F10 v2 completed: 34h wall on A40, GSM8K AR-NLL = **1.155** (vs F9's
+3.96). Final val_ar_nll = 1.19, diff loss = 4.75–5.7 range.
+
+**Phase I.0 on F10 FINAL**:
+
+| Config | acc | loop_final | max_word_run |
+|---|---|---|---|
+| `single_ar_128` | **4 %** | **0 %** | 4 |
+| `single_switch_64_32` | 2 % | 8 % | 17 |
+| `interleaved_16_8_x3` | 2 % | 2 % | 5 |
+| `interleaved_8_4_x6` | 2 % | 0 % | 3 |
+| **`interleaved_32_16_x2`** | **4 %** | 6 % | 7 |
+
+**Phase I.1 on F10 FINAL**:
+
+| Heuristic | acc | loop | diff_frac |
+|---|---|---|---|
+| H1 entropy ≥ 4.5 | 0 % | 6 % | 7 % |
+| **H2 diversity < 4** | **6 %** | 2 % | 0 % (never triggers diff) |
+| H3 diff_conf ≥ 0.5 | 2 % | 4 % | 75 % |
+
+### Cross-stage table (FINAL)
+
+| stage | best fixed (acc) | best heuristic (acc) | Δ headroom |
+|---|---|---|---|
+| F9 final (FineWeb only) | `interleaved_8_4_x6` (2 %) | 0 % | 2 pp |
+| F10 step-10k (5.5 %) | `single_switch` (4 %) | H1 (2 %) | 2 pp |
+| F10 step-35k (19 %) | `interleaved_8_4_x6` (4 %) | (n/a) | — |
+| F10 step-105k (57 %) | `interleaved_16_8_x3` (8 %) | H1/H2 (2 %) | **6 pp** |
+| **F10 FINAL (100 %)** | **`single_ar_128` / `interleaved_32_16_x2` (4 %)** | **H2 pure-AR-chunked (6 %)** | **−2 pp** (heuristic wins) |
+
+### Final verdict (locked)
+
+**The +8 pp lift seen at F10 step-105k was a transient mid-training
+effect, not a stable signal.** At convergence the best heuristic (H2,
+which never actually triggers diff and is effectively pure-AR with
+8-token chunking) reaches 6 % accuracy. Best fixed iteration (`interleaved_32_16_x2`)
+ties pure-AR at 4 %. No fixed iteration scheme beats pure-AR.
+
+**Phase I.2 NOT launched.** The plan's gate (best heuristic
+≥ +4 pp over best fixed iteration → escalate to learned router) is
+not crossed: H2's 6 % beats fixed iteration by 2 pp, well within
+binomial noise (SD ~3.4 pp at N=50). And H2's win comes from
+*not iterating at all*, which inverts the routing thesis: at this
+scale and on this task, **iteration adds nothing useful at
+convergence**.
+
+**Scope-negative confirmed**: the Sfumato learned-router vision does
+not earn its weight at 305 M scale with a properly Q/A-mixed training
+distribution. The narrow regime where routing helps — mid-training
+F10 at step 105k — is too transient to be a robust target for a
+learned router. Possible future substrates: 1 B+ scale, longer-horizon
+tasks where single-switch saturates, or training mixes where the diff
+head specialises more aggressively.
+
+### What we learned across the full F9→F10 arc
+
+1. **Data fixes the diff-head loop pathology** decisively. F9's
+   24–38 % loop rates collapsed to 0 % on F10 by step 10k.
+2. **Routing only matters when training is broken.** Where F9 needs
+   `interleaved_8_4_x6` to break loops, F10 doesn't.
+3. **Mid-training F10 (step 105k) showed a transient routing lift**
+   (8 % from `interleaved_16_8_x3`) that did not survive to
+   convergence — interesting but unreliable signal.
+4. **Pure AR is the dominant strategy at converged F10.**
+   `single_ar_128` ties or beats every iteration scheme.
+5. **F10's NLL beats F9's by 3.4×** (1.155 vs 3.96), validating the
+   Phase H+ data-mix fix as the actual lever.
+
+### Files (continued)
+
+- `e5/results/f10_mixed/probe_interleaved_final_n50.json` — raw.
+- `e5/results/f10_mixed/probe_router_heuristic_final_n50.json` — raw.
+- `e5/results/f10_mixed/composite/model_slim_final.pt` (1.22 GB,
+  weights only; kept locally; not committed).
+- `e5/results/f10_mixed/composite/{summary.json, score.json,
+  samples.md, train_log.jsonl}` — F10 final scoring artefacts.

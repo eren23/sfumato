@@ -1,0 +1,1385 @@
+{
+  "ckpt": "/Users/eren/Documents/AI/sfumato/e5/results/f10_mixed/composite/model_slim_final.pt",
+  "n_eval": 50,
+  "prompt_format": "qa",
+  "decode": {
+    "ar": {
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "no_repeat_ngram_size": 3
+    },
+    "diff": {
+      "diff_temperature": 0.8,
+      "diff_top_p": 0.9,
+      "diff_repetition_penalty": 1.15
+    }
+  },
+  "configs": {
+    "single_ar_128": {
+      "schedule": [
+        [
+          "ar",
+          128
+        ]
+      ],
+      "n": 50,
+      "n_correct": 2,
+      "accuracy": 0.04,
+      "loop_rate_final": 0.0,
+      "mean_intermediate_loop_rate": 0.0,
+      "max_word_run": 4,
+      "wall_s": 220.6,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "36",
+          "correct": 0,
+          "text": " First find the total number of eggs sold by Joyce: 16 eggs/day * 3 = <<16*3=48>>48 eggs\nThen add the number of days of the week to find the number that are not sold: 48 eggs / 2 = <<48/2=24>>24 eggs\nNow add the total amount of eggs: 12 eggs + 24 eggs = <<12+24=36>>36 eggs\n#### 36\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "21",
+          "correct": 0,
+          "text": " There are 2/2=<<2/2_2=1>>1 keystroke\n1 keystroke costs 1/2*0.1=3MRI\nThat means it took 3/2+1+2= <<3/2-1+3+2+2*9=21>>21 evaluation\n#### 21\n",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            3
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "12300",
+          "correct": 0,
+          "text": " The price of the home is $80000 x 0.75 = $<<80000*0.75=20000>>20000\nSo the cost of the new house was $20000 - $2000000 = $10,000\nThe value of this change was $5,000 + $10000 = $ <<10000+2000000=28000>>28,000 before he sold his house.\nThus, the total amount of profit was $28,400 - $20000 = <<28400-20000=12300>>12,300\n#### 12300\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "105",
+          "correct": 0,
+          "text": " He runs 3*60=<<3*60-3=180>>180 meters\nSo in total, he runs 90+180=<<90+180/4=105>>105 meters\n#### 105\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "15",
+          "correct": 0,
+          "text": " The total number of chickens that are fed in a single day is 20*3=<<20*3_6=60>>60 chickens\nIn total, the total number (40) chickens in a day is 60+30 = <<60+30=90>>90 chickens\nThe total number who are fed is 90/3 = <<90/3=15>>15 chickens\n#### 15\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "12",
+          "correct": 0,
+          "text": " The first glass cost $5 x 60/100 = $<<5*60/100=6>>6.\nThe second glass cost 6 x 60 / 100 = $7.\nSo, the total cost is 6 + 7 = $30 + $7 = $ <<6+7=13>>13.\nTherefore, Damien needs to pay $10 - $2 = $12.\n#### 12\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "140",
+          "correct": 0,
+          "text": " There are 2 * 20 = <<2*20=40>>40 sheep in Charleston.\nToulouse also has a total of 40 + 40 = <<40+40=80>>80 sheep.\nIn total, Touloke, Nashville, and Portland have 80 + 40 + 80 = <<80+40+80=140>>140 sheep.",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 2,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            4
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "2.5",
+          "correct": 0,
+          "text": " First find the total time it takes to download files: 200 GB / 40% = <<200/40=2>>2 hours\nThen add the amount of time it took to download each file to find the time: 2 hours + 2 hours * 60 minutes = <<2+2*60=80>>80 minutes\nThen divide that number by 100 to find how long it takes: 80 minutes / 80 minutes/second = <<80/80=2.5>>2.0 seconds\n#### 2.5\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "90",
+          "correct": 0,
+          "text": " John goes to work for 3*60=<<3*60+30=120>>120 miles.\nSo he stays with 120-120=<<120-120-30=90>>90 miles.",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            4
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "35",
+          "correct": 0,
+          "text": " El capitalism = 30 * 0.30 = <<30*0.30=15>>15 dollars\nElisabeth = 15 * 0 = <<15*0=15*1.20>>15 dollar\nLaissez = 15 + 15 = <<16+15=26>>26 dollars\nO Boxer = 50 - 25 = <<50-25=35>>35 dollars\n#### 35\n",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 2,
+          "intermediate_loopy": [
+            0
+          ],
+          "intermediate_word_runs": [
+            2
+          ]
+        }
+      ]
+    },
+    "single_switch_64_32": {
+      "schedule": [
+        [
+          "ar",
+          64
+        ],
+        [
+          "diff",
+          32
+        ]
+      ],
+      "n": 50,
+      "n_correct": 1,
+      "accuracy": 0.02,
+      "loop_rate_final": 0.08,
+      "mean_intermediate_loop_rate": 0.05,
+      "max_word_run": 17,
+      "wall_s": 153.7,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "4",
+          "correct": 0,
+          "text": " First find the number of eggs collected by way of day: 16 eggs / 3 = <<16/3=4>>4 eggs\nThen multiply that/ * farmer/ farmer = each farmer farm farm * one farm * each each each",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            3
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "3",
+          "correct": 1,
+          "text": " Theshirt takes 2 coyotes * 2\u03c9 = <<2*2=4>>4 products.\nIt takes 4 more than 4 products, so 4 + are of 1 of are A 1 of 1 each are 31 of 3 A A",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "00",
+          "correct": 0,
+          "text": " The house was worth $60000 so that's 60,000*0.5 = $<<60000*1.5=24000>>24000 that that of he he00000. he he he he00 he he he.",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            3
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "5",
+          "correct": 0,
+          "text": " He runs 2*60=<<2*60_3=90>>90 meters per week\nHe runs 3*60 = <<3*60-302441220463030266Question5Question",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "2",
+          "correct": 0,
+          "text": " The first two days are 30 days because 30 x 2 = <<30*2=60>>60\nThe first two nights are 4 feed for 2 24 24 3 1 3 24 each 24 feed 3 for 2 for",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "60",
+          "correct": 0,
+          "text": " The first one cost $5 because 5 x 60 = <<5*60=150>>150\nThe second one costs $50 because 150 / (60/ each each one each one each one each each each one each one one one each the",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            4,
+            3
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "10",
+          "correct": 0,
+          "text": " The number of sheep inPhone's family is 2 * 20 = <<2*20=40>>40 sheep.\nToulouse and secures 40 / same as same the the same10 the same same have the are sheep are are as",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            3,
+            2
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "2400",
+          "correct": 0,
+          "text": " First find the total time it took for the download: 200 facelaces * 60 seconds = <<200*60=2400>>2400 seconds\nThen Linux.%% minutes. Linux minutes% minutes Windows minutes Linux%, she+",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "3",
+          "correct": 0,
+          "text": " If John drives 2 hours at an speed of 20 mph and drives 3 hours, then he has 20+3 = <<20+3=24>>24 miles the miles 20 miles he 20 20 he miles 20 the 2 he he 3 he he",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "40",
+          "correct": 0,
+          "text": " First find the total weekly income for Eliza: $10/hour * 4 = $<<10*4=40>>40\nThen add that to the paid per per per per hours pay paid hours paid paid hours hour paid hours pay hour",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            4
+          ]
+        }
+      ]
+    },
+    "interleaved_16_8_x3": {
+      "schedule": [
+        [
+          "ar",
+          16
+        ],
+        [
+          "diff",
+          8
+        ],
+        [
+          "ar",
+          16
+        ],
+        [
+          "diff",
+          8
+        ],
+        [
+          "ar",
+          16
+        ],
+        [
+          "diff",
+          8
+        ]
+      ],
+      "n": 50,
+      "n_correct": 1,
+      "accuracy": 0.02,
+      "loop_rate_final": 0.02,
+      "mean_intermediate_loop_rate": 0.01,
+      "max_word_run": 5,
+      "wall_s": 138.9,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "3",
+          "correct": 0,
+          "text": " There are 16 eggs / 3 = << and farmers she farm farmers farmer chickens = 4*16=48>>48 eggs each farm farmer each more she $ she makes than $ she sells 1 chicken egg 10 a five average chickens farm week 3",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            1,
+            2,
+            2,
+            3,
+            2
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "30",
+          "correct": 0,
+          "text": " There are 6 x 2 = <<6 that that wrinklesments of A This were 1/2=1/2>> A Allirm Eatches The A A value is 30, so A All Morning value E value value values value value If",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2,
+            2,
+            2,
+            3,
+            2
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "200200200",
+          "correct": 0,
+          "text": " The house cost 80000*.5=$25 for $ 100 after he $ for 40,000*.1=<<20010050200100 he40 20050400\nHe put in $20, 2000400200 200200200 he",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "10206630",
+          "correct": 0,
+          "text": " The 2 sprints are 1*60\n runs runs32 runs does4*60=<<1*60/4s%32/s runs4*.5=90>>90\n\n 10206630 ",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "15",
+          "correct": 0,
+          "text": " The first cup of mixed feed contains 5 and each this each with the her each the number of food items that have a feeding and them, feeding two each feed = 15 cups.\nThe second cup about their her feeding two three all two",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "100",
+          "correct": 0,
+          "text": " Each glass costs 50/100 * 4 he then16 he he% he 1st time the glass costs 5(1 new402 $1 new he150) 10 = <<50*33818 each100",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "30",
+          "correct": 0,
+          "text": " Charleston has 2 * 20 sheep = << 2 5 40 3 10 1 15 30 16 3 16 9 60\nToul twice 15  50 says As 40  50 b/100 b/w. t 6 4 t 30 k k",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": null,
+          "correct": 0,
+          "text": " First find the total time in seconds: Windows This Linux If Windows If Mac Linux In Microsoft Windows They are installing the latest Windows download connect Linux install install install Linux do not install on Linux you install the install install open CD download download you download",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "20",
+          "correct": 0,
+          "text": " First, we need to determine how much 2 6 3 3 30 the he 6 3:30 + 30 = <<2 2 2 the 3 6 4 4 6 8 9 10 11 12 13 15 16 15 3 3 20 1 the 2 20",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "151",
+          "correct": 0,
+          "text": " After 15 hours, Eliza earns $ for does * monthly paid paid per* 40 = $<<20=40>> paid 2015 she 2020 pay 2015 = $3.50 per hour each30 30252 month 151",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        }
+      ]
+    },
+    "interleaved_8_4_x6": {
+      "schedule": [
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ],
+        [
+          "ar",
+          8
+        ],
+        [
+          "diff",
+          4
+        ]
+      ],
+      "n": 50,
+      "n_correct": 1,
+      "accuracy": 0.02,
+      "loop_rate_final": 0.0,
+      "mean_intermediate_loop_rate": 0.0,
+      "max_word_run": 3,
+      "wall_s": 146.0,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "40",
+          "correct": 0,
+          "text": " First find the total sell farmers farm she has: 16 birds farmer farms markets farmers markets: 16 meat farmer chicken farm chicken production plants * 4 chickens40 water chickens farming plants = << he plants barley wastewater treatment plants)\n one  apples per",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "2",
+          "correct": 0,
+          "text": " TheEngland blackout ( it that 1 that many) took 3 A A so takes 2 * 2 = 1 so 1 makes a total of 2 it so is it that 2 * 3, means means means it takes 2*\n A so A",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            2,
+            4,
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "8011003030",
+          "correct": 0,
+          "text": " The house cost 80 buy price costs he bought so this makes he he buy buy 80*$50 buy sell buy $40,000+ buy 501 buy $50) $12110 = $<<8011003030",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "464",
+          "correct": 0,
+          "text": " He ran 3* he each a per day\nSo he\n runs runs1/2=<< ran runs runs days a week\nSo= hours days days a year day hours days miles total of 60+sw464",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "30",
+          "correct": 0,
+          "text": " First find the number two her 30 food feeders feed for her each feeding feeding: 30 plants * on them feeding each = <<30* food a feeding plants)\nThen subtract both that that food feed per bird from each their two first",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "204040",
+          "correct": 0,
+          "text": " First find the total% he he he needs to spend on 20 he he everyone is $5 x% 40 = $<<5*40 he40 40 money spent\nThen multiply 8 60 40 40 by the price per40 204040",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "2",
+          "correct": 0,
+          "text": " If there are 20 2 10 3 11 11 12 14 15 15 30 10 ToulPresident's sheep 1 as T As The number of sheep 30 1 1 As The numbers in T 50ments t T .5 T M t 15 2 2",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "2",
+          "correct": 0,
+          "text": " Let x be the download install Download save time\nThe download Download Linux browse she downloaded 3 GB/ CD make she free download 2 MB/ save Download he install computer on computer install get save he download computer on PC he free free install",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "12",
+          "correct": 0,
+          "text": " The speed of his 4 the  5 hour drive is 60 3 three 4  5 3 4 3 there when 3 20 3 4 4 4 2 20 his 20 20 2525 25 2 1 20 the speed of the 12 his him what his",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "60",
+          "correct": 0,
+          "text": " For a week with weeks paid paid monthly by Eliza, amount days month weekly will be $10 paid five pay hours * $10/7 paid 15 monthly = <<10* was her Monday is 30 hours.)\n work paid a60",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        }
+      ]
+    },
+    "interleaved_32_16_x2": {
+      "schedule": [
+        [
+          "ar",
+          32
+        ],
+        [
+          "diff",
+          16
+        ],
+        [
+          "ar",
+          32
+        ],
+        [
+          "diff",
+          16
+        ]
+      ],
+      "n": 50,
+      "n_correct": 2,
+      "accuracy": 0.04,
+      "loop_rate_final": 0.06,
+      "mean_intermediate_loop_rate": 0.025,
+      "max_word_run": 7,
+      "wall_s": 173.1,
+      "results_sample": [
+        {
+          "idx": 0,
+          "gold": "18",
+          "pred": "24",
+          "correct": 0,
+          "text": " First find the number of young ducks: 16 turtles / 3 = <<16/ she chickens that eggs chicken he that she of that country.\nThe figure for the total population of the United States is 4, $ 6 2 2 7 each 6 a a 24",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "idx": 1,
+          "gold": "3",
+          "pred": "1",
+          "correct": 0,
+          "text": " The nonsensical blue fibers take 2/2*12 = <<2/2= are of of 1 are of 1 each 3/5 of the plants on my garden need to be replaced or repopulated 1 1 1 1 1 1 2 2 3 1",
+          "final_loopy": 1,
+          "final_word_run": 6,
+          "final_phrase_run": 2,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "intermediate_word_runs": [
+            2,
+            2,
+            2,
+            6
+          ]
+        },
+        {
+          "idx": 2,
+          "gold": "70000",
+          "pred": "20",
+          "correct": 0,
+          "text": " The house cost 80,000*$80,0000=$<<80000* $50 he20 of of he he 20 he30 of ronem = 3 x 10 = <<3*10=30 40 50 40 30 20 30 30 30 20 20",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2,
+            2,
+            3
+          ]
+        },
+        {
+          "idx": 3,
+          "gold": "540",
+          "pred": "651212205050104030",
+          "correct": 0,
+          "text": " It takes him 3*60=<<3*60/3=30>>4 6 he2 he 425 = 4,000\n1060 - 600 = 50,000 acres of cultivated651212205050104030",
+          "final_loopy": 0,
+          "final_word_run": 1,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "idx": 4,
+          "gold": "20",
+          "pred": "2",
+          "correct": 0,
+          "text": " The first one is 20% of the chicken feed and the second one is 30 and two two she two 1 feeding each each herThe U.S. Food and Drug Administration\u2019s (FDA) 2 two 3 each one two three 1 2 2",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            1,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 5,
+          "gold": "64",
+          "pred": "20",
+          "correct": 0,
+          "text": " The first glass costs 25 * 15 = <<25*15=300>>300 he% he%% he he he15 15%\nOr what is the he% he%\nwhat is the average value 20 20 20 $ 15 $ 40 20 $ $",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            4,
+            4,
+            4
+          ]
+        },
+        {
+          "idx": 6,
+          "gold": "260",
+          "pred": "11",
+          "correct": 0,
+          "text": " St. Louis has 2 * 10 = <<2*10=20>>20 3 5 3 times 30 twice 2 twice * 15 years ago, there was a class of girls attending the age of 14 who were 8 7 9 6 12 4 6 2 1 11",
+          "final_loopy": 0,
+          "final_word_run": 2,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "idx": 7,
+          "gold": "160",
+          "pred": "200",
+          "correct": 0,
+          "text": " First find the total time it takes to download a 200MB file: 200 GB install install CD she CD CD CD Linux Linux CDSimilar to other Linux distributions, Linux can be used with Linux, or any other a install install install a download install install download download",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "idx": 8,
+          "gold": "45",
+          "pred": "1",
+          "correct": 0,
+          "text": " It takes him 3 hours to travel from home to work so that\u2019s he  miles  he car  hours hour milesAs we continue to investigate the length of the pregnancy of a person using the current miles miles the miles miles 1 miles miles miles miles",
+          "final_loopy": 0,
+          "final_word_run": 4,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "idx": 9,
+          "gold": "460",
+          "pred": "40",
+          "correct": 0,
+          "text": " Let x be the rate of per hour per day\nSince there are 2 days paid paid pay month pay paid hours month paid monthlyOver the past decade or so, the United Nations has been tracking the world\ufffd 40 40 20 30 $ $ 30 30 $ 40",
+          "final_loopy": 0,
+          "final_word_run": 3,
+          "final_phrase_run": 1,
+          "intermediate_loopy": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "intermediate_word_runs": [
+            2,
+            2,
+            2,
+            3
+          ]
+        }
+      ]
+    }
+  }
+}
