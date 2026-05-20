@@ -49,7 +49,27 @@ def main():
     os.environ.setdefault("MIXED_GSM8K_REPEATS", "20")
     os.environ.setdefault("MIXED_FINEWEB_TOKENS", "2850000000")
     os.environ.setdefault("SAVE_EVERY", "2500")
-    # RESUME_FROM is set by the launcher (points to the F10 ckpt on pod).
+
+    # f7_1b_emerge resumes from variant's own model.pt only. So we PRE-PLACE
+    # F10's slim ckpt at the variant out_dir before launching. train.py then
+    # reads step=182999 from it and starts at step 183000, running 30000 more
+    # steps before MAX_STEPS=213000.
+    import shutil
+    resume_from = os.environ.get("RESUME_FROM")
+    if resume_from and Path(resume_from).exists():
+        out_name = os.environ["OUT_NAME"]
+        variant = os.environ["VARIANTS"].split(",")[0].strip()
+        variant_dir = REPO_ROOT / "e5" / "results" / out_name / variant
+        variant_dir.mkdir(parents=True, exist_ok=True)
+        target = variant_dir / "model.pt"
+        if not target.exists():
+            print(f"[F11] copying F10 ckpt {resume_from} -> {target}", flush=True)
+            shutil.copyfile(resume_from, target)
+        else:
+            print(f"[F11] target ckpt exists at {target}, leaving for resume", flush=True)
+    else:
+        print(f"[F11] no RESUME_FROM (or path missing) — will train FROM SCRATCH", flush=True)
+
     from e5.scripts.f7_1b_emerge import main as f7_main
     f7_main()
 
