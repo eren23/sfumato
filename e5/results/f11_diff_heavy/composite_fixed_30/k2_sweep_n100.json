@@ -1,0 +1,494 @@
+{
+  "ckpt": "/workspace/sfumato/e5/results/f11_diff_heavy/composite_fixed_30/model.pt",
+  "n_eval": 100,
+  "k_ar": 64,
+  "k_diff": 64,
+  "n_diff_steps": 16,
+  "n_outer": 1,
+  "configs": {
+    "diff_draft_ar_refill_pct10": {
+      "threshold": 10.0,
+      "n": 100,
+      "mean_nll_on_gold": 9.6156,
+      "sd_nll": 0.4751,
+      "mean_refill_rate": 0.094,
+      "mean_wall_s": 0.855,
+      "loop_rate": 0.0,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 9.7347,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 1.259,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Once she has proved to use her in her care and he was her with her care is not the health, and has no more likely his career. And because he was a result of her and her children, she had to be more o"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 9.8897,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.786,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Abarastre of the Florida, not to be invested by his position, as a tax as they shall the essay or even of their free.\nHowever, in 1858; in an example, for a couple of Chinese men.  In this kind, he s"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 9.5991,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.937,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " fung, d clean water and other! Keep it to work your time, moving her out as she might help them to be back up to go with air.\n- How To eat your family is left?\n- Being a good idea, so you have to fin"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 9.8216,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.769,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " The The name of a head is the sound of C. If we have to see the mass of B. We know that it\u2019s like the next 1/2-1 in our back, we\u2019ll do it! Is you have the than J4A2\u201d? and we\ufffd a 2 you\ufffd is.\n is\n will.\n"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 128,
+          "mean_nll": 9.7915,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.812,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " What is a greater risk of costs?\nThe amount of data is to pay energy where there are a price. If the construction does not leave the you get it on the amount. If your cost, we're going to do in your "
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 9.6569,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.973,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " If it was now?\nHere are several different kinds of these words, there are much to have a large number of measurement in the soil, which have been shown at the Earth\u2019s true water. In addition, the U.S"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 9.5587,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.59,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " 2\nThe students and read this video for developing school students develop. These children will be able to get a test for reading and learn for them together their own.\n the students will\n, students w"
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 9.7102,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.834,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " Aac Manki, thongy, p., 400, W., January 14, 18, 2010, 2015, 1884, 2012, California, U.S., 24, 2016. ISBN 1.5\u00b0C.S.Sm.\nThe second tank has one of a collection of these natural and\n \" the most The and t"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 10.1602,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.98,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " The length of glass and plastic, and other. In most of these things we have an extended point, there\u2019s a number of development in the story that the entire form is simple. That is what happens will n"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 9.2883,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.974,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " 1:00.5; 4:2.\nWe were in 18 June, and 18: August 18:\nI just have seen a book. She can be difficult for her new activities for two children? We do they help us come from the young teachers of their stu"
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct25": {
+      "threshold": 25.0,
+      "n": 100,
+      "mean_nll_on_gold": 9.6808,
+      "sd_nll": 0.5177,
+      "mean_refill_rate": 0.25,
+      "mean_wall_s": 0.926,
+      "loop_rate": 0.02,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 10.4198,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.744,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " (S)\n- his January 22, 18, 2015.\n- C. 2011. www.f.com.\nIn the recent context, he is now by the animal, a with a beach that can be needed to see this service. of of of that- and of in to the the proces"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 9.7606,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.372,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " D-R-S-A woman to the written by her and her position. in her, (in the first) a man of.., in\n\n,\n, the first to the first of the (the to of the first) the first the for a is for a\n the is and the to\n"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 9.8651,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 1.017,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " 9: 21: 5 - 4.\nYour children are a clear girl does not mean?\nSach your child is an example of them. This will be prevented and place for your child.\nThe information you\u2019s not to use your child to will"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 10.6876,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.865,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The most prominent species, the human body that are the most common way. In order to use a number of injuries. It can be used by the body. However, there is to be no one of the possibility.\nThese wer"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 84,
+          "mean_nll": 9.8613,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.43,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " How much way is when we do this is still no one of your longer-in-American?\n it you have that. the. a good thing you have to I we have to the a to\nto and I have you that you to do of the same to do.,"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 9.7076,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 1.035,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Search: How did it go to explain that we have? What can be an out how you do so the same is here to use it for as much?\nIt\u2019s a full end of the left to the make it in the planet which do not occur and"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 9.4684,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 1.113,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Thener: Inter-Mafy,berg, The Finally, the 3:30\nThe report was a group of participants were able to be going to predict the next job. When the ability to create the total level of the only new informa"
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 9.0679,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.874,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Mac.com/60/05/4/1/8/2/3/1-3/5/5) + and 6/1. The (2) is 1/7.3 1/3, 1, 1/5.1, 1.\nThe three-4, which has\nThe two 2).2 is the 0.1.\nThe 2. of2 is 2 (2)).\n in the the 0 (2) 3(( of in0\n1 the ( 0 0) 3 5).0"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 9.9431,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 1.11,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " If you have a stars of theable process?\nThere are the located on each color, the scale was taught in a source or simply released, of the storage level. They had a so that would be able to make it to "
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 9.6785,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 1.094,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " 7 to 30-30 + 5/12/4/2\nThe first generation is a look at the function of the top of a Space One or more people to use it through the program? If you think it must be?\nAccording to this blog program, w"
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct50": {
+      "threshold": 50.0,
+      "n": 100,
+      "mean_nll_on_gold": 9.6221,
+      "sd_nll": 0.5207,
+      "mean_refill_rate": 0.5,
+      "mean_wall_s": 1.089,
+      "loop_rate": 0.02,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 9.4852,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.01,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " 2000/18: 1/2-12-4-2/8/3/5-3:26/1:9/25-6/7-2-1/9/2:24-30/45.\nThe three- 1/4/2 is 100: 18, 3: 1\nThe two 1/3/ ( the) is5.\nThe two ( (1) the two 2/ of the, 1 103/2 0.\n\n. The two-310.)4). 21.5.\n4.1 0.\n of"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 9.964,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.018,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " How to be?\nAccording to the Tennessee at $4 +.00, he made an advance. She was the first time to see, but will accept them: for one of her or want to make sure a more without that.\nI find an technical"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 10.0521,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.172,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " To Keep a good thing?\nWhat to find your child?\nYou are to get. If you will do it get your baby\u2019s your doctor if they make up with her and they need to develop your kids and vegetables. If your childr"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 10.4813,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.002,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The most common features the common of less than when they are possible for the rules and activities.\nWe will be with which is the only thing to be them through the potential of at a person who will "
+        },
+        {
+          "idx": 7004,
+          "n_compare": 128,
+          "mean_nll": 10.4149,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.039,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " \u201cWe may see that the next day we can be used in our best things.\u201d\nAccording to this was originally many famous for a community. In part, we are looking like, each week that we\u2019re not accept our busin"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 9.5195,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.183,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "\nThe complete by the price of water is a period.\nThe pressure is by one of the volume of water.\nAnother material is used to keep you a number of water, there are two and those around the amount of lif"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 9.9146,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.297,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " The free essay is on what we want to read this!\nThe students should be able to know that will add and solve different, if you do not be your learning in your professional and learn. They could be abl"
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 8.8921,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.03,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " severalThere are two days than 5% and 5.3 minutes each day they do a color of find 4.5 percent of these line 2 diabetes. This means that each one is no more likely. They have a few per second hours t"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 9.7998,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.187,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " They're not only? The next step of the picture, the third-world is a set of each command. The should it be set to the in a combination of each other code. In this lesson, in this was taking to an ess"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 9.677,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.213,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " best Check in her with a child in a school. It is so much more about, and how many of their own child may work out it as those who have any time to create it to be in a healthy life in her life. That"
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct75": {
+      "threshold": 75.0,
+      "n": 100,
+      "mean_nll_on_gold": 9.6572,
+      "sd_nll": 0.5597,
+      "mean_refill_rate": 0.75,
+      "mean_wall_s": 1.218,
+      "loop_rate": 0.57,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 10.0004,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.167,
+          "final_loopy": 1,
+          "max_word_run": 2,
+          "text_head": " 35/7-10/7/6-9.\nIn most cases the next period, there are any important number of 2. The second Amendment is one that each have a total number, and there is a difference between 32.\nThe average level i"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 10.4418,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.162,
+          "final_loopy": 1,
+          "max_word_run": 3,
+          "text_head": " He was born to the larger number in 1841, which also had never been sold in his father. His own two as she believed that his first body was a different way to be able to take the darkness with it. Th"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 9.7419,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.321,
+          "final_loopy": 1,
+          "max_word_run": 2,
+          "text_head": " 6: 7: 12: 8, 5.5, 10.\nThe child will spend their own. This is, but rather than the kids who have the number of age the screen at the time, will be able to share their family as they may take their ch"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 9.8543,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.147,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " A.\nThe one of a 16th is your first un breakfast? For most of the most places you must have a clil, and you will be familiar with one of the story. You can of this will go back on the sky with a whole"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 128,
+          "mean_nll": 9.2564,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.167,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " The convention of the 19th century, the last re- protect all the city for the river and has been made on a more of the skowing of the Earth's surface the last year, then we can start with a old dange"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 9.6023,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.356,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " a piece of light (in anad) is the remaining part of most areas, the sun does not be looking for the soil. However, when the other points, it is not only the result of airy when it is made and any of "
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 9.6022,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.436,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " 5.0. 7.8.3.2.16.28.40.\nThis is when she has a high school students, students make reading about the questions and reading learning to help the steps of an exciting and help the opportunity for which "
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 10.1655,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.119,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " What does this?\nThe more money to bring your home and give you hold your bad for your child? You will want to solve the page to learn the problem or ask you learn how to do not by talking about them."
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 9.768,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.355,
+          "final_loopy": 1,
+          "max_word_run": 2,
+          "text_head": " 1950: 8: 2.5.\nThe seventh girl was good for 2 m 10 children and was pre-day parents who have been made their own and they could help them to find the fire in your child, just like being finished. The"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 9.431,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.374,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " They were active in a key books? The game has been a room-day major amount of areas: it was a member (and the own is to take a couple-14-19). Then, they see how many of the number are still true at t"
+        }
+      ]
+    }
+  }
+}

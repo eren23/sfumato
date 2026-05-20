@@ -1,0 +1,327 @@
+{
+  "decode_config": {
+    "ar": {
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "no_repeat_ngram_size": 3
+    },
+    "diff": {
+      "diff_temperature": 0.8,
+      "diff_top_p": 0.9,
+      "diff_repetition_penalty": 1.15
+    }
+  },
+  "ar_only": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 66.3,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " \"Your family: for a result.\""
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": null,
+        "correct": 0,
+        "text": " Is we are more than the final cover of your cut down the sleep?"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "4.4",
+        "correct": 0,
+        "text": " A.S.io, 4/3-3-1/2.\n(4) No.\n13. The Jean operation:\nThe length of constant types: and values are responsible, defined by the environmental list, and physical levels. The operation is more low than the level.\n6.2. The average cost will be measured in the system as the primary body can be under a certain system to control the.\n7.6.3. 2.\n5. 1.4.5.9.7.\n3. 22.3:36, 10, 15.\n4.4/"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "1.",
+        "correct": 0,
+        "text": " If there is that a significant number of capital is an alternative, and each month. The only four hour of a third of the structure in order to use this as a result is, one, another is 1.\nIn an example, the first is the most important information, they will be in that are the solution. A society will find a world. And it takes you from giving the idea and they see their own about any way to others who want what they\u2019re wrong as well as they can be without.\nBut we do we learn how to stay out more than you as much?\nSo what can you take"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " The help you encourage your individuals as a pregnancy and cancer or even one who aren't play their own until he has no more affected her. You can do not need this home your doctor if you have a local know your health where your child is to be in the symptoms. If you are you should be too expensive for your child\u2019s family with your doctor or get it.\nYou need to make sure to find out some to show us without being sure to be done to eat.\nIn general, you do with your school and will need to do what they may want to know if you about the child can be on."
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": null,
+        "correct": 0,
+        "text": " Do the number of the spaces to create a number oft participate in school? The other students have a good way to bring their own. If you know if they see the child are nothing about what they use them to get to do. You are trying to learn and consider for their families who is to try to make them to find to make up or stay on their own risk to get home at our time. If your person want to sell all these plans for your kids. So you need to get him to make an individual for students to monitor the because they need to with it when they did have to keep them off."
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "10.",
+        "correct": 0,
+        "text": " 2009; 15: 27, 2014, 2004, 18, August, 17, 1995. 1, 18.22, 19: 10.\n- Yet the first circles was one of them!\n- In the days, the Ancient its College was updated with its own poetry in the School for young days.\nIn the the evidence, people are children that they come to take up to their role. It is not only going to learn about what is something you look when you see the use of a child for them, so they did and do. You should use all the things of the kids who didn't learn about the opportunity to"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": null,
+        "correct": 0,
+        "text": " = an states that of your they keep them, then you can like a computer/or the you don't go into it to.\nWhen you will try to start your home, you can then take your and choose the way you get it into a particular, you could be on with an application.\nIf you do it have to be well, we have to stand out one. The cost is taken to you\u2019s not all the same. If your policy is as you want to start to avoid the user, you to give to grow on a file and how your work, but there are no reasons."
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "18000",
+        "correct": 0,
+        "text": " A constant calculate and two days and last limit, one does not be tieded or they are using the between 18,000 miles. This isn\u2019t know when I have become able to be treated with each of life and make it for doing what has any solution for a more than the new person who eat. The long thing is still but less difficult to become the truth from anything that for how much of this will help their own answer? That's if the same thing, we can make a lot of things about, so many people would go through it? This is not too high-called, especially in the next day and"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "-9",
+        "correct": 0,
+        "text": " The number of students: The school students will include + 1-9% learning in English school grade school, math: learning education, and students will be a Child who needs to learn about teaching teachers to study.\nThese children do so we look at a school students to teach reading? (CDA) to find parents to create students to the teacher to get in class for students and were able to say, but give to select this learning experience with a child to start and learning.\nWhat do you read, you will get up for reading about these kids! How can I make you take a student student or math for all students"
+      }
+    ]
+  },
+  "mode_switch_96_32": {
+    "n": 50,
+    "n_correct": 1,
+    "accuracy": 0.02,
+    "wall_s": 57.5,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " In her recent years, when he said she wrote her home to research, she had spread to imagine her was to have her still his family.\nHe, she said by his her back of her baby on her parents and her will be able to help they might\u2019t get their own. I find out the a, and to the and of\n\n a and, a of a in in- that"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "15",
+        "correct": 0,
+        "text": " The specified in a smaller than it is used to prevent the supply of the air will be given on the 12/2 or 3/3/7 is less than 4.\nThe positive number of 10 + A process is produced by 1.0, which are not available to a top of the most common condition of..3 to is\n,, and (1, a15 (\n the-"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "2",
+        "correct": 0,
+        "text": " \u2018good\u2019 is on a car. The good example is that all the process should be about all can be more than the rate will it be less directly.\nThe loss of $2 is one of the most important number of money. In this case, there are a multiple side of pressure/or natural and% costs the is to that cost to rate for to costs and, cost to to is"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "23",
+        "correct": 0,
+        "text": " Ayard was married at the 1940s, a pair of 8/4 + 1/1, and the end, or be used to the slopes the correct, was about the larger distance the front of the left of each second b, the first time when it was the total. The other is is because of the\n. is. is (\n a1 in to 2- 1 and\n in 23"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " The more stress of those who are the most beneficial for poor or those living in a person\u2019s risk of the body will be reduced from the baby\u2019t. If he wants to do the child to go to take and care and be improved to take up how many parents for these women have been too much\n it for. with\n is, or with and a- and a\n and a can"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "3",
+        "correct": 0,
+        "text": " 1/2/3/4/9/1/1 - 5\nThe third segment (1) is a larger set in the material used as each portion to make the best easier. This will be a similar values of an then, if it would be able to be the accuracy () of the amount of is and, in\n a- that and that3 is of is, is a. and"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "18.",
+        "correct": 0,
+        "text": " Os, X, L., W.V. D.S.C. M.A.T.R.E.D. (L) in B. 1996; 2. doi: 7-9/8. Retrieved 11, March, 18.\nHow to be a genetic God\nNot happen ( ( the the of\n- in in; of\n- the and of\n of:"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "5",
+        "correct": 0,
+        "text": " What are an?\nWhat does this is 5 of much? What does not exist? A second and count on its need to help?"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": null,
+        "correct": 0,
+        "text": "\nThe total the on the hole shows when I want to learn how much now, so are expected to make a clear. However, if it is that you have a. If the left, the one could use the business, to visit the mode you a drop.\nIt would be forced to do the amount of that will will is and that will for you it is and is on you be it you and"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "35",
+        "correct": 0,
+        "text": " 35 minutes\nIt has a walk because he has reported her she received her or her she took her her she needs to be able to establish. She knows her her cut to spend to see what I need to give her and at his way to a child who have to receive him if she and make up, then she of in, a you the and the the and the\n in of. a,, is"
+      }
+    ]
+  },
+  "mode_switch_64_32": {
+    "n": 50,
+    "n_correct": 1,
+    "accuracy": 0.02,
+    "wall_s": 35.3,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " If you have a lot of this care they are not having a high school or more money from family. A diet is one hour to teach a solution for the of\n. to, in and,, and to to\n\n and,.- to"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": null,
+        "correct": 0,
+        "text": " How did you get? You will find more hours?\nHow did you make you do you start? How do you are some of?\nWhen you have a your your, is. a the the. and, is your your to. a to"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": null,
+        "correct": 0,
+        "text": " The process is that the to cost costs. costs cost $ $ costs is will.. cost of\n of $ per"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": null,
+        "correct": 0,
+        "text": "\nThis\u2019s another way, the points of the time of this is wrong? What are in? This makes?\nThe good deal with the number to and, you to the. that. you a it of, to, and. is"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "-9.15",
+        "correct": 0,
+        "text": " The: Chazuno, 11:12: 6:00\u201317-12-9.15.\nThe first-to-called any specific a and\n a\n and with to in\n and is to a for and\n a\n"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "100",
+        "correct": 0,
+        "text": " What is he was a100?\nIn the example, the first plan was not to get. We have to a the of and a\n in and a is\n/ will/, that. of,"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": null,
+        "correct": 0,
+        "text": " In a year is best for the first way to offer in the treatment of the disease. She\u2019s also does not get disease. So they learn this of- a in that to.\n\ufffd and of and\n the, to\ufffd, for"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": null,
+        "correct": 0,
+        "text": " The amount of the right station can be ready for each important. This is just an ongoing design and use in- attended data."
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": null,
+        "correct": 0,
+        "text": " The total price of being paid by both by the chain is especially if she can take off and only other because they are not impossible to do what they use their is, that will, a and\n.,, to that to a a.\n it"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "-7",
+        "correct": 0,
+        "text": " 2:00-7%\nThe price is more attractive for this manner and need to occur in many words in an alternative sources are also. And I have the the of of. a the is the,/, of and the to\n and,"
+      }
+    ]
+  },
+  "paired_64_64": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 36.8,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " \u201cWhat is the way? I have access to the Internet for change, and see how this is so that it can get a system for applications that provide is designed to be able to learn what the patient will be easily do best.\nSince it's just seem to find to understand this information about how to use a your will you and you a. your and. a,, your in a you of on will, you. of you-, you of your and\n"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": null,
+        "correct": 0,
+        "text": " an electric have to create a hard for the air to go from your mind.com\nThe j store will be the appropriate way of a an as a general source, or even a certain number of time.\nIf you get back if you are not work, you want to start, or become the cold or the your you\n a is and you it, for the can. your. your your to can is you your is and is,, and can to will. of"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": null,
+        "correct": 0,
+        "text": " The length, a week, the length is needed to raise the contact with the number of the number: The required is to the structure for the process is to be made and work a new end. It is that this has come with a given the software for a that will require the question it will be for all things it. is is, of in, that one it will. that\n- as of in will to and be.\n and that to on on of. one"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": null,
+        "correct": 0,
+        "text": " It is possible for what is increasing:\nThere are many of people with other things like:\nWhy't you have?\nHow many people say they don\u2019t want to do? How does they were, or be the way?\nIf a person has been?\nAnd if your child can we move that of your you to. to your the the.. will and and to it, of and you, the you in that, it you will you is."
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " Four The ear is a exposed if it\u2019s her gets my personal in their tree! You can learn how to create your mother\u2019re allowed for our children because they are talking about doing this to all the right, or do not want them keep. If you see in a mild and should also be in is- or a your. for. can and and to to\n your\n it your\n\n will\n with you a a you your and for you and you"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": null,
+        "correct": 0,
+        "text": " Not only if the air is not the amount of she will last water to do. If there are no longer or a diet? I have a no= is that I have to use what it is not anything to be\n- What happens?\n- then be you have to look to be change in a by a. you, and and will the your will it if,\n,, is. and it that you the\n you your of you can your If it that you"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": null,
+        "correct": 0,
+        "text": " I need to consider how good for my family? I need the children take your home you move to learn about your home and make sure it right to read, learn how to get it the students how much of what we help with the training. This is to help your life what will be doing you help you that you of will., the\n and the a, and your you and your on\n you in. a is in for a. of\n for can you\n a"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "3.3",
+        "correct": 0,
+        "text": " 10 \u2013 10 and 5.2.00.1.8; 3.5.4.6.3.3) The most common takes- thrive in the end and/her. To avoid, keep yourself to help their lesson. This is based on what do make up. This will give them to make you you/ your is- you and\n your will and\n a for you is your of will, you you for your\n a\n you of- a your"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "1",
+        "correct": 0,
+        "text": " 3. The third- 12-year- explanations for the above-t-up is each. This works for two-15/2/2-4-3/1/6.\nThe second paper is at another of 18. The smaller end, for a. He is the takes point of the parallel\n a a that it to and1\n 2, 1 will is and\n a to and,, ( it ( 1 1 on that will in ( to in"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "2",
+        "correct": 0,
+        "text": " If he wants to maintain his father need a total for her she will have a difference between her than he must be to take him on her. If you eat or find what you would get it to start the morning.\nWhat is? How to do you go?\nIf you do the baby is the they want will the to your and the/ you will and,. you\n, of\n a and a to of\n. in will your,, and 2 your your"
+      }
+    ]
+  }
+}

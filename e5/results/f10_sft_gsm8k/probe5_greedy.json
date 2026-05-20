@@ -1,0 +1,317 @@
+{
+  "decode_config": {
+    "mode": "greedy"
+  },
+  "ar_only": {
+    "n": 50,
+    "n_correct": 1,
+    "accuracy": 0.02,
+    "wall_s": 36.5,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "2",
+        "correct": 0,
+        "text": " Janet\u2019s ducks lay 16 eggs per day because 16 x 3 = <<16*3=16>>16\nShe sells 3 muffins every morning for 4 days because 16 x 4 = <<16*4=3>>3\nShe sells 2 muffins every day for 4 days because 3 x 4 = <<3*4=12>>12\nShe sells 2 muffins every day for 4 days because 12 x 4 = <<12*4=2>>2\nShe makes $2 per duck egg because 2 x $2 = $<<2*2=2>>2\nShe makes $2 per duck egg because 2"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "2",
+        "correct": 0,
+        "text": " Half of blue is 2/2=<<2/2=1>>1/2 inch of white.\nSo it takes 1/2=<<1/2=1>>1/2 inch of white.\nSo it takes 1/2=<<1/2=1>>1/2 inch of white.\nSo it takes 1/2=<<1/2=1>>1/2 inch of white.\nSo it takes 1/2=<<1/2=1>>1/2 inch of white.\nSo it takes 1/2=<<1/2=1>>1/2"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "3000",
+        "correct": 0,
+        "text": " The house cost 80,000*.5=$<<20000*.5=4000>>4000\nSo he made 4000*.5=$<<4000*.5=1000>>1000\nSo he made 1000+4000=$<<1000+4000=3000>>3000\n#### 3000\n"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "12",
+        "correct": 0,
+        "text": " He runs 3*60=<<3*60=180>>180 meters\nSo he runs 180*3=<<180*3=360>>360 meters\nSo he runs 360*3=<<360*3=1800>>1800 meters\nSo he runs 1800*3=<<1800*3=3600>>3600 meters\nSo he runs 3600/180=<<3600/180=12>>12 meters a week\n#### 12\n"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "80",
+        "correct": 0,
+        "text": " She gives her chickens 15 cups of feed in the morning and 25 cups in the afternoon so that's 15+25 = <<15+25=40>>40 cups of feed\nShe gives her chickens 40 cups of feed in the afternoon and 25 cups in the afternoon so that's 40+25 = <<40+25=55>>55 cups of feed\nShe gives her chickens 55 cups of feed in the afternoon and 25 cups in the afternoon so that's 55+25 = <<55+25=80>>80 cups of feed\n#### 80\n"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "12",
+        "correct": 0,
+        "text": " First find the price of the first glass: $5 * 60% = $<<5*60*.01=3>>3\nThen find the price of the second glass: $5 * 60% = $<<5*60*.01=3>>3\nThen find the price of the third glass: $3 * 60% = $<<3*60*.01=3>>3\nThen add the price of the first glass to find the total cost: $3 + $3 + $3 = $<<3+3+3=12>>12\nThen multiply the price per glass by the price per glass to"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "160",
+        "correct": 0,
+        "text": " Seattle has 20*4=<<20*4=80>>80 sheep.\nToulouse has 80*2=<<80*2=160>>160 sheep.\n#### 160\n"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "2",
+        "correct": 0,
+        "text": " Carla has 200-200=<<200-200=100>>100 GB of files.\nShe has 200/100=<<200/100=10>>10 GB of files.\nShe has 10/20=<<10/20=2>>2 GB of files.\n#### 2\n"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "2",
+        "correct": 0,
+        "text": " John drives for 3 hours at a speed of 60 mph so that's 3*60 = <<3*60=180>>180 mph\nHe then turns around and drives for 2 hours at a speed of 30 mph so that's 2*30 = <<2*30=60>>60 mph\nHe then turns around and drives for 2 hours at a speed of 30 mph so that's 2*30 = <<2*30=60>>60 mph\nHe then drives for 2 hours at a speed of 30 mph so that's 2*30 = <<2*30=60>>60 mph\nHe then drives for 2 hours at"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "2400",
+        "correct": 0,
+        "text": " Eliza's hourly rate is $10/hour * 40 hours = $<<10*40=400>>400/hour.\nShe works 40 hours/week * $10/hour = $<<40*10=400>>400/week.\nShe works 40 hours/week * $400/week = $<<40*400=2400>>2400/week.\nShe works 40 hours/week * $24/week = $<<40*24=480>>480/week.\nShe works $480/week * $480/week = $<<480*480=2400>>2400/"
+      }
+    ]
+  },
+  "mode_switch_96_32": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 36.1,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "4",
+        "correct": 0,
+        "text": " Janet\u2019s ducks lay 16 eggs per day because 16 x 3 = <<16*3=16>>16\nShe sells 3 muffins every morning for 4 days because 16 x 4 = <<16*4=3>>3\nShe sells 2 muffins every day for 4 days because 3 x 4 = <<. \". \"....... \".. \".. \"."
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "222222",
+        "correct": 0,
+        "text": " Half of blue is 2/2=<<2/2=1>>1/2 inch of white.\nSo it takes 1/2=<<1/2=1>>1/2 inch of white.\nSo it takes 1/2=<<1/2=1>>1/2 inch of2222222/2222/222222"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "000000000000000000000000000000000000000000000000000000000",
+        "correct": 0,
+        "text": " The house cost 80,000*.5=$<<20000*.5=4000>>4000\nSo he made000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "3",
+        "correct": 0,
+        "text": " He runs 3*60=<<3*60=180>>180 meters\nSo he runs 180*3=<<180*3=360>>360 meters\nSo he runs 360*3=<<360*3=1800>>1800 meters\nSo he runs 1800*3=<<1800*3== runs runs runs runs runs runs runs runs runs== runs== runs=="
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "25",
+        "correct": 0,
+        "text": " She gives her chickens 15 cups of feed in the morning and 25 cups in the afternoon so that's 15+25 = <<15+25=40>>40 cups of feed\nShe gives her chickens 40 cups of feed in the afternoon and 25 cups in the afternoon so that's 40+25 = <<40+25 of of of of of of of of of of of of of of of of of of of"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "3",
+        "correct": 0,
+        "text": " First find the price of the first glass: $5 * 60% = $<<5*60*.01=3>>3\nThen find the price of the second glass: $5 * 60% = $<<5*60*.01=3>>3\nThen find the price of the third glass: $ of of of of of of of of of of of of of of of of of of of"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "4",
+        "correct": 0,
+        "text": " Seattle has 20*4=<< T T T T T T T T T T T T T T T T T T T"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "200",
+        "correct": 0,
+        "text": " Carla has 200-200=<<200-200=100>>100 GB of files.\nShe has 200/100=<<200/..................."
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "60",
+        "correct": 0,
+        "text": " John drives for 3 hours at a speed of 60 mph so that's 3*60 = <<3*60=180>>180 mph\nHe then turns around and drives for 2 hours at a speed of 30 mph so that's 2*30 = <<2*30=60>>60 mph\nHe then turns around of of of of of of of of of of of of of of of of of of of"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "400",
+        "correct": 0,
+        "text": " Eliza's hourly rate is $10/hour * 40 hours = $<<10*40=400>>400/hour.\nShe works 40 hours/week * $10/hour = $<<40*10=400>>400/week.\nShe works 40 hours/week * $400/week =.../...///....../.."
+      }
+    ]
+  },
+  "mode_switch_64_32": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 26.6,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "3",
+        "correct": 0,
+        "text": " Janet\u2019s ducks lay 16 eggs per day because 16 x 3 = <<16*3=16>>16\nShe sells 3 muffins every morning for..................."
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "1",
+        "correct": 0,
+        "text": " Half of blue is 2/2=<<2/2=1>>1/2 inch of white.\nSo it takes 1/2=<<1///////////////////"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "000000000000000000000000000000000000000000000000000000000",
+        "correct": 0,
+        "text": " The house cost 80,000*.5=$<<20000*.5=4000>>4000\nSo he made000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "360",
+        "correct": 0,
+        "text": " He runs 3*60=<<3*60=180>>180 meters\nSo he runs 180*3=<<180*3=360>>360 meters+++++++++++++++++++"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "40",
+        "correct": 0,
+        "text": " She gives her chickens 15 cups of feed in the morning and 25 cups in the afternoon so that's 15+25 = <<15+25=40>>40 of of of of of of of of of of of of of of of of of of of"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "3",
+        "correct": 0,
+        "text": " First find the price of the first glass: $5 * 60% = $<<5*60*.01=3>>3\nThen find the price of of of of of of of of of of of of of% of of of of of of"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "4",
+        "correct": 0,
+        "text": " Seattle has 20*4=<< T T T T T T T T T T T T T T T T T T T"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "200",
+        "correct": 0,
+        "text": " Carla has 200-200=<<200-200=100>>100 GB of files.\nShe has 200/100=<<200/..................."
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "180",
+        "correct": 0,
+        "text": " John drives for 3 hours at a speed of 60 mph so that's 3*60 = <<3*60=180>>180 mph\nHe then turns around \" \" \" \" \" of . \" \" at of \" \" of of \" \" of of"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "40",
+        "correct": 0,
+        "text": " Eliza's hourly rate is $10/hour * 40 hours = $<<10*40=400>>400/hour.\nShe works 40 hours//.................."
+      }
+    ]
+  },
+  "paired_64_64": {
+    "n": 50,
+    "n_correct": 1,
+    "accuracy": 0.02,
+    "wall_s": 28.6,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "4",
+        "correct": 0,
+        "text": " Janet\u2019s ducks lay 16 eggs per day because 16 x 3 = <<16*3=16>>16\nShe sells 3 muffins every morning for 4 days because 16 x 4 = <<16*4=3>>3\nShe sells 2 muffins every day for 4 days because 3 x 4 = << = = = =. = =. = = = = = = = = = = =. = =. =... =. = = = ="
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "2",
+        "correct": 0,
+        "text": " Half of blue is 2/2=<<2/2=1>>1/2 inch of white.\nSo it takes 1/2=<<1/2=1>>1/2 inch of white.\nSo it takes 1/2=<<1/2=1>>1/2 inch of/////////////////////////////////"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "3000",
+        "correct": 0,
+        "text": " The house cost 80,000*.5=$<<20000*.5=4000>>4000\nSo he made 4000*.5=$<<4000*.5=1000>>1000\nSo he made 1000+4000=$<<1000+4000=3000>>3000\n#### 3000\n000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "3600",
+        "correct": 0,
+        "text": " He runs 3*60=<<3*60=180>>180 meters\nSo he runs 180*3=<<180*3=360>>360 meters\nSo he runs 360*3=<<360*3=1800>>1800 meters\nSo he runs 1800*3=<<1800*3=3600================================="
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "25",
+        "correct": 0,
+        "text": " She gives her chickens 15 cups of feed in the morning and 25 cups in the afternoon so that's 15+25 = <<15+25=40>>40 cups of feed\nShe gives her chickens 40 cups of feed in the afternoon and 25 cups in the afternoon so that's 40+25 = <<40+25 of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "3",
+        "correct": 0,
+        "text": " First find the price of the first glass: $5 * 60% = $<<5*60*.01=3>>3\nThen find the price of the second glass: $5 * 60% = $<<5*60*.01=3>>3\nThen find the price of the third glass: $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "160",
+        "correct": 0,
+        "text": " Seattle has 20*4=<<20*4=80>>80 sheep.\nToulouse has 80*2=<<80*2=160>>160 sheep.\n#### 160\n================================="
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "2",
+        "correct": 0,
+        "text": " Carla has 200-200=<<200-200=100>>100 GB of files.\nShe has 200/100=<<200/100=10>>10 GB of files.\nShe has 10/20=<<10/20=2>>2 GB of files.\n#### 2\n======+====================+====="
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "60",
+        "correct": 0,
+        "text": " John drives for 3 hours at a speed of 60 mph so that's 3*60 = <<3*60=180>>180 mph\nHe then turns around and drives for 2 hours at a speed of 30 mph so that's 2*30 = <<2*30=60>>60 mph\nHe then turns around at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "400",
+        "correct": 0,
+        "text": " Eliza's hourly rate is $10/hour * 40 hours = $<<10*40=400>>400/hour.\nShe works 40 hours/week * $10/hour = $<<40*10=400>>400/week.\nShe works 40 hours/week * $400/week =================================="
+      }
+    ]
+  }
+}

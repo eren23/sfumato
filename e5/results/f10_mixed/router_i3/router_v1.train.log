@@ -1,0 +1,18 @@
+[router-train] device=mps ckpt=/Users/eren/Documents/AI/sfumato/e5/results/f10_mixed/composite/model_slim_final.pt out=/Users/eren/Documents/AI/sfumato/e5/results/f10_mixed/router_i3/router_v1.pt
+[router-train] loading frozen composite ...
+[router-train] composite loaded: 305.3M params, frozen
+/Users/eren/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[router-train] router: 526.9K params
+[   0] loss=-0.1190 acc=0.000 loopy=0.69 wall=14.1s
+[  10] loss=-0.0514 acc=0.000 loopy=0.12 wall=8.1s
+[  20] loss=-0.0463 acc=0.000 loopy=0.06 wall=6.7s
+[  30] loss=-0.0432 acc=0.000 loopy=0.06 wall=1.4s
+[  40] loss=-0.0717 acc=0.000 loopy=0.12 wall=5.9s
+[  50] loss=-0.0187 acc=0.000 loopy=0.00 wall=3.5s
+[  60] loss=-0.0496 acc=0.000 loopy=0.19 wall=12.0s
+[  70] loss=-0.0180 acc=0.000 loopy=0.00 wall=3.9s
+[  80] loss=-0.0166 acc=0.000 loopy=0.00 wall=3.1s
+[  90] loss=-0.0165 acc=0.000 loopy=0.00 wall=6.1s
+[  99] loss=-0.0188 acc=0.000 loopy=0.00 wall=8.0s
+[router-train] done. router -> /Users/eren/Documents/AI/sfumato/e5/results/f10_mixed/router_i3/router_v1.pt, log -> /Users/eren/Documents/AI/sfumato/e5/results/f10_mixed/router_i3/router_v1.log.jsonl

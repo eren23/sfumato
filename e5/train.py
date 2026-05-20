@@ -130,7 +130,8 @@ def train_one(
     torch.manual_seed(seed)
     np.random.seed(seed)
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    device = ("cuda" if torch.cuda.is_available() else
+              ("mps" if torch.backends.mps.is_available() else "cpu"))
     dtype = torch.bfloat16 if device == "cuda" else torch.float32
 
     cfg = CompositeConfig(
@@ -202,10 +203,36 @@ def train_one(
             start_step = 0
 
     ckpt_path = out_dir / "model.pt"
+    slim_path = out_dir / "model_slim.pt"
+
+    hf_repo_id = os.environ.get("HF_PUSH_REPO")  # e.g. "eren23/sfumato-composite-ckpts"
+    hf_subdir = os.environ.get("HF_PUSH_SUBDIR", out_dir.name)
+
+    def _hf_push_slim(label: str) -> None:
+        if not hf_repo_id or not os.environ.get("HUGGINGFACE_HUB_TOKEN", os.environ.get("HF_TOKEN")):
+            return
+        try:
+            import threading
+            from huggingface_hub import HfApi
+            api = HfApi(token=os.environ.get("HUGGINGFACE_HUB_TOKEN") or os.environ.get("HF_TOKEN"))
+            def _push():
+                try:
+                    api.upload_file(
+                        path_or_fileobj=str(slim_path),
+                        path_in_repo=f"{hf_subdir}/{label}.pt",
+                        repo_id=hf_repo_id, repo_type="model",
+                    )
+                    print(f"[hf-push] {label} -> {hf_repo_id}/{hf_subdir}/", flush=True)
+                except Exception as e:
+                    print(f"[hf-push warn] {e!s:.200}", flush=True)
+            threading.Thread(target=_push, daemon=True).start()
+        except Exception as e:
+            print(f"[hf-push setup warn] {e!s:.200}", flush=True)
 
     def _save_ckpt(at_step: int, final: bool = False) -> None:
         """Save model + optim + step + RNG so the run can resume.
         Atomic write: save to model.pt.tmp, then rename to model.pt.
+        Also writes a slim ckpt (no optim) and pushes to HF if configured.
         """
         payload = {
             "config": cfg.__dict__,
@@ -223,6 +250,15 @@ def train_one(
         tmp = ckpt_path.with_suffix(".pt.tmp")
         torch.save(payload, tmp)
         tmp.replace(ckpt_path)
+        # Slim ckpt (no optim) — small, portable, HF-pushable
+        slim = {k: payload[k] for k in ("config", "state_dict", "step", "max_steps",
+                                         "variant", "n_params", "final")}
+        slim_tmp = slim_path.with_suffix(".pt.tmp")
+        torch.save(slim, slim_tmp)
+        slim_tmp.replace(slim_path)
+        # Push slim to HF in background (non-blocking)
+        label = f"model_step{at_step}" if not final else "model_slim_final"
+        _hf_push_slim(label)
 
     for step in range(start_step, max_steps):
         try:

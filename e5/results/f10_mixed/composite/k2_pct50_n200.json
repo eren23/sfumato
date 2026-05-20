@@ -1,0 +1,494 @@
+{
+  "ckpt": "/workspace/sfumato/e5/results/f10_mixed/composite/model_slim_final.pt",
+  "n_eval": 200,
+  "k_ar": 64,
+  "k_diff": 64,
+  "n_diff_steps": 16,
+  "n_outer": 1,
+  "configs": {
+    "diff_draft_ar_refill_pct10": {
+      "threshold": 10.0,
+      "n": 200,
+      "mean_nll_on_gold": 12.1002,
+      "sd_nll": 1.1885,
+      "mean_refill_rate": 0.094,
+      "mean_wall_s": 0.834,
+      "loop_rate": 0.075,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 13.4167,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 1.114,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " The total amount of money that Werner gets from candy bars is $80/50 = $<<80/5=20>>20\nThe total amount that she makes from the candy bars will be $20 - $20 = $ <<20-20=10>>10\nThe profit she makes is "
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 12.9404,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.766,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " First find the total number of balloons (full) balloons: 300 balloons/do glow = <<300=300>>300\nThen multiply that number by the number of blue balloons to find the number that are green: 300-30=<<300"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 12.671,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.927,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " On Thanksgiving,limited to lunch, this is 30/2=<<30/2*16=12>>12 pounds of turkeys.\nOn Thursday, this will be 12+15=<<12+15+5=23>>23 pounds of turkey.\nThis will be 23-24= <<23-24=14>>14 pounds =444333"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 9.9338,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.589,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " The total number of balls is 27 + 10 = <<27+10=41>>41 balls.\nThe total number thatRemain bought is 41 - 9 = <<41-9=34>>34.\n#### 34\n/3 many red/ are - ==// + 1 are -1/= 524 6 << are = -6 =6 = = many30"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 128,
+          "mean_nll": 10.9112,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.795,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " First find the total number ofromes that same humorists tell each other (six/7=3)\nThen divide the number that was told by the number who asked the most jokes to get the answer: 11 jokes * 3 = <<11*3="
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 10.6378,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.927,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " Let x represent the number of miles on the Moon and y represent the total distance traveled by the moon. We know that the moon has an area of 3x + x + 2x + 2y = 5x.\nSo the total volume of the moon, o"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 12.3446,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 1.011,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " To make sure everyone gets the same amount of flbrush, he needs 30 / 2 = <<30/2=15>>15 yards of Floss.\nTo keep him in the shop, he has 15 * 1.25 = <<15*1.25=45>>45 yards of Pencils.\nTo 15 15 yards of"
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 10.204,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.652,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The first level has 4 pieces * 27 pieces = <<4*27=84>>84 pieces\nThe second level has 6 pieces * 22 pieces = 16 pieces\nIn total, the third level has 84 pieces + 4 pieces = 42 pieces\n#### 42\n each ther"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 11.3448,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.937,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " If Dav stret gets his start with two square drawings, then he's going to make the remaining 3 square drawing. Since the first drawing is so big, the second drawing is 3 x 4 = <<3*4=12>>12 square feet"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 12.7536,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.959,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " A book is 300 pages because 150 x 1 = <<150*1=300>>300\nA book is 200 pages because 300 x (300) + 300 = <<300+300=200>>200\nHe can read 500 pages because 200 / 3 = <<200/3=500>>500\n#### 500\nQuestion50 "
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct25": {
+      "threshold": 25.0,
+      "n": 200,
+      "mean_nll_on_gold": 12.1907,
+      "sd_nll": 1.1203,
+      "mean_refill_rate": 0.25,
+      "mean_wall_s": 0.92,
+      "loop_rate": 0.125,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 13.1406,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.867,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The number of candy bars in the store is 100/50 = <<100/50=2>>2.\nThe number of sugar bars sold is 48/2 = <<48/2=24>>24.\nIn total, she earns a total of $2 x 4 = $<<2*4=86875>>8751.\n1875510206206256020"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 10.5145,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.882,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " Let x be the number of balloons that Andrew has. We know that x + 453 =ussy/2\nThen x = originally made up, we get x = 22/2 = <<22/2=11>>11\nWe have 4x = 11, so x = 11/2.\n#### 11 3/ 3\n 6:/ of the ballo"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 11.7775,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 1.011,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " Each turkey is 5 inches long so 4*16 = <<4*16=64>> 64 inches long\nThe turkey will be left in the oven for 1 minute, 60 minutes or 1 hour so 60-60 = <<60-60=30>>30 minutes\nShe can do 30 minutes of mow"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 13.32,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.848,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " There are 19 + 10 = <<19+10=27>>27 red balls in the pack.\nThere were 27 * 6 = <<27*6=270>>270 red balls.\nSo, Helen purchased professions for a total of 270 + 270 = <<360-3000= Bucknerly]\n#### penalty"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 128,
+          "mean_nll": 11.1883,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.861,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " Charlie and.\")n\"e\"r\"r,\"r\"o\"r\",r\"u\"c\"f\"t\"i\"a\"b\"i\",c\"i,\"d\"u\",c \"v\"l\"o\",n\"r \"k\"a\",p\"a,\"w?l ah.\"n\"?\"\n,c\"?\"?\"a three-to- three- ain- the-a\n\" twob\"a\"?c abb \" \"g?in two \" ain\n"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 12.5705,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 1.016,
+          "final_loopy": 1,
+          "max_word_run": 5,
+          "text_head": " The surface of the moon has an area that\u2019s 4 times more than Earth's. This means that there are 4 * 80 = <<4*80=240>>240 acres of land on Earth.\nThe land on our moon is 20 times as much as Earth\u2019S, o"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 13.2769,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 1.098,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " First find the total amount of flilia: 20 students * 2 = <<20*2=40>>40 yards\nThen add the number of yards to find the number he has left: 40 yards + 40 yards = <<40+40=60>>60 yards\nFinally, divide th"
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 12.5206,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.846,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The level of each level is 3 levels * 7 = <<3*7=21>>21 levels.\nThe level of every level is 21 levels * 21 levels = <<21*21=amorphosed into an octagonal tower.\nIn total, the tower has 25 levels + 21 l"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 11.1491,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 1.033,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " DavANGE's painting is 12 + 4 = <<12+4=15>>15 square feet.\nThis means the two images are together 15 x 3 = <<15*3=45>>45 square feet long.\nTherefore, the painting will take an area of 45 + 45 + 15 + 3"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 11.7077,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 1.047,
+          "final_loopy": 1,
+          "max_word_run": 3,
+          "text_head": " The number of books that per book is 15 x 150 = <<15*150=3000>>3000\nThe number of workbooks that he has was 3000 - 60 = <<3000-60=600>>600\nThe total number of total workbooks he read is 600 + 300 + 3"
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct50": {
+      "threshold": 50.0,
+      "n": 200,
+      "mean_nll_on_gold": 11.9756,
+      "sd_nll": 1.1043,
+      "mean_refill_rate": 0.5,
+      "mean_wall_s": 1.078,
+      "loop_rate": 0.175,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 13.0131,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.023,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " proposed that the total amount she would earn is $80 x 60 = $<<80*60=4800>>4800\nThe total amount of money she will earn from the candy bars is $4800 - $48 = $ <<4800-48=2400>>2400\n#### 2400\n600060 -5"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 12.0172,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.007,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " Let s be the number of balloons Andrew has\ni = <<p=5>>5\nr = 5*453\nSo she had reinforce the 30/2=<<30/2)=35 of them\nc = 35/5\nThis means she had 35-35 = <<35-35=17 of them\n84 balloons4+383= = <<30/ of "
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 11.0083,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.161,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " First, find the total number of turkey on the menu: 16 pounds turkey / 16 pounds = <<16/16=2>>2 turkeys\nThen add that amount to the number of turkeys to find the number he can James cook: 8 turkeys *"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 13.7084,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.987,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " Although there were 20-10=<<20-10-5=15>>15 packs of blue balls, there were 15 - 15 = <<15-15=13>>13.\nThe total number of red and yellow balls thatbright made is 15 + 13 = <<16+13=27>>27.\n#### 27\n man"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 128,
+          "mean_nll": 12.7116,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.019,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The total number of cartoon characters is 13+7 = <<13+7=21>>21.\nThe total number is 21-7 =<<21-7=17>>17.\nThis means that a total of 21 + 17 = <<21+17=33>>33 jokes are told on Friday.\n####11 6\n6 7 = <"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 13.8497,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.209,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " It takes 6 * 80 = <<6*80=480>>480 days to get the moon to its surface.\nIt takes 480 / 60 = <<480/60=4>>4 more days for the earth to reach its surface on the Moon.\nThis takes 4 + 4 = <<4+4=8 all each "
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 12.8302,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.27,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " First find the total number of yards Dikemymbe has in his classroom: 20 students * 40 yards/teacher = <<20*40=800>>800 yards\nThen find the number of yard-ons in each student's classroom: 800 yards / "
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 12.0598,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.841,
+          "final_loopy": 1,
+          "max_word_run": 6,
+          "text_head": " The first level will have 22 pieces because 3 x 7 = <<3*7=22>>22\nThe second level will also have 27 pieces because 22 - 22 + 22 = <<22-22+22=27>>27\n#### 27\n 2/3rd 2/2 she is a student at the school. "
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 12.2028,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.188,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " Davomnia has three + 3 = <<3+3=6>>6 square feet of art.\nThe total number of square feet are 6 x 4 = <<6*4=24>>24 square feet.\nA total of 24 square feet for Davousing, Dav masculinity, and Dav Guardia"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 12.3624,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 1.277,
+          "final_loopy": 1,
+          "max_word_run": 3,
+          "text_head": " His mother bought 15 x 150 = <<15*150=1500>>1500 pages.\nThey used 1500 + 15 = <<1500+15=1500+300>>1500.\nWhen they sold the candy they had a total of 1500 - 1500 = <<requiring more money than they had"
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct75": {
+      "threshold": 75.0,
+      "n": 200,
+      "mean_nll_on_gold": 12.3662,
+      "sd_nll": 1.057,
+      "mean_refill_rate": 0.75,
+      "mean_wall_s": 1.216,
+      "loop_rate": 0.19,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 13.2104,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.157,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " The number of candy bars that she has is 50/100 * 4 = <<50/100*4=20>>20\nThe total number of moist cards is 20 + 20 = <<20+20=30>>30\nThe number of dry cards that she buys is 30 - 20 = 15\nShe makes 30/"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 13.6455,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.14,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " First find the total number of balloons Andrew buys: 4 blue balloons / 2 = <<4/2=4>>4 balloons\nThen find the number of red balloons Andrew uses: 453 red balloons * 453 = <<453*453=135>>135 balloons\nF"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 12.1826,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.318,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " At 9:00 am, postponades are going to be left at 7:30 pm so 8:00 - 9:20 = 12:00 will be the latest.\nAt 6:30 am, during the dinner party, there will be 12:30/2=<<12:30-2=185>>185 hours = <<530/3=30>>84"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 12.6603,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.964,
+          "final_loopy": 1,
+          "max_word_run": 6,
+          "text_head": " Anna bought 9 / 2 = <<9/2=3>>3 packs of white balls.\nHence, she purchased 3 + 4 + 6 = <<3+4+6=14>>14 balls in all.\n#### 14\n/\n 5 yellow balls are.\n5 red balls red are.\n = blue + blue = blue + blue = b"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 128,
+          "mean_nll": 11.8865,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.153,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " In total, they said that a total of 11 jokes + 7 jokes = <<11+7=16>>16 funny jokes were told.\nIn total, them said that 13 jokes/stoodup = <<13=13>>13 jokes were telling.\nThey also said that 5 Physics"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 11.0674,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.346,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Let R be the number of acres of land on Earth.\nThe moon's surface area is 200 x 2 = <<200*2=400>>400 square acres\nSince the value of each acre is equal to 4, then the total amount of land has 2x4 + 4"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 11.9929,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.447,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " First find the total number of yards in the school: 30 yards * 0.25 yards/passenger = <<30*0.25=10>>10 yards\nThen find the amount of flunk in the students' cart: 40 yards * 2.5 yard-floss = <<40*2.5="
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 12.2431,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.153,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " First find the total number of pieces in the first level by adding up all the pieces: 3 levels * 9 layers = <<3*9=36>>36 pieces\nThen add up all three levels to find the number of levels: 36 pieces + "
+        },
+        {
+          "idx": 7008,
+          "n_compare": 121,
+          "mean_nll": 13.754,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.248,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Dav Julio's artwork consists of a total of 3 + 4 + 12 + 1 = <<3+4+12+1=30>>30 square feet.\nHis art collection consists of 30 square feet because 30 / 3 = <<30/3=30%\n#### 30\n56\n3/6320 =2/355 = <<388/3"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 11.9162,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 1.371,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " Each book has 15 pages so 1 page will cost 3 * 150 = <<1*150=300>>300 pages.\nIf he had 30 books then he would have 300 + 30 = <<300+30=270>>code books.\nAfter buying the books, seriousness is 300 - 50"
+        }
+      ]
+    }
+  }
+}

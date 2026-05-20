@@ -1,0 +1,15 @@
+[sft] device=mps  ckpt=/Users/eren/Documents/AI/sfumato/e5/results/f10_mixed/composite/model_slim_final.pt  out=/Users/eren/Documents/AI/sfumato/e5/results/f10_sft_gsm8k
+[sft] loading F10 ...
+[sft] model: 305.3M params, block_size=1024
+/Users/eren/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[sft] tokenising GSM8K-train Q/A pairs ...
+[sft] 7473 examples, avg len 153
+[sft] total_steps=14946  batch=1  lr=3e-05
+[    0/14946] ep=0 loss=2.8409 wall=0.0m
+[   25/14946] ep=0 loss=1.0766 wall=0.2m
+[   50/14946] ep=0 loss=2.5566 wall=0.4m
+[   75/14946] ep=0 loss=1.1919 wall=0.6m
+[  100/14946] ep=0 loss=1.2436 wall=0.8m
+[  125/14946] ep=0 loss=1.5010 wall=1.0m
+[  150/14946] ep=0 loss=2.0715 wall=1.2m
