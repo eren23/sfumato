@@ -48,6 +48,7 @@ class CompositeConfig:
     d_model: int = 512
     dropout: float = 0.1
     head_diff_proj: bool = True  # learn a d_model→d_model projection before the diff head's tied-output
+    use_xsa: bool = False  # Exclusive Self Attention (arxiv:2603.09078): forbid attending to own position
 
 
 class CausalSelfAttention(nn.Module):
@@ -70,15 +71,29 @@ class CausalSelfAttention(nn.Module):
         self.proj = nn.Linear(cfg.d_model, cfg.d_model, bias=False)
         self.attn_dropout_p = cfg.dropout
         self.resid_dropout = nn.Dropout(cfg.dropout)
+        self.use_xsa = cfg.use_xsa
 
     def forward(self, x: torch.Tensor, mode: str) -> torch.Tensor:
         B, T, C = x.shape
         qkv = self.qkv(x).view(B, T, 3, self.n_heads, self.head_dim).transpose(1, 3)
         q, k, v = qkv[:, :, 0], qkv[:, :, 1], qkv[:, :, 2]  # (B, nh, T, hd)
         is_causal = mode == "ar"
+        attn_mask = None
+        if self.use_xsa:
+            # XSA: build a no-self-attn mask (diagonal = -inf, off-diagonal = 0)
+            eye = torch.eye(T, device=x.device, dtype=torch.bool)
+            attn_mask = torch.zeros(T, T, device=x.device, dtype=q.dtype)
+            attn_mask.masked_fill_(eye, float("-inf"))
+            if is_causal:
+                # SDPA cannot combine attn_mask + is_causal=True, so we bake the
+                # causal triangle into attn_mask explicitly here.
+                causal = torch.triu(torch.ones(T, T, device=x.device, dtype=torch.bool),
+                                    diagonal=1)
+                attn_mask.masked_fill_(causal, float("-inf"))
+                is_causal = False
         y = F.scaled_dot_product_attention(
             q, k, v,
-            attn_mask=None,
+            attn_mask=attn_mask,
             dropout_p=self.attn_dropout_p if self.training else 0.0,
             is_causal=is_causal,
         )
