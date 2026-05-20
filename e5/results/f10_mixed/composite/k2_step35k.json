@@ -1,0 +1,494 @@
+{
+  "ckpt": "/Users/eren/Documents/AI/sfumato/e5/results/f10_mixed/composite/model_slim_step35k.pt",
+  "n_eval": 50,
+  "k_ar": 64,
+  "k_diff": 64,
+  "n_diff_steps": 16,
+  "n_outer": 1,
+  "configs": {
+    "diff_draft_ar_refill_pct10": {
+      "threshold": 10.0,
+      "n": 50,
+      "mean_nll_on_gold": 12.0821,
+      "sd_nll": 0.9924,
+      "mean_refill_rate": 0.094,
+      "mean_wall_s": 3.783,
+      "loop_rate": 0.0,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 13.0758,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 3.765,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Jen receives 20/100 * 4 = <<20/100*4=48>>48 dollars.\nThat means she makes 6 + 36 = <<6+36=15>>15 dollars more.\n#### 15\n money the his total<< to buy-12 of-12 is $12 money on have her to are $ is $ he"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 13.9678,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 2.713,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " He has 5 x 3 = <<5*3=30>>30 blue balloons.\nSo he has 30 - 30 = <<30-30=9>>9 blue balloons in the box.\n#### 9\n, of that amount, a was $- the on his brother- to, a was left with was for the in he and $"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 13.6611,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 4.671,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " There are a total of 16+16+8=<<16+16-8=17>>17+17+16=24>>17% of the turkey.\nThere are 4*5=<<4*5*5+8*5 = <<4*6=30>>30 turkeys in the turkey to on,\nThere are 30, the number of that to of was- her on she"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 13.0259,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 3.601,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " In the first packs, there are 4*10=<<4*10+8=35>>35 balls in all.\nIn the second packs, the total number of balls is 30-35=<<30-35/5=5>>5 balls.\nThe total number in the third packs is 20-5= he has left"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 125,
+          "mean_nll": 13.2608,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 3.633,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " There are 48/3=<<48/3*-1=72>>72 messages today in the Thursday following week, but some of these were not read at all, so there is a total of 48/8 = <<48/8=6>>6 uses of bias.\n#### 6\nQuestion: on. was"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 9.9746,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 4.208,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " If the first sum of the number of oceans in the Moon's surface is 80 percent, the total number of seas on the surface is 100 percent.\nIf there are 60 of the lakes on the big side of the big and big s"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 11.8079,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 2.338,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The total number of trips is 5 + 35 = <<5+35=51>>51 feet long.\n#### 45\n in it has and with he, a total of 45 + 45 is, is- his one\n and his he be with and to on on- he, that have the a that are a"
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 13.0431,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 3.561,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " First find the number of pieces in the end: 3 * 20 = <<3*20=240>>240 pieces\nThen multiply the number left by the number in the number: 120 - 240 = <<120-240=48>>48\nThen subtract the number from the n"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 116,
+          "mean_nll": 10.6187,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 3.551,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The square hole in the center of the gallery is 2 x 4 = <<2*4=12>>12 feet.\nAfter 20-foot, he has only 4 * 3/foot = <<4*3/s=8>>8 square feet.\n\n<< to find he has 4 she has in total a of, it on of the w"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 11.898,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 4.539,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Let X be the price of apples: 15 x 10 = <<15*10=60>>60/4 = <<30*10/4=12>>12.\nSo, if there were 50*2, the total price of each box is 60+12 = <<60+12=48>>48.\n her a was--- in has-a- her- she time is th"
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct25": {
+      "threshold": 25.0,
+      "n": 50,
+      "mean_nll_on_gold": 11.9656,
+      "sd_nll": 0.9658,
+      "mean_refill_rate": 0.25,
+      "mean_wall_s": 4.109,
+      "loop_rate": 0.0,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 11.2065,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 4.027,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The total amount that happen is $15/100 * 60 = $<<15*60=240>>240.\nAfter buying the candy bars, she makes 2 * $120 = $240 - $240 = $59.\nIf she sells a soda and sells 6 sodas, she gives 2 * a soda of s"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 13.9618,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 3.488,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " When you buy two of the balloon's balls, Andrew has 2*2=<<2*2*4=12>>12 gray balloons.\nAfter the rest of his shoes, he has 4+6 = <<4+6=16>>16 red balloons.\n#### that and and a the toot-box of balloons"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 12.6277,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 4.773,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The turkeys are made of 24 * 5 = <<24*5=48>>48 pieces of turkeys.\nThey can eat 48 / 4 = <<48/4=2>>2 turkeys per pound in the morning.\nSo they have eaten 48/6 = <<47/6=3>>3 she ro on, and they have an"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 12.3693,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 2.166,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " In total, there are 7 + 8 = <<7+8=14>>14 balls altogether.\n#### 14\n that for he left, a3 is 14 - 14 = <<14-14=3 $ he the other way a was. that $, to. << the his<< had << on and<< of The to $ his is a"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 128,
+          "mean_nll": 12.057,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 4.582,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " If there were 3/5 of the September songs that Steve had read since the beginning of the month, he could tell 10/7 * 12 = <<10/7*12=36>>36 assumptions.\nIf his wife was already feeding two morely in an"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 10.4889,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 4.731,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Let the total number of the moon and the moon are: 5 times the total land on Earth is 50 x 2 = <<50*2=120>>120 billion dollars.\nThe sum of land on a Earth is 60 / 5 = <<60/5=3>>3 million dollar.\n####"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 12.3323,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 5.184,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The total amount of fl disposables is 30*6 = <<30*4=120>>120 feet.\nHe is paying the rest of the students $10+$15 = $<<20+15=33>>33 for all the packet of pieces of flasks and flasks.\n#### 33\n $30\n by "
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 12.7838,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 3.486,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " During the first level, she will have 30 x 4 = <<30*4=120>>120 pieces at the finish.\nAfter the second level, there are 120 - 180 = <<120-180=65>>65 pieces at all.\n#### 65\nQuestion: a his brother of a"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 115,
+          "mean_nll": 11.6919,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 4.127,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " His paintings are 4 x 3/4 = <<8*3/4=6>>6 inches long.\nHe also counts two small 8-foot drawings because 3 x 5 - 12 = <<3+12=24>>24\n#### 24\nQuestion: of the 40 of of his that year that he with his the "
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 12.4155,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 3.972,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " There are 100*2 = <<100*2=300>>300 pages in the store.\nThe number of books that should be in the supermarket is 300-300 = <<300-300=45000>>45000.\n#### 45000\nQuestion: There he has was of days a week "
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct50": {
+      "threshold": 50.0,
+      "n": 50,
+      "mean_nll_on_gold": 11.8393,
+      "sd_nll": 0.8108,
+      "mean_refill_rate": 0.5,
+      "mean_wall_s": 4.859,
+      "loop_rate": 0.02,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 11.3513,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 4.591,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " If her total revenue is $12 x 4 = $<<12*4=48>>48.\nIf the total revenue she makes in dollar terms is $48 x 5 = $48 + $48 = $24.\nTherefore, the total cost of candy bars is $72 - $48+$48 = to buy his ca"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 12.156,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 4.529,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " One share is 4*2 = <<4*2=8>>8 blue balloon\nThe other one in the bag has 6-6 = <<6-6=1>>1 blue balloon in it\nAfter two years, he sold 2/5 * 3 = <<2/5*3=6>>6 blue balloons\n to his brother by the end hi"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 11.8149,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 5.414,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Since the tur ducks were 2, they would eat 3*16=<<3*16+4=24>>24 pounds.\nFor the turese, she has 4*30 = <<4*30=180>>180 pounds in one pound.\nIf the turfs eat 60 pounds while eating the tursters, her t"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 10.9668,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 3.629,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The total number of balls that found out is 2+5+8=<<2+10+8+8*10+16=26>>26 balls\nThere are 7 cards in each folder.\n#### 27\nQuestion000 people are living3-5 times has3 and the the on 4 to with the rest"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 104,
+          "mean_nll": 10.5861,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 3.311,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Both for the six weeks after the last week, there were 7+8=<<7+8+8*2=24>>24 number of complaints that these past Thursday.\n#### 24\nQuestion days ago was in a were-up. The number a week. The number it"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 13.4922,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 5.433,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The Moon is an orbit at a speed of 30/12=<<30/12+12=6>>6 feet long.\nThe land on Earth is 20+4= <<20+4+4*=48>>48 km.\nTherefore the moon will take 50+48 = <<50+48=48 and 48=12 (3)\n be the has to has to"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 12.3929,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 5.931,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " DBA takes 5 gallons of flQuis and puts it into the store, then he makes 4 trips in total, so it takes 3*35 = <<3*35=55>>55 gallons of water in total.\nSince each packet is sold, he will have 50/50 = <"
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 12.3556,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 4.105,
+          "final_loopy": 1,
+          "max_word_run": 3,
+          "text_head": " First find the number of pieces in a triangle: 10 = <<10*2=40>>40\nThen find the total number of the pieces: 40+40+40 + 60 = <<40+80+60+60=160>>160\n#### 160\n, the number and number $12 he a was, in do"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 11.5513,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 5.831,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The number of square foot: 8 * 12 = <<8*12=240>>240 square feet\nThat means the number of inches in the 3- to 1-foot prints: 240 x 10/foot = <<240*10/foot=20>>20\nSo the total number of pounds there ar"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 11.672,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 4.953,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " When a month of purchase has been read by 100, he spent 4*5 = <<4*5=48>>48 dollars on books.\nSo he left with 50+48 = <<50+48=58>>58 books altogether.\n#### 55\nQuestion was wondering was the-sick the-s"
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct75": {
+      "threshold": 75.0,
+      "n": 50,
+      "mean_nll_on_gold": 12.2027,
+      "sd_nll": 0.9133,
+      "mean_refill_rate": 0.75,
+      "mean_wall_s": 5.407,
+      "loop_rate": 0.12,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 12.8967,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 3.47,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " For the total amount of candy, we know there are 50+48 = <<50+48=54>>54 coins\n#### 54\n is now selling $50.\nQuestion: There are 4 times as many as the number of cars in a car. If there she has 4 cars "
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 14.7109,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 5.709,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " The total number of blue balloons is 5*2=<<5*2+6=21>>21 blue balloons.\nHe also has 24/4 = <<24/4=8>>8 yellow balloon.\n#### 8\n he has-8-8-8 the to make 8, and he has 8 blue the to make 8 blue balloons"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 12.5914,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 6.353,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The total number of eggs in one egg to eat is 3*16=<<3*16+4=48>>48 eggs in another food.\nThe number of turkeys in the egg to serve is 48+12=<<48+12+12]=4830>>4830 eggs in the meat.\n#### 4830\nQuestion"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 10.1875,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 5.128,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Of all the blue balls, there are 30*5=<<30*5/3=50>>50 balls left.\nSo, there were 15+10=<<15+10+10-17=12>>12 balls left after the number of red long balls was added.\n#### 12\n he has a <<30-12=6>>6 on "
+        },
+        {
+          "idx": 7004,
+          "n_compare": 117,
+          "mean_nll": 12.4832,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 4.722,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " The total number of documentaries that these two send is 15+5 = <<15+5=21>>21 impressions\nThe number of original they are now is 2/3 * 20 = <<2/3*20=45>>45Young\n#### 45\nQuestion: A store the number o"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 11.9253,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 6.273,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " Since there are 3 sides of the moon, we can use a total of 4*4=<<4*4*2=16>>16 times as many times as Earth.\nAfter the initial rims are removed, we get 4+16 = <<4+16=21>>21 times as much as Earth1.\nAf"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 10.9007,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 4.255,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " Let the total number of cargoings in the refrigerator be 20+35=<<20+35+35-=22>>22\n#### 22\nQuestion, there a total of 4 << a*4 $10=100>>100 with a total of $100 on the first day.\n a his total cost on "
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 13.2977,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 4.823,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " In all, Finals's towers has to have 24 x 5 = <<24*5=55>>55 pieces in her first lego.\nSo in total, there are 26 + 55 = <<26+60=78>>78 pieces of building.\n#### 78\n the number on the tree is twice as ma"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 12.4431,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 6.327,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " At the beginning of the painting, he had 8 x 5 = <<8*5=35>>35 square feet.\nSo after the artist took up his own painting, his name would be 36 - 2 = <<36-2=4>>4 square feet long.\nAfter the paintings, "
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 10.7727,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 3.923,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Because Zachar has a total of 150 + 15 = <<150+15=78>>78 books in his library.\n####78\n of the same name as, say, days of the month, was the same, but, as the sheen of the month, the number he had is "
+        }
+      ]
+    }
+  }
+}
