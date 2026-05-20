@@ -1,0 +1,494 @@
+{
+  "ckpt": "/Users/eren/Documents/AI/sfumato/e5/results/f10_mixed/composite/model_slim_final.pt",
+  "n_eval": 50,
+  "k_ar": 64,
+  "k_diff": 64,
+  "n_diff_steps": 16,
+  "n_outer": 1,
+  "configs": {
+    "diff_draft_ar_refill_pct10": {
+      "threshold": 10.0,
+      "n": 50,
+      "mean_nll_on_gold": 11.136,
+      "sd_nll": 0.3804,
+      "mean_refill_rate": 0.094,
+      "mean_wall_s": 4.347,
+      "loop_rate": 0.06,
+      "results_sample": [
+        {
+          "idx": 0,
+          "n_compare": 128,
+          "mean_nll": 11.6137,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 6.152,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " also played in the The suppression of the Army Air Force (now known as the New York Times ) from 2006 to 2009, and died a fourth time.\nThe following year he became a member of the American Institute "
+        },
+        {
+          "idx": 1,
+          "n_compare": 128,
+          "mean_nll": 12.0695,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 4.449,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " \u201cI\u2019m happy to say he does not understand your school system. I have to be learning a language.\u201d\nIn a 2007 interview, a young English teacher told Boulters that he tried to make some new friends becau"
+        },
+        {
+          "idx": 2,
+          "n_compare": 121,
+          "mean_nll": 11.2542,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 3.947,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": "ur, which is later replaced by \" Jason.\nHe was made to look like a human, but when he saw this, he went to check it out. He also tried to have it a little too close together... so he did. I hope his h"
+        },
+        {
+          "idx": 3,
+          "n_compare": 128,
+          "mean_nll": 11.8654,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 4.069,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " in the hands of the Romans, including 4 @. 5 million, 4 @1.4 million, 2 @3.9 million , 1 @.6 million , 2 @2.8 million , 4 @3 and 3 @0.5 million . In the meantime, one hundred and forty-two months aft"
+        },
+        {
+          "idx": 4,
+          "n_compare": 128,
+          "mean_nll": 11.0036,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 4.495,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " this use in his two works.\nThe significance of this work is generally understood as a means by which the book is described. It expresses the intention of the writer, but it also gives some idea of th"
+        },
+        {
+          "idx": 5,
+          "n_compare": 128,
+          "mean_nll": 11.107,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 4.311,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "ucian influences.\nChen Shih\nZu Wai, from the 10th century, is one of the earliest poems ever written by a Chinese poet, who first began to be recognized as an Egyptian but later became known as a styl"
+        },
+        {
+          "idx": 6,
+          "n_compare": 128,
+          "mean_nll": 11.3106,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 4.581,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "\nIn the 17th century, the Ch\u014dt'on period (1330-1703) was also influenced by the school of Sh\u016brj\u016bj\u016bnin by use of Indian Sanskrit, or the Sanskrit word for \"not the same\". In Japan, the book Sh\u016bpaka is "
+        },
+        {
+          "idx": 7,
+          "n_compare": 128,
+          "mean_nll": 11.0913,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 4.409,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": "ana ) of Japan's Imperial Period, which was completed in 1635.\nIn 1648 the Emperor's personal of Emperor Fuxu had to pay a visit to the emperor, but after a short period of work, in order to encourage"
+        },
+        {
+          "idx": 8,
+          "n_compare": 128,
+          "mean_nll": 11.0313,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 4.199,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": "iii).\nHe also explains that Du Fu has a special kind of mirror which can be used for both translation and a learning of the language, because it makes it easier for an translator to follow the transla"
+        },
+        {
+          "idx": 9,
+          "n_compare": 128,
+          "mean_nll": 11.3514,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 4.295,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " turgor and its effect , also include the phrase \"n'a mai iktpe risperi\". It's also known as \"Raz mai\", \"ng\" or \"du\" in Arabic.\nThe \"I\" in the title is similar to the Arabic term \"r\" or word-\n\"r\" a \"n"
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct25": {
+      "threshold": 25.0,
+      "n": 50,
+      "mean_nll_on_gold": 10.8343,
+      "sd_nll": 0.4642,
+      "mean_refill_rate": 0.25,
+      "mean_wall_s": 4.628,
+      "loop_rate": 0.12,
+      "results_sample": [
+        {
+          "idx": 0,
+          "n_compare": 128,
+          "mean_nll": 11.3062,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 4.573,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " appears in the video series J'alma (2004), a short-story film about the difficulties faced by business owners in developing new technologies.\nIn 2009, a national campaign focused on developing new te"
+        },
+        {
+          "idx": 1,
+          "n_compare": 128,
+          "mean_nll": 12.5647,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 4.673,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "\n\u201cBoulter, who had just been married at a very young age, didn\u2019t want to be a teacher but wanted to become a teacher. He wanted to be able to do so, and was excited about going into college. But when "
+        },
+        {
+          "idx": 2,
+          "n_compare": 128,
+          "mean_nll": 10.9117,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 4.689,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": "uzel's stroke and makes it to his name.\nNelson application: The concept of something called a \"cubic\" is already being applied to computerized words, but most of the original words have been replaced "
+        },
+        {
+          "idx": 3,
+          "n_compare": 128,
+          "mean_nll": 10.8681,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 4.61,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " removed from official census data . The population was estimated at 1,194, also a single person, 3,914 was added between 997 and 1075, and another 5,atile, 1.6 million people were added between 1070 "
+        },
+        {
+          "idx": 4,
+          "n_compare": 128,
+          "mean_nll": 10.5628,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 4.684,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " the book and the inclusion of many minor sections.\n(J\u00edzang, 2008: 14)The fifth to be included in the list of emblems for this book are the difficulties with the composition of the first five parts of"
+        },
+        {
+          "idx": 5,
+          "n_compare": 128,
+          "mean_nll": 10.8625,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 4.621,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": "ucian Confucia.\nDuring this period, along with other such philosophers, in order to maintain and manage the image of Confucius and his followers as part of a lay society, the quality of writing was im"
+        },
+        {
+          "idx": 6,
+          "n_compare": 128,
+          "mean_nll": 10.7821,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 4.753,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "\nA. up until the 12th century, no other poet was known to have been a priest . The first mention of the word \"deity\" occurs in the 20th century (see below). Its origin is unknown, but it probably came"
+        },
+        {
+          "idx": 7,
+          "n_compare": 128,
+          "mean_nll": 11.1592,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 4.652,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": "ai) was a poet and writer who wrote a unique poetry in which he used the same image as that of a human figure.\nThe title of the poem is \"Nenan Y\u00fan\" which means \"H\u00e9on with the therefore is in the prese"
+        },
+        {
+          "idx": 8,
+          "n_compare": 111,
+          "mean_nll": 10.928,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 3.711,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "vii).\nFinnish translation: basic form; translation in general\nNon-English translation: the use of a translation from English to other languages, with the aim of preparing readers for the use or public"
+        },
+        {
+          "idx": 9,
+          "n_compare": 128,
+          "mean_nll": 10.3999,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 4.985,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " pattern is a melody of the underlying tone, which is in simple line with a staccato lead.\nThis song was originally published as a song by Frank aluminumay, but later was replaced by his more popular "
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct50": {
+      "threshold": 50.0,
+      "n": 50,
+      "mean_nll_on_gold": 10.3796,
+      "sd_nll": 0.4543,
+      "mean_refill_rate": 0.5,
+      "mean_wall_s": 5.205,
+      "loop_rate": 0.12,
+      "results_sample": [
+        {
+          "idx": 0,
+          "n_compare": 128,
+          "mean_nll": 10.7947,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 5.201,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " was awarded the \"Dewa Green Medal\" at the 1992 All-American Conference. He later represented the Washington Post, with his former colleague John T. Schuster as a member of the House committee that me"
+        },
+        {
+          "idx": 1,
+          "n_compare": 128,
+          "mean_nll": 11.4993,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 5.538,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": "\n\u201cThe character you see is a consequence of the fact that it has been proven that Boulters is the most influential musician in English literature. His popularity and popularity have been such that he "
+        },
+        {
+          "idx": 2,
+          "n_compare": 128,
+          "mean_nll": 9.8549,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 5.318,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "ur, but this time is too far away. In this movie, many characters are able to remember their names and give them a new perspective when they get lost or have a new friend, and when they are met by a m"
+        },
+        {
+          "idx": 3,
+          "n_compare": 128,
+          "mean_nll": 10.5946,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 5.295,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " just 14 @ .\nThis census is known as \u2018Steve-tusks\u2019 or \u2018Dunghul . The census records show that about 4.5% of the population were Chinese, while 3.8% were from other ethnic groups. The Chinese census al"
+        },
+        {
+          "idx": 4,
+          "n_compare": 128,
+          "mean_nll": 10.2693,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 5.245,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " the essence of Confucianism.\nDuring this period, Confucians introduced an organized way of writing. They used the concept of the \"realistic\" system, in which each word had its own meaning and purpose"
+        },
+        {
+          "idx": 5,
+          "n_compare": 128,
+          "mean_nll": 10.3003,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 5.315,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": "ucian vernacular , whilst the Daoists and the Confucians were considered as the ' Diamonds' , respectively. However, in the 13th century, an attempt was made by the Dua Shui (uedo), by Ssuru Shubei , "
+        },
+        {
+          "idx": 6,
+          "n_compare": 128,
+          "mean_nll": 10.3327,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 5.357,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "\nIn the 11th century, the Ch\u014dda no period appears in Japan. The term \"Koji\" was given to the combination of the two great poems of the Western era, if its creation is so defined that it is still used."
+        },
+        {
+          "idx": 7,
+          "n_compare": 128,
+          "mean_nll": 10.6934,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 5.259,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": "oku k\u014dsak\u014dtai) is a large-scale teaching technique, which is derived from the same method as the techniques used in the Late Seiji period.\nThe k\u014dk\u016bn was a traditional unit of education of the yaku, wh"
+        },
+        {
+          "idx": 8,
+          "n_compare": 128,
+          "mean_nll": 10.1475,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 5.404,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "iii).\nThere is also an additional technique to translate the language of Du Fuel's translation into another language and compare the translation to the original English . This technique uses one style"
+        },
+        {
+          "idx": 9,
+          "n_compare": 128,
+          "mean_nll": 9.9308,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 5.313,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "ization is produced by the mechanism used to produce a sequence of notes in sequence.\nThe song has three main elements: 1) a quick \u201c v c d r l o \u201d ( thi thi \"i\" - n r \"n a t aa y) 4) a beat-v e a r 5 "
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct75": {
+      "threshold": 75.0,
+      "n": 50,
+      "mean_nll_on_gold": 10.7215,
+      "sd_nll": 0.5052,
+      "mean_refill_rate": 0.75,
+      "mean_wall_s": 6.009,
+      "loop_rate": 0.18,
+      "results_sample": [
+        {
+          "idx": 0,
+          "n_compare": 128,
+          "mean_nll": 10.576,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 5.83,
+          "final_loopy": 1,
+          "max_word_run": 1,
+          "text_head": " claimed the role for more than 40 years, and in 2005 he retired from the TV show. However, in 2007 he wrote his new book, Kondathans: Ogganyed by Good Each Other : For Transforming Our Family 's Stor"
+        },
+        {
+          "idx": 1,
+          "n_compare": 128,
+          "mean_nll": 11.6646,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 5.883,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": "\n\u201cBecause of his love of writing and his involvement in the Black community, I have come to be known as a writer. He has been a central figure within Black communities for generations and an important"
+        },
+        {
+          "idx": 2,
+          "n_compare": 128,
+          "mean_nll": 9.9525,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 5.779,
+          "final_loopy": 1,
+          "max_word_run": 7,
+          "text_head": "ie's wife. He was one of the two students who made a movie,rieving and tearing at the side of the world. He had his first painting about his death in the F-14 through a very good lens.\nSource: Trombon"
+        },
+        {
+          "idx": 3,
+          "n_compare": 128,
+          "mean_nll": 10.5998,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 5.891,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " turned over by later emperors who had greatly expanded the empire .\nIn 1359 , Ching-xian and Chuan-shu (the two leaders of the Han dynasty) decided that the capital of China should be torn down from "
+        },
+        {
+          "idx": 4,
+          "n_compare": 128,
+          "mean_nll": 10.7382,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 6.113,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " a work when he wrote a treatise about his work in 1831.\nOf course, there are differences between the two works by many authors, and there are also some similarities and differences between them. The "
+        },
+        {
+          "idx": 5,
+          "n_compare": 128,
+          "mean_nll": 10.3642,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 6.24,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": "ucian movement.\nThe society had a huge influence on the communication between the surrounding area, so that the people of the area began to become aware of the opportunities that were available for th"
+        },
+        {
+          "idx": 6,
+          "n_compare": 128,
+          "mean_nll": 11.544,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 6.142,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " However, the Japanese also started using kanji in their vernacular poems after that.\nKanji's influence can also be seen among the West Indian writers such as the Mahakali writer Chila Kailash, who wr"
+        },
+        {
+          "idx": 7,
+          "n_compare": 116,
+          "mean_nll": 10.9091,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 5.131,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "ai ) gives a better picture than the one given by the other two reports.\nAccording to an article in The Journal of the Royal Society, the author has taken the reader's memory for over a hundred years,"
+        },
+        {
+          "idx": 8,
+          "n_compare": 128,
+          "mean_nll": 10.5904,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 6.071,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "v).\nHe states that, \"The Chinese translation of Du slip used in the literature has a great deal in common with the translations used by English teachers who are familiar with English.\" In other words,"
+        },
+        {
+          "idx": 9,
+          "n_compare": 128,
+          "mean_nll": 10.2795,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 6.426,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " rhythm is much more complex than the previous one. For example, the notes are highly interesting but the \"k' can be considered to be quite foreign. In any case, it is best to use the first two lines "
+        }
+      ]
+    }
+  }
+}
