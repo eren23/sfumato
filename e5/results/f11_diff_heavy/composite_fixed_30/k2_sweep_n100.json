@@ -9,484 +9,484 @@
     "diff_draft_ar_refill_pct10": {
       "threshold": 10.0,
       "n": 100,
-      "mean_nll_on_gold": 9.6156,
-      "sd_nll": 0.4751,
+      "mean_nll_on_gold": 11.579,
+      "sd_nll": 0.8782,
       "mean_refill_rate": 0.094,
-      "mean_wall_s": 0.855,
+      "mean_wall_s": 0.439,
       "loop_rate": 0.0,
       "results_sample": [
         {
           "idx": 7000,
           "n_compare": 78,
-          "mean_nll": 9.7347,
+          "mean_nll": 12.3643,
           "refill_count": 6,
           "refill_rate": 0.094,
-          "wall_s": 1.259,
+          "wall_s": 0.643,
           "final_loopy": 0,
           "max_word_run": 2,
-          "text_head": " Once she has proved to use her in her care and he was her with her care is not the health, and has no more likely his career. And because he was a result of her and her children, she had to be more o"
+          "text_head": " This means she has $80 - $50 = $<<80-50=20>>20 left to pay for candy bars\nShe has $20 - $20 = $40 left over to pay out more candy bars because she sold more than 1/2 x 50 = <<1/2*50=10>>10 candy bars"
         },
         {
           "idx": 7001,
           "n_compare": 52,
-          "mean_nll": 9.8897,
+          "mean_nll": 12.4889,
           "refill_count": 6,
           "refill_rate": 0.094,
-          "wall_s": 0.786,
+          "wall_s": 0.407,
           "final_loopy": 0,
           "max_word_run": 2,
-          "text_head": " Abarastre of the Florida, not to be invested by his position, as a tax as they shall the essay or even of their free.\nHowever, in 1858; in an example, for a couple of Chinese men.  In this kind, he s"
+          "text_head": " His brother has Groups A-D that are 1/2 * 4 = <<1/2*4=2>>2,000.\nSo, he has 5 x 3 = <<5*3=15>>15 harmonious Bastes.\nHe also has 2 groups A-B which are 3 / 2 yellow = 20 yellow20.\n each+20 = 4 106 6410"
         },
         {
           "idx": 7002,
-          "n_compare": 128,
-          "mean_nll": 9.5991,
+          "n_compare": 124,
+          "mean_nll": 11.3612,
           "refill_count": 6,
           "refill_rate": 0.094,
-          "wall_s": 0.937,
+          "wall_s": 0.443,
           "final_loopy": 0,
           "max_word_run": 2,
-          "text_head": " fung, d clean water and other! Keep it to work your time, moving her out as she might help them to be back up to go with air.\n- How To eat your family is left?\n- Being a good idea, so you have to fin"
+          "text_head": " First find how many minutes per hour the turActually takes to cook: 16*1 = <<16*1=32>>32 minutes\nThen add up the time it takes for the turkey to be cooked: 32+30 = <<32+30=48>>48 minutes\n#### 48\n3010"
         },
         {
           "idx": 7003,
           "n_compare": 44,
-          "mean_nll": 9.8216,
+          "mean_nll": 11.3403,
           "refill_count": 6,
           "refill_rate": 0.094,
-          "wall_s": 0.769,
+          "wall_s": 0.402,
           "final_loopy": 0,
-          "max_word_run": 3,
-          "text_head": " The The name of a head is the sound of C. If we have to see the mass of B. We know that it\u2019s like the next 1/2-1 in our back, we\u2019ll do it! Is you have the than J4A2\u201d? and we\ufffd a 2 you\ufffd is.\n is\n will.\n"
+          "max_word_run": 2,
+          "text_head": " twice the number of red M&Ms: 9 * 2 = <<9*2=18>>18 (Widows sold 18/6)\n10 packs of white balls: 6 + 4 = <<6+4=12>>12 (Donuts sold 18 / 6)\n8 packs of blue balls:20 * 2 = <<+20 2=25= <<220201510 5310+30"
         },
         {
           "idx": 7004,
-          "n_compare": 128,
-          "mean_nll": 9.7915,
+          "n_compare": 108,
+          "mean_nll": 11.5318,
           "refill_count": 6,
           "refill_rate": 0.094,
-          "wall_s": 0.812,
+          "wall_s": 0.309,
           "final_loopy": 0,
-          "max_word_run": 1,
-          "text_head": " What is a greater risk of costs?\nThe amount of data is to pay energy where there are a price. If the construction does not leave the you get it on the amount. If your cost, we're going to do in your "
+          "max_word_run": 3,
+          "text_head": " The total number ofthinkers is 11 * 7 = <<11*7=140>>140\nThe number of Beaufort accommodateers is 140 / 2 = <<140/2=35>>35\n#### 35\n8 times6 are the5 times-6/ times are+66/+6 the3 are times/ << are+ ma"
         },
         {
           "idx": 7005,
           "n_compare": 56,
-          "mean_nll": 9.6569,
+          "mean_nll": 11.6965,
           "refill_count": 6,
           "refill_rate": 0.094,
-          "wall_s": 0.973,
+          "wall_s": 0.461,
           "final_loopy": 0,
           "max_word_run": 2,
-          "text_head": " If it was now?\nHere are several different kinds of these words, there are much to have a large number of measurement in the soil, which have been shown at the Earth\u2019s true water. In addition, the U.S"
+          "text_head": " Let\u2019s say the total land area is 100+1/5 = 400,000 square miles.\nThis means there are 400*2=<<400*2/5=200>>200,000 more square miles than the land.\nThe total value for all the lands on the Moon is 20"
         },
         {
           "idx": 7006,
           "n_compare": 62,
-          "mean_nll": 9.5587,
+          "mean_nll": 12.3167,
           "refill_count": 6,
           "refill_rate": 0.094,
-          "wall_s": 0.59,
+          "wall_s": 0.377,
           "final_loopy": 0,
-          "max_word_run": 2,
-          "text_head": " 2\nThe students and read this video for developing school students develop. These children will be able to get a test for reading and learn for them together their own.\n the students will\n, students w"
+          "max_word_run": 3,
+          "text_head": " Dikesmbe has 60 yards because 80 / 5 = <<80/5=60>>60\nHe has 30 yards of Floss because 70 / 2 = <<70/2=30>>30\n#### 30\n3D 10: a 3240-foot15 2024 20 5 55402032010 10 20202081025501015103010256"
         },
         {
           "idx": 7007,
           "n_compare": 39,
-          "mean_nll": 9.7102,
+          "mean_nll": 11.1608,
           "refill_count": 6,
           "refill_rate": 0.094,
-          "wall_s": 0.834,
+          "wall_s": 0.4,
           "final_loopy": 0,
-          "max_word_run": 1,
-          "text_head": " Aac Manki, thongy, p., 400, W., January 14, 18, 2010, 2015, 1884, 2012, California, U.S., 24, 2016. ISBN 1.5\u00b0C.S.Sm.\nThe second tank has one of a collection of these natural and\n \" the most The and t"
+          "max_word_run": 2,
+          "text_head": " She has 23 \u2013 25 = <<23-25=13>>13 pieces left in each level\nShe has 13 x 7 = <<13*7=42>>42 pieces left after starting all the sides of the tower.\nSo, she has a total of 14 + 42 + 42 = <<14+42+20=70>> "
         },
         {
           "idx": 7008,
           "n_compare": 128,
-          "mean_nll": 10.1602,
+          "mean_nll": 12.1479,
           "refill_count": 6,
           "refill_rate": 0.094,
-          "wall_s": 0.98,
+          "wall_s": 0.468,
           "final_loopy": 0,
-          "max_word_run": 3,
-          "text_head": " The length of glass and plastic, and other. In most of these things we have an extended point, there\u2019s a number of development in the story that the entire form is simple. That is what happens will n"
+          "max_word_run": 2,
+          "text_head": " There are 60 x 4 = <<60*4=240>>240 square feet of the painting in one square foot.\nThere are 4 + 1 + 5 = <<4+1+5=9>>9 square feet in one large 2-inch painting.\nHe also wants to find out how many squa"
         },
         {
           "idx": 7009,
           "n_compare": 70,
-          "mean_nll": 9.2883,
+          "mean_nll": 11.1764,
           "refill_count": 6,
           "refill_rate": 0.094,
-          "wall_s": 0.974,
+          "wall_s": 0.48,
           "final_loopy": 0,
-          "max_word_run": 4,
-          "text_head": " 1:00.5; 4:2.\nWe were in 18 June, and 18: August 18:\nI just have seen a book. She can be difficult for her new activities for two children? We do they help us come from the young teachers of their stu"
+          "max_word_run": 2,
+          "text_head": " For every page of the book, we find 4 pages because 150 x (1/4) = <<150*(1/2)=10>>10\nFor each pages of the house, we get 3 pages because 15 x 2 = <<15*2=30>>30\nWe also find 4 books that were not read"
         }
       ]
     },
     "diff_draft_ar_refill_pct25": {
       "threshold": 25.0,
       "n": 100,
-      "mean_nll_on_gold": 9.6808,
-      "sd_nll": 0.5177,
+      "mean_nll_on_gold": 11.4773,
+      "sd_nll": 0.9673,
       "mean_refill_rate": 0.25,
-      "mean_wall_s": 0.926,
-      "loop_rate": 0.02,
+      "mean_wall_s": 0.477,
+      "loop_rate": 0.0,
       "results_sample": [
         {
           "idx": 7000,
           "n_compare": 78,
-          "mean_nll": 10.4198,
+          "mean_nll": 12.0766,
           "refill_count": 16,
           "refill_rate": 0.25,
-          "wall_s": 0.744,
+          "wall_s": 0.455,
           "final_loopy": 0,
-          "max_word_run": 3,
-          "text_head": " (S)\n- his January 22, 18, 2015.\n- C. 2011. www.f.com.\nIn the recent context, he is now by the animal, a with a beach that can be needed to see this service. of of of that- and of in to the the proces"
+          "max_word_run": 2,
+          "text_head": " Northerner makes $80 because 50 x .8 = <<50*.8=80>>80\nShe gets 20 cents from the candy bars because 48 / 60 = <<48/60=20>>20\nHer total total number of dollars is $15 because 10 + 20 + 40 = <<10+20+40"
         },
         {
           "idx": 7001,
           "n_compare": 52,
-          "mean_nll": 9.7606,
+          "mean_nll": 12.1433,
           "refill_count": 16,
           "refill_rate": 0.25,
-          "wall_s": 0.372,
+          "wall_s": 0.449,
           "final_loopy": 0,
-          "max_word_run": 2,
-          "text_head": " D-R-S-A woman to the written by her and her position. in her, (in the first) a man of.., in\n\n,\n, the first to the first of the (the to of the first) the first the for a is for a\n the is and the to\n"
+          "max_word_run": 3,
+          "text_head": " First find the total number of docels by divide the number of balloons by the total weight of the Memorialprint: endorsing feathers/shades * 4 included Virgo = <<iddy*4=836>>836309 triangles\nThen add"
         },
         {
           "idx": 7002,
           "n_compare": 128,
-          "mean_nll": 9.8651,
+          "mean_nll": 10.4176,
           "refill_count": 16,
           "refill_rate": 0.25,
-          "wall_s": 1.017,
+          "wall_s": 0.518,
           "final_loopy": 0,
           "max_word_run": 2,
-          "text_head": " 9: 21: 5 - 4.\nYour children are a clear girl does not mean?\nSach your child is an example of them. This will be prevented and place for your child.\nThe information you\u2019s not to use your child to will"
+          "text_head": " First, we find out how much hay the birds eat in total by divide the number of mountain bird funded days by 2*16 = <<2*16=32>>32 mountain bird supported days\nThen we find how many hours the birds spe"
         },
         {
           "idx": 7003,
           "n_compare": 44,
-          "mean_nll": 10.6876,
+          "mean_nll": 10.6268,
           "refill_count": 16,
           "refill_rate": 0.25,
-          "wall_s": 0.865,
+          "wall_s": 0.337,
           "final_loopy": 0,
-          "max_word_run": 2,
-          "text_head": " The most prominent species, the human body that are the most common way. In order to use a number of injuries. It can be used by the body. However, there is to be no one of the possibility.\nThese wer"
+          "max_word_run": 3,
+          "text_head": " The total number of red and orange balls is 20 + 10 = <<20+10=30>>30.\nThe total number is 30 x 2 = <<30*2=60>>60.\n#### 60\n white and black white 6 white black blue yellow yellow blue 6 blue green whi"
         },
         {
           "idx": 7004,
-          "n_compare": 84,
-          "mean_nll": 9.8613,
+          "n_compare": 128,
+          "mean_nll": 10.6032,
           "refill_count": 16,
           "refill_rate": 0.25,
-          "wall_s": 0.43,
+          "wall_s": 0.455,
           "final_loopy": 0,
           "max_word_run": 2,
-          "text_head": " How much way is when we do this is still no one of your longer-in-American?\n it you have that. the. a good thing you have to I we have to the a to\nto and I have you that you to do of the same to do.,"
+          "text_head": " With ten decade-long lifted-off times, five years-one double the number. So when the fraction is one percent, it means that 13 times 10% of 20 years are equal to 0.7*20=<<13*10/100=4>>4 more days.\nAn"
         },
         {
           "idx": 7005,
           "n_compare": 56,
-          "mean_nll": 9.7076,
+          "mean_nll": 9.9835,
           "refill_count": 16,
           "refill_rate": 0.25,
-          "wall_s": 1.035,
+          "wall_s": 0.357,
           "final_loopy": 0,
-          "max_word_run": 2,
-          "text_head": " Search: How did it go to explain that we have? What can be an out how you do so the same is here to use it for as much?\nIt\u2019s a full end of the left to the make it in the planet which do not occur and"
+          "max_word_run": 1,
+          "text_head": " Let b be the amount of land on Earth.\nThe total value is b + 2b + 8 = 80 billion dollar.\nAnd the total values are b + 3b = 100 million dollar.\nSo, square feet square is b by b4. =3.8220 square feet=1"
         },
         {
           "idx": 7006,
           "n_compare": 62,
-          "mean_nll": 9.4684,
+          "mean_nll": 11.4433,
           "refill_count": 16,
           "refill_rate": 0.25,
-          "wall_s": 1.113,
+          "wall_s": 0.549,
           "final_loopy": 0,
           "max_word_run": 2,
-          "text_head": " Thener: Inter-Mafy,berg, The Finally, the 3:30\nThe report was a group of participants were able to be going to predict the next job. When the ability to create the total level of the only new informa"
+          "text_head": " First find out how many yards the most flossers have in 5 yards: 20 \u2022 3 = <<20/3=8>>8 yards\nThen find out the number of yards they have per yard: 8 * 35 = <<8*35=agna>> LR\nNow multiply this number by"
         },
         {
           "idx": 7007,
           "n_compare": 39,
-          "mean_nll": 9.0679,
+          "mean_nll": 9.789,
           "refill_count": 16,
           "refill_rate": 0.25,
-          "wall_s": 0.874,
+          "wall_s": 0.337,
           "final_loopy": 0,
           "max_word_run": 2,
-          "text_head": " Mac.com/60/05/4/1/8/2/3/1-3/5/5) + and 6/1. The (2) is 1/7.3 1/3, 1, 1/5.1, 1.\nThe three-4, which has\nThe two 2).2 is the 0.1.\nThe 2. of2 is 2 (2)).\n in the the 0 (2) 3(( of in0\n1 the ( 0 0) 3 5).0"
+          "text_head": " The final level will be 25 + 9 = <<25+9=28>>28 pieces.\nThis means there are 23 \u2013 28 = <<23-28=7>>7 levels left.\n#### 7\n of the 7 is are are 3106, of2435 4 5 6 6 7 of25 6 7 7 5 78 78 7 the of25>> is 3"
         },
         {
           "idx": 7008,
           "n_compare": 128,
-          "mean_nll": 9.9431,
+          "mean_nll": 11.4383,
           "refill_count": 16,
           "refill_rate": 0.25,
-          "wall_s": 1.11,
+          "wall_s": 0.518,
           "final_loopy": 0,
-          "max_word_run": 3,
-          "text_head": " If you have a stars of theable process?\nThere are the located on each color, the scale was taught in a source or simply released, of the storage level. They had a so that would be able to make it to "
+          "max_word_run": 2,
+          "text_head": " his paintings are the same size as those in the exhibition. In a square 6 foot painting, he's done 4 x 3 = <<4*3=12>>12 square feet\nHe has five square 8-foot artists and one 12-foot entirely painting"
         },
         {
           "idx": 7009,
           "n_compare": 70,
-          "mean_nll": 9.6785,
+          "mean_nll": 10.0448,
           "refill_count": 16,
           "refill_rate": 0.25,
-          "wall_s": 1.094,
+          "wall_s": 0.481,
           "final_loopy": 0,
           "max_word_run": 2,
-          "text_head": " 7 to 30-30 + 5/12/4/2\nThe first generation is a look at the function of the top of a Space One or more people to use it through the program? If you think it must be?\nAccording to this blog program, w"
+          "text_head": " \u201cHe buys 25 pages because 150 / 5 = <<150/5=25>>25\nHe is saving $1 in minutes because 15 x 30 = <<15*30=1>>1\nHe has $20 left since he buys 30 pages.\n#### 20\n1520 words1010 pages\n40 pages in total\n af"
         }
       ]
     },
     "diff_draft_ar_refill_pct50": {
       "threshold": 50.0,
       "n": 100,
-      "mean_nll_on_gold": 9.6221,
-      "sd_nll": 0.5207,
+      "mean_nll_on_gold": 11.4042,
+      "sd_nll": 1.0233,
       "mean_refill_rate": 0.5,
-      "mean_wall_s": 1.089,
-      "loop_rate": 0.02,
+      "mean_wall_s": 0.539,
+      "loop_rate": 0.04,
       "results_sample": [
         {
           "idx": 7000,
           "n_compare": 78,
-          "mean_nll": 9.4852,
+          "mean_nll": 10.8236,
           "refill_count": 32,
           "refill_rate": 0.5,
-          "wall_s": 1.01,
+          "wall_s": 0.528,
           "final_loopy": 0,
-          "max_word_run": 1,
-          "text_head": " 2000/18: 1/2-12-4-2/8/3/5-3:26/1:9/25-6/7-2-1/9/2:24-30/45.\nThe three- 1/4/2 is 100: 18, 3: 1\nThe two 1/3/ ( the) is5.\nThe two ( (1) the two 2/ of the, 1 103/2 0.\n\n. The two-310.)4). 21.5.\n4.1 0.\n of"
+          "max_word_run": 2,
+          "text_head": " What percentage of the going to college is 30/100 * 50 = <<30/100*50=60>>60 cents\nShe makes 60 cents in one month so she makes 60 / 50 = 70 cents in three months\nShe uses 60 cents to buy her own trea"
         },
         {
           "idx": 7001,
           "n_compare": 52,
-          "mean_nll": 9.964,
+          "mean_nll": 11.6427,
           "refill_count": 32,
           "refill_rate": 0.5,
-          "wall_s": 1.018,
+          "wall_s": 0.524,
           "final_loopy": 0,
           "max_word_run": 2,
-          "text_head": " How to be?\nAccording to the Tennessee at $4 +.00, he made an advance. She was the first time to see, but will accept them: for one of her or want to make sure a more without that.\nI find an technical"
+          "text_head": " Let's say Andrew buys a large bag of calcium clause ne ).2 x 5 = <<303*.2*5= Supplementary Time)\nAfter the first 10 years, the number ofygots that Andrew has is188 - 30 = <<212-30= contemplated.2>> b"
         },
         {
           "idx": 7002,
           "n_compare": 128,
-          "mean_nll": 10.0521,
+          "mean_nll": 11.4208,
           "refill_count": 32,
           "refill_rate": 0.5,
-          "wall_s": 1.172,
+          "wall_s": 0.596,
           "final_loopy": 0,
-          "max_word_run": 3,
-          "text_head": " To Keep a good thing?\nWhat to find your child?\nYou are to get. If you will do it get your baby\u2019s your doctor if they make up with her and they need to develop your kids and vegetables. If your childr"
+          "max_word_run": 2,
+          "text_head": " Since one requires 20 minutes to cook, then the second lot is 10*2=<<10*2*20=60>>60 minutes long.\nThe first one takes 40 minutes to make so that's 60/40=<<60/40/5=12>>12 minutes longer than the secon"
         },
         {
           "idx": 7003,
           "n_compare": 44,
-          "mean_nll": 10.4813,
+          "mean_nll": 10.3254,
           "refill_count": 32,
           "refill_rate": 0.5,
-          "wall_s": 1.002,
+          "wall_s": 0.519,
           "final_loopy": 0,
           "max_word_run": 2,
-          "text_head": " The most common features the common of less than when they are possible for the rules and activities.\nWe will be with which is the only thing to be them through the potential of at a person who will "
+          "text_head": " If due to the lack of books, there are 4 x 18 = <<4*18=84>>84 red balls.\nThus, she bought 84 + 90 = <<84+90= remind her of the fact that she cannot visit a particular store if she goes to a different"
         },
         {
           "idx": 7004,
           "n_compare": 128,
-          "mean_nll": 10.4149,
+          "mean_nll": 11.0398,
           "refill_count": 32,
           "refill_rate": 0.5,
-          "wall_s": 1.039,
+          "wall_s": 0.532,
           "final_loopy": 0,
-          "max_word_run": 1,
-          "text_head": " \u201cWe may see that the next day we can be used in our best things.\u201d\nAccording to this was originally many famous for a community. In part, we are looking like, each week that we\u2019re not accept our busin"
+          "max_word_run": 2,
+          "text_head": " The total number of Nycoons in the story is three times more than the number that Rateas tell for Monday, so there are 3 * 7 = <<3*7=21>>21 implication oceans.\nThe total number is 21 + 7 =<<21+7=26>>"
         },
         {
           "idx": 7005,
           "n_compare": 56,
-          "mean_nll": 9.5195,
+          "mean_nll": 14.0391,
           "refill_count": 32,
           "refill_rate": 0.5,
-          "wall_s": 1.183,
+          "wall_s": 0.504,
           "final_loopy": 0,
-          "max_word_run": 2,
-          "text_head": "\nThe complete by the price of water is a period.\nThe pressure is by one of the volume of water.\nAnother material is used to keep you a number of water, there are two and those around the amount of lif"
+          "max_word_run": 4,
+          "text_head": " There are 3*20 = <<3*20=60>>60 square miles of land on each side of the moon.\nThere are 60-60 = <<60-60=30>>30 square miles on each shore.\n#### 30\n20>>20%40%12%20of the total+12%5%20of20the%0008%2000"
         },
         {
           "idx": 7006,
           "n_compare": 62,
-          "mean_nll": 9.9146,
+          "mean_nll": 13.0929,
           "refill_count": 32,
           "refill_rate": 0.5,
-          "wall_s": 1.297,
+          "wall_s": 0.615,
           "final_loopy": 0,
-          "max_word_run": 4,
-          "text_head": " The free essay is on what we want to read this!\nThe students should be able to know that will add and solve different, if you do not be your learning in your professional and learn. They could be abl"
+          "max_word_run": 2,
+          "text_head": " There are 2.5 x 3 = <<2.5*3=7>>7 students in the class.\nSo, there are 7 - 3 = 5 students.\nThus, there will be 20 - 7 = <<20-7=14>>14 students left over.\n#### 14\nQuestion1010 is a day of work.224 hour"
         },
         {
           "idx": 7007,
           "n_compare": 39,
-          "mean_nll": 8.8921,
+          "mean_nll": 11.6586,
           "refill_count": 32,
           "refill_rate": 0.5,
-          "wall_s": 1.03,
+          "wall_s": 0.523,
           "final_loopy": 0,
-          "max_word_run": 3,
-          "text_head": " severalThere are two days than 5% and 5.3 minutes each day they do a color of find 4.5 percent of these line 2 diabetes. This means that each one is no more likely. They have a few per second hours t"
+          "max_word_run": 2,
+          "text_head": " There are 25 x 7 = <<25*7= richly equates to 6.5 different levels.\nThere are 23 x 7 - 3 = <<23*7-3=28>>28 different levels at each level.\nTherefore, her tower is 5 + 27 = <<5+27=38>> 4 levels442.\n22 "
         },
         {
           "idx": 7008,
           "n_compare": 128,
-          "mean_nll": 9.7998,
+          "mean_nll": 10.8801,
           "refill_count": 32,
           "refill_rate": 0.5,
-          "wall_s": 1.187,
+          "wall_s": 0.6,
           "final_loopy": 0,
           "max_word_run": 2,
-          "text_head": " They're not only? The next step of the picture, the third-world is a set of each command. The should it be set to the in a combination of each other code. In this lesson, in this was taking to an ess"
+          "text_head": " First find the total area of the art work: 5 square feet * 4 square inches = <<5*4=20>>20 square feet\nThen multiply that number by the size of the paintings to find how many square inches they are: 2"
         },
         {
           "idx": 7009,
           "n_compare": 70,
-          "mean_nll": 9.677,
+          "mean_nll": 12.4875,
           "refill_count": 32,
           "refill_rate": 0.5,
-          "wall_s": 1.213,
+          "wall_s": 0.616,
           "final_loopy": 0,
-          "max_word_run": 1,
-          "text_head": " best Check in her with a child in a school. It is so much more about, and how many of their own child may work out it as those who have any time to create it to be in a healthy life in her life. That"
+          "max_word_run": 3,
+          "text_head": " When STDs started coming in he bought 15 x 2 = <<15*2=30>>30 pages.\nHe has 30 - 30 - 40 = <<30-30-40=15>>15 pages left after he buys some so he has 15 - 10 = <<10-10=5>>5 books left.50\n20 of60 pages "
         }
       ]
     },
     "diff_draft_ar_refill_pct75": {
       "threshold": 75.0,
       "n": 100,
-      "mean_nll_on_gold": 9.6572,
-      "sd_nll": 0.5597,
+      "mean_nll_on_gold": 11.7149,
+      "sd_nll": 0.9354,
       "mean_refill_rate": 0.75,
-      "mean_wall_s": 1.218,
-      "loop_rate": 0.57,
+      "mean_wall_s": 0.626,
+      "loop_rate": 0.09,
       "results_sample": [
         {
           "idx": 7000,
           "n_compare": 78,
-          "mean_nll": 10.0004,
+          "mean_nll": 11.2958,
           "refill_count": 48,
           "refill_rate": 0.75,
-          "wall_s": 1.167,
-          "final_loopy": 1,
+          "wall_s": 0.6,
+          "final_loopy": 0,
           "max_word_run": 2,
-          "text_head": " 35/7-10/7/6-9.\nIn most cases the next period, there are any important number of 2. The second Amendment is one that each have a total number, and there is a difference between 32.\nThe average level i"
+          "text_head": " Mini needs to buy 2 relates to the price of a nice plastic pop bar because 1 x $50 = <<1*50=2>>2\nThe are women's salt intake from these two items is 8 times that of a good ice cream bar because 8 x 3"
         },
         {
           "idx": 7001,
           "n_compare": 52,
-          "mean_nll": 10.4418,
+          "mean_nll": 11.6616,
           "refill_count": 48,
           "refill_rate": 0.75,
-          "wall_s": 1.162,
-          "final_loopy": 1,
-          "max_word_run": 3,
-          "text_head": " He was born to the larger number in 1841, which also had never been sold in his father. His own two as she believed that his first body was a different way to be able to take the darkness with it. Th"
+          "wall_s": 0.583,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " If Andrew share 60 Taking 3/4 of the Happy Staircase tanks with his family, then the number of blue Dieters in the bag is 60*3/4 = <<60*3=180>>180.\nIf Andrew sharing 6 times more blue elevator impact"
         },
         {
           "idx": 7002,
-          "n_compare": 128,
-          "mean_nll": 9.7419,
+          "n_compare": 117,
+          "mean_nll": 11.5269,
           "refill_count": 48,
           "refill_rate": 0.75,
-          "wall_s": 1.321,
-          "final_loopy": 1,
-          "max_word_run": 2,
-          "text_head": " 6: 7: 12: 8, 5.5, 10.\nThe child will spend their own. This is, but rather than the kids who have the number of age the screen at the time, will be able to share their family as they may take their ch"
+          "wall_s": 0.579,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " The second accepted cooking time is 15-15 = <<15-15=5>>5 minutes.\nShe can be updated to 2 more minutes per week so she can take 2*2 = <<2*2=4>>4 hours.\n#### 4\n1.5 million people live in the United St"
         },
         {
           "idx": 7003,
           "n_compare": 44,
-          "mean_nll": 9.8543,
+          "mean_nll": 11.9498,
           "refill_count": 48,
           "refill_rate": 0.75,
-          "wall_s": 1.147,
+          "wall_s": 0.577,
           "final_loopy": 0,
           "max_word_run": 2,
-          "text_head": " A.\nThe one of a 16th is your first un breakfast? For most of the most places you must have a clil, and you will be familiar with one of the story. You can of this will go back on the sky with a whole"
+          "text_head": " The 3 packs had a total of 3 * 19 + 9 = <<3*19+9=31>>31 balls\nThe 2 packs had 30 / 2 = <<30/2=15>>15 balls\nThere were 15 - 3 - 5 - 2 =<<15-3-5-2=6>>6 balls in each package\n#### 6\nQuestion 6 people ar"
         },
         {
           "idx": 7004,
           "n_compare": 128,
-          "mean_nll": 9.2564,
+          "mean_nll": 11.825,
           "refill_count": 48,
           "refill_rate": 0.75,
-          "wall_s": 1.167,
+          "wall_s": 0.586,
           "final_loopy": 0,
-          "max_word_run": 3,
-          "text_head": " The convention of the 19th century, the last re- protect all the city for the river and has been made on a more of the skowing of the Earth's surface the last year, then we can start with a old dange"
+          "max_word_run": 4,
+          "text_head": " If we reduce the number who have times the number they have in the first week, by 11:1, that is 11*11=<<11*11*els=67>>69 Lynx\u2019s\nIf we divide the number people who have 40 fewerhips by the number in t"
         },
         {
           "idx": 7005,
           "n_compare": 56,
-          "mean_nll": 9.6023,
+          "mean_nll": 9.9856,
           "refill_count": 48,
           "refill_rate": 0.75,
-          "wall_s": 1.356,
+          "wall_s": 0.67,
           "final_loopy": 0,
-          "max_word_run": 1,
-          "text_head": " a piece of light (in anad) is the remaining part of most areas, the sun does not be looking for the soil. However, when the other points, it is not only the result of airy when it is made and any of "
+          "max_word_run": 2,
+          "text_head": " Let x be the value of the moon's surface area and y be the number of days on the lunar soil. We know that a day has 60 days because 2x = 60.\nSo, we know that the moon has an area equal to 4 x 40 = <<"
         },
         {
           "idx": 7006,
           "n_compare": 62,
-          "mean_nll": 9.6022,
+          "mean_nll": 11.5267,
           "refill_count": 48,
           "refill_rate": 0.75,
-          "wall_s": 1.436,
+          "wall_s": 0.715,
           "final_loopy": 0,
-          "max_word_run": 2,
-          "text_head": " 5.0. 7.8.3.2.16.28.40.\nThis is when she has a high school students, students make reading about the questions and reading learning to help the steps of an exciting and help the opportunity for which "
+          "max_word_run": 3,
+          "text_head": " The most popular forward-thinking bag is the 100-foot sections of flushing for each student. (1/2) * 35 yards = <<100*35=3200>>3200 yards of Br Angeles floss\nThis means there will be a total of 3200 "
         },
         {
           "idx": 7007,
           "n_compare": 39,
-          "mean_nll": 10.1655,
+          "mean_nll": 12.5647,
           "refill_count": 48,
           "refill_rate": 0.75,
-          "wall_s": 1.119,
-          "final_loopy": 0,
+          "wall_s": 0.583,
+          "final_loopy": 1,
           "max_word_run": 2,
-          "text_head": " What does this?\nThe more money to bring your home and give you hold your bad for your child? You will want to solve the page to learn the problem or ask you learn how to do not by talking about them."
+          "text_head": " First find the total number of pieces in each level: 9 pieces + 9 pieces = <<9+9=22>>22 pieces\nThen add up all the pieces to find the number of total pieces: 22 pieces + 23 pieces + 22 pieces =<<22+2"
         },
         {
           "idx": 7008,
           "n_compare": 128,
-          "mean_nll": 9.768,
+          "mean_nll": 12.2309,
           "refill_count": 48,
           "refill_rate": 0.75,
-          "wall_s": 1.355,
-          "final_loopy": 1,
-          "max_word_run": 2,
-          "text_head": " 1950: 8: 2.5.\nThe seventh girl was good for 2 m 10 children and was pre-day parents who have been made their own and they could help them to find the fire in your child, just like being finished. The"
+          "wall_s": 0.667,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " All three large paintings have a total of 3*6 = <<3*6=18>>18 square feet\nHis 3 small paintings take up 18/2 = <<18/2=9>>9 square feet of paint\nHis 2 large paintings take 20/9 = <<20/9=5>>5 square 8-f"
         },
         {
           "idx": 7009,
           "n_compare": 70,
-          "mean_nll": 9.431,
+          "mean_nll": 11.2033,
           "refill_count": 48,
           "refill_rate": 0.75,
-          "wall_s": 1.374,
+          "wall_s": 0.681,
           "final_loopy": 0,
-          "max_word_run": 3,
-          "text_head": " They were active in a key books? The game has been a room-day major amount of areas: it was a member (and the own is to take a couple-14-19). Then, they see how many of the number are still true at t"
+          "max_word_run": 2,
+          "text_head": " There were 150 x 2 = <<150*2=400>>400 pages of candy in all.\nSo,Hadewski read 400 x 2 + 14 = <<400*2+14=FPJ>>FPJ books.\nThus, Marco read 200 -citeuses - 23 = <<200-citeuses00>>50 books.50 books.\n####"
         }
       ]
     }
