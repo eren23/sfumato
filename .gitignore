@@ -55,3 +55,6 @@ e5/results/flow_full_seed*/
 e4/data/rl_substrate_*.jsonl
 e4/results/math500/raw_*.jsonl
 phase2/frontier_compare/results_50/*.truncated_*
+
+# Local HF-pull staging (redundant with proper result dirs)
+e5/results/overnight_pull/
