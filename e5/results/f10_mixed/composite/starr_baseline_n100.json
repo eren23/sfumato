@@ -1,0 +1,37 @@
+{
+  "ckpt": "/workspace/sfumato/e5/results/f10_mixed/composite/model_slim_final.pt",
+  "n_eval": 100,
+  "k_ar": 64,
+  "k_diff": 64,
+  "n_diff_steps": 16,
+  "configs": {
+    "starr_intra_diff_pct10": {
+      "threshold": 10.0,
+      "n": 100,
+      "mean_nll_on_gold": 12.1957,
+      "mean_wall_s": 0.624,
+      "loop_rate": 0.78
+    },
+    "starr_intra_diff_pct25": {
+      "threshold": 25.0,
+      "n": 100,
+      "mean_nll_on_gold": 12.1268,
+      "mean_wall_s": 0.621,
+      "loop_rate": 0.72
+    },
+    "starr_intra_diff_pct50": {
+      "threshold": 50.0,
+      "n": 100,
+      "mean_nll_on_gold": 12.1802,
+      "mean_wall_s": 0.637,
+      "loop_rate": 0.75
+    },
+    "starr_intra_diff_pct75": {
+      "threshold": 75.0,
+      "n": 100,
+      "mean_nll_on_gold": 12.1487,
+      "mean_wall_s": 0.629,
+      "loop_rate": 0.8
+    }
+  }
+}

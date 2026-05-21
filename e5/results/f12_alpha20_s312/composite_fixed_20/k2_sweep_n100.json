@@ -1,0 +1,494 @@
+{
+  "ckpt": "/workspace/sfumato/e5/results/f12_alpha20_s312/composite_fixed_20/model.pt",
+  "n_eval": 100,
+  "k_ar": 64,
+  "k_diff": 64,
+  "n_diff_steps": 16,
+  "n_outer": 1,
+  "configs": {
+    "diff_draft_ar_refill_pct10": {
+      "threshold": 10.0,
+      "n": 100,
+      "mean_nll_on_gold": 11.5822,
+      "sd_nll": 0.8303,
+      "mean_refill_rate": 0.094,
+      "mean_wall_s": 0.545,
+      "loop_rate": 0.05,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 12.2275,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 1.026,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " First find the total price of the candy bars: $80/bar * .8 = $<<80*.8=32>>32\nThen add the cost of the supp Appropriations to find the profit: $32 + $32 = $ <<32+32=64>>64\nThen divide the amount of mo"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 11.2819,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.539,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " First find the total number ofota balloonry neighbouring Joseph's bags: 420 + 453 = << Pretender - Sage)\nThen find the number of yellow Lungs \u2013 6 red = <<6-6=2>>2 yellow servants\nThen divide the numb"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 125,
+          "mean_nll": 11.5837,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.587,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " On African-American symptoms, she eating 8*15=<<8*15/2=12>>12 pounds of turkeys on level 2 at high level.\nShe also roasts 12+1=<<12+1+1*4=14>>14 pounds of turkey at low level.\n>>14 pounds10 at high l"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 12.2177,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.529,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " First find the total number of balls: 9opic Compounders * 4balls per pack = <<9*4=24>>24 balls\nThen multiply that number by 100% to find how many balls are in each pack: 24 balls / 5 = <<24/5=8>>8 ba"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 128,
+          "mean_nll": 11.1672,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.552,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " For seven Caroline paddles, around 7-7 = <<7-7=3>>3 unique Click Here\nIn a total of four short short webcams, over a period of three hours, there were three*12=<<3*12/2=6>>6 brief webccelings\nThere a"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 12.8312,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.588,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The land area on the Moon is 7 * 3 = <<7*3=21>>21,000 square miles.\nThe land area of Earth is 60 * 10 = <<60*10=300>>300 square miles\nSince the total land area is 200, and the total surface area is 3"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 11.0694,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.647,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The maximum number of yards Dikehbe gives to all the students is 40 * 30 = <<40*30= visible unshaded.\nEach of the remaining flosses and floss remains unshade, so there are 40 - 35 = <<41-35=14>>14 ya"
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 12.0089,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.535,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " First find the total number of pieces of the tower by adding the two levels: 2 levels * 27 pieces/level = <<2*27=41>>41 pieces\nThen add the two amounts to find the length of the a priori level: 41 pi"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 11.2095,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.597,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " When he measures his art work, he's taken an average of 4 * 4 = <<4*4=8>>8 square feet.\nWhen he measures the total number of square feet, then he's found that he is taking 8 * 2 = <<8*2=16>>16 square"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 12.5004,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.443,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " He used 15 x 3 = <<15*3=45>>45 pages for his two-page book.\nHe used 45 x 2 = <<45*2=60>>60 pages for the book.1030\nHe used 605 x1020 =152322015056532030501305202520>>5625504410"
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct25": {
+      "threshold": 25.0,
+      "n": 100,
+      "mean_nll_on_gold": 11.3448,
+      "sd_nll": 0.8509,
+      "mean_refill_rate": 0.25,
+      "mean_wall_s": 0.603,
+      "loop_rate": 0.03,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 12.0539,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.519,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " There are 60-50=<<60-50+50=90>>90 candy bars left afterpsychic Deepens.\nThere are 90-6=<<90-6/3=30>>30 more candy bars thaneb transmissions.\n#### 30\n815301034:7:520:00:2101020:21020:21020 many20:2102"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 11.8408,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.6,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " He then shared an equal number of persistence-in-one= <<11-1/2=6>>6kilos to the two brothers, which is 6*30 = <<6*30=240>>240 minutes\nSince they share 60% of theirEast 3M works, they have 90/100*60 m"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 126,
+          "mean_nll": 10.8509,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.65,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " She roAST 2 16-1=<<216-1>>1 order of chicken in one day\nShe can onlyoutheastern at 600 pm so she can onlyunctions for an hour\nThere are 600-1540=<<600- driving= wild difficult to carry\n#### 3800\n>> T"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 11.477,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.564,
+          "final_loopy": 1,
+          "max_word_run": 5,
+          "text_head": " 150000+10 else = <<150000+11=26000>>26000\n26000-26000 = <<26000/6=20500>>20,500\n96700-25,200 = <<14200-24100=7200>>7200\n#### 7200\n80>>80%300<<41210=24202>>24100\n80250*24 many%3 = <<80250*%100%0010043"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 128,
+          "mean_nll": 11.3698,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.606,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " On Saturday, Running for 10 hours, he told six.\"If you add up the number he was told on Sunday, and he also told 7 Thomas's Importance, he would have told 11*7 = <<11*7=49>>49 wikis.\nOn Monday, he te"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 11.5571,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.648,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " On the Moon, the amount of land is 3 * 4 = <<3*4=12>>12 times the total land area.\nOn the Moon and the Earth, the value is 12 * 2 = <<12*2=24>>24 times the value of the total number of land areas.\n##"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 11.034,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.689,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The most significant amount of flushing is 35 yards - 40 yards = <<35-40=20>>20 yards\nThe least significant amount is 30 yards + 25 yards = 60 yards/ honor\nThe most significant is 60 yards / 2 = <<60"
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 12.0673,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.589,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " First find how many paper WEB\u2019s are left after 3 levels: 11 items * 5 pieces/level = <<11*5=75>>75 pieces\nThen add up the number of pieces left in the tower to find the total number of paperargets: 7"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 10.7899,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.655,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " For all of the paintings he measures, it takes him 3 square feet / 4 square feet/g Site = <<3/4/4=1>>1 square foot\nFor the 2- shots he measures 4 square inches / 5 square feet per picture = <<4/5*5=5"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 12.4808,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.674,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " He spent 15 x 4 = <<15*4=60>>60 pages on the Decor book.\nHe spent 60 - 60 = <<60-60=20>>20 pages on school.\nSo, he read a total of 60 + 20 = << 60+20=80>>80 pages.\nTherefore50 -100 = <<5040=30>>300 p"
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct50": {
+      "threshold": 50.0,
+      "n": 100,
+      "mean_nll_on_gold": 11.5056,
+      "sd_nll": 1.0588,
+      "mean_refill_rate": 0.5,
+      "mean_wall_s": 0.691,
+      "loop_rate": 0.04,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 12.1182,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.683,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " They sell 80/5 = <<80/5=16>>16 candy bars\nWhen they sell 48, then the price is 16 * $8 = $<<16*8=iresiline\nIf she makes $50, then her profit is 50 - $40 = $1.2\n#### 1\nQuestion5 people65 of the people"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 11.7996,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.68,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " There are lustrous purple colleges because orthogonalism is equal to 4 x 50 = <<4*50= dissatisfaction/soul\nThere are 32 manger College students because 6 x 1 = <<6*1=32>>32\nHe has $60 in his bag beca"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 12.3086,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.741,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " For the first 5 minutes, Nassau takes 3*2=<<3*2*2_15=20>>20 pounds of turkeys.\nShe then roasts it in 20/5=<<20/5o=10>>10 pounds of ways.\nThis time she is ready to go on his own for a total of 20+7=45"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 11.0513,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.651,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " 1 pack of blue balls is a total of 3 * 9 = <<3*9=39>>39 Free heads of blue-ball fields.\nThe 5 packs of black balls are an additional 4 * 18 = <<4*18=72>>72 Free head of green-ball field.\nThus, conspi"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 111,
+          "mean_nll": 11.5832,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.54,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " The total number of pathological degeneration is 11+7=<<11+7*2=27>>27\nThe total number increased to 27-7= <<27-7/7=7>>7 fun\n#### 7\n236 are49103.\n1023 the number of many more many more the8 more the m"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 10.993,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.743,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " Since there are 300,000 people on the Moon, the total number of people living on the lunar surface is 300*300 = <<300*300=1620000>>4,000,000\nSince there are 8,000 inhabitants on the land, the entire "
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 12.7962,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.791,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": " The first 10 students need 6 = <<6=6>>6 yards of Floss.\nThe second 10 students require 1.25 + 1.75 = <<1.25+1.75=4.75>>4.5 yard of flIVO.\nThus, he has 6 - 4.5= <<3-4.5=3>>8 yards/class.\n#### 3\n8: The"
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 12.312,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.671,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " First find the total number of pieces in each level: 9 levels * 7 pieces/level = <<9*7=21>>21 pieces\nThen find the number of feet per level: 21 steps / 5 feet/level= <<21/5=11>>11 feet\nFinally, divid"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 11.317,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.762,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " cranberry = 3/4 * 18\nKelley's style is 4 x 6 + 1/2 = <<4*6+1/2=3>>3 square feet.\nHe is looking at a total of 3 + 3 + 5 + 2 + 10 = <<3+3+5+210 1/ 8610>>31 2-108 square20 feet15\nHe is looking at a tota"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 12.9448,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.76,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " So, he spent 15*6 = <<15*6=90>>90 minutes on the candy\nHe spent 3*1 = <<3*1=3>>3 minutes on his book\nSo, he read 90+3 = <<90+3=09>>19 more pages\n#### 10\nQuestion: A group50 is planning to30 more than"
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct75": {
+      "threshold": 75.0,
+      "n": 100,
+      "mean_nll_on_gold": 11.6101,
+      "sd_nll": 1.0271,
+      "mean_refill_rate": 0.75,
+      "mean_wall_s": 0.782,
+      "loop_rate": 0.05,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 11.4179,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.774,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " units of money are equal to $100 / 20 = <<100/20=5>>5 unit units of time.\nIf she caught 2 products that she grew and sold, then she's making 2*50 = <<2*50=100>>100 units of savings in one week.\nSince"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 12.6341,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.76,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " First find the total number ofsupport booms and actions taken by Andrew: 6 Threats + 3 show Clinical research = <<6+3=9>>9German research observations\nThen find the number of research observations th"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 12.8323,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.833,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " It takes 6*15=<<6*15/2=15>>15 minutes to roasting a turkey.\nIt takes 30+15= <<30+15+15-30=45>>45 minutes for the turcons to be roasting on Christmas Eve.\nShe already has a total of 15+45=<<15+45=45>>"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 12.6545,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.749,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " First find the total number of molecules that Anna bought: 18 molecules * 11 molecules = <<18*11=degree-11=35>>35 molecules\nThen add up the number of atoms to find the number: 35 molecules + 20 molec"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 128,
+          "mean_nll": 10.9482,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.776,
+          "final_loopy": 1,
+          "max_word_run": 7,
+          "text_head": " \u201cTo find out how many policy words each character needs to speak in order to be a great FamiliesDay Later\u201d, you need to add up the number the students are trying to use, such as rules or order. In to"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 9.4114,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.838,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " In terms of number of square acres, the Moon has a total surface area x 1/2 = <<80*1/2=50>>50 square acres\nIn terms of value, the land is worth 50 * 6 = $<<50*6=200>>200\nThe land is divided among the"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 9.8473,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.889,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The more flossed the student has the less floss he has left, and the more fl bees he has, the more his floss will have left. So when he comes back to the store, the greater floss was 2 * 35 = <<2*35="
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 12.2648,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.754,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The first level has 9 blocks so it has 9 * 6 = <<9*6=27>>27 blocks long\nThe second level has 7 blocks so that's 5 * 7 = <<5*7=35>>35 blocks long.\nSo, the third level has 35 - 3 = <<35-3= as much many"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 11.7425,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.841,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " He measures the entire collection by taking up 6+1=<<6+1*4=10>>10 square feet of a painting.\nHe then wasn't able to find enough time to do so for a total of 6+10= <<6+10+8=20>>20 square feet.\n#### 20"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 12.643,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.858,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " He spent $5 x 100 = <<5*100=500>>500 ontech books.\nHe spent $15 x 3 = <<15*3=45>>45 on science.\nHis total money was $15 + $45 = $<<15+45=90>>90.\n#### 90\nQuestion: A group of students are planning30 m"
+        }
+      ]
+    }
+  }
+}
