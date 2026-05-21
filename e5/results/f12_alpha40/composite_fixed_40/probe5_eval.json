@@ -1,0 +1,327 @@
+{
+  "decode_config": {
+    "ar": {
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "no_repeat_ngram_size": 3
+    },
+    "diff": {
+      "diff_temperature": 0.8,
+      "diff_top_p": 0.9,
+      "diff_repetition_penalty": 1.15
+    }
+  },
+  "ar_only": {
+    "n": 50,
+    "n_correct": 1,
+    "accuracy": 0.02,
+    "wall_s": 47.8,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "21",
+        "correct": 0,
+        "text": " First find the number of eggs it takes to lay 16 = <<16=16>>16 eggs\nThen add up the number it takes for each bird to find its total production: 16 eggs + 4 eggs = <<17+4=21>>21 eggs\n#### 21\n"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "12",
+        "correct": 0,
+        "text": " There are 5*2=<<5*2*2+1=7>>7 welcomes total Sun'sconfidence\nSo each of the 7 is 7/2= <<7/2/2 = 2>>2 June round\nThat means there are 7+2=12 relationship circles that will be added to one round\n#### 12\n"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "14000",
+        "correct": 0,
+        "text": " The price of the new house is 80,000*1.5=$<<80000*0.5=8800>>8,800\nSo he makes 8,800-8, 800=<<8800-800=1200>>1200\nThat means the total cost was 12000+200=$<<12000+has+200=14000>>14000\n#### 14000\n"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "18",
+        "correct": 0,
+        "text": " He ran 3*60=<<3*60+3=72>>72 meters per week\nSo he runs 72*3=<<72*3*3ii= Mystery dividing the 2/3 of the total distance by 4\nThat means he runs 24*4=<<24*4/4=18>>18 meters a week\n#### 18\n"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "9",
+        "correct": 0,
+        "text": " She needs a total of 30*3=<<30*3*3>>15 cups of food per week for the other birds.\nShe needs 15/5=<<15/5*2=15>>15 drops of feed each day for the rest of the birds.  The remaining food must be given for the remaining 5-pound birds so that\u2019s 5+5+10 = <<5+5=9>>9inks per bird\nSo in total, she needs 15+9=<<17+9*3+9+9 facing down on feed)\n#### 9\n"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "600",
+        "correct": 0,
+        "text": " The number of glasses he needs to buy is 16-6 = <<16-6=10>>10.\nHe has to pay 10*60 = $<<10*60=600>>600 for these original glasses.\n#### 600\n"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "9",
+        "correct": 0,
+        "text": " If Seattle has 10 sheep, then Seattle has 2 * 5 = <<2*5=10>>10 sheep.\nIf Seattle has 3 times as much sheep as economics, then Las Vegas has 3 * 3 = <<3*3=9>>9 sheep."
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "90",
+        "correct": 0,
+        "text": " The first 1/2 minute is 20 minutes because 1 x 60 = <<1*60=20>>20\nThe second 1/3 second is 30 minutes because 20 x .4 = <<20*.4=30>>30\nThe total time it takes is 20 + 30 + 30 = <<40+30+30=90>>90 minutes\n#### 90\n"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "150",
+        "correct": 0,
+        "text": " The total distance from the phone to the car at the rest of the stop is 60+30 = <<60+30=90>>90 miles.\nThe total distance that John stays for a total of 90+90 = <<90+90=150>>150 miles is 110/2 hours.\n#### 150\n"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "95",
+        "correct": 0,
+        "text": " The new wage is 2*45 = <<2*45=90>>90 dollars.\nThe weekly wage is 90-1.2 = <<90-1=95>>95 dollars."
+      }
+    ]
+  },
+  "mode_switch_96_32": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 48.9,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "8",
+        "correct": 0,
+        "text": " The birds lay 16 * 3 = <<16*3=96>>96 eggs in the morning.\nThe birds are bakes for 20 * 4 = <<20*4=80>>80 hours.*10 each/s\ufffd 1s5// of each5/ days8s of"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "2",
+        "correct": 0,
+        "text": " TheEricians were made of 3*2=<<3*2*2 = 6>>6 camouflaged opponent\nSo they took 2*6= <<2 it A That did It the It It was was did that did took that  That  And"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "20505",
+        "correct": 0,
+        "text": " The house was $80000 and now it cost 80,000-75,000=$<<20000-75000=2>>2,500 more than it was before.\nThe house cost 2,500*100=$<<2500*1.5=500>>500 more then the purchase00502520003050303 he2500 did110 he20505"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "1414303101230",
+        "correct": 0,
+        "text": " The first 2 watchers are 5*60=<<5*60+3=65>>65 meters\nHe runs 65*2=<<65*2/ 1 30 1 4 2   hes 1414303101230"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "1",
+        "correct": 0,
+        "text": " If 1 cup of food contains 5 cups of food, then a pound of chicken requires 5*5=<<5*5+5=15>>15 cups of for3 2 3 =3 a 2 22 4 for 3 << days each2 << 1"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "16",
+        "correct": 0,
+        "text": " He needs 2 glasses because 16 / . $ $ each for he cost one that one him he him one cost for that him he each"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "9",
+        "correct": 0,
+        "text": " accounts for 1 + 2 1 3 10 3 2 5 3 3 6 4 twice 5 7 2 * * 1 2 9"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "360",
+        "correct": 0,
+        "text": " First find how manyMB in the file: 200GB / 200GB = <<200=200>>200MB\nThen multiply that number by 1/40: 200 128 causally hours = <<Alo office run time = 30 seconds/hour * 60 minutes = <<30*60=360>>360 seconds\nNow * * * / time,/ for /, / *+ and of from / is/"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "25303041215365500152043220155",
+        "correct": 0,
+        "text": " He turns around at a rate of 3*60=<<3*60+60=300>>300 miles per hour\nHe starts at this rate of 30-30=<<30-30-40=10>>10 miles per minute\nSo he goes 10/2=<<10/2*50=25303041215365500152043220155"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "30",
+        "correct": 0,
+        "text": " In 5 days she will earn a total of $100 x 5 = $<<100*5=500>>500 per day\nShe will earn $500 x 2 = $10 a month.\nSo in 5 days, Eliza will earn 100 - 50 = $ <<100-50 30 1020305 10203010 10 30 20155151030 20 30"
+      }
+    ]
+  },
+  "mode_switch_64_32": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 39.9,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "1",
+        "correct": 0,
+        "text": " Two days a week, it takes Lisa 2*16 = <<2*16=32>>32 hours to eat eggs in a day.\nIt takes 1665s * of one each * = on\ufffd1 of each fors1s 1"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "2",
+        "correct": 0,
+        "text": " TheLikewise, theaumas take 4+1=<<4+1/2=3>>3 chatter per Davidson.\nTheFemma takes 3 as4 as2 the the 12 the1 1 as as3 as1 as 2"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "30",
+        "correct": 0,
+        "text": " The house cost 80% off so that\u2019s 80*.01*80=<<80*.01*.01=12>>12\nThe house was $30s he3030302520 his2000 30 hes50 hes his30"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "123010",
+        "correct": 0,
+        "text": " His first 50 meters is 60*3=<<60*3/3=45>>45 meters\nSo his next 50 meters are 45*3-45 2 2 running 1s  5 runs  running runs 10 3030 123010"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "1",
+        "correct": 0,
+        "text": " The larger her flock is the more the animals will eat. So the bigger they will be eating, the more likely they will eat them.\nThe smaller her one 2 are 1 for for needs do for for are a and and to do in and on"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "15",
+        "correct": 0,
+        "text": " First find how many friends he has by multiply the number of people he has: 1 friend * 10 people = <<1*10=15>>15 people\n many that that one each each one one each of per of many for that each he that for"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "2",
+        "correct": 0,
+        "text": " The number of sheep that Toulined is twice the number of animals that0 condition = <<2*5=10>>10 twice same twice same not times not times twice the 2 times same sheep are as same not are"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "80",
+        "correct": 0,
+        "text": " First find how many architectural changes Carla had to make to run the file: 200 Copyright: 400 - 50 = <<200-50=40>>40 copyright80 from run from run running from from from run, run runs is run and// /"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "60",
+        "correct": 0,
+        "text": " His trip started with 60+20=<<60+20*4=120>>120 miles\nSo he traveled 120/ left minutes miles from his after left from after to after left miles30303060 from60"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "20",
+        "correct": 0,
+        "text": " El Dubro works 30 x 30 = <<30*30=sworth>>sa.\nShe received an 232 * 0.5 = $<<rophe10 for15103020 for15,, for work= per30 work20 working work"
+      }
+    ]
+  },
+  "paired_64_64": {
+    "n": 50,
+    "n_correct": 3,
+    "accuracy": 0.06,
+    "wall_s": 39.2,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "5",
+        "correct": 0,
+        "text": " First find the total number of days the birds lay: 16 eggs/day * 4 days = <<16*4=64>>64 days\nThen add up the number of birds to find the number he makes each week: 64 days + 64 days = 5 days\n#### 5\n208*20 = =5 <<8/76 *15+55*+==128+=* *2//10>> *"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "3202015251015305",
+        "correct": 0,
+        "text": " It takes 2ockingbird comic cards for a total of 2*2=<<2*2*20=40>>40Jew-cracking\nSo it takes 40/2= <<40/2 =5>>5 moreitution\nThat means the whetting is 100*.6=<<100*.6)=5010185080256010860254110303+15+302060+3202015251015305"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "40000",
+        "correct": 0,
+        "text": " The house is worth 80,000-50,200 = <<80000-20200=60,000>>60,00\nSo the cost was 60,000*5 = $<<60000*25=40000>>40000\n#### 40000\n61540530 of2050030502010000121023000025303015100010040205015100008"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "20422080",
+        "correct": 0,
+        "text": " The first 7 days of the week are 30*3=<<30*3/5=15>>15 days\nSo in one week, James runs 1*60 = <<1*60=120>>120 meters\nIn one week he runs 120*2=<<120*2_4=160>>160122081030128030 per30401040+/ per105812805608/6+20422080"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "47",
+        "correct": 0,
+        "text": " The poultry also needs a little bit more feed, so it will take 3*20=<<3*20+15=75>>75 minutes for this little bird to eat.\nThe chicken takes 2 minutes to feed, which means it takes 2*5=<<2*5-10=9>>9 minutes884/2+1084 = for10255 <<3 << birds =526 =126251231 <<47"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "2030",
+        "correct": 0,
+        "text": " First find the number of glassesmonsterar has in his house: 15 glasses * 50% = <<15*50*.01=10>>10 glasses\nThen find the total cost of each glass: 10 glass flowers + 30 eyeglasses = <<10+30=60>>60 lenses\nNow divide the cost of205 $=<< $2030 $15 a8 =0000 =*20403040158<< *=5152015 2030 *"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "2",
+        "correct": 0,
+        "text": " dominated the fish 9 times because 2 x 3 = <<2*3=9>>9\nToulouse made 6 sheep because 5 x 3=<<5*3 140=6>>6\nT Products had 2 more sheep than Hubble because 2 - 9 = <<1-9=2>>2\n#### 2 * <<710 are842581515 + 8+/ 57 15 7 =++15 710 * * * are10 +/"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "2",
+        "correct": 0,
+        "text": " First find how long it takes for the download to be installed: 100 Gw = <<100=100>>100 minutes\nThen divide that time by the number of minutes per minute to find how many minutes it takes to download: 100 / 50 = <<200/50=2>>2 minutes\n#### 2\n *. * * / time/, / minutes = / time/ time / time / * = * / // = <</ */, in * /"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "35820105",
+        "correct": 0,
+        "text": " The speed of the car is 60+30=<<60+30+4=80>>80 miles per hour\nThe speed of one mile per hour is 80/2=<<80/2*80=32>>32 miles per second\nSo it takes his brother 2*40= <<2*40* = minutes 203203 20 5158 miles 30106 5 =151 minutes45 miles1260 minutes3010 35820105"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "30",
+        "correct": 0,
+        "text": " First find the daily rate of pay by multiply the weekly rate by 2 to find the monthly rate: 45 * 3 = <<45*3=180>> 180 minutes\nThen add that to the daily wage to find El Hampton's monthly payment to find her weekly pay: 180 + 180 = <<180+180=240** hours/ * hours */ days days * days>> = hours in>>*/ hour/ hours/ $ in30 * =/ *=* *"
+      }
+    ]
+  }
+}
