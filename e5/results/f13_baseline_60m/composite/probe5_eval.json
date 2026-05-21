@@ -1,0 +1,327 @@
+{
+  "decode_config": {
+    "ar": {
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "no_repeat_ngram_size": 3
+    },
+    "diff": {
+      "diff_temperature": 0.8,
+      "diff_top_p": 0.9,
+      "diff_repetition_penalty": 1.15
+    }
+  },
+  "ar_only": {
+    "n": 50,
+    "n_correct": 1,
+    "accuracy": 0.02,
+    "wall_s": 15.3,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " when they're from his child in their owning which is a teacher, but so that the way of the mixed- text. In some things about how they could also always the day. And they are necessary to home.\n- Email about you are not. I have helped them from things out you will have to think as an honor the our note that of the most popular to put a our points. If you may be in fact that you will all ways that the question:\nIt\u2019re called to use. They\u2019ll like to. This is more than?"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "-3",
+        "correct": 0,
+        "text": " In the second time, the 1; although the marineitionally, it might be (4/19-4)\n-6.\nWhen the idea,ED(1 to aic|5 ...|2-3\"This seems it would be evaluated theine material, but the fire or other other parts of the most common of the W to contribute to a year.\nIf you should include: \"The right to build to identify a launch - you get them is well- In this body or practice for the same is even here is able to do not exist on the other kind of your child. There's rights in the"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": null,
+        "correct": 0,
+        "text": " The First, according to those who is not have to the design. One, there are not we think of law in the family, at least few years. The back, I am not think that in this family. To see at the first time, even we should help to So I\u2019s. But it was something things about me. In the fact. People that she\u2019re. We do that something that it much more removed with my understanding of any are covered in a problem, I all more. I do to come to go on God\u2019ll know for the way to visit. We want and me at"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "6",
+        "correct": 0,
+        "text": " the cleaning is a time. If you do I get all hand at least 6:\nIt's it can get aCH\" does not be forced to add a year that he will. When I will explain that there was always get them it may ask what they are from the game or anUn associations.\nWe can get sure you have to bring like my own. What your body or too about your heart for you don\u2019t develop out, can students need to learn them. Therefore. The value that the concern that you want. The mother\u2019re.\nStep your sure. You can know how you make your"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": null,
+        "correct": 0,
+        "text": " I think, the world with the main woman was the minor at all of a science\u2019s life and not have been found that theft, parents. The years of the time, after it could use. However, and that we see how much long just a group of the way of the business. That is no little day, to have just open to find up to mind when I saw what I do only feel to the war, but he says in a tube, we are God\u2019re the article, for death. But that they can you\u2019ll go from a great.\nThey can be a first person"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": null,
+        "correct": 0,
+        "text": " What did not do you can be kept before my story of those who did not have for you need to see that don\u2019t be along with what I think this is really want to know they are his life?\nTo\u201d\n pick out to start to start with \"What there\u201cI am a person, starting!\nAs much away here to keep your job and I has an UN involves each day, try to this is. We\u201d (the or a school in our floor.\u201d, every other part of what you, we am a lot of the later, we have a easy to to take"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "3",
+        "correct": 0,
+        "text": " either be approximately 10 percent of course to improve the 1137.\n sodium\nWhat he really easier to the world was a survey of Florida, including a single seems that the first time. So how it is seen in the Canada. For example the speakers, which\nThe lars\nI can cause the most open- attended through your baby is aash past day who are actively model, while the South Year, but there are usually see that by V your article, the picture that you can also then it has been the last (3) is not yet intended to get it to what will be used to an outside it to my"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": null,
+        "correct": 0,
+        "text": " Themaking.\n|Sous or the shape is not a hard.\nSo this reason you are all all out how you may be used to that you have an fatal. You?\nWe can raise the us, and then get an excellent part of it is no. When you use a great deal. It should best! And if you understand that they don\u2019t I\u2019s not your personal must be a child will only you will be a.\nIt\u2019ve been performed your:// reading of certain paper. This lesson when you will\nIn a lot of the whether you can become more than the number"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "3.",
+        "correct": 0,
+        "text": " 3.\nThe wheat."
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "1885",
+        "correct": 0,
+        "text": " 1885- vehicles want to a very too simple; A specific attack, so that, what to do you can cause is not only so? Even if you\u2019s not get to be important to me, your health, but when you make these who will just. There are highly time, I\u2019t see you\u201d, which will not and you are why do your important to even that can be a physician about you\u2018I\u2019re, we have a few different with a lot out how your events to show what you don\u2019ve heard from your health. This is too a hard to our person"
+      }
+    ]
+  },
+  "mode_switch_96_32": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 12.5,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " By a shore media forms, N.com\u2019re common for the own source of the country of the time. We are infected is the day. These people in the project, the body. The other important for any own environment, and both cultures, with a lot of record are that are not so they would a, and to,\ufffd of to is\n\n is that a it and to\n to"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "64",
+        "correct": 0,
+        "text": "\nThe first road is a month. He will not do the planes. However, it has be made on the final as they are much? It is related to do not the potential to do you can cause your computer.\nTwo than 30, you will also take back a new animals?\nPro 64 and the, your\n your to your to a. a is can the your, you you your you"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "100",
+        "correct": 0,
+        "text": " 3: 11\u2013d unable to style from 30-7\u201394 when we're raised how I. I.com(S. M. \"If you't me for all I.)\nYou are prepared questions that I am not have a 100th century here)\n\"Even anything where there are not have it\n? your the to? you and is, is of you you, you the is,"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": null,
+        "correct": 0,
+        "text": " The library, \"What means he have a doses of the generation- readers on the areas of her dates of this company of the old, and he was conducted by the most general question that they do I will have been quite more enough. This will only know the basic aid of the in as a \u201cThere are., is to, it\ufffd\ufffd\n is\ufffd to in and and\ufffd to\n is"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "2.",
+        "correct": 0,
+        "text": "okocros, and hahen let\ufffdt.\n-', the working for a German American livelihoods German century, but: 2. With the first. It will understand that the author of kids and for politics. But when they is the Zealand, the country to eat the University of Illinois, he was a he with a in was was and to his to in he his and it was on a his"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "1719.",
+        "correct": 0,
+        "text": " 1719.\nThe optimized\nIn the local for many online beyond a\" that they have an transition about good \u201cThere are different Roman statistics or all of a front of the United States.\u201d is my hands on what this time that they can create a long- The prize\ufffd in and and\ufffd in,\ufffd\ufffd in of, the is, and\ufffd, and"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "10.",
+        "correct": 0,
+        "text": "10.\nThe most were discussed in the one of Big & modules is a significant types of first to be reduced and other different and even try to re- immigrants that he still being much more than a cup of a time. The \u201cthe next site in the wind of a few years. The marine, in\ufffd is\ufffd the the\ufffd,\ufffd\ufffd the,\ufffd to to\n\ufffd is of"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": null,
+        "correct": 0,
+        "text": " If you, I do a entirely:\nIt is a have to the bill, there may not deal on any already so that they who is responsible\n Is how the your baby as a good or other things of each day, you can be broken or the time with it to do not the first one. After this. your is your? it you you and and your you your\n you in your and\n"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "14.",
+        "correct": 0,
+        "text": " 7: 45th:7. 14. It was taken as one four times that we have no school of their skill.\nThe first day."
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": null,
+        "correct": 0,
+        "text": "\nIt is important for a Music: I do so the world that the necessary to \u201cThe other types of this means that is your it is no time. To us, but don\u201d has one year, you have some different point, or share that I\u201d\nThere will also it!\n- you\n a you your a to you in to you and. a the and to\u2019"
+      }
+    ]
+  },
+  "mode_switch_64_32": {
+    "n": 50,
+    "n_correct": 0,
+    "accuracy": 0.0,
+    "wall_s": 7.8,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": null,
+        "correct": 0,
+        "text": " until, and presented to be get a different culture, are not have a year. This is that they are all things that the body, the ratio of using.,,\n\ufffd and to a you to to of\n you it a in is of"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": null,
+        "correct": 0,
+        "text": "At. to,\n, a to of a the\n the is\n.. the the,"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": null,
+        "correct": 0,
+        "text": " The Gulf of my foot.\nWhat is the end of the hands- into a every year in the He said that there are want to the win. It,. and is you I you I.\n I to it\n it, to\n you"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "1",
+        "correct": 0,
+        "text": " 1,owiscometry are \u201cIt\u2019s units."
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "13.",
+        "correct": 0,
+        "text": " A=2, the nor at the months that was a few people and 13. He had created by his mother.\n\"T.Ss of South to a he his I to his him \" was he \" and I\n was I \" and"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "7.",
+        "correct": 0,
+        "text": " - 4. Most of theorows do not still do it is in these are making the evil, Aett:7.\nIt can be able to of you you and a, I a is. and a in\n,\n and, a"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "30",
+        "correct": 0,
+        "text": "30 in the first only is the city, the Right look for it was not be until it. These medication.\nThe Vol have been around. This article in and a to to, of of and the of the is of a a to the."
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "2",
+        "correct": 0,
+        "text": " The period of working and a less than 2, learn because the success of all the result, though, he had no time, and out on the top in is and that that. and to a\n. to\n of is\n it a in in"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": null,
+        "correct": 0,
+        "text": " (I) in the same, though we have to call that three. It and I, it I you\n is,. you:\n\n you I I you\n"
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "1",
+        "correct": 0,
+        "text": " You may be obvious and then I believe it is right as, Dr.\nThe Light?\nIn 1854, like 1, your body, you will the of a in the it the you to a a to. and of you to and a"
+      }
+    ]
+  },
+  "paired_64_64": {
+    "n": 50,
+    "n_correct": 1,
+    "accuracy": 0.02,
+    "wall_s": 8.2,
+    "results_sample": [
+      {
+        "idx": 0,
+        "gold": "18",
+        "pred": "10",
+        "correct": 0,
+        "text": "10, A night. Let\u2019ll take an argument to be seen on her knowledge about this body-D to contain this works: What they will serve as well. However, Germany, I know it can be big home. To in the cut them. So if it is many it was no time before the to\n you of you\n your to to, you is a and and is that of you a\n the of and you is, that\n, of a a"
+      },
+      {
+        "idx": 1,
+        "gold": "3",
+        "pred": "6",
+        "correct": 0,
+        "text": " The first, a lot is the four years, as all clear, and Nipation of human given a good, the same time, but the maintenance. It is the person, but a Informationt know this 6, therefore the possible is these other research. In the source was typically form of the right time to. are in to in\n\n to and of you that to. a it to a\n to in for. and is\n it and you that. of are"
+      },
+      {
+        "idx": 2,
+        "gold": "70000",
+        "pred": "28",
+        "correct": 0,
+        "text": "org, had to the landing on the Westernart comes by an important to get the Jewish city of this year. After the most personal diversity of the New York2- 1948 than present to draw his lives of the end of the company that they were theuline, was seen an. The grain War 28, then in, \" his\n to he, had in had\n \" were. and as his \" and was. was and his was his in. and a was from"
+      },
+      {
+        "idx": 3,
+        "gold": "540",
+        "pred": "1.",
+        "correct": 0,
+        "text": " less than 1:1. Another number in the election. Co.\nAs the end thement.: I I\n you you of you is, in and\n to a to your\n\n you and,,, of is of the your, your and you"
+      },
+      {
+        "idx": 4,
+        "gold": "20",
+        "pred": "18.",
+        "correct": 0,
+        "text": " pet, and involved in 18 decades. And that theee,000 from S. The organizations and his clothing were employed by the 1996,i. Therefore, and fear of the recent years. However, then it made their own end of the high- drive.\n18.\nIt is not, but one of he he for a and a was him that he was was on his as a in had a \" He his had to I he was to him \" \" his was"
+      },
+      {
+        "idx": 5,
+        "gold": "64",
+        "pred": "16",
+        "correct": 0,
+        "text": " 15 and a mid- mid-8 questions for the MP art companies. Can you had to look at one of your house into another \"To small, I find about 16, each day the guide\nThis is an own name by a way to know. In the language \u2014 in the original voice's a positive world is of in. you is of and. that it in\n is in it that\n you it, you and and, you,,\n and I of a"
+      },
+      {
+        "idx": 6,
+        "gold": "260",
+        "pred": "2016",
+        "correct": 0,
+        "text": " from many members of this is likely to his Robert Laboratory.\nYou're a dates for the next one of \u201cIt\u2019s, they are many ways that it is to know what it was the following \u201cThe New York, do you\u201d (and, I found in 2016). If you believe\ufffd the\ufffd. and of that in of to to is,\ufffd a I\n\ufffd \ufffd a and a\n\ufffd\u2019 the. to\n and the\ufffd"
+      },
+      {
+        "idx": 7,
+        "gold": "160",
+        "pred": "1.",
+        "correct": 0,
+        "text": " 5- 01 and maintain for private school can not use each other tips are located on the climate change.\nIf you think that the equipment and the students are a wear them at the attention for this time in a means the old. In the schedule of an alternative at least 3: 1. A virus or is such you, and is is your of to you. it you your\n a\n in in you your to and is your in of\n\n you,, your your"
+      },
+      {
+        "idx": 8,
+        "gold": "45",
+        "pred": "2",
+        "correct": 0,
+        "text": " \" Texas at: How much when the east for these were formed a four-1). There are not a second words.com can be quite less than 2; it's sold by the latter was done to use or the Church is completed in the same time. The influence of his own. He had been removed for and\n I is that\n you\n it you I,. it I I,, and, you \" to\n that\n you and to\n in \","
+      },
+      {
+        "idx": 9,
+        "gold": "460",
+        "pred": "5",
+        "correct": 0,
+        "text": " 23, remember that we will and output of the future, but one's given the Ancientization. So, this time on time to the earth and without a few years. The face the front of 5: Many studies, the as God\u2019s full cell.\nThe most. More than is a bit of it in is I\n and in it to\ufffd a you to\n\n you in you and of I to I a\ufffd that\ufffd\n you a is to it"
+      }
+    ]
+  }
+}

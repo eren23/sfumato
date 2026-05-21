@@ -1,0 +1,494 @@
+{
+  "ckpt": "/workspace/sfumato/e5/results/f13_baseline_60m/composite/model.pt",
+  "n_eval": 100,
+  "k_ar": 64,
+  "k_diff": 64,
+  "n_diff_steps": 16,
+  "n_outer": 1,
+  "configs": {
+    "diff_draft_ar_refill_pct10": {
+      "threshold": 10.0,
+      "n": 100,
+      "mean_nll_on_gold": 9.9029,
+      "sd_nll": 0.5604,
+      "mean_refill_rate": 0.094,
+      "mean_wall_s": 0.183,
+      "loop_rate": 0.0,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 10.894,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.414,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Environmental Early begin to the first week is an drive, you. I go up as they know about the stakeholders? This is only in my topic to be completely a shot in times, even like many words that he coul"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 10.3701,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.174,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " The(a) \" pharmaceutical stages, say; could be difficult?\n- from his own?\nThere are the first of this she as he is all the Southern death to think that it is true, they are to come at the \"Check out o"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 9.7409,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.199,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "12 of common step.\nThe Van K. In the plural: How the coming only cost is any other reasons in a single example, but to the money as one, but was a bit of having place; or rare, in St regarding three o"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 10.5568,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.169,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": "000 at the encouraging, which the western people. The men to have place of 18th century. The 19-2010 and Germany: York.\nThere was one of other days for students know that they asked to August 6 to the"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 102,
+          "mean_nll": 9.6589,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.113,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " a simple\ufffd\nIn most need of gas cannot be the propaganda times more than the right, it is one or the night of the asking it. This could be found that the environment. and the of the and a lot of the sa"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 9.3513,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.188,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": "\nThe electrical market, this above. As the forest built by winter or average form of the number of the growth in the interest.\nWhy does it is also from the Year, during the inside the appear to their "
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 9.4252,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.214,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " You't have a recognized here to the respiratory:\nDr interact with the time, it at a specified to this. Theeng in the day in the two questions that two know that they have a small distance of all are "
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 10.1715,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.176,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " 1/s, 2014). For this has been on the quiz,\" it was still as they use from the case was now so we are these, and one is quite two mountain- assigned together at the new languages to the collection of "
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 9.6674,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.202,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": ": 40, the Church on least the same time, I should ever could be a great fact, head. If you're lower enough for games, it comes by 2017, like something about night, 12, we live, I have your top, we wil"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 10.4229,
+          "refill_count": 6,
+          "refill_rate": 0.094,
+          "wall_s": 0.211,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " birth you would be told is an all because I know that I also actually like I\u2019re it do only themselves. We must have to who would not seem. And if what there was in this way the following just because"
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct25": {
+      "threshold": 25.0,
+      "n": 100,
+      "mean_nll_on_gold": 9.8247,
+      "sd_nll": 0.5969,
+      "mean_refill_rate": 0.25,
+      "mean_wall_s": 0.189,
+      "loop_rate": 0.0,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 10.5549,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.186,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " - I have resulted\nTheject aon. For instance you, which is that it will be made.\nIt\u2019s a work on the world, I know.\nTo them from his child is the real place, we feel some of him, it are different in th"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 10.3322,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.185,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " \" joining him to be reached their Columbia's thanks the same-ai\" did, the media with other God.\n(and, the breaking in early honor of love,\" \"a was also, the Jews). It was published by only went back "
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 9.5133,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.215,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " 5 and in fis, MK (1)\nThe longer than 10: I have been seen as I. try to go for a much more safe, a few years ago but was still so that the sense of people.\n At the first, and then look from the Jew as"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 9.9165,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.179,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " \"The key, 2010. As the core of the security for example,000 hundredst in the world and was in order to be in a possible as the ongoing life, like a word the women. He fching, but when it had all of a"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 128,
+          "mean_nll": 9.5601,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.188,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " he takes them. You don't mean, to know the end from which are my God who can be harmful place: An than I did not. Yet that it is that you do not do. It might take a house, as the think of the work, t"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 9.6641,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.094,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "\nA method\nThe tunnel as the need to reduced the most common kinds of the travel to the700.,., a few years, and to to.\n and the a few years, the same, a in and the same.\n to the.\n a\n in the in the it a"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 9.403,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.229,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " A.\nthe very about 4: The head, records is an Bhx, Italy is the last year. You can be protected in my following 10 feet to try to U- Farares, and coast for your own is I have a new hand, you are not p"
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 10.4563,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.185,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " \u201ca\u201d at the most), and suffered up to work,\u201d after its ten ways to detect but the core area of it is that I really.\nThe other met, now what you have become much more than the school. You are not a con"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 10.0308,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.213,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " 10 days,000, 29 months in the most in these people who had found in 1, such as an with Germany would be made the world and she makes them the 16. I, but they were started on his foods that we are not"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 9.7846,
+          "refill_count": 16,
+          "refill_rate": 0.25,
+          "wall_s": 0.129,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "com. If they should not mean what this, 8: messages is the world with the all, ( strongly). In those if you ask about the church.| I a to the of the world, of I\u2019s I:\nThe first a a\n\nThe, you, it\ufffd in yo"
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct50": {
+      "threshold": 50.0,
+      "n": 100,
+      "mean_nll_on_gold": 9.8769,
+      "sd_nll": 0.548,
+      "mean_refill_rate": 0.5,
+      "mean_wall_s": 0.204,
+      "loop_rate": 0.02,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 10.6565,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.208,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " What not have been taken a known as the mid- treats cannot be able to identify it may still that the history of scientists who are only working on she has first. It is an important and place, the wor"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 10.3855,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.203,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " \"a\"\nThe municipalI seem to the steepons\nIf you believe that it is its\ufffdli's God. You's one is to myify with his credit.\nIf a 2, I, it. They will't get out in of a discovery of the U. However, I\u2019s a in"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 10.2964,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.234,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " if it is the truth of \u201c forms of your body\u201d\nThe insid had two types of the first thing to perform a little way the modified\u2019s wants for the binding that the discovery and make their own kind of peopl"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 10.7878,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.2,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "\nIf you believe to find if you were making your environment. At some who were originally wish to replace us, you have been more effective in or end from the star. To use of water to get a lifetime. Th"
+        },
+        {
+          "idx": 7004,
+          "n_compare": 128,
+          "mean_nll": 10.3743,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.207,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "\n-OMHow to be taken at about your\nIf you or help to break to know about the farm answer if it is one that how you are more than to not feel one of let\u2019s something I can be about and eating. This allow"
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 9.7406,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.223,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " \"The Article 3bral that this is a feed up each year in the last section by the same time in the front of the company has the most than 2. This is a years that it's that it is many women and the best "
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 9.3752,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.251,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " C. But you may be sent through the experts in the full of West under these support that this region. The shadow, I was this ever as is now was included at an important to seek to create a much more t"
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 10.3017,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.203,
+          "final_loopy": 0,
+          "max_word_run": 4,
+          "text_head": "33. And what you can see that you are some meaning is a job.\n- If you find a concentration of making it is this as a find the public questions, or keep in your history and so I want you would be $2. I"
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 9.1684,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.233,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": " S. 11: What's end 12-2. guidance for government to the late 30th lot of this N. The role 13. 1810.1C.4.\nWith:1099/90, 9 1.\nF opportunity\n-67 23:13.\nThe United States in the|). and the in the \") (1, 1"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 9.9277,
+          "refill_count": 32,
+          "refill_rate": 0.5,
+          "wall_s": 0.237,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " he said: 20 by 20, 18, and God\u201cI have a little class all that he established with one of day,\u201d\nWhat is hard to the east \" Ple\"\u201cSee just in call it looks in his something called \u2018What have come on the"
+        }
+      ]
+    },
+    "diff_draft_ar_refill_pct75": {
+      "threshold": 75.0,
+      "n": 100,
+      "mean_nll_on_gold": 9.7768,
+      "sd_nll": 0.6569,
+      "mean_refill_rate": 0.75,
+      "mean_wall_s": 0.23,
+      "loop_rate": 0.3,
+      "results_sample": [
+        {
+          "idx": 7000,
+          "n_compare": 78,
+          "mean_nll": 10.2055,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.224,
+          "final_loopy": 1,
+          "max_word_run": 2,
+          "text_head": " 3-vards \u2013 I have the personal range of fire, you can be out for the world will get at the first. The://www.\n cases, the largest B, some could be looks.orgF and M.g. It will be moved the family for th"
+        },
+        {
+          "idx": 7001,
+          "n_compare": 52,
+          "mean_nll": 10.4662,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.219,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " \"Gphthal]\n\" are still acceptable. And to the 15, and his divergence\"\nof hundreds of 2016, 10, either for a total of United States for him and all of Atlantic's son.\"\nThe reforms of theGoogle. The Hea"
+        },
+        {
+          "idx": 7002,
+          "n_compare": 128,
+          "mean_nll": 9.5655,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.26,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": "5(1 (3) \u2013 choices) produce two participants get it-6).\nAlthough you should be applied, and on the first year in children. Her favor of their 4.com| Standard 4, ISBN $8 by the Medicine, https://www. Ke"
+        },
+        {
+          "idx": 7003,
+          "n_compare": 44,
+          "mean_nll": 9.8562,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.218,
+          "final_loopy": 0,
+          "max_word_run": 2,
+          "text_head": " Water. TheNo missions and the ease was used in the ground to increase a good knowledge.\nThe right down his personal U. By the first time to 1: expected the most of the risks on an hour for more than "
+        },
+        {
+          "idx": 7004,
+          "n_compare": 128,
+          "mean_nll": 9.347,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.224,
+          "final_loopy": 1,
+          "max_word_run": 2,
+          "text_head": "\n\"The British instances for the known as anano, will be\nThis is a more courses, but the net present in which has been into the influenced on the 'A story of his two years that is the time in the year "
+        },
+        {
+          "idx": 7005,
+          "n_compare": 56,
+          "mean_nll": 9.6663,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.246,
+          "final_loopy": 1,
+          "max_word_run": 2,
+          "text_head": " 0 of certain one- items, and 3% of the20\nIt's kept up to set from this was needed for 5: \u201ctime process\u201d that are produced the year. The area.5\nThe case is very much-cines include more than three most"
+        },
+        {
+          "idx": 7006,
+          "n_compare": 62,
+          "mean_nll": 9.2514,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.271,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": "4 than we can want to several months for this sense that the last one of property, to feed them from a Review, the next published the combination of)\nBains, if you have a problem at the case for less "
+        },
+        {
+          "idx": 7007,
+          "n_compare": 39,
+          "mean_nll": 10.6173,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.222,
+          "final_loopy": 0,
+          "max_word_run": 1,
+          "text_head": " The hair on around the law, but is higher way, and the same year to serve that shows this is an average of two years that makes it.\nWhat's old has been used for that the take any line the world. But "
+        },
+        {
+          "idx": 7008,
+          "n_compare": 128,
+          "mean_nll": 9.1885,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.251,
+          "final_loopy": 1,
+          "max_word_run": 2,
+          "text_head": " least 10 g run. A good 50 years.\nThe first text than 4, 43030\u20131 \u2013 tax 2, rivers. In the first three weeks: 1, proper events,th century,47: The entire section. are created on the Life.\n-10.\n|\nWe's non"
+        },
+        {
+          "idx": 7009,
+          "n_compare": 70,
+          "mean_nll": 10.0307,
+          "refill_count": 48,
+          "refill_rate": 0.75,
+          "wall_s": 0.261,
+          "final_loopy": 0,
+          "max_word_run": 3,
+          "text_head": "com, they think it didn't have to now.\nThe American Africa to He was now before a bit of God was based on heres because of his facts, and I would have life about what is once by November I can know yo"
+        }
+      ]
+    }
+  }
+}
