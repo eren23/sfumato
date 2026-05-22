@@ -58,3 +58,6 @@ phase2/frontier_compare/results_50/*.truncated_*
 
 # Local HF-pull staging (redundant with proper result dirs)
 e5/results/overnight_pull/
+
+# Stray local train log from killed MPS run
+e5/results/f13_baseline_60m_train.log
