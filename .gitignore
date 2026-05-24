@@ -61,3 +61,10 @@ e5/results/overnight_pull/
 
 # Stray local train log from killed MPS run
 e5/results/f13_baseline_60m_train.log
+
+# Phase P interpretability — activation caches + SAE weights + graph dumps
+# (push trained SAEs to HF Hub; gitignore the raw activation .pt files)
+e5/interp/cache/
+e5/interp/saes/
+e5/interp/graphs/
+e5/interp/results/*.npy
