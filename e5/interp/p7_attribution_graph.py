@@ -66,7 +66,10 @@ def build_attribution_svg(prompt_label, text, raw_model, tok, layer_saes,
                           top_per_cell=4, max_features=12):
     """
     layer_saes: list of (layer_idx, sae) tuples, sorted by layer ascending.
-    Returns SVG string + a feature legend dict.
+    Returns (svg_string, feature_meta_dict, colour_by_fid).
+
+    feature_meta_dict: { fid_str: {color, total_act, max_act, top_contexts: [{layer, pos, token, act}]} }
+    used by JS to power the hover side panel.
     """
     device = next(raw_model.parameters()).device
     ids = tok.encode(text, add_special_tokens=False)
@@ -179,25 +182,44 @@ def build_attribution_svg(prompt_label, text, raw_model, tok, layer_saes,
                     f'stroke="{color}" stroke-width="1.2" stroke-opacity="0.32"/>'
                 )
 
-    # Now circles
+    # Now circles (with data attributes for JS hover)
+    feature_meta: dict = {}  # fid_str → details for JS panel
     for li, layer in enumerate(per_layer):
         for t, cell in enumerate(layer["cells"]):
             n = len(cell)
             if n == 0:
                 continue
-            # Lay out 1..top_per_cell circles inside cell, offset slightly
             for ci, (fid, val) in enumerate(cell):
                 r = 2 + 9 * (val / max_act) ** 0.6
                 cx = margin_left + t * cell_w + (cell_w * (ci + 1)) / (n + 1)
                 cy = margin_top + li * cell_h + cell_h / 2
                 color = colour_by_fid.get(fid, "#3a4255")
                 opacity = 0.85 if fid in top_feature_ids else 0.45
+                tok_text = token_strs[t].strip() or "·"
                 title = f"L{layer['layer']} · pos {t} · #{fid} · act {val:.2f}"
                 svg.append(
-                    f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{color}" '
+                    f'<circle class="node" data-fid="{fid}" '
+                    f'data-layer="{layer["layer"]}" data-pos="{t}" '
+                    f'data-act="{val:.3f}" '
+                    f'data-token="{html.escape(tok_text)[:24]}" '
+                    f'cx="{cx}" cy="{cy}" r="{r}" fill="{color}" '
                     f'fill-opacity="{opacity}" stroke="{color}" stroke-opacity="0.9" '
                     f'stroke-width="1"><title>{html.escape(title)}</title></circle>'
                 )
+                key = str(fid)
+                if key not in feature_meta:
+                    feature_meta[key] = {
+                        "fid": fid, "color": color,
+                        "total": 0.0, "max": 0.0,
+                        "contexts": [],
+                    }
+                feature_meta[key]["total"] += val
+                if val > feature_meta[key]["max"]:
+                    feature_meta[key]["max"] = val
+                feature_meta[key]["contexts"].append({
+                    "layer": layer["layer"], "pos": t,
+                    "token": token_strs[t], "act": val,
+                })
 
     # legend (bottom)
     leg_y = height - 50
@@ -217,7 +239,13 @@ def build_attribution_svg(prompt_label, text, raw_model, tok, layer_saes,
         )
 
     svg.append('</svg>')
-    return "\n".join(svg), top_features, colour_by_fid
+
+    # Sort contexts inside each feature_meta entry by activation desc, cap to 12
+    for k in feature_meta:
+        feature_meta[k]["contexts"].sort(key=lambda c: -c["act"])
+        feature_meta[k]["contexts"] = feature_meta[k]["contexts"][:12]
+
+    return "\n".join(svg), feature_meta, top_features, colour_by_fid
 
 
 GRAPH_CSS = """
@@ -305,7 +333,7 @@ def main():
 
     for label, text in prompts:
         print(f"[p7] building {label} ...", flush=True)
-        svg, top_features, _ = build_attribution_svg(label, text, raw_model, tok, layer_saes)
+        svg, feature_meta, top_features, _colour = build_attribution_svg(label, text, raw_model, tok, layer_saes)
         nav_html = ['<div class="toolbar"><span class="lab">prompts</span>']
         for nl in nav_links:
             nav_html.append(nl.replace('href="', f'href="').replace(
@@ -321,15 +349,43 @@ def main():
         nav2.append('<a href="index.html" style="margin-left:auto; color:var(--gold);">↩ index</a>')
         nav2.append('</div>')
 
+        meta_json = json.dumps(feature_meta)
         body = [
             f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
             f'<title>attr · {label}</title>',
             GRAPH_CSS,
+            '<style>'
+            '.graph-layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 22px; align-items: start; }'
+            '@media (max-width: 1100px) { .graph-layout { grid-template-columns: 1fr; } }'
+            '.svg-wrap { position: relative; }'
+            '.node { cursor: pointer; transition: r 0.12s ease, stroke-width 0.12s ease, fill-opacity 0.12s ease; }'
+            '.node.dim { fill-opacity: 0.08; stroke-opacity: 0.12; }'
+            '.node.lit { fill-opacity: 1; stroke-width: 2.5; }'
+            '.inspector { background: var(--surface); border: 1px solid var(--border); padding: 22px 24px;'
+            ' position: sticky; top: 20px; max-height: calc(100vh - 40px); overflow-y: auto; }'
+            '.inspector .ph { color: var(--text-muted); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; }'
+            '.inspector .swatch { width: 18px; height: 18px; border-radius: 50%; display: inline-block; vertical-align: middle; margin-right: 10px; box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px currentColor; }'
+            '.inspector h3 { font-family: "Fraunces", serif; font-weight: 700; font-size: 38px; margin: 12px 0 4px; letter-spacing: -0.02em; line-height: 1; }'
+            '.inspector .sub { font-size: 11px; color: var(--text-muted); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 18px; }'
+            '.inspector .row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 12px; }'
+            '.inspector .row .k { color: var(--text-muted); letter-spacing: 0.06em; }'
+            '.inspector .row .v { font-family: "JetBrains Mono", monospace; color: var(--text); }'
+            '.inspector .ctxs { margin-top: 18px; }'
+            '.inspector .ctxs .title { font-size: 11px; color: var(--text-muted); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 8px; }'
+            '.inspector .ctx { display: grid; grid-template-columns: 36px 1fr 44px; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); align-items: center; font-size: 12px; }'
+            '.inspector .ctx .layer { font-family: "JetBrains Mono", monospace; color: var(--text-muted); }'
+            '.inspector .ctx .tok { font-family: "JetBrains Mono", monospace; color: var(--text); background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 2px; overflow-wrap: anywhere; }'
+            '.inspector .ctx .act { font-family: "Fraunces", serif; text-align: right; font-weight: 600; font-size: 14px; }'
+            '.inspector .links { margin-top: 18px; }'
+            '.inspector .links a { display: inline-block; padding: 6px 10px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-dim); text-decoration: none; margin-right: 6px; cursor: pointer; }'
+            '.inspector .links a:hover { color: var(--gold); border-color: var(--gold); }'
+            '.inspector .hint { color: var(--text-muted); font-style: italic; font-family: "Fraunces", serif; font-size: 14px; line-height: 1.5; }'
+            '</style>',
             '</head><body><div class="shell">',
             '<div class="topbar"><span class="logo">Sfumato</span>'
-            '<span>Attribution graph · AR mode · layers 6-15</span></div>',
+            '<span>Attribution graph · AR mode · layers 6-15 · interactive</span></div>',
             f'<h1>Attribution graph: <span style="color:var(--gold);font-style:italic;">{html.escape(label)}</span></h1>',
-            '<div class="subtitle">Top-firing SAE features per (layer, token). Circle size = activation strength. Threads = same feature persisting across adjacent layers.</div>',
+            '<div class="subtitle">Hover any circle to inspect the feature: persistent thread highlights across layers, side panel shows the top firing contexts within this prompt and a link to its full dossier.</div>',
             *nav2,
             '<div class="graph-card">',
             f'<div class="prompt-block">{html.escape(text)}</div>',
@@ -337,15 +393,120 @@ def main():
             f'<b>SAE:</b> TopK k=64 · d_features=16384 &nbsp;&nbsp;'
             f'<b>Layers shown:</b> {", ".join(f"L{L}" for L, _ in layer_saes)} &nbsp;&nbsp;'
             f'<b>Cells:</b> top-4 features per token</div>',
+            '<div class="graph-layout">',
+            '  <div class="svg-wrap" id="svg-wrap">',
             svg,
+            '  </div>',
+            '  <aside class="inspector" id="inspector">',
+            '    <div class="ph">Inspector</div>',
+            '    <div class="hint" style="margin-top:14px;">Hover any circle in the graph to inspect the feature. '
+            'The matching nodes across other layers will highlight together — a vertical thread of the same feature.</div>',
+            '  </aside>',
+            '</div>',
             '<div class="legend-help">'
             '<span><span class="dot" style="background:#9ca3af"></span>circle size ∝ activation</span>'
-            '<span><span class="dot" style="background:#fbbf24"></span>thread = same feature firing in next layer</span>'
-            '<span>hover any circle for the feature id and activation</span>'
+            '<span><span class="dot" style="background:#fbbf24"></span>thread highlights on hover</span>'
+            '<span><span class="dot" style="background:#a855f7"></span>click a circle to lock the inspector</span>'
             '</div>',
             '</div>',
-            '<div class="foot"><span>Sfumato · P.7 attribution graph</span>'
+            '<div class="foot"><span>Sfumato · P.7 attribution graph · interactive</span>'
             '<a href="index.html">↩ all prompts</a></div>',
+            f'<script>const FEATURE_META = {meta_json};</script>',
+            '<script>',
+            '(() => {',
+            '  const meta = FEATURE_META;',
+            '  const insp = document.getElementById("inspector");',
+            '  const svg = document.querySelector("#svg-wrap svg");',
+            '  const nodes = svg ? Array.from(svg.querySelectorAll(".node")) : [];',
+            '  let locked = null;',
+            '  function el(tag, props, ...children) {',
+            '    const e = document.createElement(tag);',
+            '    if (props) for (const k in props) {',
+            '      if (k === "style") for (const sk in props.style) e.style[sk] = props.style[sk];',
+            '      else if (k === "className") e.className = props[k];',
+            '      else if (k.startsWith("on")) e.addEventListener(k.slice(2).toLowerCase(), props[k]);',
+            '      else e.setAttribute(k, props[k]);',
+            '    }',
+            '    for (const c of children) {',
+            '      if (c == null) continue;',
+            '      e.appendChild(typeof c === "string" ? document.createTextNode(c) : c);',
+            '    }',
+            '    return e;',
+            '  }',
+            '  function dimAll(setOfFids) {',
+            '    for (const n of nodes) {',
+            '      if (setOfFids.has(n.dataset.fid)) { n.classList.add("lit"); n.classList.remove("dim"); }',
+            '      else { n.classList.remove("lit"); n.classList.add("dim"); }',
+            '    }',
+            '  }',
+            '  function clearDim() { for (const n of nodes) { n.classList.remove("dim"); n.classList.remove("lit"); } }',
+            '  function clearInspector() {',
+            '    while (insp.firstChild) insp.removeChild(insp.firstChild);',
+            '  }',
+            '  function emptyState() {',
+            '    clearInspector();',
+            '    insp.appendChild(el("div", {className: "ph"}, "Inspector"));',
+            '    insp.appendChild(el("div", {className: "hint", style: {marginTop: "14px"}},',
+            '      "Hover any circle in the graph to inspect the feature. The matching nodes across layers will highlight."));',
+            '  }',
+            '  function unlock(e) {',
+            '    if (e) e.preventDefault();',
+            '    locked = null; clearDim(); emptyState();',
+            '  }',
+            '  function renderInspector(fid) {',
+            '    const m = meta[String(fid)];',
+            '    clearInspector();',
+            '    if (!m) {',
+            '      insp.appendChild(el("div", {className: "ph"}, "Inspector"));',
+            '      insp.appendChild(el("div", {className: "hint", style: {marginTop: "14px"}}, "No data for this feature."));',
+            '      return;',
+            '    }',
+            '    insp.appendChild(el("div", {className: "ph"}, "Inspector · feature"));',
+            '    const swatch = el("span", {className: "swatch", style: {color: m.color, background: m.color}});',
+            '    insp.appendChild(el("h3", {style: {color: m.color}}, swatch, "#" + m.fid));',
+            '    insp.appendChild(el("div", {className: "sub"}, "ar head · " + m.contexts.length + " firing positions"));',
+            '    const rows = [',
+            '      ["Σ activation (this prompt)", m.total.toFixed(2), m.color],',
+            '      ["peak in this prompt", m.max.toFixed(2), null],',
+            '      ["firing positions", String(m.contexts.length), null],',
+            '    ];',
+            '    for (const [k, v, color] of rows) {',
+            '      const row = el("div", {className: "row"},',
+            '        el("span", {className: "k"}, k),',
+            '        el("span", {className: "v", style: color ? {color: color} : {}}, v));',
+            '      insp.appendChild(row);',
+            '    }',
+            '    const ctxs = el("div", {className: "ctxs"});',
+            '    ctxs.appendChild(el("div", {className: "title"}, "top firing positions"));',
+            '    for (const c of m.contexts) {',
+            '      const tok = (c.token || "").replace(/\\n/g, "↵") || "·";',
+            '      ctxs.appendChild(el("div", {className: "ctx"},',
+            '        el("span", {className: "layer"}, "L" + String(c.layer).padStart(2, "0")),',
+            '        el("span", {className: "tok"}, tok),',
+            '        el("span", {className: "act", style: {color: m.color}}, c.act.toFixed(2))));',
+            '    }',
+            '    insp.appendChild(ctxs);',
+            '    const links = el("div", {className: "links"},',
+            '      el("a", {href: "../p6_dashboard/feat_ar_" + m.fid + ".html"}, "open full dossier ↗"),',
+            '      el("a", {href: "#", onClick: unlock}, "unlock"));',
+            '    insp.appendChild(links);',
+            '  }',
+            '  nodes.forEach(n => {',
+            '    n.addEventListener("mouseenter", () => {',
+            '      if (locked) return;',
+            '      const fid = n.dataset.fid;',
+            '      dimAll(new Set([fid])); renderInspector(fid);',
+            '    });',
+            '    n.addEventListener("mouseleave", () => { if (!locked) clearDim(); });',
+            '    n.addEventListener("click", e => {',
+            '      e.preventDefault();',
+            '      const fid = n.dataset.fid;',
+            '      if (locked === fid) { locked = null; clearDim(); emptyState(); }',
+            '      else { locked = fid; dimAll(new Set([fid])); renderInspector(fid); }',
+            '    });',
+            '  });',
+            '})();',
+            '</script>',
             '</div></body></html>'
         ]
         (out_dir / f"attr_{label}.html").write_text("\n".join(body))
