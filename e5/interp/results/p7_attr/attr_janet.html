@@ -1,0 +1,979 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>attr · janet</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+:root {
+  --bg: #0a0e1a; --surface: #131725; --surface-2: #1a1f2e;
+  --border: #262b3d; --border-lit: #3a4255;
+  --text: #e5e7eb; --text-dim: #9ca3af; --text-muted: #6b7280;
+  --gold: #fbbf24;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+  font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+.shell { max-width: 1240px; margin: 0 auto; padding: 48px 32px 80px; }
+.topbar { display:flex; justify-content:space-between; padding-bottom:12px; border-bottom:1px solid var(--border); margin-bottom:36px; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted); }
+.topbar a { color: var(--text-dim); text-decoration: none; }
+.topbar a:hover { color: var(--gold); }
+.logo { font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; color: var(--gold); text-transform: none; letter-spacing: -0.01em; }
+h1 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 36px; letter-spacing: -0.015em; margin: 0 0 6px; }
+.subtitle { font-family: 'Fraunces', serif; font-style: italic; color: var(--text-dim); font-size: 17px; margin-bottom: 22px; }
+.toolbar { display:flex; gap: 10px; flex-wrap: wrap; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); margin-bottom: 22px; }
+.toolbar .lab { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin-right: 8px; align-self: center; }
+.toolbar a {
+  display: inline-block; padding: 7px 12px; font-size: 12px; font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim); border: 1px solid var(--border); text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.toolbar a:hover { color: var(--gold); border-color: var(--border-lit); background: var(--surface-2); }
+.toolbar a.active { color: var(--bg); background: var(--gold); border-color: var(--gold); }
+
+.graph-card { background: var(--surface); border: 1px solid var(--border); padding: 24px 26px; margin-bottom: 22px; }
+.graph-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 16px; font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; }
+.graph-meta b { color: var(--text-dim); }
+.prompt-block { background: rgba(0,0,0,0.30); border-left: 2px solid var(--gold); padding: 12px 16px;
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 15px; color: var(--text-dim); margin-bottom: 22px; }
+.legend-help { display: flex; gap: 24px; font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; margin-top: 16px; align-items: center; }
+.legend-help .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+.foot { margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-muted); letter-spacing: 0.14em; text-transform: uppercase; display: flex; justify-content: space-between; }
+.foot a { color: var(--text-dim); text-decoration: none; }
+</style>
+
+</head><body><div class="shell">
+<div class="topbar"><span class="logo">Sfumato</span><span>Attribution graph · AR mode · layers 6-15</span></div>
+<h1>Attribution graph: <span style="color:var(--gold);font-style:italic;">janet</span></h1>
+<div class="subtitle">Top-firing SAE features per (layer, token). Circle size = activation strength. Threads = same feature persisting across adjacent layers.</div>
+<div class="toolbar"><span class="lab">prompts</span>
+<a href="attr_janet.html" class="active">janet</a>
+<a href="attr_baker.html">baker</a>
+<a href="attr_apples.html">apples</a>
+<a href="attr_history.html">history</a>
+<a href="attr_science.html">science</a>
+<a href="attr_math_chain.html">math_chain</a>
+<a href="attr_counting.html">counting</a>
+<a href="attr_recipe.html">recipe</a>
+<a href="attr_cs_dijkstra.html">cs_dijkstra</a>
+<a href="attr_dialogue.html">dialogue</a>
+<a href="index.html" style="margin-left:auto; color:var(--gold);">↩ index</a>
+</div>
+<div class="graph-card">
+<div class="prompt-block">Question: Janet&#x27;s ducks lay 16 eggs per day. How much does she make daily?
+Answer:</div>
+<div class="graph-meta"><b>Hookpoint:</b> block.L.ar (post-residual) &nbsp;&nbsp;<b>SAE:</b> TopK k=64 · d_features=16384 &nbsp;&nbsp;<b>Layers shown:</b> L6, L7, L8, L9, L10, L11, L12, L13, L14, L15 &nbsp;&nbsp;<b>Cells:</b> top-4 features per token</div>
+<svg viewBox="0 0 1444 690" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;max-width:1444px;height:auto;">
+<rect width="1444" height="690" fill="#0a0e1a"/>
+<line x1="70" y1="50" x2="70" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="134" y1="50" x2="134" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="198" y1="50" x2="198" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="262" y1="50" x2="262" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="326" y1="50" x2="326" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="390" y1="50" x2="390" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="454" y1="50" x2="454" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="518" y1="50" x2="518" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="582" y1="50" x2="582" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="646" y1="50" x2="646" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="710" y1="50" x2="710" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="774" y1="50" x2="774" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="838" y1="50" x2="838" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="902" y1="50" x2="902" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="966" y1="50" x2="966" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="1030" y1="50" x2="1030" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="1094" y1="50" x2="1094" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="1158" y1="50" x2="1158" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="1222" y1="50" x2="1222" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="1286" y1="50" x2="1286" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="1350" y1="50" x2="1350" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<line x1="1414" y1="50" x2="1414" y2="630" stroke="#1a1f2e" stroke-width="1"/>
+<text x="102.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">Question</text>
+<text x="166.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">:</text>
+<text x="230.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">Janet</text>
+<text x="294.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">&#x27;s</text>
+<text x="358.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">ducks</text>
+<text x="422.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">lay</text>
+<text x="486.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">16</text>
+<text x="550.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">eggs</text>
+<text x="614.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">per</text>
+<text x="678.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">day</text>
+<text x="742.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">.</text>
+<text x="806.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">How</text>
+<text x="870.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">much</text>
+<text x="934.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">does</text>
+<text x="998.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">she</text>
+<text x="1062.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">make</text>
+<text x="1126.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">daily</text>
+<text x="1190.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">?</text>
+<text x="1254.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">↵</text>
+<text x="1318.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">Answer</text>
+<text x="1382.0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">:</text>
+<text x="56" y="92.0" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="12" fill="#9ca3af">L06</text>
+<text x="56" y="148.0" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="12" fill="#9ca3af">L07</text>
+<text x="56" y="204.0" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="12" fill="#9ca3af">L08</text>
+<text x="56" y="260.0" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="12" fill="#9ca3af">L09</text>
+<text x="56" y="316.0" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="12" fill="#9ca3af">L10</text>
+<text x="56" y="372.0" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="12" fill="#9ca3af">L11</text>
+<text x="56" y="428.0" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="12" fill="#9ca3af">L12</text>
+<text x="56" y="484.0" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="12" fill="#9ca3af">L13</text>
+<text x="56" y="540.0" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="12" fill="#9ca3af">L14</text>
+<text x="56" y="596.0" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="12" fill="#9ca3af">L15</text>
+<circle cx="82.8" cy="88.0" r="4.419274239607915" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 0 · #13795 · act 5.76</title></circle>
+<circle cx="95.6" cy="88.0" r="4.2694637987596105" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 0 · #15822 · act 5.18</title></circle>
+<circle cx="108.4" cy="88.0" r="4.1973396722846825" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 0 · #3324 · act 4.91</title></circle>
+<circle cx="121.2" cy="88.0" r="4.078073675409419" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 0 · #5117 · act 4.47</title></circle>
+<circle cx="146.8" cy="88.0" r="4.160470030694922" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 1 · #4769 · act 4.77</title></circle>
+<circle cx="159.6" cy="88.0" r="3.8985963423216896" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 1 · #4074 · act 3.85</title></circle>
+<circle cx="172.4" cy="88.0" r="3.869792260047804" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 1 · #2971 · act 3.75</title></circle>
+<circle cx="185.2" cy="88.0" r="3.6033194671435465" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 1 · #1061 · act 2.90</title></circle>
+<circle cx="210.8" cy="88.0" r="4.938901080050918" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 2 · #11407 · act 7.97</title></circle>
+<circle cx="223.6" cy="88.0" r="4.769712533872358" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 2 · #2971 · act 7.22</title></circle>
+<circle cx="236.4" cy="88.0" r="4.389813738845104" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 2 · #2102 · act 5.64</title></circle>
+<circle cx="249.2" cy="88.0" r="4.007824439962609" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 2 · #2716 · act 4.22</title></circle>
+<circle cx="274.8" cy="88.0" r="4.072514548261505" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 3 · #5472 · act 4.45</title></circle>
+<circle cx="287.6" cy="88.0" r="4.067249364807384" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 3 · #2971 · act 4.43</title></circle>
+<circle cx="300.4" cy="88.0" r="3.926999823439762" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 3 · #4518 · act 3.94</title></circle>
+<circle cx="313.2" cy="88.0" r="3.640961957149388" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 3 · #15279 · act 3.02</title></circle>
+<circle cx="338.8" cy="88.0" r="4.853962775757374" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 4 · #2971 · act 7.59</title></circle>
+<circle cx="351.6" cy="88.0" r="4.502952425086815" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 4 · #14503 · act 6.10</title></circle>
+<circle cx="364.4" cy="88.0" r="4.231036434907788" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 4 · #547 · act 5.03</title></circle>
+<circle cx="377.2" cy="88.0" r="4.075793959480462" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 4 · #2535 · act 4.46</title></circle>
+<circle cx="402.8" cy="88.0" r="5.797675031866821" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 5 · #14969 · act 12.21</title></circle>
+<circle cx="415.6" cy="88.0" r="4.671671903902881" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 5 · #5143 · act 6.80</title></circle>
+<circle cx="428.4" cy="88.0" r="4.509695911997787" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 5 · #2971 · act 6.12</title></circle>
+<circle cx="441.2" cy="88.0" r="3.75758961328847" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 5 · #1061 · act 3.38</title></circle>
+<circle cx="466.8" cy="88.0" r="4.3831643389492765" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 6 · #2971 · act 5.62</title></circle>
+<circle cx="479.6" cy="88.0" r="4.21370135951533" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 6 · #10954 · act 4.97</title></circle>
+<circle cx="492.4" cy="88.0" r="3.976078908150054" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 6 · #706 · act 4.11</title></circle>
+<circle cx="505.2" cy="88.0" r="3.9618874728612496" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 6 · #15628 · act 4.06</title></circle>
+<circle cx="530.8" cy="88.0" r="5.454244106971031" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 7 · #56 · act 10.43</title></circle>
+<circle cx="543.6" cy="88.0" r="4.576969795242545" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 7 · #2971 · act 6.40</title></circle>
+<circle cx="556.4" cy="88.0" r="4.305216411692903" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 7 · #14503 · act 5.31</title></circle>
+<circle cx="569.2" cy="88.0" r="3.9106666260251757" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 7 · #4293 · act 3.89</title></circle>
+<circle cx="594.8" cy="88.0" r="5.12962435895784" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 8 · #14619 · act 8.85</title></circle>
+<circle cx="607.6" cy="88.0" r="4.517738460277689" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 8 · #11950 · act 6.16</title></circle>
+<circle cx="620.4" cy="88.0" r="4.229450875122667" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 8 · #2971 · act 5.03</title></circle>
+<circle cx="633.2" cy="88.0" r="4.143467053935176" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 8 · #4602 · act 4.71</title></circle>
+<circle cx="658.8" cy="88.0" r="4.804812479216828" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 9 · #8415 · act 7.37</title></circle>
+<circle cx="671.6" cy="88.0" r="4.6737850282841" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 9 · #6418 · act 6.80</title></circle>
+<circle cx="684.4" cy="88.0" r="4.324345985223227" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 9 · #2971 · act 5.39</title></circle>
+<circle cx="697.2" cy="88.0" r="3.9312768366946824" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 9 · #4724 · act 3.96</title></circle>
+<circle cx="722.8" cy="88.0" r="3.699684619029804" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 10 · #4239 · act 3.20</title></circle>
+<circle cx="735.6" cy="88.0" r="3.4626810559949313" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 10 · #2721 · act 2.49</title></circle>
+<circle cx="748.4" cy="88.0" r="3.4301079326037263" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 10 · #7529 · act 2.40</title></circle>
+<circle cx="761.2" cy="88.0" r="3.3986930213799305" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 10 · #2971 · act 2.31</title></circle>
+<circle cx="786.8" cy="88.0" r="4.975181411408418" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 11 · #15510 · act 8.13</title></circle>
+<circle cx="799.6" cy="88.0" r="4.293872333693971" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 11 · #8156 · act 5.27</title></circle>
+<circle cx="812.4" cy="88.0" r="4.266012918904264" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 11 · #16120 · act 5.16</title></circle>
+<circle cx="825.2" cy="88.0" r="4.222347672184499" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 11 · #2932 · act 5.00</title></circle>
+<circle cx="850.8" cy="88.0" r="4.894367113318834" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 12 · #13567 · act 7.77</title></circle>
+<circle cx="863.6" cy="88.0" r="4.7510370638565895" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 12 · #8815 · act 7.14</title></circle>
+<circle cx="876.4" cy="88.0" r="4.1275142602539105" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 12 · #2971 · act 4.65</title></circle>
+<circle cx="889.2" cy="88.0" r="3.7879907489227387" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 12 · #13257 · act 3.48</title></circle>
+<circle cx="914.8" cy="88.0" r="4.554379832474281" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 13 · #1860 · act 6.31</title></circle>
+<circle cx="927.6" cy="88.0" r="4.028586546358824" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 13 · #2971 · act 4.29</title></circle>
+<circle cx="940.4" cy="88.0" r="3.9562526599638197" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 13 · #1291 · act 4.04</title></circle>
+<circle cx="953.2" cy="88.0" r="3.7146630593968215" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 13 · #16017 · act 3.24</title></circle>
+<circle cx="978.8" cy="88.0" r="4.096078691199187" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 14 · #2971 · act 4.54</title></circle>
+<circle cx="991.6" cy="88.0" r="3.923554509563635" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 14 · #15347 · act 3.93</title></circle>
+<circle cx="1004.4" cy="88.0" r="3.85096930871636" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 14 · #11538 · act 3.69</title></circle>
+<circle cx="1017.2" cy="88.0" r="3.8127379505046637" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 14 · #2590 · act 3.56</title></circle>
+<circle cx="1042.8" cy="88.0" r="5.0365813253628335" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 15 · #967 · act 8.41</title></circle>
+<circle cx="1055.6" cy="88.0" r="4.071217516324077" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 15 · #2971 · act 4.45</title></circle>
+<circle cx="1068.4" cy="88.0" r="4.049037183607158" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 15 · #14592 · act 4.37</title></circle>
+<circle cx="1081.2" cy="88.0" r="3.9144478917794463" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 15 · #586 · act 3.90</title></circle>
+<circle cx="1106.8" cy="88.0" r="4.963203857140995" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 16 · #11293 · act 8.08</title></circle>
+<circle cx="1119.6" cy="88.0" r="4.461843299445769" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 16 · #6669 · act 5.93</title></circle>
+<circle cx="1132.4" cy="88.0" r="4.227513612041791" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 16 · #2971 · act 5.02</title></circle>
+<circle cx="1145.2" cy="88.0" r="4.164865158132682" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 16 · #3474 · act 4.79</title></circle>
+<circle cx="1170.8" cy="88.0" r="4.553095199591613" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 17 · #4531 · act 6.30</title></circle>
+<circle cx="1183.6" cy="88.0" r="4.048568483776164" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 17 · #8413 · act 4.37</title></circle>
+<circle cx="1196.4" cy="88.0" r="3.5628845264397357" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 17 · #4135 · act 2.78</title></circle>
+<circle cx="1209.2" cy="88.0" r="3.5140290781193038" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 17 · #2971 · act 2.64</title></circle>
+<circle cx="1234.8" cy="88.0" r="3.452072498069988" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 18 · #2461 · act 2.46</title></circle>
+<circle cx="1247.6" cy="88.0" r="3.3177543092167108" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 18 · #8980 · act 2.09</title></circle>
+<circle cx="1260.4" cy="88.0" r="3.2786507411829477" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 18 · #6025 · act 1.99</title></circle>
+<circle cx="1273.2" cy="88.0" r="3.260508662884951" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 18 · #10247 · act 1.94</title></circle>
+<circle cx="1298.8" cy="88.0" r="4.526316923782158" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 19 · #3651 · act 6.19</title></circle>
+<circle cx="1311.6" cy="88.0" r="3.8539960079999647" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 19 · #4901 · act 3.70</title></circle>
+<circle cx="1324.4" cy="88.0" r="3.7831642398213425" fill="#3b82f6" fill-opacity="0.85" stroke="#3b82f6" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 19 · #2971 · act 3.46</title></circle>
+<circle cx="1337.2" cy="88.0" r="3.735088635596534" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 19 · #15820 · act 3.31</title></circle>
+<circle cx="1362.8" cy="88.0" r="4.036514797781088" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 20 · #4074 · act 4.32</title></circle>
+<circle cx="1375.6" cy="88.0" r="3.9667595507223314" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 20 · #4769 · act 4.08</title></circle>
+<circle cx="1388.4" cy="88.0" r="3.4632984052358218" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 20 · #5736 · act 2.49</title></circle>
+<circle cx="1401.2" cy="88.0" r="3.3093106539592623" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L6 · pos 20 · #4972 · act 2.07</title></circle>
+<circle cx="82.8" cy="144.0" r="4.498773797879789" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 0 · #14856 · act 6.08</title></circle>
+<circle cx="95.6" cy="144.0" r="4.496576469927423" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 0 · #8386 · act 6.07</title></circle>
+<circle cx="108.4" cy="144.0" r="4.117684938676307" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 0 · #12973 · act 4.61</title></circle>
+<circle cx="121.2" cy="144.0" r="4.113225841997158" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 0 · #8089 · act 4.60</title></circle>
+<circle cx="146.8" cy="144.0" r="4.0972152932699615" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 1 · #11971 · act 4.54</title></circle>
+<circle cx="159.6" cy="144.0" r="4.0406927324675745" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 1 · #679 · act 4.34</title></circle>
+<circle cx="172.4" cy="144.0" r="4.008219862728141" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 1 · #4842 · act 4.22</title></circle>
+<circle cx="185.2" cy="144.0" r="3.783762507631925" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 1 · #2834 · act 3.47</title></circle>
+<circle cx="210.8" cy="144.0" r="5.079678656076955" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 2 · #3945 · act 8.61</title></circle>
+<circle cx="223.6" cy="144.0" r="4.848912381063377" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 2 · #4842 · act 7.56</title></circle>
+<circle cx="236.4" cy="144.0" r="4.600260910326304" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 2 · #9994 · act 6.50</title></circle>
+<circle cx="249.2" cy="144.0" r="4.49593951328933" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 2 · #11971 · act 6.07</title></circle>
+<circle cx="274.8" cy="144.0" r="4.223541891323629" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 3 · #4842 · act 5.00</title></circle>
+<circle cx="287.6" cy="144.0" r="4.120754918796475" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 3 · #11971 · act 4.62</title></circle>
+<circle cx="300.4" cy="144.0" r="4.097135716733588" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 3 · #10413 · act 4.54</title></circle>
+<circle cx="313.2" cy="144.0" r="3.9979167452413984" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 3 · #13260 · act 4.19</title></circle>
+<circle cx="338.8" cy="144.0" r="5.058772455930784" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 4 · #6646 · act 8.51</title></circle>
+<circle cx="351.6" cy="144.0" r="4.908229814942597" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 4 · #4842 · act 7.83</title></circle>
+<circle cx="364.4" cy="144.0" r="4.539916554751962" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 4 · #11971 · act 6.25</title></circle>
+<circle cx="377.2" cy="144.0" r="4.537737100571624" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 4 · #9130 · act 6.24</title></circle>
+<circle cx="402.8" cy="144.0" r="5.703849759774732" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 5 · #6763 · act 11.71</title></circle>
+<circle cx="415.6" cy="144.0" r="4.544563049805538" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 5 · #4842 · act 6.27</title></circle>
+<circle cx="428.4" cy="144.0" r="4.320205131988031" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 5 · #11971 · act 5.37</title></circle>
+<circle cx="441.2" cy="144.0" r="4.21894576976532" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 5 · #4538 · act 4.99</title></circle>
+<circle cx="466.8" cy="144.0" r="4.5642362667237135" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 6 · #4309 · act 6.35</title></circle>
+<circle cx="479.6" cy="144.0" r="4.388302884772161" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 6 · #4842 · act 5.64</title></circle>
+<circle cx="492.4" cy="144.0" r="4.235562382060932" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 6 · #11971 · act 5.05</title></circle>
+<circle cx="505.2" cy="144.0" r="4.05977381951475" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 6 · #14276 · act 4.40</title></circle>
+<circle cx="530.8" cy="144.0" r="4.993585316812615" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 7 · #2850 · act 8.21</title></circle>
+<circle cx="543.6" cy="144.0" r="4.639888168846971" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 7 · #4842 · act 6.66</title></circle>
+<circle cx="556.4" cy="144.0" r="4.4408193863201175" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 7 · #9130 · act 5.85</title></circle>
+<circle cx="569.2" cy="144.0" r="4.355573174248595" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 7 · #11971 · act 5.51</title></circle>
+<circle cx="594.8" cy="144.0" r="5.077558601533891" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 8 · #14574 · act 8.60</title></circle>
+<circle cx="607.6" cy="144.0" r="5.001353023494922" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 8 · #15766 · act 8.25</title></circle>
+<circle cx="620.4" cy="144.0" r="4.602446748659733" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 8 · #8314 · act 6.50</title></circle>
+<circle cx="633.2" cy="144.0" r="4.2929794235795455" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 8 · #4842 · act 5.27</title></circle>
+<circle cx="658.8" cy="144.0" r="4.6271267753342" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 9 · #1190 · act 6.61</title></circle>
+<circle cx="671.6" cy="144.0" r="4.391480550421277" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 9 · #4842 · act 5.65</title></circle>
+<circle cx="684.4" cy="144.0" r="4.352728374076701" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 9 · #15471 · act 5.50</title></circle>
+<circle cx="697.2" cy="144.0" r="4.217210524952131" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 9 · #11971 · act 4.98</title></circle>
+<circle cx="722.8" cy="144.0" r="3.8685567989585645" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 10 · #11971 · act 3.74</title></circle>
+<circle cx="735.6" cy="144.0" r="3.5073289452449234" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 10 · #11002 · act 2.62</title></circle>
+<circle cx="748.4" cy="144.0" r="3.4464897435543813" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 10 · #13835 · act 2.44</title></circle>
+<circle cx="761.2" cy="144.0" r="3.4297045466016427" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 10 · #4842 · act 2.40</title></circle>
+<circle cx="786.8" cy="144.0" r="4.819974762973741" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 11 · #7044 · act 7.44</title></circle>
+<circle cx="799.6" cy="144.0" r="4.4344642199498425" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 11 · #15287 · act 5.82</title></circle>
+<circle cx="812.4" cy="144.0" r="4.14053905150978" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 11 · #4842 · act 4.70</title></circle>
+<circle cx="825.2" cy="144.0" r="4.12461342658689" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 11 · #11971 · act 4.64</title></circle>
+<circle cx="850.8" cy="144.0" r="5.0252117614507625" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 12 · #4584 · act 8.36</title></circle>
+<circle cx="863.6" cy="144.0" r="5.019887513211936" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 12 · #15561 · act 8.33</title></circle>
+<circle cx="876.4" cy="144.0" r="4.175013328239304" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 12 · #11971 · act 4.82</title></circle>
+<circle cx="889.2" cy="144.0" r="4.153358877071781" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 12 · #4842 · act 4.74</title></circle>
+<circle cx="914.8" cy="144.0" r="4.548638070292218" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 13 · #3412 · act 6.28</title></circle>
+<circle cx="927.6" cy="144.0" r="4.157489849083941" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 13 · #1525 · act 4.76</title></circle>
+<circle cx="940.4" cy="144.0" r="4.143230462506331" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 13 · #9871 · act 4.71</title></circle>
+<circle cx="953.2" cy="144.0" r="4.107197956094932" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 13 · #4842 · act 4.58</title></circle>
+<circle cx="978.8" cy="144.0" r="4.229012388536214" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 14 · #11971 · act 5.02</title></circle>
+<circle cx="991.6" cy="144.0" r="4.114199574088657" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 14 · #4842 · act 4.60</title></circle>
+<circle cx="1004.4" cy="144.0" r="4.024619875859191" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 14 · #14985 · act 4.28</title></circle>
+<circle cx="1017.2" cy="144.0" r="3.854083904535745" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 14 · #8886 · act 3.70</title></circle>
+<circle cx="1042.8" cy="144.0" r="5.146333247109584" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 15 · #12434 · act 8.92</title></circle>
+<circle cx="1055.6" cy="144.0" r="4.2494991136282625" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 15 · #11971 · act 5.10</title></circle>
+<circle cx="1068.4" cy="144.0" r="4.0640068697902" fill="#ec4899" fill-opacity="0.85" stroke="#ec4899" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 15 · #4842 · act 4.42</title></circle>
+<circle cx="1081.2" cy="144.0" r="4.025210789032259" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 15 · #1088 · act 4.28</title></circle>
+<circle cx="1106.8" cy="144.0" r="5.086469666214572" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 16 · #7376 · act 8.64</title></circle>
+<circle cx="1119.6" cy="144.0" r="4.389556743498513" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 16 · #11971 · act 5.64</title></circle>
+<circle cx="1132.4" cy="144.0" r="4.33610421868104" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 16 · #3134 · act 5.43</title></circle>
+<circle cx="1145.2" cy="144.0" r="4.33157602099365" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 16 · #711 · act 5.42</title></circle>
+<circle cx="1170.8" cy="144.0" r="4.5990203116665285" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 17 · #8895 · act 6.49</title></circle>
+<circle cx="1183.6" cy="144.0" r="4.209669450349397" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 17 · #10780 · act 4.95</title></circle>
+<circle cx="1196.4" cy="144.0" r="4.006534260483304" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 17 · #11971 · act 4.22</title></circle>
+<circle cx="1209.2" cy="144.0" r="3.8786145022817275" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 17 · #14956 · act 3.78</title></circle>
+<circle cx="1234.8" cy="144.0" r="4.036205688028746" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 18 · #11971 · act 4.32</title></circle>
+<circle cx="1247.6" cy="144.0" r="3.6793100860382353" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 18 · #1177 · act 3.13</title></circle>
+<circle cx="1260.4" cy="144.0" r="3.4472647994993153" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 18 · #10236 · act 2.45</title></circle>
+<circle cx="1273.2" cy="144.0" r="3.4168840131145473" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 18 · #5504 · act 2.36</title></circle>
+<circle cx="1298.8" cy="144.0" r="4.171943283654326" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 19 · #11971 · act 4.81</title></circle>
+<circle cx="1311.6" cy="144.0" r="4.107470044184872" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 19 · #8229 · act 4.58</title></circle>
+<circle cx="1324.4" cy="144.0" r="3.8121164979837676" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 19 · #13074 · act 3.56</title></circle>
+<circle cx="1337.2" cy="144.0" r="3.7684171070527652" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 19 · #10990 · act 3.42</title></circle>
+<circle cx="1362.8" cy="144.0" r="4.045298887674141" fill="#10b981" fill-opacity="0.85" stroke="#10b981" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 20 · #11971 · act 4.35</title></circle>
+<circle cx="1375.6" cy="144.0" r="3.6623653463258234" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 20 · #10039 · act 3.08</title></circle>
+<circle cx="1388.4" cy="144.0" r="3.6394021663566107" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 20 · #2834 · act 3.01</title></circle>
+<circle cx="1401.2" cy="144.0" r="3.5960826160629917" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L7 · pos 20 · #679 · act 2.88</title></circle>
+<circle cx="82.8" cy="200.0" r="6.059818965309094" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 0 · #12653 · act 13.65</title></circle>
+<circle cx="95.6" cy="200.0" r="4.358440744074015" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 0 · #15220 · act 5.52</title></circle>
+<circle cx="108.4" cy="200.0" r="4.327961148131928" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 0 · #1484 · act 5.40</title></circle>
+<circle cx="121.2" cy="200.0" r="4.315185514789884" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 0 · #11179 · act 5.35</title></circle>
+<circle cx="146.8" cy="200.0" r="4.575288903604027" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 1 · #16326 · act 6.39</title></circle>
+<circle cx="159.6" cy="200.0" r="3.833468133927028" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 1 · #16098 · act 3.63</title></circle>
+<circle cx="172.4" cy="200.0" r="3.6885551395397305" fill="#84cc16" fill-opacity="0.85" stroke="#84cc16" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 1 · #5960 · act 3.16</title></circle>
+<circle cx="185.2" cy="200.0" r="3.6152324596849663" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 1 · #9588 · act 2.94</title></circle>
+<circle cx="210.8" cy="200.0" r="5.176255609464073" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 2 · #13492 · act 9.07</title></circle>
+<circle cx="223.6" cy="200.0" r="4.671580003655739" fill="#84cc16" fill-opacity="0.85" stroke="#84cc16" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 2 · #5960 · act 6.80</title></circle>
+<circle cx="236.4" cy="200.0" r="4.539129544205954" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 2 · #1526 · act 6.24</title></circle>
+<circle cx="249.2" cy="200.0" r="4.169093692750582" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 2 · #10859 · act 4.80</title></circle>
+<circle cx="274.8" cy="200.0" r="4.571250506753937" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 3 · #8438 · act 6.38</title></circle>
+<circle cx="287.6" cy="200.0" r="4.19418069289747" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 3 · #14426 · act 4.89</title></circle>
+<circle cx="300.4" cy="200.0" r="4.0500116786041955" fill="#84cc16" fill-opacity="0.85" stroke="#84cc16" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 3 · #5960 · act 4.37</title></circle>
+<circle cx="313.2" cy="200.0" r="3.654479382333355" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 3 · #1032 · act 3.06</title></circle>
+<circle cx="338.8" cy="200.0" r="4.745045317473732" fill="#84cc16" fill-opacity="0.85" stroke="#84cc16" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 4 · #5960 · act 7.11</title></circle>
+<circle cx="351.6" cy="200.0" r="4.683339622664094" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 4 · #10105 · act 6.84</title></circle>
+<circle cx="364.4" cy="200.0" r="4.53099194834944" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 4 · #11392 · act 6.21</title></circle>
+<circle cx="377.2" cy="200.0" r="3.977569672795615" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 4 · #6709 · act 4.12</title></circle>
+<circle cx="402.8" cy="200.0" r="5.848959452577543" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 5 · #7063 · act 12.49</title></circle>
+<circle cx="415.6" cy="200.0" r="4.463707439414646" fill="#84cc16" fill-opacity="0.85" stroke="#84cc16" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 5 · #5960 · act 5.94</title></circle>
+<circle cx="428.4" cy="200.0" r="3.9297514297851803" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 5 · #4608 · act 3.95</title></circle>
+<circle cx="441.2" cy="200.0" r="3.822193308760047" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 5 · #13284 · act 3.59</title></circle>
+<circle cx="466.8" cy="200.0" r="4.268088283064532" fill="#84cc16" fill-opacity="0.85" stroke="#84cc16" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 6 · #5960 · act 5.17</title></circle>
+<circle cx="479.6" cy="200.0" r="4.245796845374308" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 6 · #5557 · act 5.09</title></circle>
+<circle cx="492.4" cy="200.0" r="4.179401243348035" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 6 · #4968 · act 4.84</title></circle>
+<circle cx="505.2" cy="200.0" r="4.099770190219236" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 6 · #8014 · act 4.55</title></circle>
+<circle cx="530.8" cy="200.0" r="5.690507895168884" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 7 · #10741 · act 11.64</title></circle>
+<circle cx="543.6" cy="200.0" r="4.518616030999734" fill="#84cc16" fill-opacity="0.85" stroke="#84cc16" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 7 · #5960 · act 6.16</title></circle>
+<circle cx="556.4" cy="200.0" r="4.3233176842119665" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 7 · #10105 · act 5.38</title></circle>
+<circle cx="569.2" cy="200.0" r="3.7025938116562767" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 7 · #7997 · act 3.21</title></circle>
+<circle cx="594.8" cy="200.0" r="4.754118190160401" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 8 · #4175 · act 7.15</title></circle>
+<circle cx="607.6" cy="200.0" r="4.640203252574393" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 8 · #489 · act 6.66</title></circle>
+<circle cx="620.4" cy="200.0" r="4.362102472549832" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 8 · #3439 · act 5.53</title></circle>
+<circle cx="633.2" cy="200.0" r="4.161946918052909" fill="#84cc16" fill-opacity="0.85" stroke="#84cc16" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 8 · #5960 · act 4.78</title></circle>
+<circle cx="658.8" cy="200.0" r="4.853412046695145" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 9 · #2401 · act 7.58</title></circle>
+<circle cx="671.6" cy="200.0" r="4.29512687315696" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 9 · #4469 · act 5.28</title></circle>
+<circle cx="684.4" cy="200.0" r="4.285902538113426" fill="#84cc16" fill-opacity="0.85" stroke="#84cc16" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 9 · #5960 · act 5.24</title></circle>
+<circle cx="697.2" cy="200.0" r="4.19269110985193" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 9 · #4224 · act 4.89</title></circle>
+<circle cx="722.8" cy="200.0" r="3.5032477123778016" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 10 · #1171 · act 2.61</title></circle>
+<circle cx="735.6" cy="200.0" r="3.4998976177641126" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 10 · #10640 · act 2.60</title></circle>
+<circle cx="748.4" cy="200.0" r="3.496060276652069" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 10 · #15333 · act 2.59</title></circle>
+<circle cx="761.2" cy="200.0" r="3.358885934740634" fill="#84cc16" fill-opacity="0.85" stroke="#84cc16" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 10 · #5960 · act 2.20</title></circle>
+<circle cx="786.8" cy="200.0" r="5.388600089619492" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 11 · #7397 · act 10.10</title></circle>
+<circle cx="799.6" cy="200.0" r="4.255550662946288" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 11 · #10851 · act 5.12</title></circle>
+<circle cx="812.4" cy="200.0" r="4.085377626863609" fill="#84cc16" fill-opacity="0.85" stroke="#84cc16" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 11 · #5960 · act 4.50</title></circle>
+<circle cx="825.2" cy="200.0" r="4.068953309219664" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 11 · #10412 · act 4.44</title></circle>
+<circle cx="850.8" cy="200.0" r="5.513770029063924" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 12 · #9996 · act 10.73</title></circle>
+<circle cx="863.6" cy="200.0" r="4.5488884364007305" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 12 · #8451 · act 6.28</title></circle>
+<circle cx="876.4" cy="200.0" r="4.489217320426178" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 12 · #6960 · act 6.04</title></circle>
+<circle cx="889.2" cy="200.0" r="4.151162160248702" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 12 · #7853 · act 4.74</title></circle>
+<circle cx="914.8" cy="200.0" r="5.103781118460268" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 13 · #6331 · act 8.72</title></circle>
+<circle cx="927.6" cy="200.0" r="4.305968679744929" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 13 · #2803 · act 5.32</title></circle>
+<circle cx="940.4" cy="200.0" r="4.175935390592378" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 13 · #12690 · act 4.83</title></circle>
+<circle cx="953.2" cy="200.0" r="4.079931471464337" fill="#84cc16" fill-opacity="0.85" stroke="#84cc16" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 13 · #5960 · act 4.48</title></circle>
+<circle cx="978.8" cy="200.0" r="4.183360573614413" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 14 · #8416 · act 4.85</title></circle>
+<circle cx="991.6" cy="200.0" r="4.162806258195115" fill="#84cc16" fill-opacity="0.85" stroke="#84cc16" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 14 · #5960 · act 4.78</title></circle>
+<circle cx="1004.4" cy="200.0" r="3.744883797656559" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 14 · #9675 · act 3.34</title></circle>
+<circle cx="1017.2" cy="200.0" r="3.7338015482378006" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 14 · #7121 · act 3.31</title></circle>
+<circle cx="1042.8" cy="200.0" r="4.973955654754305" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 15 · #13875 · act 8.12</title></circle>
+<circle cx="1055.6" cy="200.0" r="4.039967206484642" fill="#84cc16" fill-opacity="0.85" stroke="#84cc16" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 15 · #5960 · act 4.33</title></circle>
+<circle cx="1068.4" cy="200.0" r="3.978086219381387" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 15 · #8416 · act 4.12</title></circle>
+<circle cx="1081.2" cy="200.0" r="3.848716833168997" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 15 · #15393 · act 3.68</title></circle>
+<circle cx="1106.8" cy="200.0" r="5.035453560288266" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 16 · #9434 · act 8.41</title></circle>
+<circle cx="1119.6" cy="200.0" r="4.881302286318582" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 16 · #1799 · act 7.71</title></circle>
+<circle cx="1132.4" cy="200.0" r="4.312864748213123" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 16 · #7598 · act 5.34</title></circle>
+<circle cx="1145.2" cy="200.0" r="4.1457851459679675" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 16 · #14379 · act 4.72</title></circle>
+<circle cx="1170.8" cy="200.0" r="4.559979103461145" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 17 · #7357 · act 6.33</title></circle>
+<circle cx="1183.6" cy="200.0" r="4.123748927241225" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 17 · #6202 · act 4.64</title></circle>
+<circle cx="1196.4" cy="200.0" r="4.044735512018592" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 17 · #9686 · act 4.35</title></circle>
+<circle cx="1209.2" cy="200.0" r="4.030253165166122" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 17 · #8416 · act 4.30</title></circle>
+<circle cx="1234.8" cy="200.0" r="3.7369969410256147" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 18 · #12662 · act 3.32</title></circle>
+<circle cx="1247.6" cy="200.0" r="3.4889866944706824" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 18 · #8416 · act 2.56</title></circle>
+<circle cx="1260.4" cy="200.0" r="3.431242518251332" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 18 · #15526 · act 2.40</title></circle>
+<circle cx="1273.2" cy="200.0" r="3.3741627550544457" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 18 · #2965 · act 2.24</title></circle>
+<circle cx="1298.8" cy="200.0" r="4.64433149303656" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 19 · #9574 · act 6.68</title></circle>
+<circle cx="1311.6" cy="200.0" r="4.33113540698173" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 19 · #563 · act 5.41</title></circle>
+<circle cx="1324.4" cy="200.0" r="3.920232089449085" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 19 · #14900 · act 3.92</title></circle>
+<circle cx="1337.2" cy="200.0" r="3.683284464557044" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 19 · #15519 · act 3.15</title></circle>
+<circle cx="1362.8" cy="200.0" r="4.179308605461239" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 20 · #16326 · act 4.84</title></circle>
+<circle cx="1375.6" cy="200.0" r="3.638826523215271" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 20 · #16098 · act 3.01</title></circle>
+<circle cx="1388.4" cy="200.0" r="3.450001861328565" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 20 · #1535 · act 2.45</title></circle>
+<circle cx="1401.2" cy="200.0" r="3.390981684392883" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L8 · pos 20 · #9588 · act 2.29</title></circle>
+<circle cx="82.8" cy="256.0" r="7.40329294569636" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 0 · #10163 · act 21.98</title></circle>
+<circle cx="95.6" cy="256.0" r="7.361021729886597" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 0 · #6055 · act 21.69</title></circle>
+<circle cx="108.4" cy="256.0" r="7.337283436437572" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 0 · #9947 · act 21.53</title></circle>
+<circle cx="121.2" cy="256.0" r="7.101153790867613" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 0 · #1914 · act 19.97</title></circle>
+<circle cx="146.8" cy="256.0" r="4.271876820782595" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 1 · #14951 · act 5.19</title></circle>
+<circle cx="159.6" cy="256.0" r="4.155439365110205" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 1 · #6046 · act 4.75</title></circle>
+<circle cx="172.4" cy="256.0" r="3.940396113217915" fill="#06b6d4" fill-opacity="0.85" stroke="#06b6d4" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 1 · #5902 · act 3.99</title></circle>
+<circle cx="185.2" cy="256.0" r="3.9323526594303155" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 1 · #2260 · act 3.96</title></circle>
+<circle cx="210.8" cy="256.0" r="5.247014241474172" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 2 · #9850 · act 9.41</title></circle>
+<circle cx="223.6" cy="256.0" r="4.949447896550984" fill="#06b6d4" fill-opacity="0.85" stroke="#06b6d4" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 2 · #5902 · act 8.01</title></circle>
+<circle cx="236.4" cy="256.0" r="4.682231579267222" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 2 · #4903 · act 6.84</title></circle>
+<circle cx="249.2" cy="256.0" r="4.405410792642825" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 2 · #6046 · act 5.70</title></circle>
+<circle cx="274.8" cy="256.0" r="4.171629210673112" fill="#06b6d4" fill-opacity="0.85" stroke="#06b6d4" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 3 · #5902 · act 4.81</title></circle>
+<circle cx="287.6" cy="256.0" r="4.030725354332215" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 3 · #8579 · act 4.30</title></circle>
+<circle cx="300.4" cy="256.0" r="4.008769639991666" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 3 · #6046 · act 4.22</title></circle>
+<circle cx="313.2" cy="256.0" r="3.8905400200976867" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 3 · #15281 · act 3.82</title></circle>
+<circle cx="338.8" cy="256.0" r="4.944168306089849" fill="#06b6d4" fill-opacity="0.85" stroke="#06b6d4" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 4 · #5902 · act 7.99</title></circle>
+<circle cx="351.6" cy="256.0" r="4.619083716689772" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 4 · #13296 · act 6.57</title></circle>
+<circle cx="364.4" cy="256.0" r="4.5561708993227406" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 4 · #14955 · act 6.31</title></circle>
+<circle cx="377.2" cy="256.0" r="4.493865122290229" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 4 · #6046 · act 6.06</title></circle>
+<circle cx="402.8" cy="256.0" r="5.772801551690193" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 5 · #7531 · act 12.08</title></circle>
+<circle cx="415.6" cy="256.0" r="4.581839735475309" fill="#06b6d4" fill-opacity="0.85" stroke="#06b6d4" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 5 · #5902 · act 6.42</title></circle>
+<circle cx="428.4" cy="256.0" r="4.528166502346683" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 5 · #6046 · act 6.20</title></circle>
+<circle cx="441.2" cy="256.0" r="4.509698374727835" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 5 · #9102 · act 6.12</title></circle>
+<circle cx="466.8" cy="256.0" r="4.478791551936375" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 6 · #6046 · act 6.00</title></circle>
+<circle cx="479.6" cy="256.0" r="4.335843667916583" fill="#06b6d4" fill-opacity="0.85" stroke="#06b6d4" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 6 · #5902 · act 5.43</title></circle>
+<circle cx="492.4" cy="256.0" r="4.30676296274337" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 6 · #15836 · act 5.32</title></circle>
+<circle cx="505.2" cy="256.0" r="4.25688545049327" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 6 · #5466 · act 5.13</title></circle>
+<circle cx="530.8" cy="256.0" r="5.165536887887052" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 7 · #1448 · act 9.02</title></circle>
+<circle cx="543.6" cy="256.0" r="4.614099207060544" fill="#06b6d4" fill-opacity="0.85" stroke="#06b6d4" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 7 · #5902 · act 6.55</title></circle>
+<circle cx="556.4" cy="256.0" r="4.609392886926488" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 7 · #9428 · act 6.53</title></circle>
+<circle cx="569.2" cy="256.0" r="4.448709211846036" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 7 · #6046 · act 5.88</title></circle>
+<circle cx="594.8" cy="256.0" r="5.135879481083215" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 8 · #816 · act 8.88</title></circle>
+<circle cx="607.6" cy="256.0" r="4.584188225219137" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 8 · #14634 · act 6.43</title></circle>
+<circle cx="620.4" cy="256.0" r="4.330404459003239" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 8 · #6046 · act 5.41</title></circle>
+<circle cx="633.2" cy="256.0" r="4.215629208444023" fill="#06b6d4" fill-opacity="0.85" stroke="#06b6d4" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 8 · #5902 · act 4.97</title></circle>
+<circle cx="658.8" cy="256.0" r="5.006025188123388" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 9 · #6341 · act 8.27</title></circle>
+<circle cx="671.6" cy="256.0" r="4.3745544766652715" fill="#06b6d4" fill-opacity="0.85" stroke="#06b6d4" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 9 · #5902 · act 5.58</title></circle>
+<circle cx="684.4" cy="256.0" r="4.370144816914383" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 9 · #3262 · act 5.57</title></circle>
+<circle cx="697.2" cy="256.0" r="4.282207499394003" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 9 · #6046 · act 5.23</title></circle>
+<circle cx="722.8" cy="256.0" r="4.467011462429049" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 10 · #2352 · act 5.95</title></circle>
+<circle cx="735.6" cy="256.0" r="3.9443485171506563" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 10 · #3368 · act 4.00</title></circle>
+<circle cx="748.4" cy="256.0" r="3.810836357766939" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 10 · #6046 · act 3.55</title></circle>
+<circle cx="761.2" cy="256.0" r="3.665814634183509" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 10 · #1914 · act 3.09</title></circle>
+<circle cx="786.8" cy="256.0" r="5.050092594676919" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 11 · #14100 · act 8.47</title></circle>
+<circle cx="799.6" cy="256.0" r="4.979638668950686" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 11 · #9214 · act 8.15</title></circle>
+<circle cx="812.4" cy="256.0" r="4.341563211393789" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 11 · #6046 · act 5.45</title></circle>
+<circle cx="825.2" cy="256.0" r="4.136771798301047" fill="#06b6d4" fill-opacity="0.85" stroke="#06b6d4" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 11 · #5902 · act 4.68</title></circle>
+<circle cx="850.8" cy="256.0" r="4.994467128140112" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 12 · #10992 · act 8.22</title></circle>
+<circle cx="863.6" cy="256.0" r="4.982017526892097" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 12 · #11283 · act 8.16</title></circle>
+<circle cx="876.4" cy="256.0" r="4.762100982611647" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 12 · #14100 · act 7.18</title></circle>
+<circle cx="889.2" cy="256.0" r="4.534708021997133" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 12 · #9114 · act 6.22</title></circle>
+<circle cx="914.8" cy="256.0" r="4.817425980933914" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 13 · #9422 · act 7.42</title></circle>
+<circle cx="927.6" cy="256.0" r="4.555861343398389" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 13 · #3928 · act 6.31</title></circle>
+<circle cx="940.4" cy="256.0" r="4.416859559267216" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 13 · #12858 · act 5.75</title></circle>
+<circle cx="953.2" cy="256.0" r="4.072285777978907" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 13 · #6046 · act 4.45</title></circle>
+<circle cx="978.8" cy="256.0" r="4.155832227591389" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 14 · #6046 · act 4.75</title></circle>
+<circle cx="991.6" cy="256.0" r="4.1369552141504915" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 14 · #3789 · act 4.68</title></circle>
+<circle cx="1004.4" cy="256.0" r="4.111575271377877" fill="#06b6d4" fill-opacity="0.85" stroke="#06b6d4" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 14 · #5902 · act 4.59</title></circle>
+<circle cx="1017.2" cy="256.0" r="3.926944858306104" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 14 · #1625 · act 3.94</title></circle>
+<circle cx="1042.8" cy="256.0" r="4.770160877713666" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 15 · #245 · act 7.22</title></circle>
+<circle cx="1055.6" cy="256.0" r="4.115995033230039" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 15 · #6046 · act 4.61</title></circle>
+<circle cx="1068.4" cy="256.0" r="4.039430322305927" fill="#06b6d4" fill-opacity="0.85" stroke="#06b6d4" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 15 · #5902 · act 4.33</title></circle>
+<circle cx="1081.2" cy="256.0" r="4.009026875722215" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 15 · #10283 · act 4.23</title></circle>
+<circle cx="1106.8" cy="256.0" r="5.279601365618834" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 16 · #5579 · act 9.56</title></circle>
+<circle cx="1119.6" cy="256.0" r="4.338560415319885" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 16 · #15375 · act 5.44</title></circle>
+<circle cx="1132.4" cy="256.0" r="4.270873106969566" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 16 · #6046 · act 5.18</title></circle>
+<circle cx="1145.2" cy="256.0" r="4.133627031261554" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 16 · #33 · act 4.67</title></circle>
+<circle cx="1170.8" cy="256.0" r="4.763890980573455" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 17 · #12221 · act 7.19</title></circle>
+<circle cx="1183.6" cy="256.0" r="4.585135087439155" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 17 · #14553 · act 6.43</title></circle>
+<circle cx="1196.4" cy="256.0" r="4.530206120938461" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 17 · #11595 · act 6.21</title></circle>
+<circle cx="1209.2" cy="256.0" r="3.9481524265856476" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 17 · #6046 · act 4.01</title></circle>
+<circle cx="1234.8" cy="256.0" r="4.193562285417027" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 18 · #7019 · act 4.89</title></circle>
+<circle cx="1247.6" cy="256.0" r="3.9166390155780717" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 18 · #6046 · act 3.91</title></circle>
+<circle cx="1260.4" cy="256.0" r="3.7006337159334493" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 18 · #12443 · act 3.20</title></circle>
+<circle cx="1273.2" cy="256.0" r="3.569412179083218" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 18 · #6387 · act 2.80</title></circle>
+<circle cx="1298.8" cy="256.0" r="4.741772882023052" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 19 · #7310 · act 7.10</title></circle>
+<circle cx="1311.6" cy="256.0" r="4.141029040808139" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 19 · #6343 · act 4.70</title></circle>
+<circle cx="1324.4" cy="256.0" r="4.067876161194651" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 19 · #6046 · act 4.43</title></circle>
+<circle cx="1337.2" cy="256.0" r="3.849110905830913" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 19 · #907 · act 3.68</title></circle>
+<circle cx="1362.8" cy="256.0" r="4.117424759167919" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 20 · #14951 · act 4.61</title></circle>
+<circle cx="1375.6" cy="256.0" r="3.9291675254618346" fill="#a855f7" fill-opacity="0.85" stroke="#a855f7" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 20 · #6046 · act 3.95</title></circle>
+<circle cx="1388.4" cy="256.0" r="3.609182573653979" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 20 · #3154 · act 2.92</title></circle>
+<circle cx="1401.2" cy="256.0" r="3.488929806913193" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L9 · pos 20 · #11465 · act 2.56</title></circle>
+<circle cx="82.8" cy="312.0" r="9.174971219503027" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 0 · #9845 · act 35.26</title></circle>
+<circle cx="95.6" cy="312.0" r="8.938776478456084" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 0 · #2456 · act 33.35</title></circle>
+<circle cx="108.4" cy="312.0" r="8.906176661924379" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 0 · #3999 · act 33.09</title></circle>
+<circle cx="121.2" cy="312.0" r="8.902531188265339" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 0 · #703 · act 33.06</title></circle>
+<circle cx="146.8" cy="312.0" r="3.947911381987865" fill="#8b5cf6" fill-opacity="0.85" stroke="#8b5cf6" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 1 · #7919 · act 4.01</title></circle>
+<circle cx="159.6" cy="312.0" r="3.943458476684188" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 1 · #6396 · act 4.00</title></circle>
+<circle cx="172.4" cy="312.0" r="3.7698957703272002" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 1 · #15688 · act 3.42</title></circle>
+<circle cx="185.2" cy="312.0" r="3.755119238976004" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 1 · #8956 · act 3.37</title></circle>
+<circle cx="210.8" cy="312.0" r="4.873216607716223" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 2 · #3438 · act 7.67</title></circle>
+<circle cx="223.6" cy="312.0" r="4.703448381325529" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 2 · #9490 · act 6.93</title></circle>
+<circle cx="236.4" cy="312.0" r="4.686726473215633" fill="#8b5cf6" fill-opacity="0.85" stroke="#8b5cf6" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 2 · #7919 · act 6.86</title></circle>
+<circle cx="249.2" cy="312.0" r="4.110226234829606" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 2 · #750 · act 4.59</title></circle>
+<circle cx="274.8" cy="312.0" r="4.1378115815826" fill="#8b5cf6" fill-opacity="0.85" stroke="#8b5cf6" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 3 · #7919 · act 4.69</title></circle>
+<circle cx="287.6" cy="312.0" r="4.09366649615121" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 3 · #8339 · act 4.53</title></circle>
+<circle cx="300.4" cy="312.0" r="3.9897404341280125" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 3 · #13700 · act 4.16</title></circle>
+<circle cx="313.2" cy="312.0" r="3.8448058498081057" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 3 · #5061 · act 3.67</title></circle>
+<circle cx="338.8" cy="312.0" r="4.845948793896307" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 4 · #5507 · act 7.55</title></circle>
+<circle cx="351.6" cy="312.0" r="4.741510961438511" fill="#8b5cf6" fill-opacity="0.85" stroke="#8b5cf6" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 4 · #7919 · act 7.09</title></circle>
+<circle cx="364.4" cy="312.0" r="4.218055657785316" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 4 · #15818 · act 4.98</title></circle>
+<circle cx="377.2" cy="312.0" r="4.1781178653506394" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 4 · #15578 · act 4.83</title></circle>
+<circle cx="402.8" cy="312.0" r="5.700494805065347" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 5 · #10781 · act 11.70</title></circle>
+<circle cx="415.6" cy="312.0" r="5.133266808328861" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 5 · #653 · act 8.86</title></circle>
+<circle cx="428.4" cy="312.0" r="4.502675741385502" fill="#8b5cf6" fill-opacity="0.85" stroke="#8b5cf6" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 5 · #7919 · act 6.09</title></circle>
+<circle cx="441.2" cy="312.0" r="3.776643608348458" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 5 · #15578 · act 3.44</title></circle>
+<circle cx="466.8" cy="312.0" r="4.373416088399946" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 6 · #7761 · act 5.58</title></circle>
+<circle cx="479.6" cy="312.0" r="4.3546105188634625" fill="#8b5cf6" fill-opacity="0.85" stroke="#8b5cf6" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 6 · #7919 · act 5.51</title></circle>
+<circle cx="492.4" cy="312.0" r="4.319679902412915" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 6 · #9161 · act 5.37</title></circle>
+<circle cx="505.2" cy="312.0" r="3.7497197756193623" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 6 · #12251 · act 3.36</title></circle>
+<circle cx="530.8" cy="312.0" r="4.928471389675995" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 7 · #903 · act 7.92</title></circle>
+<circle cx="543.6" cy="312.0" r="4.558430178823959" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 7 · #4670 · act 6.32</title></circle>
+<circle cx="556.4" cy="312.0" r="4.523886644736246" fill="#8b5cf6" fill-opacity="0.85" stroke="#8b5cf6" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 7 · #7919 · act 6.18</title></circle>
+<circle cx="569.2" cy="312.0" r="4.205654870745473" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 7 · #13232 · act 4.94</title></circle>
+<circle cx="594.8" cy="312.0" r="4.893740787024682" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 8 · #14815 · act 7.76</title></circle>
+<circle cx="607.6" cy="312.0" r="4.848346989468564" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 8 · #12850 · act 7.56</title></circle>
+<circle cx="620.4" cy="312.0" r="4.363433083274332" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 8 · #5739 · act 5.54</title></circle>
+<circle cx="633.2" cy="312.0" r="4.33278609976877" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 8 · #1628 · act 5.42</title></circle>
+<circle cx="658.8" cy="312.0" r="5.1867862570506595" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 9 · #1052 · act 9.12</title></circle>
+<circle cx="671.6" cy="312.0" r="5.150603970455443" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 9 · #3558 · act 8.94</title></circle>
+<circle cx="684.4" cy="312.0" r="4.3448456796165225" fill="#8b5cf6" fill-opacity="0.85" stroke="#8b5cf6" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 9 · #7919 · act 5.47</title></circle>
+<circle cx="697.2" cy="312.0" r="4.095293261028665" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 9 · #7998 · act 4.53</title></circle>
+<circle cx="722.8" cy="312.0" r="5.296600092054479" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 10 · #1860 · act 9.65</title></circle>
+<circle cx="735.6" cy="312.0" r="5.142621758976125" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 10 · #3583 · act 8.91</title></circle>
+<circle cx="748.4" cy="312.0" r="5.118798514193108" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 10 · #3999 · act 8.79</title></circle>
+<circle cx="761.2" cy="312.0" r="5.114965478941384" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 10 · #574 · act 8.78</title></circle>
+<circle cx="786.8" cy="312.0" r="4.8877562153355125" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 11 · #6940 · act 7.74</title></circle>
+<circle cx="799.6" cy="312.0" r="4.625591283894325" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 11 · #6044 · act 6.60</title></circle>
+<circle cx="812.4" cy="312.0" r="4.0968923480893125" fill="#8b5cf6" fill-opacity="0.85" stroke="#8b5cf6" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 11 · #7919 · act 4.54</title></circle>
+<circle cx="825.2" cy="312.0" r="4.088548253888691" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 11 · #2505 · act 4.51</title></circle>
+<circle cx="850.8" cy="312.0" r="5.318921001555232" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 12 · #15424 · act 9.76</title></circle>
+<circle cx="863.6" cy="312.0" r="4.477759124351698" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 12 · #13391 · act 5.99</title></circle>
+<circle cx="876.4" cy="312.0" r="4.453437577125486" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 12 · #14413 · act 5.90</title></circle>
+<circle cx="889.2" cy="312.0" r="4.248990437798707" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 12 · #11843 · act 5.10</title></circle>
+<circle cx="914.8" cy="312.0" r="4.750751130948306" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 13 · #11884 · act 7.13</title></circle>
+<circle cx="927.6" cy="312.0" r="4.571986648366255" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 13 · #15206 · act 6.38</title></circle>
+<circle cx="940.4" cy="312.0" r="4.325483922613574" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 13 · #10548 · act 5.39</title></circle>
+<circle cx="953.2" cy="312.0" r="4.255628735193429" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 13 · #4472 · act 5.12</title></circle>
+<circle cx="978.8" cy="312.0" r="4.370127638543872" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 14 · #2129 · act 5.57</title></circle>
+<circle cx="991.6" cy="312.0" r="4.09481693474384" fill="#8b5cf6" fill-opacity="0.85" stroke="#8b5cf6" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 14 · #7919 · act 4.53</title></circle>
+<circle cx="1004.4" cy="312.0" r="3.9945129039300022" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 14 · #20 · act 4.17</title></circle>
+<circle cx="1017.2" cy="312.0" r="3.9485517170898614" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 14 · #3540 · act 4.02</title></circle>
+<circle cx="1042.8" cy="312.0" r="5.3231751715642615" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 15 · #6559 · act 9.78</title></circle>
+<circle cx="1055.6" cy="312.0" r="4.286617858831075" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 15 · #5803 · act 5.24</title></circle>
+<circle cx="1068.4" cy="312.0" r="4.011920931061642" fill="#8b5cf6" fill-opacity="0.85" stroke="#8b5cf6" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 15 · #7919 · act 4.24</title></circle>
+<circle cx="1081.2" cy="312.0" r="3.698738743565733" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 15 · #20 · act 3.19</title></circle>
+<circle cx="1106.8" cy="312.0" r="5.235005075795109" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 16 · #7998 · act 9.35</title></circle>
+<circle cx="1119.6" cy="312.0" r="4.845298017066694" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 16 · #4634 · act 7.55</title></circle>
+<circle cx="1132.4" cy="312.0" r="4.111292481962088" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 16 · #7063 · act 4.59</title></circle>
+<circle cx="1145.2" cy="312.0" r="4.062148345935956" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 16 · #8251 · act 4.41</title></circle>
+<circle cx="1170.8" cy="312.0" r="4.808287309393607" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 17 · #10563 · act 7.38</title></circle>
+<circle cx="1183.6" cy="312.0" r="4.129363203134678" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 17 · #10817 · act 4.66</title></circle>
+<circle cx="1196.4" cy="312.0" r="4.067708965605128" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 17 · #9156 · act 4.43</title></circle>
+<circle cx="1209.2" cy="312.0" r="3.5334749593827155" fill="#8b5cf6" fill-opacity="0.85" stroke="#8b5cf6" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 17 · #7919 · act 2.69</title></circle>
+<circle cx="1234.8" cy="312.0" r="3.8375246197321875" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 18 · #15229 · act 3.64</title></circle>
+<circle cx="1247.6" cy="312.0" r="3.7837863619377585" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 18 · #12752 · act 3.47</title></circle>
+<circle cx="1260.4" cy="312.0" r="3.7398291213139627" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 18 · #2947 · act 3.32</title></circle>
+<circle cx="1273.2" cy="312.0" r="3.6387335040829774" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 18 · #13455 · act 3.01</title></circle>
+<circle cx="1298.8" cy="312.0" r="4.414662517506057" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 19 · #1586 · act 5.74</title></circle>
+<circle cx="1311.6" cy="312.0" r="4.080303083990825" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 19 · #13993 · act 4.48</title></circle>
+<circle cx="1324.4" cy="312.0" r="4.02897305079598" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 19 · #12567 · act 4.30</title></circle>
+<circle cx="1337.2" cy="312.0" r="3.968003343647611" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 19 · #7487 · act 4.08</title></circle>
+<circle cx="1362.8" cy="312.0" r="3.5963471086705727" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 20 · #1116 · act 2.88</title></circle>
+<circle cx="1375.6" cy="312.0" r="3.563742238300302" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 20 · #6083 · act 2.78</title></circle>
+<circle cx="1388.4" cy="312.0" r="3.3957422696055835" fill="#8b5cf6" fill-opacity="0.85" stroke="#8b5cf6" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 20 · #7919 · act 2.30</title></circle>
+<circle cx="1401.2" cy="312.0" r="3.3673635591710767" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L10 · pos 20 · #6396 · act 2.23</title></circle>
+<circle cx="82.8" cy="368.0" r="9.69422698196597" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 0 · #6672 · act 39.61</title></circle>
+<circle cx="95.6" cy="368.0" r="9.600992667265917" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 0 · #6985 · act 38.82</title></circle>
+<circle cx="108.4" cy="368.0" r="9.597689980678329" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 0 · #14832 · act 38.79</title></circle>
+<circle cx="121.2" cy="368.0" r="9.494174562267506" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 0 · #7292 · act 37.91</title></circle>
+<circle cx="146.8" cy="368.0" r="4.25915924418941" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 1 · #2598 · act 5.14</title></circle>
+<circle cx="159.6" cy="368.0" r="3.9824080521373455" fill="#f97316" fill-opacity="0.85" stroke="#f97316" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 1 · #8130 · act 4.13</title></circle>
+<circle cx="172.4" cy="368.0" r="3.8161714088992227" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 1 · #3798 · act 3.57</title></circle>
+<circle cx="185.2" cy="368.0" r="3.6560647353339166" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 1 · #15367 · act 3.06</title></circle>
+<circle cx="210.8" cy="368.0" r="5.053152021104067" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 2 · #7868 · act 8.49</title></circle>
+<circle cx="223.6" cy="368.0" r="4.889071151327583" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 2 · #15549 · act 7.74</title></circle>
+<circle cx="236.4" cy="368.0" r="4.782674681058079" fill="#f97316" fill-opacity="0.85" stroke="#f97316" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 2 · #8130 · act 7.27</title></circle>
+<circle cx="249.2" cy="368.0" r="3.9863829069880383" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 2 · #13036 · act 4.15</title></circle>
+<circle cx="274.8" cy="368.0" r="4.406347428223833" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 3 · #11508 · act 5.71</title></circle>
+<circle cx="287.6" cy="368.0" r="4.295045840509846" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 3 · #12779 · act 5.28</title></circle>
+<circle cx="300.4" cy="368.0" r="4.104697074379373" fill="#f97316" fill-opacity="0.85" stroke="#f97316" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 3 · #8130 · act 4.57</title></circle>
+<circle cx="313.2" cy="368.0" r="4.098670845073997" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 3 · #9307 · act 4.54</title></circle>
+<circle cx="338.8" cy="368.0" r="4.747570776999023" fill="#f97316" fill-opacity="0.85" stroke="#f97316" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 4 · #8130 · act 7.12</title></circle>
+<circle cx="351.6" cy="368.0" r="4.682974197241245" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 4 · #10406 · act 6.84</title></circle>
+<circle cx="364.4" cy="368.0" r="4.580078642033588" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 4 · #11267 · act 6.41</title></circle>
+<circle cx="377.2" cy="368.0" r="4.317145203981957" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 4 · #12235 · act 5.36</title></circle>
+<circle cx="402.8" cy="368.0" r="6.102307270993649" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 5 · #14578 · act 13.89</title></circle>
+<circle cx="415.6" cy="368.0" r="4.527362580583212" fill="#f97316" fill-opacity="0.85" stroke="#f97316" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 5 · #8130 · act 6.19</title></circle>
+<circle cx="428.4" cy="368.0" r="3.8928528832850837" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 5 · #4238 · act 3.83</title></circle>
+<circle cx="441.2" cy="368.0" r="3.7166771895088413" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 5 · #12235 · act 3.25</title></circle>
+<circle cx="466.8" cy="368.0" r="4.812933134939354" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 6 · #8799 · act 7.40</title></circle>
+<circle cx="479.6" cy="368.0" r="4.380681456298927" fill="#f97316" fill-opacity="0.85" stroke="#f97316" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 6 · #8130 · act 5.61</title></circle>
+<circle cx="492.4" cy="368.0" r="4.255614128264832" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 6 · #13530 · act 5.12</title></circle>
+<circle cx="505.2" cy="368.0" r="4.209119566348528" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 6 · #1204 · act 4.95</title></circle>
+<circle cx="530.8" cy="368.0" r="5.861662469992513" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 7 · #56 · act 12.56</title></circle>
+<circle cx="543.6" cy="368.0" r="4.500174911376286" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 7 · #11199 · act 6.08</title></circle>
+<circle cx="556.4" cy="368.0" r="4.4989572718247" fill="#f97316" fill-opacity="0.85" stroke="#f97316" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 7 · #8130 · act 6.08</title></circle>
+<circle cx="569.2" cy="368.0" r="4.114252558627182" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 7 · #10406 · act 4.60</title></circle>
+<circle cx="594.8" cy="368.0" r="5.241202146562976" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 8 · #10907 · act 9.38</title></circle>
+<circle cx="607.6" cy="368.0" r="4.842012203359882" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 8 · #4743 · act 7.53</title></circle>
+<circle cx="620.4" cy="368.0" r="4.331331023297549" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 8 · #6944 · act 5.41</title></circle>
+<circle cx="633.2" cy="368.0" r="4.2291886784778026" fill="#f97316" fill-opacity="0.85" stroke="#f97316" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 8 · #8130 · act 5.03</title></circle>
+<circle cx="658.8" cy="368.0" r="5.357866636280173" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 9 · #11395 · act 9.95</title></circle>
+<circle cx="671.6" cy="368.0" r="5.0078432245796485" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 9 · #8313 · act 8.28</title></circle>
+<circle cx="684.4" cy="368.0" r="4.380963989872872" fill="#f97316" fill-opacity="0.85" stroke="#f97316" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 9 · #8130 · act 5.61</title></circle>
+<circle cx="697.2" cy="368.0" r="4.17784035025265" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 9 · #4152 · act 4.83</title></circle>
+<circle cx="722.8" cy="368.0" r="5.937261591273838" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 10 · #6672 · act 12.97</title></circle>
+<circle cx="735.6" cy="368.0" r="5.820297336298039" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 10 · #455 · act 12.33</title></circle>
+<circle cx="748.4" cy="368.0" r="5.810818520924299" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 10 · #1356 · act 12.28</title></circle>
+<circle cx="761.2" cy="368.0" r="5.809697245863698" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 10 · #6667 · act 12.28</title></circle>
+<circle cx="786.8" cy="368.0" r="5.0381635269666205" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 11 · #13189 · act 8.42</title></circle>
+<circle cx="799.6" cy="368.0" r="4.89780374127428" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 11 · #5214 · act 7.78</title></circle>
+<circle cx="812.4" cy="368.0" r="4.248574179954861" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 11 · #1805 · act 5.10</title></circle>
+<circle cx="825.2" cy="368.0" r="4.0595105247023815" fill="#f97316" fill-opacity="0.85" stroke="#f97316" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 11 · #8130 · act 4.40</title></circle>
+<circle cx="850.8" cy="368.0" r="5.17162429638063" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 12 · #2151 · act 9.04</title></circle>
+<circle cx="863.6" cy="368.0" r="4.797775221998947" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 12 · #1805 · act 7.34</title></circle>
+<circle cx="876.4" cy="368.0" r="4.68791999297303" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 12 · #7666 · act 6.86</title></circle>
+<circle cx="889.2" cy="368.0" r="4.674923726223714" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 12 · #13542 · act 6.81</title></circle>
+<circle cx="914.8" cy="368.0" r="5.024712257330716" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 13 · #16073 · act 8.36</title></circle>
+<circle cx="927.6" cy="368.0" r="4.558531947110524" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 13 · #9870 · act 6.32</title></circle>
+<circle cx="940.4" cy="368.0" r="4.387279209048005" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 13 · #9892 · act 5.63</title></circle>
+<circle cx="953.2" cy="368.0" r="3.9762475195710234" fill="#f97316" fill-opacity="0.85" stroke="#f97316" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 13 · #8130 · act 4.11</title></circle>
+<circle cx="978.8" cy="368.0" r="4.2925875658546975" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 14 · #2364 · act 5.27</title></circle>
+<circle cx="991.6" cy="368.0" r="4.010299128361897" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 14 · #6198 · act 4.23</title></circle>
+<circle cx="1004.4" cy="368.0" r="3.9994000452975405" fill="#f97316" fill-opacity="0.85" stroke="#f97316" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 14 · #8130 · act 4.19</title></circle>
+<circle cx="1017.2" cy="368.0" r="3.954529141246045" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 14 · #14102 · act 4.04</title></circle>
+<circle cx="1042.8" cy="368.0" r="4.663133164036981" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 15 · #10125 · act 6.76</title></circle>
+<circle cx="1055.6" cy="368.0" r="4.584971697193813" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 15 · #3193 · act 6.43</title></circle>
+<circle cx="1068.4" cy="368.0" r="4.511806115505635" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 15 · #274 · act 6.13</title></circle>
+<circle cx="1081.2" cy="368.0" r="4.170832786269305" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 15 · #9780 · act 4.81</title></circle>
+<circle cx="1106.8" cy="368.0" r="5.653456314974834" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 16 · #16245 · act 11.45</title></circle>
+<circle cx="1119.6" cy="368.0" r="4.213676240637156" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 16 · #7931 · act 4.97</title></circle>
+<circle cx="1132.4" cy="368.0" r="4.205481035832251" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 16 · #9780 · act 4.94</title></circle>
+<circle cx="1145.2" cy="368.0" r="4.164401553526007" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 16 · #4152 · act 4.78</title></circle>
+<circle cx="1170.8" cy="368.0" r="4.991097421022539" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 17 · #13801 · act 8.20</title></circle>
+<circle cx="1183.6" cy="368.0" r="4.657673928419582" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 17 · #10341 · act 6.74</title></circle>
+<circle cx="1196.4" cy="368.0" r="3.6680941166941023" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 17 · #9780 · act 3.10</title></circle>
+<circle cx="1209.2" cy="368.0" r="3.3895024207033533" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 17 · #3050 · act 2.29</title></circle>
+<circle cx="1234.8" cy="368.0" r="4.18488204958453" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 18 · #2354 · act 4.86</title></circle>
+<circle cx="1247.6" cy="368.0" r="3.880904513449714" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 18 · #7693 · act 3.79</title></circle>
+<circle cx="1260.4" cy="368.0" r="3.78719615013755" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 18 · #13940 · act 3.48</title></circle>
+<circle cx="1273.2" cy="368.0" r="3.7449861543225924" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 18 · #9780 · act 3.34</title></circle>
+<circle cx="1298.8" cy="368.0" r="5.061235254399293" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 19 · #13568 · act 8.53</title></circle>
+<circle cx="1311.6" cy="368.0" r="4.254044019399282" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 19 · #6120 · act 5.12</title></circle>
+<circle cx="1324.4" cy="368.0" r="3.8909524084214286" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 19 · #11752 · act 3.82</title></circle>
+<circle cx="1337.2" cy="368.0" r="3.853071383373127" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 19 · #15367 · act 3.69</title></circle>
+<circle cx="1362.8" cy="368.0" r="3.637454484611251" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 20 · #2598 · act 3.01</title></circle>
+<circle cx="1375.6" cy="368.0" r="3.544780958845693" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 20 · #14674 · act 2.73</title></circle>
+<circle cx="1388.4" cy="368.0" r="3.3343150672434767" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 20 · #15220 · act 2.14</title></circle>
+<circle cx="1401.2" cy="368.0" r="3.2154930840474156" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L11 · pos 20 · #6064 · act 1.83</title></circle>
+<circle cx="82.8" cy="424.0" r="10.480193210323161" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 0 · #6656 · act 46.59</title></circle>
+<circle cx="95.6" cy="424.0" r="10.293262058007395" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 0 · #15022 · act 44.89</title></circle>
+<circle cx="108.4" cy="424.0" r="10.225359797127247" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 0 · #5409 · act 44.28</title></circle>
+<circle cx="121.2" cy="424.0" r="10.008432856245753" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 0 · #242 · act 42.35</title></circle>
+<circle cx="146.8" cy="424.0" r="4.5131207166246075" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 1 · #8177 · act 6.14</title></circle>
+<circle cx="159.6" cy="424.0" r="4.130799629159589" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 1 · #16066 · act 4.66</title></circle>
+<circle cx="172.4" cy="424.0" r="3.8310449848660224" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 1 · #6333 · act 3.62</title></circle>
+<circle cx="185.2" cy="424.0" r="3.8306964443599747" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 1 · #12388 · act 3.62</title></circle>
+<circle cx="210.8" cy="424.0" r="4.796925419615514" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 2 · #8177 · act 7.33</title></circle>
+<circle cx="223.6" cy="424.0" r="4.663646025408742" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 2 · #6333 · act 6.76</title></circle>
+<circle cx="236.4" cy="424.0" r="4.590308733403601" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 2 · #14596 · act 6.45</title></circle>
+<circle cx="249.2" cy="424.0" r="4.56304593887846" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 2 · #12171 · act 6.34</title></circle>
+<circle cx="274.8" cy="424.0" r="4.5587213516624105" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 3 · #8177 · act 6.32</title></circle>
+<circle cx="287.6" cy="424.0" r="4.332018180535983" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 3 · #10537 · act 5.42</title></circle>
+<circle cx="300.4" cy="424.0" r="4.289136641881794" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 3 · #1054 · act 5.25</title></circle>
+<circle cx="313.2" cy="424.0" r="3.968944013083766" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 3 · #12985 · act 4.09</title></circle>
+<circle cx="338.8" cy="424.0" r="4.823274512250748" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 4 · #8177 · act 7.45</title></circle>
+<circle cx="351.6" cy="424.0" r="4.810261557136193" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 4 · #14201 · act 7.39</title></circle>
+<circle cx="364.4" cy="424.0" r="4.617745653739657" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 4 · #12023 · act 6.57</title></circle>
+<circle cx="377.2" cy="424.0" r="4.455691385612575" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 4 · #6333 · act 5.90</title></circle>
+<circle cx="402.8" cy="424.0" r="6.257006925452261" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 5 · #13064 · act 14.77</title></circle>
+<circle cx="415.6" cy="424.0" r="4.780143027828668" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 5 · #8177 · act 7.26</title></circle>
+<circle cx="428.4" cy="424.0" r="4.129652110085388" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 5 · #6333 · act 4.66</title></circle>
+<circle cx="441.2" cy="424.0" r="4.108249153851517" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 5 · #15481 · act 4.58</title></circle>
+<circle cx="466.8" cy="424.0" r="4.821661456597948" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 6 · #4952 · act 7.44</title></circle>
+<circle cx="479.6" cy="424.0" r="4.811460839910392" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 6 · #8177 · act 7.40</title></circle>
+<circle cx="492.4" cy="424.0" r="4.323834341545481" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 6 · #9100 · act 5.39</title></circle>
+<circle cx="505.2" cy="424.0" r="4.064912407267237" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 6 · #13944 · act 4.42</title></circle>
+<circle cx="530.8" cy="424.0" r="4.8631387432377275" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 7 · #8177 · act 7.63</title></circle>
+<circle cx="543.6" cy="424.0" r="4.543138182371866" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 7 · #5651 · act 6.26</title></circle>
+<circle cx="556.4" cy="424.0" r="4.158062994423055" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 7 · #15481 · act 4.76</title></circle>
+<circle cx="569.2" cy="424.0" r="4.12957046511767" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 7 · #11314 · act 4.66</title></circle>
+<circle cx="594.8" cy="424.0" r="4.821249608704261" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 8 · #667 · act 7.44</title></circle>
+<circle cx="607.6" cy="424.0" r="4.629069288538089" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 8 · #8177 · act 6.62</title></circle>
+<circle cx="620.4" cy="424.0" r="4.626914167765063" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 8 · #1726 · act 6.61</title></circle>
+<circle cx="633.2" cy="424.0" r="4.520737856723077" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 8 · #1925 · act 6.17</title></circle>
+<circle cx="658.8" cy="424.0" r="5.427083272551676" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 9 · #13679 · act 10.29</title></circle>
+<circle cx="671.6" cy="424.0" r="5.105986686970469" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 9 · #6483 · act 8.73</title></circle>
+<circle cx="684.4" cy="424.0" r="4.777948722042222" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 9 · #8177 · act 7.25</title></circle>
+<circle cx="697.2" cy="424.0" r="4.689858205535112" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 9 · #14739 · act 6.87</title></circle>
+<circle cx="722.8" cy="424.0" r="6.441810440399662" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 10 · #12352 · act 15.86</title></circle>
+<circle cx="735.6" cy="424.0" r="6.378817513006966" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 10 · #5409 · act 15.48</title></circle>
+<circle cx="748.4" cy="424.0" r="6.340226153041954" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 10 · #12569 · act 15.26</title></circle>
+<circle cx="761.2" cy="424.0" r="6.326386639516882" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 10 · #13380 · act 15.17</title></circle>
+<circle cx="786.8" cy="424.0" r="4.7550250426091" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 11 · #11397 · act 7.15</title></circle>
+<circle cx="799.6" cy="424.0" r="4.655467110490879" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 11 · #8177 · act 6.73</title></circle>
+<circle cx="812.4" cy="424.0" r="4.550584040871397" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 11 · #1196 · act 6.29</title></circle>
+<circle cx="825.2" cy="424.0" r="4.084733640132972" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 11 · #15317 · act 4.49</title></circle>
+<circle cx="850.8" cy="424.0" r="5.356373234569869" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 12 · #3458 · act 9.94</title></circle>
+<circle cx="863.6" cy="424.0" r="4.648445598180747" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 12 · #8177 · act 6.70</title></circle>
+<circle cx="876.4" cy="424.0" r="4.5996085856285225" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 12 · #12497 · act 6.49</title></circle>
+<circle cx="889.2" cy="424.0" r="4.23743384701806" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 12 · #7105 · act 5.06</title></circle>
+<circle cx="914.8" cy="424.0" r="4.767205616474287" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 13 · #1172 · act 7.21</title></circle>
+<circle cx="927.6" cy="424.0" r="4.605536436560003" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 13 · #8177 · act 6.52</title></circle>
+<circle cx="940.4" cy="424.0" r="4.4979177026383" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 13 · #10423 · act 6.07</title></circle>
+<circle cx="953.2" cy="424.0" r="4.2224812038680355" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 13 · #1347 · act 5.00</title></circle>
+<circle cx="978.8" cy="424.0" r="4.49015050274846" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 14 · #8177 · act 6.04</title></circle>
+<circle cx="991.6" cy="424.0" r="4.310815781320248" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 14 · #14191 · act 5.34</title></circle>
+<circle cx="1004.4" cy="424.0" r="4.130572957470939" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 14 · #3643 · act 4.66</title></circle>
+<circle cx="1017.2" cy="424.0" r="4.113934901090886" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 14 · #14596 · act 4.60</title></circle>
+<circle cx="1042.8" cy="424.0" r="4.7334970144630235" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 15 · #15310 · act 7.06</title></circle>
+<circle cx="1055.6" cy="424.0" r="4.625969523618887" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 15 · #14747 · act 6.60</title></circle>
+<circle cx="1068.4" cy="424.0" r="4.594045474476399" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 15 · #8177 · act 6.47</title></circle>
+<circle cx="1081.2" cy="424.0" r="4.572677086147632" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 15 · #31 · act 6.38</title></circle>
+<circle cx="1106.8" cy="424.0" r="5.433172351235602" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 16 · #337 · act 10.32</title></circle>
+<circle cx="1119.6" cy="424.0" r="4.565417674249897" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 16 · #8177 · act 6.35</title></circle>
+<circle cx="1132.4" cy="424.0" r="4.443388379239602" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 16 · #13679 · act 5.86</title></circle>
+<circle cx="1145.2" cy="424.0" r="4.316162528331866" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 16 · #11122 · act 5.36</title></circle>
+<circle cx="1170.8" cy="424.0" r="5.079666173568353" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 17 · #15649 · act 8.61</title></circle>
+<circle cx="1183.6" cy="424.0" r="4.726142966489784" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 17 · #2401 · act 7.03</title></circle>
+<circle cx="1196.4" cy="424.0" r="4.375181688245375" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 17 · #8177 · act 5.59</title></circle>
+<circle cx="1209.2" cy="424.0" r="3.878983475478276" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 17 · #5992 · act 3.78</title></circle>
+<circle cx="1234.8" cy="424.0" r="4.347842622684638" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 18 · #5224 · act 5.48</title></circle>
+<circle cx="1247.6" cy="424.0" r="4.277093552612925" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 18 · #8177 · act 5.21</title></circle>
+<circle cx="1260.4" cy="424.0" r="4.078546838378857" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 18 · #1383 · act 4.47</title></circle>
+<circle cx="1273.2" cy="424.0" r="3.9904192606982036" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 18 · #4314 · act 4.16</title></circle>
+<circle cx="1298.8" cy="424.0" r="4.668793199025792" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 19 · #1675 · act 6.78</title></circle>
+<circle cx="1311.6" cy="424.0" r="4.557415126912001" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 19 · #8177 · act 6.32</title></circle>
+<circle cx="1324.4" cy="424.0" r="4.355965233102394" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 19 · #1998 · act 5.51</title></circle>
+<circle cx="1337.2" cy="424.0" r="3.9044261414190418" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 19 · #14309 · act 3.87</title></circle>
+<circle cx="1362.8" cy="424.0" r="4.4309491802126395" fill="#22d3ee" fill-opacity="0.85" stroke="#22d3ee" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 20 · #8177 · act 5.81</title></circle>
+<circle cx="1375.6" cy="424.0" r="3.6371627097561348" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 20 · #9021 · act 3.00</title></circle>
+<circle cx="1388.4" cy="424.0" r="3.5003754102286058" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 20 · #12388 · act 2.60</title></circle>
+<circle cx="1401.2" cy="424.0" r="3.475862380660482" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L12 · pos 20 · #3575 · act 2.53</title></circle>
+<circle cx="82.8" cy="480.0" r="11.0" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 0 · #16011 · act 51.44</title></circle>
+<circle cx="95.6" cy="480.0" r="10.194633620665423" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 0 · #15335 · act 44.00</title></circle>
+<circle cx="108.4" cy="480.0" r="10.043535015557076" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 0 · #12163 · act 42.66</title></circle>
+<circle cx="121.2" cy="480.0" r="9.967234563498806" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 0 · #5811 · act 41.98</title></circle>
+<circle cx="146.8" cy="480.0" r="4.42952097989582" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 1 · #12667 · act 5.80</title></circle>
+<circle cx="159.6" cy="480.0" r="4.3336759659603645" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 1 · #12915 · act 5.42</title></circle>
+<circle cx="172.4" cy="480.0" r="3.929595351544984" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 1 · #12082 · act 3.95</title></circle>
+<circle cx="185.2" cy="480.0" r="3.9269552080549133" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 1 · #101 · act 3.94</title></circle>
+<circle cx="210.8" cy="480.0" r="5.2067583494626435" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 2 · #1991 · act 9.21</title></circle>
+<circle cx="223.6" cy="480.0" r="4.730953908407692" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 2 · #12667 · act 7.05</title></circle>
+<circle cx="236.4" cy="480.0" r="4.291096952586505" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 2 · #1444 · act 5.26</title></circle>
+<circle cx="249.2" cy="480.0" r="4.28919761460382" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 2 · #7908 · act 5.25</title></circle>
+<circle cx="274.8" cy="480.0" r="4.622232528236019" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 3 · #12667 · act 6.59</title></circle>
+<circle cx="287.6" cy="480.0" r="4.25631430844974" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 3 · #16324 · act 5.13</title></circle>
+<circle cx="300.4" cy="480.0" r="4.208104332918918" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 3 · #11116 · act 4.95</title></circle>
+<circle cx="313.2" cy="480.0" r="4.026590131405059" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 3 · #11646 · act 4.29</title></circle>
+<circle cx="338.8" cy="480.0" r="5.077660962888103" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 4 · #3739 · act 8.60</title></circle>
+<circle cx="351.6" cy="480.0" r="4.803121539716955" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 4 · #12667 · act 7.36</title></circle>
+<circle cx="364.4" cy="480.0" r="4.7713745564049965" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 4 · #2062 · act 7.22</title></circle>
+<circle cx="377.2" cy="480.0" r="4.6243093909723205" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 4 · #2243 · act 6.60</title></circle>
+<circle cx="402.8" cy="480.0" r="5.453269313453393" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 5 · #9835 · act 10.42</title></circle>
+<circle cx="415.6" cy="480.0" r="4.683122143575066" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 5 · #12667 · act 6.84</title></circle>
+<circle cx="428.4" cy="480.0" r="4.395959660918914" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 5 · #1872 · act 5.67</title></circle>
+<circle cx="441.2" cy="480.0" r="4.191638206285519" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 5 · #2025 · act 4.88</title></circle>
+<circle cx="466.8" cy="480.0" r="4.56246700227127" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 6 · #12667 · act 6.34</title></circle>
+<circle cx="479.6" cy="480.0" r="4.513197342625367" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 6 · #8259 · act 6.14</title></circle>
+<circle cx="492.4" cy="480.0" r="4.513082520207652" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 6 · #9976 · act 6.14</title></circle>
+<circle cx="505.2" cy="480.0" r="4.084392152608158" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 6 · #2807 · act 4.49</title></circle>
+<circle cx="530.8" cy="480.0" r="4.844488559854016" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 7 · #2025 · act 7.54</title></circle>
+<circle cx="543.6" cy="480.0" r="4.700217038977936" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 7 · #12667 · act 6.92</title></circle>
+<circle cx="556.4" cy="480.0" r="4.4260835761180175" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 7 · #14041 · act 5.79</title></circle>
+<circle cx="569.2" cy="480.0" r="4.261258537323258" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 7 · #2062 · act 5.15</title></circle>
+<circle cx="594.8" cy="480.0" r="5.673850652344573" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 8 · #2272 · act 11.56</title></circle>
+<circle cx="607.6" cy="480.0" r="4.582371129100118" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 8 · #10725 · act 6.42</title></circle>
+<circle cx="620.4" cy="480.0" r="4.467382374013328" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 8 · #12667 · act 5.95</title></circle>
+<circle cx="633.2" cy="480.0" r="3.8370394447408693" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 8 · #3560 · act 3.64</title></circle>
+<circle cx="658.8" cy="480.0" r="5.482684775395491" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 9 · #10551 · act 10.57</title></circle>
+<circle cx="671.6" cy="480.0" r="5.170482622813305" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 9 · #5520 · act 9.04</title></circle>
+<circle cx="684.4" cy="480.0" r="4.63739541378471" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 9 · #12667 · act 6.65</title></circle>
+<circle cx="697.2" cy="480.0" r="3.97707187210148" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 9 · #1412 · act 4.11</title></circle>
+<circle cx="722.8" cy="480.0" r="6.594432342743272" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 10 · #10659 · act 16.77</title></circle>
+<circle cx="735.6" cy="480.0" r="6.547344266922737" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 10 · #2380 · act 16.49</title></circle>
+<circle cx="748.4" cy="480.0" r="6.5213816740068316" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 10 · #14572 · act 16.33</title></circle>
+<circle cx="761.2" cy="480.0" r="6.479997236901672" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 10 · #12163 · act 16.08</title></circle>
+<circle cx="786.8" cy="480.0" r="5.238070362527372" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 11 · #1214 · act 9.36</title></circle>
+<circle cx="799.6" cy="480.0" r="4.18085746489283" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 11 · #20 · act 4.84</title></circle>
+<circle cx="812.4" cy="480.0" r="4.173067731783416" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 11 · #12082 · act 4.82</title></circle>
+<circle cx="825.2" cy="480.0" r="4.142226188216188" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 11 · #12667 · act 4.70</title></circle>
+<circle cx="850.8" cy="480.0" r="5.0349543539802015" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 12 · #4832 · act 8.40</title></circle>
+<circle cx="863.6" cy="480.0" r="5.006571674099842" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 12 · #2587 · act 8.27</title></circle>
+<circle cx="876.4" cy="480.0" r="4.412406227872361" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 12 · #1034 · act 5.73</title></circle>
+<circle cx="889.2" cy="480.0" r="4.276115529819208" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 12 · #10259 · act 5.20</title></circle>
+<circle cx="914.8" cy="480.0" r="5.031700112986772" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 13 · #7587 · act 8.39</title></circle>
+<circle cx="927.6" cy="480.0" r="4.807395227746906" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 13 · #732 · act 7.38</title></circle>
+<circle cx="940.4" cy="480.0" r="4.263573119357419" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 13 · #12630 · act 5.16</title></circle>
+<circle cx="953.2" cy="480.0" r="4.23404993442271" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 13 · #12667 · act 5.04</title></circle>
+<circle cx="978.8" cy="480.0" r="4.557010814591978" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 14 · #8448 · act 6.32</title></circle>
+<circle cx="991.6" cy="480.0" r="4.119299650246559" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 14 · #10870 · act 4.62</title></circle>
+<circle cx="1004.4" cy="480.0" r="4.116345200234217" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 14 · #14880 · act 4.61</title></circle>
+<circle cx="1017.2" cy="480.0" r="4.0585205601670555" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 14 · #10009 · act 4.40</title></circle>
+<circle cx="1042.8" cy="480.0" r="4.648009983779376" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 15 · #7549 · act 6.70</title></circle>
+<circle cx="1055.6" cy="480.0" r="4.483679923928553" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 15 · #12176 · act 6.02</title></circle>
+<circle cx="1068.4" cy="480.0" r="4.371682127758768" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 15 · #3133 · act 5.57</title></circle>
+<circle cx="1081.2" cy="480.0" r="4.2716166456409095" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 15 · #12948 · act 5.19</title></circle>
+<circle cx="1106.8" cy="480.0" r="5.259268358032876" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 16 · #2264 · act 9.46</title></circle>
+<circle cx="1119.6" cy="480.0" r="4.337084616444795" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 16 · #3133 · act 5.44</title></circle>
+<circle cx="1132.4" cy="480.0" r="4.252515025786626" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 16 · #12176 · act 5.11</title></circle>
+<circle cx="1145.2" cy="480.0" r="4.181497713773291" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 16 · #12667 · act 4.85</title></circle>
+<circle cx="1170.8" cy="480.0" r="5.129101406539293" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 17 · #14728 · act 8.84</title></circle>
+<circle cx="1183.6" cy="480.0" r="4.3537750179139145" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 17 · #13605 · act 5.50</title></circle>
+<circle cx="1196.4" cy="480.0" r="3.910665641440146" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 17 · #12667 · act 3.89</title></circle>
+<circle cx="1209.2" cy="480.0" r="3.5940341079843448" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 17 · #2931 · act 2.87</title></circle>
+<circle cx="1234.8" cy="480.0" r="4.268466147431508" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 18 · #5567 · act 5.17</title></circle>
+<circle cx="1247.6" cy="480.0" r="4.122187095977545" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 18 · #1949 · act 4.63</title></circle>
+<circle cx="1260.4" cy="480.0" r="3.841514239660346" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 18 · #9994 · act 3.65</title></circle>
+<circle cx="1273.2" cy="480.0" r="3.7663090274843865" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 18 · #13976 · act 3.41</title></circle>
+<circle cx="1298.8" cy="480.0" r="5.013760492904795" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 19 · #5403 · act 8.31</title></circle>
+<circle cx="1311.6" cy="480.0" r="4.339769436295269" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 19 · #13818 · act 5.45</title></circle>
+<circle cx="1324.4" cy="480.0" r="4.0474628422899634" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 19 · #12667 · act 4.36</title></circle>
+<circle cx="1337.2" cy="480.0" r="4.0262110335835075" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 19 · #6524 · act 4.29</title></circle>
+<circle cx="1362.8" cy="480.0" r="4.050136890897644" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 20 · #12915 · act 4.37</title></circle>
+<circle cx="1375.6" cy="480.0" r="3.8521609548696487" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 20 · #2425 · act 3.69</title></circle>
+<circle cx="1388.4" cy="480.0" r="3.7963469873723286" fill="#fbbf24" fill-opacity="0.85" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 20 · #12667 · act 3.51</title></circle>
+<circle cx="1401.2" cy="480.0" r="3.771004782363565" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L13 · pos 20 · #11419 · act 3.42</title></circle>
+<circle cx="82.8" cy="536.0" r="10.227889933133104" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 0 · #9402 · act 44.30</title></circle>
+<circle cx="95.6" cy="536.0" r="10.138394021762121" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 0 · #7803 · act 43.50</title></circle>
+<circle cx="108.4" cy="536.0" r="9.97519814317012" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 0 · #18 · act 42.05</title></circle>
+<circle cx="121.2" cy="536.0" r="9.912393942116804" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 0 · #14675 · act 41.50</title></circle>
+<circle cx="146.8" cy="536.0" r="4.602262791540174" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 1 · #922 · act 6.50</title></circle>
+<circle cx="159.6" cy="536.0" r="4.30529795046602" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 1 · #15000 · act 5.31</title></circle>
+<circle cx="172.4" cy="536.0" r="4.048050158959602" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 1 · #8541 · act 4.36</title></circle>
+<circle cx="185.2" cy="536.0" r="4.035905175860388" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 1 · #7034 · act 4.32</title></circle>
+<circle cx="210.8" cy="536.0" r="5.374883342669793" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 2 · #11756 · act 10.03</title></circle>
+<circle cx="223.6" cy="536.0" r="4.677838691755465" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 2 · #922 · act 6.82</title></circle>
+<circle cx="236.4" cy="536.0" r="4.487036195143147" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 2 · #11903 · act 6.03</title></circle>
+<circle cx="249.2" cy="536.0" r="4.434709070188213" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 2 · #8164 · act 5.82</title></circle>
+<circle cx="274.8" cy="536.0" r="4.7423814595813925" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 3 · #1768 · act 7.10</title></circle>
+<circle cx="287.6" cy="536.0" r="4.734173277803654" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 3 · #4337 · act 7.06</title></circle>
+<circle cx="300.4" cy="536.0" r="4.7021135306301804" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 3 · #922 · act 6.92</title></circle>
+<circle cx="313.2" cy="536.0" r="4.244169600337024" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 3 · #13238 · act 5.08</title></circle>
+<circle cx="338.8" cy="536.0" r="5.277956699896138" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 4 · #4980 · act 9.56</title></circle>
+<circle cx="351.6" cy="536.0" r="4.733289848421573" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 4 · #14500 · act 7.06</title></circle>
+<circle cx="364.4" cy="536.0" r="4.682013703700703" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 4 · #8245 · act 6.84</title></circle>
+<circle cx="377.2" cy="536.0" r="4.681437095511286" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 4 · #922 · act 6.84</title></circle>
+<circle cx="402.8" cy="536.0" r="6.391304431515477" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 5 · #2934 · act 15.56</title></circle>
+<circle cx="415.6" cy="536.0" r="4.673164284911255" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 5 · #922 · act 6.80</title></circle>
+<circle cx="428.4" cy="536.0" r="4.326818961551112" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 5 · #14837 · act 5.40</title></circle>
+<circle cx="441.2" cy="536.0" r="4.20823550070136" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 5 · #6626 · act 4.95</title></circle>
+<circle cx="466.8" cy="536.0" r="4.582545904617544" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 6 · #922 · act 6.42</title></circle>
+<circle cx="479.6" cy="536.0" r="4.155741381574105" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 6 · #6400 · act 4.75</title></circle>
+<circle cx="492.4" cy="536.0" r="4.072629126932755" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 6 · #13187 · act 4.45</title></circle>
+<circle cx="505.2" cy="536.0" r="3.9102676304001465" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 6 · #16014 · act 3.89</title></circle>
+<circle cx="530.8" cy="536.0" r="5.059751445037563" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 7 · #10621 · act 8.52</title></circle>
+<circle cx="543.6" cy="536.0" r="4.664536782407231" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 7 · #922 · act 6.77</title></circle>
+<circle cx="556.4" cy="536.0" r="4.299200444911682" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 7 · #6992 · act 5.29</title></circle>
+<circle cx="569.2" cy="536.0" r="4.151864679765952" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 7 · #12935 · act 4.74</title></circle>
+<circle cx="594.8" cy="536.0" r="4.831134505436108" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 8 · #4330 · act 7.48</title></circle>
+<circle cx="607.6" cy="536.0" r="4.646858487099224" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 8 · #16279 · act 6.69</title></circle>
+<circle cx="620.4" cy="536.0" r="4.546548260684049" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 8 · #4457 · act 6.27</title></circle>
+<circle cx="633.2" cy="536.0" r="4.5049433590741055" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 8 · #922 · act 6.10</title></circle>
+<circle cx="658.8" cy="536.0" r="5.700316647641909" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 9 · #7688 · act 11.69</title></circle>
+<circle cx="671.6" cy="536.0" r="5.136512864422983" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 9 · #6731 · act 8.88</title></circle>
+<circle cx="684.4" cy="536.0" r="4.697889876670985" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 9 · #922 · act 6.91</title></circle>
+<circle cx="697.2" cy="536.0" r="4.501807139283887" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 9 · #13900 · act 6.09</title></circle>
+<circle cx="722.8" cy="536.0" r="6.6377611231347355" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 10 · #6415 · act 17.04</title></circle>
+<circle cx="735.6" cy="536.0" r="6.572650905299114" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 10 · #633 · act 16.64</title></circle>
+<circle cx="748.4" cy="536.0" r="6.5560687774732145" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 10 · #7803 · act 16.54</title></circle>
+<circle cx="761.2" cy="536.0" r="6.515065290273845" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 10 · #4313 · act 16.29</title></circle>
+<circle cx="786.8" cy="536.0" r="5.897199187189501" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 11 · #3564 · act 12.75</title></circle>
+<circle cx="799.6" cy="536.0" r="4.893833040655405" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 11 · #1791 · act 7.76</title></circle>
+<circle cx="812.4" cy="536.0" r="4.489905763903969" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 11 · #14503 · act 6.04</title></circle>
+<circle cx="825.2" cy="536.0" r="4.187323220432541" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 11 · #922 · act 4.87</title></circle>
+<circle cx="850.8" cy="536.0" r="5.7020431216416565" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 12 · #14133 · act 11.70</title></circle>
+<circle cx="863.6" cy="536.0" r="5.422191438345321" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 12 · #14503 · act 10.27</title></circle>
+<circle cx="876.4" cy="536.0" r="4.902182569846952" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 12 · #1585 · act 7.80</title></circle>
+<circle cx="889.2" cy="536.0" r="4.737185587504202" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 12 · #11095 · act 7.08</title></circle>
+<circle cx="914.8" cy="536.0" r="4.9299066498021755" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 13 · #1630 · act 7.92</title></circle>
+<circle cx="927.6" cy="536.0" r="4.247793132027349" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 13 · #8460 · act 5.10</title></circle>
+<circle cx="940.4" cy="536.0" r="4.229946276751524" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 13 · #922 · act 5.03</title></circle>
+<circle cx="953.2" cy="536.0" r="4.228101345572112" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 13 · #16 · act 5.02</title></circle>
+<circle cx="978.8" cy="536.0" r="4.743041341125854" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 14 · #9791 · act 7.10</title></circle>
+<circle cx="991.6" cy="536.0" r="4.49283556470586" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 14 · #4213 · act 6.05</title></circle>
+<circle cx="1004.4" cy="536.0" r="4.41900731649003" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 14 · #13137 · act 5.76</title></circle>
+<circle cx="1017.2" cy="536.0" r="4.183447434868738" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 14 · #14315 · act 4.85</title></circle>
+<circle cx="1042.8" cy="536.0" r="4.816706751701885" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 15 · #12533 · act 7.42</title></circle>
+<circle cx="1055.6" cy="536.0" r="4.610131549840805" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 15 · #13001 · act 6.54</title></circle>
+<circle cx="1068.4" cy="536.0" r="4.4949519691876745" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 15 · #15675 · act 6.06</title></circle>
+<circle cx="1081.2" cy="536.0" r="4.36660980583244" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 15 · #198 · act 5.55</title></circle>
+<circle cx="1106.8" cy="536.0" r="5.652105440715142" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 16 · #319 · act 11.44</title></circle>
+<circle cx="1119.6" cy="536.0" r="4.6872033856868995" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 16 · #13001 · act 6.86</title></circle>
+<circle cx="1132.4" cy="536.0" r="4.366533706088241" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 16 · #104 · act 5.55</title></circle>
+<circle cx="1145.2" cy="536.0" r="4.2467760725001815" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 16 · #922 · act 5.09</title></circle>
+<circle cx="1170.8" cy="536.0" r="5.209893152427794" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 17 · #3002 · act 9.23</title></circle>
+<circle cx="1183.6" cy="536.0" r="4.166877615250282" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 17 · #13648 · act 4.79</title></circle>
+<circle cx="1196.4" cy="536.0" r="4.120722117300493" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 17 · #8927 · act 4.62</title></circle>
+<circle cx="1209.2" cy="536.0" r="4.041350121324548" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 17 · #922 · act 4.34</title></circle>
+<circle cx="1234.8" cy="536.0" r="4.69859777499399" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 18 · #8692 · act 6.91</title></circle>
+<circle cx="1247.6" cy="536.0" r="3.8575855240456325" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 18 · #2347 · act 3.71</title></circle>
+<circle cx="1260.4" cy="536.0" r="3.8375591223036185" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 18 · #11934 · act 3.64</title></circle>
+<circle cx="1273.2" cy="536.0" r="3.8342891306742857" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 18 · #4704 · act 3.63</title></circle>
+<circle cx="1298.8" cy="536.0" r="4.548605569085044" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 19 · #15813 · act 6.28</title></circle>
+<circle cx="1311.6" cy="536.0" r="4.431435862619362" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 19 · #6517 · act 5.81</title></circle>
+<circle cx="1324.4" cy="536.0" r="4.03319302676698" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 19 · #4401 · act 4.31</title></circle>
+<circle cx="1337.2" cy="536.0" r="4.020750456625186" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 19 · #922 · act 4.27</title></circle>
+<circle cx="1362.8" cy="536.0" r="4.096615775961973" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 20 · #15000 · act 4.54</title></circle>
+<circle cx="1375.6" cy="536.0" r="3.9048017101959234" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 20 · #1943 · act 3.87</title></circle>
+<circle cx="1388.4" cy="536.0" r="3.9043616505390233" fill="#ef4444" fill-opacity="0.85" stroke="#ef4444" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 20 · #922 · act 3.87</title></circle>
+<circle cx="1401.2" cy="536.0" r="3.8446846134488757" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L14 · pos 20 · #1258 · act 3.67</title></circle>
+<circle cx="82.8" cy="592.0" r="10.21125065232771" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 0 · #12861 · act 44.15</title></circle>
+<circle cx="95.6" cy="592.0" r="9.889212296807896" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 0 · #12207 · act 41.30</title></circle>
+<circle cx="108.4" cy="592.0" r="9.844386133387147" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 0 · #11698 · act 40.91</title></circle>
+<circle cx="121.2" cy="592.0" r="9.838342313861077" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 0 · #10400 · act 40.86</title></circle>
+<circle cx="146.8" cy="592.0" r="5.881261458807784" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 1 · #15001 · act 12.66</title></circle>
+<circle cx="159.6" cy="592.0" r="5.075919896663332" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 1 · #9558 · act 8.59</title></circle>
+<circle cx="172.4" cy="592.0" r="4.604837059709347" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 1 · #5421 · act 6.51</title></circle>
+<circle cx="185.2" cy="592.0" r="4.345706117660656" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 1 · #10786 · act 5.47</title></circle>
+<circle cx="210.8" cy="592.0" r="4.814841331801441" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 2 · #9558 · act 7.41</title></circle>
+<circle cx="223.6" cy="592.0" r="4.582113841507686" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 2 · #6892 · act 6.42</title></circle>
+<circle cx="236.4" cy="592.0" r="4.579008357582402" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 2 · #5625 · act 6.41</title></circle>
+<circle cx="249.2" cy="592.0" r="4.431449636834657" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 2 · #13658 · act 5.81</title></circle>
+<circle cx="274.8" cy="592.0" r="5.013018247360165" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 3 · #9558 · act 8.30</title></circle>
+<circle cx="287.6" cy="592.0" r="4.975763909987952" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 3 · #13096 · act 8.13</title></circle>
+<circle cx="300.4" cy="592.0" r="4.513467278697308" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 3 · #7849 · act 6.14</title></circle>
+<circle cx="313.2" cy="592.0" r="4.246561437134288" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 3 · #14116 · act 5.09</title></circle>
+<circle cx="338.8" cy="592.0" r="5.246710417430077" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 4 · #14508 · act 9.40</title></circle>
+<circle cx="351.6" cy="592.0" r="4.871402113633719" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 4 · #3461 · act 7.66</title></circle>
+<circle cx="364.4" cy="592.0" r="4.821287248298022" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 4 · #9558 · act 7.44</title></circle>
+<circle cx="377.2" cy="592.0" r="4.672079186731443" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 4 · #5715 · act 6.80</title></circle>
+<circle cx="402.8" cy="592.0" r="6.17773368332154" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 5 · #12192 · act 14.32</title></circle>
+<circle cx="415.6" cy="592.0" r="4.761404748997524" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 5 · #9558 · act 7.18</title></circle>
+<circle cx="428.4" cy="592.0" r="4.529096495357829" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 5 · #3044 · act 6.20</title></circle>
+<circle cx="441.2" cy="592.0" r="4.395353623086477" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 5 · #13690 · act 5.66</title></circle>
+<circle cx="466.8" cy="592.0" r="4.7884740973435616" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 6 · #9558 · act 7.30</title></circle>
+<circle cx="479.6" cy="592.0" r="4.39581402762346" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 6 · #10796 · act 5.67</title></circle>
+<circle cx="492.4" cy="592.0" r="3.95422710261668" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 6 · #4435 · act 4.04</title></circle>
+<circle cx="505.2" cy="592.0" r="3.8737320808213527" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 6 · #3000 · act 3.76</title></circle>
+<circle cx="530.8" cy="592.0" r="5.217538505472594" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 7 · #13690 · act 9.26</title></circle>
+<circle cx="543.6" cy="592.0" r="4.808573022849482" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 7 · #9558 · act 7.39</title></circle>
+<circle cx="556.4" cy="592.0" r="4.593555603304104" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 7 · #1251 · act 6.47</title></circle>
+<circle cx="569.2" cy="592.0" r="4.400055177026216" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 7 · #7867 · act 5.68</title></circle>
+<circle cx="594.8" cy="592.0" r="5.637375228059753" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 8 · #9675 · act 11.36</title></circle>
+<circle cx="607.6" cy="592.0" r="4.680708447035993" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 8 · #10106 · act 6.83</title></circle>
+<circle cx="620.4" cy="592.0" r="4.543031586474506" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 8 · #9558 · act 6.26</title></circle>
+<circle cx="633.2" cy="592.0" r="4.1320008646636275" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 8 · #9763 · act 4.67</title></circle>
+<circle cx="658.8" cy="592.0" r="5.525287289974561" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 9 · #6000 · act 10.79</title></circle>
+<circle cx="671.6" cy="592.0" r="5.370734054530375" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 9 · #2961 · act 10.01</title></circle>
+<circle cx="684.4" cy="592.0" r="4.826948684023861" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 9 · #9558 · act 7.47</title></circle>
+<circle cx="697.2" cy="592.0" r="4.3669482104188315" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 9 · #12209 · act 5.55</title></circle>
+<circle cx="722.8" cy="592.0" r="6.855066751283294" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 10 · #7306 · act 18.39</title></circle>
+<circle cx="735.6" cy="592.0" r="6.732520214738878" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 10 · #11698 · act 17.62</title></circle>
+<circle cx="748.4" cy="592.0" r="6.720161095546119" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 10 · #16298 · act 17.55</title></circle>
+<circle cx="761.2" cy="592.0" r="6.549876658895976" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 10 · #5931 · act 16.50</title></circle>
+<circle cx="786.8" cy="592.0" r="5.809870201132452" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 11 · #1072 · act 12.28</title></circle>
+<circle cx="799.6" cy="592.0" r="4.849466706903813" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 11 · #6250 · act 7.57</title></circle>
+<circle cx="812.4" cy="592.0" r="4.745287571629492" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 11 · #944 · act 7.11</title></circle>
+<circle cx="825.2" cy="592.0" r="4.624895928978055" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 11 · #9558 · act 6.60</title></circle>
+<circle cx="850.8" cy="592.0" r="5.714272741821607" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 12 · #14343 · act 11.77</title></circle>
+<circle cx="863.6" cy="592.0" r="4.853097574023526" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 12 · #15888 · act 7.58</title></circle>
+<circle cx="876.4" cy="592.0" r="4.586521845118627" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 12 · #2836 · act 6.44</title></circle>
+<circle cx="889.2" cy="592.0" r="4.533370015488399" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 12 · #9558 · act 6.22</title></circle>
+<circle cx="914.8" cy="592.0" r="5.289267091643115" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 13 · #6793 · act 9.61</title></circle>
+<circle cx="927.6" cy="592.0" r="4.835755012591685" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 13 · #4951 · act 7.51</title></circle>
+<circle cx="940.4" cy="592.0" r="4.784626002982763" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 13 · #9558 · act 7.28</title></circle>
+<circle cx="953.2" cy="592.0" r="4.605945435088081" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 13 · #15734 · act 6.52</title></circle>
+<circle cx="978.8" cy="592.0" r="4.932682955561271" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 14 · #1726 · act 7.94</title></circle>
+<circle cx="991.6" cy="592.0" r="4.837075702437891" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 14 · #13658 · act 7.51</title></circle>
+<circle cx="1004.4" cy="592.0" r="4.297254075943526" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 14 · #9558 · act 5.28</title></circle>
+<circle cx="1017.2" cy="592.0" r="4.222543389655197" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 14 · #12717 · act 5.00</title></circle>
+<circle cx="1042.8" cy="592.0" r="5.084776680783753" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 15 · #3482 · act 8.64</title></circle>
+<circle cx="1055.6" cy="592.0" r="4.870463644568526" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 15 · #15901 · act 7.66</title></circle>
+<circle cx="1068.4" cy="592.0" r="4.7992944012979315" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 15 · #10677 · act 7.34</title></circle>
+<circle cx="1081.2" cy="592.0" r="4.585924575810946" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 15 · #9558 · act 6.44</title></circle>
+<circle cx="1106.8" cy="592.0" r="5.429039350830296" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 16 · #15029 · act 10.30</title></circle>
+<circle cx="1119.6" cy="592.0" r="5.402329704991541" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 16 · #3482 · act 10.17</title></circle>
+<circle cx="1132.4" cy="592.0" r="5.2260275178863775" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 16 · #2961 · act 9.30</title></circle>
+<circle cx="1145.2" cy="592.0" r="4.474052439395184" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 16 · #9558 · act 5.98</title></circle>
+<circle cx="1170.8" cy="592.0" r="5.312799571772805" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 17 · #7739 · act 9.73</title></circle>
+<circle cx="1183.6" cy="592.0" r="4.848600487288944" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 17 · #4793 · act 7.56</title></circle>
+<circle cx="1196.4" cy="592.0" r="4.505501772727193" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 17 · #9558 · act 6.11</title></circle>
+<circle cx="1209.2" cy="592.0" r="4.284784581851759" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 17 · #1137 · act 5.24</title></circle>
+<circle cx="1234.8" cy="592.0" r="5.177149183960358" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 18 · #13429 · act 9.07</title></circle>
+<circle cx="1247.6" cy="592.0" r="4.900097009701165" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 18 · #9253 · act 7.79</title></circle>
+<circle cx="1260.4" cy="592.0" r="4.255829699981367" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 18 · #9558 · act 5.13</title></circle>
+<circle cx="1273.2" cy="592.0" r="4.1758430413023175" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 18 · #1137 · act 4.83</title></circle>
+<circle cx="1298.8" cy="592.0" r="5.006830961441934" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 19 · #2325 · act 8.27</title></circle>
+<circle cx="1311.6" cy="592.0" r="4.6502610867052585" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 19 · #12793 · act 6.70</title></circle>
+<circle cx="1324.4" cy="592.0" r="4.438811520331381" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 19 · #9558 · act 5.84</title></circle>
+<circle cx="1337.2" cy="592.0" r="4.406064231667427" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 19 · #8631 · act 5.71</title></circle>
+<circle cx="1362.8" cy="592.0" r="4.642228532557014" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 20 · #5243 · act 6.67</title></circle>
+<circle cx="1375.6" cy="592.0" r="4.476248283006528" fill="#f59e0b" fill-opacity="0.85" stroke="#f59e0b" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 20 · #9558 · act 5.99</title></circle>
+<circle cx="1388.4" cy="592.0" r="4.449558499700301" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 20 · #15001 · act 5.88</title></circle>
+<circle cx="1401.2" cy="592.0" r="4.301032890200042" fill="#3a4255" fill-opacity="0.45" stroke="#3a4255" stroke-opacity="0.9" stroke-width="1"><title>L15 · pos 20 · #6793 · act 5.30</title></circle>
+<text x="70" y="640" font-family="JetBrains Mono, monospace" font-size="11" fill="#9ca3af">TOP FEATURES</text>
+<circle cx="76" cy="650" r="5" fill="#f59e0b" fill-opacity="0.9"/>
+<text x="88" y="654" font-family="JetBrains Mono, monospace" font-size="11" fill="#e5e7eb">#9558 · Σ 128.2</text>
+<circle cx="336" cy="650" r="5" fill="#22d3ee" fill-opacity="0.9"/>
+<text x="348" y="654" font-family="JetBrains Mono, monospace" font-size="11" fill="#e5e7eb">#8177 · Σ 125.1</text>
+<circle cx="596" cy="650" r="5" fill="#a855f7" fill-opacity="0.9"/>
+<text x="608" y="654" font-family="JetBrains Mono, monospace" font-size="11" fill="#e5e7eb">#6046 · Σ 93.8</text>
+<circle cx="856" cy="650" r="5" fill="#10b981" fill-opacity="0.9"/>
+<text x="868" y="654" font-family="JetBrains Mono, monospace" font-size="11" fill="#e5e7eb">#11971 · Σ 89.1</text>
+<circle cx="76" cy="666" r="5" fill="#ef4444" fill-opacity="0.9"/>
+<text x="88" y="670" font-family="JetBrains Mono, monospace" font-size="11" fill="#e5e7eb">#922 · Σ 87.5</text>
+<circle cx="336" cy="666" r="5" fill="#fbbf24" fill-opacity="0.9"/>
+<text x="348" y="670" font-family="JetBrains Mono, monospace" font-size="11" fill="#e5e7eb">#12667 · Σ 85.8</text>
+<circle cx="596" cy="666" r="5" fill="#3b82f6" fill-opacity="0.9"/>
+<text x="608" y="670" font-family="JetBrains Mono, monospace" font-size="11" fill="#e5e7eb">#2971 · Σ 82.9</text>
+<circle cx="856" cy="666" r="5" fill="#ec4899" fill-opacity="0.9"/>
+<text x="868" y="670" font-family="JetBrains Mono, monospace" font-size="11" fill="#e5e7eb">#4842 · Σ 79.5</text>
+</svg>
+<div class="legend-help"><span><span class="dot" style="background:#9ca3af"></span>circle size ∝ activation</span><span><span class="dot" style="background:#fbbf24"></span>thread = same feature firing in next layer</span><span>hover any circle for the feature id and activation</span></div>
+</div>
+<div class="foot"><span>Sfumato · P.7 attribution graph</span><a href="index.html">↩ all prompts</a></div>
+</div></body></html>

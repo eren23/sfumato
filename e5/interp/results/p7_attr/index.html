@@ -1,0 +1,63 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Sfumato · Attribution graphs</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+:root {
+  --bg: #0a0e1a; --surface: #131725; --surface-2: #1a1f2e;
+  --border: #262b3d; --border-lit: #3a4255;
+  --text: #e5e7eb; --text-dim: #9ca3af; --text-muted: #6b7280;
+  --gold: #fbbf24;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+  font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+.shell { max-width: 1240px; margin: 0 auto; padding: 48px 32px 80px; }
+.topbar { display:flex; justify-content:space-between; padding-bottom:12px; border-bottom:1px solid var(--border); margin-bottom:36px; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted); }
+.topbar a { color: var(--text-dim); text-decoration: none; }
+.topbar a:hover { color: var(--gold); }
+.logo { font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; color: var(--gold); text-transform: none; letter-spacing: -0.01em; }
+h1 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 36px; letter-spacing: -0.015em; margin: 0 0 6px; }
+.subtitle { font-family: 'Fraunces', serif; font-style: italic; color: var(--text-dim); font-size: 17px; margin-bottom: 22px; }
+.toolbar { display:flex; gap: 10px; flex-wrap: wrap; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); margin-bottom: 22px; }
+.toolbar .lab { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin-right: 8px; align-self: center; }
+.toolbar a {
+  display: inline-block; padding: 7px 12px; font-size: 12px; font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim); border: 1px solid var(--border); text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.toolbar a:hover { color: var(--gold); border-color: var(--border-lit); background: var(--surface-2); }
+.toolbar a.active { color: var(--bg); background: var(--gold); border-color: var(--gold); }
+
+.graph-card { background: var(--surface); border: 1px solid var(--border); padding: 24px 26px; margin-bottom: 22px; }
+.graph-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 16px; font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; }
+.graph-meta b { color: var(--text-dim); }
+.prompt-block { background: rgba(0,0,0,0.30); border-left: 2px solid var(--gold); padding: 12px 16px;
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 15px; color: var(--text-dim); margin-bottom: 22px; }
+.legend-help { display: flex; gap: 24px; font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; margin-top: 16px; align-items: center; }
+.legend-help .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+.foot { margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-muted); letter-spacing: 0.14em; text-transform: uppercase; display: flex; justify-content: space-between; }
+.foot a { color: var(--text-dim); text-decoration: none; }
+</style>
+
+<style>.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin-top: 22px; }.card { display: block; background: var(--surface); border: 1px solid var(--border); padding: 18px 20px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s, background 0.15s; }.card:hover { border-color: var(--gold); transform: translateY(-1px); background: var(--surface-2); }.card-label { font-family: "Fraunces", serif; font-weight: 600; font-size: 22px; color: var(--gold); margin-bottom: 6px; letter-spacing: -0.01em; }.card-prompt { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--text-dim); line-height: 1.5; }</style>
+</head><body><div class="shell">
+<div class="topbar"><span class="logo">Sfumato</span><span>Attribution graphs · field manual</span></div>
+<h1>Attribution graphs</h1>
+<div class="subtitle">A per-prompt circuit-tracer-style view. Layers stacked vertical, tokens horizontal, top-firing SAE features rendered as circles. Lines connect the same feature across adjacent layers, so persistent features form a vertical thread.</div>
+<div class="grid">
+<a href="attr_janet.html" class="card"><div class="card-label">janet</div><div class="card-prompt">Question: Janet&#x27;s ducks lay 16 eggs per day. How much does she make daily?
+Answer:</div></a>
+<a href="attr_baker.html" class="card"><div class="card-label">baker</div><div class="card-prompt">Question: A baker makes 240 cookies, packs in boxes of 12 each. Boxes?
+Answer:</div></a>
+<a href="attr_apples.html" class="card"><div class="card-label">apples</div><div class="card-prompt">Question: 96 apples shared among 8 children equally. Each gets?
+Answer:</div></a>
+<a href="attr_history.html" class="card"><div class="card-label">history</div><div class="card-prompt">The Roman Empire reached its peak under Trajan in 117 AD, from Britain to Mesopotamia.</div></a>
+<a href="attr_science.html" class="card"><div class="card-label">science</div><div class="card-prompt">Photosynthesis uses sunlight and chlorophyll to synthesize food in plant leaves.</div></a>
+<a href="attr_math_chain.html" class="card"><div class="card-label">math_chain</div><div class="card-prompt">Let x = 3 + 4 * 2. Then x = </div></a>
+<a href="attr_counting.html" class="card"><div class="card-label">counting</div><div class="card-prompt">John has 15 marbles. He gives 4 to Mary and 3 to Tom. 15 - 4 - 3 = </div></a>
+<a href="attr_recipe.html" class="card"><div class="card-label">recipe</div><div class="card-prompt">Mix the flour, sugar, and eggs in a large bowl, then bake at 350 degrees for 25 minutes.</div></a>
+<a href="attr_cs_dijkstra.html" class="card"><div class="card-label">cs_dijkstra</div><div class="card-prompt">Dijkstra&#x27;s algorithm finds the shortest path by relaxing edges in non-decreasing order.</div></a>
+<a href="attr_dialogue.html" class="card"><div class="card-label">dialogue</div><div class="card-prompt">&quot;Where did you go?&quot; she asked. He shrugged and said &quot;Nowhere in particular.&quot;</div></a>
+</div>
+<div class="foot" style="margin-top:60px;"><span>Sfumato · P.7</span><span>10 prompts × 10 layers</span><a href="../p6_dashboard/index.html">↩ to dossier</a></div>
+</div></body></html>
