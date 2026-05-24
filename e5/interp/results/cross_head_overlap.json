@@ -1,0 +1,123 @@
+{
+  "sae_ar_path": "/workspace/sfumato/e5/interp/saes/ln_f_ar/sae.pt",
+  "sae_diff_path": "/workspace/sfumato/e5/interp/saes/ln_f_diff/sae.pt",
+  "d_features": 16384,
+  "d_in": 1024,
+  "headline_overlap_share": {
+    "ar_to_diff_share_at_0.5": 0.01837158203125,
+    "ar_to_diff_share_at_0.7": 0.00421142578125,
+    "ar_to_diff_share_at_0.9": 0.0001220703125,
+    "diff_to_ar_share_at_0.5": 0.01593017578125,
+    "diff_to_ar_share_at_0.7": 0.00408935546875,
+    "diff_to_ar_share_at_0.9": 0.0001220703125
+  },
+  "distribution_stats": {
+    "ar_to_diff_mean": 0.16910526156425476,
+    "ar_to_diff_median": 0.12938281893730164,
+    "ar_to_diff_max": 0.9041134119033813,
+    "ar_to_diff_min": 0.10187596082687378,
+    "diff_to_ar_mean": 0.1397017538547516
+  },
+  "top20_matched_pairs": [
+    {
+      "ar_feature": 8544,
+      "diff_feature": 1958,
+      "cosine": 0.9041134119033813
+    },
+    {
+      "ar_feature": 15288,
+      "diff_feature": 11872,
+      "cosine": 0.9011993408203125
+    },
+    {
+      "ar_feature": 13394,
+      "diff_feature": 4286,
+      "cosine": 0.8768033981323242
+    },
+    {
+      "ar_feature": 7218,
+      "diff_feature": 15716,
+      "cosine": 0.8732417821884155
+    },
+    {
+      "ar_feature": 2257,
+      "diff_feature": 11444,
+      "cosine": 0.8637567162513733
+    },
+    {
+      "ar_feature": 16119,
+      "diff_feature": 1691,
+      "cosine": 0.8613038063049316
+    },
+    {
+      "ar_feature": 1845,
+      "diff_feature": 6599,
+      "cosine": 0.8596115112304688
+    },
+    {
+      "ar_feature": 1150,
+      "diff_feature": 16195,
+      "cosine": 0.8418488502502441
+    },
+    {
+      "ar_feature": 1485,
+      "diff_feature": 4684,
+      "cosine": 0.8403229713439941
+    },
+    {
+      "ar_feature": 6973,
+      "diff_feature": 16042,
+      "cosine": 0.8380259275436401
+    },
+    {
+      "ar_feature": 547,
+      "diff_feature": 16322,
+      "cosine": 0.8336101770401001
+    },
+    {
+      "ar_feature": 8967,
+      "diff_feature": 761,
+      "cosine": 0.8311898708343506
+    },
+    {
+      "ar_feature": 7879,
+      "diff_feature": 13453,
+      "cosine": 0.829841673374176
+    },
+    {
+      "ar_feature": 2696,
+      "diff_feature": 9064,
+      "cosine": 0.828313946723938
+    },
+    {
+      "ar_feature": 8435,
+      "diff_feature": 14810,
+      "cosine": 0.8195555210113525
+    },
+    {
+      "ar_feature": 7285,
+      "diff_feature": 13210,
+      "cosine": 0.8164112567901611
+    },
+    {
+      "ar_feature": 10446,
+      "diff_feature": 3068,
+      "cosine": 0.8089373707771301
+    },
+    {
+      "ar_feature": 15894,
+      "diff_feature": 10449,
+      "cosine": 0.8084554076194763
+    },
+    {
+      "ar_feature": 10213,
+      "diff_feature": 14648,
+      "cosine": 0.8054823279380798
+    },
+    {
+      "ar_feature": 13555,
+      "diff_feature": 7316,
+      "cosine": 0.8048381805419922
+    }
+  ]
+}
