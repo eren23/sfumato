@@ -56,6 +56,10 @@ export DEVICE=cuda
 export STEPS=${SAE_STEPS:-4000}
 export BATCH=${SAE_BATCH:-8}
 export T=${SAE_T:-256}
+# Push each SAE to HF immediately on completion so a broken SSH pipe
+# during rsync (which bit us once) does NOT lose work. Default repo is
+# the same one we pull F10 from.
+export HF_PUSH_REPO=${SAE_HF_PUSH_REPO:-eren23/sfumato-composite-ckpts}
 
 for L in 6 7 8 9 11 12 13 14 15; do
     OUT_DIR="$REPO_ROOT/e5/interp/saes/block_${L}_diff"
@@ -64,9 +68,7 @@ for L in 6 7 8 9 11 12 13 14 15; do
         continue
     fi
     echo "[pod] block.${L}.diff -- start $(date -u +%FT%TZ)"
-    HOOKPOINT="block.${L}.diff" \
-        HF_PUSH_REPO=${SAE_HF_PUSH_REPO:-} \
-        python3 -u -m e5.interp.train_saes
+    HOOKPOINT="block.${L}.diff" python3 -u -m e5.interp.train_saes
     echo "[pod] block.${L}.diff -- done $(date -u +%FT%TZ)"
 done
 
@@ -105,5 +107,41 @@ for MM in uniform span_uniform; do
         fi
     fi
 done
+
+echo "[pod] === Phase K hardening: N_OUTER=3 + WikiText transfer ==="
+
+# 1. N_OUTER=3 sweep on F10 GSM8K (held-out N=100) — does iteration saturate?
+K_OUT_3="$REPO_ROOT/e5/results/f10_mixed/composite/k2_n_outer3_n100.json"
+if [[ ! -f "$K_OUT_3" ]]; then
+    echo "[pod] N_OUTER=3 sweep -- start $(date -u +%FT%TZ)"
+    CKPT="$F10_LOCAL" N_EVAL=100 N_OUTER=3 \
+        OUT="$K_OUT_3" \
+        python3 -u -m e5.scripts.probe_diff_draft_ar_refill || echo "[pod] WARN: N_OUTER=3 failed"
+fi
+
+# 2. WikiText-2 transfer at N_OUTER=2 — does iterated routing win on non-math?
+WT_OUT="$REPO_ROOT/e5/results/f10_mixed/composite/k2_wikitext_n_outer2_n50.json"
+if [[ ! -f "$WT_OUT" ]] && [[ -f "$REPO_ROOT/e5/scripts/probe_k2_wikitext.py" ]]; then
+    echo "[pod] WikiText N_OUTER=2 -- start $(date -u +%FT%TZ)"
+    CKPT="$F10_LOCAL" N_EVAL=50 N_OUTER=2 \
+        OUT="$WT_OUT" \
+        python3 -u -m e5.scripts.probe_k2_wikitext || echo "[pod] WARN: WikiText N_OUTER=2 failed"
+fi
+
+# Belt-and-suspenders: push k2 results JSONs to HF too
+if [[ -n "${HF_PUSH_REPO:-}" ]] && [[ -n "${HUGGINGFACE_HUB_TOKEN:-}" ]]; then
+    python3 -u -c "
+import os
+from huggingface_hub import HfApi
+api = HfApi(token=os.environ['HUGGINGFACE_HUB_TOKEN'])
+for src in [os.environ.get('K_OUT_3'), os.environ.get('WT_OUT')]:
+    if src and os.path.exists(src):
+        api.upload_file(path_or_fileobj=src,
+                        path_in_repo='f10_mixed/' + os.path.basename(src),
+                        repo_id=os.environ['HF_PUSH_REPO'],
+                        repo_type='model')
+        print(f'[pod] pushed {src} to HF')
+" K_OUT_3="$K_OUT_3" WT_OUT="$WT_OUT" || echo "[pod] WARN: HF push of k2 JSONs failed"
+fi
 
 echo "[pod] === all remaining work done $(date -u +%FT%TZ) ==="
