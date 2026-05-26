@@ -33,21 +33,22 @@ print(f'[pod] tokens ready: {len(t):,}')
 fi
 
 # F10 ckpt is large; pull from HF if not already present.
-F10_LOCAL="$REPO_ROOT/e5/results/f10_mixed/composite/model_slim_final.pt"
+# HF repo layout: eren23/sfumato-composite-ckpts/f10_mixed/model_slim_final.pt
+# Local layout (matches train_saes.py default): e5/results/f10_mixed/composite/model_slim_final.pt
+export F10_LOCAL="$REPO_ROOT/e5/results/f10_mixed/composite/model_slim_final.pt"
 mkdir -p "$REPO_ROOT/e5/results/f10_mixed/composite"
 if [[ ! -f "$F10_LOCAL" ]]; then
     echo "[pod] F10 ckpt not found; pulling from HF eren23/sfumato-composite-ckpts..."
-    python3 -u -c "
+    F10_LOCAL="$F10_LOCAL" python3 -u -c "
+import os, shutil
 from huggingface_hub import hf_hub_download
-import shutil, os
 p = hf_hub_download(repo_id='eren23/sfumato-composite-ckpts',
-                    filename='f10_mixed/composite/model_slim_final.pt')
+                    filename='f10_mixed/model_slim_final.pt')
 dst = os.environ['F10_LOCAL']
 shutil.copy(p, dst)
 print(f'[pod] F10 -> {dst}')
-" || echo "[pod] WARN: F10 pull failed; SAE training will use random model"
+" || echo "[pod] WARN: F10 pull failed; SAE training will fail"
 fi
-export F10_LOCAL
 
 echo "[pod] === Diff-mode SAEs (blocks 6..9, 11..15) ==="
 export TOKENS_PATH="$TOK_CACHE/fineweb_gpt2_200000000.npy"
