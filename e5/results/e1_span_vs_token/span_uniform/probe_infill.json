@@ -1,0 +1,18 @@
+{
+  "ckpt": "e5/results/e1_span_vs_token/span_uniform/model.pt",
+  "n_eval": 50,
+  "n_scored": 43,
+  "n_middle_tokens": 860,
+  "mid_mask_len": 20,
+  "suffix_len": 20,
+  "max_len": 256,
+  "wall_s": 0.5,
+  "metrics": {
+    "fim_diff_nll": 5.7062,
+    "ar_no_suffix_nll": 2.5258,
+    "ar_full_nll": 2.5258,
+    "gap_diff_vs_ar_no_suffix": -3.1804,
+    "gap_diff_vs_ar_full": -3.1804
+  },
+  "note": "composite-diff sees BOTH prefix AND suffix bidirectionally. AR-no-suffix is the pure-AR fallback (no suffix context). AR-full is teacher-forced AR with the full ground-truth sequence (still left-to-right, but the per-position predictions cannot use tokens AFTER the predicted position, so suffix-context info is structurally inaccessible to the AR head)."
+}
