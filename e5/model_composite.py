@@ -247,9 +247,94 @@ def sample_mask_ratios(B: int, device, mode: str = "uniform") -> torch.Tensor:
     """Sample per-sequence mask ratios.
     mode="uniform": ~Uniform[0.01, 0.99] (MDLM-style).
     mode="midrange": ~Uniform[0.30, 0.70] (less variance, faster signal).
+    mode="span_uniform" / "span_midrange": same ratio sampling; the
+        caller is expected to dispatch to `apply_span_mask` instead of
+        `apply_mask`. The mode tag is informational only.
     """
-    if mode == "uniform":
+    if mode in ("uniform", "span_uniform"):
         return 0.01 + 0.98 * torch.rand(B, device=device)
-    if mode == "midrange":
+    if mode in ("midrange", "span_midrange"):
         return 0.30 + 0.40 * torch.rand(B, device=device)
     raise ValueError(mode)
+
+
+def apply_span_mask(
+    idx: torch.Tensor,
+    mask_ratio_per_seq: torch.Tensor,
+    span_mean_length: int = 4,
+    mask_token_id: int = MASK_TOKEN_ID,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """T5/SpanBERT-style span masking.
+
+    For each sequence, walk left-to-right; at each position with
+    probability p_start = mask_ratio / span_mean_length, start a masked
+    span of geometric length (mean = span_mean_length). Skip ahead by
+    the span length to avoid overlaps.
+
+    Composite-specific motivation: forces the diff head to learn
+    in-context completion rather than independent-token mask-fill,
+    which matches downstream FIM-shaped evaluation (HumanEval-Infill,
+    SantaCoder-FIM) directly. Span masking is the data lever D2 from
+    the situation report at /Users/eren/.claude/plans/...crane.md.
+
+    Returns (idx_masked, masked_positions_bool) with the same shape
+    contract as `apply_mask`.
+    """
+    B, T = idx.shape
+    p_start = (mask_ratio_per_seq / float(span_mean_length)).clamp(0.0, 1.0)  # (B,)
+    masked = torch.zeros(B, T, dtype=torch.bool, device=idx.device)
+    # Sample span starts independently per position
+    u = torch.rand(B, T, device=idx.device)
+    starts = u < p_start.unsqueeze(1)  # (B, T)
+    # Sample geometric span lengths (mean span_mean_length, min 1)
+    # Use torch.empty(...).geometric_(p): p = 1/mean; returns k>=1 with mean=1/p
+    p = 1.0 / float(span_mean_length)
+    # Pre-sample lengths for all positions; only the ones at span starts are used
+    lengths = torch.empty(B, T, device=idx.device).geometric_(p).clamp(max=T).long()
+    # Per-batch left-to-right walk; B and T are small at training time so the
+    # python loop is not a bottleneck.
+    for b in range(B):
+        i = 0
+        while i < T:
+            if starts[b, i]:
+                L = min(int(lengths[b, i].item()), T - i)
+                if L < 1:
+                    L = 1
+                masked[b, i:i + L] = True
+                i += L
+            else:
+                i += 1
+    idx_masked = torch.where(masked, torch.full_like(idx, mask_token_id), idx)
+    return idx_masked, masked
+
+
+def apply_position_biased_mask(
+    idx: torch.Tensor,
+    mask_ratio_per_seq: torch.Tensor,
+    mask_token_id: int = MASK_TOKEN_ID,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Anti-AR-biased mask placement: P(mask|pos) proportional to pos/T.
+
+    The first position is almost never masked; the last position is
+    masked at ~2x the target rate. Average mask ratio per sequence still
+    equals `mask_ratio_per_seq[i]` by construction.
+
+    Composite-specific motivation: AR's causal attention sees no future
+    context, so the suffix is structurally where AR is weakest. Biasing
+    the diff-head's training signal toward suffix positions forces it
+    to specialise on the positions AR can't help with --- amplifying
+    the disjoint-circuit specialisation we measure in Phase P.2. Data
+    lever D1 from the situation report.
+
+    Returns (idx_masked, masked_positions_bool).
+    """
+    B, T = idx.shape
+    # pos_weight[i] = 2*(i+1)/(T+1) so its mean over i is 1.0
+    arange = torch.arange(1, T + 1, device=idx.device, dtype=torch.float32)
+    pos_weight = 2.0 * arange / float(T + 1)  # (T,), mean=1.0
+    threshold = mask_ratio_per_seq.unsqueeze(1) * pos_weight.unsqueeze(0)  # (B, T)
+    threshold = threshold.clamp(0.0, 1.0)
+    u = torch.rand(B, T, device=idx.device)
+    masked = u < threshold
+    idx_masked = torch.where(masked, torch.full_like(idx, mask_token_id), idx)
+    return idx_masked, masked

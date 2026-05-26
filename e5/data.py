@@ -105,15 +105,51 @@ def make_ar_batch(window: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
     return idx, targets
 
 
-def make_diff_batch(window: torch.Tensor, mask_token_id: int) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-    """DIFF mode: drop the last position, mask a random fraction of the
-    remaining T positions, return (idx_masked, idx_original, masked_bool).
+def make_diff_batch(
+    window: torch.Tensor,
+    mask_token_id: int,
+    mask_mode: str = "uniform",
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    """DIFF mode: drop the last position, mask a fraction of the remaining
+    T positions, return (idx_masked, idx_original, masked_bool).
+
+    mask_mode dispatches to one of three primitives in `model_composite`:
+      "uniform" / "midrange"       -> apply_mask          (Bernoulli per-token,
+                                                          default MDLM behaviour)
+      "span_uniform" /
+      "span_midrange"              -> apply_span_mask     (T5/SpanBERT-style
+                                                          geometric spans; data
+                                                          lever D2)
+      "anti_ar_uniform" /
+      "anti_ar_midrange"           -> apply_position_biased_mask
+                                                          (suffix-weighted mask;
+                                                          data lever D1)
+
+    Default "uniform" preserves the original behaviour, so existing training
+    drivers are unaffected.
     """
-    from e5.model_composite import sample_mask_ratios, apply_mask
+    from e5.model_composite import (
+        sample_mask_ratios,
+        apply_mask,
+        apply_span_mask,
+        apply_position_biased_mask,
+    )
     idx_original = window[:, :-1].contiguous()  # (B, T)
     B, T = idx_original.shape
-    ratios = sample_mask_ratios(B, device=idx_original.device, mode="uniform")
-    idx_masked, masked = apply_mask(idx_original, ratios, mask_token_id=mask_token_id)
+    ratio_mode = "midrange" if mask_mode.endswith("midrange") else "uniform"
+    ratios = sample_mask_ratios(B, device=idx_original.device, mode=ratio_mode)
+    if mask_mode.startswith("span_"):
+        idx_masked, masked = apply_span_mask(
+            idx_original, ratios, mask_token_id=mask_token_id
+        )
+    elif mask_mode.startswith("anti_ar_"):
+        idx_masked, masked = apply_position_biased_mask(
+            idx_original, ratios, mask_token_id=mask_token_id
+        )
+    else:
+        idx_masked, masked = apply_mask(
+            idx_original, ratios, mask_token_id=mask_token_id
+        )
     return idx_masked, idx_original, masked
 
 

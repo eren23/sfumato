@@ -126,6 +126,7 @@ def train_one(
     tokenizer_for_samples=None,
     resume_from: Path | None = None,
     save_every: int = 5000,
+    mask_mode: str = "uniform",
 ) -> dict:
     torch.manual_seed(seed)
     np.random.seed(seed)
@@ -290,7 +291,9 @@ def train_one(
                 loss = ar_loss(logits, targets)
                 last_ar = float(loss.detach())
             else:
-                idx_masked, idx_orig, masked = make_diff_batch(window, mask_token_id=MASK_TOKEN_ID)
+                idx_masked, idx_orig, masked = make_diff_batch(
+                    window, mask_token_id=MASK_TOKEN_ID, mask_mode=mask_mode,
+                )
                 logits = model(idx_masked, mode="diff")
                 loss = diff_loss(logits, idx_orig, masked)
                 last_diff = float(loss.detach())
@@ -439,6 +442,7 @@ def main():
     n_layers_small = env_int("N_LAYERS_SMALL", 6)
     eval_every = env_int("EVAL_EVERY", 500)
     n_eval = env_int("N_EVAL", 50)
+    mask_mode = env_str("MASK_MODE", "uniform")  # see make_diff_batch docstring
 
     print(f"loading GSM8K-train tokens (gpt2, cot)…")
     tokens = load_gsm8k_train_tokens(include_reasoning=True)
@@ -469,6 +473,7 @@ def main():
                 eval_every=eval_every,
                 n_eval=n_eval,
                 tokens=tokens,
+                mask_mode=mask_mode,
             )
             sub_dirs.append(str(sub_dir))
         (base_out / "meta.json").write_text(json.dumps({
@@ -493,6 +498,7 @@ def main():
         eval_every=eval_every,
         n_eval=n_eval,
         tokens=tokens,
+        mask_mode=mask_mode,
     )
 
 
