@@ -1,0 +1,19 @@
+{
+  "feature_id": 8435,
+  "steer_k": 4.0,
+  "max_new": 48,
+  "n_prompts": 6,
+  "ar_feature_mean_div": 0.25827547009600504,
+  "diff_feature_mean_div": 0.30838280811317914,
+  "random_mean_div": 0.1546136088171248,
+  "random_sd": 0.03514802076697167,
+  "per_direction": {
+    "AR-feature #8435": 0.2583,
+    "diff-feature #8435": 0.3084,
+    "random #0": 0.1868,
+    "random #1": 0.1589,
+    "random #2": 0.1679,
+    "random #3": 0.1049
+  },
+  "verdict": "AR-feature > random => direction-specific (supports causal reading)"
+}
