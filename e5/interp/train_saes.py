@@ -62,7 +62,7 @@ def collect_activations(raw_model, tokens, hook_target, mode, n_batches,
     store = {"act": None}
     handle = attach_hook(raw_model, hook_target, store)
     try:
-        rng = np.random.default_rng(0)
+        rng = np.random.default_rng(int(os.environ.get("SAE_SEED", "0")))
         for _ in range(n_batches):
             starts = rng.integers(0, len(tokens) - T, size=batch)
             windows = np.stack([tokens[s:s+T] for s in starts]).astype(np.int64)
@@ -129,6 +129,10 @@ def main():
     hook_target, mode = resolve_hookpoint(hookpoint)
     print(f"[sae] resolved: target={hook_target} mode={mode}", flush=True)
 
+    _sae_seed = int(os.environ.get("SAE_SEED", "0"))
+    torch.manual_seed(_sae_seed)
+    np.random.seed(_sae_seed)
+    print(f"[sae] SAE_SEED={_sae_seed}", flush=True)
     sae = TopKSAE(d_in=d_in, d_features=d_features, k=k).to(device)
     print(f"[sae] SAE params: {sae.num_params()/1e6:.1f}M", flush=True)
     optim = torch.optim.AdamW(sae.parameters(), lr=lr, betas=(0.9, 0.999),
