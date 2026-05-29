@@ -39,7 +39,7 @@ trained on F10 (305M, val_ar_nll=1.155) FineWeb-Edu activations.
    toward shared structure.
 
 3. **The original Paper C P.2 finding (0.169 on ln_f) was an
-   underestimate** of how disjoint the circuits actually are at the
+   underestimate** of how specialised the circuits actually are at the
    block level (0.157–0.162). The paper claim should be tightened
    from "modes specialise at the pre-head residual" to "modes
    specialise uniformly across all backbone layers in the divergence
@@ -52,22 +52,19 @@ trained on F10 (305M, val_ar_nll=1.155) FineWeb-Edu activations.
    residual (consistent with point 2 — some shared structure leaks
    back at the very last layer).
 
-## Paper-claim revision (recommended)
+## Paper-claim status (DONE — superseded)
 
-**Current abstract (Paper C, after the pivot edit):**
-> Sparse-autoencoder analysis of the F10 (305M) backbone shows the
-> two heads operate on near-disjoint feature bases: mean cross-head
-> cosine 0.169 on 16,384 TopK SAE features at the pre-head residual,
-> 0 index overlap on top-8 features across 12 prompts, ...
-
-**Suggested tighten (next paper revision):**
-> Sparse-autoencoder analysis of the F10 (305M) backbone shows the
-> two heads operate on near-disjoint feature bases: mean cross-head
-> cosine in [0.157, 0.162] across all ten blocks of the divergence
-> zone (and 0.169 at the pre-head residual), with the bridge-feature
-> tail (cosine ≥ 0.7) accounting for under 0.5% of features at any
-> depth. Specialisation is uniform across the backbone, not a
-> pre-head artefact of the head_diff_proj projection.
+The paper has since been revised and the claim **anchored against a
+null baseline** (see `sae_null_baseline.md`): same-mode different-seed
+cosine 0.286 vs cross-mode 0.169 vs chance floor 0.124, so cross-mode
+retains only ~28% of the above-chance alignment. The wording was
+deliberately softened from "near-disjoint" to **"substantially
+specialised (largely distinct)"**, because cross-mode (0.169) is above
+the chance floor (0.124), not at it — a small shared "bridge" subspace
+exists. The by-depth result here (cross-mode 0.157–0.162 across all
+ten blocks) reports cross-mode cosine per block; the same-mode null is
+measured at `ln_f` only, so the depth-uniformity claim is anchored on
+the `ln_f` control (noted in the paper's limitations).
 
 ## Provenance
 

@@ -40,11 +40,16 @@ SAE; only 0.42% have a sibling above 0.7.
 
 ## Interpretation
 
-The composite's two heads use **essentially disjoint feature
-directions inside the shared backbone**. Even though both heads
-operate on the same backbone weights, the residual-stream
-representations at the final pre-head layer factorise into nearly
-disjoint sparse-feature bases under each attention regime.
+The composite's two heads use **substantially specialised (largely
+distinct) feature directions inside the shared backbone**. (See
+`sae_null_baseline.md` for the control: cross-mode best-cosine 0.169
+vs same-mode different-seed 0.286 vs chance floor 0.124 — cross-mode
+retains only ~28% of the above-chance alignment. "Disjoint"/
+"orthogonal" overstates it; cross-mode is above chance, so a small
+shared "bridge" subspace exists.) Even though both heads operate on
+the same backbone weights, the residual-stream representations at the
+final pre-head layer factorise into largely distinct sparse-feature
+bases under each attention regime.
 
 Reconciling with the Phase P.0 raw-activation cosine (0.54 at the
 final layer):
@@ -69,7 +74,7 @@ the feature-direction level.
 ## What this opens
 
 - **Distillation candidate**: if AR and diff feature bases are
-  near-disjoint, F10 backbone is probably effectively *two
+  substantially specialised, F10 backbone is probably effectively *two
   half-rank subnetworks*. A distil into AR-only + diff-only models
   with shared embeddings might recover ~all the capability at ~half
   the params. Future paper D.
